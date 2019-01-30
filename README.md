@@ -8,7 +8,7 @@ The instructions are a little different from your development operating system, 
 
 You can also check the [documentation](https://facebook.github.io/react-native/docs/getting-started.html) of React Native to install it in the other OS.
 
-## Installing dependencies 📋
+## Installing Dependencies 📋
 
 You will need Node, the **React Native** command line interface, a **JDK**, and **Android Studio**.
 
@@ -32,7 +32,7 @@ apt-get install -y nodejs
 
 Else, follow the [Installation instructions](https://nodejs.org/en/download/package-manager/) for your Linux distribution to install Node 8.3 or newer.
 
-### The React Native CLI
+### React Native CLI
 
 Node comes with npm, which lets you install the React Native command line interface.
 
@@ -41,13 +41,14 @@ Run the following command in a Command Prompt or shell:
 ```
 npm install -g react-native-cli
 ```
-_*If you get an error like Cannot find module 'npmlog', try installing npm directly: curl -0 -L https://npmjs.org/install.sh | sudo sh._
+
+Note: If you get an error like Cannot find module 'npmlog', try installing npm directly: curl -0 -L https://npmjs.org/install.sh | sudo sh.
 
 ### Java Development Kit
 
 React Native requires a recent version of the Java SE Development Kit (JDK). [Download and install Oracle JDK 8](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) if needed. You can also use [OpenJDK 8](http://openjdk.java.net/install/) as an alternative.
 
-### Android development environment
+### Android Development Environment
 
 Setting up your development environment can be somewhat tedious if you're new to Android development. If you're already familiar with Android development, there are a few things you may need to configure. In either case, please make sure to carefully follow the next few steps.
 
@@ -61,7 +62,7 @@ Setting up your development environment can be somewhat tedious if you're new to
 
 Then, click "Next" to install all of these components.
 
-_*If the checkboxes are grayed out, you will have a chance to install these components later on._
+Note: If the checkboxes are grayed out, you will have a chance to install these components later on.
 
 Once setup has finalized and you're presented with the Welcome screen, proceed to the next step.
 
@@ -69,7 +70,7 @@ Once setup has finalized and you're presented with the Welcome screen, proceed t
 
 Android Studio installs the latest Android SDK by default. Building a React Native app with native code, however, requires the **Android 9 (Pie) SDK** in particular. Additional Android SDKs can be installed through the SDK Manager in Android Studio. The SDK Manager can be accessed from the "Welcome to Android Studio" screen. Click on "Configure", then select "SDK Manager".
 
-_*The SDK Manager can also be found within the Android Studio "Preferences" dialog, under Appearance & Behavior → System Settings → Android SDK._
+Note: The SDK Manager can also be found within the Android Studio "Preferences" dialog, under Appearance & Behavior → System Settings → Android SDK.
 
 Select the "SDK Platforms" tab from within the SDK Manager, then check the box next to "Show Package Details" in the bottom right corner. Look for and expand the Android 9 (Pie) entry, then make sure the following items are checked:
 
@@ -94,11 +95,11 @@ Add the following lines to your **$HOME/.bash_profile** (or $HOME/.profile) conf
   export PATH=$PATH:$ANDROID_HOME/platform-tools
 ```
 
-_*.bash_profile is specific to bash. If you're using another shell, you will need to edit the appropriate shell-specific config file._
+Note: .bash_profile is specific to bash. If you're using another shell, you will need to edit the appropriate shell-specific config file.
 
 Type **source $HOME/.bash_profile** to load the config into your current shell. Verify that ANDROID_HOME has been added to your path by running **echo $PATH**.
 
-_*Please make sure you use the correct Android SDK path. You can find the actual location of the SDK in the Android Studio "Preferences" dialog, under Appearance & Behavior → System Settings → Android SDK._
+Note: Please make sure you use the correct Android SDK path. You can find the actual location of the SDK in the Android Studio "Preferences" dialog, under Appearance & Behavior → System Settings → Android SDK.
 
 
 ### Watchman
@@ -106,7 +107,7 @@ _*Please make sure you use the correct Android SDK path. You can find the actual
 Follow the [Watchman installation guide](https://facebook.github.io/watchman/docs/install.html#buildinstall) to compile and Watchman install from source.
 
 
-## Preparing the Android device Using a physical device
+## Preparing the android device using a Physical Device
 
 You will need to prepare the device to run Android apps for development.
 
@@ -117,11 +118,11 @@ adb devices
 ```
 Note: you need to authorize your mobile device and enable USB debugging by going to **Settings>Developer Options>USB debugging**
 
-You can also follow the detailed instructions[here](https://facebook.github.io/react-native/docs/running-on-device).
+You can also follow the detailed instructions [here](https://facebook.github.io/react-native/docs/running-on-device).
 
 If you want to use a virtual device (AVD) you must create it following the steps described in the [official React Native documentation](https://facebook.github.io/react-native/docs/getting-started.html#content): Preparing the _Android device > Using a virtual device_.
 
-_Note:_Choose the Android and Linux option.
+Note: Choose the Android and Linux option.
 
 
 ### Running your React Native application
@@ -136,5 +137,4 @@ react-native run-android
 
 If everything is set up correctly, you should see your new app running in your Android shortly.
 
-_Note:_ If you can't get this to work, see the [Troubleshooting](https://facebook.github.io/react-native/docs/troubleshooting#content) page.
-
+Note: If you can't get this to work, see the [Troubleshooting](https://facebook.github.io/react-native/docs/troubleshooting#content) page.
