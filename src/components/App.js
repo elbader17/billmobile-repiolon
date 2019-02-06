@@ -1,29 +1,19 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- * @lint-ignore-every XPLATJSCOPYRIGHT1
- */
-
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 
 import Amplify from 'aws-amplify';
 import aws_exports from './src/aws-exports';
-import Home from'./src/login/Home';
+import Authentication from'./src/components/Authentication';
 
 Amplify.configure(aws_exports);
 
-type Props = {};
-export default class App extends Component<Props> {
+export default class App extends Component {
   render() {
     return (
       <View style={styles.container}>
         <Text> Welcome to React Native </Text>
-        <Home/>
-     
+        <Authentication />
+
       </View>
     );
   }
@@ -32,7 +22,7 @@ export default class App extends Component<Props> {
 const styles = StyleSheet.create({
   container: {
     flex: 5,
-   
+
     backgroundColor: '#F5FCFF',
   },
   welcome: {

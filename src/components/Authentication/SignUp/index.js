@@ -1,11 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View, Modal, Navigator} from 'react-native';
-import { Input, Button, ButtonGroup } from "react-native-elements";
+import { StyleSheet, View, Modal } from 'react-native';
+import { Input, Button } from "react-native-elements";
 import { Auth } from 'aws-amplify';
 import {YellowBox} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import { CognitoUserPool, CognitoUserAttribute, CognitoUser } from 'amazon-cognito-identity-js';
-
 
 // import store from '../store';
 
@@ -49,12 +46,12 @@ export default class SignUp extends React.Component {
             .then(() => this.setState({ modalVisible: true }))
             // On failure, display error in console
             .catch(err => console.error("erroe", err));
-          
+
         } else {
           alert('Passwords do not match.');
         }
     }
-    
+
     handleConfirmationCode = () => {
         const { name, confirmationCode } = this.state;
         Auth.confirmSignUp(name, confirmationCode, {})
@@ -129,7 +126,7 @@ export default class SignUp extends React.Component {
             </Modal>
         </View>
         )
-       
+
     }
 }
 
@@ -137,9 +134,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    
-    
-
   },
 });
-<script src="http://localhost:8097"></script>
+
+
+export default SignUp;
