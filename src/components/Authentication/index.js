@@ -3,8 +3,8 @@ import { StyleSheet, View } from 'react-native';
 import { ButtonGroup } from "react-native-elements";
 import { Auth } from 'aws-amplify';
 import {YellowBox} from 'react-native';
-import Signup from './Signup';
-import Signin from './Signin';
+import Signup from './SignUp';
+import Signin from './SignIn';
 
 // import store from '../store';
 

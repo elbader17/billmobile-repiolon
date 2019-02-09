@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Provider } from 'react-redux';
 import Amplify from 'aws-amplify';
-import aws_exports from './src/aws-exports';
-import Authentication from './src/components/Authentication';
+import aws_exports from '../aws-exports';
+import Authentication from '../components/Authentication';
 import store from '../store';
 
 Amplify.configure(aws_exports);

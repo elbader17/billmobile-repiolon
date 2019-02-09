@@ -1,60 +1,20 @@
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { Input, Button } from "react-native-elements";
+import { connect } from 'react-redux'
+import SignIn from './Component';
 import { signIn } from '../../../app/authentication/actions';
 
-class SignIn extends React.Component {
+const mapStateToProps = (state) => ({
+}) ;
 
-    constructor(props) {
-      super(props);
-      this.state = {
-        email: '',
-        password: '@Am1234!',
-        name:'',
-        confirmPassword: '@Am1234!',
-      };
-    }
-
-    handleSignIn = () => {
-      const { email, password } = this.state;
-      const { dispatch } = this.props;
-      dispatch(signIn(email, password));
-    }
-
-    setEmail = (value) => this.setState({ email: value })
-    setPassword = (value) => this.setState({ password: value })
-
-    render() {
-      return(
-          <View>
-            <Input
-              label="Email"
-              leftIcon={{ type: 'font-awesome', name: 'envelope' }}
-              onChangeText={this.setEmail}
-              placeholder="my@email.com"
-            />
-            <Input
-              label="Password"
-              leftIcon={{ type: 'font-awesome', name: 'lock' }}
-              onChangeText={this.setPassword}
-              placeholder="p@ssw0rd123"
-              secureTextEntry
-            />
-            <Button
-              title='Submit'
-              onPress={ this.handleSignIn }
-            />
-        </View>
-      )
-    }
+function mapDispatchToProps(dispatch) {
+    return {
+        signIn: (email, password) => dispatch(signIn(email, password)),
+    };
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-});
+  
+const component = connect( 
+    mapStateToProps,
+    mapDispatchToProps,
+)(SignIn);
 
-
-export default SignIn;
+export default component;
