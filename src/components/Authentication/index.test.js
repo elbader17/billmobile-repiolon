@@ -5,20 +5,15 @@
 
 import React from 'react';
 import { shallow, mount, render } from 'enzyme';
-import Authentication from '../src/components/Authentication/index';
-import { signIn } from '../src/app/authentication/actions';
-
-
+import Authentication from './index';
 
 /**
- * 
+ *
 it('matches the snapshot', () => {
   const snapshot = shallow(<Authentication/>);
   expect(wrapper.find)
 });
  */
-
-
 
 it('matches the snapshot', () => {
   const tree = renderer.create(<Authentication />).toJSON();
@@ -28,9 +23,6 @@ it('matches the snapshot', () => {
 it('return empty signIn', () => {
   expect( signIn('','')).toEqual({});
 })
-
-
-
 
 it('test buton submitSignIn', function() {
   const wrapper = shallow(<Authentication />);
