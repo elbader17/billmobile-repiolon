@@ -18,7 +18,11 @@ class SignIn extends React.Component {
     handleSignIn = () => {
       const { email, password } = this.state;
       const { signIn } = this.props;
+      if(email.length == 0 || password.length == 0){
+        return {};
+      }
       signIn(email, password);
+      
     }
 
     setEmail = (value) => this.setState({ email: value })
@@ -41,8 +45,10 @@ class SignIn extends React.Component {
               secureTextEntry
             />
             <Button
+              id='submitSignIn'
               title='Submit'
               onPress={ this.handleSignIn }
+              testID='submitSignIn'
             />
         </View>
       )

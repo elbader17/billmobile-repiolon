@@ -10,7 +10,7 @@ function setJwtToken({state, jwtToken }){
   return state;
 }
 
-export const authenticationReducer = (state = initialState, action) => {
+export default authenticationReducer = (state = initialState, action) => {
   return producer(state, (draftState) => {
     switch (action.type) {
       case SET_JWT_TOKEN:
@@ -20,3 +20,17 @@ export const authenticationReducer = (state = initialState, action) => {
     }
   });
 };
+
+/**
+ export const authenticationReducer = (state = initialState, action) => {
+  return producer(state, (draftState) => {
+    switch (action.type) {
+      case SET_JWT_TOKEN:
+        return setJwtToken({state, jwtToken: action.payload.jwtToken });
+      default:
+        return draftState;
+    }
+  });
+};
+ * 
+ */
