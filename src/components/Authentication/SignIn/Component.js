@@ -32,12 +32,14 @@ class SignIn extends React.Component {
       return(
           <View>
             <Input
+              value={this.state.email}
               label="Email"
               leftIcon={{ type: 'font-awesome', name: 'envelope' }}
               onChangeText={this.setEmail}
               placeholder="my@email.com"
             />
             <Input
+              value={this.state.password}
               label="Password"
               leftIcon={{ type: 'font-awesome', name: 'lock' }}
               onChangeText={this.setPassword}

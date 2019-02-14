@@ -124,6 +124,8 @@ If you want to use a virtual device (AVD) you must create it following the steps
 
 Note: Choose the Android and Linux option.
 
+### Library Links 
+`react-native link amazon-cognito-identity-js`
 
 ### Running your React Native application
 
