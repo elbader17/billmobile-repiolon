@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Modal } from 'react-native';
 import { Input, Button } from "react-native-elements";
-
+import { TextInput, PasswordInput } from 'react-native-inputs'
 
 class SignUp extends React.Component {
 
@@ -13,7 +13,9 @@ class SignUp extends React.Component {
           name:'',
           confirmPassword: '@Am1234!',
           selectedIndex: 0,
-          modalVisible: false,
+          validateData: true,
+          validEmail: true,
+          validPass: true,
         };
       }
 
@@ -30,8 +32,7 @@ class SignUp extends React.Component {
             name:name,
         };
         const { signUp } = this.props;
-        signUp(password, name,attributes)
-        this.state.modalVisible = this.props.showConfirmationModal;
+        signUp(password, email,attributes);
     }
 
     handleConfirmationCode = () => {
@@ -39,6 +40,23 @@ class SignUp extends React.Component {
         const { confirmCode } = this.props;
         confirmCode(name,this.confirmationCode,{})
     }
+
+    isEmail = (email) => {
+        var re = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
+        var bool = re.test(String(email).toLowerCase());
+        this.state.validEmail = !bool;
+        this.state.validateData = !bool || this.state.validPass
+        return bool;
+    }
+
+    isPasswordCoorrect = (password) => {
+        var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+        var bool = strongRegex.test(password);
+        this.state.validPass = !bool;
+        this.state.validateData = !bool || this.state.validEmail;
+        return (bool);
+    }
+
 
     setName = (value) => this.setState({ name: value})
     setEmail = (value) => this.setState({ email: value })
@@ -59,12 +77,19 @@ class SignUp extends React.Component {
                     leftIcon={{ type: 'font-awesome', name: 'envelope' }}
                     onChangeText={this.setEmail}
                     placeholder="my@email.com"
+                    onRef={r => { this.state.email = r }}
+                    value={this.state.email}
+                    editable={!this.props.fetching}
+                    valid={this.isEmail(this.state.email)}
+                    returnKeyType='next'
                 />
+            
                 <Input
                     label="Password"
                     leftIcon={{ type: 'font-awesome', name: 'lock' }}
                     onChangeText={ this.setPassword }
                     placeholder="p@ssw0rd123"
+                    valid={this.isPasswordCoorrect(this.state.password)}
                     secureTextEntry
                 />
                 <Input
@@ -76,10 +101,12 @@ class SignUp extends React.Component {
                 />
                 <Button
                     title='Submit'
+                    disabled={this.state.validateData}
                     onPress={ this.handleSignUp }
                 />
+            
 
-                <Modal visible={this.state.modalVisible} >
+                <Modal visible={this.props.showConfirmationModal} >
                     <View style={styles.container} >
                         <Input
                             label="Confirmation Code"

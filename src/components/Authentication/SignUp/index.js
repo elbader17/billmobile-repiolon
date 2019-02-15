@@ -4,7 +4,7 @@ import { signUp } from '../../../app/authentication/actions';
 import { confirmCode } from '../../../app/authentication/actions';
 
 const mapStateToProps = (state) => ({
-    modalVisible: state.modalVisible
+  showConfirmationModal: state.authentication.showConfirmationModal,
 }) ;
 
 function mapDispatchToProps(dispatch) {

@@ -4,3 +4,4 @@ import authenticationReducer from '../app/authentication/reducer';
 export default combineReducers({
   authentication: authenticationReducer,
 });
+
