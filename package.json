@@ -35,6 +35,6 @@
   },
   "jest": {
     "preset": "react-native",
-    "setupFilesAfterEnv": ["/home/martin/billmobile-frontend/setup-tests.js"]
+    "setupFilesAfterEnv": ["<rootDir>setup-tests.js"]
   }
 }

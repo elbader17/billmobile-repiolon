@@ -1,10 +1,10 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Intro from './Intro';
+import Screen2 from './Screen2';
 
-describe('Rendering Component Intro', () => {
+describe('Rendering Component Screen2', () => {
   test('renders correctly', () => {
-    const component = renderer.create(<Intro />).toJSON();
+    const component = renderer.create(<Screen2 />).toJSON();
     expect(component).toMatchSnapshot();
   });
-});
+})
