@@ -2,6 +2,7 @@ import { Auth } from 'aws-amplify';
 import {
    SET_JWT_TOKEN, 
    SHOW_CONFIRMATION_MODAL,
+   HIDE_CONFIRMATION_MODAL,
 } from './constants';
 
 
@@ -11,7 +12,9 @@ function setJwtToken(jwtToken){
 function showConfirmationModal(){
   return{ type: SHOW_CONFIRMATION_MODAL };
 }
-
+function hideConfirmationModal(){
+  return{ type: HIDE_CONFIRMATION_MODAL };
+}
 
 const signIn = function(email, password) {
   return (dispatch) => {
@@ -25,10 +28,10 @@ const signIn = function(email, password) {
 }
 
 
-const signUp = function(password, name, attributes) {
+const signUp = function(password, email, attributes) {
   
   return (dispatch) => {
-    Auth.signUp({password:password,username:name,attributes:attributes,validationData:[],})
+    Auth.signUp({password:password,username:email,attributes:attributes,validationData:[],})
     .then((data => {
       dispatch(showConfirmationModal());
     }))
@@ -36,13 +39,12 @@ const signUp = function(password, name, attributes) {
   }
 }
 
-const confirmCode = function(name, confirmationCode) {
+const confirmCode = function(email, confirmationCode) {
   
   return (dispatch) => {
-    const auth = Auth.confirmSignUp(name, confirmationCode, {})
+    const auth = Auth.confirmSignUp(email, confirmationCode, {})
     .then((data => {
-      dispatch(showConfirmationModal());
-      dispatch(signIn(name,password));
+      dispatch(hideConfirmationModal());
     }))
     .catch(err => console.error("erroe", err));
   }

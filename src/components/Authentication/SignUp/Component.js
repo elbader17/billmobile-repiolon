@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Modal } from 'react-native';
 import { Input, Button } from "react-native-elements";
-import { TextInput, PasswordInput } from 'react-native-inputs'
+
 
 class SignUp extends React.Component {
 
@@ -9,21 +9,17 @@ class SignUp extends React.Component {
         super(props);
         this.state = {
           email: '',
-          password: '@Am1234!',
+          password: '',
           name:'',
-          confirmPassword: '@Am1234!',
+          confirmPassword: '',
+          confirmationEmail:'',
           selectedIndex: 0,
           validateData: true,
           validEmail: true,
           validPass: true,
+          showConfirmationModal: false,
         };
       }
-
-    updateIndex = () => {
-        // If selectedIndex was 0, make it 1.  If it was 1, make it 0
-        const newIndex = this.state.selectedIndex === 0 ? 1 : 0;
-        this.setState({ selectedIndex: newIndex });
-    }
 
     handleSignUp = () => {
         const { name, email, password, confirmPassword } = this.state;
@@ -33,12 +29,17 @@ class SignUp extends React.Component {
         };
         const { signUp } = this.props;
         signUp(password, email,attributes);
+        this.setState({showConfirmationModal: true});
+        console.log("ShowConf: "+this.props.showConfirmationModal);
+        
     }
 
     handleConfirmationCode = () => {
-        const { name, confirmationCode } = this.state;
+        const { confirmationEmail, confirmationCode } = this.state;
         const { confirmCode } = this.props;
-        confirmCode(name,this.confirmationCode,{})
+        confirmCode(confirmationEmail,confirmationCode,{})
+        console.log("ShowConf: "+this.props.showConfirmationModal);
+
     }
 
     isEmail = (email) => {
@@ -46,6 +47,7 @@ class SignUp extends React.Component {
         var bool = re.test(String(email).toLowerCase());
         this.state.validEmail = !bool;
         this.state.validateData = !bool || this.state.validPass
+        console.log("ShowConf: "+this.props.showConfirmationModal);
         return bool;
     }
 
@@ -62,7 +64,7 @@ class SignUp extends React.Component {
     setEmail = (value) => this.setState({ email: value })
     setPassword = (value) => this.setState({ password: value })
     setConfirmPassword = (value) => this.setState({ confirmPassword: value })
-
+    
     render() {
         return(
             <View>
@@ -105,9 +107,17 @@ class SignUp extends React.Component {
                     onPress={ this.handleSignUp }
                 />
             
-
+                
                 <Modal visible={this.props.showConfirmationModal} >
                     <View style={styles.container} >
+                    <Input
+                            label="Email"
+                            leftIcon={{ type: 'font-awesome', name: 'lock' }}
+                            onChangeText={
+                                // Set this.state.confirmationCode to the value in this Input box
+                                (value) => this.setState({ confirmationEmail: value })
+                            }
+                        />
                         <Input
                             label="Confirmation Code"
                             leftIcon={{ type: 'font-awesome', name: 'lock' }}

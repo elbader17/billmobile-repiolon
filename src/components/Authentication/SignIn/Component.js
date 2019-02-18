@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Alert, StyleSheet, View } from 'react-native';
 import { Input, Button } from "react-native-elements";
 
 
@@ -18,11 +18,8 @@ class SignIn extends React.Component {
     handleSignIn = () => {
       const { email, password } = this.state;
       const { signIn } = this.props;
-      if(email.length == 0 || password.length == 0){
-        return {};
-      }
       signIn(email, password);
-      
+            
     }
 
     setEmail = (value) => this.setState({ email: value })

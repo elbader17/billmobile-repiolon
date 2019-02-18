@@ -3,6 +3,7 @@ import SignIn from './Component';
 import { signIn } from '../../../app/authentication/actions';
 
 const mapStateToProps = (state) => ({
+    jwtToken: state.authentication.jwtToken,
 }) ;
 
 function mapDispatchToProps(dispatch) {
