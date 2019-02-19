@@ -1,9 +1,11 @@
 import { Auth } from 'aws-amplify';
+import {Alert} from 'react-native';
 import {
    SET_JWT_TOKEN, 
    SHOW_CONFIRMATION_MODAL,
    HIDE_CONFIRMATION_MODAL,
 } from './constants';
+import { from } from 'zen-observable';
 
 
 function setJwtToken(jwtToken){
@@ -22,8 +24,9 @@ const signIn = function(email, password) {
     .then((data) => {
       const { jwtToken } = data.signInUserSession.idToken;
       dispatch(setJwtToken(jwtToken));
-    });
-    return {};
+      Alert.alert(jwtToken);
+    })
+    .catch(err => Alert.alert("Error al Ingresar: ",err.message));
   }
 }
 
@@ -35,7 +38,7 @@ const signUp = function(password, email, attributes) {
     .then((data => {
       dispatch(showConfirmationModal());
     }))
-    .catch(err => console.error("erroe", err.message));
+    .catch(err => Alert.alert("Error al Ingresar: ",err.message));
   }
 }
 
@@ -46,7 +49,7 @@ const confirmCode = function(email, confirmationCode) {
     .then((data => {
       dispatch(hideConfirmationModal());
     }))
-    .catch(err => console.error("erroe", err));
+    .catch(err => Alert.alert("Error al Ingresar: ",err.message));
   }
 }
 

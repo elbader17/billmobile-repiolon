@@ -1,7 +1,8 @@
 import React from 'react';
 import { StyleSheet, View, Modal } from 'react-native';
 import { Input, Button } from "react-native-elements";
-
+import PasswordInputText from 'react-native-hide-show-password-input';
+import Confirmation from '../Confirmation';
 
 class SignUp extends React.Component {
 
@@ -17,7 +18,6 @@ class SignUp extends React.Component {
           validateData: true,
           validEmail: true,
           validPass: true,
-          showConfirmationModal: false,
         };
       }
 
@@ -30,7 +30,6 @@ class SignUp extends React.Component {
         const { signUp } = this.props;
         signUp(password, email,attributes);
         this.setState({showConfirmationModal: true});
-        console.log("ShowConf: "+this.props.showConfirmationModal);
         
     }
 
@@ -38,16 +37,13 @@ class SignUp extends React.Component {
         const { confirmationEmail, confirmationCode } = this.state;
         const { confirmCode } = this.props;
         confirmCode(confirmationEmail,confirmationCode,{})
-        console.log("ShowConf: "+this.props.showConfirmationModal);
-
     }
 
     isEmail = (email) => {
         var re = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
         var bool = re.test(String(email).toLowerCase());
         this.state.validEmail = !bool;
-        this.state.validateData = !bool || this.state.validPass
-        console.log("ShowConf: "+this.props.showConfirmationModal);
+        this.state.validateData = !bool || this.state.validPass;
         return bool;
     }
 
@@ -67,18 +63,16 @@ class SignUp extends React.Component {
     
     render() {
         return(
-            <View>
+            <View style={{margin: 20}}>
                 <Input
-                    label="Name"
-                    leftIcon={{ type: 'font-awesome', name: 'envelope' }}
+                    label="Nombre"
                     onChangeText={ this.setName }
-                    placeholder="Name"
+                    placeholder="Nombre"
                 />
                 <Input
                     label="Email"
-                    leftIcon={{ type: 'font-awesome', name: 'envelope' }}
                     onChangeText={this.setEmail}
-                    placeholder="my@email.com"
+                    placeholder="usuario@email.com"
                     onRef={r => { this.state.email = r }}
                     value={this.state.email}
                     editable={!this.props.fetching}
@@ -86,19 +80,20 @@ class SignUp extends React.Component {
                     returnKeyType='next'
                 />
             
-                <Input
+                <PasswordInputText
                     label="Password"
                     leftIcon={{ type: 'font-awesome', name: 'lock' }}
                     onChangeText={ this.setPassword }
-                    placeholder="p@ssw0rd123"
+                    placeholder="Aa@-1234"
                     valid={this.isPasswordCoorrect(this.state.password)}
                     secureTextEntry
                 />
-                <Input
+                
+                <PasswordInputText
                     label="ConfirmPassword"
                     leftIcon={{ type: 'font-awesome', name: 'lock' }}
                     onChangeText={ this.setConfirmPassword }
-                    placeholder="p@ssw0rd123"
+                    placeholder="Aa@-1234"
                     secureTextEntry
                 />
                 <Button
@@ -110,26 +105,7 @@ class SignUp extends React.Component {
                 
                 <Modal visible={this.props.showConfirmationModal} >
                     <View style={styles.container} >
-                    <Input
-                            label="Email"
-                            leftIcon={{ type: 'font-awesome', name: 'lock' }}
-                            onChangeText={
-                                // Set this.state.confirmationCode to the value in this Input box
-                                (value) => this.setState({ confirmationEmail: value })
-                            }
-                        />
-                        <Input
-                            label="Confirmation Code"
-                            leftIcon={{ type: 'font-awesome', name: 'lock' }}
-                            onChangeText={
-                                // Set this.state.confirmationCode to the value in this Input box
-                                (value) => this.setState({ confirmationCode: value })
-                            }
-                        />
-                        <Button
-                            title='Submit'
-                            onPress={ this.handleConfirmationCode }
-                        />
+                        <Confirmation/>
                     </View>
                 </Modal>
         </View>

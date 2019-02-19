@@ -3,7 +3,7 @@ import { StyleSheet, View, Modal } from 'react-native';
 import { Input, Button } from "react-native-elements";
 
 
-class SignUp extends React.Component {
+class Confirmation extends React.Component {
 
     constructor(props) {
         super(props);
@@ -34,7 +34,7 @@ class SignUp extends React.Component {
                     }
                 />
                 <Input
-                    label="Confirmation Code"
+                    label="Codigo de confirmación"
                     leftIcon={{ type: 'font-awesome', name: 'lock' }}
                     onChangeText={
                         // Set this.state.confirmationCode to the value in this Input box
