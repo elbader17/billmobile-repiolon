@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Rendering Component Intro renders correctly 1`] = `
+exports[`Rendering Component Screen3 renders correctly 1`] = `
 <View
   style={
     Object {
