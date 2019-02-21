@@ -43,6 +43,7 @@ class Confirmation extends React.Component {
                 />
                 <Button
                     title='Submit'
+                    testID={'submitConfirmation'}
                     onPress={ this.handleConfirmationCode }
                 />
             </View>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View} from 'react-native';
 import { ButtonGroup } from "react-native-elements";
 import Signup from './SignUp';
 import Signin from './SignIn';

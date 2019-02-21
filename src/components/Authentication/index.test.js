@@ -1,33 +1,10 @@
-/**
- * @format
- * @lint-ignore-every XPLATJSCOPYRIGHT1
- */
-
 import React from 'react';
-import { shallow, mount, render } from 'enzyme';
+import { shallow } from 'enzyme';
 import Authentication from './index';
 
-/**
- *
 it('matches the snapshot', () => {
-  const snapshot = shallow(<Authentication/>);
-  expect(wrapper.find)
-});
- */
-
-it('matches the snapshot', () => {
-  const tree = renderer.create(<Authentication />).toJSON();
+  const tree = shallow(<Authentication />);
   expect(tree).toMatchSnapshot();
 });
 
-it('return empty signIn', () => {
-  expect( signIn('','')).toEqual({});
-})
 
-it('test buton submitSignIn', function() {
-  const wrapper = shallow(<Authentication />);
-  let refreshData = jest.spyOn(wrapper.instance(), "submitSignIn");
-  expect(wrapper.find('#submitSignIn')).toHaveLength(1);
-  wrapper.find("[testID='submitSignIn']").onPress();
-  expect(refreshData).toHaveBeenCalledTimes(1);
-});

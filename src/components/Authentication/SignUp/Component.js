@@ -98,6 +98,7 @@ class SignUp extends React.Component {
                 />
                 <Button
                     title='Submit'
+                    testID={'submitSignUp'}
                     disabled={this.state.validateData}
                     onPress={ this.handleSignUp }
                 />

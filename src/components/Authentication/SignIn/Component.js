@@ -44,10 +44,11 @@ class SignIn extends React.Component {
               secureTextEntry
             />
             <Button
+              testID={'submitSignIn'}
               id='submitSignIn'
               title='Submit'
               onPress={ this.handleSignIn }
-              testID='submitSignIn'
+              
             />
         </View>
       )
