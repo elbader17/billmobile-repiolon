@@ -11,18 +11,18 @@ const initialState = {
   showConfirmationModal: false,
 };
 
-function setJwtToken({draftState, jwtToken }){
+export function setJwtToken({draftState, jwtToken }){
   draftState.jwtToken = jwtToken;
   return draftState;
 }
 
-function showConfirmationModal({draftState }){
+export function showConfirmationModal({draftState }){
   draftState.showConfirmationModal = true;
   return draftState;
 }
 
-function hideConfirmationModal({draftState }){
-  draftState.showConfirmationModal = false;
+export function hideConfirmationModal({draftState }){
+  draftState.hideConfirmationModal = false;
   return draftState;
 }
 

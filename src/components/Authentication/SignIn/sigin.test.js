@@ -2,8 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import { shallow } from 'enzyme';
 import SignIn from './Component';
-import { Button } from 'react-native-elements';
-
+import { handleSignIn } from './Component';
 
 describe('Rendering Component SigIn', () => {
   test('renders correctly SignIn', () => {
@@ -21,3 +20,6 @@ describe('Rendering Component and call  handeleSigIn', () => {
     expect(clickFn).toBeCalled();
   });
 });
+
+
+

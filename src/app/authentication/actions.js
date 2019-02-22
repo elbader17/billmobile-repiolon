@@ -8,26 +8,27 @@ import {
 import { from } from 'zen-observable';
 
 
-function setJwtToken(jwtToken){
+export function setJwtToken(jwtToken){
   return { type: SET_JWT_TOKEN, jwtToken };
 }
-function showConfirmationModal(){
+export function showConfirmationModal(){
   return{ type: SHOW_CONFIRMATION_MODAL };
 }
-function hideConfirmationModal(){
+export function hideConfirmationModal(){
   return{ type: HIDE_CONFIRMATION_MODAL };
 }
 
 const signIn = function(email, password) {
-  return (dispatch) => {
-    Auth.signIn(email, password)
-    .then((data) => {
-      const { jwtToken } = data.signInUserSession.idToken;
-      dispatch(setJwtToken(jwtToken));
-      Alert.alert(jwtToken);
-    })
-    .catch(err => Alert.alert("Error al Ingresar: ",err.message));
-  }
+    return (dispatch) => {
+      Auth.signIn(email, password)
+      .then((data) => {
+        const { jwtToken } = data.signInUserSession.idToken;
+        dispatch(setJwtToken(jwtToken));
+        Alert.alert(jwtToken);
+        return jwtToken;
+      })
+      .catch(err => Alert.alert("Error al Ingresar: ",err.message));
+    }
 }
 
 
