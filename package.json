@@ -20,6 +20,9 @@
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.9.1",
     "enzyme-to-json": "^3.3.5",
+    "eslint": "^5.14.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.16.0",
     "jest": "^24.1.0",
     "jest-cli": "^24.1.0",
     "jsdom": "13.2.0",
@@ -35,6 +38,21 @@
   },
   "jest": {
     "preset": "react-native",
-    "setupFilesAfterEnv": ["<rootDir>setup-tests.js"]
-  }
+    "setupFilesAfterEnv": [
+      "<rootDir>setup-tests.js"
+    ]
+  },
+  "description": "This will help you install and build your first React Native application.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nuxtulabs/billmobile-frontend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nuxtulabs/billmobile-frontend/issues"
+  },
+  "homepage": "https://github.com/nuxtulabs/billmobile-frontend#readme"
 }
