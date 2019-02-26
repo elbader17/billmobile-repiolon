@@ -1,20 +1,20 @@
 import { Auth } from 'aws-amplify';
-import {Alert} from 'react-native';
+import { Alert } from 'react-native';
 import {
-   SET_JWT_TOKEN, 
+   SET_JWT_TOKEN,
    SHOW_CONFIRMATION_MODAL,
    HIDE_CONFIRMATION_MODAL,
 } from './constants';
 import { from } from 'zen-observable';
 
 
-export function setJwtToken(jwtToken){
+function setJwtToken(jwtToken){
   return { type: SET_JWT_TOKEN, jwtToken };
 }
-export function showConfirmationModal(){
+function showConfirmationModal(){
   return{ type: SHOW_CONFIRMATION_MODAL };
 }
-export function hideConfirmationModal(){
+function hideConfirmationModal(){
   return{ type: HIDE_CONFIRMATION_MODAL };
 }
 
@@ -33,23 +33,27 @@ const signIn = function(email, password) {
 
 
 const signUp = function(password, email, attributes) {
-  
+
   return (dispatch) => {
-    Auth.signUp({password:password,username:email,attributes:attributes,validationData:[],})
-    .then((data => {
+    Auth.signUp({
+      password,
+      email,
+      attributes,
+      validationData: [],
+    }).then((_data) => {
       dispatch(showConfirmationModal());
-    }))
+    })
     .catch(err => Alert.alert("Error al Ingresar: ",err.message));
   }
 }
 
 const confirmCode = function(email, confirmationCode) {
-  
+
   return (dispatch) => {
-    const auth = Auth.confirmSignUp(email, confirmationCode, {})
-    .then((data => {
+    Auth.confirmSignUp(email, confirmationCode, {})
+    .then((_data) => {
       dispatch(hideConfirmationModal());
-    }))
+    })
     .catch(err => Alert.alert("Error al Ingresar: ",err.message));
   }
 }

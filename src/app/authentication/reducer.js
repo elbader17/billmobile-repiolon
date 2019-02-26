@@ -1,6 +1,6 @@
 import producer from 'immer';
-import { 
-  SET_JWT_TOKEN, 
+import {
+  SET_JWT_TOKEN,
   SHOW_CONFIRMATION_MODAL,
   HIDE_CONFIRMATION_MODAL,
 } from './constants';
@@ -11,17 +11,17 @@ const initialState = {
   showConfirmationModal: false,
 };
 
-export function setJwtToken({draftState, jwtToken }){
+function setJwtToken({draftState, jwtToken }){
   draftState.jwtToken = jwtToken;
   return draftState;
 }
 
-export function showConfirmationModal({draftState }){
+function showConfirmationModal({draftState }){
   draftState.showConfirmationModal = true;
   return draftState;
 }
 
-export function hideConfirmationModal({draftState }){
+function hideConfirmationModal({draftState }){
   draftState.hideConfirmationModal = false;
   return draftState;
 }
