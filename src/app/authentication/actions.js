@@ -19,21 +19,20 @@ function hideConfirmationModal(){
 }
 
 const signIn = function(email, password) {
-    return (dispatch) => {
-      Auth.signIn(email, password)
-      .then((data) => {
-        const { jwtToken } = data.signInUserSession.idToken;
-        dispatch(setJwtToken(jwtToken));
-        Alert.alert(jwtToken);
-        return jwtToken;
-      })
-      .catch(err => Alert.alert("Error al Ingresar: ",err.message));
+  return (dispatch) => {
+    Auth.signIn(email, password)
+    .then((data) => {
+      const { jwtToken } = data.signInUserSession.idToken;
+      dispatch(setJwtToken(jwtToken));
+      Alert.alert(jwtToken);
+      return jwtToken;
+    })
+    .catch(err => Alert.alert("Error al Ingresar: ",err.message));
     }
 }
 
 
 const signUp = function(password, email, attributes) {
-
   return (dispatch) => {
     Auth.signUp({
       password,
@@ -48,7 +47,6 @@ const signUp = function(password, email, attributes) {
 }
 
 const confirmCode = function(email, confirmationCode) {
-
   return (dispatch) => {
     Auth.confirmSignUp(email, confirmationCode, {})
     .then((_data) => {
@@ -57,6 +55,5 @@ const confirmCode = function(email, confirmationCode) {
     .catch(err => Alert.alert("Error al Ingresar: ",err.message));
   }
 }
-
 
 export { signIn, signUp, confirmCode };

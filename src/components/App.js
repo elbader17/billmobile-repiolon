@@ -6,7 +6,7 @@ import aws_exports from '../aws-exports';
 import Authentication from '../components/Authentication';
 import store from '../store';
 import Intro from './Intro/Intro';
-
+import styles from './styles';
 Amplify.configure(aws_exports);
 
 export default class App extends Component {
@@ -20,22 +20,4 @@ export default class App extends Component {
     );
   }
 }
-//TODO REPLACE AUTENTICATOIN BY INTRO
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 5,
-
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 5,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});

@@ -4,6 +4,7 @@ import { shallow } from 'enzyme';
 import Confirmation from './Component';
 
 
+
 describe('Rendering Component Confirmation', () => {
   test('renders correctly Confirmation', () => {
     const component = renderer.create(<Confirmation />).toJSON();

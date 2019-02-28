@@ -3,8 +3,12 @@ import { StyleSheet, View, Modal } from 'react-native';
 import { Input, Button } from "react-native-elements";
 import PasswordInputText from 'react-native-hide-show-password-input';
 import Confirmation from '../Confirmation';
+import styles from './styles';
 
+const EMAIL_REGEXP = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
+const PASSWORD_REGEXP = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})"); 
 class SignUp extends React.Component {
+
 
     constructor(props) {
         super(props);
@@ -15,9 +19,7 @@ class SignUp extends React.Component {
           confirmPassword: '',
           confirmationEmail:'',
           selectedIndex: 0,
-          validateData: true,
-          validEmail: true,
-          validPass: true,
+          
         };
       }
 
@@ -39,23 +41,15 @@ class SignUp extends React.Component {
         confirmCode(confirmationEmail,confirmationCode,{})
     }
 
-    isEmail = (email) => {
-        var re = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
-        var bool = re.test(String(email).toLowerCase());
-        this.state.validEmail = !bool;
-        this.state.validateData = !bool || this.state.validPass;
-        return bool;
+   
+
+    validateData = () => {
+      const isValidPassword = PASSWORD_REGEXP.test(this.state.password);
+      const isValidEmail = EMAIL_REGEXP.test(String(this.state.email).toLowerCase());
+      return (isValidPassword && isValidEmail);
     }
 
-    isPasswordCoorrect = (password) => {
-        var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
-        var bool = strongRegex.test(password);
-        this.state.validPass = !bool;
-        this.state.validateData = !bool || this.state.validEmail;
-        return (bool);
-    }
-
-
+    
     setName = (value) => this.setState({ name: value})
     setEmail = (value) => this.setState({ email: value })
     setPassword = (value) => this.setState({ password: value })
@@ -76,7 +70,6 @@ class SignUp extends React.Component {
                     onRef={r => { this.state.email = r }}
                     value={this.state.email}
                     editable={!this.props.fetching}
-                    valid={this.isEmail(this.state.email)}
                     returnKeyType='next'
                 />
             
@@ -85,7 +78,7 @@ class SignUp extends React.Component {
                     leftIcon={{ type: 'font-awesome', name: 'lock' }}
                     onChangeText={ this.setPassword }
                     placeholder="Aa@-1234"
-                    valid={this.isPasswordCoorrect(this.state.password)}
+                    value={this.state.password}
                     secureTextEntry
                 />
                 
@@ -97,9 +90,11 @@ class SignUp extends React.Component {
                     secureTextEntry
                 />
                 <Button
+                    id='submitSignUp'
                     title='Submit'
+                    value={this.state.email}
                     testID={'submitSignUp'}
-                    disabled={this.state.validateData}
+                    disabled={!this.validateData()}
                     onPress={ this.handleSignUp }
                 />
             
@@ -114,12 +109,5 @@ class SignUp extends React.Component {
 
     }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-});
 
 export default SignUp;
