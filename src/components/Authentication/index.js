@@ -1,8 +1,9 @@
 import React from 'react';
-import { StyleSheet, View} from 'react-native';
+import { View, Text, Image } from 'react-native';
 import { ButtonGroup } from "react-native-elements";
 import Signup from './SignUp';
 import Signin from './SignIn';
+import style from './style';
 
 
 class Authentication extends React.Component {
@@ -16,12 +17,9 @@ class Authentication extends React.Component {
         confirmPassword: '@Am1234!',
         selectedIndex: 0,
       };
-
-      this.buttons = ['Sign Up', 'Sign In'];
     }
 
     updateIndex = () => {
-      // If selectedIndex was 0, make it 1.  If it was 1, make it 0
       const newIndex = this.state.selectedIndex === 0 ? 1 : 0;
       this.setState({ selectedIndex: newIndex });
     }
@@ -41,27 +39,34 @@ class Authentication extends React.Component {
         );
       }
     }
-
+    
     render() {
+      const logo = require('../../images/iconBill.png')
+      const component1 = () => <Text style={this.state.selectedIndex === 0 ? a : b}>REGISTRAR</Text>
+      const component2 = () => <Text style={this.state.selectedIndex === 1 ? a : b}>INICIAR SESIÓN</Text>
+      const buttons = [{ element: component1 }, { element: component2 }]
+      const a = style.buttonOn
+      const b = style.buttonOff
+
       return(
-        <View style={styles.container}>
+        <View style={style.container}>
+          <View style={style.container2}>
+            <Image source={logo} style={style.image} />
+            <Text style={style.textTittle}>Hacé facturas electronicas rápido.{"\n"} 
+            Y hacelo seguro</Text>
+          </View>
           <ButtonGroup
               onPress={this.updateIndex}
               selectedIndex={this.state.selectedIndex}
-              buttons={ this.buttons }
+              buttons={buttons}
+              containerStyle={style.buttons}
+              textStyle={style.text}
+              selectedButtonStyle={style.buttonSelected}
           />
           {this.renderSignUpSignIn()}
        </View>
       );
     }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-});
-
 
 export default Authentication;

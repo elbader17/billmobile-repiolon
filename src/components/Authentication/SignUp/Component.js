@@ -1,8 +1,8 @@
 import React from 'react';
-import { StyleSheet, View, Modal } from 'react-native';
-import { Input, Button } from "react-native-elements";
-import PasswordInputText from 'react-native-hide-show-password-input';
+import { View, Text, Modal, TextInput, TouchableOpacity, Image } from 'react-native';
+import { Button } from "react-native-elements";
 import Confirmation from '../Confirmation';
+import style from './style';
 
 class SignUp extends React.Component {
 
@@ -18,8 +18,19 @@ class SignUp extends React.Component {
           validateData: true,
           validEmail: true,
           validPass: true,
+          hidePassword: true,
+          hideConfirmPassword: true
         };
-      }
+    }
+
+    // function used to change password visibility
+    managePasswordVisibility = () => {
+        this.setState({ hidePassword: !this.state.hidePassword });
+    }
+    // function used to change confirmp assword visibility
+    manageConfirmPasswordVisibility = () => {
+        this.setState({ hideConfirmPassword: !this.state.hideConfirmPassword });
+    }
 
     handleSignUp = () => {
         const { name, email, password, confirmPassword } = this.state;
@@ -55,71 +66,103 @@ class SignUp extends React.Component {
         return (bool);
     }
 
-
     setName = (value) => this.setState({ name: value})
     setEmail = (value) => this.setState({ email: value })
     setPassword = (value) => this.setState({ password: value })
     setConfirmPassword = (value) => this.setState({ confirmPassword: value })
     
     render() {
+        const hide = require('../../../images/hide.png')
+        const show = require('../../../images/show.png')
         return(
-            <View style={{margin: 20}}>
-                <Input
-                    label="Nombre"
+            <View style={ style.cotainer }>
+              <View style = { style.container2 }>
+                <View style={ style.textBoxBtnHolder }>
+                  <TextInput
                     onChangeText={ this.setName }
-                    placeholder="Nombre"
-                />
-                <Input
-                    label="Email"
-                    onChangeText={this.setEmail}
-                    placeholder="usuario@email.com"
-                    onRef={r => { this.state.email = r }}
+                    placeholder="Tu nombre"
+                    style={ style.textBox }
+                  />
+                </View>
+                <View style={ style.textBoxBtnHolder }>
+                  <TextInput
+                    onChangeText={ this.setEmail }
+                    placeholder="Tu email"
+                    style={ style.textBox }
+                    onRef={ r => { this.state.email = r }}
                     value={this.state.email}
-                    editable={!this.props.fetching}
-                    valid={this.isEmail(this.state.email)}
+                    editable={ !this.props.fetching }
+                    valid={ this.isEmail(this.state.email) }
                     returnKeyType='next'
-                />
-            
-                <PasswordInputText
-                    label="Password"
-                    leftIcon={{ type: 'font-awesome', name: 'lock' }}
-                    onChangeText={ this.setPassword }
-                    placeholder="Aa@-1234"
-                    valid={this.isPasswordCoorrect(this.state.password)}
-                    secureTextEntry
-                />
-                
-                <PasswordInputText
-                    label="ConfirmPassword"
-                    leftIcon={{ type: 'font-awesome', name: 'lock' }}
-                    onChangeText={ this.setConfirmPassword }
-                    placeholder="Aa@-1234"
-                    secureTextEntry
-                />
+                  />
+                </View>
+                <View style={ style.textBoxBtnHolder }>
+                  <TextInput 
+                    underlineColorAndroid="transparent" 
+                    placeholder="Contraseña"
+                    style={ style.textBox }
+                    secureTextEntry={ this.state.hidePassword } 
+                    valid={ this.isPasswordCoorrect(this.state.password) }
+                  />        
+                  <TouchableOpacity 
+                    activeOpacity={ 0.8 } 
+                    style={ style.visibilityBtn } 
+                    onPress={ this.managePasswordVisibility }
+                  >
+                    <Image 
+                      source={( this.state.hidePassword ) ? hide : show } 
+                      style={ style.btnImage } 
+                    />
+                  </TouchableOpacity>
+                </View>
+                <View style={ style.textBoxBtnHolder }>
+                  <TextInput 
+                    underlineColorAndroid="transparent" 
+                    placeholder="Confirmar Contraseña"
+                    style={ style.textBox }
+                    secureTextEntry={ this.state.hideConfirmPassword } 
+                  />        
+                  <TouchableOpacity 
+                    activeOpacity={ 0.8 } 
+                    style={ style.visibilityBtn } 
+                    onPress={ this.manageConfirmPasswordVisibility }
+                  >
+                    <Image 
+                      source={( this.state.hideConfirmPassword ) ? hide : show } 
+                      style={ style.btnImage } 
+                    />
+                  </TouchableOpacity>
+                </View>   
+
+                <Text style={ style.textSignIn }>
+                  ¿Ya tienes una cuenta? Iniciar Sesión
+                </Text>
+
                 <Button
-                    title='Submit'
-                    testID={'submitSignUp'}
-                    disabled={this.state.validateData}
-                    onPress={ this.handleSignUp }
+                  title='CREAR CUENTA'
+                  testID={ 'submitSignUp' }
+                  onPress={ this.handleSignUp }
+                  buttonStyle={ style.submit }
+                  titleStyle={ style.submitText }
+                  disabledTitleStyle={ style.submitText }
+                  disabledStyle={ style.submitDisabled }
+                  disabled={ true }
                 />
-            
-                
-                <Modal visible={this.props.showConfirmationModal} >
-                    <View style={styles.container} >
-                        <Confirmation/>
-                    </View>
-                </Modal>
-        </View>
+                <Text style={style.textFooterA}>
+                  Al registrarte estas aceptando nuestros
+                </Text>
+                <Text style={style.textFooterB}>
+                  Términos y Condiciones y Políticas de Privacidad
+                </Text>
+              </View>   
+              <Modal visible={ this.props.showConfirmationModal }>
+                <Confirmation/>
+              </Modal>
+
+            </View>
         )
 
     }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-});
 
 export default SignUp;
