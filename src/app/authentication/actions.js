@@ -25,6 +25,7 @@ const signIn = function(email, password) {
       const { jwtToken } = data.signInUserSession.idToken;
       dispatch(setJwtToken(jwtToken));
       Alert.alert(jwtToken);
+      console.log(jwtToken);
       return jwtToken;
     })
     .catch(err => Alert.alert("Error al Ingresar: ",err.message));
@@ -35,14 +36,14 @@ const signIn = function(email, password) {
 const signUp = function(password, email, attributes) {
   return (dispatch) => {
     Auth.signUp({
-      password,
-      email,
-      attributes,
+      username:email,
+      password:password,
+      attributes:attributes,
       validationData: [],
-    }).then((_data) => {
+    }).then((data) => {
       dispatch(showConfirmationModal());
     })
-    .catch(err => Alert.alert("Error al Ingresar: ",err.message));
+    .catch(err => Alert.alert("Error al Ingresar: ",err));
   }
 }
 

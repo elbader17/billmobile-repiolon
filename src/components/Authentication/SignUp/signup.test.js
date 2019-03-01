@@ -27,22 +27,18 @@ describe('Test to validate data of form ',() => {
   })
   it('Test Password with atributes disabled true', () => {
    const wrapper = shallow(<SignUp />);
-    const inputEmail = wrapper.findWhere(node => node.prop('label') === 'Email');
-    const inputPassword = wrapper.findWhere(node => node.prop('label') === 'Password');
-    inputEmail.simulate('change', { value: { value: 'Changed' } });
-    inputPassword.simulate('change', { value: { value: 'Changed' } });
-   
+    wrapper.setState({ password: 'mal' });
+    wrapper.setState({ email: 'mal' });
     const button = wrapper.findWhere(node => node.prop('id') === 'submitSignUp');
     expect(button.props().disabled).toEqual(true);
   })
   it('Test Password with atributes disabled false', () => {
     const wrapper = shallow(<SignUp />);
-    const inputEmail = wrapper.findWhere(node => node.prop('label') === 'Email');
-    const inputPassword = wrapper.findWhere(node => node.prop('label') === 'Password');
-    inputEmail.simulate('change', { value: { value: 'changed@abc.com' } });
-    inputPassword.simulate('change', { value: { value: '@Am1234-' } });
+    wrapper.setState({ password: '@Am1234-' });
+    wrapper.setState({ email: 'a@a.com' });
     const button = wrapper.findWhere(node => node.prop('id') === 'submitSignUp');
-    expect(inputEmail.props()).toEqual(false);
+    expect(button.props().disabled).toEqual(false);
    })
   
 });
+

@@ -31,7 +31,7 @@ class SignUp extends React.Component {
         };
         const { signUp } = this.props;
         signUp(password, email,attributes);
-        this.setState({showConfirmationModal: true});
+        //this.setState({showConfirmationModal: true});
         
     }
 
@@ -65,20 +65,20 @@ class SignUp extends React.Component {
                 />
                 <Input
                     label="Email"
+                    value={ this.state.email }
                     onChangeText={this.setEmail}
                     placeholder="usuario@email.com"
                     onRef={r => { this.state.email = r }}
-                    value={this.state.email}
                     editable={!this.props.fetching}
                     returnKeyType='next'
                 />
             
                 <PasswordInputText
                     label="Password"
+                    value={this.state.password}
                     leftIcon={{ type: 'font-awesome', name: 'lock' }}
                     onChangeText={ this.setPassword }
                     placeholder="Aa@-1234"
-                    value={this.state.password}
                     secureTextEntry
                 />
                 

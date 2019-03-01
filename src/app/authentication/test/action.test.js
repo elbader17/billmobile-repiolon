@@ -71,9 +71,9 @@ describe('Actions', () => {
 
     it('should call Auth.signUp with email, password, attributes', () => {
       expect(Auth.signUp).toBeCalledWith({
-        password,
-        email,
-        attributes,
+        username:email,
+        password:password,
+        attributes:attributes,
         validationData: [],
       });
     });
