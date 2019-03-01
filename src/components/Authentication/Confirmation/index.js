@@ -10,8 +10,7 @@ function mapDispatchToProps(dispatch) {
         confirmCode: (email, confirmationCode) => dispatch(confirmCode(email,confirmationCode)),
     };
 }
-
-  
+ 
 const component = connect( 
     mapStateToProps,
     mapDispatchToProps,

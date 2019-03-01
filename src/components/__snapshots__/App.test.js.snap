@@ -2,13 +2,7 @@
 
 exports[`renders correctly App 1`] = `
 <View>
-  <View
-    style={
-      Object {
-        "backgroundColor": "#fff",
-      }
-    }
-  >
+  <View>
     <View
       style={
         Object {
@@ -25,6 +19,7 @@ exports[`renders correctly App 1`] = `
           "overflow": "hidden",
         }
       }
+      testID="buttonGroup"
     >
       <View
         style={

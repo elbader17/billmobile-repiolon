@@ -11,7 +11,6 @@ function mapDispatchToProps(dispatch) {
         signIn: (email, password) => dispatch(signIn(email, password)),
     };
 }
-
   
 const component = connect( 
     mapStateToProps,

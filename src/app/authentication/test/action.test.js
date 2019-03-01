@@ -1,10 +1,8 @@
 import { Auth } from 'aws-amplify';
-import { Alert } from 'react-native';
 import * as actions from '../actions';
 import {
   SET_JWT_TOKEN,
   SHOW_CONFIRMATION_MODAL,
-  HIDE_CONFIRMATION_MODAL,
 } from '../constants';
 
 describe('Actions', () => {

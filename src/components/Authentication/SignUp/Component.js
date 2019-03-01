@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Modal } from 'react-native';
+import { View, Modal } from 'react-native';
 import { Input, Button } from "react-native-elements";
 import PasswordInputText from 'react-native-hide-show-password-input';
 import Confirmation from '../Confirmation';
@@ -7,6 +7,7 @@ import styles from './styles';
 
 const EMAIL_REGEXP = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
 const PASSWORD_REGEXP = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})"); 
+
 class SignUp extends React.Component {
 
 

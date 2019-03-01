@@ -3,6 +3,7 @@ import { StyleSheet, View} from 'react-native';
 import { ButtonGroup } from "react-native-elements";
 import Signup from './SignUp';
 import Signin from './SignIn';
+import styles from './styles';
 
 
 class Authentication extends React.Component {
@@ -46,6 +47,7 @@ class Authentication extends React.Component {
       return(
         <View style={styles.container}>
           <ButtonGroup
+              testID="buttonGroup"
               onPress={this.updateIndex}
               selectedIndex={this.state.selectedIndex}
               buttons={ this.buttons }
@@ -56,11 +58,7 @@ class Authentication extends React.Component {
     }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#fff',
-  },
-});
+
 
 
 export default Authentication;

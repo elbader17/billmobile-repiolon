@@ -25,7 +25,6 @@ const signIn = function(email, password) {
       const { jwtToken } = data.signInUserSession.idToken;
       dispatch(setJwtToken(jwtToken));
       Alert.alert(jwtToken);
-      console.log(jwtToken);
       return jwtToken;
     })
     .catch(err => Alert.alert("Error al Ingresar: ",err.message));

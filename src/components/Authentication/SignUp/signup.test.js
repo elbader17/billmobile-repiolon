@@ -18,7 +18,7 @@ describe('Rendering Component and call  handeleSigUp', () => {
 
 });
 describe('Test to validate data of form ',() => {
-  it('Test Password with atributes disabled true', () => {
+  it('Test Password with atributes disabled true, initial state', () => {
     const clickFn = jest.fn();
     const wrapper = shallow(<SignUp signUp={clickFn} />);
     const button = wrapper.findWhere(node => node.prop('id') === 'submitSignUp');

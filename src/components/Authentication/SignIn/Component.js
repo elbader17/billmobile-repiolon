@@ -1,7 +1,9 @@
 import React from 'react';
-import { Alert, StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
 import { Input, Button } from "react-native-elements";
 
+const EMAIL_REGEXP = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
+const PASSWORD_REGEXP = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})"); 
 
 class SignIn extends React.Component {
 
@@ -9,9 +11,9 @@ class SignIn extends React.Component {
       super(props);
       this.state = {
         email: '',
-        password: '@Am1234!',
+        password: '',
         name:'',
-        confirmPassword: '@Am1234!',
+        confirmPassword: '',
       };
     }
 
@@ -20,6 +22,12 @@ class SignIn extends React.Component {
       const { signIn } = this.props;
       signIn(email, password);
             
+    }
+
+    validateData = () => {
+      const isValidPassword = PASSWORD_REGEXP.test(this.state.password);
+      const isValidEmail = EMAIL_REGEXP.test(String(this.state.email).toLowerCase());
+      return (isValidPassword && isValidEmail);
     }
 
     setEmail = (value) => this.setState({ email: value })
@@ -47,6 +55,7 @@ class SignIn extends React.Component {
               testID={'submitSignIn'}
               id='submitSignIn'
               title='Submit'
+              disabled={!this.validateData()}
               onPress={ this.handleSignIn }
               
             />
