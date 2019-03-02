@@ -12,10 +12,10 @@ class Authentication extends React.Component {
     super(props);
     this.state = {
       email: '',
-      password: '@Am1234!',
+      password: '',
       name:'',
-      confirmPassword: '@Am1234!',
-      selectedIndex: 0,
+      confirmPassword: '',
+      selectedIndex: 0
     };
   }
 
@@ -49,21 +49,21 @@ class Authentication extends React.Component {
     const buttons = [{ element: component1 }, { element: component2 }]
     return(
       <KeyboardAwareScrollView>
-        <View style={style.container}>
-          <View style={style.container2}>
-            <Image source={logo} style={style.image} />
-            <Text style={style.textTittle}>Hacé facturas electronicas rápido.{"\n"} 
+        <View style={ style.container }>
+          <View style={ style.container2 }>
+            <Image source={ logo } style={ style.image } />
+            <Text style={ style.textTittle }>Hacé facturas electronicas rápido.{"\n"} 
             Y hacelo seguro</Text>
           </View>
           <ButtonGroup
-            onPress={this.updateIndex}
-            selectedIndex={this.state.selectedIndex}
-            buttons={buttons}
-            containerStyle={style.buttons}
-            textStyle={style.text}
-            selectedButtonStyle={style.buttonSelected}
+            onPress={ this.updateIndex }
+            selectedIndex={ this.state.selectedIndex }
+            buttons={ buttons }
+            containerStyle={ style.buttons }
+            textStyle={ style.text }
+            selectedButtonStyle={ style.buttonSelected }
           />
-          {this.renderSignUpSignIn()}
+          { this.renderSignUpSignIn() }
         </View>
       </KeyboardAwareScrollView>
     );

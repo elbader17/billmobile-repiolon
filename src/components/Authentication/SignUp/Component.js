@@ -4,6 +4,9 @@ import { Button } from "react-native-elements";
 import Confirmation from '../Confirmation';
 import style from './style';
 
+const EMAIL_REGEXP = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
+const PASSWORD_REGEXP = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})"); 
+
 class SignUp extends React.Component {
 
   constructor(props) {
@@ -15,32 +18,26 @@ class SignUp extends React.Component {
       confirmPassword: '',
       confirmationEmail:'',
       selectedIndex: 0,
-      validateData: true,
-      validEmail: true,
-      validPass: true,
       hidePassword: true,
       hideConfirmPassword: true
     };
   }
 
-  // function used to change password visibility
   managePasswordVisibility = () => {
     this.setState({ hidePassword: !this.state.hidePassword });
   }
-  // function used to change confirmp assword visibility
   manageConfirmPasswordVisibility = () => {
     this.setState({ hideConfirmPassword: !this.state.hideConfirmPassword });
   }
 
   handleSignUp = () => {
-    const { name, email, password, confirmPassword } = this.state;
+    const { name, email, password } = this.state;
     const attributes = {
       email:email,
       name:name,
     };
     const { signUp } = this.props;
-    signUp(password, email,attributes);
-    this.setState({showConfirmationModal: true});    
+    signUp(password, email, attributes);
   }
 
   handleConfirmationCode = () => {
@@ -49,20 +46,10 @@ class SignUp extends React.Component {
     confirmCode(confirmationEmail,confirmationCode,{})
   }
 
-  isEmail = (email) => {
-    var re = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
-    var bool = re.test(String(email).toLowerCase());
-    this.state.validEmail = !bool;
-    this.state.validateData = !bool || this.state.validPass;
-    return bool;
-  }
-
-  isPasswordCoorrect = (password) => {
-    var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
-    var bool = strongRegex.test(password);
-    this.state.validPass = !bool;
-    this.state.validateData = !bool || this.state.validEmail;
-    return (bool);
+  validateData = () => {
+    const isValidPassword = PASSWORD_REGEXP.test(this.state.password);
+    const isValidEmail = EMAIL_REGEXP.test(String(this.state.email).toLowerCase());
+    return (isValidPassword && isValidEmail);
   }
 
   setName = (value) => this.setState({ name: value})
@@ -78,6 +65,7 @@ class SignUp extends React.Component {
         <View style = { style.container2 }>
           <View style={ style.textBoxBtnHolder }>
             <TextInput
+              label="Nombre"
               onChangeText={ this.setName }
               placeholder="Tu nombre"
               style={ style.textBox }
@@ -85,23 +73,24 @@ class SignUp extends React.Component {
           </View>
           <View style={ style.textBoxBtnHolder }>
             <TextInput
-              nChangeText={ this.setEmail }
+              label="Email"
+              value={ this.state.email }
+              onChangeText={ this.setEmail }
               placeholder="Tu email"
               style={ style.textBox }
               onRef={ r => { this.state.email = r }}
-              value={this.state.email}
               editable={ !this.props.fetching }
-              valid={ this.isEmail(this.state.email) }
               returnKeyType='next'
             />
           </View>
           <View style={ style.textBoxBtnHolder }>
             <TextInput 
-              underlineColorAndroid="transparent" 
+              label="Password"
+              value={ this.state.password }
+              onChangeText={ this.setPassword }
               placeholder="Contraseña"
               style={ style.textBox }
-              secureTextEntry={ this.state.hidePassword } 
-              valid={ this.isPasswordCoorrect(this.state.password) }
+              secureTextEntry={ this.state.hidePassword }
             />        
             <TouchableOpacity 
               activeOpacity={ 0.8 } 
@@ -116,7 +105,8 @@ class SignUp extends React.Component {
           </View>
           <View style={ style.textBoxBtnHolder }>
             <TextInput 
-              underlineColorAndroid="transparent" 
+              label="ConfirmPassword"
+              onChangeText={ this.setConfirmPassword }
               placeholder="Confirmar Contraseña"
               style={ style.textBox }
               secureTextEntry={ this.state.hideConfirmPassword } 
@@ -142,11 +132,12 @@ class SignUp extends React.Component {
             title='CREAR CUENTA'
             testID={ 'submitSignUp' }
             onPress={ this.handleSignUp }
+            value={this.state.email}
             buttonStyle={ style.submit }
             titleStyle={ style.submitText }
             disabledTitleStyle={ style.submitText }
             disabledStyle={ style.submitDisabled }
-            disabled={ true }
+            disabled={ !this.validateData() }
           />
 
           <Text style={style.textFooterA}>

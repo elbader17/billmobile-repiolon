@@ -3,20 +3,21 @@ import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 import { Button } from "react-native-elements";
 import style from './style';
 
+const EMAIL_REGEXP = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
+const PASSWORD_REGEXP = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})"); 
+
 class SignIn extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
       email: '',
-      password: '@Am1234!',
+      password: '',
       name:'',
-      confirmPassword: '@Am1234!',
       hidePassword: true
     };
   }
 
-  // function used to change password visibility
   managePasswordVisibility = () => {
     this.setState({ hidePassword: !this.state.hidePassword });
   }
@@ -25,6 +26,12 @@ class SignIn extends React.Component {
     const { email, password } = this.state;
     const { signIn } = this.props;
     signIn(email, password);    
+  }
+
+  validateData = () => {
+    const isValidPassword = PASSWORD_REGEXP.test(this.state.password);
+    const isValidEmail = EMAIL_REGEXP.test(String(this.state.email).toLowerCase());
+    return (isValidPassword && isValidEmail);
   }
 
   setEmail = (value) => this.setState({ email: value })
@@ -38,22 +45,21 @@ class SignIn extends React.Component {
         <View style={ style.container2 }>
           <View style={ style.textBoxBtnHolder }>
             <TextInput
-              value={this.state.email}
               label="Email"
               onChangeText={this.setEmail}
+              value={this.state.email}
               placeholder="Tu email"
               style={ style.textBox }
             />
           </View>
           <View style={ style.textBoxBtnHolder }>
-            <TextInput 
-              value={this.state.password}
+            <TextInput
+              label="Password" 
               onChangeText={this.setPassword}
-              underlineColorAndroid="transparent" 
+              value={this.state.password}
               placeholder="Contraseña"
               style={ style.textBox }
               secureTextEntry={ this.state.hidePassword } 
-              style={ style.textBox }
             />        
             <TouchableOpacity 
               activeOpacity={ 0.8 } 
@@ -78,9 +84,9 @@ class SignIn extends React.Component {
             onPress={ this.handleSignIn }
             buttonStyle={ style.submit }
             titleStyle={ style.submitText }
+            disabled={ !this.validateData() }
             disabledTitleStyle={ style.submitText }
             disabledStyle={ style.submitDisabled }
-            disabled={ true }
           />
 
           <Text style={style.textFooterA}>

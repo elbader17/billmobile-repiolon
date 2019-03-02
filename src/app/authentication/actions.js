@@ -5,8 +5,6 @@ import {
    SHOW_CONFIRMATION_MODAL,
    HIDE_CONFIRMATION_MODAL,
 } from './constants';
-import { from } from 'zen-observable';
-
 
 function setJwtToken(jwtToken){
   return { type: SET_JWT_TOKEN, jwtToken };
@@ -25,17 +23,20 @@ const signIn = function(email, password) {
       const { jwtToken } = data.signInUserSession.idToken;
       dispatch(setJwtToken(jwtToken));
       Alert.alert(jwtToken);
+      return jwtToken;
     })
     .catch(err => Alert.alert("Error al Ingresar: ",err.message));
   }
 }
 
-
 const signUp = function(password, email, attributes) {
-  
   return (dispatch) => {
-    Auth.signUp({password:password,username:email,attributes:attributes,validationData:[],})
-    .then((data => {
+    Auth.signUp({
+      username:email,
+      password:password,
+      attributes:attributes,
+      validationData:[],
+    }).then((data => {
       dispatch(showConfirmationModal());
     }))
     .catch(err => Alert.alert("Error al Ingresar: ",err.message));
@@ -43,15 +44,13 @@ const signUp = function(password, email, attributes) {
 }
 
 const confirmCode = function(email, confirmationCode) {
-  
   return (dispatch) => {
-    const auth = Auth.confirmSignUp(email, confirmationCode, {})
-    .then((data => {
+    Auth.confirmSignUp(email, confirmationCode, {})
+    .then((_data) => {
       dispatch(hideConfirmationModal());
-    }))
+    })
     .catch(err => Alert.alert("Error al Ingresar: ",err.message));
   }
 }
-
 
 export { signIn, signUp, confirmCode };

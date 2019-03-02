@@ -1,62 +1,60 @@
 import React from 'react';
-import { StyleSheet, View, Modal } from 'react-native';
-import { Input, Button } from "react-native-elements";
-
+import { Text, View, TextInput } from 'react-native';
+import { Button } from "react-native-elements";
+import style from './style';
 
 class Confirmation extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-          email: '',
-          confirmPassword: '',
-        };
-      }
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: '',
+      confirmPassword: '',
+    };
+  }
 
+  handleConfirmationCode = () => {
+    const { confirmationEmail, confirmationCode } = this.state;
+    const { confirmCode } = this.props;
+    confirmCode(confirmationEmail,confirmationCode,{})
+  }
 
-    handleConfirmationCode = () => {
-        const { confirmationEmail, confirmationCode } = this.state;
-        const { confirmCode } = this.props;
-        confirmCode(confirmationEmail,confirmationCode,{})
-    }
+  setConfirmPassword = (value) => this.setState({ confirmPassword: value })
 
-    setConfirmPassword = (value) => this.setState({ confirmPassword: value })
-
-    render() {
-        return(
-            <View>
-                <Input
-                    label="Email"
-                    leftIcon={{ type: 'font-awesome', name: 'lock' }}
-                    onChangeText={
-                        // Set this.state.confirmationCode to the value in this Input box
-                        (value) => this.setState({ confirmationEmail: value })
-                    }
-                />
-                <Input
-                    label="Codigo de confirmación"
-                    leftIcon={{ type: 'font-awesome', name: 'lock' }}
-                    onChangeText={
-                        // Set this.state.confirmationCode to the value in this Input box
-                        (value) => this.setState({ confirmationCode: value })
-                    }
-                />
-                <Button
-                    title='Submit'
-                    testID={'submitConfirmation'}
-                    onPress={ this.handleConfirmationCode }
-                />
-            </View>
-        )
-
-    }
+  render() {
+    return(
+      <View state={ style.container }>
+        <View style={ style.container2 }>       
+          <Text style={ style.text }>
+            Verificar Cuenta
+          </Text>
+          <View style={ style.textBoxBtnHolder }>
+            <TextInput
+              label="Email"
+              onChangeText={ (value) => this.setState({ confirmationEmail: value }) }
+              placeholder="Tu email"
+              style={ style.textBox }
+            />
+          </View>
+          <View style={ style.textBoxBtnHolder }>
+            <TextInput
+              label="Codigo de confirmación"
+              onChangeText={ (value) => this.setState({ confirmationCode: value }) }
+              placeholder="Codigo de Confirmación"
+              style={ style.textBox }
+            />
+          </View>
+          <Button
+            title='VERIFICAR'
+            testID={'submitConfirmation'}
+            onPress={ this.handleConfirmationCode }
+            buttonStyle={ style.submit }
+            titleStyle={ style.submitText }
+          />
+        </View>
+      </View>
+    )
+  }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-});
 
 export default Confirmation;

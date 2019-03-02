@@ -5,7 +5,6 @@ import {
   HIDE_CONFIRMATION_MODAL,
 } from './constants';
 
-
 const initialState = {
   jwtToken: '',
   showConfirmationModal: false,
@@ -30,7 +29,6 @@ function toggleConfirmationModal({draftState }){
   draftState.showConfirmationModal = !draftState.showConfirmationModal;
   return draftState;
 }
-
 
 export default authenticationReducer = (state = initialState, action) => {
   return producer(state, (draftState) => {
