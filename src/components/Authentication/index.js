@@ -56,6 +56,7 @@ class Authentication extends React.Component {
             Y hacelo seguro</Text>
           </View>
           <ButtonGroup
+            testID={ 'buttonGroup' }
             onPress={ this.updateIndex }
             selectedIndex={ this.state.selectedIndex }
             buttons={ buttons }

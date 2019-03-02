@@ -9,1041 +9,456 @@ exports[`renders correctly App 1`] = `
     }
   }
 >
-  <View
-    style={
+  <RCTScrollView
+    automaticallyAdjustContentInsets={false}
+    contentInset={
       Object {
-        "backgroundColor": "#fff",
-        "flex": 1,
+        "bottom": 0,
       }
     }
+    enableAutomaticScroll={true}
+    enableOnAndroid={false}
+    enableResetScrollToCoords={true}
+    extraHeight={75}
+    extraScrollHeight={0}
+    getScrollResponder={[Function]}
+    handleOnScroll={[Function]}
+    keyboardDismissMode="interactive"
+    keyboardOpeningTime={250}
+    keyboardSpace={0}
+    onScroll={[Function]}
+    resetKeyboardSpace={[Function]}
+    scrollEventThrottle={1}
+    scrollForExtraHeightOnAndroid={[Function]}
+    scrollIntoView={[Function]}
+    scrollToEnd={[Function]}
+    scrollToFocusedInput={[Function]}
+    scrollToPosition={[Function]}
+    showsVerticalScrollIndicator={true}
+    update={[Function]}
+    viewIsInsideTabBar={false}
   >
-    <View
-      style={
-        Object {
-          "backgroundColor": "#fff",
-          "borderColor": "#e3e3e3",
-          "borderRadius": 3,
-          "borderWidth": 1,
-          "flexDirection": "row",
-          "height": 40,
-          "marginBottom": 5,
-          "marginLeft": 10,
-          "marginRight": 10,
-          "marginTop": 5,
-          "overflow": "hidden",
-        }
-      }
-    >
-      <View
-        style={
-          Object {
-            "borderBottomLeftRadius": 3,
-            "borderRightColor": "#bdc6cf",
-            "borderRightWidth": 0,
-            "borderTopLeftRadius": 3,
-            "flex": 1,
-          }
-        }
-      >
-        <View
-          accessible={true}
-          isTVSelectable={true}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
-          style={
-            Object {
-              "flex": 1,
-              "opacity": 1,
-            }
-          }
-          testID="buttonGroupItem"
-        >
-          <View
-            style={
-              Object {
-                "alignItems": "center",
-                "backgroundColor": "#2089dc",
-                "flex": 1,
-                "justifyContent": "center",
-              }
-            }
-          >
-            <Text
-              style={
-                Object {
-                  "color": "#fff",
-                  "fontSize": 16.25,
-                  "fontWeight": "500",
-                }
-              }
-              testID="buttonGroupItemText"
-              theme={
-                Object {
-                  "colors": Object {
-                    "disabled": "hsl(208, 8%, 90%)",
-                    "divider": "#bcbbc1",
-                    "error": "#ff190c",
-                    "grey0": "#393e42",
-                    "grey1": "#43484d",
-                    "grey2": "#5e6977",
-                    "grey3": "#86939e",
-                    "grey4": "#bdc6cf",
-                    "grey5": "#e1e8ee",
-                    "greyOutline": "#bbb",
-                    "platform": Object {
-                      "android": Object {
-                        "error": "#f44336",
-                        "primary": "#2196f3",
-                        "secondary": "#9C27B0",
-                        "success": "#4caf50",
-                        "warning": "#ffeb3b",
-                      },
-                      "ios": Object {
-                        "error": "#ff3b30",
-                        "primary": "#007aff",
-                        "secondary": "#5856d6",
-                        "success": "#4cd964",
-                        "warning": "#ffcc00",
-                      },
-                    },
-                    "primary": "#2089dc",
-                    "searchBg": "#303337",
-                    "secondary": "#8F0CE8",
-                    "success": "#52c41a",
-                    "warning": "#faad14",
-                  },
-                }
-              }
-            >
-              Sign Up
-            </Text>
-          </View>
-        </View>
-      </View>
-      <View
-        style={
-          Object {
-            "borderBottomRightRadius": 3,
-            "borderLeftColor": "#bdc6cf",
-            "borderLeftWidth": 1,
-            "borderTopRightRadius": 3,
-            "flex": 1,
-          }
-        }
-      >
-        <View
-          accessible={true}
-          isTVSelectable={true}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
-          style={
-            Object {
-              "flex": 1,
-              "opacity": 1,
-            }
-          }
-          testID="buttonGroupItem"
-        >
-          <View
-            style={
-              Object {
-                "alignItems": "center",
-                "flex": 1,
-                "justifyContent": "center",
-              }
-            }
-          >
-            <Text
-              style={
-                Object {
-                  "color": "#5e6977",
-                  "fontSize": 16.25,
-                  "fontWeight": "500",
-                }
-              }
-              testID="buttonGroupItemText"
-              theme={
-                Object {
-                  "colors": Object {
-                    "disabled": "hsl(208, 8%, 90%)",
-                    "divider": "#bcbbc1",
-                    "error": "#ff190c",
-                    "grey0": "#393e42",
-                    "grey1": "#43484d",
-                    "grey2": "#5e6977",
-                    "grey3": "#86939e",
-                    "grey4": "#bdc6cf",
-                    "grey5": "#e1e8ee",
-                    "greyOutline": "#bbb",
-                    "platform": Object {
-                      "android": Object {
-                        "error": "#f44336",
-                        "primary": "#2196f3",
-                        "secondary": "#9C27B0",
-                        "success": "#4caf50",
-                        "warning": "#ffeb3b",
-                      },
-                      "ios": Object {
-                        "error": "#ff3b30",
-                        "primary": "#007aff",
-                        "secondary": "#5856d6",
-                        "success": "#4cd964",
-                        "warning": "#ffcc00",
-                      },
-                    },
-                    "primary": "#2089dc",
-                    "searchBg": "#303337",
-                    "secondary": "#8F0CE8",
-                    "success": "#52c41a",
-                    "warning": "#faad14",
-                  },
-                }
-              }
-            >
-              Sign In
-            </Text>
-          </View>
-        </View>
-      </View>
-    </View>
     <View>
       <View
         style={
           Object {
-            "margin": 20,
+            "backgroundColor": "#fff",
+            "height": 1334,
+            "width": 750,
           }
         }
       >
         <View
           style={
             Object {
-              "paddingHorizontal": 10,
-              "width": "100%",
+              "alignItems": "center",
+              "backgroundColor": "#3687d1",
+              "justifyContent": "center",
+              "marginBottom": -5,
+              "paddingTop": 30,
             }
           }
         >
+          <Image
+            source={
+              Object {
+                "testUri": "../../../src/images/iconBill.png",
+              }
+            }
+            style={
+              Object {
+                "height": 99,
+                "width": 136,
+              }
+            }
+          />
           <Text
             style={
               Object {
-                "color": "#86939e",
-                "fontSize": 16,
-                "fontWeight": "bold",
+                "color": "#fff",
+                "fontFamily": "Lato-Regular",
+                "fontSize": undefined,
+                "lineHeight": 22,
+                "opacity": 0.7,
+                "paddingBottom": 25,
+                "paddingTop": 10,
+                "textAlign": "center",
               }
             }
           >
-            Nombre
-          </Text>
-          <View
-            style={
-              Object {
-                "alignItems": "center",
-                "borderBottomWidth": 1,
-                "borderColor": "#86939e",
-                "flexDirection": "row",
-                "transform": Array [
-                  Object {
-                    "translateX": 0,
-                  },
-                ],
-              }
-            }
-          >
-            <TextInput
-              allowFontScaling={true}
-              onChangeText={[Function]}
-              placeholder="Nombre"
-              style={
-                Object {
-                  "alignSelf": "center",
-                  "color": "black",
-                  "flex": 1,
-                  "fontSize": 18,
-                  "minHeight": 40,
-                }
-              }
-              testID="RNE__Input__text-input"
-              underlineColorAndroid="transparent"
-            />
-          </View>
-        </View>
-        <View
-          style={
-            Object {
-              "paddingHorizontal": 10,
-              "width": "100%",
-            }
-          }
-        >
-          <Text
-            style={
-              Object {
-                "color": "#86939e",
-                "fontSize": 16,
-                "fontWeight": "bold",
-              }
-            }
-          >
-            Email
-          </Text>
-          <View
-            style={
-              Object {
-                "alignItems": "center",
-                "borderBottomWidth": 1,
-                "borderColor": "#86939e",
-                "flexDirection": "row",
-                "transform": Array [
-                  Object {
-                    "translateX": 0,
-                  },
-                ],
-              }
-            }
-          >
-            <TextInput
-              allowFontScaling={true}
-              editable={true}
-              onChangeText={[Function]}
-              onRef={[Function]}
-              placeholder="usuario@email.com"
-              returnKeyType="next"
-              style={
-                Object {
-                  "alignSelf": "center",
-                  "color": "black",
-                  "flex": 1,
-                  "fontSize": 18,
-                  "minHeight": 40,
-                }
-              }
-              testID="RNE__Input__text-input"
-              underlineColorAndroid="transparent"
-              valid={false}
-              value=""
-            />
-          </View>
-        </View>
-        <View>
-          <View
-            onResponderRelease={[Function]}
-            onStartShouldSetResponder={[Function]}
-            pointerEvents="auto"
-          >
-            <View
-              style={
-                Object {
-                  "backgroundColor": "transparent",
-                  "borderBottomColor": "rgba(0, 0, 0, 0.38)",
-                  "borderBottomWidth": 0.5,
-                  "height": 64,
-                  "paddingBottom": 8,
-                  "paddingTop": 32,
-                }
-              }
-            >
-              <View
-                style={
-                  Object {
-                    "position": "absolute",
-                    "top": 16,
-                  }
-                }
-              >
-                <Text
-                  active={true}
-                  animationDuration={225}
-                  errored={false}
-                  focused={false}
-                  numberOfLines={1}
-                  style={
-                    Object {
-                      "color": "rgba(0, 0, 0, 0.38)",
-                      "fontSize": 12,
-                    }
-                  }
-                >
-                  Password
-                </Text>
-              </View>
-              <View
-                style={
-                  Object {
-                    "flexDirection": "row",
-                  }
-                }
-              >
-                <TextInput
-                  allowFontScaling={true}
-                  autoCapitalize="sentences"
-                  blurOnSubmit={true}
-                  disableFullscreenUI={true}
-                  editable={true}
-                  iconSize={25}
-                  leftIcon={
-                    Object {
-                      "name": "lock",
-                      "type": "font-awesome",
-                    }
-                  }
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  onChangeText={[Function]}
-                  onContentSizeChange={[Function]}
-                  onFocus={[Function]}
-                  placeholder="Aa@-1234"
-                  secureTextEntry={true}
-                  selectionColor="rgb(0, 145, 234)"
-                  style={
-                    Array [
-                      Object {
-                        "flex": 1,
-                        "margin": 0,
-                        "padding": 0,
-                        "top": 2,
-                      },
-                      Object {
-                        "color": "rgba(0, 0, 0, .87)",
-                        "fontSize": 16,
-                        "height": 24,
-                      },
-                      undefined,
-                    ]
-                  }
-                  underlineColorAndroid="transparent"
-                  valid={false}
-                  value=""
-                />
-              </View>
-            </View>
-            <View
-              style={
-                Object {
-                  "flexDirection": "row",
-                  "height": 8,
-                }
-              }
-            >
-              <View
-                style={
-                  Object {
-                    "flex": 1,
-                  }
-                }
-              >
-                <View
-                  style={
-                    Object {
-                      "bottom": 0,
-                      "left": 0,
-                      "paddingVertical": 4,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 0,
-                    }
-                  }
-                >
-                  <Text
-                    numberOfLines={1}
-                    style={
-                      Object {
-                        "backgroundColor": "transparent",
-                        "color": "rgb(213, 0, 0)",
-                        "fontSize": 0,
-                        "opacity": 0,
-                      }
-                    }
-                  />
-                </View>
-                <View
-                  style={
-                    Object {
-                      "bottom": 0,
-                      "left": 0,
-                      "paddingVertical": 4,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 0,
-                    }
-                  }
-                >
-                  <Text
-                    numberOfLines={1}
-                    style={
-                      Object {
-                        "backgroundColor": "transparent",
-                        "color": "rgba(0, 0, 0, .38)",
-                        "fontSize": 12,
-                        "opacity": 1,
-                      }
-                    }
-                  />
-                </View>
-              </View>
-            </View>
-          </View>
-          <Text
-            allowFontScaling={false}
-            onPress={[Function]}
-            style={
-              Array [
-                Object {
-                  "color": undefined,
-                  "fontSize": 25,
-                },
-                Object {
-                  "position": "absolute",
-                  "right": 0,
-                  "top": 33,
-                },
-                Object {
-                  "fontFamily": "Material Icons",
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
-              ]
-            }
-          >
-            
-          </Text>
-        </View>
-        <View>
-          <View
-            onResponderRelease={[Function]}
-            onStartShouldSetResponder={[Function]}
-            pointerEvents="auto"
-          >
-            <View
-              style={
-                Object {
-                  "backgroundColor": "transparent",
-                  "borderBottomColor": "rgba(0, 0, 0, 0.38)",
-                  "borderBottomWidth": 0.5,
-                  "height": 64,
-                  "paddingBottom": 8,
-                  "paddingTop": 32,
-                }
-              }
-            >
-              <View
-                style={
-                  Object {
-                    "position": "absolute",
-                    "top": 16,
-                  }
-                }
-              >
-                <Text
-                  active={true}
-                  animationDuration={225}
-                  errored={false}
-                  focused={false}
-                  numberOfLines={1}
-                  style={
-                    Object {
-                      "color": "rgba(0, 0, 0, 0.38)",
-                      "fontSize": 12,
-                    }
-                  }
-                >
-                  Password
-                </Text>
-              </View>
-              <View
-                style={
-                  Object {
-                    "flexDirection": "row",
-                  }
-                }
-              >
-                <TextInput
-                  allowFontScaling={true}
-                  autoCapitalize="sentences"
-                  blurOnSubmit={true}
-                  disableFullscreenUI={true}
-                  editable={true}
-                  iconSize={25}
-                  leftIcon={
-                    Object {
-                      "name": "lock",
-                      "type": "font-awesome",
-                    }
-                  }
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  onChangeText={[Function]}
-                  onContentSizeChange={[Function]}
-                  onFocus={[Function]}
-                  placeholder="Aa@-1234"
-                  secureTextEntry={true}
-                  selectionColor="rgb(0, 145, 234)"
-                  style={
-                    Array [
-                      Object {
-                        "flex": 1,
-                        "margin": 0,
-                        "padding": 0,
-                        "top": 2,
-                      },
-                      Object {
-                        "color": "rgba(0, 0, 0, .87)",
-                        "fontSize": 16,
-                        "height": 24,
-                      },
-                      undefined,
-                    ]
-                  }
-                  underlineColorAndroid="transparent"
-                  value=""
-                />
-              </View>
-            </View>
-            <View
-              style={
-                Object {
-                  "flexDirection": "row",
-                  "height": 8,
-                }
-              }
-            >
-              <View
-                style={
-                  Object {
-                    "flex": 1,
-                  }
-                }
-              >
-                <View
-                  style={
-                    Object {
-                      "bottom": 0,
-                      "left": 0,
-                      "paddingVertical": 4,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 0,
-                    }
-                  }
-                >
-                  <Text
-                    numberOfLines={1}
-                    style={
-                      Object {
-                        "backgroundColor": "transparent",
-                        "color": "rgb(213, 0, 0)",
-                        "fontSize": 0,
-                        "opacity": 0,
-                      }
-                    }
-                  />
-                </View>
-                <View
-                  style={
-                    Object {
-                      "bottom": 0,
-                      "left": 0,
-                      "paddingVertical": 4,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 0,
-                    }
-                  }
-                >
-                  <Text
-                    numberOfLines={1}
-                    style={
-                      Object {
-                        "backgroundColor": "transparent",
-                        "color": "rgba(0, 0, 0, .38)",
-                        "fontSize": 12,
-                        "opacity": 1,
-                      }
-                    }
-                  />
-                </View>
-              </View>
-            </View>
-          </View>
-          <Text
-            allowFontScaling={false}
-            onPress={[Function]}
-            style={
-              Array [
-                Object {
-                  "color": undefined,
-                  "fontSize": 25,
-                },
-                Object {
-                  "position": "absolute",
-                  "right": 0,
-                  "top": 33,
-                },
-                Object {
-                  "fontFamily": "Material Icons",
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
-              ]
-            }
-          >
-            
+            Hacé facturas electronicas rápido.
+            
+
+            Y hacelo seguro
           </Text>
         </View>
         <View
           style={
             Object {
-              "borderRadius": 3,
+              "backgroundColor": "#3687d1",
+              "borderColor": "#e3e3e3",
+              "borderRadius": 0,
+              "borderWidth": 0,
+              "flexDirection": "row",
+              "height": 45,
+              "marginBottom": 5,
+              "marginLeft": 10,
+              "marginRight": 10,
+              "marginTop": 5,
+              "overflow": "hidden",
+              "right": 10,
+              "width": "100%",
             }
           }
-        >
-          <View
-            accessible={true}
-            isTVSelectable={true}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-            style={
-              Object {
-                "opacity": 1,
-              }
-            }
-            testID="submitSignUp"
-          >
-            <View
-              style={
-                Object {
-                  "alignItems": "center",
-                  "backgroundColor": "hsl(208, 8%, 90%)",
-                  "borderColor": "#2089dc",
-                  "borderRadius": 3,
-                  "borderWidth": 0,
-                  "flexDirection": "row",
-                  "justifyContent": "center",
-                  "padding": 8,
-                }
-              }
-            >
-              <Text
-                style={
-                  Object {
-                    "color": Object {
-                      "color": Array [
-                        208,
-                        8,
-                        63,
-                      ],
-                      "model": "hsl",
-                      "valpha": 1,
-                    },
-                    "fontSize": 18,
-                    "paddingBottom": 1,
-                    "paddingTop": 2,
-                    "textAlign": "center",
-                  }
-                }
-              >
-                Submit
-              </Text>
-            </View>
-          </View>
-        </View>
-        <Modal
-          hardwareAccelerated={false}
-          visible={false}
+          testID="buttonGroup"
         >
           <View
             style={
               Object {
-                "backgroundColor": "#fff",
+                "borderBottomLeftRadius": 3,
+                "borderRightColor": "#bdc6cf",
+                "borderRightWidth": 0,
+                "borderTopLeftRadius": 3,
                 "flex": 1,
               }
             }
           >
-            <View>
+            <View
+              accessible={true}
+              isTVSelectable={true}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "flex": 1,
+                  "opacity": 1,
+                }
+              }
+              testID="buttonGroupItem"
+            >
               <View
                 style={
                   Object {
-                    "paddingHorizontal": 10,
-                    "width": "100%",
+                    "alignItems": "center",
+                    "backgroundColor": "#fff",
+                    "flex": 1,
+                    "justifyContent": "center",
                   }
                 }
               >
                 <Text
                   style={
                     Object {
-                      "color": "#86939e",
-                      "fontSize": 16,
-                      "fontWeight": "bold",
+                      "color": "#3687d1",
+                      "fontFamily": "Lato-Regular",
+                      "fontSize": 11,
                     }
                   }
                 >
-                  Email
+                  REGISTRAR
                 </Text>
-                <View
-                  style={
-                    Object {
-                      "alignItems": "center",
-                      "borderBottomWidth": 1,
-                      "borderColor": "#86939e",
-                      "flexDirection": "row",
-                      "transform": Array [
-                        Object {
-                          "translateX": 0,
-                        },
-                      ],
-                    }
-                  }
-                >
-                  <View
-                    style={
-                      Object {
-                        "alignItems": "center",
-                        "height": 40,
-                        "justifyContent": "center",
-                        "marginLeft": 15,
-                      }
-                    }
-                  >
-                    <View>
-                      <View
-                        style={
-                          Object {
-                            "alignItems": "center",
-                            "backgroundColor": "transparent",
-                            "justifyContent": "center",
-                          }
-                        }
-                        theme={
-                          Object {
-                            "colors": Object {
-                              "disabled": "hsl(208, 8%, 90%)",
-                              "divider": "#bcbbc1",
-                              "error": "#ff190c",
-                              "grey0": "#393e42",
-                              "grey1": "#43484d",
-                              "grey2": "#5e6977",
-                              "grey3": "#86939e",
-                              "grey4": "#bdc6cf",
-                              "grey5": "#e1e8ee",
-                              "greyOutline": "#bbb",
-                              "platform": Object {
-                                "android": Object {
-                                  "error": "#f44336",
-                                  "primary": "#2196f3",
-                                  "secondary": "#9C27B0",
-                                  "success": "#4caf50",
-                                  "warning": "#ffeb3b",
-                                },
-                                "ios": Object {
-                                  "error": "#ff3b30",
-                                  "primary": "#007aff",
-                                  "secondary": "#5856d6",
-                                  "success": "#4cd964",
-                                  "warning": "#ffcc00",
-                                },
-                              },
-                              "primary": "#2089dc",
-                              "searchBg": "#303337",
-                              "secondary": "#8F0CE8",
-                              "success": "#52c41a",
-                              "warning": "#faad14",
-                            },
-                          }
-                        }
-                        underlayColor="white"
-                      >
-                        <Text
-                          allowFontScaling={false}
-                          style={
-                            Array [
-                              Object {
-                                "color": "black",
-                                "fontSize": 24,
-                              },
-                              Object {
-                                "backgroundColor": "transparent",
-                              },
-                              Object {
-                                "fontFamily": "FontAwesome",
-                                "fontStyle": "normal",
-                                "fontWeight": "normal",
-                              },
-                              Object {},
-                            ]
-                          }
-                          testID="iconIcon"
-                        >
-                          
-                        </Text>
-                      </View>
-                    </View>
-                  </View>
-                  <TextInput
-                    allowFontScaling={true}
-                    onChangeText={[Function]}
-                    style={
-                      Object {
-                        "alignSelf": "center",
-                        "color": "black",
-                        "flex": 1,
-                        "fontSize": 18,
-                        "minHeight": 40,
-                      }
-                    }
-                    testID="RNE__Input__text-input"
-                    underlineColorAndroid="transparent"
-                  />
-                </View>
               </View>
+            </View>
+          </View>
+          <View
+            style={
+              Object {
+                "borderBottomRightRadius": 3,
+                "borderLeftColor": "#bdc6cf",
+                "borderLeftWidth": 1,
+                "borderTopRightRadius": 3,
+                "flex": 1,
+              }
+            }
+          >
+            <View
+              accessible={true}
+              isTVSelectable={true}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "flex": 1,
+                  "opacity": 1,
+                }
+              }
+              testID="buttonGroupItem"
+            >
               <View
                 style={
                   Object {
-                    "paddingHorizontal": 10,
-                    "width": "100%",
+                    "alignItems": "center",
+                    "flex": 1,
+                    "justifyContent": "center",
                   }
                 }
               >
                 <Text
                   style={
                     Object {
-                      "color": "#86939e",
-                      "fontSize": 16,
-                      "fontWeight": "bold",
+                      "color": "#fff",
+                      "fontFamily": "Lato-Regular",
+                      "fontSize": 11,
                     }
                   }
                 >
-                  Codigo de confirmación
+                  INICIAR SESIÓN
                 </Text>
-                <View
+              </View>
+            </View>
+          </View>
+        </View>
+        <View>
+          <View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "paddingHorizontal": 45,
+                  "paddingTop": 15,
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "alignSelf": "stretch",
+                    "justifyContent": "center",
+                    "marginTop": 5,
+                    "position": "relative",
+                  }
+                }
+              >
+                <TextInput
+                  allowFontScaling={true}
+                  label="Nombre"
+                  onChangeText={[Function]}
+                  placeholder="Tu nombre"
                   style={
                     Object {
-                      "alignItems": "center",
-                      "borderBottomWidth": 1,
-                      "borderColor": "#86939e",
-                      "flexDirection": "row",
-                      "transform": Array [
-                        Object {
-                          "translateX": 0,
-                        },
-                      ],
+                      "alignSelf": "stretch",
+                      "borderColor": "#C4C4C4",
+                      "borderRadius": 2,
+                      "borderWidth": 1,
+                      "fontFamily": "Lato-Regular",
+                      "fontSize": 16,
+                      "height": 45,
+                      "paddingLeft": 8,
+                      "paddingRight": 45,
+                      "paddingVertical": 0,
+                    }
+                  }
+                  underlineColorAndroid="transparent"
+                />
+              </View>
+              <View
+                style={
+                  Object {
+                    "alignSelf": "stretch",
+                    "justifyContent": "center",
+                    "marginTop": 5,
+                    "position": "relative",
+                  }
+                }
+              >
+                <TextInput
+                  allowFontScaling={true}
+                  editable={true}
+                  label="Email"
+                  onChangeText={[Function]}
+                  onRef={[Function]}
+                  placeholder="Tu email"
+                  returnKeyType="next"
+                  style={
+                    Object {
+                      "alignSelf": "stretch",
+                      "borderColor": "#C4C4C4",
+                      "borderRadius": 2,
+                      "borderWidth": 1,
+                      "fontFamily": "Lato-Regular",
+                      "fontSize": 16,
+                      "height": 45,
+                      "paddingLeft": 8,
+                      "paddingRight": 45,
+                      "paddingVertical": 0,
+                    }
+                  }
+                  underlineColorAndroid="transparent"
+                  value=""
+                />
+              </View>
+              <View
+                style={
+                  Object {
+                    "alignSelf": "stretch",
+                    "justifyContent": "center",
+                    "marginTop": 5,
+                    "position": "relative",
+                  }
+                }
+              >
+                <TextInput
+                  allowFontScaling={true}
+                  label="Password"
+                  onChangeText={[Function]}
+                  placeholder="Contraseña"
+                  secureTextEntry={true}
+                  style={
+                    Object {
+                      "alignSelf": "stretch",
+                      "borderColor": "#C4C4C4",
+                      "borderRadius": 2,
+                      "borderWidth": 1,
+                      "fontFamily": "Lato-Regular",
+                      "fontSize": 16,
+                      "height": 45,
+                      "paddingLeft": 8,
+                      "paddingRight": 45,
+                      "paddingVertical": 0,
+                    }
+                  }
+                  underlineColorAndroid="transparent"
+                  value=""
+                />
+                <View
+                  accessible={true}
+                  isTVSelectable={true}
+                  onResponderGrant={[Function]}
+                  onResponderMove={[Function]}
+                  onResponderRelease={[Function]}
+                  onResponderTerminate={[Function]}
+                  onResponderTerminationRequest={[Function]}
+                  onStartShouldSetResponder={[Function]}
+                  style={
+                    Object {
+                      "height": 40,
+                      "opacity": 1,
+                      "padding": 5,
+                      "position": "absolute",
+                      "right": 3,
+                      "width": 35,
                     }
                   }
                 >
-                  <View
-                    style={
+                  <Image
+                    source={
                       Object {
-                        "alignItems": "center",
-                        "height": 40,
-                        "justifyContent": "center",
-                        "marginLeft": 15,
+                        "testUri": "../../../src/images/hide.png",
                       }
                     }
-                  >
-                    <View>
-                      <View
-                        style={
-                          Object {
-                            "alignItems": "center",
-                            "backgroundColor": "transparent",
-                            "justifyContent": "center",
-                          }
-                        }
-                        theme={
-                          Object {
-                            "colors": Object {
-                              "disabled": "hsl(208, 8%, 90%)",
-                              "divider": "#bcbbc1",
-                              "error": "#ff190c",
-                              "grey0": "#393e42",
-                              "grey1": "#43484d",
-                              "grey2": "#5e6977",
-                              "grey3": "#86939e",
-                              "grey4": "#bdc6cf",
-                              "grey5": "#e1e8ee",
-                              "greyOutline": "#bbb",
-                              "platform": Object {
-                                "android": Object {
-                                  "error": "#f44336",
-                                  "primary": "#2196f3",
-                                  "secondary": "#9C27B0",
-                                  "success": "#4caf50",
-                                  "warning": "#ffeb3b",
-                                },
-                                "ios": Object {
-                                  "error": "#ff3b30",
-                                  "primary": "#007aff",
-                                  "secondary": "#5856d6",
-                                  "success": "#4cd964",
-                                  "warning": "#ffcc00",
-                                },
-                              },
-                              "primary": "#2089dc",
-                              "searchBg": "#303337",
-                              "secondary": "#8F0CE8",
-                              "success": "#52c41a",
-                              "warning": "#faad14",
-                            },
-                          }
-                        }
-                        underlayColor="white"
-                      >
-                        <Text
-                          allowFontScaling={false}
-                          style={
-                            Array [
-                              Object {
-                                "color": "black",
-                                "fontSize": 24,
-                              },
-                              Object {
-                                "backgroundColor": "transparent",
-                              },
-                              Object {
-                                "fontFamily": "FontAwesome",
-                                "fontStyle": "normal",
-                                "fontWeight": "normal",
-                              },
-                              Object {},
-                            ]
-                          }
-                          testID="iconIcon"
-                        >
-                          
-                        </Text>
-                      </View>
-                    </View>
-                  </View>
-                  <TextInput
-                    allowFontScaling={true}
-                    onChangeText={[Function]}
                     style={
                       Object {
-                        "alignSelf": "center",
-                        "color": "black",
-                        "flex": 1,
-                        "fontSize": 18,
-                        "minHeight": 40,
+                        "height": "100%",
+                        "opacity": 0.4,
+                        "resizeMode": "contain",
+                        "width": "100%",
                       }
                     }
-                    testID="RNE__Input__text-input"
-                    underlineColorAndroid="transparent"
                   />
                 </View>
               </View>
               <View
                 style={
                   Object {
-                    "borderRadius": 3,
+                    "alignSelf": "stretch",
+                    "justifyContent": "center",
+                    "marginTop": 5,
+                    "position": "relative",
+                  }
+                }
+              >
+                <TextInput
+                  allowFontScaling={true}
+                  label="ConfirmPassword"
+                  onChangeText={[Function]}
+                  placeholder="Confirmar Contraseña"
+                  secureTextEntry={true}
+                  style={
+                    Object {
+                      "alignSelf": "stretch",
+                      "borderColor": "#C4C4C4",
+                      "borderRadius": 2,
+                      "borderWidth": 1,
+                      "fontFamily": "Lato-Regular",
+                      "fontSize": 16,
+                      "height": 45,
+                      "paddingLeft": 8,
+                      "paddingRight": 45,
+                      "paddingVertical": 0,
+                    }
+                  }
+                  underlineColorAndroid="transparent"
+                />
+                <View
+                  accessible={true}
+                  isTVSelectable={true}
+                  onResponderGrant={[Function]}
+                  onResponderMove={[Function]}
+                  onResponderRelease={[Function]}
+                  onResponderTerminate={[Function]}
+                  onResponderTerminationRequest={[Function]}
+                  onStartShouldSetResponder={[Function]}
+                  style={
+                    Object {
+                      "height": 40,
+                      "opacity": 1,
+                      "padding": 5,
+                      "position": "absolute",
+                      "right": 3,
+                      "width": 35,
+                    }
+                  }
+                >
+                  <Image
+                    source={
+                      Object {
+                        "testUri": "../../../src/images/hide.png",
+                      }
+                    }
+                    style={
+                      Object {
+                        "height": "100%",
+                        "opacity": 0.4,
+                        "resizeMode": "contain",
+                        "width": "100%",
+                      }
+                    }
+                  />
+                </View>
+              </View>
+              <Text
+                style={
+                  Object {
+                    "color": "#858585",
+                    "fontFamily": "Lato-Regular",
+                    "fontSize": 11,
+                    "paddingVertical": 15,
+                  }
+                }
+              >
+                ¿Ya tienes una cuenta?
+                <Text
+                  style={
+                    Object {
+                      "color": "#EE6123",
+                    }
+                  }
+                >
+                   Iniciar Sesión
+                </Text>
+              </Text>
+              <View
+                style={
+                  Object {
+                    "borderRadius": 2,
                   }
                 }
               >
@@ -1061,43 +476,227 @@ exports[`renders correctly App 1`] = `
                       "opacity": 1,
                     }
                   }
-                  testID="submitConfirmation"
+                  testID="submitSignUp"
                 >
                   <View
                     style={
                       Object {
                         "alignItems": "center",
-                        "backgroundColor": "#2089dc",
+                        "backgroundColor": "#ffad99",
                         "borderColor": "#2089dc",
-                        "borderRadius": 3,
+                        "borderRadius": 2,
                         "borderWidth": 0,
                         "flexDirection": "row",
+                        "height": 40,
                         "justifyContent": "center",
                         "padding": 8,
+                        "width": 266,
                       }
                     }
                   >
                     <Text
                       style={
                         Object {
-                          "color": "white",
-                          "fontSize": 18,
+                          "color": "#fff",
+                          "fontFamily": "Lato-Regular",
+                          "fontSize": undefined,
                           "paddingBottom": 1,
                           "paddingTop": 2,
                           "textAlign": "center",
                         }
                       }
                     >
-                      Submit
+                      CREAR CUENTA
                     </Text>
                   </View>
                 </View>
               </View>
+              <Text
+                style={
+                  Object {
+                    "color": "#858585",
+                    "fontFamily": "Lato-Regular",
+                    "fontSize": 11,
+                    "marginTop": 10,
+                  }
+                }
+              >
+                Al registrarte estas aceptando nuestros
+              </Text>
+              <Text
+                style={
+                  Object {
+                    "color": "#858585",
+                    "fontFamily": "Lato-Regular",
+                    "fontSize": 11,
+                    "fontWeight": "bold",
+                  }
+                }
+              >
+                Términos y Condiciones y Políticas de Privacidad
+              </Text>
             </View>
+            <Modal
+              hardwareAccelerated={false}
+              visible={false}
+            >
+              <View
+                state={
+                  Object {
+                    "height": 1334,
+                    "width": 750,
+                  }
+                }
+              >
+                <View
+                  style={
+                    Object {
+                      "alignItems": "center",
+                      "paddingHorizontal": 45,
+                      "paddingTop": 15,
+                    }
+                  }
+                >
+                  <Text
+                    style={
+                      Object {
+                        "fontFamily": "Lato-Regular",
+                        "fontSize": 16,
+                        "fontWeight": "bold",
+                      }
+                    }
+                  >
+                    Verificar Cuenta
+                  </Text>
+                  <View
+                    style={
+                      Object {
+                        "alignSelf": "stretch",
+                        "justifyContent": "center",
+                        "marginBottom": 6,
+                        "marginTop": 2,
+                        "position": "relative",
+                      }
+                    }
+                  >
+                    <TextInput
+                      allowFontScaling={true}
+                      label="Email"
+                      onChangeText={[Function]}
+                      placeholder="Tu email"
+                      style={
+                        Object {
+                          "alignSelf": "stretch",
+                          "borderColor": "#C4C4C4",
+                          "borderRadius": 2,
+                          "borderWidth": 1,
+                          "fontFamily": "Lato-Regular",
+                          "fontSize": 16,
+                          "height": 45,
+                          "paddingLeft": 8,
+                          "paddingRight": 45,
+                          "paddingVertical": 0,
+                        }
+                      }
+                      underlineColorAndroid="transparent"
+                    />
+                  </View>
+                  <View
+                    style={
+                      Object {
+                        "alignSelf": "stretch",
+                        "justifyContent": "center",
+                        "marginBottom": 6,
+                        "marginTop": 2,
+                        "position": "relative",
+                      }
+                    }
+                  >
+                    <TextInput
+                      allowFontScaling={true}
+                      label="Codigo de confirmación"
+                      onChangeText={[Function]}
+                      placeholder="Codigo de Confirmación"
+                      style={
+                        Object {
+                          "alignSelf": "stretch",
+                          "borderColor": "#C4C4C4",
+                          "borderRadius": 2,
+                          "borderWidth": 1,
+                          "fontFamily": "Lato-Regular",
+                          "fontSize": 16,
+                          "height": 45,
+                          "paddingLeft": 8,
+                          "paddingRight": 45,
+                          "paddingVertical": 0,
+                        }
+                      }
+                      underlineColorAndroid="transparent"
+                    />
+                  </View>
+                  <View
+                    style={
+                      Object {
+                        "borderRadius": 2,
+                      }
+                    }
+                  >
+                    <View
+                      accessible={true}
+                      isTVSelectable={true}
+                      onResponderGrant={[Function]}
+                      onResponderMove={[Function]}
+                      onResponderRelease={[Function]}
+                      onResponderTerminate={[Function]}
+                      onResponderTerminationRequest={[Function]}
+                      onStartShouldSetResponder={[Function]}
+                      style={
+                        Object {
+                          "opacity": 1,
+                        }
+                      }
+                      testID="submitConfirmation"
+                    >
+                      <View
+                        style={
+                          Object {
+                            "alignItems": "center",
+                            "backgroundColor": "#EE6123",
+                            "borderColor": "#2089dc",
+                            "borderRadius": 2,
+                            "borderWidth": 0,
+                            "flexDirection": "row",
+                            "height": 40,
+                            "justifyContent": "center",
+                            "padding": 8,
+                            "width": 266,
+                          }
+                        }
+                      >
+                        <Text
+                          style={
+                            Object {
+                              "color": "#fff",
+                              "fontFamily": "Lato-Regular",
+                              "fontSize": undefined,
+                              "paddingBottom": 1,
+                              "paddingTop": 2,
+                              "textAlign": "center",
+                            }
+                          }
+                        >
+                          VERIFICAR
+                        </Text>
+                      </View>
+                    </View>
+                  </View>
+                </View>
+              </View>
+            </Modal>
           </View>
-        </Modal>
+        </View>
       </View>
     </View>
-  </View>
+  </RCTScrollView>
 </View>
 `;
