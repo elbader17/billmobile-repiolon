@@ -3,6 +3,7 @@
 exports[`renders correctly App 1`] = `
 <<<<<<< HEAD
 <View>
+<<<<<<< HEAD
   <View
     style={
 =======
@@ -45,6 +46,27 @@ exports[`renders correctly App 1`] = `
     viewIsInsideTabBar={false}
   >
     <View>
+=======
+  <View>
+    <View
+      style={
+        Object {
+          "backgroundColor": "#fff",
+          "borderColor": "#e3e3e3",
+          "borderRadius": 3,
+          "borderWidth": 1,
+          "flexDirection": "row",
+          "height": 40,
+          "marginBottom": 5,
+          "marginLeft": 10,
+          "marginRight": 10,
+          "marginTop": 5,
+          "overflow": "hidden",
+        }
+      }
+      testID="buttonGroup"
+    >
+>>>>>>> b310d0819b27db894d8e43379491bdcec7fcc580
       <View
         style={
           Object {

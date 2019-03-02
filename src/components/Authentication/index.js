@@ -56,13 +56,10 @@ class Authentication extends React.Component {
             Y hacelo seguro</Text>
           </View>
           <ButtonGroup
-            testID={ 'buttonGroup' }
-            onPress={ this.updateIndex }
-            selectedIndex={ this.state.selectedIndex }
-            buttons={ buttons }
-            containerStyle={ style.buttons }
-            textStyle={ style.text }
-            selectedButtonStyle={ style.buttonSelected }
+              testID="buttonGroup"
+              onPress={this.updateIndex}
+              selectedIndex={this.state.selectedIndex}
+              buttons={ this.buttons }
           />
           { this.renderSignUpSignIn() }
         </View>

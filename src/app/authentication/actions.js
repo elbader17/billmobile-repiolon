@@ -35,11 +35,11 @@ const signUp = function(password, email, attributes) {
       username:email,
       password:password,
       attributes:attributes,
-      validationData:[],
+      validationData: [],
     }).then((data) => {
       dispatch(showConfirmationModal());
     })
-    .catch(err => Alert.alert("Error al Ingresar: ",err.message));
+    .catch(err => Alert.alert("Error al Ingresar: ",err));
   }
 }
 

@@ -25,7 +25,7 @@ describe('Reducers', () => {
 
   it('Test Hide confirmation modal ', () => {
     const action = { type: HIDE_CONFIRMATION_MODAL };
-    const expectedState = { jwtToken: "", showConfirmationModal: false };
+    const expectedState = {  jwtToken: "", showConfirmationModal: false };
     expect(authenticationReducer(undefined, action)).toEqual(expectedState);
   });
 });
