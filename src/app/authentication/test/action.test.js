@@ -1,10 +1,8 @@
 import { Auth } from 'aws-amplify';
-import { Alert } from 'react-native';
 import * as actions from '../actions';
 import {
   SET_JWT_TOKEN,
   SHOW_CONFIRMATION_MODAL,
-  HIDE_CONFIRMATION_MODAL,
 } from '../constants';
 
 describe('Actions', () => {
@@ -42,7 +40,6 @@ describe('Actions', () => {
       const actions = store.getActions();
       expect(actions[0].jwtToken).toEqual(jwtToken);
     });
-
   });
 
   describe('actions.signUp', () => {
@@ -71,9 +68,9 @@ describe('Actions', () => {
 
     it('should call Auth.signUp with email, password, attributes', () => {
       expect(Auth.signUp).toBeCalledWith({
-        password,
-        email,
-        attributes,
+        username:email,
+        password:password,
+        attributes:attributes,
         validationData: [],
       });
     });
@@ -83,6 +80,4 @@ describe('Actions', () => {
       expect(actions[0].type).toEqual(SHOW_CONFIRMATION_MODAL);
     });
   });
-
 });
-

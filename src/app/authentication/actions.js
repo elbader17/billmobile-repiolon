@@ -5,8 +5,6 @@ import {
    SHOW_CONFIRMATION_MODAL,
    HIDE_CONFIRMATION_MODAL,
 } from './constants';
-import { from } from 'zen-observable';
-
 
 function setJwtToken(jwtToken){
   return { type: SET_JWT_TOKEN, jwtToken };
@@ -31,15 +29,14 @@ const signIn = function(email, password) {
     }
 }
 
-
 const signUp = function(password, email, attributes) {
   return (dispatch) => {
     Auth.signUp({
-      password,
-      email,
-      attributes,
-      validationData: [],
-    }).then((_data) => {
+      username:email,
+      password:password,
+      attributes:attributes,
+      validationData:[],
+    }).then((data) => {
       dispatch(showConfirmationModal());
     })
     .catch(err => Alert.alert("Error al Ingresar: ",err.message));

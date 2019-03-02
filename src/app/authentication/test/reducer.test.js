@@ -11,27 +11,21 @@ describe('Reducers', () => {
     const initialState = {jwtToken: undefined, showConfirmationModal: false };
     expect(authenticationReducer(undefined, action)).toEqual(initialState);
   })
-
   it('Test set jwtToken ', () => {
     const action = { type: SET_JWT_TOKEN, jwtToken: 1 };
     const expectedState = { jwtToken: 1, showConfirmationModal: false };
-
     expect(authenticationReducer(undefined, action)).toEqual(expectedState);
   });
 
   it('Test Show confirmation modal ', () => {
     const action = { type: SHOW_CONFIRMATION_MODAL };
     const expectedState = { jwtToken: "",showConfirmationModal: true };
-
     expect(authenticationReducer(undefined, action)).toEqual(expectedState);
   });
 
   it('Test Hide confirmation modal ', () => {
     const action = { type: HIDE_CONFIRMATION_MODAL };
-    const expectedState = { hideConfirmationModal: false, jwtToken: "", showConfirmationModal: false };
-
+    const expectedState = { jwtToken: "", showConfirmationModal: false };
     expect(authenticationReducer(undefined, action)).toEqual(expectedState);
   });
-
 });
-
