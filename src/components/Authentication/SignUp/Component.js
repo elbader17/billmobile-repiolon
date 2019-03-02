@@ -10,7 +10,6 @@ const PASSWORD_REGEXP = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\
 
 class SignUp extends React.Component {
 
-
     constructor(props) {
         super(props);
         this.state = {
@@ -22,7 +21,7 @@ class SignUp extends React.Component {
           selectedIndex: 0,
           
         };
-      }
+    }
 
     handleSignUp = () => {
         const { name, email, password, confirmPassword } = this.state;
@@ -31,9 +30,7 @@ class SignUp extends React.Component {
             name:name,
         };
         const { signUp } = this.props;
-        signUp(password, email,attributes);
-        //this.setState({showConfirmationModal: true});
-        
+        signUp(password, email,attributes);        
     }
 
     handleConfirmationCode = () => {
@@ -42,15 +39,12 @@ class SignUp extends React.Component {
         confirmCode(confirmationEmail,confirmationCode,{})
     }
 
-   
-
     validateData = () => {
       const isValidPassword = PASSWORD_REGEXP.test(this.state.password);
       const isValidEmail = EMAIL_REGEXP.test(String(this.state.email).toLowerCase());
       return (isValidPassword && isValidEmail);
     }
 
-    
     setName = (value) => this.setState({ name: value})
     setEmail = (value) => this.setState({ email: value })
     setPassword = (value) => this.setState({ password: value })
@@ -59,11 +53,13 @@ class SignUp extends React.Component {
     render() {
         return(
             <View style={{margin: 20}}>
+
                 <Input
                     label="Nombre"
                     onChangeText={ this.setName }
                     placeholder="Nombre"
                 />
+
                 <Input
                     label="Email"
                     value={ this.state.email }
@@ -90,8 +86,10 @@ class SignUp extends React.Component {
                     placeholder="Aa@-1234"
                     secureTextEntry
                 />
+
                 <Button
                     id='submitSignUp'
+                    testID={'submitSignUp'}
                     title='Submit'
                     value={this.state.email}
                     testID={'submitSignUp'}
@@ -99,15 +97,14 @@ class SignUp extends React.Component {
                     onPress={ this.handleSignUp }
                 />
             
-                
                 <Modal visible={this.props.showConfirmationModal} >
                     <View style={styles.container} >
                         <Confirmation/>
                     </View>
                 </Modal>
+
         </View>
         )
-
     }
 }
 

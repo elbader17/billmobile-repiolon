@@ -26,7 +26,7 @@ describe('Test to validate data of form ',() => {
   it('Test Password with atributes disabled true, initial state ', () => {
     const clickFn = jest.fn();
     const wrapper = shallow(<SignIn signIn={clickFn} />);
-    const button = wrapper.findWhere(node => node.prop('id') === 'submitSignIn');
+    const button = wrapper.findWhere(node => node.prop('testID') === 'submitSignIn');
     expect(button.props().disabled).toEqual(true);
   
   })
@@ -34,14 +34,14 @@ describe('Test to validate data of form ',() => {
    const wrapper = shallow(<SignIn />);
     wrapper.setState({ password: 'mal' });
     wrapper.setState({ email: 'mal' });
-    const button = wrapper.findWhere(node => node.prop('id') === 'submitSignIn');
+    const button = wrapper.findWhere(node => node.prop('testID') === 'submitSignIn');
     expect(button.props().disabled).toEqual(true);
   })
   it('Test Password with atributes disabled false', () => {
     const wrapper = shallow(<SignIn />);
     wrapper.setState({ password: '@Am1234-' });
     wrapper.setState({ email: 'a@a.com' });
-    const button = wrapper.findWhere(node => node.prop('id') === 'submitSignIn');
+    const button = wrapper.findWhere(node => node.prop('testID') === 'submitSignIn');
     expect(button.props().disabled).toEqual(false);
    })
   

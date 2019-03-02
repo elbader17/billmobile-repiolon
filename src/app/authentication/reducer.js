@@ -22,7 +22,7 @@ function showConfirmationModal({draftState }){
 }
 
 function hideConfirmationModal({draftState }){
-  draftState.hideConfirmationModal = false;
+  draftState.showConfirmationModal = false;
   return draftState;
 }
 
