@@ -1,24 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly App 1`] = `
-<<<<<<< HEAD
 <View>
-<<<<<<< HEAD
-  <View
-    style={
-=======
-<View
-  style={
-    Object {
-      "backgroundColor": "#F5FCFF",
-      "flex": 5,
-    }
-  }
->
   <RCTScrollView
     automaticallyAdjustContentInsets={false}
     contentInset={
->>>>>>> BIL-13-registerStyle
       Object {
         "bottom": 0,
       }
@@ -46,27 +32,6 @@ exports[`renders correctly App 1`] = `
     viewIsInsideTabBar={false}
   >
     <View>
-=======
-  <View>
-    <View
-      style={
-        Object {
-          "backgroundColor": "#fff",
-          "borderColor": "#e3e3e3",
-          "borderRadius": 3,
-          "borderWidth": 1,
-          "flexDirection": "row",
-          "height": 40,
-          "marginBottom": 5,
-          "marginLeft": 10,
-          "marginRight": 10,
-          "marginTop": 5,
-          "overflow": "hidden",
-        }
-      }
-      testID="buttonGroup"
-    >
->>>>>>> b310d0819b27db894d8e43379491bdcec7fcc580
       <View
         style={
           Object {
@@ -151,37 +116,6 @@ exports[`renders correctly App 1`] = `
               }
             }
           >
-<<<<<<< HEAD
-            <TextInput
-              allowFontScaling={true}
-              editable={true}
-              onChangeText={[Function]}
-              onRef={[Function]}
-              placeholder="usuario@email.com"
-              returnKeyType="next"
-              style={
-                Object {
-                  "alignSelf": "center",
-                  "color": "black",
-                  "flex": 1,
-                  "fontSize": 18,
-                  "minHeight": 40,
-                }
-              }
-              testID="RNE__Input__text-input"
-              underlineColorAndroid="transparent"
-              value=""
-            />
-          </View>
-        </View>
-        <View>
-          <View
-            onResponderRelease={[Function]}
-            onStartShouldSetResponder={[Function]}
-            pointerEvents="auto"
-          >
-=======
->>>>>>> BIL-13-registerStyle
             <View
               accessible={true}
               isTVSelectable={true}
@@ -221,57 +155,6 @@ exports[`renders correctly App 1`] = `
                   REGISTRAR
                 </Text>
               </View>
-<<<<<<< HEAD
-              <View
-                style={
-                  Object {
-                    "flexDirection": "row",
-                  }
-                }
-              >
-                <TextInput
-                  allowFontScaling={true}
-                  autoCapitalize="sentences"
-                  blurOnSubmit={true}
-                  disableFullscreenUI={true}
-                  editable={true}
-                  iconSize={25}
-                  leftIcon={
-                    Object {
-                      "name": "lock",
-                      "type": "font-awesome",
-                    }
-                  }
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  onChangeText={[Function]}
-                  onContentSizeChange={[Function]}
-                  onFocus={[Function]}
-                  placeholder="Aa@-1234"
-                  secureTextEntry={true}
-                  selectionColor="rgb(0, 145, 234)"
-                  style={
-                    Array [
-                      Object {
-                        "flex": 1,
-                        "margin": 0,
-                        "padding": 0,
-                        "top": 2,
-                      },
-                      Object {
-                        "color": "rgba(0, 0, 0, .87)",
-                        "fontSize": 16,
-                        "height": 24,
-                      },
-                      undefined,
-                    ]
-                  }
-                  underlineColorAndroid="transparent"
-                  value=""
-                />
-              </View>
-=======
->>>>>>> BIL-13-registerStyle
             </View>
           </View>
           <View
@@ -475,103 +358,6 @@ exports[`renders correctly App 1`] = `
                   />
                 </View>
               </View>
-<<<<<<< HEAD
-            </View>
-          </View>
-          <Text
-            allowFontScaling={false}
-            onPress={[Function]}
-            style={
-              Array [
-                Object {
-                  "color": undefined,
-                  "fontSize": 25,
-                },
-                Object {
-                  "position": "absolute",
-                  "right": 0,
-                  "top": 33,
-                },
-                Object {
-                  "fontFamily": "Material Icons",
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
-              ]
-            }
-          >
-            
-          </Text>
-        </View>
-        <View
-          style={
-            Object {
-              "borderRadius": 3,
-            }
-          }
-        >
-          <View
-            accessible={true}
-            isTVSelectable={true}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-            style={
-              Object {
-                "opacity": 1,
-              }
-            }
-            testID="submitSignUp"
-          >
-            <View
-              style={
-                Object {
-                  "alignItems": "center",
-                  "backgroundColor": "hsl(208, 8%, 90%)",
-                  "borderColor": "#2089dc",
-                  "borderRadius": 3,
-                  "borderWidth": 0,
-                  "flexDirection": "row",
-                  "justifyContent": "center",
-                  "padding": 8,
-                }
-              }
-            >
-              <Text
-                style={
-                  Object {
-                    "color": Object {
-                      "color": Array [
-                        208,
-                        8,
-                        63,
-                      ],
-                      "model": "hsl",
-                      "valpha": 1,
-                    },
-                    "fontSize": 18,
-                    "paddingBottom": 1,
-                    "paddingTop": 2,
-                    "textAlign": "center",
-                  }
-                }
-              >
-                Submit
-              </Text>
-            </View>
-          </View>
-        </View>
-        <Modal
-          hardwareAccelerated={false}
-          visible={false}
-        >
-          <View>
-            <View>
-=======
->>>>>>> BIL-13-registerStyle
               <View
                 style={
                   Object {

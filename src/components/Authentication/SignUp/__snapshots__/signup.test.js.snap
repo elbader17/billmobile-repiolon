@@ -1,7 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-<<<<<<< HEAD
 exports[`Rendering Component SigUp renders correctly SignUp 1`] = `ShallowWrapper {}`;
-=======
-exports[`Matches  matches the snapshot 1`] = `ShallowWrapper {}`;
->>>>>>> b310d0819b27db894d8e43379491bdcec7fcc580
