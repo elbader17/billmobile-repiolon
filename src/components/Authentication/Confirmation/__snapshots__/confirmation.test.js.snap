@@ -1,0 +1,156 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Rendering Component Confirmation renders correctly Confirmation 1`] = `
+<View
+  state={
+    Object {
+      "height": 1334,
+      "width": 750,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "paddingHorizontal": 45,
+        "paddingTop": 15,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "fontFamily": "Lato-Regular",
+          "fontSize": 16,
+          "fontWeight": "bold",
+        }
+      }
+    >
+      Verificar Cuenta
+    </Text>
+    <View
+      style={
+        Object {
+          "alignSelf": "stretch",
+          "justifyContent": "center",
+          "marginBottom": 6,
+          "marginTop": 2,
+          "position": "relative",
+        }
+      }
+    >
+      <TextInput
+        allowFontScaling={true}
+        label="Email"
+        onChangeText={[Function]}
+        placeholder="Tu email"
+        style={
+          Object {
+            "alignSelf": "stretch",
+            "borderColor": "#C4C4C4",
+            "borderRadius": 2,
+            "borderWidth": 1,
+            "fontFamily": "Lato-Regular",
+            "fontSize": 16,
+            "height": 45,
+            "paddingLeft": 8,
+            "paddingRight": 45,
+            "paddingVertical": 0,
+          }
+        }
+        underlineColorAndroid="transparent"
+      />
+    </View>
+    <View
+      style={
+        Object {
+          "alignSelf": "stretch",
+          "justifyContent": "center",
+          "marginBottom": 6,
+          "marginTop": 2,
+          "position": "relative",
+        }
+      }
+    >
+      <TextInput
+        allowFontScaling={true}
+        label="Codigo de confirmación"
+        onChangeText={[Function]}
+        placeholder="Codigo de Confirmación"
+        style={
+          Object {
+            "alignSelf": "stretch",
+            "borderColor": "#C4C4C4",
+            "borderRadius": 2,
+            "borderWidth": 1,
+            "fontFamily": "Lato-Regular",
+            "fontSize": 16,
+            "height": 45,
+            "paddingLeft": 8,
+            "paddingRight": 45,
+            "paddingVertical": 0,
+          }
+        }
+        underlineColorAndroid="transparent"
+      />
+    </View>
+    <View
+      style={
+        Object {
+          "borderRadius": 2,
+        }
+      }
+    >
+      <View
+        accessible={true}
+        isTVSelectable={true}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+        testID="submitConfirmation"
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#EE6123",
+              "borderColor": "#2089dc",
+              "borderRadius": 2,
+              "borderWidth": 0,
+              "flexDirection": "row",
+              "height": 40,
+              "justifyContent": "center",
+              "padding": 8,
+              "width": 266,
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "color": "#fff",
+                "fontFamily": "Lato-Regular",
+                "fontSize": undefined,
+                "paddingBottom": 1,
+                "paddingTop": 2,
+                "textAlign": "center",
+              }
+            }
+          >
+            VERIFICAR
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;

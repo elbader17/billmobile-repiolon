@@ -17,7 +17,7 @@ exports[`Rendering Component Screen2 renders correctly 1`] = `
       Object {
         "bottom": 422,
         "color": "#fff",
-        "fontFamily": "Lato-Regular",
+        "fontFamily": undefined,
         "fontSize": 80,
         "lineHeight": 90,
         "position": "absolute",
@@ -31,8 +31,8 @@ exports[`Rendering Component Screen2 renders correctly 1`] = `
       Object {
         "alignItems": "center",
         "color": "#fff",
-        "fontFamily": "Lato-Semibold",
-        "fontSize": 18,
+        "fontFamily": undefined,
+        "fontSize": 16,
         "height": 33,
         "lineHeight": 32,
         "position": "absolute",
@@ -49,8 +49,8 @@ exports[`Rendering Component Screen2 renders correctly 1`] = `
       Object {
         "alignItems": "center",
         "color": "#fff",
-        "fontFamily": "Lato-Regular",
-        "fontSize": 14,
+        "fontFamily": undefined,
+        "fontSize": undefined,
         "height": 66,
         "lineHeight": 21,
         "position": "absolute",

@@ -3,6 +3,7 @@ export const FONTS = {
   latoSemiBold: 'Lato-Semibold',
   latoLight: 'Lato-Light',
   latoMedium: 'Lato-MediumItalic',
-  size14: 14,
-  size18: 18
+  size11: 11,
+  size18: 18,
+  size18: 16
 };
