@@ -1,23 +1,19 @@
-import React, { Component } from 'react';
-import { StyleSheet, View } from 'react-native';
+import * as React from 'react';
 import { Provider } from 'react-redux';
+import store from '../store';
 import Amplify from 'aws-amplify';
 import aws_exports from '../aws-exports';
-import Authentication from '../components/Authentication';
-import store from '../store';
-import Intro from './Intro/Intro';
-import styles from './styles';
+import AppNavigator from './app-navigator';
 Amplify.configure(aws_exports);
 
-export default class App extends Component {
+class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <View style={styles.container}>
-          <Authentication />
-        </View>
+        <AppNavigator />
       </Provider>
     );
   }
 }
 
+export default App;

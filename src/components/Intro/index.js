@@ -1,6 +1,6 @@
 //Component that renders the introduction of the application
 import React, { Component } from 'react';
-import { Text } from 'react-native';
+import { Text, StyleSheet, View} from 'react-native';
 import Swiper from 'react-native-swiper'; //https://github.com/leecade/react-native-swiper
 import Screen1 from './Screens/Screen1';
 import Screen2 from './Screens/Screen2';
@@ -11,7 +11,6 @@ import {COLORS} from '../../constants/colors';
 class Intro extends Component {
   render() {
     return (
-      //Configuration of component properties
       <Swiper
         showsButtons
         loop={false} 
