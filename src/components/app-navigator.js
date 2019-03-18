@@ -4,14 +4,17 @@ import {
 } from 'react-navigation';
 import Intro from './Intro';
 import Authentication from './Authentication';
+//Temporal
+import TaxConfiguration from './TaxConfiguration';
 
 let RootStack = createStackNavigator(
   {
-    Intro,
-    Authentication,
+    TaxConfiguration,
+    //Intro,
+    //Authentication,
   },
   {
-    headerMode: 'none',
+    //headerMode: 'none',
   }
 )
 
