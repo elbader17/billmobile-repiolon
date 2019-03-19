@@ -22,7 +22,6 @@ const signIn = function(email, password) {
     .then((data) => {
       const { jwtToken } = data.signInUserSession.idToken;
       dispatch(setJwtToken(jwtToken));
-      Alert.alert(jwtToken);
       return jwtToken;
     })
     .catch(err => Alert.alert("Error al Ingresar: ",err.message));
@@ -39,7 +38,7 @@ const signUp = function(password, email, attributes) {
     }).then((data) => {
       dispatch(showConfirmationModal());
     })
-    .catch(err => Alert.alert("Error al Ingresar: ",err));
+    .catch(err => Alert.alert("Error al Registrar: ",err.message));
   }
 }
 
@@ -49,7 +48,7 @@ const confirmCode = function(email, confirmationCode) {
     .then((_data) => {
       dispatch(hideConfirmationModal());
     })
-    .catch(err => Alert.alert("Error al Ingresar: ",err.message));
+    .catch(err => Alert.alert("Error al Confirmar: ",err.message));
   }
 }
 

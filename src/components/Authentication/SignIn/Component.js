@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 import { Button } from "react-native-elements";
+import { Alert } from 'react-native';
+import { withNavigation } from 'react-navigation';
 import style from './style';
 
 const EMAIL_REGEXP = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
@@ -25,7 +27,8 @@ class SignIn extends React.Component {
   handleSignIn = () => {
     const { email, password } = this.state;
     const { signIn } = this.props;
-    signIn(email, password);    
+    signIn(email, password);
+    this.props.navigation.navigate('TaxConfiguration');   
   }
 
   validateData = () => {
@@ -102,4 +105,4 @@ class SignIn extends React.Component {
   }
 }
 
-export default SignIn;
+export default withNavigation(SignIn);

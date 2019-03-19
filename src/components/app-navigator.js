@@ -9,9 +9,9 @@ import TaxConfiguration from './TaxConfiguration';
 
 let RootStack = createStackNavigator(
   {
+    Intro,
+    Authentication,
     TaxConfiguration,
-    //Intro,
-    //Authentication,
   },
   {
     //headerMode: 'none',
