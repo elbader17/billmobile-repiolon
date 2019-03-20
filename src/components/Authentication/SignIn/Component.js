@@ -4,6 +4,7 @@ import { Button } from "react-native-elements";
 import { Alert } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import style from './style';
+import { async } from 'rxjs/internal/scheduler/async';
 
 const EMAIL_REGEXP = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
 const PASSWORD_REGEXP = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})"); 
@@ -13,8 +14,8 @@ class SignIn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
-      password: '',
+      email: 'am@mozej.com',
+      password: '@Agus1234',
       name:'',
       hidePassword: true
     };
@@ -24,11 +25,24 @@ class SignIn extends React.Component {
     this.setState({ hidePassword: !this.state.hidePassword });
   }
 
-  handleSignIn = () => {
+  handleSignIn = async() => {
     const { email, password } = this.state;
     const { signIn } = this.props;
-    signIn(email, password);
-    this.props.navigation.navigate('TaxConfiguration');   
+    /* signIn(email, password);
+    console.log("Token: "+this.props.jwtToken.toLowerCase());
+    if (this.props.jwtToken.toLowerCase()){
+      this.props.navigation.navigate('TaxConfiguration');
+    }else{
+      this.props.navigation.navigate('TaxConfiguration');
+    }
+     */ 
+    const result = await signIn(email, password);
+    console.log("Token: "+this.props.jwtToken.toLowerCase());
+      if (this.props.jwtToken.toLowerCase()){
+        this.props.navigation.navigate('TaxConfiguration');
+      }else{
+        this.props.navigation.navigate('SignIn');
+      }
   }
 
   validateData = () => {
