@@ -27,10 +27,13 @@ class SignIn extends React.Component {
   handleSignIn = () => {
     const { email, password } = this.state;
     const { signIn } = this.props;
-    signIn(email, password);
-    this.props.navigation.navigate('TaxConfiguration');   
+    signIn(email, password)
+    .then(() => {
+      this.props.navigation.navigate('TaxConfiguration');
+    })
+    .catch(err => Alert.alert("Error al Ingresar: ",err.message));
   }
-
+  
   validateData = () => {
     const isValidPassword = PASSWORD_REGEXP.test(this.state.password);
     const isValidEmail = EMAIL_REGEXP.test(String(this.state.email).toLowerCase());

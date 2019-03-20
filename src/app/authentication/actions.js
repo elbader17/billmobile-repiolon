@@ -18,14 +18,13 @@ function hideConfirmationModal(){
 
 const signIn = function(email, password) {
   return (dispatch) => {
-    Auth.signIn(email, password)
+    return Auth.signIn(email, password)
     .then((data) => {
       const { jwtToken } = data.signInUserSession.idToken;
       dispatch(setJwtToken(jwtToken));
       return jwtToken;
     })
-    .catch(err => Alert.alert("Error al Ingresar: ",err.message));
-    }
+  }
 }
 
 const signUp = function(password, email, attributes) {
