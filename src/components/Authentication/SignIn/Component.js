@@ -28,23 +28,13 @@ class SignIn extends React.Component {
   handleSignIn = async() => {
     const { email, password } = this.state;
     const { signIn } = this.props;
-    /* signIn(email, password);
-    console.log("Token: "+this.props.jwtToken.toLowerCase());
-    if (this.props.jwtToken.toLowerCase()){
+    signIn(email, password)
+    .then(() => {
       this.props.navigation.navigate('TaxConfiguration');
-    }else{
-      this.props.navigation.navigate('TaxConfiguration');
-    }
-     */ 
-    const result = await signIn(email, password);
-    console.log("Token: "+this.props.jwtToken.toLowerCase());
-      if (this.props.jwtToken.toLowerCase()){
-        this.props.navigation.navigate('TaxConfiguration');
-      }else{
-        this.props.navigation.navigate('SignIn');
-      }
+    })
+    .catch(err => Alert.alert("Error al Ingresar: ",err.message));
   }
-
+  
   validateData = () => {
     const isValidPassword = PASSWORD_REGEXP.test(this.state.password);
     const isValidEmail = EMAIL_REGEXP.test(String(this.state.email).toLowerCase());
