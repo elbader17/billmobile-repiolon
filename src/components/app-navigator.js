@@ -2,6 +2,7 @@ import { createStackNavigator, createAppContainer, createSwitchNavigator } from 
 import Intro from './Intro';
 import Authentication from './Authentication';
 import TaxConfiguration from './TaxConfiguration';
+import Loading from './Loading/Component';
 
 const AppStack = createStackNavigator(
   {
@@ -10,7 +11,7 @@ const AppStack = createStackNavigator(
   }
 )
 
-const initialStack = createStackNavigator(
+const Login = createStackNavigator(
   {
     Intro,
     Authentication,
@@ -22,11 +23,12 @@ const initialStack = createStackNavigator(
 
 let AppNavigator = createAppContainer(createSwitchNavigator(
   {
-    initialApp: initialStack,
-    App: AppStack
+    Loading: Loading,
+    Login: Login,
+    App: AppStack,
   },
   {
-    initialRouteName: 'initialApp',
+    initialRouteName: 'Loading',
   }
 ));
 

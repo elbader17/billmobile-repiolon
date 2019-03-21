@@ -4,7 +4,6 @@ import { Button } from "react-native-elements";
 import { Alert } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import style from './style';
-import { async } from 'rxjs/internal/scheduler/async';
 
 const EMAIL_REGEXP = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
 const PASSWORD_REGEXP = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})"); 
@@ -14,8 +13,8 @@ class SignIn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: 'am@mozej.com',
-      password: '@Agus1234',
+      email: '',
+      password: '',
       name:'',
       hidePassword: true
     };
@@ -25,11 +24,12 @@ class SignIn extends React.Component {
     this.setState({ hidePassword: !this.state.hidePassword });
   }
 
-  handleSignIn = async() => {
+  handleSignIn = () => {
     const { email, password } = this.state;
     const { signIn } = this.props;
     signIn(email, password)
     .then(() => {
+      Alert.alert(this.props.jwtToken);
       this.props.navigation.navigate('Configure');
     })
     .catch(err => Alert.alert("Error al Ingresar: ",err.message));
