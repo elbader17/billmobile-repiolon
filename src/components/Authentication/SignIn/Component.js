@@ -30,7 +30,7 @@ class SignIn extends React.Component {
     const { signIn } = this.props;
     signIn(email, password)
     .then(() => {
-      this.props.navigation.navigate('TaxConfiguration');
+      this.props.navigation.navigate('Configure');
     })
     .catch(err => Alert.alert("Error al Ingresar: ",err.message));
   }

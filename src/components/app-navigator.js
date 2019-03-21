@@ -1,23 +1,33 @@
-import { 
-  createStackNavigator, 
-  createAppContainer 
-} from 'react-navigation';
+import { createStackNavigator, createAppContainer, createSwitchNavigator } from 'react-navigation';
 import Intro from './Intro';
 import Authentication from './Authentication';
-//Temporal
 import TaxConfiguration from './TaxConfiguration';
 
-let RootStack = createStackNavigator(
+const AppStack = createStackNavigator(
   {
-    Intro,
-    Authentication,
-    TaxConfiguration,
-  },
-  {
-    //headerMode: 'none',
+    Configure: TaxConfiguration,
+    //HomeScreen: Home,
   }
 )
 
-let AppNavigator = createAppContainer(RootStack);
+const initialStack = createStackNavigator(
+  {
+    Intro,
+    Authentication,
+  },
+  {
+    headerMode: 'none',
+  }
+)
+
+let AppNavigator = createAppContainer(createSwitchNavigator(
+  {
+    initialApp: initialStack,
+    App: AppStack
+  },
+  {
+    initialRouteName: 'initialApp',
+  }
+));
 
 export default AppNavigator;

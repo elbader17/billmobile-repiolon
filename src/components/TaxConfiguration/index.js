@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import TaxConfiguration from './component';
+import TaxConfiguration from './Component';
 import { registerUserService } from '../../app/userservice/action';
 
 const mapStateToProps = state => ({

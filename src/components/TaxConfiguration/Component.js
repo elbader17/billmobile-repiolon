@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Text, TextInput, Alert } from 'react-native';
 import { Button } from "react-native-elements";
 import style from './style';
-import { async } from 'rxjs/internal/scheduler/async';
 
 class TaxConfiguration extends React.Component{
 
@@ -15,8 +14,6 @@ class TaxConfiguration extends React.Component{
     };
   }
 
- 
-
   handleConfigFiscal = () => {
    
    Alert.alert("Towken: "+this.props.jwtToken);
@@ -28,13 +25,10 @@ class TaxConfiguration extends React.Component{
     })
   }
 
-
   setName = (value) => this.setState({ name: value})
   setCuit = (value) => this.setState({ cuit: value })
   setKeyFiscal = (value) => this.setState({ keyfiscal: value })
     
-  
-
   render() {
     return(
       <View style={style.container}>
