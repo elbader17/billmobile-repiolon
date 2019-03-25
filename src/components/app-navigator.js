@@ -3,15 +3,22 @@ import Intro from './Intro';
 import Authentication from './Authentication';
 import TaxConfiguration from './TaxConfiguration';
 import Loading from './Loading/Component';
+import Home from './Home';
+import NewClient from './Client/Component';
+import Item from './Item/Component';
+import NewItem from './Item/NewItem/Component';
 
 const AppStack = createStackNavigator(
   {
     Configure: TaxConfiguration,
-    //HomeScreen: Home,
+    HomeScreen: Home,
+    Client: NewClient,
+    Items: Item,
+    NewItems: NewItem,
   }
 )
 
-const Login = createStackNavigator(
+const AppLogin = createStackNavigator(
   {
     Intro,
     Authentication,
@@ -21,14 +28,14 @@ const Login = createStackNavigator(
   }
 )
 
-let AppNavigator = createAppContainer(createSwitchNavigator(
+const AppNavigator = createAppContainer(createSwitchNavigator(
   {
     Loading: Loading,
-    Login: Login,
+    Login: AppLogin,
     App: AppStack,
   },
   {
-    initialRouteName: 'Loading',
+    initialRouteName: 'App',
   }
 ));
 

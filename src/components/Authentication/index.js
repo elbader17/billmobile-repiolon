@@ -24,6 +24,11 @@ class Authentication extends React.Component {
     this.setState({ selectedIndex: newIndex });
   }
 
+  updateIndex = () => {
+    const newIndex = this.state.selectedIndex === 0 ? 1 : 0;
+    this.setState({ selectedIndex: newIndex });
+  }
+
   renderSignUpSignIn = () => {
     if (this.state.selectedIndex === 0) {
       return (

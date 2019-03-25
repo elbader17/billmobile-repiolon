@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, TextInput, Alert } from 'react-native';
 import { Button } from "react-native-elements";
+import { withNavigation } from 'react-navigation';
 import style from './style';
 
 class TaxConfiguration extends React.Component{
@@ -22,6 +23,7 @@ class TaxConfiguration extends React.Component{
    registerUserService(name, cuit, keyfiscal)
     .then((data) => {
       Alert.alert("Pops Data: "+this.props.name+" "+this.props.cuit);
+      this.props.navigation.navigate('HomeScreen');
     })
   }
 
@@ -49,16 +51,12 @@ class TaxConfiguration extends React.Component{
               style={ style.textBox }
             />
             <Text style={ style.textRegister }>
-              INGRESA TU CLAVE FISCAL
+              POR AHORA SIN CLAVE FISCAL
             </Text>
-            <TextInput style={ style.textRegister }
-              onChangeText={this.setKeyFiscal}
-              style={ style.textBox }
-            />
             <Button
               title="LISTO"
               onPress={ this.handleConfigFiscal }
-              buttonStyle={ style.handleConfigFiscal }
+              buttonStyle={ style.submit }
               titleStyle={ style.submitText }
               disabledTitleStyle={ style.submitText }
               disabledStyle={ style.submitDisabled }
@@ -70,4 +68,4 @@ class TaxConfiguration extends React.Component{
   }
 }
 
-export default TaxConfiguration;
+export default withNavigation(TaxConfiguration);
