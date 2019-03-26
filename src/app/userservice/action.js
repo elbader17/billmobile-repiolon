@@ -23,7 +23,7 @@ function setParams(name, cuit) {
 const registerUserService = function(name, cuit, jwtToken) {
 
   const instance = axios.create({
-    baseURL: 'http://192.168.1.108:8888/',
+    baseURL: 'http://192.168.1.18:8888/',
     timeout: 1000,
     headers: { 'JWT-TOKEN': jwtToken },
   });

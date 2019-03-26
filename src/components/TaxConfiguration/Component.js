@@ -49,12 +49,6 @@ class TaxConfiguration extends React.Component{
               onChangeText={this.setCuit}
               style={ style.textBox }
             />
-<<<<<<< HEAD:src/components/TaxConfiguration/component.js
-=======
-            <Text style={ style.textRegister }>
-              POR AHORA SIN CLAVE FISCAL
-            </Text>
->>>>>>> fab5f7d90c66e843a792c0669e8c11c2c0ca5cbf:src/components/TaxConfiguration/Component.js
             <Button
               title="LISTO"
               onPress={ this.handleConfigFiscal }

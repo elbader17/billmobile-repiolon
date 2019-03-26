@@ -6,3 +6,16 @@ export default axios.create({
   timeout: 1000,
   headers: { 'JWT-TOKEN': store.getState.jwtToken },
 });
+
+
+_retrieveData = async () => {
+  try {
+    const value = await AsyncStorage.getItem('TASKS');
+    if (value !== null) {
+      // We have data!!
+      console.log(value);
+    }
+  } catch (error) {
+    // Error retrieving data
+  }
+};

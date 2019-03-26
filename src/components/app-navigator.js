@@ -20,7 +20,7 @@ const AppStack = createStackNavigator(
 
 const AppLogin = createStackNavigator(
   {
-    Intro,
+    //Intro,
     Authentication,
   },
   {
@@ -35,7 +35,7 @@ const AppNavigator = createAppContainer(createSwitchNavigator(
     App: AppStack,
   },
   {
-    initialRouteName: 'App',
+    initialRouteName: 'Login',
   }
 ));
 
