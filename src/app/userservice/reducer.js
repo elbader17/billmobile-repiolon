@@ -9,13 +9,11 @@ import {
 const initialState = {
   name: '',
   cuit: '',
-  keyfiscal: '',
 };
 
-function setParams({ draftState, name, cuit, keyfiscal }) {
+function setParams({ draftState, name, cuit }) {
   draftState.name = name;
   draftState.cuit = cuit;
-  draftState.keyfiscal = keyfiscal;
   return draftState;
 }
 
@@ -27,7 +25,6 @@ export default userserviceReducer = (state = initialState, action) => {
           draftState,
           name: action.name,
           cuit: action.cuit,
-          keyfiscal: action.keyfiscal,
         });
       default:
         return draftState;

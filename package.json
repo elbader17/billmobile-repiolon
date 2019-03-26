@@ -10,6 +10,7 @@
     "@babel/runtime": "^7.3.4",
     "aws-amplify": "^1.1.19",
     "aws-amplify-react-native": "^2.1.7",
+    "axios": "^0.18.0",
     "babel-preset-es2015": "^6.24.1",
     "immer": "^2.0.0",
     "jest-enzyme": "^7.0.1",

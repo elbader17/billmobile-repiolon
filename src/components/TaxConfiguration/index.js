@@ -21,4 +21,3 @@ const component = connect(
 )(TaxConfiguration);
 
 export default component;
-

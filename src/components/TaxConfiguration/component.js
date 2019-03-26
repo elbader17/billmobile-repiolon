@@ -11,7 +11,6 @@ class TaxConfiguration extends React.Component{
     this.state = {
       name: '',
       cuit: '',
-      keyfiscal:'',
     };
   }
 
@@ -20,9 +19,9 @@ class TaxConfiguration extends React.Component{
   handleConfigFiscal = () => {
    
    Alert.alert("Towken: "+this.props.jwtToken);
-   const { name, cuit, keyfiscal } = this.state;
+   const { name, cuit } = this.state;
    const { registerUserService } = this.props;
-   registerUserService(name, cuit, keyfiscal)
+   registerUserService(name, cuit, this.props.jwtToken)
     .then((data) => {
       Alert.alert("Pops Data: "+this.props.name+" "+this.props.cuit);
     })
@@ -31,7 +30,7 @@ class TaxConfiguration extends React.Component{
 
   setName = (value) => this.setState({ name: value})
   setCuit = (value) => this.setState({ cuit: value })
-  setKeyFiscal = (value) => this.setState({ keyfiscal: value })
+
     
   
 
@@ -41,7 +40,7 @@ class TaxConfiguration extends React.Component{
         <View style={style.container2}>
           <View style={ style.textBoxBtnHolder }>
             <Text style={ style.textRegister }>
-              NOMBRE DE LA EMPRESA
+              NOMBRE 
             </Text>
             <TextInput style={ style.textRegister }
               onChangeText={this.setName}
@@ -52,13 +51,6 @@ class TaxConfiguration extends React.Component{
             </Text>
             <TextInput style={ style.textRegister }
               onChangeText={this.setCuit}
-              style={ style.textBox }
-            />
-            <Text style={ style.textRegister }>
-              INGRESA TU CLAVE FISCAL
-            </Text>
-            <TextInput style={ style.textRegister }
-              onChangeText={this.setKeyFiscal}
               style={ style.textBox }
             />
             <Button
