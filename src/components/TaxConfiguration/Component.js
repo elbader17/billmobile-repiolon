@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, Text, TextInput, Alert } from 'react-native';
 import { Button } from "react-native-elements";
+import { withNavigation } from 'react-navigation';
 import style from './style';
-import { async } from 'rxjs/internal/scheduler/async';
 
 class TaxConfiguration extends React.Component{
 
@@ -14,8 +14,6 @@ class TaxConfiguration extends React.Component{
     };
   }
 
- 
-
   handleConfigFiscal = () => {
    
    Alert.alert("Towken: "+this.props.jwtToken);
@@ -24,16 +22,14 @@ class TaxConfiguration extends React.Component{
    registerUserService(name, cuit, this.props.jwtToken)
     .then((data) => {
       Alert.alert("Pops Data: "+this.props.name+" "+this.props.cuit);
+      this.props.navigation.navigate('HomeScreen');
     })
   }
-
 
   setName = (value) => this.setState({ name: value})
   setCuit = (value) => this.setState({ cuit: value })
 
     
-  
-
   render() {
     return(
       <View style={style.container}>
@@ -53,10 +49,16 @@ class TaxConfiguration extends React.Component{
               onChangeText={this.setCuit}
               style={ style.textBox }
             />
+<<<<<<< HEAD:src/components/TaxConfiguration/component.js
+=======
+            <Text style={ style.textRegister }>
+              POR AHORA SIN CLAVE FISCAL
+            </Text>
+>>>>>>> fab5f7d90c66e843a792c0669e8c11c2c0ca5cbf:src/components/TaxConfiguration/Component.js
             <Button
               title="LISTO"
               onPress={ this.handleConfigFiscal }
-              buttonStyle={ style.handleConfigFiscal }
+              buttonStyle={ style.submit }
               titleStyle={ style.submitText }
               disabledTitleStyle={ style.submitText }
               disabledStyle={ style.submitDisabled }
@@ -68,4 +70,4 @@ class TaxConfiguration extends React.Component{
   }
 }
 
-export default TaxConfiguration;
+export default withNavigation(TaxConfiguration);
