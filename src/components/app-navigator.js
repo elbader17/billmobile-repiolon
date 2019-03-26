@@ -10,17 +10,27 @@ import NewItem from './Item/NewItem/Component';
 
 const AppStack = createStackNavigator(
   {
-    Configure: TaxConfiguration,
-    HomeScreen: Home,
-    Client: NewClient,
-    Items: Item,
-    NewItems: NewItem,
+    Configure: {
+      screen: TaxConfiguration,
+    },
+    HomeScreen: { 
+      screen: Home,
+    },
+    Client: {
+      screen: NewClient,
+    },
+    Items: {
+      screen: Item,
+    },
+    NewItems: {
+      NewItem,
+    },
   }
 )
 
 const AppLogin = createStackNavigator(
   {
-    Intro,
+    //Intro,
     Authentication,
   },
   {
@@ -35,7 +45,7 @@ const AppNavigator = createAppContainer(createSwitchNavigator(
     App: AppStack,
   },
   {
-    initialRouteName: 'App',
+    initialRouteName: 'Login',
   }
 ));
 
