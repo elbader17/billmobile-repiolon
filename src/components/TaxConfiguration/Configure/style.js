@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
-import { COLORS } from '../../constants/colors';
-import { FONTS } from '../../constants/fonts';
-import { METRICS } from '../../constants/metrics';
+import { COLORS } from '../../../constants/colors';
+import { FONTS } from '../../../constants/fonts';
+import { METRICS } from '../../../constants/metrics';
 
 const styles = StyleSheet.create({
   container: {
@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
     width: 266,
     height: 40,
     borderRadius: 2,
+    marginTop: 20
   },
   submitDisabled: {
     backgroundColor: COLORS.redLight,
@@ -83,11 +84,19 @@ const styles = StyleSheet.create({
     color: COLORS.grayDark,
     fontWeight: 'bold',
   },
-  actionButtonIcon: {
-    fontSize: 20,
-    height: 22,
-    color: 'white',
+  headerText: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size16,
+    fontWeight: 'normal',
+    color: COLORS.blue,
   },
+  text: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size18,
+    textAlign: 'center',
+    lineHeight: 26,
+    padding: 15
+  }
 });
 
 export default styles;

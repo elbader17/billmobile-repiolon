@@ -5,5 +5,6 @@ export const FONTS = {
   latoMedium: 'Lato-MediumItalic',
   size11: 11,
   size18: 18,
-  size18: 16
+  size16: 16,
+  size14: 14,
 };

@@ -11,48 +11,52 @@ class TaxConfiguration extends React.Component{
     this.state = {
       name: '',
       cuit: '',
-      keyfiscal:'',
     };
   }
+
+  static navigationOptions = {
+    title: 'CONFIGURACIÓN DE CUIT',
+    headerTitleStyle: style.headerText,
+    headerTintColor: '#3687D1',
+  };
 
   handleConfigFiscal = () => {
    
    Alert.alert("Towken: "+this.props.jwtToken);
-   const { name, cuit, keyfiscal } = this.state;
+   const { name, cuit } = this.state;
    const { registerUserService } = this.props;
-   registerUserService(name, cuit, keyfiscal)
+   registerUserService(name, cuit, this.props.jwtToken)
     .then((data) => {
       Alert.alert("Pops Data: "+this.props.name+" "+this.props.cuit);
-      this.props.navigation.navigate('HomeScreen');
+      this.props.navigation.push('HomeScreen');
     })
   }
 
   setName = (value) => this.setState({ name: value})
   setCuit = (value) => this.setState({ cuit: value })
-  setKeyFiscal = (value) => this.setState({ keyfiscal: value })
+
     
   render() {
     return(
       <View style={style.container}>
         <View style={style.container2}>
           <View style={ style.textBoxBtnHolder }>
-            <Text style={ style.textRegister }>
+            <Text style={ style.text }>
               NOMBRE DE LA EMPRESA
             </Text>
             <TextInput style={ style.textRegister }
+              placeholder= 'Nombre'
               onChangeText={this.setName}
               style={ style.textBox }
             />
-            <Text style={ style.textRegister }>
+            <Text style={ style.text }>
               INGRESA TU CUIT
             </Text>
             <TextInput style={ style.textRegister }
+              placeholder= 'xx-xxxxxxxx-x'
               onChangeText={this.setCuit}
               style={ style.textBox }
             />
-            <Text style={ style.textRegister }>
-              POR AHORA SIN CLAVE FISCAL
-            </Text>
             <Button
               title="LISTO"
               onPress={ this.handleConfigFiscal }

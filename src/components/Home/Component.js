@@ -3,6 +3,8 @@ import { View, Text, Alert } from 'react-native';
 import { Button } from "react-native-elements";
 import { withNavigation } from 'react-navigation';
 import style from './style';
+import ActionButton from 'react-native-action-button';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 class Home extends React.Component {
 
@@ -29,27 +31,18 @@ class Home extends React.Component {
             buttonStyle={ style.submit }
             titleStyle={ style.submitText }
           />
-          <Text style={ style.textRegister }> Botones del Menu: </Text>
-          <Button
-            title='AGREGAR CLIENTE'
-            onPress={ this.newClientNavigate }
-            buttonStyle={ style.submit }
-            titleStyle={ style.submitText }
-          />
-          <Text style={ style.textRegister }> </Text>
-          <Button
-            title='AGREGAR ITEMS'
-            onPress={ this.newItemNavigate }
-            buttonStyle={ style.submit }
-            titleStyle={ style.submitText }
-          />
-          <Text style={ style.textRegister }> </Text>
-          <Button
-            title='AGREGAR FACTURA'
-            buttonStyle={ style.submit }
-            titleStyle={ style.submitText }
-          />
         </View>
+        <ActionButton style={{height: 570}}>
+          <ActionButton.Item title="Clientes" onPress={ this.newClientNavigate }>
+            <Icon name="md-person" style={style.actionButtonIcon} />
+          </ActionButton.Item>
+          <ActionButton.Item title="Items" onPress={ this.newItemNavigate }>
+            <Icon name="md-paper" style={style.actionButtonIcon} />
+          </ActionButton.Item>
+          <ActionButton.Item title="Facturas">
+            <Icon name="md-cash" style={style.actionButtonIcon} />
+          </ActionButton.Item>
+        </ActionButton>
       </View>
     )
   }

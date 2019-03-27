@@ -13,8 +13,8 @@ class SignIn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
-      password: '',
+      email: 'hh@mozej.com',
+      password: '@Martin44',
       name:'',
       hidePassword: true
     };
@@ -30,7 +30,7 @@ class SignIn extends React.Component {
     signIn(email, password)
     .then(() => {
       Alert.alert(this.props.jwtToken);
-      this.props.navigation.navigate('Configure');
+      this.props.navigation.navigate('InitialConfigure');
     })
     .catch(err => Alert.alert("Error al Ingresar: ",err.message));
   }
