@@ -14,7 +14,7 @@
     "jest-enzyme": "^7.0.1",
     "react": "16.6.3",
     "react-dom": "^16.8.1",
-    "react-native": "0.58.3",
+    "react-native": "^0.59.2",
     "react-native-button": "^2.3.0",
     "react-native-elements": "^1.0.0",
     "react-native-hide-show-password-input": "^1.0.7",
