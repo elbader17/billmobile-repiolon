@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 import { Button } from "react-native-elements";
+import { Alert } from 'react-native';
+import { withNavigation } from 'react-navigation';
 import style from './style';
 
 const EMAIL_REGEXP = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
@@ -11,8 +13,8 @@ class SignIn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
-      password: '',
+      email: 'hh@mozej.com',
+      password: '@Martin44',
       name:'',
       hidePassword: true
     };
@@ -25,9 +27,14 @@ class SignIn extends React.Component {
   handleSignIn = () => {
     const { email, password } = this.state;
     const { signIn } = this.props;
-    signIn(email, password);    
+    signIn(email, password)
+    .then(() => {
+      Alert.alert(this.props.jwtToken);
+      this.props.navigation.navigate('InitialConfigure');
+    })
+    .catch(err => Alert.alert("Error al Ingresar: ",err.message));
   }
-
+  
   validateData = () => {
     const isValidPassword = PASSWORD_REGEXP.test(this.state.password);
     const isValidEmail = EMAIL_REGEXP.test(String(this.state.email).toLowerCase());
@@ -102,4 +109,4 @@ class SignIn extends React.Component {
   }
 }
 
-export default SignIn;
+export default withNavigation(SignIn);

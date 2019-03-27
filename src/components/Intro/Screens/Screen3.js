@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { Text, View, Alert } from 'react-native';
+import { Text, View} from 'react-native';
+import { withNavigation } from 'react-navigation';
 import Button from 'react-native-button'; //https://www.npmjs.com/package/react-native-button
 import style from './style';
 
 class Screen3 extends Component {
-  _onPressButton() {
-    Alert.alert('You tapped the button!')
+  handlePress = () => {
+    this.props.navigation.navigate('Authentication')
   }
-   
   render() {
     return (
       <View style={style.slide3}>
@@ -16,7 +16,7 @@ class Screen3 extends Component {
         <Text style={style.textDescription}>Nuestra política de privacidad es simple: No 
         compartimos ninguna información personal o impositiva tuya.</Text>
         <Button 
-          onPress={this._onPressButton} 
+          onPress={this.handlePress} 
           style={style.styleButton} 
           containerStyle={style.positionButtonEnd}
           testID={'ready'}
@@ -28,5 +28,5 @@ class Screen3 extends Component {
   }
 }
 
-export default Screen3;
+export default withNavigation(Screen3);
   
