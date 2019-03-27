@@ -17,10 +17,7 @@
     "react": "16.6.3",
     "react-dom": "^16.8.1",
     "react-native": "^0.59.2",
-<<<<<<< HEAD
-=======
     "react-native-action-button": "^2.8.5",
->>>>>>> c462fd1f60cfac4c625027b1f159a2df900541dc
     "react-native-button": "^2.3.0",
     "react-native-elements": "^1.0.0",
     "react-native-gesture-handler": "^1.1.0",

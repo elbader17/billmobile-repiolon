@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import Client from './Component';
+import Invoice from './Component';
 
 const mapStateToProps = state => ({
   jwtToken: state.authentication.jwtToken,
@@ -7,6 +7,6 @@ const mapStateToProps = state => ({
 
 const component = connect(
   mapStateToProps,
-)(Client);
+)(Invoice);
 
 export default component;

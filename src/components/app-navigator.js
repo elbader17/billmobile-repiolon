@@ -8,6 +8,7 @@ import Home from './Home';
 import NewClient from './Client/Component';
 import Item from './Item/Component';
 import NewItem from './Item/NewItem/Component';
+import Invoice from './Invoice/Component';
 
 const AppStack = createStackNavigator(
   {
@@ -23,6 +24,9 @@ const AppStack = createStackNavigator(
     NewItems: {
       screen: NewItem,
     },
+    Invoices: {
+      screen: Invoice
+    }
   }
 );
 

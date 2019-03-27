@@ -88,6 +88,24 @@ const styles = StyleSheet.create({
     height: 22,
     color: 'white',
   },
+  headerText: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size16,
+    fontWeight: 'normal',
+    color: COLORS.blue,
+  },
+  text: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size18,
+    textAlign: 'center',
+    lineHeight: 26,
+    padding: 15
+  },
+  buttonAddClient: {
+    backgroundColor: COLORS.white,
+    borderWidth: 1,
+    borderColor: '#EE6123',
+  }
 });
 
 export default styles;
