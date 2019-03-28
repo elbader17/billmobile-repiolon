@@ -1,14 +1,14 @@
 import { createStackNavigator, createAppContainer, createSwitchNavigator } from 'react-navigation';
 import Intro from './Intro';
 import Authentication from './Authentication';
-import TaxConfiguration from './TaxConfiguration/Configure/Component';
+import TaxConfiguration from './TaxConfiguration/Configure';
 import InitialConfiguration from './TaxConfiguration/InitialConfigure/Component';
-import Loading from './Loading/Component';
+import Loading from './Loading';
 import Home from './Home';
-import NewClient from './Client/Component';
-import Item from './Item/Component';
-import NewItem from './Item/NewItem/Component';
-import Invoice from './Invoice/Component';
+import NewClient from './Client';
+import Item from './Item';
+import NewItem from './Item/NewItem';
+import Invoice from './Invoice';
 
 const AppStack = createStackNavigator(
   {
@@ -35,9 +35,6 @@ const AppTaxConfiguration = createStackNavigator(
     InitialConfigure: {
       screen: InitialConfiguration,
     },
-    Configure: {
-      screen: TaxConfiguration,
-    }
   }
 )
 
@@ -59,7 +56,7 @@ const AppNavigator = createAppContainer(createSwitchNavigator(
     App: AppStack,
   },
   {
-    initialRouteName: 'App',
+    initialRouteName: 'Configuration',
   }
 ));
 

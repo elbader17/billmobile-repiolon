@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, Text, Alert } from 'react-native';
+import { View, Text, Alert, ImageBackground } from 'react-native';
 import { Button } from "react-native-elements";
 import { withNavigation } from 'react-navigation';
-import style from '../Invoice/style';
+import style from './style';
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -63,7 +63,7 @@ class Home extends React.Component {
       <View style={style.container}>
         <View style={style.container2}>
           <Text style={ style.textRegister }> INFORMACIÓN FISCAL DEL USUARIO </Text>
-          <Text style={ style.textRegister }> CLIENTES RECIENTES</Text>
+          {/*<Text style={ style.textRegister }> CLIENTES RECIENTES</Text>
           <Button
             onPress={ this.newClientNavigate }
             buttonStyle= {style.buttonAddClient}
@@ -74,7 +74,7 @@ class Home extends React.Component {
                 color="#EE6123"
               />
             }
-          />
+          />*/}
         </View>
         <ActionButton style={{height: 570}} buttonColor="#EE6123">
           <ActionButton.Item 

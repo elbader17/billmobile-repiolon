@@ -21,7 +21,6 @@ class TaxConfiguration extends React.Component{
   };
 
   handleConfigFiscal = () => {
-   
    Alert.alert("Towken: "+this.props.jwtToken);
    const { name, cuit } = this.state;
    const { registerUserService } = this.props;
