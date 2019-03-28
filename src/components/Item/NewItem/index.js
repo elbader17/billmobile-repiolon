@@ -4,6 +4,7 @@ import { registerItemProduct, registerItemService } from '../../../app/items/act
 
 const mapStateToProps = state => ({
   jwtToken: state.authentication.jwtToken,
+  name: state.addItem.name,
 });
 
 function mapDispatchToProps(dispatch) {

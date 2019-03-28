@@ -2,11 +2,11 @@ import { createStackNavigator, createAppContainer, createSwitchNavigator } from 
 import Intro from './Intro';
 import Authentication from './Authentication';
 import TaxConfiguration from './TaxConfiguration';
-import Loading from './Loading/Component';
+import Loading from './Loading';
 import Home from './Home';
-import NewClient from './Client/Component';
-import Item from './Item/Component';
-import NewItem from './Item/NewItem/Component';
+import NewClient from './Client';
+import Item from './Item';
+import NewItem from './Item/NewItem';
 
 const AppStack = createStackNavigator(
   {

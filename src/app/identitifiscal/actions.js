@@ -1,8 +1,6 @@
-import { Auth } from 'aws-amplify';
-import { Alert } from 'react-native';
+
 import axios from 'axios';
-import store from '../../store';
-import API from './apis';
+
 import {
   SET_IDENTITI_FISCAL,
 } from './constants';
@@ -15,9 +13,8 @@ function setIdentitiFiscal(name, cuit) {
   };
 }
 
-
-
-const registerFiscalIdentiti = function(name, cuit, jwtToken) {
+// eslint-disable-next-line func-names
+const registerFiscalIdentiti = function (name, cuit, jwtToken) {
 
   const instance = axios.create({
     baseURL: 'http://192.168.1.18:8888/',

@@ -23,10 +23,9 @@ class NewItem extends React.Component {
   }
 
   saveProduct = () => {
-    jwtToken = this.props.jwtToken;
-    Alert.alert("Towken: "+this.props.jwtToken);
+    const { jwtToken, registerItemProduct } = this.props;
+    Alert.alert("Token: "+ jwtToken);
     const{ name, price } = this.state;
-    const { registerItemProduct } = this.props;
     registerItemProduct(name, price, jwtToken)
     .then((data) => {
       Alert.alert("Producto: "+this.props.name+" guardado ");

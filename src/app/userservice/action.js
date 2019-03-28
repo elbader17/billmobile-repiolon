@@ -1,11 +1,7 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-undef */
 /* eslint-disable func-names */
-import { Auth } from 'aws-amplify';
-import { Alert } from 'react-native';
 import axios from 'axios';
-import store from '../../store';
-import API from './apis';
 import {
   SET_PARAMS,
 } from './constants';
