@@ -1,4 +1,4 @@
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import TaxConfiguration from './Component';
 import { registerUserService } from '../../app/userservice/action';
 

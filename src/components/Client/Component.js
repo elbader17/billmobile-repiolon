@@ -8,16 +8,32 @@ class NewClient extends React.Component {
 
   constructor(props) {
     super(props);
-  }
-  state = {user: ''}
-  updateUser = (user) => {
-    this.setState({ user: user })
+    this.state = {
+      selectedIndex: 0,
+      name: "",
+      category: "m",
+      cuit:"",
+      conditionSale:"",
+    };
   }
 
+
+  setName = (value) => this.setState({ name: value})
+  setConditionSale = (value) => this.setState({ conditionSale: value })
+  setCuitDni = (value) => this.setState({ cuit: value })
+
   newClient = () => {
-    Alert.alert("Éxito -> Home | Fracaso -> Alert o algo :) ");
-    this.props.navigation.navigate('HomeScreen');
+    const { name, category, cuit } = this.state;
+    const { registerFiscalIdentiti } = this.props;
+    registerFiscalIdentiti(category, name, cuit)
+    .then((data) => {
+      Alert.alert("Cliente Cargado: "+this.props.name+" "+this.props.cuit);
+      this.props.navigation.navigate('HomeScreen');
+    })
+    .catch(err => Alert.alert("Error al Ingresar: ",err.message));
   }
+
+
 
   render() {
     return(
@@ -35,6 +51,7 @@ class NewClient extends React.Component {
           <View style={ style.textBoxBtnHolder }>
             <TextInput
               placeholder="CUIT O DNI"
+              onChangeText={this.setCuitDni}
               style={ style.textBox }
             />
           </View>
@@ -43,12 +60,14 @@ class NewClient extends React.Component {
           <View style={ style.textBoxBtnHolder }>
             <TextInput
               style={ style.textBox }
+              onChangeText={this.setName}
             />
           </View>
           <View style={ style.textBoxBtnHolder }>
             <TextInput
               placeholder="Condicíon de Venta"
               style={ style.textBox }
+              onChangeText={this.setConditionSale}
             />
           </View>
           <Text style={ style.textRegister }> Esta condicion será la que aparecerá para el cliente per luego pordrás cambiarla en la facturación</Text>

@@ -1,24 +1,23 @@
-/* eslint-disable no-restricted-globals */
-/* eslint-disable no-undef */
-/* eslint-disable func-names */
 import { Auth } from 'aws-amplify';
 import { Alert } from 'react-native';
 import axios from 'axios';
 import store from '../../store';
 import API from './apis';
 import {
-  SET_PARAMS,
+  SET_IDENTITI_FISCAL,
 } from './constants';
 
-function setParams(name, cuit) {
+function setIdentitiFiscal(name, cuit) {
   return {
-    type: SET_PARAMS,
+    type: SET_IDENTITI_FISCAL,
     name,
     cuit,
   };
 }
 
-const registerUserService = function (name, cuit, jwtToken) {
+
+
+const registerFiscalIdentiti = function(name, cuit, jwtToken) {
 
   const instance = axios.create({
     baseURL: 'http://192.168.1.18:8888/',
@@ -34,20 +33,16 @@ const registerUserService = function (name, cuit, jwtToken) {
 
   return (dispatch) => {
 
-    return instance.put('/v1/my/fiscal_identity', {resource} )
+    return instance.put('/v1/my....', {resource} )
       .then((response) => {
-        dispatch(setParams(name, cuit));
+        dispatch(setIdentitiFiscal(name, cuit));
       })
       .catch((error) => {
         console.log(error);
       });
   };
+  
 };
 
-export { registerUserService };
+export { registerFiscalIdentiti };
 
-/*
-Promise.resolve(1).then((response) => {
-      dispatch(setParams(name, cuit, keyfiscal));
-    })
-    */

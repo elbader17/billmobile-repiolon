@@ -4,12 +4,16 @@ import { ButtonGroup, Button} from "react-native-elements";
 import { withNavigation } from 'react-navigation';
 import style from '../style';
 
+
 class NewItem extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      selectedIndex: 0
+      selectedIndex: 0,
+      name: "",
+      price: "",
+      unit:"",
     };
   }
 
@@ -19,14 +23,33 @@ class NewItem extends React.Component {
   }
 
   saveProduct = () => {
-    Alert.alert("Exito o Fracaso al Guardar!");
-    this.props.navigation.navigate('HomeScreen');
-  }
+    jwtToken = this.props.jwtToken;
+    Alert.alert("Towken: "+this.props.jwtToken);
+    const{ name, price } = this.state;
+    const { registerItemProduct } = this.props;
+    registerItemProduct(name, price, jwtToken)
+    .then((data) => {
+      Alert.alert("Producto: "+this.props.name+" guardado ");
+      this.props.navigation.navigate('HomeScreen');
+    }).catch(err => Alert.alert("Error al Ingresar: ",err.message));
+    
+  };
 
   saveService = () => {
-    Alert.alert("Exito o Fracaso al Guardar!");
-    this.props.navigation.navigate('HomeScreen');
+    const { name, price, unit } = this.state;
+    const { registerItemService } = this.props;
+    registerItemService(name, price, unit, this.props.jwtToken)
+    .then((data) => {
+        Alert.alert("Servicio: "+this.props.name+" guardado ");
+        this.props.navigation.navigate('HomeScreen');
+     })
+    .catch(err => Alert.alert("Error al Ingresar: ",err.message));
   }
+
+
+  setName = (value) => this.setState({ name: value})
+  setPrice = (value) => this.setState({ price: value })
+  setUnit = (value) => this.setState({ unit: value })
 
   renderNewItems = () => {
     if (this.state.selectedIndex === 0) {
@@ -35,12 +58,14 @@ class NewItem extends React.Component {
           <View style={ style.textBoxBtnHolder }>
             <TextInput
               placeholder="Nombre del Producto"
+              onChangeText={this.setName}
               style={ style.textBox }
             />
           </View>
           <View style={ style.textBoxBtnHolder }>
             <TextInput
               placeholder="Precio"
+              onChangeText={this.setPrice}
               style={ style.textBox }
             />
           </View>
@@ -57,19 +82,28 @@ class NewItem extends React.Component {
         <View>
           <View style={ style.textBoxBtnHolder }>
             <TextInput
+              placeholder="Nombre del Producto"
+              onChangeText={this.setName}
+              style={ style.textBox }
+            />
+          </View>
+          <View style={ style.textBoxBtnHolder }>
+            <TextInput
               placeholder="Unidad de Medida"
+              onChangeText={this.setUnit}
               style={ style.textBox }
             />
           </View>
           <View style={ style.textBoxBtnHolder }>
             <TextInput
               placeholder="Precio"
+              onChangeText={this.setPrice}
               style={ style.textBox }
             />
           </View>
           <Button
             title='GUARDAR SERVICIO'
-            onPress={ this.saveProduct }
+            onPress={ this.saveService }
             buttonStyle={ style.submit }
             titleStyle={ style.submitText }
           />
@@ -100,6 +134,7 @@ class NewItem extends React.Component {
       </View>
     )
   }
+
 }
 
 export default withNavigation(NewItem);
