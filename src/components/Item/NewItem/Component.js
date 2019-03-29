@@ -98,8 +98,9 @@ class NewItem extends React.Component {
             selectedIndex={ this.state.selectedIndex }
             buttons={ buttons }
             containerStyle={ style.buttons }
-            textStyle={ style.text }
-            textStyle={ style.buttonSelected }
+            buttonStyle = {style.borderButton}
+            innerBorderStyle={{color: 'white'}}
+            selectedButtonStyle={style.backgroundColorButton}
           />
           { this.renderNewItems() }
         </View>

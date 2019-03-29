@@ -90,11 +90,29 @@ const styles = StyleSheet.create({
     color: COLORS.blue,
   },
   buttons: {
-    
+    width: 260,
+    borderRadius: 4,
+    borderColor: COLORS.white
   },
-  buttonSelected: {
+  borderButton: {
+    margin: 3, 
+    borderRadius: 4, 
+    borderWidth: 0.8, 
+    borderColor: COLORS.blue, 
+    width: 122,
+  },
+  backgroundColorButton : {
+    backgroundColor: COLORS.blue,
+  },
+  buttonOn: {
+    color: COLORS.white,
+    fontSize: FONTS.size14,
     fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size11,
+  },
+  buttonOff: {
+    color: COLORS.blue,
+    fontSize: FONTS.size14,
+    fontFamily: FONTS.latoRegular,
   },
 });
 

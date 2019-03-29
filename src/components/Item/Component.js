@@ -47,8 +47,8 @@ class Item extends React.Component {
   render() {
     const a = style.buttonOn
     const b = style.buttonOff
-    const component1 = () => <Text style={this.state.selectedIndex === 0 ? a : b}>Productos</Text>
-    const component2 = () => <Text style={this.state.selectedIndex === 1 ? a : b}>Servicios</Text>
+    const component1 = () => <Text style={this.state.selectedIndex === 0 ? a : b}>PRODUCTOS</Text>
+    const component2 = () => <Text style={this.state.selectedIndex === 1 ? a : b}>SERVICIOS</Text>
     const buttons = [{ element: component1 }, { element: component2 }]
     return(
       <View style={style.container}>
@@ -60,8 +60,9 @@ class Item extends React.Component {
             selectedIndex={ this.state.selectedIndex }
             buttons={ buttons }
             containerStyle={ style.buttons }
-            textStyle={ style.text }
-            selectedButtonStyle={ style.buttonSelected }
+            buttonStyle = {style.borderButton}
+            innerBorderStyle={{color: 'white'}}
+            selectedButtonStyle={style.backgroundColorButton}
           />
           { this.renderItems() }
           <Text style={ style.textRegister }> </Text>
