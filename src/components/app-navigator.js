@@ -4,7 +4,7 @@ import Authentication from './Authentication';
 import TaxConfiguration from './TaxConfiguration';
 import Loading from './Loading';
 import Home from './Home';
-import NewClient from './Client';
+import NewCostumer from './Costumer';
 import Item from './Item';
 import NewItem from './Item/NewItem';
 
@@ -12,7 +12,7 @@ const AppStack = createStackNavigator(
   {
     Configure: TaxConfiguration,
     HomeScreen: Home,
-    Client: NewClient,
+    NewCostumer,
     Items: Item,
     NewItems: NewItem,
   }

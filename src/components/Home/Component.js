@@ -10,8 +10,8 @@ class Home extends React.Component {
     super(props);
   }
 
-  newClientNavigate = () => {
-    this.props.navigation.navigate('Client');
+  newCostumerNavigate = () => {
+    this.props.navigation.navigate('NewCostumer');
   }
 
   newItemNavigate = () => {
@@ -32,7 +32,7 @@ class Home extends React.Component {
           <Text style={ style.textRegister }> Botones del Menu: </Text>
           <Button
             title='AGREGAR CLIENTE'
-            onPress={ this.newClientNavigate }
+            onPress={ this.newCostumerNavigate }
             buttonStyle={ style.submit }
             titleStyle={ style.submitText }
           />

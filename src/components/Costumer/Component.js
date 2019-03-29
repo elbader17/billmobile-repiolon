@@ -4,7 +4,7 @@ import { Button } from "react-native-elements";
 import { withNavigation } from 'react-navigation';
 import style from './style';
 
-class NewClient extends React.Component {
+class NewCostumer extends React.Component {
 
   constructor(props) {
     super(props);
@@ -83,4 +83,4 @@ class NewClient extends React.Component {
   }
 }
 
-export default withNavigation(NewClient);
+export default withNavigation(NewCostumer);
