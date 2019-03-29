@@ -40,8 +40,8 @@ class NewItem extends React.Component {
         <View>
           <View style={ style.textBoxBtnHolder }>
             <TextInput
-              placeholder="Nombre del Producto"
-              style={ style.textBox }
+              placeholder="Nombre de Producto"
+              style={ style.textBoxTop }
             />
           </View>
           <View style={ style.textBoxBtnHolder }>
@@ -61,6 +61,12 @@ class NewItem extends React.Component {
     }else {
       return (
         <View>
+          <View style={ style.textBoxBtnHolder }>
+            <TextInput
+              placeholder="Concepto del Servicio"
+              style={ style.textBoxTop }
+            />
+          </View>
           <View style={ style.textBoxBtnHolder }>
             <TextInput
               placeholder="Unidad de Medida"

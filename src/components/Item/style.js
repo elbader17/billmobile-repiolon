@@ -18,6 +18,7 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     justifyContent: 'center',
     marginTop: 5,
+    marginBottom: 10
   },
   textBox: {
     fontFamily: FONTS.latoRegular,
@@ -30,6 +31,14 @@ const styles = StyleSheet.create({
     paddingVertical: 0,
     borderColor: COLORS.gray,
     borderRadius: 2,
+  },
+  textBoxTop: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size18,
+    alignSelf: 'stretch',
+    height: 45,
+    paddingRight: 45,
+    paddingLeft: 8,
   },
   visibilityBtn: {
     position: 'absolute',
