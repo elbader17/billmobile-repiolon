@@ -105,6 +105,9 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     borderWidth: 1,
     borderColor: '#EE6123',
+  },
+  picker: {
+   
   }
 });
 

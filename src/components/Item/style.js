@@ -83,6 +83,19 @@ const styles = StyleSheet.create({
     color: COLORS.grayDark,
     fontWeight: 'bold',
   },
+  headerText: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size16,
+    fontWeight: 'normal',
+    color: COLORS.blue,
+  },
+  buttons: {
+    
+  },
+  buttonSelected: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size11,
+  },
 });
 
 export default styles;

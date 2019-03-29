@@ -24,6 +24,7 @@
     "react-native-hide-show-password-input": "^1.0.7",
     "react-native-inputs": "^0.2.1",
     "react-native-keyboard-aware-scroll-view": "^0.8.0",
+    "react-native-picker-select": "^6.1.0",
     "react-native-swiper": "^1.5.14",
     "react-native-vector-icons": "^6.2.0",
     "react-navigation": "^3.4.1",

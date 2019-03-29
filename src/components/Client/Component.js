@@ -4,14 +4,32 @@ import { Button } from "react-native-elements";
 import { withNavigation } from 'react-navigation';
 import style from './style';
 
+const conditionIVA = [
+  {
+    label: 'RESPONSABLE INSCRIPTO',
+    value: 'ri',
+  },
+  {
+    label: 'IVA EXENTO',
+    value: 'ie',
+  },
+  {
+    label: 'MONOTRIBUTISTA',
+    value: 'm',
+  },
+  {
+    label: 'RESPONSABLE NO INSCRIPTO',
+    value: 'rni',
+  },
+];
+
 class NewClient extends React.Component {
 
   constructor(props) {
     super(props);
-  }
-  state = {user: ''}
-  updateUser = (user) => {
-    this.setState({ user: user })
+    this.state = {
+      condition: '',
+    }
   }
 
   newClient = () => {
@@ -19,16 +37,23 @@ class NewClient extends React.Component {
     this.props.navigation.navigate('HomeScreen');
   }
 
+  static navigationOptions = {
+    title: 'NUEVO CLIENTE',
+    headerTitleStyle: style.headerText,
+    headerTintColor: '#3687D1',
+  };
+
   render() {
     return(
       <View style={style.container}>
         <View style={style.container2}>
           <View style={ style.textBoxBtnHolder }>
-            <Picker selectedValue = {this.state.user} onValueChange = {this.updateUser}>
-              <Picker.Item label = "RESPONSABLE INSCRIPTO" value = "ri" />
-              <Picker.Item label = "IVA EXCENTO" value = "exento" />
-              <Picker.Item label = "MONOTRIBUTISTA" value = "m" />
-              <Picker.Item label = "RESPONSABLE NO INSCRIPTO" value = "rni" />
+            <Picker
+              selectedValue={this.state.condition}
+              onValueChange={itemValue => this.setState({ condition: itemValue })}>
+              {conditionIVA.map((i, index) => (
+                <Picker.Item key={index} label={i.label} value={i.value} />
+            ))}
             </Picker>
           </View>
           <Text>TIPO DE DOCUMENTO</Text>

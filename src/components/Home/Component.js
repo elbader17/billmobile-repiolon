@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Alert, ImageBackground } from 'react-native';
+import { View, Text, ImageBackground } from 'react-native';
 import { Button } from "react-native-elements";
 import { withNavigation } from 'react-navigation';
 import style from './style';
@@ -47,11 +47,13 @@ class Home extends React.Component {
   };
 
   newClientNavigate = () => {
-    this.props.navigation.navigate('Client');
+    //this.props.navigation.navigate('Client');
+    alert('Clientes');
   }
 
   newItemNavigate = () => {
-    this.props.navigation.navigate('Items');
+    //this.props.navigation.navigate('Items');
+    alert('Productos y Servicios')
   }
 
   newInvoiceNavigate = () => {

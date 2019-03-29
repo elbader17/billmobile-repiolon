@@ -1,7 +1,7 @@
 import { createStackNavigator, createAppContainer, createSwitchNavigator } from 'react-navigation';
 import Intro from './Intro';
 import Authentication from './Authentication';
-import TaxConfiguration from './TaxConfiguration/Configure';
+import TaxConfiguration from './TaxConfiguration/Configure/Component';
 import InitialConfiguration from './TaxConfiguration/InitialConfigure/Component';
 import Loading from './Loading';
 import Home from './Home';
@@ -34,6 +34,9 @@ const AppTaxConfiguration = createStackNavigator(
   {
     InitialConfigure: {
       screen: InitialConfiguration,
+    },
+    Configure: {
+      screen: TaxConfiguration, 
     },
   }
 )

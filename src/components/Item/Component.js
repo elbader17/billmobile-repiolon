@@ -13,6 +13,12 @@ class Item extends React.Component {
     };
   }
 
+  static navigationOptions = {
+    title: 'ELEJIR PRODUCTOS/SERVICIOS',
+    headerTitleStyle: style.headerText,
+    headerTintColor: '#3687D1',
+  };
+
   updateIndex = () => {
     const newIndex = this.state.selectedIndex === 0 ? 1 : 0;
     this.setState({ selectedIndex: newIndex });

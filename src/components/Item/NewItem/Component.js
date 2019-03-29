@@ -13,6 +13,12 @@ class NewItem extends React.Component {
     };
   }
 
+  static navigationOptions = {
+    title: 'CARGAR PRODUCTO/SERVICIO',
+    headerTitleStyle: style.headerText,
+    headerTintColor: '#3687D1',
+  };
+
   updateIndex = () => {
     const newIndex = this.state.selectedIndex === 0 ? 1 : 0;
     this.setState({ selectedIndex: newIndex });
@@ -81,8 +87,8 @@ class NewItem extends React.Component {
   render() {
     const a = style.buttonOn
     const b = style.buttonOff
-    const component1 = () => <Text style={this.state.selectedIndex === 0 ? a : b}>Productos</Text>
-    const component2 = () => <Text style={this.state.selectedIndex === 1 ? a : b}>Servicios</Text>
+    const component1 = () => <Text style={this.state.selectedIndex === 0 ? a : b}>PRODUCTO</Text>
+    const component2 = () => <Text style={this.state.selectedIndex === 1 ? a : b}>SERVICIO</Text>
     const buttons = [{ element: component1 }, { element: component2 }]
     return(
       <View style={style.container}>
@@ -93,7 +99,7 @@ class NewItem extends React.Component {
             buttons={ buttons }
             containerStyle={ style.buttons }
             textStyle={ style.text }
-            selectedButtonStyle={ style.buttonSelected }
+            textStyle={ style.buttonSelected }
           />
           { this.renderNewItems() }
         </View>
