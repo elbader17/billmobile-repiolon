@@ -14,13 +14,7 @@ function setIdentitiFiscal(name, cuit) {
 }
 
 // eslint-disable-next-line func-names
-const registerFiscalIdentity = function (name, cuit, jwtToken) {
-
-  const instance = axios.create({
-    baseURL: 'http://192.168.1.18:8888/',
-    timeout: 1000,
-    headers: { 'JWT-TOKEN': jwtToken },
-  });
+const registerFiscalIdentity = function (name, cuit) {
 
   const resource = {
     category: 'monotributo',
@@ -28,7 +22,10 @@ const registerFiscalIdentity = function (name, cuit, jwtToken) {
     identification: cuit,
   };
 
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const instance = axios.create({
+      headers: { 'JWT-TOKEN': getState().authentication.jwtToken },
+    });
     return instance.put('/v1/my....', { resource })
       .then(() => {
         dispatch(setIdentitiFiscal(name, cuit));

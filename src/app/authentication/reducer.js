@@ -3,11 +3,13 @@ import {
   SET_JWT_TOKEN,
   SHOW_CONFIRMATION_MODAL,
   HIDE_CONFIRMATION_MODAL,
+  USER_SIGNED_UP,
 } from './constants';
 
 const initialState = {
   jwtToken: '',
   showConfirmationModal: false,
+  registration: null,
 };
 
 function setJwtToken({ draftState, jwtToken }) {
@@ -22,11 +24,12 @@ function showConfirmationModal({ draftState }) {
 
 function hideConfirmationModal({ draftState }) {
   draftState.showConfirmationModal = false;
+  draftState.registration = null;
   return draftState;
 }
 
-function toggleConfirmationModal({ draftState }) {
-  draftState.showConfirmationModal = !draftState.showConfirmationModal;
+function setRegistration({ draftState, registration }) {
+  draftState.registration = registration;
   return draftState;
 }
 
@@ -39,6 +42,8 @@ export default (state = initialState, action) => {
         return showConfirmationModal({ draftState });
       case HIDE_CONFIRMATION_MODAL:
         return hideConfirmationModal({ draftState });
+      case USER_SIGNED_UP:
+        return setRegistration({ draftState, registration: action.registration });
       default:
         return draftState;
     }

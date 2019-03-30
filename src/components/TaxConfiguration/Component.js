@@ -26,6 +26,13 @@ class TaxConfiguration extends React.Component{
   setName = (value) => this.setState({ name: value})
   setCuit = (value) => this.setState({ cuit: value })
 
+  validateData = () => {
+    const { name, cuit } = this.state;
+    const isValidName = name != '';
+    const isValidCuit = cuit != '';
+    return (isValidName && isValidCuit);
+  }
+
 
   render() {
     return(
@@ -53,6 +60,7 @@ class TaxConfiguration extends React.Component{
               titleStyle={ style.submitText }
               disabledTitleStyle={ style.submitText }
               disabledStyle={ style.submitDisabled }
+              disabled= { this.validateData() }
             />
           </View>
         </View>

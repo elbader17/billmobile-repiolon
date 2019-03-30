@@ -1,35 +1,42 @@
 import axios from 'axios';
 import {
-  SET_ITEM,
+  CREATE_ITEM,
+  UPDATE_ITEM,
 } from './constant';
 
-function setItem(name, price) {
+function createItemAction(name, price) {
   return {
-    type: SET_ITEM,
+    type: CREATE_ITEM,
+    name,
+    price,
+  };
+}
+
+function updateItemAction(id, name, price) {
+  return {
+    type: UPDATE_ITEM,
+    id,
     name,
     price,
   };
 }
 
 // eslint-disable-next-line func-names
-const registerItemProduct = function (name, price, jwtToken) {
-  const instance = axios.create({
-    baseURL: 'http://192.168.1.18:8888/',
-    timeout: 1000,
-    headers: { 'JWT-TOKEN': jwtToken },
-  });
+const createItem = (category, name, price) => {
 
   const resource = {
-    category:  "product",
-    name: name,
-    price:  price,
+    category,
+    name,
+    price,
   };
 
-  return (dispatch) => {
-
+  return (dispatch, getState) => {
+    const instance = axios.create({
+      headers: { 'JWT-TOKEN': getState().authentication.jwtToken },
+    });
     return instance.post('v1/items', { resource })
-      .then((response) => {
-        dispatch(setItem(name, price));
+      .then(() => {
+        dispatch(createItemAction(name, price));
       })
       .catch((error) => {
         console.log(error);
@@ -37,24 +44,20 @@ const registerItemProduct = function (name, price, jwtToken) {
   };
 };
 
-// eslint-disable-next-line func-names
-const registerItemService = function (name, price, unit, jwtToken) {
-  const instance = axios.create({
-    baseURL: 'http://192.168.1.18:8888/',
-    timeout: 1000,
-    headers: { 'JWT-TOKEN': jwtToken },
-  });
 
+const updateItem = (id, name, price) => {
   const resource = {
-    category:  "service",
-    name: name,
-    price:  price,
+    name,
+    price,
   };
 
-  return (dispatch) => {
-    return instance.post('v1/items', { resource })
-      .then((response) => {
-        dispatch(setItem(name, price));
+  return (dispatch, getState) => {
+    const instance = axios.create({
+      headers: { 'JWT-TOKEN': getState().authentication.jwtToken },
+    });
+    return instance.put(`v1/items/${id}`, { resource })
+      .then(() => {
+        dispatch(updateItemAction(name, price));
       })
       .catch((error) => {
         console.log(error);
@@ -62,4 +65,5 @@ const registerItemService = function (name, price, unit, jwtToken) {
   };
 };
 
-export { registerItemProduct, registerItemService };
+
+export { createItem, updateItem };

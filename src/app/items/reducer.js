@@ -1,6 +1,6 @@
 import producer from 'immer';
 import {
-  SET_ITEM,
+  CREATE_ITEM,
 } from './constant';
 
 const initialState = {
@@ -17,7 +17,7 @@ function setItems({ draftState, name, price }) {
 export default addItemReducer = (state = initialState, action) => {
   return producer(state, (draftState) => {
     switch (action.type) {
-      case SET_ITEM:
+      case CREATE_ITEM:
         return setItems({
           draftState,
           name: action.name,

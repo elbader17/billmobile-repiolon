@@ -13,8 +13,8 @@ class SignIn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: 'hh@mozej.com',
-      password: '@Martin44',
+      email: '',
+      password: '',
       name:'',
       hidePassword: true
     };
@@ -26,10 +26,16 @@ class SignIn extends React.Component {
 
   handleSignIn = () => {
     const { email, password } = this.state;
-    const { signIn } = this.props;
+    const { signIn, getFiscalIdentity } = this.props;
     signIn(email, password)
-    .then(() => {
-      this.props.navigation.navigate('Configure');
+    .then((response) => {
+      return dispatch(getFiscalIdentity());
+    }).then((response) => {
+      if (response.data) {
+        this.props.navigation.navigate('HomeScreen');
+      } else {
+        this.props.navigation.navigate('Configure');
+      }
     })
     .catch(err => Alert.alert("Error al Ingresar: ",err.message));
   }
