@@ -18,6 +18,7 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     justifyContent: 'center',
     marginTop: 5,
+    marginBottom: 10
   },
   textBox: {
     fontFamily: FONTS.latoRegular,
@@ -30,6 +31,14 @@ const styles = StyleSheet.create({
     paddingVertical: 0,
     borderColor: COLORS.gray,
     borderRadius: 2,
+  },
+  textBoxTop: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size18,
+    alignSelf: 'stretch',
+    height: 45,
+    paddingRight: 45,
+    paddingLeft: 8,
   },
   visibilityBtn: {
     position: 'absolute',
@@ -61,12 +70,47 @@ const styles = StyleSheet.create({
     fontSize: FONTS.size14,
     color: COLORS.white,
   },
+  submitTextItem: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size18,
+    color: COLORS.grayDark,
+  },
+  submitTextContinue: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size16,
+    color: COLORS.white,
+  },
+  textTotal: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size18,
+    color: COLORS.white,
+    textAlign: 'center',
+    paddingTop: 15
+  },
+  textTotalPrice: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size42,
+    color: COLORS.white,
+    textAlign: 'center',
+    paddingTop: 12
+  },
+  totalPrice: {
+    flexDirection: "row",
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
   textRegister: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size14,
     color: COLORS.grayDark,
     paddingVertical: 15,
     textAlign: 'center',
+  },
+  inLine: {
+    width: METRICS.screenWidth,
+    flexDirection: "row",
+    position: 'absolute',
+    bottom:80
   },
   red: {
     color: COLORS.red,
@@ -90,11 +134,47 @@ const styles = StyleSheet.create({
     color: COLORS.blue,
   },
   buttons: {
-    
+    width: 260,
+    borderRadius: 4,
+    borderColor: COLORS.white
   },
-  buttonSelected: {
+  borderButton: {
+    margin: 3, 
+    borderRadius: 4, 
+    borderWidth: 0.8, 
+    borderColor: COLORS.blue, 
+    width: 122,
+  },
+  backgroundColorButton : {
+    backgroundColor: COLORS.blue,
+  },
+  buttonOn: {
+    color: COLORS.white,
+    fontSize: FONTS.size14,
     fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size11,
+  },
+  buttonOff: {
+    color: COLORS.blue,
+    fontSize: FONTS.size14,
+    fontFamily: FONTS.latoRegular,
+  },
+  total: {
+    backgroundColor: COLORS.blue,
+    height: 140
+  },
+  buttonNewItem: {
+    borderRadius: 0,
+    borderWidth: 0.5,
+    borderColor: COLORS.grayDark,
+    width: 230,
+    height: 45,
+    backgroundColor: COLORS.white
+  },
+  buttonContinue: {
+    borderRadius: 0,
+    width: 130,
+    height: 45,
+    backgroundColor: COLORS.red
   },
 });
 
