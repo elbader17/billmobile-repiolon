@@ -24,7 +24,7 @@ class Confirmation extends React.Component {
   render() {
     return(
       <View state={ style.container }>
-        <View style={ style.container2 }>       
+        <View style={ style.container2 }>
           <Text style={ style.text }>
             Verificar Cuenta
           </Text>

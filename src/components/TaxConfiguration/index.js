@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import TaxConfiguration from './Component';
-import { registerUserService } from '../../app/userservice/action';
+import { updateFiscalIdentity } from '../../app/user_service/action';
 
 const mapStateToProps = state => ({
   jwtToken: state.authentication.jwtToken,
@@ -11,7 +11,7 @@ const mapStateToProps = state => ({
 
 function mapDispatchToProps(dispatch) {
   return {
-    registerUserService: (name, cuit, clavefiscal) => dispatch(registerUserService(name, cuit, clavefiscal)),
+    updateFiscalIdentity: (name, cuit, clavefiscal) => dispatch(updateFiscalIdentity(name, cuit, clavefiscal)),
   };
 }
 

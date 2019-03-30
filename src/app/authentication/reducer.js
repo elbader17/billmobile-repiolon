@@ -10,35 +10,35 @@ const initialState = {
   showConfirmationModal: false,
 };
 
-function setJwtToken({draftState, jwtToken }){
+function setJwtToken({ draftState, jwtToken }) {
   draftState.jwtToken = jwtToken;
   return draftState;
 }
 
-function showConfirmationModal({draftState }){
+function showConfirmationModal({ draftState }) {
   draftState.showConfirmationModal = true;
   return draftState;
 }
 
-function hideConfirmationModal({draftState }){
+function hideConfirmationModal({ draftState }) {
   draftState.showConfirmationModal = false;
   return draftState;
 }
 
-function toggleConfirmationModal({draftState }){
+function toggleConfirmationModal({ draftState }) {
   draftState.showConfirmationModal = !draftState.showConfirmationModal;
   return draftState;
 }
 
-export default authenticationReducer = (state = initialState, action) => {
+export default (state = initialState, action) => {
   return producer(state, (draftState) => {
     switch (action.type) {
       case SET_JWT_TOKEN:
-        return setJwtToken({draftState, jwtToken: action.jwtToken });
+        return setJwtToken({ draftState, jwtToken: action.jwtToken });
       case SHOW_CONFIRMATION_MODAL:
-        return showConfirmationModal({draftState})
+        return showConfirmationModal({ draftState });
       case HIDE_CONFIRMATION_MODAL:
-        return hideConfirmationModal({draftState})
+        return hideConfirmationModal({ draftState });
       default:
         return draftState;
     }

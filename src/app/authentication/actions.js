@@ -16,39 +16,39 @@ function hideConfirmationModal() {
   return { type: HIDE_CONFIRMATION_MODAL };
 }
 
-const signIn = function(email, password) {
+const signIn = (email, password) => {
   return (dispatch) => {
     return Auth.signIn(email, password)
-    .then((data) => {
-      const { jwtToken } = data.signInUserSession.idToken;
-      dispatch(setJwtToken(jwtToken));
-      return jwtToken;
-    })
-  }
-}
+      .then((data) => {
+        const { jwtToken } = data.signInUserSession.idToken;
+        dispatch(setJwtToken(jwtToken));
+        return jwtToken;
+      });
+  };
+};
 
-const signUp = function(password, email, attributes) {
+const signUp = (password, email, attributes) => {
   return (dispatch) => {
     Auth.signUp({
-      username:email,
-      password:password,
-      attributes:attributes,
+      username: email,
+      password,
+      attributes,
       validationData: [],
-    }).then((data) => {
-      dispatch(showConfirmationModal());
     })
-    .catch(err => Alert.alert("Error al Registrar: ",err.message));
-  }
-}
+      .then(() => {
+        dispatch(showConfirmationModal());
+      }).catch(err => Alert.alert('Error al Registrar: ', err.message));
+  };
+};
 
-const confirmCode = function(email, confirmationCode) {
+const confirmCode = (email, confirmationCode) => {
   return (dispatch) => {
     Auth.confirmSignUp(email, confirmationCode, {})
-    .then((_data) => {
-      dispatch(hideConfirmationModal());
-    })
-    .catch(err => Alert.alert("Error al Confirmar: ",err.message));
-  }
-}
+      .then(() => {
+        dispatch(hideConfirmationModal());
+      })
+      .catch(err => Alert.alert('Error al Confirmar: ', err.message));
+  };
+};
 
 export { signIn, signUp, confirmCode };

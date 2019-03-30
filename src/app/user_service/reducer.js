@@ -3,12 +3,12 @@
 /* eslint-disable max-len */
 import producer from 'immer';
 import {
-  SET_PARAMS,
+  SET_MY_FISCAL_IDENTITY,
 } from './constants';
 
 const initialState = {
-  name: '',
-  cuit: '',
+  name: null,
+  cuit: null,
 };
 
 function setParams({ draftState, name, cuit }) {
@@ -20,7 +20,7 @@ function setParams({ draftState, name, cuit }) {
 export default userserviceReducer = (state = initialState, action) => {
   return producer(state, (draftState) => {
     switch (action.type) {
-      case SET_PARAMS:
+      case SET_MY_FISCAL_IDENTITY:
         return setParams({
           draftState,
           name: action.name,

@@ -15,8 +15,8 @@ const AppStack = createStackNavigator(
     NewCostumer,
     Items: Item,
     NewItems: NewItem,
-  }
-)
+  },
+);
 
 const AppLogin = createStackNavigator(
   {
@@ -25,18 +25,18 @@ const AppLogin = createStackNavigator(
   },
   {
     headerMode: 'none',
-  }
-)
+  },
+);
 
 const AppNavigator = createAppContainer(createSwitchNavigator(
   {
-    Loading: Loading,
+    Loading,
     Login: AppLogin,
     App: AppStack,
   },
   {
     initialRouteName: 'Login',
-  }
+  },
 ));
 
 export default AppNavigator;

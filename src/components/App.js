@@ -3,14 +3,15 @@ import { Provider } from 'react-redux';
 import store from '../store';
 import Amplify from 'aws-amplify';
 import axios from 'axios';
-import aws_exports from '../aws-exports';
-import AppNavigator from './app-navigator';
-Amplify.configure(aws_exports);
-/*
-axios.setHost = 
-axios.setHeader = { "JWT-TOKEN" : store.getState.authetication.jwtToken };
-*/
+import {
+  API_HOST,
+} from 'react-native-dotenv';
+import aws_exports from '../constants/aws-exports';
+import AppNavigator from './AppNavigator';
 
+Amplify.configure(aws_exports);
+
+axios.defaults.baseURL = API_HOST;
 
 class App extends React.Component {
   render() {

@@ -1,6 +1,6 @@
 import producer from 'immer';
 import {
-  SET_IDENTITI_FISCAL,
+  SET_FISCAL_IDENTITY,
 } from './constants';
 
 const initialState = {
@@ -17,7 +17,7 @@ function setIdentitiFiscal({ draftState, name, cuit }) {
 export default identitiFiscalReducer = (state = initialState, action) => {
   return producer(state, (draftState) => {
     switch (action.type) {
-      case SET_IDENTITI_FISCAL:
+      case SET_FISCAL_IDENTITY:
         return setIdentitiFiscal({
           draftState,
           name: action.name,
