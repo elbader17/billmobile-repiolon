@@ -46,7 +46,7 @@ class Invoice extends React.Component {
   }
 
   navigateClient = () => {
-    this.props.navigation.navigate('Client');
+    this.props.navigation.navigate('Customer');
   }
 
   renderCustomer = () => {
@@ -54,6 +54,7 @@ class Invoice extends React.Component {
       return (
         <View>
           <Text>Listado de Clientes</Text>
+          <Text>{ this.props.name }</Text>
           <Button
             title='AGREGAR CLIENTE'
             onPress={ this.navigateClient }
@@ -79,6 +80,10 @@ class Invoice extends React.Component {
         </View>
       );
     }
+  }
+
+  navigateClient = () => {
+    this.props.navigation.navigate('Custumer');
   }
 
   xxx = () => {

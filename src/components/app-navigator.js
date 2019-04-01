@@ -1,11 +1,11 @@
 import { createStackNavigator, createAppContainer, createSwitchNavigator } from 'react-navigation';
 import Intro from './Intro';
 import Authentication from './Authentication';
-import TaxConfiguration from './TaxConfiguration/Configure/Component';
+import TaxConfiguration from './TaxConfiguration/Configure';
 import InitialConfiguration from './TaxConfiguration/InitialConfigure/Component';
 import Loading from './Loading';
 import Home from './Home';
-import NewClient from './Client';
+import Custumer from './Customer';
 import Item from './Item';
 import NewItem from './Item/NewItem';
 import Invoice from './Invoice';
@@ -15,8 +15,8 @@ const AppStack = createStackNavigator(
     HomeScreen: {
       screen: Home,
     },
-    Client: {
-      screen: NewClient,
+    Custumer: {
+      screen: Custumer,
     },
     Items: {
       screen: Item,

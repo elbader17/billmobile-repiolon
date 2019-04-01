@@ -34,57 +34,21 @@ class NewItem extends React.Component {
     this.props.navigation.navigate('HomeScreen');
   }
 
-  renderNewItems = () => {
+  newItemNavigate = () => {
+    this.props.navigation.navigate('NewItems');
+  }
+
+  renderItems = () => {
     if (this.state.selectedIndex === 0) {
       return (
         <View>
-          <View style={ style.textBoxBtnHolder }>
-            <TextInput
-              placeholder="Nombre de Producto"
-              style={ style.textBoxTop }
-            />
-          </View>
-          <View style={ style.textBoxBtnHolder }>
-            <TextInput
-              placeholder="Precio"
-              style={ style.textBox }
-            />
-          </View>
-          <Button
-            title='GUARDAR PRODUCTO'
-            onPress={ this.saveProduct }
-            buttonStyle={ style.submit }
-            titleStyle={ style.submitText }
-          />
+          <Text>Lista de Productos</Text>
         </View>
       );
     }else {
       return (
         <View>
-          <View style={ style.textBoxBtnHolder }>
-            <TextInput
-              placeholder="Concepto del Servicio"
-              style={ style.textBoxTop }
-            />
-          </View>
-          <View style={ style.textBoxBtnHolder }>
-            <TextInput
-              placeholder="Unidad de Medida"
-              style={ style.textBox }
-            />
-          </View>
-          <View style={ style.textBoxBtnHolder }>
-            <TextInput
-              placeholder="Precio"
-              style={ style.textBox }
-            />
-          </View>
-          <Button
-            title='GUARDAR SERVICIO'
-            onPress={ this.saveProduct }
-            buttonStyle={ style.submit }
-            titleStyle={ style.submitText }
-          />
+          <Text>Lista de Servicios</Text>
         </View>
       );
     }
@@ -93,22 +57,36 @@ class NewItem extends React.Component {
   render() {
     const a = style.buttonOn
     const b = style.buttonOff
-    const component1 = () => <Text style={this.state.selectedIndex === 0 ? a : b}>PRODUCTO</Text>
-    const component2 = () => <Text style={this.state.selectedIndex === 1 ? a : b}>SERVICIO</Text>
+    const component1 = () => <Text style={this.state.selectedIndex === 0 ? a : b}>Productos</Text>
+    const component2 = () => <Text style={this.state.selectedIndex === 1 ? a : b}>Servicios</Text>
     const buttons = [{ element: component1 }, { element: component2 }]
     return(
       <View style={style.container}>
         <View style={style.container2}>
+          <Text style={ style.textRegister }> Facturar </Text>
+          <Text style={ style.textRegister }> $ 0.00 </Text>
           <ButtonGroup
             onPress={ this.updateIndex }
             selectedIndex={ this.state.selectedIndex }
             buttons={ buttons }
             containerStyle={ style.buttons }
-            buttonStyle = {style.borderButton}
-            innerBorderStyle={{color: 'white'}}
-            selectedButtonStyle={style.backgroundColorButton}
+            textStyle={ style.text }
+            selectedButtonStyle={ style.buttonSelected }
           />
-          { this.renderNewItems() }
+          { this.renderItems() }
+          <Text style={ style.textRegister }> </Text>
+          <Button
+            title='CREAR NUEVO ITEM'
+            onPress={ this.newItemNavigate }
+            buttonStyle={ style.submit }
+            titleStyle={ style.submitText }
+          />
+          <Text style={ style.textRegister }> </Text>
+          <Button
+            title='CONTINUAR'
+            buttonStyle={ style.submit }
+            titleStyle={ style.submitText }
+          />
         </View>
       </View>
     )
