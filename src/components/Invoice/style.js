@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
   container: {
     width: METRICS.screenWidth,
     height: METRICS.screenHeight,
+    flex:1
   },
   container2: {
     alignItems: 'center',
@@ -17,7 +18,24 @@ const styles = StyleSheet.create({
     position: 'relative',
     alignSelf: 'stretch',
     justifyContent: 'center',
-    marginTop: 5,
+    marginTop: 0,
+    backgroundColor: COLORS.white,
+    borderRadius: 4,
+    borderBottomColor: COLORS.white,
+    borderBottomWidth: 1,
+  },
+  textBoxBtnHolderAux: {
+    position: 'relative',
+    alignSelf: 'stretch',
+    justifyContent: 'center',
+    marginTop: 0,
+    borderBottomColor: COLORS.white,
+    borderBottomWidth: 2,
+    color: COLORS.white,
+  },
+  picker: {
+    height: 45,
+    color: COLORS.white,
   },
   textBox: {
     fontFamily: FONTS.latoRegular,

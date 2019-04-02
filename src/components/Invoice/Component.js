@@ -91,13 +91,30 @@ class Invoice extends React.Component {
     const component1 = () => <Text style={this.state.selectedIndex === 0 ? a : b}></Text>
     const component2 = () => <Text style={this.state.selectedIndex === 1 ? a : b}>Consumidor Final</Text>
     const buttons = [{ element: component1 }, { element: component2 }]
+    const data = Array.from({ length: 800 });
     return(
       <KeyboardAwareScrollView>
       <View style={style.container}>
+      {data.map((_, i) => (
+        <View
+          key={i}
+          style={{
+            position: 'absolute',
+            backgroundColor: '#3687d1',
+            height: 3,
+            bottom: (300 + i),
+            right: 0,
+            left: 0,
+            zIndex: 0,
+            opacity: (1 / 500) * (i - 1)
+          }}
+        />
+      ))}
         <View style={style.container2}>
-        <View style={ style.textBoxBtnHolder }>
+        <View style={ style.textBoxBtnHolderAux }>
           <Picker
             selectedValue={this.state.typeVoucher}
+            style={{color: 'white'}}
             onValueChange={itemValue => this.setState({ typeVoucher: itemValue })}>
             {voucher.map((i, index) => (
               <Picker.Item key={index} label={i.label} value={i.value} />
