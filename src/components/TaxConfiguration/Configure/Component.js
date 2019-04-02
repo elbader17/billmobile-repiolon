@@ -21,14 +21,13 @@ class TaxConfiguration extends React.Component{
   };
 
   handleConfigFiscal = () => {
-   //Alert.alert("Towken: "+this.props.jwtToken);
-   //const { name, cuit } = this.state;
-   //const { registerUserService } = this.props;
-   //registerUserService(name, cuit, this.props.jwtToken)
-   // .then((data) => {
-      //Alert.alert("Pops Data: "+this.props.name+" "+this.props.cuit);
+    const { name, cuit } = this.state;
+    const { updateFiscalIdentity } = this.props;
+    updateFiscalIdentity(name, cuit)
+     .then((data) => {
+      Alert.alert("Pops Data: "+this.props.name+" "+this.props.cuit);
       this.props.navigation.push('HomeScreen');
-    //})
+    })
   }
 
   setName = (value) => this.setState({ name: value})

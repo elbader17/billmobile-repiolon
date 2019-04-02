@@ -30,7 +30,7 @@ class SignIn extends React.Component {
     signIn(email, password)
     .then(() => {
       Alert.alert(this.props.jwtToken);
-      this.props.navigation.navigate('InitialConfigure');
+      this.props.navigation.navigate('Configure');
     })
     .catch(err => Alert.alert("Error al Ingresar: ",err.message));
   }

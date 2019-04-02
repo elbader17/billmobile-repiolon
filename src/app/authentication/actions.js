@@ -4,6 +4,7 @@ import {
   SET_JWT_TOKEN,
   SHOW_CONFIRMATION_MODAL,
   HIDE_CONFIRMATION_MODAL,
+  USER_SIGNED_UP,
 } from './constants';
 
 function setJwtToken(jwtToken) {
@@ -12,43 +13,50 @@ function setJwtToken(jwtToken) {
 function showConfirmationModal() {
   return { type: SHOW_CONFIRMATION_MODAL };
 }
+
+function userSignedUp(email, password) {
+  return { type: USER_SIGNED_UP, registration: { email, password } };
+}
+
 function hideConfirmationModal() {
   return { type: HIDE_CONFIRMATION_MODAL };
 }
 
-const signIn = function(email, password) {
+const signIn = (email, password) => {
   return (dispatch) => {
     return Auth.signIn(email, password)
-    .then((data) => {
-      const { jwtToken } = data.signInUserSession.idToken;
-      dispatch(setJwtToken(jwtToken));
-      return jwtToken;
-    })
-  }
-}
+      .then((data) => {
+        const { jwtToken } = data.signInUserSession.idToken;
+        dispatch(setJwtToken(jwtToken));
+      });
+  };
+};
 
-const signUp = function(password, email, attributes) {
+const signUp = (password, email, attributes) => {
   return (dispatch) => {
-    Auth.signUp({
-      username:email,
-      password:password,
-      attributes:attributes,
+    return Auth.signUp({
+      username: email,
+      password,
+      attributes,
       validationData: [],
-    }).then((data) => {
-      dispatch(showConfirmationModal());
     })
-    .catch(err => Alert.alert("Error al Registrar: ",err.message));
-  }
-}
+      .then(() => {
+        dispatch(userSignedUp(email, password));
+        dispatch(showConfirmationModal());
+      }).catch(err => Alert.alert('Error al Registrar: ', err.message));
+  };
+};
 
-const confirmCode = function(email, confirmationCode) {
-  return (dispatch) => {
-    Auth.confirmSignUp(email, confirmationCode, {})
-    .then((_data) => {
-      dispatch(hideConfirmationModal());
-    })
-    .catch(err => Alert.alert("Error al Confirmar: ",err.message));
-  }
-}
+const confirmCode = (email, confirmationCode) => {
+  return (dispatch, getState) => {
+    return Auth.confirmSignUp(email, confirmationCode, {})
+      .then(() => {
+        const { password } = getState().authentication.registration;
+        dispatch(hideConfirmationModal());
+        return dispatch(signIn(password, email));
+      })
+      .catch(err => Alert.alert('Error al Confirmar: ', err.message));
+  };
+};
 
 export { signIn, signUp, confirmCode };

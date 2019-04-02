@@ -3,6 +3,7 @@ import Invoice from './Component';
 
 const mapStateToProps = state => ({
   jwtToken: state.authentication.jwtToken,
+  name: state.identitiFiscal.name,
 });
 
 const component = connect(

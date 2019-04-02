@@ -24,7 +24,7 @@ class Item extends React.Component {
     const newIndex = this.state.selectedIndex === 0 ? 1 : 0;
     this.setState({ selectedIndex: newIndex });
   }
-
+  
   newItemNavigate = () => {
     this.props.navigation.navigate('NewItems');
   }

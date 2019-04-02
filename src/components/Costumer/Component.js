@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, Alert, Picker, TextInput } from 'react-native';
 import { Button } from "react-native-elements";
 import { withNavigation } from 'react-navigation';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import style from './style';
 
 const conditionIVA = [
@@ -38,19 +39,30 @@ const conditionSale = [
   },
 ];
 
-class NewClient extends React.Component {
+class NewCostumer extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
+      condition: '',
+      name: "",
+      category: "m",
+      cuit:"",
+      conditionSale:"",
       conditionIva: '',
       conditionSale: '',
     }
   }
 
-  newClient = () => {
-    Alert.alert("Éxito -> Home | Fracaso -> Alert o algo :) ");
-    this.props.navigation.navigate('HomeScreen');
+  newCostumer = () => {
+    const { name, category, cuit } = this.state;
+    const { registerFiscalIdentity } = this.props;
+    registerFiscalIdentity(name, cuit)
+    .then((data) => {
+      Alert.alert("Cliente Cargado: "+this.props.name+" "+this.props.cuit);
+      this.props.navigation.navigate('HomeScreen');
+    })
+    .catch(err => Alert.alert("Error al Ingresar: ",err.message));
   }
 
   static navigationOptions = {
@@ -59,8 +71,14 @@ class NewClient extends React.Component {
     headerTintColor: '#3687D1',
   };
 
+  setName = (value) => this.setState({ name: value})
+  setConditionSale = (value) => this.setState({ conditionSale: value })
+  setCuitDni = (value) => this.setState({ cuit: value })
+
+
   render() {
     return(
+      <KeyboardAwareScrollView>
       <View style={style.container}>
         <View style={style.container2}>
           <Text style={style.textRegister}>CONDICIÓN FRENTE AL IVA</Text>
@@ -77,6 +95,7 @@ class NewClient extends React.Component {
           <Text style={style.textRegister}>TIPO DE DOCUMENTO</Text>
           <View style={ style.textBoxBtnHolder }>
             <TextInput
+              onChangeText={this.setCuitDni}
               placeholder="CUIT ó DNI"
               style={ style.textBox }
             />
@@ -87,6 +106,7 @@ class NewClient extends React.Component {
           <View style={ style.textBoxBtnHolder }>
             <TextInput
               style={ style.textBox }
+              onChangeText={this.setName}
             />
           </View>
           <Text style={style.textRegister}>CONDICIÓN DE VENTA</Text>
@@ -105,13 +125,15 @@ class NewClient extends React.Component {
         </View>
         <Button
           title='GUARDAR'
-          onPress={ this.newClient }
+          onPress={ this.newCostumer }
           buttonStyle={ style.submit }
           titleStyle={ style.submitText }
         />
       </View>
+      </KeyboardAwareScrollView>
     )
   }
 }
 
-export default withNavigation(NewClient);
+
+export default withNavigation(NewCostumer);

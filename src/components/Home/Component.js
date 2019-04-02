@@ -57,7 +57,7 @@ class Home extends React.Component {
   }
 
   newInvoiceNavigate = () => {
-    this.props.navigation.navigate('Invoices');
+    this.props.navigation.navigate('Invoice');
   }
 
   render() {
@@ -65,6 +65,7 @@ class Home extends React.Component {
       <View style={style.container}>
         <View style={style.container2}>
           <Text style={ style.textRegister }> INFORMACIÓN FISCAL DEL USUARIO </Text>
+          <Text>{ this.props.name}</Text>
           {/*<Text style={ style.textRegister }> CLIENTES RECIENTES</Text>
           <Button
             onPress={ this.newClientNavigate }
