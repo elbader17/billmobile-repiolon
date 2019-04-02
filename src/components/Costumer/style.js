@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
   container: {
     width: METRICS.screenWidth,
     height: METRICS.screenHeight,
+    backgroundColor: COLORS.blue
   },
   container2: {
     alignItems: 'center',
@@ -17,11 +18,17 @@ const styles = StyleSheet.create({
     position: 'relative',
     alignSelf: 'stretch',
     justifyContent: 'center',
-    marginTop: 5,
+    marginTop: 0,
+    backgroundColor: COLORS.white,
+    borderRadius: 4,
+  },
+  picker: {
+    height: 45,
+    color: COLORS.grayDark
   },
   textBox: {
     fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size18,
+    fontSize: FONTS.size16,
     alignSelf: 'stretch',
     height: 45,
     paddingRight: 45,
@@ -46,9 +53,9 @@ const styles = StyleSheet.create({
   },
   submit: {
     backgroundColor: COLORS.red,
-    width: 266,
     height: 40,
     borderRadius: 2,
+    bottom: -29
   },
   submitDisabled: {
     backgroundColor: COLORS.redLight,
@@ -64,12 +71,23 @@ const styles = StyleSheet.create({
   textRegister: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size14,
-    color: COLORS.grayDark,
-    paddingVertical: 15,
+    color: COLORS.white,
+    paddingVertical: 10,
     textAlign: 'center',
+  },
+  textDescription: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size11,
+    color: COLORS.white,
+    paddingVertical: 5,
   },
   red: {
     color: COLORS.red,
+  },
+  inLine: {
+    flexDirection: "row",
+    position: 'absolute',
+    bottom:80
   },
   textFooterA: {
     fontFamily: FONTS.latoRegular,
@@ -88,6 +106,13 @@ const styles = StyleSheet.create({
     fontSize: FONTS.size16,
     fontWeight: 'normal',
     color: COLORS.blue,
+  },
+  lineWhite: {
+    backgroundColor: COLORS.white,
+    height: 1,
+    width: 280,
+    marginTop: 20,
+    marginBottom: 10,
   },
 });
 

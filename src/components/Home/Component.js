@@ -57,7 +57,7 @@ class Home extends React.Component {
   }
 
   newInvoiceNavigate = () => {
-    this.props.navigation.navigate('Invoices');
+    this.props.navigation.navigate('Invoice');
   }
 
   render() {

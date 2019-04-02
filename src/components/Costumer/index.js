@@ -1,6 +1,6 @@
 /* eslint-disable import/no-named-as-default */
 import { connect } from 'react-redux';
-import Custumer from './Component';
+import NewCostumer from './Component';
 import { registerFiscalIdentity } from '../../app/fiscal_identity/actions';
 
 const mapStateToProps = state => ({
@@ -17,6 +17,6 @@ function mapDispatchToProps(dispatch) {
 const component = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Custumer);
+)(NewCostumer);
 
 export default component;

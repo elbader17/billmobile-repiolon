@@ -43,7 +43,6 @@ class TaxConfiguration extends React.Component{
               NOMBRE DE LA EMPRESA
             </Text>
             <TextInput style={ style.textRegister }
-              placeholder= 'Nombre'
               onChangeText={this.setName}
               style={ style.textBox }
             />
@@ -51,7 +50,6 @@ class TaxConfiguration extends React.Component{
               INGRESA TU CUIT
             </Text>
             <TextInput style={ style.textRegister }
-              placeholder= 'xx-xxxxxxxx-x'
               onChangeText={this.setCuit}
               style={ style.textBox }
             />
