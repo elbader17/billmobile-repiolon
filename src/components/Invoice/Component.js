@@ -87,7 +87,7 @@ class Invoice extends React.Component {
   }
 
   xxx = () => {
-    this.props.navigation.navigate('NewItems');
+    this.props.navigation.navigate('Items');
   }
 
   render() {
