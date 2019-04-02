@@ -1,27 +1,37 @@
 import producer from 'immer';
 import {
   CREATE_ITEM,
+  LIST_ITEMS,
 } from './constant';
 
 const initialState = {
-  name: '',
-  price: '',
+  items: [],
 };
 
-function setItems({ draftState, name, price }) {
-  draftState.name = name;
-  draftState.price = price;
+function addItem({ draftState, category, name, price }) {
+  draftState.items.push({category, name, price});
   return draftState;
 }
 
-export default addItemReducer = (state = initialState, action) => {
+function setItems({ draftState, items }) {
+  draftState.items = items;
+  return draftState;
+}
+
+export default itemsReducer = (state = initialState, action) => {
   return producer(state, (draftState) => {
     switch (action.type) {
       case CREATE_ITEM:
-        return setItems({
+        return addItem({
           draftState,
+          category: action.category,
           name: action.name,
           price: action.price,
+        });
+      case LIST_ITEMS:
+        return setItems({
+          draftState,
+          items: action.items,
         });
       default:
         return draftState;

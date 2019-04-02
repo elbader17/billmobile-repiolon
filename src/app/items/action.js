@@ -2,11 +2,13 @@ import axios from 'axios';
 import {
   CREATE_ITEM,
   UPDATE_ITEM,
+  LIST_ITEMS,
 } from './constant';
 
-function createItemAction(name, price) {
+function createItemAction(category, name, price) {
   return {
     type: CREATE_ITEM,
+    category,
     name,
     price,
   };
@@ -18,6 +20,14 @@ function updateItemAction(id, name, price) {
     id,
     name,
     price,
+  };
+}
+
+
+function itemListAction(items) {
+  return {
+    type: LIST_ITEMS,
+    items,
   };
 }
 
@@ -34,9 +44,26 @@ const createItem = (category, name, price) => {
     const instance = axios.create({
       headers: { 'JWT-TOKEN': getState().authentication.jwtToken },
     });
-    return instance.post('v1/items', { resource })
-      .then(() => {
-        dispatch(createItemAction(name, price));
+    // return instance.post('v1/items', { resource })
+    //  .then(() => {
+        return Promise.resolve( dispatch(createItemAction(category, name, price)));
+    /*  })
+      .catch((error) => {
+        console.log(error);
+      });
+    */
+  };
+};
+
+const listItems = () => {
+
+  return (dispatch, getState) => {
+    const instance = axios.create({
+      headers: { 'JWT-TOKEN': getState().authentication.jwtToken },
+    });
+    return instance.get('v1/items')
+      .then((resources) => {
+        dispatch(itemListAction(resources.data));
       })
       .catch((error) => {
         console.log(error);
@@ -66,4 +93,4 @@ const updateItem = (id, name, price) => {
 };
 
 
-export { createItem, updateItem };
+export { createItem, updateItem, itemListAction };

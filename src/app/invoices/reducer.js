@@ -24,14 +24,15 @@ function setInvoices({ draftState, invoices }) {
   return draftState;
 }
 
-function addInvoiceItem({ draftState }) {
+function addInvoiceItem({ draftState, invoiceItem }) {
+  draftState.currentInvoice.invoiceItems.push(invoiceItem);
   return draftState;
 }
 function updateInvoiceItem({ draftState }) {
   return draftState;
 }
 
-export default addInvoiceReducer = (state = initialState, action) => {
+export default invoicesReducer = (state = initialState, action) => {
   return producer(state, (draftState) => {
     switch (action.type) {
       case CREATE_INVOICE:

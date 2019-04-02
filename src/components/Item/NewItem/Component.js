@@ -9,7 +9,10 @@ class NewItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedIndex: 0
+      selectedIndex: 0,
+      nameProduct:"",
+      nameService:"",
+      price:"",
     };
   }
 
@@ -25,14 +28,26 @@ class NewItem extends React.Component {
   }
 
   saveProduct = () => {
-    Alert.alert("Exito o Fracaso al Guardar!");
-    this.props.navigation.navigate('Items');
+
+    const { nameProduct,price } = this.state;
+    const { createItem } = this.props;
+    createItem("product", nameProduct, price)
+    .catch(err => Alert.alert("Error al Ingresar: ",err.message));
+
+    
   }
 
   saveService = () => {
-    Alert.alert("Exito o Fracaso al Guardar!");
-    this.props.navigation.navigate('Items');
+    const { nameService,price } = this.state;
+    const { createItem } = this.props;
+    createItem("service", nameService, price)
+    .catch(err => Alert.alert("Error al Ingresar: ",err.message));
   }
+
+  setNameProduct = (value) => this.setState({ nameProduct: value})
+  setNameService = (value) => this.setState({ nameService: value})
+  setPrice = (value) => this.setState({ price:value })
+  
 
   renderNewItems = () => {
     if (this.state.selectedIndex === 0) {
@@ -41,12 +56,14 @@ class NewItem extends React.Component {
           <View style={ style.textBoxBtnHolder }>
             <TextInput
               placeholder="Nombre de Producto"
+              onChangeText={this.setNameProduct}
               style={ style.textBoxTop }
             />
           </View>
           <View style={ style.textBoxBtnHolder }>
             <TextInput
               placeholder="Precio"
+              onChangeText={this.setPrice}
               style={ style.textBox }
             />
           </View>
@@ -64,18 +81,14 @@ class NewItem extends React.Component {
           <View style={ style.textBoxBtnHolder }>
             <TextInput
               placeholder="Concepto del Servicio"
+              onChangeText={this.setNameService}
               style={ style.textBoxTop }
             />
           </View>
           <View style={ style.textBoxBtnHolder }>
             <TextInput
-              placeholder="Unidad de Medida"
-              style={ style.textBox }
-            />
-          </View>
-          <View style={ style.textBoxBtnHolder }>
-            <TextInput
               placeholder="Precio"
+              onChangeText={this.setPrice}
               style={ style.textBox }
             />
           </View>

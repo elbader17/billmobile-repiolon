@@ -20,6 +20,7 @@ class Item extends React.Component {
     headerTintColor: '#3687D1',
   };
 
+
   updateIndex = () => {
     const newIndex = this.state.selectedIndex === 0 ? 1 : 0;
     this.setState({ selectedIndex: newIndex });
@@ -34,6 +35,7 @@ class Item extends React.Component {
       return (
         <View>
           <Text>Lista de Productos</Text>
+          <Text>{ this.props.items.map((i) => i.name).join(', ') }</Text>
         </View>
       );
     }else {
