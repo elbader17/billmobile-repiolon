@@ -8,6 +8,7 @@ import NewCostumer from './Costumer';
 import Item from './Item';
 import NewItem from './Item/NewItem';
 import Invoice from './Invoice';
+import ListEditableItem from './Item/ListEditableItem'
 
 const AppStack = createStackNavigator(
   {
@@ -17,6 +18,7 @@ const AppStack = createStackNavigator(
     Items: Item,
     NewItems: NewItem,
     Invoice,
+    ListEditableItem,
   },
 );
 
@@ -29,21 +31,15 @@ const AppLogin = createStackNavigator(
     headerMode: 'none',
   },
 );
-const Prueba = createStackNavigator(
-  {
-    Item
-  },
-);
 
 const AppNavigator = createAppContainer(createSwitchNavigator(
   {
     Loading,
     Login: AppLogin,
     App: AppStack,
-    Prueba,
   },
   {
-    initialRouteName: 'Prueba',
+    initialRouteName: 'Login',
   },
 ));
 

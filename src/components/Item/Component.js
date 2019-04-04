@@ -21,7 +21,6 @@ class Item extends React.Component {
     headerTintColor: '#3687D1',
   };
 
-
   updateIndex = () => {
     const newIndex = this.state.selectedIndex === 0 ? 1 : 0;
     this.setState({ selectedIndex: newIndex });
@@ -29,6 +28,10 @@ class Item extends React.Component {
   
   newItemNavigate = () => {
     this.props.navigation.navigate('NewItems');
+  }
+
+  listEditableNavigate = () => {
+    this.props.navigation.navigate('ListEditableItem');
   }
 
   renderItems = () => {
@@ -94,6 +97,7 @@ class Item extends React.Component {
             />
             <Button
               title='CONTINUAR'
+              onPress={ this.listEditableNavigate}
               buttonStyle={ style.buttonContinue }
               titleStyle={ style.submitTextContinue }
             />
