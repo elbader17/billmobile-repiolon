@@ -107,10 +107,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   inLine: {
-    width: METRICS.screenWidth,
     flexDirection: "row",
-    position: 'absolute',
-    bottom:80
   },
   red: {
     color: COLORS.red,

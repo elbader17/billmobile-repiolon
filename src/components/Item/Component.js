@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Alert} from 'react-native';
+import { View, Text, Alert, TextInput,TouchableWithoutFeedback } from 'react-native';
 import { ButtonGroup, Button} from "react-native-elements";
 import { withNavigation } from 'react-navigation';
 import style from './style';
@@ -10,7 +10,8 @@ class Item extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedIndex: 0
+      selectedIndex: 0,
+      product: 0,
     };
   }
 
@@ -34,13 +35,14 @@ class Item extends React.Component {
     if (this.state.selectedIndex === 0) {
       return (
         <View>
-          <Text>Lista de Productos</Text>
-          <Text>{ this.props.items.map((i) => i.name).join(', ') }</Text>
+          <Text>
+          { this.props.items.map((i) => i.name + "      "  + "$" + i.price + "\n")}
+          </Text>
         </View>
       );
     }else {
       return (
-        <View>
+        <View>  
           <Text>Lista de Servicios</Text>
         </View>
       );

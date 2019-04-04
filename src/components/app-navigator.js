@@ -29,15 +29,21 @@ const AppLogin = createStackNavigator(
     headerMode: 'none',
   },
 );
+const Prueba = createStackNavigator(
+  {
+    Item
+  },
+);
 
 const AppNavigator = createAppContainer(createSwitchNavigator(
   {
     Loading,
     Login: AppLogin,
     App: AppStack,
+    Prueba,
   },
   {
-    initialRouteName: 'Login',
+    initialRouteName: 'Prueba',
   },
 ));
 

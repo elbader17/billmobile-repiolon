@@ -32,7 +32,7 @@ class NewItem extends React.Component {
     const { nameProduct,price } = this.state;
     const { createItem } = this.props;
     createItem("product", nameProduct, price)
-    .catch(err => Alert.alert("Error al Ingresar: ",err.message));
+    //.catch(err => Alert.alert("Error al Ingresar: ",err.message));
 
     
   }
@@ -41,7 +41,7 @@ class NewItem extends React.Component {
     const { nameService,price } = this.state;
     const { createItem } = this.props;
     createItem("service", nameService, price)
-    .catch(err => Alert.alert("Error al Ingresar: ",err.message));
+    //.catch(err => Alert.alert("Error al Ingresar: ",err.message));
   }
 
   setNameProduct = (value) => this.setState({ nameProduct: value})
