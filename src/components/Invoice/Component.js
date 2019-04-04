@@ -49,12 +49,28 @@ class Invoice extends React.Component {
     this.props.navigation.navigate('NewCustomer');
   }
 
+  navigateClient = () => {
+    this.props.navigation.navigate('NewCostumer');
+  }
+
+  xxx = () => {
+    this.props.navigation.navigate('Items');
+  }
+
+  newInvoice = () => {
+    const { identitiFiscal } = this.props.identitiFiscal;
+    const { items} = this.props.items;
+    createInvoice()
+  }
+
   renderCustomer = () => {
     if (this.state.selectedIndex === 0) {
       return (
         <View>
           <Text>Listado de Clientes</Text>
           <Text>{ this.props.name }</Text>
+          <Text>Listado de Productos</Text>
+          <Text>{ this.props.items.map((i) => i.name+" price "+ i.price).join(', ') }</Text>
           <Button
             title='AGREGAR CLIENTE'
             onPress={ this.navigateClient }
@@ -82,13 +98,7 @@ class Invoice extends React.Component {
     }
   }
 
-  navigateClient = () => {
-    this.props.navigation.navigate('NewCostumer');
-  }
-
-  xxx = () => {
-    this.props.navigation.navigate('Items');
-  }
+  
 
   render() {
     const a = style.buttonOn
@@ -151,7 +161,7 @@ class Invoice extends React.Component {
           />
           <Button
             title='CONTUNUAR'
-            onPress={ this.xxx }
+            onPress={ this.newInvoice }
             buttonStyle={ style.submit }
             titleStyle={ style.submitText }
             disabled

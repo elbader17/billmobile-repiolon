@@ -10,7 +10,8 @@ class Item extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedIndex: 0
+      selectedIndex: 0,
+      sumPriceItems: 0,
     };
   }
 
@@ -47,6 +48,8 @@ class Item extends React.Component {
     }
   }
 
+  
+
   render() {
     const a = style.buttonOn
     const b = style.buttonOff
@@ -59,8 +62,7 @@ class Item extends React.Component {
           <Text style={ style.textTotal }> Facturar </Text>
           <View style={ style.totalPrice }> 
             <Text style={ style.textTotal }>$ </Text>
-            <Text style={ style.textTotalPrice }>0</Text>
-            <Text style={ style.textTotal }> 00</Text>
+            <Text style={ style.textTotalPrice }>{ this.props.items.map((i) => parseFloat(i.price, 10)).reduce((partial_sum, a) => { return partial_sum + a }, 0) }</Text>
           </View>
         </View>
         <View style={style.container2}>
