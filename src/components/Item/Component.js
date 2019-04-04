@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Alert} from 'react-native';
+import { View, Text, Alert, TextInput,TouchableWithoutFeedback } from 'react-native';
 import { ButtonGroup, Button} from "react-native-elements";
 import { withNavigation } from 'react-navigation';
 import style from './style';
@@ -11,7 +11,7 @@ class Item extends React.Component {
     super(props);
     this.state = {
       selectedIndex: 0,
-      sumPriceItems: 0,
+      product: 0,
     };
   }
 
@@ -20,7 +20,6 @@ class Item extends React.Component {
     headerTitleStyle: style.headerText,
     headerTintColor: '#3687D1',
   };
-
 
   updateIndex = () => {
     const newIndex = this.state.selectedIndex === 0 ? 1 : 0;
@@ -31,17 +30,22 @@ class Item extends React.Component {
     this.props.navigation.navigate('NewItems');
   }
 
+  listEditableNavigate = () => {
+    this.props.navigation.navigate('ListEditableItem');
+  }
+
   renderItems = () => {
     if (this.state.selectedIndex === 0) {
       return (
         <View>
-          <Text>Lista de Productos</Text>
-          <Text>{ this.props.items.map((i) => i.name).join(', ') }</Text>
+          <Text>
+          { this.props.items.map((i) => i.name + "      "  + "$" + i.price + "\n")}
+          </Text>
         </View>
       );
     }else {
       return (
-        <View>
+        <View>  
           <Text>Lista de Servicios</Text>
         </View>
       );
@@ -94,6 +98,7 @@ class Item extends React.Component {
             />
             <Button
               title='CONTINUAR'
+              onPress={ this.listEditableNavigate}
               buttonStyle={ style.buttonContinue }
               titleStyle={ style.submitTextContinue }
             />

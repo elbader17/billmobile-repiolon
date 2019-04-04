@@ -8,10 +8,20 @@ const styles = StyleSheet.create({
     width: METRICS.screenWidth,
     height: METRICS.screenHeight,
   },
-  container2: {
-    alignItems: 'center',
-    paddingHorizontal: 45,
+  containerView: {
+    paddingHorizontal: 25,
     paddingTop: 15,
+  },
+  textRegular14: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size14,
+  },
+  textRegular18: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size18,
+  },
+  spacingText: {
+    marginLeft: 'auto',
   },
   textBoxBtnHolder: {
     position: 'relative',
@@ -107,25 +117,22 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   inLine: {
-    width: METRICS.screenWidth,
     flexDirection: "row",
-    position: 'absolute',
-    bottom:80
   },
   red: {
     color: COLORS.red,
   },
-  textFooterA: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size11,
-    color: COLORS.grayDark,
-    marginTop: 110,
+  lineGrayDark: {
+    backgroundColor: COLORS.grayDark,
+    height: 1.2,
+    width: 310 ,
+    marginTop: 20,
+    marginBottom: 10,
   },
-  textFooterB: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size11,
-    color: COLORS.grayDark,
-    fontWeight: 'bold',
+  lineGray: {
+    backgroundColor: COLORS.gray,
+    height: 2,
+    marginTop: 20,  
   },
   headerText: {
     fontFamily: FONTS.latoRegular,
@@ -175,6 +182,12 @@ const styles = StyleSheet.create({
     width: 130,
     height: 45,
     backgroundColor: COLORS.red
+  },
+  buttonRed: {
+    borderRadius: 0,
+    height: 45,
+    backgroundColor: COLORS.red,
+    top: 300,
   },
 });
 
