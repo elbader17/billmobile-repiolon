@@ -9,4 +9,5 @@ export const FONTS = {
   size18: 18,
   size24: 24,
   size42: 42,
+  size78: 78,
 };
