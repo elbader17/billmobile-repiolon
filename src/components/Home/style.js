@@ -1,48 +1,43 @@
 import { StyleSheet } from 'react-native';
 import { COLORS } from '../../constants/colors';
 import { FONTS } from '../../constants/fonts';
-import { METRICS } from '../../constants/metrics';
 
 const styles = StyleSheet.create({
-  container: {
-    width: METRICS.screenWidth,
-    height: METRICS.screenHeight,
-  },
-  container2: {
+  containerActionButton: {
     alignItems: 'center',
-    paddingHorizontal: 45,
-    paddingTop: 15,
-  },
-  textBoxBtnHolder: {
-    position: 'relative',
-    alignSelf: 'stretch',
-    justifyContent: 'center',
-    marginTop: 5,
-  },
-  textBox: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size18,
-    alignSelf: 'stretch',
-    height: 45,
-    paddingRight: 45,
-    paddingLeft: 8,
-    borderWidth: 1,
-    paddingVertical: 0,
-    borderColor: COLORS.gray,
-    borderRadius: 2,
-  },
-  visibilityBtn: {
-    position: 'absolute',
-    right: 3,
-    height: 40,
-    width: 35,
-    padding: 5,
-  },
-  btnImage: {
-    resizeMode: 'contain',
-    height: '100%',
     width: '100%',
-    opacity: 0.4,
+    height: 420,
+  },
+  containerListCustomer: {
+    width: '90%',
+    height: '24%',
+    margin: 35,
+    borderWidth: 1,
+    borderColor: COLORS.grayLight,
+    borderRadius: 4,
+  },
+  containerInfo: {
+    backgroundColor: COLORS.blue,
+    height: 100,
+  },
+  inLine: {
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  lineGray: {
+    backgroundColor: COLORS.gray,
+    height: 1.2,
+    marginTop: 2.5,
+    marginBottom: 2.5,
+  },
+  lineGrayLight: {
+    backgroundColor: COLORS.grayLight,
+    height: 1,
+    marginBottom: 2.5,
+  },
+  positionTextInfo: {
+    marginVertical: 25,
+    marginHorizontal: 35
   },
   submit: {
     backgroundColor: COLORS.red,
@@ -50,38 +45,41 @@ const styles = StyleSheet.create({
     height: 40,
     borderRadius: 2,
   },
-  submitDisabled: {
-    backgroundColor: COLORS.redLight,
-    width: 266,
-    height: 40,
-    borderRadius: 2,
+  buttonAddCustomer: {
+    backgroundColor: COLORS.white,
+    borderWidth: 1,
+    borderColor: COLORS.red,
+    borderRadius: 4,
+    width: 40,
+    height: 25,
+    opacity: 0.8
   },
-  submitText: {
+  buttonShowInvoice: {
+    backgroundColor: COLORS.white,
+    borderRadius: 5,
+    width: 40,
+    height: 25,
+  },
+  textButtonInvoice: {
+    fontFamily: FONTS.latoRegular,
+    color: '#3687d1',
+    fontSize: FONTS.size11,
+  },
+  textRegular14Gray: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size14,
+    color: COLORS.gray,
+  },
+  textRegular14GrayDark: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size14,
+    color: COLORS.grayDark,
+  },
+  textRegular14WhiteOpacity: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size14,
     color: COLORS.white,
-  },
-  textRegister: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size14,
-    color: COLORS.grayDark,
-    paddingVertical: 15,
-    textAlign: 'center',
-  },
-  red: {
-    color: COLORS.red,
-  },
-  textFooterA: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size11,
-    color: COLORS.grayDark,
-    marginTop: 110,
-  },
-  textFooterB: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size11,
-    color: COLORS.grayDark,
-    fontWeight: 'bold',
+    opacity: 0.9
   },
   actionButtonIcon: {
     fontSize: 20,
@@ -92,20 +90,8 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size16,
     fontWeight: 'normal',
-    color: COLORS.blue,
+    color: COLORS.white,
   },
-  text: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size18,
-    textAlign: 'center',
-    lineHeight: 26,
-    padding: 15
-  },
-  buttonAddClient: {
-    backgroundColor: COLORS.white,
-    borderWidth: 1,
-    borderColor: '#EE6123',
-  }
 });
 
 export default styles;
