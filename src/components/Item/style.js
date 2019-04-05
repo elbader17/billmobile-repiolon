@@ -187,7 +187,6 @@ const styles = StyleSheet.create({
     borderRadius: 0,
     height: 45,
     backgroundColor: COLORS.red,
-    top: 300,
   },
 });
 
