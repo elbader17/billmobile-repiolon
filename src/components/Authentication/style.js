@@ -1,42 +1,38 @@
 import { StyleSheet } from 'react-native';
 import { COLORS } from '../../constants/colors';
 import { FONTS } from '../../constants/fonts';
-import { METRICS } from '../../constants/metrics';
 
 const styles = StyleSheet.create({
   container: {
-    width: METRICS.screenWidth,
-    height: METRICS.screenHeight,
     backgroundColor: COLORS.white
   },
-  container2: {
+  containerHeader: {
     backgroundColor: COLORS.blue,
-    justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: -5,
-    paddingTop: 30
+    paddingTop: 30,
+    marginBottom: -5, //To join the buttons with the header
   },
-  textTittle: {
-    textAlign: 'center',
+  textRegular14White: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size14,
     color: COLORS.white,
+    textAlign: 'center',
     paddingBottom: 25,
     paddingTop: 10,
     lineHeight: 22,
     opacity: 0.7
   },
-  image: {
+  imageHeader: {
     width: 136,
     height: 99
   },
   buttons: {
+    backgroundColor: COLORS.blue,
     borderRadius: 0,
     borderWidth: 0,
-    backgroundColor: COLORS.blue,
     height: 45,
     width: '100%',
-    right: 10
+    right: 10 
   },
   buttonSelected: {
     backgroundColor: COLORS.white

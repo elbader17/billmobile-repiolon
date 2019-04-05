@@ -1,17 +1,16 @@
 import { StyleSheet } from 'react-native';
 import { COLORS } from '../../../constants/colors';
 import { FONTS } from '../../../constants/fonts';
-import { METRICS } from '../../../constants/metrics';
 
 const styles = StyleSheet.create({
   container:{
-    width: METRICS.screenWidth,
-    height: METRICS.screenHeight
-  },
-  container2:{
     alignItems: 'center',
-    paddingHorizontal: 45,
-    paddingTop: 15
+    marginVertical: 10,
+    marginHorizontal: 40,
+  },
+  containerFooter: {
+    justifyContent: 'flex-end',
+    marginBottom: 20,
   },
   textBoxBtnHolder: {
     position: 'relative',
@@ -51,37 +50,32 @@ const styles = StyleSheet.create({
     borderRadius: 2,
   },
   submitDisabled: {
-    backgroundColor: COLORS.redLight,
+    backgroundColor: COLORS.gray,
     width: 266,
     height: 40,
     borderRadius: 2,
   },
-  submitText: {
+  textRegular14White: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size14,
     color: COLORS.white
   },
-  textRegister: {
+  textRegular11GrayDark: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size11,
     color: COLORS.grayDark,
-    paddingVertical: 15
+    textAlign: 'center',
   },
-  red: {
-    color: COLORS.red
-  },
-  textFooterA: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size11,
-    color: COLORS.grayDark,
-    marginTop: 10
-  },
-  textFooterB: {
+  textRegular11GrayDarkBold: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size11,
     color: COLORS.grayDark,
     fontWeight: 'bold',
-  }
+    textAlign: 'center',
+  },
+  textRed: {
+    color: COLORS.red
+  },
 });
 
 export default styles;

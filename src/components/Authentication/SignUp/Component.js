@@ -17,7 +17,6 @@ class SignUp extends React.Component {
       name:'',
       confirmPassword: '',
       confirmationEmail:'',
-      selectedIndex: 0,
       hidePassword: true,
       hideConfirmPassword: true
     };
@@ -61,8 +60,8 @@ class SignUp extends React.Component {
     const hide = require('../../../images/hide.png')
     const show = require('../../../images/show.png')
     return(
-      <View style={ style.cotainer }>
-        <View style = { style.container2 }>
+      <View>
+        <View style = { style.container }>
           <View style={ style.textBoxBtnHolder }>
             <TextInput
               label="Nombre"
@@ -123,10 +122,12 @@ class SignUp extends React.Component {
             </TouchableOpacity>
           </View>   
 
-          <Text style={ style.textRegister }>
+          <TouchableOpacity>
+            <Text style={[style.textRegular11GrayDark, {paddingVertical: 15}] }>
             ¿Ya tienes una cuenta? 
-            <Text style={ style.red }> Iniciar Sesión</Text>
-          </Text>
+            <Text style={ style.textRed }> Iniciar Sesión</Text>
+            </Text>
+          </TouchableOpacity>
 
           <Button
             title='CREAR CUENTA'
@@ -134,19 +135,20 @@ class SignUp extends React.Component {
             onPress={ this.handleSignUp }
             value={this.state.email}
             buttonStyle={ style.submit }
-            titleStyle={ style.submitText }
-            disabledTitleStyle={ style.submitText }
+            titleStyle={ style.textRegular14White }
+            disabledTitleStyle={ style.textRegular14White}
             disabledStyle={ style.submitDisabled }
             disabled={ !this.validateData() }
           />
-
-          <Text style={style.textFooterA}>
-            Al registrarte estas aceptando nuestros
-          </Text>
-          <Text style={style.textFooterB}>
-            Términos y Condiciones y Políticas de Privacidad
-          </Text>
-        </View>   
+        </View> 
+        <View style={style.containerFooter}>
+            <Text style={style.textRegular11GrayDark}>
+              Al registrarte estas aceptando nuestros
+            </Text>
+            <Text style={style.textRegular11GrayDarkBold}>
+              Términos y Condiciones y Políticas de Privacidad
+            </Text>
+          </View>  
         <Modal visible={ this.props.showConfirmationModal }>
           <Confirmation/>
         </Modal>

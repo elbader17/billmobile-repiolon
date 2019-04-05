@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, TextInput, Alert } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Button } from "react-native-elements";
 import { withNavigation } from 'react-navigation';
 import style from './style';
@@ -36,34 +37,38 @@ class TaxConfiguration extends React.Component{
     
   render() {
     return(
+    <KeyboardAwareScrollView>
       <View style={style.container}>
-        <View style={style.container2}>
-          <View style={ style.textBoxBtnHolder }>
-            <Text style={ style.text }>
-              NOMBRE DE LA EMPRESA
-            </Text>
-            <TextInput style={ style.textRegister }
-              onChangeText={this.setName}
-              style={ style.textBox }
-            />
-            <Text style={ style.text }>
-              INGRESA TU CUIT
-            </Text>
-            <TextInput style={ style.textRegister }
-              onChangeText={this.setCuit}
-              style={ style.textBox }
-            />
-            <Button
-              title="LISTO"
-              onPress={ this.handleConfigFiscal }
-              buttonStyle={ style.submit }
-              titleStyle={ style.submitText }
-              disabledTitleStyle={ style.submitText }
-              disabledStyle={ style.submitDisabled }
-            />
-          </View>
+        <View style={ style.textBoxBtnHolder }>
+          <Text style={ style.textRegular18GrayDark }>
+            NOMBRE DE LA EMPRESA
+          </Text>
+          <TextInput style={ style.textRegular14DarkGray }
+            onChangeText={this.setName}
+            style={ style.textBox }
+          />
+          <Text style={ style.textRegular18GrayDark }>
+            INGRESA TU CUIT
+          </Text>
+          <TextInput style={ style.textRegular14DarkGray }
+            onChangeText={this.setCuit}
+            style={ style.textBox }
+          />
+          <Text style={[style.textDescription, {paddingVertical: 15}] }>
+            Con el CUIT podremos acceder a tu informacion y 
+            configurar la cuenta por ti.
+          </Text>
         </View>
+        <Button
+          title="LISTO"
+          onPress={ this.handleConfigFiscal }
+          buttonStyle={ style.submitReady }
+          titleStyle={ style.textRegular14White }
+          disabledTitleStyle={ style.textRegular14White}
+          disabledStyle={ style.submitDisabled }
+        />
       </View>
+      </KeyboardAwareScrollView>
     )
   }
 }

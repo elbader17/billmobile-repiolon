@@ -13,8 +13,8 @@ class Intro extends Component {
     return ( 
       <Swiper
         showsButtons
-        loop={false} 
-        dotColor={COLORS.gray} 
+        loop={false}
+        dotColor={COLORS.gray}
         style={style.wrapper} 
         activeDotColor={COLORS.white} 
         prevButton = {<Text style={style.prev}></Text>} 
