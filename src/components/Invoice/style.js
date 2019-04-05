@@ -6,13 +6,92 @@ import { METRICS } from '../../constants/metrics';
 const styles = StyleSheet.create({
   container: {
     width: METRICS.screenWidth,
-    height: METRICS.screenHeight,
-    flex:1
+    //height: METRICS.screenHeight,
+    flex:1,
+    backgroundColor: COLORS.grayLight,
   },
   container2: {
     alignItems: 'center',
     paddingHorizontal: 45,
     paddingTop: 15,
+  },
+  containerInvoice: {
+    margin: 10,
+    borderWidth: 1,
+    borderRadius: 4,
+    borderColor: COLORS.gray,
+    backgroundColor: COLORS.white,
+  },
+  containerConditionAndTotal: {
+    height: 75,
+  },
+  containerConditionSale: {
+    marginVertical: 5,
+  },
+  containerButtonEdite: {
+    margin: 10,
+  },
+  containerTotal: {
+    marginVertical: 5,
+  },
+  inLine: {
+    flexDirection: "row",
+  },
+  inLineSpace: {
+    flexDirection: "row",
+    justifyContent: 'space-between',
+  },
+  spacingText: {
+    marginLeft: 'auto',
+  },
+  textRegular11Gray: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size11,
+    color: COLORS.gray,
+    marginTop: 5,
+    marginBottom: 2.5,
+    marginLeft: 10,
+    marginRight: 10,
+  },
+  textRegular14Gray: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size14,
+    color: COLORS.gray,
+    marginTop: 5,
+    marginBottom: 2.5,
+    marginLeft: 10,
+    marginRight: 10,
+  },
+  textRegular11: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size11,
+    marginTop: 5,
+    marginBottom: 2.5,
+    marginLeft: 10,
+    marginRight: 10,
+  },
+  textRegular14: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size14,
+    marginTop: 5,
+    marginBottom: 2.5,
+    marginLeft: 10,
+    marginRight: 10,
+  },
+  textRegular18: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size18,
+    marginTop: 5,
+    marginBottom: 2.5,
+    marginLeft: 10,
+    marginRight: 10,
+  },
+  textRegular24: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size24,
+    marginBottom: 2.5,
+    marginLeft: 10,
+    marginRight: 10,
   },
   textBoxBtnHolder: {
     position: 'relative',
@@ -124,9 +203,44 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#EE6123',
   },
-  picker: {
-   
-  }
+  buttonRed: {
+    borderRadius: 0,
+    height: 45,
+    backgroundColor: COLORS.red,
+  },
+  buttonEdite: {
+    borderRadius: 4,
+    borderWidth: 1,
+    borderColor: COLORS.blue,
+    height: 40,
+    backgroundColor: COLORS.white,
+    width: 150,
+  },
+  textButtonEdite:{
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size14,
+    color: COLORS.blue,
+  },
+  lineGray: {
+    backgroundColor: COLORS.gray,
+    height: 1.2,
+    marginTop: 2.5,
+    marginBottom: 2.5,
+  },
+  lineGrayLight: {
+    backgroundColor: COLORS.grayLight,
+    height: 1.2,
+    marginTop: 2.5,
+    marginBottom: 2.5,
+    marginLeft: 10,
+    marginRight: 10,
+  },
+  lineHorizontalGrayLight: {
+    borderColor: COLORS.grayLight,
+    borderRightWidth: 1.2,
+    borderRadius: 1,
+    marginVertical: 1,
+  },
 });
 
 export default styles;

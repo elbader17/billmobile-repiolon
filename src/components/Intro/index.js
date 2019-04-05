@@ -10,16 +10,16 @@ import {COLORS} from '../../constants/colors';
 
 class Intro extends Component {
   render() {
-    return (
+    return ( 
       <Swiper
         showsButtons
-        loop={false} 
-        dotColor={COLORS.gray} 
+        loop={false}
+        dotColor={COLORS.gray}
         style={style.wrapper} 
         activeDotColor={COLORS.white} 
-        buttonWrapperStyle = {style.positionButtonNext}
         prevButton = {<Text style={style.prev}></Text>} 
-        nextButton = {<Text style={style.styleButton}>Siguiente</Text>} 
+        nextButton = {<Text style={style.styleButtonNext}>Siguiente</Text>} 
+        buttonWrapperStyle = {style.positionButtonNext}
       >
         <Screen1 />
         <Screen2 /> 

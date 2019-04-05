@@ -3,7 +3,7 @@ import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 import { Button } from "react-native-elements";
 import { Alert } from 'react-native';
 import { withNavigation } from 'react-navigation';
-import style from './style';
+import style from '../SignUp/style';
 
 const EMAIL_REGEXP = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
 const PASSWORD_REGEXP = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})"); 
@@ -48,8 +48,8 @@ class SignIn extends React.Component {
     const hide = require('../../../images/hide.png')
     const show = require('../../../images/show.png')
     return(
-      <View style={ style.container }>
-        <View style={ style.container2 }>
+      <View>
+        <View style={ style.container }>
           <View style={ style.textBoxBtnHolder }>
             <TextInput
               label="Email"
@@ -80,30 +80,33 @@ class SignIn extends React.Component {
             </TouchableOpacity>
           </View>
 
-          <Text style={ style.textRegister }>
-            ¿No tienes una cuenta? 
-            <Text style={ style.red }> Registrate</Text>
-          </Text>
+          <TouchableOpacity>
+            <Text style={[style.textRegular11GrayDark, {paddingVertical: 15}] }>
+              ¿No tienes una cuenta? 
+              <Text style={ style.textRed }> Registrate</Text>
+            </Text>
+          </TouchableOpacity>
 
           <Button
             title='ENTRAR'
             testID={'submitSignIn'}
             onPress={ this.handleSignIn }
             buttonStyle={ style.submit }
-            titleStyle={ style.submitText }
-            disabled={ !this.validateData() }
-            disabledTitleStyle={ style.submitText }
+            titleStyle={ style.textRegular14White }
+            disabledTitleStyle={ style.textRegular14White }
             disabledStyle={ style.submitDisabled }
+            disabled={ !this.validateData() }
           />
+        </View>
 
-          <Text style={style.textFooterA}>
+        <View style={style.containerFooter}>
+          <Text style={style.textRegular11GrayDark}>
             Al registrarte estas aceptando nuestros
           </Text>
-          <Text style={style.textFooterB}>
+          <Text style={style.textRegular11GrayDarkBold}>
             Términos y Condiciones y Políticas de Privacidad
           </Text>
-          
-        </View>
+        </View>  
       </View>
     )
   }

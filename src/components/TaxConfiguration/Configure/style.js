@@ -5,13 +5,9 @@ import { METRICS } from '../../../constants/metrics';
 
 const styles = StyleSheet.create({
   container: {
-    width: METRICS.screenWidth,
-    height: METRICS.screenHeight,
-  },
-  container2: {
     alignItems: 'center',
-    paddingHorizontal: 45,
-    paddingTop: 15,
+    marginVertical: 10,
+    marginHorizontal: 40,
   },
   textBoxBtnHolder: {
     position: 'relative',
@@ -44,45 +40,42 @@ const styles = StyleSheet.create({
     width: '100%',
     opacity: 0.4,
   },
-  submit: {
+  submitReady: {
     backgroundColor: COLORS.red,
-    width: 266,
+    width: 166,
     height: 40,
     borderRadius: 2,
-    marginTop: 20
   },
   submitDisabled: {
-    backgroundColor: COLORS.redLight,
+    backgroundColor: COLORS.gray,
     width: 266,
     height: 40,
     borderRadius: 2,
   },
-  submitText: {
+  textRegular14White: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size14,
-    color: COLORS.white,
+    color: COLORS.white
   },
-  textRegister: {
+  textRegular14DarkGray: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size14,
     color: COLORS.grayDark,
     paddingVertical: 15,
     textAlign: 'center',
   },
-  red: {
-    color: COLORS.red,
-  },
-  textFooterA: {
+  textDescription: {
     fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size11,
+    fontSize: FONTS.size14,
     color: COLORS.grayDark,
-    marginTop: 110,
   },
-  textFooterB: {
+  textRegular18GrayDark: {
     fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size11,
+    fontSize: FONTS.size18,
     color: COLORS.grayDark,
-    fontWeight: 'bold',
+    textAlign: 'center',
+    lineHeight: 26,
+    padding: 15
   },
   headerText: {
     fontFamily: FONTS.latoRegular,
@@ -90,13 +83,6 @@ const styles = StyleSheet.create({
     fontWeight: 'normal',
     color: COLORS.blue,
   },
-  text: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size18,
-    textAlign: 'center',
-    lineHeight: 26,
-    padding: 15
-  }
 });
 
 export default styles;

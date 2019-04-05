@@ -8,7 +8,8 @@ import NewCostumer from './Costumer';
 import Item from './Item';
 import NewItem from './Item/NewItem';
 import Invoice from './Invoice';
-import ListEditableItem from './Item/ListEditableItem'
+import ListEditableItem from './Item/ListEditableItem';
+import InvoiceSummary from './Invoice/Summary/Component';
 
 const AppStack = createStackNavigator(
   {
@@ -32,11 +33,18 @@ const AppLogin = createStackNavigator(
   },
 );
 
+const Prueba = createStackNavigator(
+  {
+    InvoiceSummary
+  },
+);
+
 const AppNavigator = createAppContainer(createSwitchNavigator(
   {
     Loading,
     Login: AppLogin,
     App: AppStack,
+    Prueba,
   },
   {
     initialRouteName: 'Login',
