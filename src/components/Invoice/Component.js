@@ -68,7 +68,7 @@ class Invoice extends React.Component {
       return (
         <View>
           <Text>Listado de Clientes</Text>
-          <Text>{ this.props.name }</Text>
+          <Text>{ this.props.identitiFiscal.name }</Text>
           <Text>Listado de Productos</Text>
           <Text>{ this.props.items.map((i) => i.name+" price "+ i.price).join(', ') }</Text>
           <Button
