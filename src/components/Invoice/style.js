@@ -5,15 +5,30 @@ import { METRICS } from '../../constants/metrics';
 
 const styles = StyleSheet.create({
   container: {
-    width: METRICS.screenWidth,
-    //height: METRICS.screenHeight,
-    flex:1,
-    backgroundColor: COLORS.grayLight,
-  },
-  container2: {
+    height: METRICS.screenHeight,
+    backgroundColor: COLORS.blue,
     alignItems: 'center',
-    paddingHorizontal: 45,
+    paddingHorizontal: 25,
     paddingTop: 15,
+  },
+  containerDateInvoice: {
+    flexDirection: "row",
+  },
+  containerCustomers: {
+    backgroundColor: 'white',
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: COLORS.gray,
+    marginVertical: 20
+  },
+  listCustomer: {
+    padding: 10,
+  },
+  lineGray: {
+    backgroundColor: COLORS.gray,
+    height: 1.2,
+    marginTop: 0,
+    marginBottom: 0,
   },
   containerInvoice: {
     margin: 10,
@@ -22,17 +37,26 @@ const styles = StyleSheet.create({
     borderColor: COLORS.gray,
     backgroundColor: COLORS.white,
   },
-  containerConditionAndTotal: {
-    height: 75,
+  buttons: {
+    width: '95%',
+    borderRadius: 4,
+    borderColor: COLORS.white,
   },
-  containerConditionSale: {
-    marginVertical: 5,
+  borderButton: {
+    borderRadius: 4, 
+    borderWidth: 0, 
+    borderColor: COLORS.blue, 
+    width: 122,
   },
-  containerButtonEdite: {
-    margin: 10,
+  backgroundColorButton : {
+    backgroundColor: COLORS.white,
   },
-  containerTotal: {
-    marginVertical: 5,
+  buttonOn: {
+    borderWidth: 1,
+    borderRadius: 4,
+    borderColor: COLORS.gray,
+    padding: 5,
+    color: COLORS.gray,
   },
   inLine: {
     flexDirection: "row",
@@ -53,42 +77,16 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
   },
+  textRegular14White: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size14,
+    color: COLORS.white,
+  },
   textRegular14Gray: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size14,
     color: COLORS.gray,
     marginTop: 5,
-    marginBottom: 2.5,
-    marginLeft: 10,
-    marginRight: 10,
-  },
-  textRegular11: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size11,
-    marginTop: 5,
-    marginBottom: 2.5,
-    marginLeft: 10,
-    marginRight: 10,
-  },
-  textRegular14: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size14,
-    marginTop: 5,
-    marginBottom: 2.5,
-    marginLeft: 10,
-    marginRight: 10,
-  },
-  textRegular18: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size18,
-    marginTop: 5,
-    marginBottom: 2.5,
-    marginLeft: 10,
-    marginRight: 10,
-  },
-  textRegular24: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size24,
     marginBottom: 2.5,
     marginLeft: 10,
     marginRight: 10,
@@ -103,13 +101,23 @@ const styles = StyleSheet.create({
     borderBottomColor: COLORS.white,
     borderBottomWidth: 1,
   },
+  styleDate: {
+    borderRadius: 1,
+    borderBottomColor: COLORS.white,
+    borderBottomWidth: 1,
+    marginTop: 1,
+    width: 100,
+    alignItems: 'center',
+    paddingVertical: 15,
+    marginLeft: 10
+  },
   textBoxBtnHolderAux: {
-    position: 'relative',
-    alignSelf: 'stretch',
-    justifyContent: 'center',
+    width: '65%',
+    alignSelf: 'center',
     marginTop: 0,
     borderBottomColor: COLORS.white,
-    borderBottomWidth: 2,
+    borderBottomWidth: 1,
+    borderRadius: 1,
     color: COLORS.white,
   },
   picker: {
@@ -128,57 +136,70 @@ const styles = StyleSheet.create({
     borderColor: COLORS.gray,
     borderRadius: 2,
   },
-  visibilityBtn: {
-    position: 'absolute',
-    right: 3,
-    height: 40,
-    width: 35,
-    padding: 5,
-  },
-  btnImage: {
-    resizeMode: 'contain',
-    height: '100%',
-    width: '100%',
-    opacity: 0.4,
-  },
-  submit: {
+  buttonContinue: {
     backgroundColor: COLORS.red,
-    width: 266,
+    width: 320,
+    height: 40,
+    borderRadius: 2,
+    marginVertical: 20,
+  },
+  textButtonContinue: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size14,
+  },
+  addCustomer: {
+    backgroundColor: COLORS.white,
+    borderWidth: 1,
+    borderColor: COLORS.red,
+    opacity: 0.7,
+    width: '100%',
     height: 40,
     borderRadius: 2,
   },
-  submitDisabled: {
-    backgroundColor: COLORS.redLight,
-    width: 266,
+  addItems: {
+    backgroundColor: COLORS.white,
+    width: 320,
     height: 40,
-    borderRadius: 2,
+    borderWidth: 1,
+    borderColor: COLORS.gray
   },
-  submitText: {
+  buttonConfirm: {
+    backgroundColor: COLORS.white,
+    width: 50,
+    height: 28,
+    borderWidth: 1,
+    borderColor: COLORS.red,
+    margin: 7,
+  },
+  submitTextCustomer: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size14,
-    color: COLORS.white,
-  },
-  textRegister: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size14,
-    color: COLORS.grayDark,
-    paddingVertical: 15,
-    textAlign: 'center',
-  },
-  red: {
     color: COLORS.red,
   },
-  textFooterA: {
+  submitTextItems: {
     fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size11,
+    fontSize: FONTS.size14,
     color: COLORS.grayDark,
-    marginTop: 110,
+    opacity: 0.7,
   },
-  textFooterB: {
+  submitDisabled: {
+    backgroundColor: COLORS.gray,
+    width: 320,
+    height: 40,
+    borderRadius: 2,
+  },
+  textRegular14White: {
     fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size11,
+    fontSize: FONTS.size14,
+    color: COLORS.white
+  },
+  textInputDNI: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size18,
+    width: '100%',
+    height: 40,
     color: COLORS.grayDark,
-    fontWeight: 'bold',
+    marginHorizontal: 10
   },
   actionButtonIcon: {
     fontSize: 20,
@@ -190,13 +211,6 @@ const styles = StyleSheet.create({
     fontSize: FONTS.size16,
     fontWeight: 'normal',
     color: COLORS.blue,
-  },
-  text: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size18,
-    textAlign: 'center',
-    lineHeight: 26,
-    padding: 15
   },
   buttonAddClient: {
     backgroundColor: COLORS.white,
