@@ -3,7 +3,7 @@ import { View, Text, Alert, TextInput } from 'react-native';
 import { Button} from "react-native-elements";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { withNavigation } from 'react-navigation';
-import style from '../style';
+import style from './style';
 
 class InvoiceSummary extends React.Component {
 
@@ -45,14 +45,8 @@ class InvoiceSummary extends React.Component {
             <Text style={[style.textRegular14Gray, style.spacingText]}>${"0"}</Text>
             <Text style={[style.textRegular14, style.spacingText]}>${"0"}</Text>
           </View>
-          <View style={style.lineGrayLight}></View>
-          <View style={style.inLine}>
-            <Text style={style.textRegular14}>Producto A</Text>
-            <Text style={[style.textRegular14, style.spacingText]}>X{"1"}</Text>
-            <Text style={[style.textRegular14Gray, style.spacingText]}>${"0"}</Text>
-            <Text style={[style.textRegular14, style.spacingText]}>${"0"}</Text>
-          </View>
-          <View style={[style.lineGray,{marginTop: 15}]}></View>
+          
+          <View style={style.lineGray}></View>
           <View style={[style.containerConditionAndTotal, style.inLineSpace]}>
             <View style={style.containerConditionSale}>
               <Text style={style.textRegular14Gray}>CONDICIÓN DE VENTA</Text>
@@ -61,14 +55,14 @@ class InvoiceSummary extends React.Component {
             </View>
             <View style={style.containerTotal}>
               <View style={style.inLine}>
-                <Text style={style.textRegular14Gray}>SUBTOTAL</Text>
+                <Text style={style.textRegular14Gray}>SUBTOTAL </Text>
                 <View style={style.lineHorizontalGrayLight}></View>
-                <Text style={style.textRegular14}>${"0"}</Text>
+                <Text style={style.textRegular14}> ${"0"}</Text>
               </View>
               <View style={[style.inLine,{marginTop: 7}]}>
-                <Text style={style.textRegular14Gray}>IMPUESTO</Text>
+                <Text style={style.textRegular14Gray}>IMPUESTO </Text>
                 <View style={style.lineHorizontalGrayLight}></View>
-                <Text style={style.textRegular14}>${"0"}</Text>
+                <Text style={style.textRegular14}> ${"0"}</Text>
               </View>  
             </View>
           </View>
@@ -79,15 +73,14 @@ class InvoiceSummary extends React.Component {
             buttonStyle={ style.buttonEdite }
             titleStyle={ style.textButtonEdite }
           />
-          <Text style={style.textRegular18}>TOTAL</Text>
-          <Text style={style.textRegular18}>${"0"}</Text>
+          <Text style={style.textRegular14GrayDark}>TOTAL</Text>
+          <Text style={style.textRegular14GrayDark}>${"12335"}</Text>
         </View>
-
         </View>
         <Button
           title='CONFIRMAR FACTURA'
           buttonStyle={ style.buttonRed }
-          titleStyle={ style.submitTextContinue }
+          titleStyle={ style.textRegular14White }
         />
       </View>
       </KeyboardAwareScrollView>

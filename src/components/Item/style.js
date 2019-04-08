@@ -5,12 +5,11 @@ import { METRICS } from '../../constants/metrics';
 
 const styles = StyleSheet.create({
   container: {
-    width: METRICS.screenWidth,
     height: METRICS.screenHeight,
+    alignItems: 'center'
   },
-  containerView: {
-    paddingHorizontal: 25,
-    paddingTop: 15,
+  containerItems: {
+    marginBottom: 15
   },
   textRegular14: {
     fontFamily: FONTS.latoRegular,
@@ -50,27 +49,8 @@ const styles = StyleSheet.create({
     paddingRight: 45,
     paddingLeft: 8,
   },
-  visibilityBtn: {
-    position: 'absolute',
-    right: 3,
-    height: 40,
-    width: 35,
-    padding: 5,
-  },
-  btnImage: {
-    resizeMode: 'contain',
-    height: '100%',
-    width: '100%',
-    opacity: 0.4,
-  },
   submit: {
     backgroundColor: COLORS.red,
-    width: 266,
-    height: 40,
-    borderRadius: 2,
-  },
-  submitDisabled: {
-    backgroundColor: COLORS.redLight,
     width: 266,
     height: 40,
     borderRadius: 2,
@@ -84,11 +64,6 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size18,
     color: COLORS.grayDark,
-  },
-  submitTextContinue: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size16,
-    color: COLORS.white,
   },
   textTotal: {
     fontFamily: FONTS.latoRegular,
@@ -119,9 +94,6 @@ const styles = StyleSheet.create({
   inLine: {
     flexDirection: "row",
   },
-  red: {
-    color: COLORS.red,
-  },
   lineGrayDark: {
     backgroundColor: COLORS.grayDark,
     height: 1.2,
@@ -132,7 +104,12 @@ const styles = StyleSheet.create({
   lineGray: {
     backgroundColor: COLORS.gray,
     height: 2,
-    marginTop: 20,  
+    marginVertical: 10,  
+  },
+  lineGrayLight: {
+    backgroundColor: COLORS.grayLight,
+    height: 2,
+    marginVertical: 5,  
   },
   headerText: {
     fontFamily: FONTS.latoRegular,
@@ -167,7 +144,8 @@ const styles = StyleSheet.create({
   },
   total: {
     backgroundColor: COLORS.blue,
-    height: 140
+    height: 140,
+    width: '100%'
   },
   buttonNewItem: {
     borderRadius: 0,
@@ -185,6 +163,7 @@ const styles = StyleSheet.create({
   },
   buttonRed: {
     borderRadius: 0,
+    width: 285,
     height: 45,
     backgroundColor: COLORS.red,
   },

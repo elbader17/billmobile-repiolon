@@ -60,7 +60,7 @@ class NewCostumer extends React.Component {
     registerFiscalIdentity(name, cuit)
     .then((data) => {
       Alert.alert("Cliente Cargado: "+this.props.name+" "+this.props.cuit);
-      this.props.navigation.navigate('HomeScreen');
+      this.props.navigation.navigate('Invoice');
     })
     .catch(err => Alert.alert("Error al Ingresar: ",err.message));
   }
@@ -79,9 +79,8 @@ class NewCostumer extends React.Component {
   render() {
     return(
       <KeyboardAwareScrollView>
-      <View style={style.container}>
-        <View style={style.container2}>
-          <Text style={style.textRegister}>CONDICIÓN FRENTE AL IVA</Text>
+        <View style={style.container}>
+          <Text style={style.textRegular14White}>CONDICIÓN FRENTE AL IVA</Text>
           <View style={ style.textBoxBtnHolder }>
             <Picker
               selectedValue={this.state.conditionIva}
@@ -92,7 +91,7 @@ class NewCostumer extends React.Component {
             ))}
             </Picker>
           </View>
-          <Text style={style.textRegister}>TIPO DE DOCUMENTO</Text>
+          <Text style={style.textRegular14White}>TIPO DE DOCUMENTO</Text>
           <View style={ style.textBoxBtnHolder }>
             <TextInput
               onChangeText={this.setCuitDni}
@@ -100,16 +99,16 @@ class NewCostumer extends React.Component {
               style={ style.textBox }
             />
           </View>
-          <Text style={ style.textDescription }>La información fiscal de los clientes se cargarn automaticamente poniendo su N° de CUIT</Text>
+          <Text style={ style.textRegular11White }>La información fiscal de los clientes se cargarn automaticamente poniendo su N° de CUIT</Text>
           <View style={style.lineWhite}></View>
-          <Text style={style.textRegister} >NOMBRE DE FANTASÍA (OPCIONAL)</Text>
+          <Text style={style.textRegular14White} >NOMBRE DE FANTASÍA (OPCIONAL)</Text>
           <View style={ style.textBoxBtnHolder }>
             <TextInput
               style={ style.textBox }
               onChangeText={this.setName}
             />
           </View>
-          <Text style={style.textRegister}>CONDICIÓN DE VENTA</Text>
+          <Text style={style.textRegular14White}>CONDICIÓN DE VENTA</Text>
           <View style={ style.textBoxBtnHolder }>
             <Picker
               selectedValue={this.state.conditionSale}
@@ -120,14 +119,15 @@ class NewCostumer extends React.Component {
             ))}
             </Picker>
           </View>
-          <Text style={ style.textDescription }> Esta condición será la que aparecerá para el cliente per luego pordrás cambiarla en la facturación</Text>
+          <Text style={ style.textRegular11White }> Esta condición será la que aparecerá para el cliente per luego pordrás cambiarla en la facturación</Text>
           <View style={style.lineWhite}></View>
-        </View>
         <Button
           title='GUARDAR'
           onPress={ this.newCostumer }
           buttonStyle={ style.submit }
-          titleStyle={ style.submitText }
+          titleStyle={ style.textRegular14White }
+          disabledTitleStyle={ style.textRegular14White}
+          disabledStyle={ style.submitDisabled }
         />
       </View>
       </KeyboardAwareScrollView>

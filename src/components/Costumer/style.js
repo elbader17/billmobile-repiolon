@@ -5,13 +5,10 @@ import { METRICS } from '../../constants/metrics';
 
 const styles = StyleSheet.create({
   container: {
-    width: METRICS.screenWidth,
     height: METRICS.screenHeight,
-    backgroundColor: COLORS.blue
-  },
-  container2: {
+    backgroundColor: COLORS.blue,
     alignItems: 'center',
-    paddingHorizontal: 45,
+    paddingHorizontal: 30,
     paddingTop: 15,
   },
   textBoxBtnHolder: {
@@ -38,44 +35,32 @@ const styles = StyleSheet.create({
     borderColor: COLORS.gray,
     borderRadius: 2,
   },
-  visibilityBtn: {
-    position: 'absolute',
-    right: 3,
-    height: 40,
-    width: 35,
-    padding: 5,
-  },
-  btnImage: {
-    resizeMode: 'contain',
-    height: '100%',
-    width: '100%',
-    opacity: 0.4,
-  },
   submit: {
     backgroundColor: COLORS.red,
     height: 40,
     borderRadius: 2,
-    bottom: -29
+    width: 285,
   },
   submitDisabled: {
-    backgroundColor: COLORS.redLight,
-    width: 266,
+    backgroundColor: COLORS.gray,
+    width: 285,
     height: 40,
     borderRadius: 2,
   },
   submitText: {
+    textAlign: 'center',
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size14,
     color: COLORS.white,
   },
-  textRegister: {
+  textRegular14White: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size14,
     color: COLORS.white,
     paddingVertical: 10,
     textAlign: 'center',
   },
-  textDescription: {
+  textRegular11White: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size11,
     color: COLORS.white,
@@ -110,7 +95,7 @@ const styles = StyleSheet.create({
   lineWhite: {
     backgroundColor: COLORS.white,
     height: 1,
-    width: 280,
+    width: '100%',
     marginTop: 20,
     marginBottom: 10,
   },
