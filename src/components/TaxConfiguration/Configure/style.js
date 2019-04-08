@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   },
   submitReady: {
     backgroundColor: COLORS.red,
-    width: 166,
+    width: 285,
     height: 40,
     borderRadius: 2,
   },

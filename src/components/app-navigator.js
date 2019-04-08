@@ -20,6 +20,7 @@ const AppStack = createStackNavigator(
     NewItems: NewItem,
     Invoice,
     ListEditableItem,
+    InvoiceSummary,
   },
 );
 
@@ -35,7 +36,7 @@ const AppLogin = createStackNavigator(
 
 const Prueba = createStackNavigator(
   {
-    InvoiceSummary
+    ListEditableItem,
   },
 );
 
@@ -47,7 +48,7 @@ const AppNavigator = createAppContainer(createSwitchNavigator(
     Prueba,
   },
   {
-    initialRouteName: 'Login',
+    initialRouteName: 'App',
   },
 ));
 

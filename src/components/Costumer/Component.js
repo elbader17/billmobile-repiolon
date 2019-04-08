@@ -60,7 +60,7 @@ class NewCostumer extends React.Component {
     registerFiscalIdentity(name, cuit)
     .then((data) => {
       Alert.alert("Cliente Cargado: "+this.props.name+" "+this.props.cuit);
-      this.props.navigation.navigate('HomeScreen');
+      this.props.navigation.navigate('Invoice');
     })
     .catch(err => Alert.alert("Error al Ingresar: ",err.message));
   }

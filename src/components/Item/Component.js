@@ -38,15 +38,24 @@ class Item extends React.Component {
     if (this.state.selectedIndex === 0) {
       return (
         <View>
-          <Text>
-          { this.props.items.map((i) => i.name + "      "  + "$" + i.price + "\n")}
-          </Text>
+          {
+            this.props.items.map((i) => (
+              <View style={{flexDirection: 'row',justifyContent:'space-between'}}>
+                <View>
+                  <Text>{i.name}</Text>
+                </View>
+                <View>
+                  <Text>${i.price}</Text>
+                </View>
+              </View>
+            ))
+          }
         </View>
       );
     }else {
       return (
         <View>  
-          <Text>Lista de Servicios</Text>
+          <Text>Servicios</Text>
         </View>
       );
     }
@@ -69,7 +78,7 @@ class Item extends React.Component {
             <Text style={ style.textTotalPrice }>{ this.props.items.map((i) => parseFloat(i.price, 10)).reduce((partial_sum, a) => { return partial_sum + a }, 0) }</Text>
           </View>
         </View>
-        <View style={style.container2}>
+        <View>
           <ButtonGroup
             onPress={ this.updateIndex }
             selectedIndex={ this.state.selectedIndex }
@@ -79,8 +88,9 @@ class Item extends React.Component {
             innerBorderStyle={{color: 'white'}}
             selectedButtonStyle={style.backgroundColorButton}
           />
-          { this.renderItems() }
-          <Text style={ style.textRegister }> </Text>
+          <View style={style.containerItems}>
+            { this.renderItems() }
+          </View>
         </View>
           <View style={style.inLine}>
             <Button

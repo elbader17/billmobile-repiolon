@@ -3166,6 +3166,11 @@ expect@^24.7.1:
     jest-message-util "^24.7.1"
     jest-regex-util "^24.3.0"
 
+expo-linear-gradient@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/expo-linear-gradient/-/expo-linear-gradient-4.0.0.tgz#a6ae6c6a0bc8ae4a14318ad1c1c9fb7696523322"
+  integrity sha512-QiBnoB0UhsIdn2vcLVIauQKOKO2vx9Sgz0DPLV2qLeD491RzF31szYGnoFiflHFyktgnvAqkeu49Sn0uym574g==
+
 extend-shallow@^1.1.2:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/extend-shallow/-/extend-shallow-1.1.4.tgz#19d6bf94dfc09d76ba711f39b872d21ff4dd9071"
