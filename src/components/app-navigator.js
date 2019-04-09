@@ -10,6 +10,7 @@ import NewItem from './Item/NewItem';
 import Invoice from './Invoice';
 import ListEditableItem from './Item/ListEditableItem';
 import InvoiceSummary from './Invoice/Summary/Component';
+import VerticalStackLayout from './Invoice/Summary/prueba';
 
 const AppStack = createStackNavigator(
   {
@@ -36,7 +37,8 @@ const AppLogin = createStackNavigator(
 
 const Prueba = createStackNavigator(
   {
-    ListEditableItem,
+    Invoice,
+    //VerticalStackLayout,
   },
 );
 
@@ -48,7 +50,7 @@ const AppNavigator = createAppContainer(createSwitchNavigator(
     Prueba,
   },
   {
-    initialRouteName: 'App',
+    initialRouteName: 'Prueba',
   },
 ));
 
