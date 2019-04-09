@@ -9,7 +9,7 @@ import Item from './Item';
 import NewItem from './Item/NewItem';
 import Invoice from './Invoice';
 import ListEditableItem from './Item/ListEditableItem';
-import InvoiceSummary from './Invoice/Summary/Component';
+import InvoiceSummary from './Invoice/Summary';
 
 const AppStack = createStackNavigator(
   {
@@ -48,7 +48,7 @@ const AppNavigator = createAppContainer(createSwitchNavigator(
     Prueba,
   },
   {
-    initialRouteName: 'App',
+    initialRouteName: 'Login',
   },
 ));
 

@@ -55,7 +55,9 @@ const confirmCode = (email, confirmationCode) => {
         dispatch(hideConfirmationModal());
         return dispatch(signIn(password, email));
       })
-      .catch(err => Alert.alert('Error al Confirmar: ', err.message));
+      .catch((err) => {
+        Alert.alert('Error al Confirmar: ', err.message);
+      });
   };
 };
 

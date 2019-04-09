@@ -13,7 +13,9 @@ axios.setHeader = { "JWT-TOKEN" : store.getState.authetication.jwtToken };
 
 
 class App extends React.Component {
+  
   render() {
+    console.disableYellowBox = true;
     return (
       <Provider store={store}>
         <AppNavigator />

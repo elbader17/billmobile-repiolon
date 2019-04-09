@@ -25,7 +25,7 @@ const updateFiscalIdentity = function (name, cuit) {
     const instance = axios.create({
       headers: { 'JWT-TOKEN': getState().authentication.jwtToken },
     });
-    return instance.put('/v1/my/fiscal_identity', { resource })
+    return instance.put('192.168.1.21:8888/v1/my/fiscal_identity', { resource })
       .then(() => {
         dispatch(setParams(name, cuit));
       })
@@ -40,7 +40,7 @@ const getFiscalIdentity = function () {
     const instance = axios.create({
       headers: { 'JWT-TOKEN': getState().authentication.jwtToken },
     });
-    return instance.get('/v1/my/fiscal_identity')
+    return instance.get('192.168.1.21:8888/v1/my/fiscal_identity')
       .then((response) => {
         dispatch(setParams(response.data.name, response.data.cuit));
         return response.data;

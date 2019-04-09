@@ -34,18 +34,19 @@ class Invoice extends React.Component {
       typeVoucher: '',
       selectedIndex: 0,
       isDateTimePickerVisible: false,
-      date: '',
+      isDateTimeVisible:false,
+      bool:false,
+      date: new Date().getDate()+'/'+ new Date().getMonth()+'/'+ new Date().getFullYear(),
     }
   }
 
-  _showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true });
+  showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true});
  
-  _hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
- 
-  _handleDatePicked = (date) => {
-    alert(date.getDate()+'/'+ date.getMonth()+'/2019');
-    this.setState({date: date})
-    this._hideDateTimePicker();
+  hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
+
+  handleDatePicked = (date) => {
+    this.setState({ date: date.getDate()+'/'+ date.getMonth()+date.getFullYear() })
+    this.hideDateTimePicker();
   };
 
   static navigationOptions = {
@@ -76,6 +77,9 @@ class Invoice extends React.Component {
     const { items} = this.props.items;
     createInvoice()
   }
+  createCustomer = () => {
+    
+  }
 
   renderCustomer = () => {
     if (this.state.selectedIndex === 0) {
@@ -83,8 +87,6 @@ class Invoice extends React.Component {
         <View style={style.listCustomer}>
           <Text>Listado de Clientes</Text>
           <Text>{ this.props.identitiFiscal.name }</Text>
-          <Text>Listado de Productos</Text>
-          <Text>{ this.props.items.map((i) => i.name+" price "+ i.price).join(', ') }</Text>
           <Button
             title=' AGREGAR CLIENTE'
             icon={
@@ -105,8 +107,11 @@ class Invoice extends React.Component {
       return (
         <View style={style.inLineSpace}>
           <View style={style.textBoxBtnHolder}>
+          <Text>Listado de Clientes</Text>
+          <Text>{ this.props.identitiFiscal.name }</Text>
             <TextInput 
               placeholder="DNI"
+              onChangeText={this.setDni}
               style={ style.textInputDNI }
             />
           </View> 
@@ -118,6 +123,7 @@ class Invoice extends React.Component {
                 color="#EE6123"
               />
             }
+            onPress={ this.createCustomer }
             buttonStyle={ style.buttonConfirm }
           />            
         </View>
@@ -144,13 +150,13 @@ class Invoice extends React.Component {
           </Picker>
         </View>
         <View >
-          <TouchableOpacity onPress={this._showDateTimePicker} style={style.styleDate}>
-            <Text style={style.textRegular14White}>FECHA</Text>
+          <TouchableOpacity onPress={this.showDateTimePicker} style={style.styleDate}>
+            <Text style={style.textRegular14White}>{ this.state.date }</Text>
           </TouchableOpacity>
           <DateTimePicker
             isVisible={this.state.isDateTimePickerVisible}
-            onConfirm={this._handleDatePicked}
-            onCancel={this._hideDateTimePicker}
+            onConfirm={this.handleDatePicked}
+            onCancel={this.hideDateTimePicker}
           />
         </View>
       </View>
@@ -169,6 +175,19 @@ class Invoice extends React.Component {
           <View style={[style.lineGray, {marginHorizontal: 3}]}></View>
           { this.renderCustomer() }
         </View>
+        <View style={style.containerCustomers}>
+        { this.props.items.map((i) => (
+              <View style={{flexDirection: 'row',justifyContent:'space-between'}}>
+                <View>
+                  <Text>{i.name}</Text>
+                </View>
+                <View>
+                  <Text>${i.price}</Text>
+                </View>
+              </View>
+            ))
+          }
+          </View>
         <Button
           title=' AGEGAR ITEMS'
           icon={
