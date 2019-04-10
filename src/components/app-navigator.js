@@ -37,7 +37,7 @@ const AppLogin = createStackNavigator(
 
 const Prueba = createStackNavigator(
   {
-    Invoice,
+    InvoiceSummary,
     //VerticalStackLayout,
   },
 );
