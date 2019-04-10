@@ -1,179 +1,171 @@
 import { StyleSheet } from 'react-native';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { METRICS } from '../../../constants/metrics';
 import { COLORS } from '../../../constants/colors';
 import { FONTS } from '../../../constants/fonts';
-import { METRICS } from '../../../constants/metrics';
 
 const styles = StyleSheet.create({
   container: {
-    height: METRICS.screenHeight,
+    height: hp('100%') - METRICS.heightHeader - METRICS.heightStatusBar,
     backgroundColor: COLORS.grayLight,
-    padding: 15
+    padding: 18,
   },
-  containerCustomers: {
-    backgroundColor: 'white',
-    borderRadius: 5,
+  containerInvoice: {
+    backgroundColor: COLORS.white,
     borderWidth: 1,
+    borderRadius: 4,
     borderColor: COLORS.gray,
-    marginVertical: 20
   },
-  listCustomer: {
-    padding: 10,
+  boxHeaderInvoice: {
+    paddingVertical: 7,
+    paddingHorizontal: 12
+  },
+  boxCustomer: {
+    paddingVertical: 7,
+    paddingHorizontal: 12
+  },
+  boxListItems: {
+    paddingVertical: 7,
+    paddingHorizontal: 12
+  },
+  boxTotal: {
+    paddingVertical: 10,
+    paddingHorizontal: 12
+  },
+  boxTotal1: {
+    flex: 2.5,
+  },
+  boxTotal2: {
+    alignItems: 'flex-end',
+    justifyContent: 'center',
+    flex: 1.7,
+  },
+  boxTotal3: {
+    flex: 2,
+  },
+  boxTotalFinal: {
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+    justifyContent: 'center'
+  },
+  boxPriceFinal: {
+    width: wp('50%')
   },
   lineGray: {
     backgroundColor: COLORS.gray,
     height: 1.2,
-    marginTop: 0,
-    marginBottom: 0,
   },
-  containerInvoice: {
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderWidth: 1,
-    borderRadius: 4,
-    borderColor: COLORS.gray,
-    backgroundColor: COLORS.white,
+  lineGrayLight: {
+    backgroundColor: COLORS.grayLight,
+    height: 1.2,
+    marginVertical: 5 //No recommended
   },
-  buttons: {
-    width: '95%',
-    borderRadius: 4,
-    borderColor: COLORS.white,
+  lineHorizontalGrayLight: {
+    borderColor: COLORS.grayLight,
+    borderRightWidth: 1.2,
   },
-  borderButton: {
-    borderRadius: 4, 
-    borderWidth: 0, 
-    borderColor: COLORS.blue, 
-    width: 122,
+  marginBottom5: {
+    marginBottom: 5,
   },
-  backgroundColorButton : {
-    backgroundColor: COLORS.white,
-  },
-  buttonOn: {
-    borderWidth: 1,
-    borderRadius: 4,
-    borderColor: COLORS.gray,
-    padding: 5,
-    color: COLORS.gray,
-  },
-  inLine: {
-    flexDirection: "row",
-  },
-  inLineSpace: {
-    flexDirection: "row",
-    justifyContent: 'space-between',
-  },
-  spacingText: {
-    marginLeft: 'auto',
+  marginLeft5: {
+    marginLeft: 5,
   },
   textRegular11Gray: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size11,
     color: COLORS.gray,
-    marginTop: 5,
-    marginBottom: 2.5,
-    marginLeft: 10,
-    marginRight: 10,
   },
-  textRegular14White: {
+  textRegular12Gray: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size12,
+    color: COLORS.gray,
+  },
+  textRegular14Gray: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size14,
-    color: COLORS.white,
+    color: COLORS.gray,
+  },
+  textRegular12GrayDark: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size12,
+    color: COLORS.grayDark,
   },
   textRegular14GrayDark: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size14,
     color: COLORS.grayDark,
   },
+  textRegular17GrayDark: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size17,
+    color: COLORS.grayDark,
+  },
+  textRegular14White: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size14,
+    color: COLORS.white,
+    fontWeight: 'bold',
+  },
+  textRegular14: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size14,
+  },
+  textRegular12: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size14,
+  },
+  textRegular18: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size18,
+  },
   textRegular18GrayDark: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size18,
     color: COLORS.grayDark,
   },
-  textBoxBtnHolder: {
-    position: 'relative',
-    alignSelf: 'stretch',
-    justifyContent: 'center',
-    marginTop: 0,
-    backgroundColor: COLORS.white,
-    borderRadius: 4,
-    borderBottomColor: COLORS.white,
-    borderBottomWidth: 1,
+  inLine: {
+    flexDirection: "row",
   },
-  picker: {
-    height: 45,
-    color: COLORS.white,
+  inLineSpaceBetween: {
+    flexDirection: "row",
+    justifyContent: 'space-between',
   },
-  textBox: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size18,
-    alignSelf: 'stretch',
-    height: 45,
-    paddingRight: 45,
-    paddingLeft: 8,
-    borderWidth: 1,
-    paddingVertical: 0,
-    borderColor: COLORS.gray,
-    borderRadius: 2,
+  inLineSpaceAround: {
+    flexDirection: "row",
+    justifyContent: 'space-around',
   },
-  buttonConfirm: {
-    backgroundColor: COLORS.white,
-    width: 50,
-    height: 28,
-    borderWidth: 1,
-    borderColor: COLORS.red,
-    margin: 7,
+  inColumnSpace: {
+    flexDirection: "column",
+    justifyContent: 'space-between',
   },
-  textRegular14White: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size14,
-    color: COLORS.white
-  },
-  actionButtonIcon: {
-    fontSize: 20,
-    height: 22,
-    color: 'white',
-  },
-  headerText: {
+  headerTextNav: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size16,
     fontWeight: 'normal',
     color: COLORS.blue,
   },
-  buttonRed: {
-    borderRadius: 4,
-    height: 45,
-    backgroundColor: COLORS.red,
-    marginTop: 10,
-  },
   buttonEdite: {
     borderRadius: 4,
     borderWidth: 1,
     borderColor: COLORS.blue,
-    height: 40,
+    height: hp('5%'),
     backgroundColor: COLORS.white,
-    width: 150,
+    width: wp('30%'),
   },
   textButtonEdite:{
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size14,
     color: COLORS.blue,
   },
-  lineGray: {
-    backgroundColor: COLORS.gray,
-    height: 1.2,
-    marginTop: 5,
-    marginBottom: 5,
+  buttonConfirm: {
+    height: wp('14%'),
+    backgroundColor: COLORS.red,
   },
-  lineGrayLight: {
-    backgroundColor: COLORS.grayLight,
-    height: 1.2,
-    marginTop: 5,
-    marginBottom: 5,
-  },
-  lineHorizontalGrayLight: {
-    borderColor: COLORS.grayLight,
-    borderRightWidth: 1.2,
-    borderRadius: 1,
-    marginVertical: 1,
+  positionFinalButton: {
+    position: 'absolute', 
+    bottom: 0, 
+    left:0, 
+    right:0
   },
 });
 
