@@ -6765,6 +6765,11 @@ react-native-ratings@^6.3.0:
     lodash "^4.17.4"
     prop-types "^15.5.10"
 
+react-native-responsive-screen@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/react-native-responsive-screen/-/react-native-responsive-screen-1.2.1.tgz#fa9b74a3bb76856bc2f3754af1ba267893e98595"
+  integrity sha512-QquX/XWt5kHCs9duKPuvIU49p3Dq/0rnztvDWxec8KnV7q1agnS9JN9BRb/xro1G2zJOoNZBmLjEuXFRknZtpg==
+
 react-native-safe-area-view@^0.13.0:
   version "0.13.1"
   resolved "https://registry.yarnpkg.com/react-native-safe-area-view/-/react-native-safe-area-view-0.13.1.tgz#834bbb6d22f76a7ff07de56725ee5667ba1386b0"

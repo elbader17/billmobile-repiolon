@@ -9,6 +9,11 @@ class InvoiceSummary extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      impuesto: '',
+      subTotal: '',
+      total: 0,
+    };
   }
 
   static navigationOptions = {
@@ -16,6 +21,12 @@ class InvoiceSummary extends React.Component {
     headerTitleStyle: style.headerTextNav,
     headerTintColor: '#3687D1',
   };
+
+  setTotal = () => {
+    this.total = this.subTotal + this.impuesto;
+  }
+
+  setImpuesto = (value) => this.setState({ impuesto: value})
 
   render() {
     return(
@@ -31,7 +42,7 @@ class InvoiceSummary extends React.Component {
           <View style={style.lineGray}></View>
 
           <View style={style.boxCustomer}>
-            <Text style={[style.textRegular14,style.marginBottom5]}>{'CLIENTE S.A'}</Text>
+            <Text style={[style.textRegular14GrayDark,style.marginBottom5]}>{ this.props.identitiFiscal.name }</Text>
             <Text style={style.textRegular11Gray}>CUIT: {'00-00000000-0'}</Text>
             <Text style={style.textRegular11Gray}>Localidad: {'Río Cuarto'}</Text>
             <Text style={style.textRegular11Gray}>Provincia: {'Córdoba'}</Text>
@@ -43,17 +54,19 @@ class InvoiceSummary extends React.Component {
 
           <View style={style.boxListItems}>
             <View style={style.inLineSpaceBetween}>
-              <Text style={style.textRegular14}>Producto A</Text>
-              <Text style={style.textRegular14}>X{"1"}</Text>
-              <Text style={style.textRegular14Gray}>${"0"}</Text>
-              <Text style={style.textRegular14}>${"0"}</Text>
-            </View>
-            <View style={style.lineGrayLight}></View>
-            <View style={style.inLineSpaceBetween}>
-              <Text style={style.textRegular14}>Producto B</Text>
-              <Text style={style.textRegular14}>X{"1"}</Text>
-              <Text style={style.textRegular14Gray}>${"0"}</Text>
-              <Text style={style.textRegular14}>${"0"}</Text>
+
+              { this.props.items.map((i) => (
+                <View style={{flexDirection: 'row',justifyContent:'space-between'}}>
+                  <View>
+                    <Text>{i.name}</Text>
+                  </View>
+                  <View>
+                    <Text>${i.price}</Text>
+                  </View>
+                  <View style={style.lineGrayLight}></View>
+                </View>
+              ))
+              }
             </View>
           </View>
 
@@ -74,7 +87,10 @@ class InvoiceSummary extends React.Component {
               <View style={style.inLineSpaceBetween}>
                 <View style={[style.lineHorizontalGrayLight,style.marginLeft5]}></View>
                 <View>
-                  <Text style={style.textRegular14GrayDark}>${'0.00'}</Text>
+                  <Text style={style.textRegular14GrayDark}>
+                    ${ this.props.items.map((i) => parseFloat(i.price, 10))
+                      .reduce((partial_sum, a) => { return partial_sum + a }, 0) }
+                  </Text>
                 </View>
               </View>
               <View style={style.inLineSpaceBetween}>
@@ -96,7 +112,7 @@ class InvoiceSummary extends React.Component {
             />
             <View style={[style.boxPriceFinal, style.inLineSpaceBetween]}>
               <Text style={style.textRegular17GrayDark}>TOTAL</Text>
-              <Text style={style.textRegular18GrayDark}>${"0.00"}</Text>
+              <Text style={style.textRegular18GrayDark}>${this.total}</Text>
             </View>
           </View>
 

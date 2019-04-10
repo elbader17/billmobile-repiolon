@@ -47,7 +47,7 @@ class SignUp extends React.Component {
 
   validateData = () => {
     const isValidPassword = PASSWORD_REGEXP.test(this.state.password);
-    const isValidEmail = EMAIL_REGEXP.test(String(this.state.email).toLowerCase());
+    const isValidEmail = true// EMAIL_REGEXP.test(String(this.state.email).toLowerCase());
     return (isValidPassword && isValidEmail);
   }
 
