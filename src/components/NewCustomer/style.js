@@ -1,90 +1,58 @@
 import { StyleSheet } from 'react-native';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { METRICS } from '../../constants/metrics';
 import { COLORS } from '../../constants/colors';
 import { FONTS } from '../../constants/fonts';
-import { METRICS } from '../../constants/metrics';
 
 const styles = StyleSheet.create({
   container: {
-    height: METRICS.screenHeight,
+    height: hp('100%') - METRICS.heightHeader - METRICS.heightStatusBar,
     backgroundColor: COLORS.blue,
-    alignItems: 'center',
-    paddingHorizontal: 30,
-    paddingTop: 15,
+    padding: 18,
   },
-  textBoxBtnHolder: {
-    position: 'relative',
-    alignSelf: 'stretch',
-    justifyContent: 'center',
-    marginTop: 0,
+  containerInputs: {
+    marginHorizontal: 2,
+    marginVertical: 5
+  },
+  boxBtnHolder: {
     backgroundColor: COLORS.white,
+    height: hp('7%'),
+    marginVertical: 8,
     borderRadius: 4,
   },
   picker: {
-    height: 45,
-    color: COLORS.grayDark
-  },
-  textBox: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size16,
-    alignSelf: 'stretch',
-    height: 45,
-    paddingRight: 45,
-    paddingLeft: 8,
-    borderWidth: 1,
-    paddingVertical: 0,
-    borderColor: COLORS.gray,
-    borderRadius: 2,
-  },
-  submit: {
-    backgroundColor: COLORS.red,
-    height: 40,
-    borderRadius: 2,
-    width: 285,
-  },
-  submitDisabled: {
-    backgroundColor: COLORS.gray,
-    width: 285,
-    height: 40,
-    borderRadius: 2,
-  },
-  submitText: {
-    textAlign: 'center',
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size14,
-    color: COLORS.white,
+    flex: 1,
+    justifyContent: 'center',
   },
   textRegular14White: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size14,
     color: COLORS.white,
-    paddingVertical: 10,
-    textAlign: 'center',
   },
-  textRegular11White: {
+  textRegular12White: {
     fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size11,
+    fontSize: FONTS.size12,
     color: COLORS.white,
-    paddingVertical: 5,
   },
-  red: {
-    color: COLORS.red,
-  },
-  inLine: {
-    flexDirection: "row",
-    position: 'absolute',
-    bottom:80
-  },
-  textFooterA: {
+  textRegular11GrayDark: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size11,
     color: COLORS.grayDark,
-    marginTop: 110,
   },
-  textFooterB: {
+  textRegular16GrayDark: {
     fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size11,
+    fontSize: FONTS.size16,
     color: COLORS.grayDark,
-    fontWeight: 'bold',
+  },
+  buttonConfirm: {
+    height: wp('14%'),
+    backgroundColor: COLORS.red,
+  },
+  marginLeft5: {
+    marginLeft: 5,
+  },
+  marginTop25: {
+    marginTop: 25,
   },
   headerText: {
     fontFamily: FONTS.latoRegular,
@@ -96,8 +64,14 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     height: 1,
     width: '100%',
-    marginTop: 20,
+    marginTop: 10,
     marginBottom: 10,
+  },
+  positionFinalButton: {
+    position: 'absolute', 
+    bottom: 0, 
+    left:0, 
+    right:0
   },
 });
 

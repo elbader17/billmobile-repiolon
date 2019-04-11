@@ -5,6 +5,8 @@ import { withNavigation } from 'react-navigation';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import style from './style';
 
+const grayLight = '#cecece';
+
 const conditionIVA = [
   {
     label: 'RESPONSABLE INSCRIPTO',
@@ -75,60 +77,58 @@ class NewCustomer extends React.Component {
   setConditionSale = (value) => this.setState({ conditionSale: value })
   setCuitDni = (value) => this.setState({ cuit: value })
 
-
   render() {
     return(
       <KeyboardAwareScrollView>
         <View style={style.container}>
-          <Text style={style.textRegular14White}>CONDICIÓN FRENTE AL IVA</Text>
-          <View style={ style.textBoxBtnHolder }>
-            <Picker
-              selectedValue={this.state.conditionIva}
-              style = {style.picker}
-              onValueChange={itemValue => this.setState({ conditionIva: itemValue })}>
-              {conditionIVA.map((i, index) => (
-                <Picker.Item key={index} label={i.label} value={i.value} />
-            ))}
-            </Picker>
-          </View>
-          <Text style={style.textRegular14White}>TIPO DE DOCUMENTO</Text>
-          <View style={ style.textBoxBtnHolder }>
-            <TextInput
-              onChangeText={this.setCuitDni}
-              placeholder="CUIT ó DNI"
-              style={ style.textBox }
-            />
-          </View>
-          <Text style={ style.textRegular11White }>La información fiscal de los clientes se cargarn automaticamente poniendo su N° de CUIT</Text>
+          <View style={style.containerInputs}>
+            <Text style={style.textRegular14White}>CONDICIÓN FRENTE AL IVA</Text>
+            <View style={style.boxBtnHolder}>
+              <Picker
+                selectedValue={this.state.conditionIva}
+                style= {style.picker}
+                onValueChange={itemValue => this.setState({ conditionIva: itemValue })}>
+                  {conditionIVA.map((i, index) => (
+                    <Picker.Item key={index} color='gray' label={i.label} value={i.value} />
+                ))}
+              </Picker>
+            </View>
+            <Text style={style.textRegular14White}>NÚMERO DE CUIT</Text>
+            <View style={ style.boxBtnHolder }>
+              <TextInput
+                onChangeText={this.setCuitDni}
+                placeholder="00-00000000-0"
+                placeholderTextColor={grayLight}
+                style={[style.textRegular16GrayDark,style.marginLeft5]}
+              />
+            </View>
+          <Text style={ style.textRegular12White }>La información fiscal de los clientes se cargan automaticamente poniendo su N° de CUIT</Text>
+          
           <View style={style.lineWhite}></View>
+          <Text style={ style.textRegular12White }>DATOS DEL CLIENTE</Text>
+          <View style={style.lineWhite}></View>
+          
           <Text style={style.textRegular14White} >NOMBRE DE FANTASÍA (OPCIONAL)</Text>
-          <View style={ style.textBoxBtnHolder }>
+          <View style={ style.boxBtnHolder }>
             <TextInput
-              style={ style.textBox }
+              style={[style.textRegular16GrayDark,style.marginLeft5]}
               onChangeText={this.setName}
+              placeholder="Inserta el Nombre"
+              placeholderTextColor={grayLight}
             />
           </View>
-          <Text style={style.textRegular14White}>CONDICIÓN DE VENTA</Text>
-          <View style={ style.textBoxBtnHolder }>
-            <Picker
-              selectedValue={this.state.conditionSale}
-              style = {style.picker}
-              onValueChange={itemValue => this.setState({ conditionSale: itemValue })}>
-              {conditionSale.map((i, index) => (
-                <Picker.Item key={index} label={i.label} value={i.value} />
-            ))}
-            </Picker>
+          
+          </View>
+          <View style={style.positionFinalButton}>
+            <Button
+              onPress={this.newCustomer}
+              title='GUARDAR'
+              buttonStyle={ style.buttonConfirm }
+              titleStyle={ style.textRegular14White }
+            />
           </View>
           <Text style={ style.textRegular11White }> Esta condición será la que aparecerá para el cliente per luego pordrás cambiarla en la facturación</Text>
           <View style={style.lineWhite}></View>
-        <Button
-          title='GUARDAR'
-          onPress={ this.newCustomer }
-          buttonStyle={ style.submit }
-          titleStyle={ style.textRegular14White }
-          disabledTitleStyle={ style.textRegular14White}
-          disabledStyle={ style.submitDisabled }
-        />
       </View>
       </KeyboardAwareScrollView>
     )
