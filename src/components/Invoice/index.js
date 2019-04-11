@@ -3,8 +3,8 @@ import Invoice from './Component';
 
 const mapStateToProps = state => ({
   jwtToken: state.authentication.jwtToken,
-  identitiFiscal: state.identitiFiscal,
-  items: state.items.items,
+  fiscalIdentity: state.invoices.currentInvoice.fiscalIdentity,
+  items: state.invoices.currentInvoice.invoiceItems,
 });
 
 function mapDispatchToProps(dispatch) {
@@ -13,7 +13,7 @@ function mapDispatchToProps(dispatch) {
       dispatch(createItem(category, name, price))
         .then((data) => {
           //Alert.alert("Exito al Guardar!");
-          this.props.navigation.navigate('Items');
+          this.props.navigation.navigate('InvoiceItemList');
         });
     },
   };

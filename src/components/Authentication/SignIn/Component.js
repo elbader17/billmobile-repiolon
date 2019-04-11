@@ -3,6 +3,7 @@ import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 import { Button } from "react-native-elements";
 import { Alert } from 'react-native';
 import { withNavigation } from 'react-navigation';
+import { Auth } from 'aws-amplify';
 import style from '../SignUp/style';
 
 const EMAIL_REGEXP = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
@@ -14,7 +15,7 @@ class SignIn extends React.Component {
     super(props);
     this.state = {
       email: 'hh@mozej.com',
-      password: '@Martin44',
+      password: '@Am12345',
       name:'',
       hidePassword: true
     };
@@ -29,14 +30,13 @@ class SignIn extends React.Component {
     const { signIn } = this.props;
     signIn(email, password)
     .then( (_data) => {
-     
-      if(this.props.jwtToken != ''){
+      if(this.props.jwtToken !== ''){
         this.props.navigation.navigate('Configure');
       } else {
-        if ( _data.message == 'User does not exist.'){
+        if ( _data.message === 'User does not exist.'){
           Alert.alert(_data.message);
           this.props.navigation.navigate('Authentication');
-        }else if ( _data.message == 'User is not confirmed.'){
+        }else if ( _data.message === 'User is not confirmed.'){
           Alert.alert(_data.message);
           this.props.navigation.navigate('ConfirmationCodeRegister');
         }else {
@@ -53,7 +53,7 @@ class SignIn extends React.Component {
   
   validateData = () => {
     const isValidPassword = PASSWORD_REGEXP.test(this.state.password);
-    const isValidEmail = true//EMAIL_REGEXP.test(String(this.state.email).toLowerCase());
+    const isValidEmail = EMAIL_REGEXP.test(String(this.state.email).toLowerCase());
     return (isValidPassword && isValidEmail);
   }
 

@@ -8,10 +8,18 @@ import {
   CREATE_INVOICE_ITEM,
   UPDATE_INVOICE_ITEM,
 } from '../invoice_items/constant';
+import {
+  ADD_FISCAL_IDENTIY_TO_INVOICE,
+} from '../fiscal_identity/constants';
+import { addFiscalIdentityToInvoice } from '../fiscal_identity/actions';
+
+function defaultCurrentInvoice() {
+  return { fiscalIdentity: {}, invoiceItems: [] };
+}
 
 const initialState = {
   invoices: [],
-  currentInvoice: null,
+  currentInvoice: defaultCurrentInvoice(),
 };
 
 function setCurrentInvoice({ draftState, invoice }) {
@@ -28,7 +36,18 @@ function addInvoiceItem({ draftState, invoiceItem }) {
   draftState.currentInvoice.invoiceItems.push(invoiceItem);
   return draftState;
 }
+
+function addFiscalIdentity({ draftState, fiscalIdentity }) {
+  draftState.currentInvoice.fiscalIdentity = fiscalIdentity;
+  return draftState;
+}
+
 function updateInvoiceItem({ draftState }) {
+  return draftState;
+}
+
+function resetCurrentInvoice({ draftState }) {
+  draftState.currentInvoice = defaultCurrentInvoice();
   return draftState;
 }
 
@@ -59,6 +78,11 @@ export default invoicesReducer = (state = initialState, action) => {
         return updateInvoiceItem({
           draftState,
           invoiceItem: action.invoiceItem,
+        });
+      case ADD_FISCAL_IDENTIY_TO_INVOICE:
+        return addFiscalIdentity({
+          draftState,
+          fiscalIdentity: action.fiscalIdentity,
         });
       default:
         return draftState;

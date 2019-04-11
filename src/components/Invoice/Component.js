@@ -64,16 +64,12 @@ class Invoice extends React.Component {
     this.props.navigation.navigate('NewCustomer');
   }
 
-  navigateClient = () => {
-    this.props.navigation.navigate('NewCostumer');
-  }
-
   xxx = () => {
-    this.props.navigation.navigate('Items');
+    this.props.navigation.navigate('InvoiceItemList');
   }
 
   newInvoice = () => {
-    const { identitiFiscal } = this.props.identitiFiscal;
+    const { fiscalIdentity } = this.props.fiscalIdentity;
     const { items} = this.props.items;
     //createInvoice()
 
@@ -89,7 +85,7 @@ class Invoice extends React.Component {
       return (
         <View style={style.listCustomer}>
           <Text>Listado de Clientes</Text>
-          <Text>{ this.props.identitiFiscal.name }</Text>
+          <Text>{ this.props.fiscalIdentity.name }</Text>
           <Button
             title=' AGREGAR CLIENTE'
             icon={
@@ -111,7 +107,7 @@ class Invoice extends React.Component {
         <View style={style.inLineSpace}>
           <View style={style.textBoxBtnHolder}>
           <Text>Listado de Clientes</Text>
-          <Text>{ this.props.identitiFiscal.name }</Text>
+          <Text>{ this.props.fiscalIdentity.name }</Text>
             <TextInput 
               placeholder="DNI"
               onChangeText={this.setDni}

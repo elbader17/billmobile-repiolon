@@ -6,6 +6,7 @@ import {
   SHOW_CONFIRMATION_MODAL,
   HIDE_CONFIRMATION_MODAL,
   USER_SIGNED_UP,
+  USER_NOT_CONFIRMED_MESSAGE
 } from './constants';
 
 function setJwtToken(jwtToken) {
@@ -27,8 +28,13 @@ const signIn = (email, password) => {
   return (dispatch) => {
     return Auth.signIn(email, password)
       .then((data) => {
-        const { jwtToken } = data.signInUserSession.idToken;
-        dispatch(setJwtToken(jwtToken));
+        console.log(data);
+        if (data.message === USER_NOT_CONFIRMED_MESSAGE) {
+          dispatch(userSignedUp(null, password));
+        } else {
+          const { jwtToken } = data.signInUserSession.idToken;
+          dispatch(setJwtToken(jwtToken));
+        }
       })
       .catch((err) => {
         Alert.alert('Error al Ingresar: ', err.message);
@@ -56,6 +62,7 @@ const confirmCode = (email, confirmationCode) => {
   return (dispatch, getState) => {
     return Auth.confirmSignUp(email, confirmationCode, {})
       .then(() => {
+        console.log(getState().authentication);
         const { password } = getState().authentication.registration;
         dispatch(hideConfirmationModal());
         return dispatch(signIn(password, email));

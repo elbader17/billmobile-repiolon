@@ -39,7 +39,7 @@ const conditionSale = [
   },
 ];
 
-class NewCostumer extends React.Component {
+class NewCustomer extends React.Component {
 
   constructor(props) {
     super(props);
@@ -54,10 +54,10 @@ class NewCostumer extends React.Component {
     }
   }
 
-  newCostumer = () => {
+  newCustomer = () => {
     const { name, category, cuit } = this.state;
-    const { registerFiscalIdentity } = this.props;
-    registerFiscalIdentity(name, cuit)
+    const { addFiscalIdentityToInvoice } = this.props;
+    addFiscalIdentityToInvoice(name, cuit)
     .then((data) => {
       Alert.alert("Cliente Cargado: "+this.props.name+" "+this.props.cuit);
       this.props.navigation.navigate('Invoice');
@@ -123,7 +123,7 @@ class NewCostumer extends React.Component {
           <View style={style.lineWhite}></View>
         <Button
           title='GUARDAR'
-          onPress={ this.newCostumer }
+          onPress={ this.newCustomer }
           buttonStyle={ style.submit }
           titleStyle={ style.textRegular14White }
           disabledTitleStyle={ style.textRegular14White}
@@ -136,4 +136,4 @@ class NewCostumer extends React.Component {
 }
 
 
-export default withNavigation(NewCostumer);
+export default withNavigation(NewCustomer);

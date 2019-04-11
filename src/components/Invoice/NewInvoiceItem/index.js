@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import NewItem from '../Item/NewItem/Component';
-import { createInvoiceItem } from '../../app/invoice_items/action';
+import NewItem from '../../Item/NewItem/Component';
+import { createInvoiceItem } from '../../../app/invoice_items/action';
 
 const mapStateToProps = state => ({
 });

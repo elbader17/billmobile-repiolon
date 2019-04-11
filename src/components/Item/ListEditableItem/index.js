@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import ListEditableItem from './Component';
 
 const mapStateToProps = state => ({
-  identitiFiscal: state.identitiFiscal,
+  fiscalIdentity: state.fiscalIdentity,
   items: state.items.items,
 });
 

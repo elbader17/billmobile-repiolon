@@ -13,9 +13,9 @@ class SignUp extends React.Component {
     super(props);
     this.state = {
       email: '',
-      password: '@Am12345',
+      password: '@Martin44',
       name:'Agustin',
-      confirmPassword: '@Am12345',
+      confirmPassword: '@Martin44',
       confirmationEmail:'',
       hidePassword: true,
       hideConfirmPassword: true
@@ -106,6 +106,7 @@ class SignUp extends React.Component {
             <TextInput 
               label="ConfirmPassword"
               onChangeText={ this.setConfirmPassword }
+              value={ this.confirmPassword }
               placeholder="Confirmar Contraseña"
               style={ style.textBox }
               secureTextEntry={ this.state.hideConfirmPassword } 
