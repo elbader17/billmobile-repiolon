@@ -1,5 +1,6 @@
 import { Auth } from 'aws-amplify';
 import { Alert } from 'react-native';
+import { withNavigation } from 'react-navigation';
 import {
   SET_JWT_TOKEN,
   SHOW_CONFIRMATION_MODAL,
@@ -28,6 +29,10 @@ const signIn = (email, password) => {
       .then((data) => {
         const { jwtToken } = data.signInUserSession.idToken;
         dispatch(setJwtToken(jwtToken));
+      })
+      .catch((err) => {
+        Alert.alert('Error al Ingresar: ', err.message);
+        return err;
       });
   };
 };
@@ -57,6 +62,7 @@ const confirmCode = (email, confirmationCode) => {
       })
       .catch((err) => {
         Alert.alert('Error al Confirmar: ', err.message);
+        this.props.navigation.navigate('ConfirmationCodeRegister');
       });
   };
 };

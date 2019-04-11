@@ -13,9 +13,9 @@ class SignUp extends React.Component {
     super(props);
     this.state = {
       email: '',
-      password: '',
-      name:'',
-      confirmPassword: '',
+      password: '@Am12345',
+      name:'Agustin',
+      confirmPassword: '@Am12345',
       confirmationEmail:'',
       hidePassword: true,
       hideConfirmPassword: true

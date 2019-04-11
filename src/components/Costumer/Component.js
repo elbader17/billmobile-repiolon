@@ -26,21 +26,6 @@ const conditionIVA = [
   },
 ];
 
-const conditionSale = [
-  {
-    label: 'CONTADO',
-    value: 'contado',
-  },
-  {
-    label: 'DÉBITO',
-    value: 'debito',
-  },
-  {
-    label: 'CRÉDITO',
-    value: 'credito',
-  },
-];
-
 class NewCostumer extends React.Component {
 
   constructor(props) {
@@ -121,6 +106,7 @@ class NewCostumer extends React.Component {
           </View>
           <View style={style.positionFinalButton}>
             <Button
+              onPress={this.newCostumer}
               title='GUARDAR'
               buttonStyle={ style.buttonConfirm }
               titleStyle={ style.textRegular14White }
