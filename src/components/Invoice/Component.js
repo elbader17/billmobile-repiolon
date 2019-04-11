@@ -75,7 +75,10 @@ class Invoice extends React.Component {
   newInvoice = () => {
     const { identitiFiscal } = this.props.identitiFiscal;
     const { items} = this.props.items;
-    createInvoice()
+    //createInvoice()
+
+    this.props.navigation.navigate('InvoiceSummary');
+
   }
   createCustomer = () => {
     
@@ -209,8 +212,7 @@ class Invoice extends React.Component {
             titleStyle={ style.textRegular14White }
             disabledTitleStyle={ style.textRegular14White}
             disabledStyle={ style.submitDisabled }
-            disabled
-          />
+                      />
         </View>
       </View>
       </KeyboardAwareScrollView>

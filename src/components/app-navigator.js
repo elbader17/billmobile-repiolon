@@ -10,6 +10,7 @@ import NewItem from './Item/NewItem';
 import Invoice from './Invoice';
 import ListEditableItem from './Item/ListEditableItem';
 import InvoiceSummary from './Invoice/Summary';
+import ConfirmationCodeRegister from './Authentication/Confirmation';
 
 const AppStack = createStackNavigator(
   {
@@ -21,6 +22,7 @@ const AppStack = createStackNavigator(
     Invoice,
     ListEditableItem,
     InvoiceSummary,
+    
   },
 );
 
@@ -28,6 +30,7 @@ const AppLogin = createStackNavigator(
   {
     Intro,
     Authentication,
+    ConfirmationCodeRegister,
   },
   {
     headerMode: 'none',
@@ -36,8 +39,9 @@ const AppLogin = createStackNavigator(
 
 const Prueba = createStackNavigator(
   {
-    InvoiceSummary,
+    //InvoiceSummary,
     //VerticalStackLayout,
+    Authentication,
   },
 );
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, View, TextInput } from 'react-native';
 import { Button } from "react-native-elements";
+import { withNavigation } from 'react-navigation';
 import style from './style';
 
 class Confirmation extends React.Component {
@@ -16,7 +17,8 @@ class Confirmation extends React.Component {
   handleConfirmationCode = () => {
     const { confirmationEmail, confirmationCode } = this.state;
     const { confirmCode } = this.props;
-    confirmCode(confirmationEmail,confirmationCode,{})
+    confirmCode(confirmationEmail,confirmationCode,{});
+    
   }
 
   setConfirmPassword = (value) => this.setState({ confirmPassword: value })
@@ -57,4 +59,4 @@ class Confirmation extends React.Component {
   }
 }
 
-export default Confirmation;
+export default withNavigation(Confirmation); 

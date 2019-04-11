@@ -28,9 +28,25 @@ class SignIn extends React.Component {
     const { email, password } = this.state;
     const { signIn } = this.props;
     signIn(email, password)
-    .then(() => {
-      Alert.alert(this.props.jwtToken);
-      this.props.navigation.navigate('Configure');
+    .then( (_data) => {
+     
+      if(this.props.jwtToken != ''){
+        this.props.navigation.navigate('Configure');
+      } else {
+        if ( _data.message == 'User does not exist.'){
+          Alert.alert(_data.message);
+          this.props.navigation.navigate('Authentication');
+        }else if ( _data.message == 'User is not confirmed.'){
+          Alert.alert(_data.message);
+          this.props.navigation.navigate('ConfirmationCodeRegister');
+        }else {
+          Alert.alert(_data.message);
+          this.props.navigation.navigate('Authentication');
+        }
+        
+        
+      }
+    
     })
     .catch(err => Alert.alert("Error al Ingresar: ",err.message));
   }
