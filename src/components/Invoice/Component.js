@@ -6,6 +6,7 @@ import style from './style';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import DateTimePicker from 'react-native-modal-datetime-picker';
+
 const voucher = [
   {
     label: 'FACTURA-C',
@@ -25,8 +26,6 @@ const voucher = [
   },
 ];
 
-const estilo = style.buttonModalSelected;
-
 class Invoice extends React.Component {
 
   constructor(props) {
@@ -39,6 +38,7 @@ class Invoice extends React.Component {
       bool:false,
       date: new Date().getDate()+'/'+ new Date().getMonth()+'/'+ new Date().getFullYear(),
       modalVisible: false,
+      voucher: voucher[0],
     }
   }
 
@@ -86,8 +86,10 @@ class Invoice extends React.Component {
     this.props.navigation.navigate('InvoiceSummary');
 
   }
-  createCustomer = () => {
-    
+
+  selectionVoucher = (date) => {
+    this.setModalVisible(!this.state.modalVisible);
+    this.setState({voucher: date})
   }
 
   renderCustomer = () => {
@@ -150,17 +152,19 @@ class Invoice extends React.Component {
         <View style={style.inLineSpaceBetween}>
           <View style={style.boxVoucher}>
             <TouchableOpacity
-              onPress={() => {
-                this.setModalVisible(true);
-              }}
+              onPress={() => {this.setModalVisible(true)}}
               style={style.buttonVoucher}
             >
-              <Text style={style.textRegular16WhiteCenter}>FACTURA-C</Text>
+              <Text style={style.textRegular16WhiteCenter}>
+                {this.state.voucher.label}
+              </Text>
             </TouchableOpacity>
           </View>
           <View style={style.boxDate}>
             <TouchableOpacity onPress={this.showDateTimePicker} style={style.buttonDate}>
-              <Text style={style.textRegular16WhiteCenter}>{ this.state.date }</Text>
+              <Text style={style.textRegular16WhiteCenter}>
+                {this.state.date}
+              </Text>
             </TouchableOpacity>
             <DateTimePicker
               isVisible={this.state.isDateTimePickerVisible}
@@ -229,37 +233,24 @@ class Invoice extends React.Component {
           <View style={style.modalVoucher}>
             <View style={style.boxModal}>
               <View style={style.headerModal}>
-                <Text style={style.textRegular16WhiteCenter}>TIPO DE COMPROBANTE</Text>
+                <Text style={style.textRegular16WhiteCenter}>Tipo de Comprobante</Text>
               </View>
               <View style={style.boxVoucherType}>
-                <TouchableOpacity 
-                  style={[style.borderVoucher,style.marginVertical8]}
-                >
-                <Text style={style.textRegular18Blue}>
-                  FACTURA-C
-                </Text>
-                </TouchableOpacity>
-                <TouchableOpacity 
-                  style={[style.borderVoucher,style.marginVertical8]}
-                >
-                <Text style={style.textRegular18Blue}>
-                  RECIBO-C
-                </Text>
-                </TouchableOpacity>
-                <TouchableOpacity 
-                  style={[style.borderVoucher,style.marginVertical8]}
-                >
-                  <Text style={style.textRegular18Blue}>
-                    NOTA DE CRÉDITO-C
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity 
-                  style={[style.borderVoucher,style.marginVertical8]}
-                > 
-                  <Text style={style.textRegular18Blue}>
-                    NOTA DE DÉBITO-C
-                  </Text>
-                </TouchableOpacity>
+                <View style={style.lineGrayLight}></View>
+
+                {voucher.map((i) => (
+                <View>
+                  <TouchableOpacity 
+                    style={[style.borderVoucher,style.marginVertical8]}
+                    onPress={() => this.selectionVoucher(i)}
+                  >
+                    <Text style={style.textRegular18Blue}>
+                      {i.label}
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+                ))}
+                <View style={style.lineGrayLight}></View>
               </View>
             </View>
             <View> 
@@ -271,7 +262,7 @@ class Invoice extends React.Component {
             </View>
           </View>
         </Modal> 
-                
+
       </View>
       </KeyboardAwareScrollView>
     )

@@ -13,9 +13,8 @@ const styles = StyleSheet.create({
   containerCustomers: {
     backgroundColor: 'white',
     borderRadius: 5,
-    borderWidth: 1,
-    borderColor: COLORS.gray,
-    marginVertical: 20
+    marginVertical: 20,
+    elevation: 20,
   },
   modalVoucher: {
     flex: 1,
@@ -31,9 +30,10 @@ const styles = StyleSheet.create({
   },
   boxModal: {
     width: wp('80%'),
-    height: hp('45%'),
+    height: hp('40%'),
     backgroundColor: COLORS.white,
-    borderRadius: 2,
+    borderRadius: 3,
+    elevation: 20,
   },
   boxVoucherType: {
     flex: 1,
@@ -41,8 +41,10 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   headerModal: {
+    borderTopLeftRadius: 3,
+    borderTopRightRadius: 3,
     backgroundColor: COLORS.blue,
-    paddingVertical: 20
+    paddingVertical: 15
   },
   inLineSpaceBetween: {
     flexDirection: "row",
@@ -57,9 +59,10 @@ const styles = StyleSheet.create({
   borderVoucher: {
     borderWidth: 1,
     borderColor: COLORS.blue,
-    borderRadius: 5,
+    borderRadius: 3,
     paddingVertical: 3,
-    paddingHorizontal: 10
+    paddingHorizontal: 10,
+    backgroundColor: COLORS.blue
   },
   buttonDate: {
     paddingVertical: 10,
@@ -99,19 +102,19 @@ const styles = StyleSheet.create({
   },
   textRegular18Blue: {
     fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size18,
-    color: COLORS.blue,
+    fontSize: FONTS.size16,
+    color: COLORS.white,
   },
   textRegular16WhiteCenter: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size16,
     color: COLORS.white,
-    textAlign: 'center'
+    textAlign: 'center',
   },
   lineGrayLight: {
     backgroundColor: COLORS.grayLight,
     height: 1.2,
-    width: wp('60%')
+    width: wp('75%')
   },
   buttons: {
     width: '95%',
