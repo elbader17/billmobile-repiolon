@@ -53,7 +53,7 @@ const AppNavigator = createAppContainer(createSwitchNavigator(
     Prueba,
   },
   {
-    initialRouteName: 'Login',
+    initialRouteName: 'App',
   },
 ));
 

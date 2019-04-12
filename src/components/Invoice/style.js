@@ -1,18 +1,14 @@
 import { StyleSheet } from 'react-native';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { COLORS } from '../../constants/colors';
 import { FONTS } from '../../constants/fonts';
 import { METRICS } from '../../constants/metrics';
 
 const styles = StyleSheet.create({
   container: {
-    height: METRICS.screenHeight,
+    height: hp('100%') - METRICS.heightHeader - METRICS.heightStatusBar,
     backgroundColor: COLORS.blue,
-    alignItems: 'center',
-    paddingHorizontal: 25,
-    paddingTop: 15,
-  },
-  containerDateInvoice: {
-    flexDirection: "row",
+    padding: 18,
   },
   containerCustomers: {
     backgroundColor: 'white',
@@ -21,21 +17,101 @@ const styles = StyleSheet.create({
     borderColor: COLORS.gray,
     marginVertical: 20
   },
-  listCustomer: {
-    padding: 10,
+  modalVoucher: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0.6)'
   },
-  lineGray: {
-    backgroundColor: COLORS.gray,
-    height: 1.2,
-    marginTop: 0,
-    marginBottom: 0,
+  boxVoucher: {
+    width: '60%',
   },
-  containerInvoice: {
-    margin: 10,
-    borderWidth: 1,
-    borderRadius: 4,
-    borderColor: COLORS.gray,
+  boxDate: {
+    width: '35%',
+  },
+  boxModal: {
+    width: wp('80%'),
+    height: hp('45%'),
     backgroundColor: COLORS.white,
+    borderRadius: 2,
+  },
+  boxVoucherType: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  headerModal: {
+    backgroundColor: COLORS.blue,
+    paddingVertical: 20
+  },
+  inLineSpaceBetween: {
+    flexDirection: "row",
+    justifyContent: 'space-between',
+  },
+  buttonVoucher: {
+    paddingVertical: 10,
+    borderBottomColor: COLORS.white,
+    borderBottomWidth: 1,
+    borderRadius: 1,
+  },
+  borderVoucher: {
+    borderWidth: 1,
+    borderColor: COLORS.blue,
+    borderRadius: 5,
+    paddingVertical: 3,
+    paddingHorizontal: 10
+  },
+  buttonDate: {
+    paddingVertical: 10,
+    borderBottomColor: COLORS.white,
+    borderBottomWidth: 1,
+    borderRadius: 1,
+  },
+  buttonHideModal: {
+    backgroundColor: COLORS.white,
+    width: wp('16%'),
+    height: hp('9%'),
+    borderRadius: 100,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  buttonModalSelected: {
+    backgroundColor: '#60a9e5',
+    borderRadius: 8,
+    paddingVertical: 5
+  },
+  textHideModal: {
+    //fontFamily: 'Cochin',
+    fontSize: FONTS.size24,
+    color: COLORS.grayDark,
+  },
+  textVoucher: {
+    textAlign: 'center',
+    fontWeight: 'bold'
+  },
+  marginVertical8: {
+    marginVertical: 8
+  },
+  textRegular16White: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size16,
+    color: COLORS.white,
+  },
+  textRegular18Blue: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size18,
+    color: COLORS.blue,
+  },
+  textRegular16WhiteCenter: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size16,
+    color: COLORS.white,
+    textAlign: 'center'
+  },
+  lineGrayLight: {
+    backgroundColor: COLORS.grayLight,
+    height: 1.2,
+    width: wp('60%')
   },
   buttons: {
     width: '95%',
@@ -48,25 +124,8 @@ const styles = StyleSheet.create({
     borderColor: COLORS.blue, 
     width: 122,
   },
-  backgroundColorButton : {
-    backgroundColor: COLORS.white,
-  },
-  buttonOn: {
-    borderWidth: 1,
-    borderRadius: 4,
-    borderColor: COLORS.gray,
-    padding: 5,
-    color: COLORS.gray,
-  },
   inLine: {
     flexDirection: "row",
-  },
-  inLineSpace: {
-    flexDirection: "row",
-    justifyContent: 'space-between',
-  },
-  spacingText: {
-    marginLeft: 'auto',
   },
   textRegular11Gray: {
     fontFamily: FONTS.latoRegular,
@@ -90,51 +149,6 @@ const styles = StyleSheet.create({
     marginBottom: 2.5,
     marginLeft: 10,
     marginRight: 10,
-  },
-  textBoxBtnHolder: {
-    position: 'relative',
-    alignSelf: 'stretch',
-    justifyContent: 'center',
-    marginTop: 0,
-    backgroundColor: COLORS.white,
-    borderRadius: 4,
-    borderBottomColor: COLORS.white,
-    borderBottomWidth: 1,
-  },
-  styleDate: {
-    borderRadius: 1,
-    borderBottomColor: COLORS.white,
-    borderBottomWidth: 1,
-    marginTop: 1,
-    width: 100,
-    alignItems: 'center',
-    paddingVertical: 15,
-    marginLeft: 10
-  },
-  textBoxBtnHolderAux: {
-    width: '65%',
-    alignSelf: 'center',
-    marginTop: 0,
-    borderBottomColor: COLORS.white,
-    borderBottomWidth: 1,
-    borderRadius: 1,
-    color: COLORS.white,
-  },
-  picker: {
-    height: 45,
-    color: COLORS.white,
-  },
-  textBox: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size18,
-    alignSelf: 'stretch',
-    height: 45,
-    paddingRight: 45,
-    paddingLeft: 8,
-    borderWidth: 1,
-    paddingVertical: 0,
-    borderColor: COLORS.gray,
-    borderRadius: 2,
   },
   buttonContinue: {
     backgroundColor: COLORS.red,
@@ -182,17 +196,6 @@ const styles = StyleSheet.create({
     color: COLORS.grayDark,
     opacity: 0.7,
   },
-  submitDisabled: {
-    backgroundColor: COLORS.gray,
-    width: 320,
-    height: 40,
-    borderRadius: 2,
-  },
-  textRegular14White: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size14,
-    color: COLORS.white
-  },
   textInputDNI: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size18,
@@ -200,11 +203,6 @@ const styles = StyleSheet.create({
     height: 40,
     color: COLORS.grayDark,
     marginHorizontal: 10
-  },
-  actionButtonIcon: {
-    fontSize: 20,
-    height: 22,
-    color: 'white',
   },
   headerText: {
     fontFamily: FONTS.latoRegular,
@@ -216,44 +214,6 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     borderWidth: 1,
     borderColor: '#EE6123',
-  },
-  buttonRed: {
-    borderRadius: 0,
-    height: 45,
-    backgroundColor: COLORS.red,
-  },
-  buttonEdite: {
-    borderRadius: 4,
-    borderWidth: 1,
-    borderColor: COLORS.blue,
-    height: 40,
-    backgroundColor: COLORS.white,
-    width: 150,
-  },
-  textButtonEdite:{
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size14,
-    color: COLORS.blue,
-  },
-  lineGray: {
-    backgroundColor: COLORS.gray,
-    height: 1.2,
-    marginTop: 2.5,
-    marginBottom: 2.5,
-  },
-  lineGrayLight: {
-    backgroundColor: COLORS.grayLight,
-    height: 1.2,
-    marginTop: 2.5,
-    marginBottom: 2.5,
-    marginLeft: 10,
-    marginRight: 10,
-  },
-  lineHorizontalGrayLight: {
-    borderColor: COLORS.grayLight,
-    borderRightWidth: 1.2,
-    borderRadius: 1,
-    marginVertical: 1,
   },
 });
 

@@ -1,12 +1,11 @@
 import React from 'react';
-import { View, Text, Picker, TextInput, TouchableOpacity} from 'react-native';
+import { View, Text, Modal, TextInput, TouchableOpacity, Alert} from 'react-native';
 import { Button, ButtonGroup } from "react-native-elements";
 import { withNavigation } from 'react-navigation';
 import style from './style';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import DateTimePicker from 'react-native-modal-datetime-picker';
-
 const voucher = [
   {
     label: 'FACTURA-C',
@@ -26,6 +25,8 @@ const voucher = [
   },
 ];
 
+const estilo = style.buttonModalSelected;
+
 class Invoice extends React.Component {
 
   constructor(props) {
@@ -37,7 +38,12 @@ class Invoice extends React.Component {
       isDateTimeVisible:false,
       bool:false,
       date: new Date().getDate()+'/'+ new Date().getMonth()+'/'+ new Date().getFullYear(),
+      modalVisible: false,
     }
+  }
+
+  setModalVisible(visible) {
+    this.setState({modalVisible: visible});
   }
 
   showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true});
@@ -45,7 +51,7 @@ class Invoice extends React.Component {
   hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
 
   handleDatePicked = (date) => {
-    this.setState({ date: date.getDate()+'/'+ date.getMonth()+date.getFullYear() })
+    this.setState({ date: date.getDate()+'/'+ date.getMonth()+'/'+date.getFullYear() })
     this.hideDateTimePicker();
   };
 
@@ -141,27 +147,27 @@ class Invoice extends React.Component {
     return(
       <KeyboardAwareScrollView>
       <View style={style.container}>
-        <View style={style.containerDateInvoice}>
-        <View style={ style.textBoxBtnHolderAux }>
-          <Picker
-            selectedValue={this.state.typeVoucher}
-            style={{color: 'white'}}
-            onValueChange={itemValue => this.setState({ typeVoucher: itemValue })}>
-            {voucher.map((i, index) => (
-              <Picker.Item key={index} label={i.label} value={i.value} />
-            ))}
-          </Picker>
-        </View>
-        <View >
-          <TouchableOpacity onPress={this.showDateTimePicker} style={style.styleDate}>
-            <Text style={style.textRegular14White}>{ this.state.date }</Text>
-          </TouchableOpacity>
-          <DateTimePicker
-            isVisible={this.state.isDateTimePickerVisible}
-            onConfirm={this.handleDatePicked}
-            onCancel={this.hideDateTimePicker}
-          />
-        </View>
+        <View style={style.inLineSpaceBetween}>
+          <View style={style.boxVoucher}>
+            <TouchableOpacity
+              onPress={() => {
+                this.setModalVisible(true);
+              }}
+              style={style.buttonVoucher}
+            >
+              <Text style={style.textRegular16WhiteCenter}>FACTURA-C</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={style.boxDate}>
+            <TouchableOpacity onPress={this.showDateTimePicker} style={style.buttonDate}>
+              <Text style={style.textRegular16WhiteCenter}>{ this.state.date }</Text>
+            </TouchableOpacity>
+            <DateTimePicker
+              isVisible={this.state.isDateTimePickerVisible}
+              onConfirm={this.handleDatePicked}
+              onCancel={this.hideDateTimePicker}
+            />
+          </View>
       </View>
         <View style={style.containerCustomers}>
           <View style={style.inLine}>
@@ -214,6 +220,58 @@ class Invoice extends React.Component {
             disabledStyle={ style.submitDisabled }
                       />
         </View>
+        
+        <Modal
+          animationType="fade"
+          transparent={true}
+          visible={this.state.modalVisible}
+        >
+          <View style={style.modalVoucher}>
+            <View style={style.boxModal}>
+              <View style={style.headerModal}>
+                <Text style={style.textRegular16WhiteCenter}>TIPO DE COMPROBANTE</Text>
+              </View>
+              <View style={style.boxVoucherType}>
+                <TouchableOpacity 
+                  style={[style.borderVoucher,style.marginVertical8]}
+                >
+                <Text style={style.textRegular18Blue}>
+                  FACTURA-C
+                </Text>
+                </TouchableOpacity>
+                <TouchableOpacity 
+                  style={[style.borderVoucher,style.marginVertical8]}
+                >
+                <Text style={style.textRegular18Blue}>
+                  RECIBO-C
+                </Text>
+                </TouchableOpacity>
+                <TouchableOpacity 
+                  style={[style.borderVoucher,style.marginVertical8]}
+                >
+                  <Text style={style.textRegular18Blue}>
+                    NOTA DE CRÉDITO-C
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity 
+                  style={[style.borderVoucher,style.marginVertical8]}
+                > 
+                  <Text style={style.textRegular18Blue}>
+                    NOTA DE DÉBITO-C
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+            <View> 
+              <TouchableOpacity
+                activeOpacity={0.7}
+                onPress={() => {this.setModalVisible(!this.state.modalVisible);}}>
+                <Text>X</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal> 
+                
       </View>
       </KeyboardAwareScrollView>
     )
