@@ -95,23 +95,9 @@ class Invoice extends React.Component {
   renderCustomer = () => {
     if (this.state.selectedIndex === 0) {
       return (
-        <View style={style.listCustomer}>
+        <View>
           <Text>Listado de Clientes</Text>
-          <Text>{ this.props.identitiFiscal.name }</Text>
-          <Button
-            title=' AGREGAR CLIENTE'
-            icon={
-              <Icon
-                name="md-person-add"
-                size={20}
-                color="#EE6123"
-              />
-            }
-            onPress={ this.navigateClient }
-            buttonStyle={ style.addCustomer }
-            titleStyle={ style.submitTextCustomer }
-          />   
-        
+          <Text>{ this.props.identitiFiscal.name }</Text>    
         </View>
       );
     }else {
@@ -143,7 +129,7 @@ class Invoice extends React.Component {
   }
 
   render() {
-    const component1 = () => <Text style={ style.buttonOn }>Consumidor Final</Text>
+    const component1 = () => <Text style={[style.buttonOn,style.textButtonOn]}>CONSUMIDOR FINAL</Text>
     const component2 = () => <Text></Text>
     const buttons = [{ element: component1 }, { element: component2 }]
     return(
@@ -172,7 +158,7 @@ class Invoice extends React.Component {
               onCancel={this.hideDateTimePicker}
             />
           </View>
-      </View>
+        </View>
         <View style={style.containerCustomers}>
           <View style={style.inLine}>
             <ButtonGroup
@@ -180,40 +166,51 @@ class Invoice extends React.Component {
               selectedIndex={ this.state.selectedIndex }
               buttons={ buttons }
               containerStyle={ style.buttons }
-              buttonStyle = {style.borderButton}
-              innerBorderStyle={{color: 'white'}}
+              buttonStyle = {style.buttonGroupStyle}
+              innerBorderStyle={{color: 'transparent'}}
               selectedButtonStyle={style.backgroundColorButton}
-            /> 
+            />
+            <Button
+              icon={
+                <Icon
+                  name="md-person-add"
+                  size={20}
+                  color="#EE6123"
+                />
+              }
+              onPress={ this.navigateClient }
+              buttonStyle={[style.addCustomer, style.marginVertical8]}
+              titleStyle={ style.submitTextCustomer }
+            />   
           </View>
-          <View style={[style.lineGray, {marginHorizontal: 3}]}></View>
+          <View style={[style.lineGray, style.marginHorizontal5]}></View>
           { this.renderCustomer() }
         </View>
-        <View style={style.containerCustomers}>
-        { this.props.items.map((i) => (
-              <View style={{flexDirection: 'row',justifyContent:'space-between'}}>
-                <View>
-                  <Text>{i.name}</Text>
-                </View>
-                <View>
-                  <Text>${i.price}</Text>
-                </View>
+        <View>
+          {this.props.items.map((i) => (
+            <View style={{flexDirection: 'row',justifyContent:'space-between'}}>
+              <View>
+                <Text>{i.name}</Text>
               </View>
-            ))
-          }
-          </View>
+              <View>
+                <Text>${i.price}</Text>
+              </View>
+            </View>
+          ))}
+        </View>
         <Button
-          title=' AGEGAR ITEMS'
-          icon={
-            <Icon
-              name="md-add"
-              size={20}
-              color="#EE6123"
+              title=' AGEGAR ITEMS'
+              icon={
+                <Icon
+                  name="md-add"
+                  size={20}
+                  color="#EE6123"
+                />
+              }
+              onPress={ this.xxx }
+              buttonStyle={ style.addItems }
+              titleStyle={ style.submitTextItems }
             />
-          }
-          onPress={ this.xxx }
-          buttonStyle={ style.addItems }
-          titleStyle={ style.submitTextItems }
-        />
         <View>
           <Button
             title='CONTUNUAR'

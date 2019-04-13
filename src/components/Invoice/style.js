@@ -11,10 +11,11 @@ const styles = StyleSheet.create({
     padding: 18,
   },
   containerCustomers: {
-    backgroundColor: 'white',
+    height: hp('30%'),
+    backgroundColor: COLORS.white,
     borderRadius: 5,
     marginVertical: 20,
-    elevation: 20,
+    elevation: 3,
   },
   modalVoucher: {
     flex: 1,
@@ -70,23 +71,17 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderRadius: 1,
   },
-  buttonHideModal: {
-    backgroundColor: COLORS.white,
-    width: wp('16%'),
-    height: hp('9%'),
-    borderRadius: 100,
-    justifyContent: 'center',
-    alignItems: 'center'
+  buttonOn: {
+    borderColor: COLORS.grayDark,
+    borderRadius: 3,
+    borderWidth: 1,
+    paddingVertical: 10,
+    paddingHorizontal: 4,
+    marginRight: 7
   },
-  buttonModalSelected: {
-    backgroundColor: '#60a9e5',
-    borderRadius: 8,
-    paddingVertical: 5
-  },
-  textHideModal: {
-    //fontFamily: 'Cochin',
-    fontSize: FONTS.size24,
-    color: COLORS.grayDark,
+  textButtonOn: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size11,
   },
   textVoucher: {
     textAlign: 'center',
@@ -116,16 +111,24 @@ const styles = StyleSheet.create({
     height: 1.2,
     width: wp('75%')
   },
+  lineGray: {
+    backgroundColor: COLORS.gray,
+    height: 1,
+  },
+  marginHorizontal5: {
+    marginHorizontal: 5
+  },
   buttons: {
-    width: '95%',
-    borderRadius: 4,
+    width: '75%',
     borderColor: COLORS.white,
   },
-  borderButton: {
+  buttonGroupStyle: {
+    width: wp('35%'),
     borderRadius: 4, 
     borderWidth: 0, 
-    borderColor: COLORS.blue, 
-    width: 122,
+  },
+  backgroundColorButton: {
+    backgroundColor: COLORS.white
   },
   inLine: {
     flexDirection: "row",
@@ -166,16 +169,15 @@ const styles = StyleSheet.create({
   },
   addCustomer: {
     backgroundColor: COLORS.white,
-    borderWidth: 1,
     borderColor: COLORS.red,
-    opacity: 0.7,
-    width: '100%',
-    height: 40,
-    borderRadius: 2,
+    borderRadius: 3,
+    borderWidth: 1,
+    width: '50%',
+    height: 30,
   },
   addItems: {
     backgroundColor: COLORS.white,
-    width: 320,
+    width: '30%',
     height: 40,
     borderWidth: 1,
     borderColor: COLORS.gray
