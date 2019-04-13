@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     padding: 18,
   },
   containerCustomers: {
-    height: hp('30%'),
+    height: hp('25%'),
     backgroundColor: COLORS.white,
     borderRadius: 5,
     marginVertical: 20,
@@ -49,6 +49,10 @@ const styles = StyleSheet.create({
   },
   inLineSpaceBetween: {
     flexDirection: "row",
+    justifyContent: 'space-between',
+  },
+  inColumnSpaceBetween: {
+    flexDirection: "column",
     justifyContent: 'space-between',
   },
   buttonVoucher: {
@@ -118,32 +122,89 @@ const styles = StyleSheet.create({
   marginHorizontal5: {
     marginHorizontal: 5
   },
-  buttons: {
-    width: '75%',
-    borderColor: COLORS.white,
+  margin7: {
+    margin: 7
   },
-  buttonGroupStyle: {
-    width: wp('35%'),
-    borderRadius: 4, 
-    borderWidth: 0, 
+  listCustomer:{
+    marginHorizontal: 15,
+    marginVertical: 5
   },
-  backgroundColorButton: {
-    backgroundColor: COLORS.white
+  containerFinalConsumer: {
+    flex:1 ,
+    justifyContent: 'center',
+    marginHorizontal: 15,
+  },
+  containerInputCustomer: {
+    backgroundColor: 'red',
+    height: hp('7%'),
+  },
+  buttonCfDisable: {
+    width: wp('40%'),
+    height: hp('5%'),
+    backgroundColor: 'transparent',
+    borderWidth: 1,
+    borderColor: COLORS.gray,
+  },
+  buttonCfEnable: {
+    width: wp('40%'),
+    height: hp('5%'),
+    backgroundColor: COLORS.grayLight,
+    borderWidth: 1,
+    borderColor: COLORS.gray,
+  },
+  buttonRI: {
+    width: wp('25%'),
+    height: hp('5%'),
+    backgroundColor: 'transparent',
+    borderWidth: 1,
+    borderColor: COLORS.grayLight,
+  },
+  buttonRIdisabled: {
+    borderWidth: 0,
+    backgroundColor: 'transparent'
+  },
+  textButtonRIdisabled: {
+    color: 'transparent'
+  },
+  buttonShowAll: {
+    backgroundColor: 'transparent',
+    opacity: 0.8
   },
   inLine: {
     flexDirection: "row",
+  },
+  textRegular11GrayDark: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size11,
+    color: COLORS.grayDark,
   },
   textRegular11Gray: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size11,
     color: COLORS.gray,
-    marginTop: 5,
-    marginBottom: 2.5,
-    marginLeft: 10,
-    marginRight: 10,
   },
-  textRegular14White: {
+  textRegular14GrayDark: {
     fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size14,
+    color: COLORS.grayDark,
+  },
+  textRegular14GrayDarkBold: {
+    fontFamily: FONTS.latoSemiBold,
+    fontSize: FONTS.size14,
+    color: COLORS.grayDark,
+  },
+  textRegular18GrayDark: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size18,
+    color: COLORS.grayDark,
+  },
+  textRegular12Red: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size12,
+    color: COLORS.red,
+  },
+  textSemiBold14White: {
+    fontFamily: FONTS.latoSemiBold,
     fontSize: FONTS.size14,
     color: COLORS.white,
   },
@@ -167,28 +228,23 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size14,
   },
-  addCustomer: {
-    backgroundColor: COLORS.white,
+  buttonAddCustomer: {
+    backgroundColor: 'transparent',
     borderColor: COLORS.red,
     borderRadius: 3,
     borderWidth: 1,
-    width: '50%',
-    height: 30,
+    width: wp('14%'),
+    height: hp('5%'),
   },
-  addItems: {
+  buttonAddItems: {
     backgroundColor: COLORS.white,
-    width: '30%',
-    height: 40,
-    borderWidth: 1,
-    borderColor: COLORS.gray
+    height: hp('7%'),
+    borderRadius: 5,
+    elevation: 3,
   },
-  buttonConfirm: {
-    backgroundColor: COLORS.white,
-    width: 50,
-    height: 28,
-    borderWidth: 1,
-    borderColor: COLORS.red,
-    margin: 7,
+  positionIconAdd: {
+    right: 15, 
+    position: 'absolute'
   },
   submitTextCustomer: {
     fontFamily: FONTS.latoRegular,
@@ -201,13 +257,12 @@ const styles = StyleSheet.create({
     color: COLORS.grayDark,
     opacity: 0.7,
   },
-  textInputDNI: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size18,
-    width: '100%',
-    height: 40,
-    color: COLORS.grayDark,
-    marginHorizontal: 10
+  inputDNICustomer: {
+    width: wp('60%'),
+    height: hp('7%'),
+    borderWidth: 1,
+    borderColor: COLORS.gray,
+    borderRadius: 3
   },
   headerText: {
     fontFamily: FONTS.latoRegular,
@@ -219,6 +274,17 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     borderWidth: 1,
     borderColor: '#EE6123',
+  },
+  buttonConfirm: {
+    height: hp('8%'),
+    backgroundColor: COLORS.red,
+    borderRadius: 0,
+  },
+  positionFinalButton: {
+    position: 'absolute', 
+    bottom: 0, 
+    left:0, 
+    right:0
   },
 });
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Modal, TextInput, TouchableOpacity, Alert} from 'react-native';
+import { View, Text, Modal, TextInput, TouchableOpacity, ScrollView, TouchableWithoutFeedback, Alert} from 'react-native';
 import { Button, ButtonGroup } from "react-native-elements";
 import { withNavigation } from 'react-navigation';
 import style from './style';
@@ -32,7 +32,7 @@ class Invoice extends React.Component {
     super(props);
     this.state = {
       typeVoucher: '',
-      selectedIndex: 0,
+      cf: false,
       isDateTimePickerVisible: false,
       isDateTimeVisible:false,
       bool:false,
@@ -92,46 +92,50 @@ class Invoice extends React.Component {
     this.setState({voucher: date})
   }
 
+  changeTypeCustomer = () => {
+    this.setState({cf:true})
+  }
+
   renderCustomer = () => {
-    if (this.state.selectedIndex === 0) {
+    if (!this.state.cf) {
       return (
-        <View>
-          <Text>Listado de Clientes</Text>
-          <Text>{ this.props.identitiFiscal.name }</Text>    
-        </View>
+        <ScrollView>
+          <View style={style.listCustomer}>
+            <Text style={style.textRegular14GrayDark}>
+              {this.props.identitiFiscal.name}
+            </Text>    
+          </View>
+        </ScrollView>
       );
     }else {
       return (
-        <View style={style.inLineSpace}>
-          <View style={style.textBoxBtnHolder}>
-          <Text>Listado de Clientes</Text>
-          <Text>{ this.props.identitiFiscal.name }</Text>
+        <View style={style.containerFinalConsumer}>
+          <View style={[style.inLineSpaceBetween, {alignItems: 'center'}]}>
             <TextInput 
               placeholder="DNI"
               onChangeText={this.setDni}
-              style={ style.textInputDNI }
+              style={[style.textRegular18GrayDark,style.inputDNICustomer]}
             />
-          </View> 
-          <Button
-            icon={
-              <Icon
+            <Button
+              icon={
+                <Icon
                 name="md-checkmark"
                 size={25}
                 color="#EE6123"
-              />
-            }
-            onPress={ this.createCustomer }
-            buttonStyle={ style.buttonConfirm }
-          />            
+                />
+              }
+              onPress={ this.createCustomer }
+              buttonStyle={ style.buttonConfirm }
+            />            
+          </View>
         </View>
       );
     }
   }
 
   render() {
-    const component1 = () => <Text style={[style.buttonOn,style.textButtonOn]}>CONSUMIDOR FINAL</Text>
-    const component2 = () => <Text></Text>
-    const buttons = [{ element: component1 }, { element: component2 }]
+    const buttonCfEnable = style.buttonCfEnable;
+    const buttonCfDisable = style.buttonCfDisable;
     return(
       <KeyboardAwareScrollView>
       <View style={style.container}>
@@ -159,16 +163,24 @@ class Invoice extends React.Component {
             />
           </View>
         </View>
-        <View style={style.containerCustomers}>
-          <View style={style.inLine}>
-            <ButtonGroup
-              onPress={ this.updateIndex }
-              selectedIndex={ this.state.selectedIndex }
-              buttons={ buttons }
-              containerStyle={ style.buttons }
-              buttonStyle = {style.buttonGroupStyle}
-              innerBorderStyle={{color: 'transparent'}}
-              selectedButtonStyle={style.backgroundColorButton}
+          
+        <View style={[style.containerCustomers,style.inColumnSpaceBetween]}>
+          <View style={[style.inLineSpaceBetween,style.margin7]}>
+            <Button
+              title='CONSUMIDOR FINAL'
+              onPress={this.changeTypeCustomer}
+              buttonStyle = {this.state.cf ? buttonCfEnable : buttonCfDisable}
+              titleStyle={style.textRegular11GrayDark}
+            />
+            <Button
+              title='R. INSCRIPTO'
+              onPress={() => this.setState({cf: false})}
+              buttonStyle={style.buttonRI}
+              titleStyle={style.textRegular11Gray}
+              disabled={!this.state.cf}
+              disabledStyle={style.buttonRIdisabled}
+              disabledTitleStyle={style.textButtonRIdisabled}
+              TouchableComponent={TouchableWithoutFeedback}
             />
             <Button
               icon={
@@ -179,13 +191,22 @@ class Invoice extends React.Component {
                 />
               }
               onPress={ this.navigateClient }
-              buttonStyle={[style.addCustomer, style.marginVertical8]}
-              titleStyle={ style.submitTextCustomer }
-            />   
+              buttonStyle={style.buttonAddCustomer}
+  
+            />
           </View>
           <View style={[style.lineGray, style.marginHorizontal5]}></View>
           { this.renderCustomer() }
+          <View style={style.containerButtonShowAll}>
+            <View style={[style.lineGray, style.marginHorizontal5]}></View>
+            <Button
+              title='VER TODOS'
+              buttonStyle = {style.buttonShowAll}
+              titleStyle={style.textRegular12Red}
+            />
+          </View>
         </View>
+
         <View>
           {this.props.items.map((i) => (
             <View style={{flexDirection: 'row',justifyContent:'space-between'}}>
@@ -198,28 +219,35 @@ class Invoice extends React.Component {
             </View>
           ))}
         </View>
+
         <Button
-              title=' AGEGAR ITEMS'
-              icon={
-                <Icon
-                  name="md-add"
-                  size={20}
-                  color="#EE6123"
-                />
-              }
-              onPress={ this.xxx }
-              buttonStyle={ style.addItems }
-              titleStyle={ style.submitTextItems }
+          title={
+            <Text>
+              <Text style={style.textRegular14GrayDark}>AGREGAR </Text> 
+              <Text style={style.textRegular14GrayDarkBold}>ITEMS</Text>
+            </Text>}
+          icon={
+            <View style={style.positionIconAdd}>
+            <Icon
+              name="md-add"
+              size={30}
+              color="#EE6123"
             />
-        <View>
+            </View>
+          }
+          iconRight
+          onPress={ this.xxx }
+          buttonStyle={ style.buttonAddItems }
+          titleStyle={ style.textRegular14GrayDark }
+        />
+
+        <View style={style.positionFinalButton}>
           <Button
-            title='CONTUNUAR'
+            title='CONTINUAR'
             onPress={ this.newInvoice }
-            buttonStyle={ style.buttonContinue }
-            titleStyle={ style.textRegular14White }
-            disabledTitleStyle={ style.textRegular14White}
-            disabledStyle={ style.submitDisabled }
-                      />
+            buttonStyle={ style.buttonConfirm }
+            titleStyle={ style.textSemiBold14White }
+          />
         </View>
         
         <Modal
@@ -234,7 +262,6 @@ class Invoice extends React.Component {
               </View>
               <View style={style.boxVoucherType}>
                 <View style={style.lineGrayLight}></View>
-
                 {voucher.map((i) => (
                 <View>
                   <TouchableOpacity 
@@ -249,13 +276,6 @@ class Invoice extends React.Component {
                 ))}
                 <View style={style.lineGrayLight}></View>
               </View>
-            </View>
-            <View> 
-              <TouchableOpacity
-                activeOpacity={0.7}
-                onPress={() => {this.setModalVisible(!this.state.modalVisible);}}>
-                <Text>X</Text>
-              </TouchableOpacity>
             </View>
           </View>
         </Modal> 

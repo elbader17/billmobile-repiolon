@@ -121,7 +121,7 @@ class InvoiceSummary extends React.Component {
           <Button
             title='CONFIRMAR FACTURA'
             buttonStyle={ style.buttonConfirm }
-            titleStyle={ style.textRegular14White }
+            titleStyle={ style.textSemiBold14White }
           />
         </View>
       </View>

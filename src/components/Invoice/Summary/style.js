@@ -104,7 +104,11 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size14,
     color: COLORS.white,
-    fontWeight: 'bold',
+  },
+  textSemiBold14White: {
+    fontFamily: FONTS.latoSemiBold,
+    fontSize: FONTS.size14,
+    color: COLORS.white,
   },
   textRegular14: {
     fontFamily: FONTS.latoRegular,
@@ -158,8 +162,9 @@ const styles = StyleSheet.create({
     color: COLORS.blue,
   },
   buttonConfirm: {
-    height: wp('14%'),
+    height: hp('8%'),
     backgroundColor: COLORS.red,
+    borderRadius: 0,
   },
   positionFinalButton: {
     position: 'absolute', 
