@@ -14,8 +14,8 @@ class SignIn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: 'hh@mozej.com',
-      password: '@Martin44',
+      email: '',
+      password: '',
       name:'',
       hidePassword: true
     };
@@ -27,7 +27,7 @@ class SignIn extends React.Component {
 
   handleSignIn = () => {
     const { email, password } = this.state;
-    const { signIn } = this.props;
+    const { signIn, getFiscalIdentity } = this.props;
     signIn(email, password)
     .then( (_data) => {
       if(this.props.jwtToken !== ''){

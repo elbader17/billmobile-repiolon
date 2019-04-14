@@ -51,7 +51,7 @@ function resetCurrentInvoice({ draftState }) {
   return draftState;
 }
 
-export default invoicesReducer = (state = initialState, action) => {
+export default addInvoiceReducer = (state = initialState, action) => {
   return producer(state, (draftState) => {
     switch (action.type) {
       case CREATE_INVOICE:

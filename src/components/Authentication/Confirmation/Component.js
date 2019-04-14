@@ -9,7 +9,7 @@ class Confirmation extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
+      email: this.props.email,
       confirmPassword: '',
     };
   }
@@ -18,7 +18,7 @@ class Confirmation extends React.Component {
     const { confirmationEmail, confirmationCode } = this.state;
     const { confirmCode } = this.props;
     confirmCode(confirmationEmail,confirmationCode,{});
-    
+
   }
 
   setConfirmPassword = (value) => this.setState({ confirmPassword: value })
@@ -26,7 +26,7 @@ class Confirmation extends React.Component {
   render() {
     return(
       <View state={ style.container }>
-        <View style={ style.container2 }>       
+        <View style={ style.container2 }>
           <Text style={ style.text }>
             Verificar Cuenta
           </Text>
@@ -36,6 +36,7 @@ class Confirmation extends React.Component {
               onChangeText={ (value) => this.setState({ confirmationEmail: value }) }
               placeholder="Tu email"
               style={ style.textBox }
+              disabled={ true }
             />
           </View>
           <View style={ style.textBoxBtnHolder }>
@@ -59,4 +60,4 @@ class Confirmation extends React.Component {
   }
 }
 
-export default withNavigation(Confirmation); 
+export default withNavigation(Confirmation);

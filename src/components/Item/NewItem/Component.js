@@ -4,6 +4,7 @@ import { ButtonGroup, Button} from "react-native-elements";
 import { withNavigation } from 'react-navigation';
 import style from '../style';
 
+
 class NewItem extends React.Component {
 
   constructor(props) {
@@ -34,7 +35,7 @@ class NewItem extends React.Component {
     createItem("product", nameProduct, price)
     //.catch(err => Alert.alert("Error al Ingresar: ",err.message))
 
-    
+
   }
 
   saveService = () => {
@@ -47,7 +48,7 @@ class NewItem extends React.Component {
   setNameProduct = (value) => this.setState({ nameProduct: value})
   setNameService = (value) => this.setState({ nameService: value})
   setPrice = (value) => this.setState({ price:value })
-  
+
 
   renderNewItems = () => {
     if (this.state.selectedIndex === 0) {
@@ -94,7 +95,7 @@ class NewItem extends React.Component {
           </View>
           <Button
             title='GUARDAR SERVICIO'
-            onPress={ this.saveProduct }
+            onPress={ this.saveService }
             buttonStyle={ style.submit }
             titleStyle={ style.submitText }
           />
@@ -126,6 +127,7 @@ class NewItem extends React.Component {
       </View>
     )
   }
+
 }
 
 export default withNavigation(NewItem);

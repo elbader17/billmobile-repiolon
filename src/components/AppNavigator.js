@@ -24,13 +24,13 @@ const AppStack = createStackNavigator(
     Invoice,
     ListEditableItem,
     InvoiceSummary,
-    
+
   },
 );
 
 const AppLogin = createStackNavigator(
   {
-    //Intro,
+    Intro,
     Authentication,
     ConfirmationCodeRegister,
   },

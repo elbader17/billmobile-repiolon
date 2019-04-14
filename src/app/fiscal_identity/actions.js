@@ -2,11 +2,10 @@
 import axios from 'axios';
 
 import {
-  ADD_FISCAL_IDENTIY_TO_INVOICE,
   SET_FISCAL_IDENTITY,
 } from './constants';
 
-function setfiscalIdentity(name, cuit) {
+function setIdentitiFiscal(name, cuit) {
   return {
     type: SET_FISCAL_IDENTITY,
     name,
@@ -34,16 +33,13 @@ const addFiscalIdentityToInvoice = function (name, cuit) {
     const instance = axios.create({
       headers: { 'JWT-TOKEN': getState().authentication.jwtToken },
     });
-    // return instance.put('/v1/my....', { resource })
-    //   .then(() => {
-    //     dispatch(addfiscalIdentityToInvoiceAction(name, cuit));
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-    return Promise.resolve(
-      dispatch(addfiscalIdentityToInvoiceAction(name, cuit)),
-    );
+    return instance.put('/v1/my....', { resource })
+      .then(() => {
+        dispatch(addfiscalIdentityToInvoiceAction(name, cuit));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 };
 

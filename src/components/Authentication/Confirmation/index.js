@@ -1,19 +1,20 @@
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import Confirmation from './Component';
 import { confirmCode } from '../../../app/authentication/actions';
 
-const mapStateToProps = (state) => ({
-});
+const mapStateToProps = (state) => {
+  return { email: state.authentication.registration.email };
+};
 
 function mapDispatchToProps(dispatch) {
-    return{
-        confirmCode: (email, confirmationCode) => dispatch(confirmCode(email,confirmationCode)),
-    };
+  return {
+    confirmCode: (email, confirmationCode) => dispatch(confirmCode(email, confirmationCode)),
+  };
 }
-  
-const component = connect( 
-    mapStateToProps,
-    mapDispatchToProps,
+
+const component = connect(
+  mapStateToProps,
+  mapDispatchToProps,
 )(Confirmation);
 
 export default component;

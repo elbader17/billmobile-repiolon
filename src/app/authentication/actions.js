@@ -32,7 +32,6 @@ const signIn = (email, password) => {
           dispatch(userSignedUp(null, password));
         } else {
           const { jwtToken } = data.signInUserSession.idToken;
-          console.log(jwtToken);
           dispatch(setJwtToken(jwtToken));
           dispatch(getFiscalIdentity());
         }
@@ -63,7 +62,6 @@ const confirmCode = (email, confirmationCode) => {
   return (dispatch, getState) => {
     return Auth.confirmSignUp(email, confirmationCode, {})
       .then(() => {
-        console.log(getState().authentication);
         const { password } = getState().authentication.registration;
         dispatch(hideConfirmationModal());
         return dispatch(signIn(password, email));

@@ -19,7 +19,7 @@ function updateInvoiceItemAction(invoiceItem) {
 }
 
 // eslint-disable-next-line func-names
-const createInvoiceItem = (category, name, price) => {
+const createInvoiceItem = (category, name, price, invoiceId) => {
 
   const resource = {
     category,
@@ -27,18 +27,17 @@ const createInvoiceItem = (category, name, price) => {
     price,
   };
 
-  return (dispatch) => {
-    // const instance = axios.create({
-    //   headers: { 'JWT-TOKEN': getState().authentication.jwtToken },
-    // });
-    // return instance.post(`v1/invoice_items?invoice_id=${invoiceId}`, { resource })
-    //   .then((response) => {
-    //     dispatch(createInvoiceItemAction(response.data));
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-    return Promise.resolve(dispatch(createInvoiceItemAction(resource)));
+  return (dispatch, getState) => {
+    const instance = axios.create({
+      headers: { 'JWT-TOKEN': getState().authentication.jwtToken },
+    });
+    return instance.post(`v1/invoice_items?invoice_id=${invoiceId}`, { resource })
+      .then((response) => {
+        dispatch(createInvoiceItemAction(response.data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 };
 
