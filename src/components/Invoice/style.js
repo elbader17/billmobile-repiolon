@@ -8,14 +8,22 @@ const styles = StyleSheet.create({
   container: {
     height: hp('100%') - METRICS.heightHeader - METRICS.heightStatusBar,
     backgroundColor: COLORS.blue,
-    padding: 18,
+    paddingHorizontal: 18,
+    paddingVertical: 7,
   },
   containerCustomers: {
     height: hp('25%'),
     backgroundColor: COLORS.white,
     borderRadius: 5,
-    marginVertical: 20,
+    marginVertical: 15,
     elevation: 3,
+  },
+  containerItemsInvoice: {
+    height: hp('30%'),
+    backgroundColor: COLORS.white,
+    borderRadius: 5,
+    elevation: 3,
+    marginTop: 10
   },
   modalVoucher: {
     flex: 1,
@@ -30,11 +38,29 @@ const styles = StyleSheet.create({
     width: '35%',
   },
   boxModal: {
-    width: wp('80%'),
+    width: wp('70%'),
     height: hp('40%'),
     backgroundColor: COLORS.white,
     borderRadius: 3,
     elevation: 20,
+  },
+  boxItemsInvoice: {
+    height: hp('23%'),
+    backgroundColor: 'transparent',
+    paddingTop: 7,
+  },
+  boxItemsInvoiceTotal: {
+    height: hp('7%'),
+    backgroundColor: 'transparent',
+    paddingHorizontal: 15
+  },
+  boxItems1: {
+    flex: 1,
+  },
+  boxItems2: {},
+  boxItems3: {
+    flex: 0.5, 
+    alignItems: 'flex-end',
   },
   boxVoucherType: {
     flex: 1,
@@ -67,7 +93,7 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     paddingVertical: 3,
     paddingHorizontal: 10,
-    backgroundColor: COLORS.blue
+    backgroundColor: 'transparent'
   },
   buttonDate: {
     paddingVertical: 10,
@@ -94,15 +120,21 @@ const styles = StyleSheet.create({
   marginVertical8: {
     marginVertical: 8
   },
+  marginVertical5: {
+    marginVertical: 5
+  },
+  marginTop3: {
+    marginTop: 3
+  },
   textRegular16White: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size16,
     color: COLORS.white,
   },
-  textRegular18Blue: {
+  textRegular16Blue: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size16,
-    color: COLORS.white,
+    color: COLORS.blue,
   },
   textRegular16WhiteCenter: {
     fontFamily: FONTS.latoRegular,
@@ -112,8 +144,11 @@ const styles = StyleSheet.create({
   },
   lineGrayLight: {
     backgroundColor: COLORS.grayLight,
-    height: 1.2,
-    width: wp('75%')
+    height: 1,
+  },
+  lineGrayDark: {
+    backgroundColor: COLORS.grayDark,
+    height: 1,
   },
   lineGray: {
     backgroundColor: COLORS.gray,
@@ -125,9 +160,15 @@ const styles = StyleSheet.create({
   margin7: {
     margin: 7
   },
+  margin5: {
+    margin: 5
+  },
   listCustomer:{
     marginHorizontal: 15,
     marginVertical: 5
+  },
+  listItems: {
+    marginHorizontal: 15,
   },
   containerFinalConsumer: {
     flex:1 ,
@@ -178,6 +219,16 @@ const styles = StyleSheet.create({
     fontSize: FONTS.size11,
     color: COLORS.grayDark,
   },
+  textRegular12GrayDark: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size12,
+    color: COLORS.grayDark,
+  },
+  textRegular16GrayDark: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size16,
+    color: COLORS.grayDark,
+  },
   textRegular11Gray: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size11,
@@ -191,6 +242,16 @@ const styles = StyleSheet.create({
   textRegular14GrayDarkBold: {
     fontFamily: FONTS.latoSemiBold,
     fontSize: FONTS.size14,
+    color: COLORS.grayDark,
+  },
+  textRegular12RedkBold: {
+    fontFamily: FONTS.latoSemiBold,
+    fontSize: FONTS.size12,
+    color: COLORS.red,
+  },
+  textRegular16GrayDarkBold: {
+    fontFamily: FONTS.latoSemiBold,
+    fontSize: FONTS.size16,
     color: COLORS.grayDark,
   },
   textRegular18GrayDark: {
@@ -275,10 +336,30 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#EE6123',
   },
-  buttonConfirm: {
+  buttonContinue: {
     height: hp('8%'),
     backgroundColor: COLORS.red,
     borderRadius: 0,
+  },
+  buttonCheck: {
+    backgroundColor: 'transparent',
+    borderColor: COLORS.red,
+    borderRadius: 3,
+    borderWidth: 1,
+    width: wp('14%'),
+    height: hp('5%'),
+  },
+  buttonDelete: {
+    backgroundColor: 'transparent',
+    height: hp('3.5%'),
+    opacity: 0.9,
+    paddingHorizontal: 12
+  },
+  buttonCantProduct: {
+    backgroundColor: 'transparent',
+    height: hp('3.5%'),
+    borderWidth: 1,
+    borderColor: COLORS.red,
   },
   positionFinalButton: {
     position: 'absolute', 
@@ -286,6 +367,10 @@ const styles = StyleSheet.create({
     left:0, 
     right:0
   },
+  center: {
+    flex: 1,
+    justifyContent: 'center'
+  }
 });
 
 export default styles;

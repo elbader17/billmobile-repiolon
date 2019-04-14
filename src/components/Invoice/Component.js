@@ -125,7 +125,7 @@ class Invoice extends React.Component {
                 />
               }
               onPress={ this.createCustomer }
-              buttonStyle={ style.buttonConfirm }
+              buttonStyle={ style.buttonCheck }
             />            
           </View>
         </View>
@@ -207,19 +207,6 @@ class Invoice extends React.Component {
           </View>
         </View>
 
-        <View>
-          {this.props.items.map((i) => (
-            <View style={{flexDirection: 'row',justifyContent:'space-between'}}>
-              <View>
-                <Text>{i.name}</Text>
-              </View>
-              <View>
-                <Text>${i.price}</Text>
-              </View>
-            </View>
-          ))}
-        </View>
-
         <Button
           title={
             <Text>
@@ -241,11 +228,78 @@ class Invoice extends React.Component {
           titleStyle={ style.textRegular14GrayDark }
         />
 
+        <View style={[style.containerItemsInvoice,style.inColumnSpaceBetween]}>
+          <View style={style.boxItemsInvoice}> 
+          <ScrollView>
+            <View style={style.listItems}>
+              {this.props.items.map((i) => (
+              <View>
+                <View style={style.inLineSpaceBetween}>
+                  <View style={style.boxItems1}>
+                    <Text style={style.textRegular16GrayDark}>
+                      {i.name}
+                    </Text>
+                  </View>
+                  <View style={[style.inLineSpaceBetween,style.boxItems2]}>
+                    <Button
+                      title='X1'
+                      buttonStyle={style.buttonCantProduct}
+                      titleStyle={ style.textRegular12RedkBold }
+                    />
+                    
+                    <Button
+                      icon={
+                        <Icon
+                          name="md-trash"
+                          size={23}
+                          color="#EE6123"
+                        />
+                      }
+                      buttonStyle={style.buttonDelete}
+                    />
+                  </View>
+                  <View style={style.boxItems3}>
+                    <Text style={style.textRegular16GrayDark}>
+                      ${i.price}
+                    </Text>
+                  </View>
+                </View>
+                <View style={[style.lineGrayLight, style.marginVertical5]}></View>
+              </View>
+              ))}
+            </View>
+          </ScrollView>
+          </View>
+
+          <View style={[style.lineGray, style.marginHorizontal5]}></View>
+
+          <View style={style.boxItemsInvoiceTotal}>   
+            {/*<View style={style.center}>
+              <View style={style.inLineSpaceBetween}>
+                <Text style={style.textRegular12GrayDark}>SUBTOTAL</Text>
+                <Text style={style.textRegular12GrayDark}>$0</Text>
+              </View>
+              <View style={style.inLineSpaceBetween}>
+                <Text style={style.textRegular12GrayDark}>+Impuestos</Text>
+                <Text style={style.textRegular12GrayDark}>$0</Text>
+              </View>
+            </View>
+              <View style={[style.lineGray, style.marginTop3]}></View> */}
+
+            <View style={style.center}>
+              <View style={style.inLineSpaceBetween}>
+                <Text style={style.textRegular16GrayDarkBold}>TOTAL</Text>
+                <Text style={style.textRegular16GrayDarkBold}>$0</Text>
+              </View>
+            </View>
+          </View>
+        </View>
+
         <View style={style.positionFinalButton}>
           <Button
             title='CONTINUAR'
             onPress={ this.newInvoice }
-            buttonStyle={ style.buttonConfirm }
+            buttonStyle={ style.buttonContinue }
             titleStyle={ style.textSemiBold14White }
           />
         </View>
@@ -261,20 +315,18 @@ class Invoice extends React.Component {
                 <Text style={style.textRegular16WhiteCenter}>Tipo de Comprobante</Text>
               </View>
               <View style={style.boxVoucherType}>
-                <View style={style.lineGrayLight}></View>
                 {voucher.map((i) => (
                 <View>
                   <TouchableOpacity 
                     style={[style.borderVoucher,style.marginVertical8]}
                     onPress={() => this.selectionVoucher(i)}
                   >
-                    <Text style={style.textRegular18Blue}>
+                    <Text style={style.textRegular16Blue}>
                       {i.label}
                     </Text>
                   </TouchableOpacity>
                 </View>
                 ))}
-                <View style={style.lineGrayLight}></View>
               </View>
             </View>
           </View>
