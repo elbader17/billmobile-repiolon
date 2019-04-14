@@ -1,4 +1,4 @@
-import {  combineReducers } from 'redux';
+import { combineReducers } from 'redux';
 import authenticationReducer from '../app/authentication/reducer';
 import userserviceReducer from '../app/user_service/reducer';
 import fiscalIdentityReducer from '../app/fiscal_identity/reducer';
@@ -13,4 +13,3 @@ export default combineReducers({
   invoices: invoicesReducer,
   items: itemsReducer,
 });
-

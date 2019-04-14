@@ -7,7 +7,7 @@ import { Auth } from 'aws-amplify';
 import style from '../SignUp/style';
 
 const EMAIL_REGEXP = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
-const PASSWORD_REGEXP = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})"); 
+const PASSWORD_REGEXP = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
 
 class SignIn extends React.Component {
 
@@ -43,14 +43,14 @@ class SignIn extends React.Component {
           Alert.alert(_data.message);
           this.props.navigation.navigate('Authentication');
         }
-        
-        
+
+
       }
-    
+
     })
     .catch(err => Alert.alert("Error al Ingresar: ",err.message));
   }
-  
+
   validateData = () => {
     const isValidPassword = PASSWORD_REGEXP.test(this.state.password);
     const isValidEmail = EMAIL_REGEXP.test(String(this.state.email).toLowerCase());
@@ -73,32 +73,33 @@ class SignIn extends React.Component {
               value={this.state.email}
               placeholder="Tu email"
               style={ style.textBox }
+              keyboardType='email-address'
             />
           </View>
           <View style={ style.textBoxBtnHolder }>
             <TextInput
-              label="Password" 
+              label="Password"
               onChangeText={this.setPassword}
               value={this.state.password}
               placeholder="Contraseña"
               style={ style.textBox }
-              secureTextEntry={ this.state.hidePassword } 
-            />        
-            <TouchableOpacity 
-              activeOpacity={ 0.8 } 
-              style={ style.visibilityBtn } 
+              secureTextEntry={ this.state.hidePassword }
+            />
+            <TouchableOpacity
+              activeOpacity={ 0.8 }
+              style={ style.visibilityBtn }
               onPress={ this.managePasswordVisibility }
             >
-              <Image 
-                source={( this.state.hidePassword ) ? hide : show } 
-                style={ style.btnImage } 
+              <Image
+                source={( this.state.hidePassword ) ? hide : show }
+                style={ style.btnImage }
               />
             </TouchableOpacity>
           </View>
 
           <TouchableOpacity>
             <Text style={[style.textRegular11GrayDark, {paddingVertical: 15}] }>
-              ¿No tienes una cuenta? 
+              ¿No tienes una cuenta?
               <Text style={ style.textRed }> Registrate</Text>
             </Text>
           </TouchableOpacity>
@@ -122,7 +123,7 @@ class SignIn extends React.Component {
           <Text style={style.textRegular11GrayDarkBold}>
             Términos y Condiciones y Políticas de Privacidad
           </Text>
-        </View>  
+        </View>
       </View>
     )
   }

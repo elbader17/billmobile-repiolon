@@ -4,4 +4,4 @@ const config = {
 	userPoolId:'us-west-2_QwvQuSpPB',
 	userPoolWebClientId:'3e9leqnv8n1libugr1qipfqg49'
 }
-export default config
+export default config;
