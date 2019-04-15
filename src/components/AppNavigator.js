@@ -30,7 +30,7 @@ const AppStack = createStackNavigator(
 
 const AppLogin = createStackNavigator(
   {
-    Intro,
+    // Intro,
     Authentication,
     ConfirmationCodeRegister,
   },
