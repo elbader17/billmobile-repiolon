@@ -350,6 +350,23 @@ const styles = StyleSheet.create({
     width: wp('14%'),
     height: hp('5%'),
   },
+  buttonCheckCustomerDisabled: {
+    backgroundColor: 'transparent',
+    borderColor: COLORS.red,
+    borderRadius: 3,
+    borderWidth: 1,
+    width: wp('13%'),
+    height: hp('3.5%'),
+    opacity: 0.6
+  },
+  buttonCheckCustomerEnabled: {
+    backgroundColor: '#fceaea',
+    borderColor: COLORS.red,
+    borderRadius: 3,
+    borderWidth: 1,
+    width: wp('13%'),
+    height: hp('3.5%'),
+  },
   buttonDelete: {
     backgroundColor: 'transparent',
     height: hp('3.5%'),

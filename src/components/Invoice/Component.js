@@ -39,6 +39,7 @@ class Invoice extends React.Component {
       date: new Date().getDate()+'/'+ new Date().getMonth()+'/'+ new Date().getFullYear(),
       modalVisible: false,
       voucher: voucher[0],
+      selectCustomer: false,
     }
   }
 
@@ -94,6 +95,10 @@ class Invoice extends React.Component {
 
   changeTypeCustomer = () => {
     this.setState({cf:true})
+  }
+
+  selectCustomer() {
+    this.setState({selectCustomer:!this.state.selectCustomer})
   }
 
   renderViewItemsAdd = () => {
@@ -158,11 +163,9 @@ class Invoice extends React.Component {
   renderCustomer = () => {
     if (!this.state.cf) {
       return (
-        <ScrollView>
+        <ScrollView pagingEnabled={true}>
           <View style={style.listCustomer}>
-            <Text style={style.textRegular14GrayDark}>
-              {this.props.identitiFiscal.name}
-            </Text>    
+            {this.renderListCustomers()}
           </View>
         </ScrollView>
       );
@@ -190,6 +193,38 @@ class Invoice extends React.Component {
         </View>
       );
     }
+  }
+
+  renderListCustomers = () => {
+    //PREGUNTAR A NICO
+    //Alert.alert('fasas'+this.props.identitiFiscal.name)
+    if (this.props.identitiFiscal.name!='') {
+      return(
+        <View style={style.inLineSpaceBetween}>
+        <Text style={style.textRegular14GrayDark}>
+          {this.props.identitiFiscal.name}
+        </Text>  
+        <Button
+          icon={
+            <Icon
+              name="md-checkmark"
+              size={20}
+              color="#EE6123"
+            />
+          }
+          onPress={() => {this.selectCustomer()} }
+          buttonStyle={ this.state.selectCustomer ? style.buttonCheckCustomerEnabled : style.buttonCheckCustomerDisabled }
+        />  
+        </View> 
+      );
+    } else {
+        return(
+          <Text>
+            No hay Clientes Cargados
+          </Text>
+       );
+      }
+
   }
 
   render() {
