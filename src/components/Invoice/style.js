@@ -19,11 +19,12 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   containerItemsInvoice: {
-    height: hp('30%'),
+    maxHeight: hp('30%'),
     backgroundColor: COLORS.white,
     borderRadius: 5,
     elevation: 3,
-    marginTop: 10
+    marginTop: 10,
+    overflow: 'hidden'
   },
   modalVoucher: {
     flex: 1,
@@ -45,9 +46,9 @@ const styles = StyleSheet.create({
     elevation: 20,
   },
   boxItemsInvoice: {
-    height: hp('23%'),
+    maxHeight: hp('23%'),
     backgroundColor: 'transparent',
-    paddingTop: 7,
+    paddingTop: 2,
   },
   boxItemsInvoiceTotal: {
     height: hp('7%'),
