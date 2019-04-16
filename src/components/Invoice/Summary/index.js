@@ -3,8 +3,8 @@ import InvoiceSummary from './Component';
 
 const mapStateToProps = state => ({
   jwtToken: state.authentication.jwtToken,
-  identitiFiscal: state.identitiFiscal,
-  items: state.items.items,
+  fiscalIdentity: state.invoices.currentInvoice.fiscalIdentity,
+  items: state.invoices.currentInvoice.invoiceItems,
 });
 
 

@@ -5,7 +5,7 @@ import { withNavigation } from 'react-navigation';
 import style from './style';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-class Item extends React.Component {
+class ItemList extends React.Component {
 
   constructor(props) {
     super(props);
@@ -27,7 +27,7 @@ class Item extends React.Component {
   }
   
   newItemNavigate = () => {
-    this.props.navigation.navigate('NewItems');
+    this.props.navigation.navigate('NewInvoiceItem');
   }
 
   listEditableNavigate = () => {
@@ -42,7 +42,7 @@ class Item extends React.Component {
             this.props.items.map((i) => (
               <View style={{flexDirection: 'row',justifyContent:'space-between'}}>
                 <View>
-                  <Text>{i.name}</Text>
+                  <Text>{i.name} gg</Text>
                 </View>
                 <View>
                   <Text>${i.price}</Text>
@@ -118,4 +118,4 @@ class Item extends React.Component {
   }
 }
 
-export default withNavigation(Item);
+export default withNavigation(ItemList);

@@ -4,6 +4,7 @@ import { Button} from "react-native-elements";
 import { withNavigation } from 'react-navigation';
 import style from '../style';
 
+
 class NewItem extends React.Component {
 
   constructor(props) {
@@ -125,6 +126,7 @@ class NewItem extends React.Component {
       </ScrollView>
     )
   }
+
 }
 
 export default withNavigation(NewItem);

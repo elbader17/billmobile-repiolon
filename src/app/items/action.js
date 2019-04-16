@@ -44,14 +44,13 @@ const createItem = (category, name, price) => {
     const instance = axios.create({
       headers: { 'JWT-TOKEN': getState().authentication.jwtToken },
     });
-    // return instance.post('v1/items', { resource })
-    //  .then(() => {
-        return Promise.resolve( dispatch(createItemAction(category, name, price)));
-    /*  })
+    return instance.post('v1/items', { resource })
+      .then(() => {
+        return dispatch(createItemAction(category, name, price));
+      })
       .catch((error) => {
         console.log(error);
       });
-    */
   };
 };
 

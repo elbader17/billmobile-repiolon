@@ -5,7 +5,7 @@ import Confirmation from '../Confirmation';
 import style from './style';
 
 const EMAIL_REGEXP = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
-const PASSWORD_REGEXP = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})"); 
+const PASSWORD_REGEXP = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
 
 class SignUp extends React.Component {
 
@@ -13,9 +13,9 @@ class SignUp extends React.Component {
     super(props);
     this.state = {
       email: '',
-      password: '@Am12345',
+      password: '@Martin44',
       name:'Agustin',
-      confirmPassword: '@Am12345',
+      confirmPassword: '@Martin44',
       confirmationEmail:'',
       hidePassword: true,
       hideConfirmPassword: true
@@ -55,7 +55,7 @@ class SignUp extends React.Component {
   setEmail = (value) => this.setState({ email: value })
   setPassword = (value) => this.setState({ password: value })
   setConfirmPassword = (value) => this.setState({ confirmPassword: value })
-    
+
   render() {
     const hide = require('../../../images/hide.png')
     const show = require('../../../images/show.png')
@@ -80,51 +80,53 @@ class SignUp extends React.Component {
               onRef={ r => { this.state.email = r }}
               editable={ !this.props.fetching }
               returnKeyType='next'
+              keyboardType='email-address'
             />
           </View>
           <View style={ style.textBoxBtnHolder }>
-            <TextInput 
+            <TextInput
               label="Password"
               value={ this.state.password }
               onChangeText={ this.setPassword }
               placeholder="Contraseña"
               style={ style.textBox }
               secureTextEntry={ this.state.hidePassword }
-            />        
-            <TouchableOpacity 
-              activeOpacity={ 0.8 } 
-              style={ style.visibilityBtn } 
+            />
+            <TouchableOpacity
+              activeOpacity={ 0.8 }
+              style={ style.visibilityBtn }
               onPress={ this.managePasswordVisibility }
             >
-              <Image 
-                source={( this.state.hidePassword ) ? hide : show } 
-                style={ style.btnImage } 
+              <Image
+                source={( this.state.hidePassword ) ? hide : show }
+                style={ style.btnImage }
               />
             </TouchableOpacity>
           </View>
           <View style={ style.textBoxBtnHolder }>
-            <TextInput 
+            <TextInput
               label="ConfirmPassword"
               onChangeText={ this.setConfirmPassword }
+              value={ this.confirmPassword }
               placeholder="Confirmar Contraseña"
               style={ style.textBox }
-              secureTextEntry={ this.state.hideConfirmPassword } 
-            />        
-            <TouchableOpacity 
-              activeOpacity={ 0.8 } 
-              style={ style.visibilityBtn } 
+              secureTextEntry={ this.state.hideConfirmPassword }
+            />
+            <TouchableOpacity
+              activeOpacity={ 0.8 }
+              style={ style.visibilityBtn }
               onPress={ this.manageConfirmPasswordVisibility }
             >
-              <Image 
-                source={( this.state.hideConfirmPassword ) ? hide : show } 
-                style={ style.btnImage } 
+              <Image
+                source={( this.state.hideConfirmPassword ) ? hide : show }
+                style={ style.btnImage }
               />
             </TouchableOpacity>
-          </View>   
+          </View>
 
           <TouchableOpacity>
             <Text style={[style.textRegular11GrayDark, {paddingVertical: 15}] }>
-            ¿Ya tienes una cuenta? 
+            ¿Ya tienes una cuenta?
             <Text style={ style.textRed }> Iniciar Sesión</Text>
             </Text>
           </TouchableOpacity>
@@ -140,7 +142,7 @@ class SignUp extends React.Component {
             disabledStyle={ style.submitDisabled }
             disabled={ !this.validateData() }
           />
-        </View> 
+        </View>
         <View style={style.containerFooter}>
             <Text style={style.textRegular11GrayDark}>
               Al registrarte estas aceptando nuestros
@@ -148,7 +150,7 @@ class SignUp extends React.Component {
             <Text style={style.textRegular11GrayDarkBold}>
               Términos y Condiciones y Políticas de Privacidad
             </Text>
-          </View>  
+          </View>
         <Modal visible={ this.props.showConfirmationModal }>
           <Confirmation/>
         </Modal>

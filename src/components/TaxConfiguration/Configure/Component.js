@@ -10,8 +10,8 @@ class TaxConfiguration extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      cuit: '',
+      name: this.props.name,
+      cuit: this.props.cuit,
     };
   }
 
@@ -26,7 +26,6 @@ class TaxConfiguration extends React.Component{
     const { updateFiscalIdentity } = this.props;
     updateFiscalIdentity(name, cuit)
      .then((data) => {
-      Alert.alert("Pops Data: "+this.props.name+" "+this.props.cuit);
       this.props.navigation.push('HomeScreen');
     })
   }
@@ -34,7 +33,7 @@ class TaxConfiguration extends React.Component{
   setName = (value) => this.setState({ name: value})
   setCuit = (value) => this.setState({ cuit: value })
 
-    
+
   render() {
     return(
     <KeyboardAwareScrollView>
@@ -46,6 +45,7 @@ class TaxConfiguration extends React.Component{
           <TextInput style={ style.textRegular14DarkGray }
             onChangeText={this.setName}
             style={ style.textBox }
+            value={this.state.name}
           />
           <Text style={ style.textRegular18GrayDark }>
             INGRESA TU CUIT
@@ -53,9 +53,10 @@ class TaxConfiguration extends React.Component{
           <TextInput style={ style.textRegular14DarkGray }
             onChangeText={this.setCuit}
             style={ style.textBox }
+            value={this.state.cuit}
           />
           <Text style={[style.textDescription, {paddingVertical: 15}] }>
-            Con el CUIT podremos acceder a tu informacion y 
+            Con el CUIT podremos acceder a tu informacion y
             configurar la cuenta por ti.
           </Text>
         </View>

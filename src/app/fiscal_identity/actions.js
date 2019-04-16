@@ -13,8 +13,15 @@ function setIdentitiFiscal(name, cuit) {
   };
 }
 
+function addfiscalIdentityToInvoiceAction(name, cuit) {
+  return {
+    type: ADD_FISCAL_IDENTIY_TO_INVOICE,
+    fiscalIdentity: { name, cuit },
+  };
+}
+
 // eslint-disable-next-line func-names
-const registerFiscalIdentity = function (name, cuit) {
+const addFiscalIdentityToInvoice = function (name, cuit) {
 
   const resource = {
     category: 'monotributo',
@@ -28,13 +35,12 @@ const registerFiscalIdentity = function (name, cuit) {
     });
     return instance.put('/v1/my....', { resource })
       .then(() => {
-        dispatch(setIdentitiFiscal(name, cuit));
+        dispatch(addfiscalIdentityToInvoiceAction(name, cuit));
       })
       .catch((error) => {
-        dispatch(setIdentitiFiscal(name, cuit));
         console.log(error);
       });
   };
 };
 
-export { registerFiscalIdentity };
+export { addFiscalIdentityToInvoice };

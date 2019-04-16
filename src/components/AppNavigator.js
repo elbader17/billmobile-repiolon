@@ -4,9 +4,10 @@ import Authentication from './Authentication';
 import TaxConfiguration from './TaxConfiguration/Configure';
 import Loading from './Loading';
 import Home from './Home';
-import NewCostumer from './Costumer';
-import Item from './Item';
+import NewCustomer from './NewCustomer';
+import InvoiceItemList from './Invoice/ItemList';
 import NewItem from './Item/NewItem';
+import NewInvoiceItem from './Invoice/NewInvoiceItem';
 import Invoice from './Invoice';
 import ListEditableItem from './Item/ListEditableItem';
 import InvoiceSummary from './Invoice/Summary';
@@ -16,19 +17,20 @@ const AppStack = createStackNavigator(
   {
     Configure: TaxConfiguration,
     HomeScreen: Home,
-    NewCostumer,
-    Items: Item,
+    NewCustomer,
+    InvoiceItemList,
+    NewInvoiceItem,
     NewItems: NewItem,
     Invoice,
     ListEditableItem,
     InvoiceSummary,
-    
+
   },
 );
 
 const AppLogin = createStackNavigator(
   {
-    //Intro,
+    // Intro,
     Authentication,
     ConfirmationCodeRegister,
   },
@@ -41,7 +43,7 @@ const Prueba = createStackNavigator(
   {
     //InvoiceSummary,
     //VerticalStackLayout,
-    NewCostumer,
+    NewCustomer,
   },
 );
 

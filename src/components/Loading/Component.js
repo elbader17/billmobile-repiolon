@@ -8,9 +8,8 @@ class Loading extends React.Component {
   }
 
   componentDidMount() {
-    const token = this.props.jwtToken;
-    Alert.alert(this.props.jwtToken);
-    //this.props.navigation.navigate((token != undefined) ? 'App' : 'Login');
+    const { jwtToken } = this.props;
+    this.props.navigation.navigate(jwtToken ? 'Login' : 'App');
     this.props.navigation.navigate('Login');
   };
 

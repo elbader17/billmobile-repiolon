@@ -45,7 +45,7 @@ class Home extends React.Component {
     ),
   };
 
-  newClientNavigate = () => { 
+  newClientNavigate = () => {
   }
 
   newItemNavigate = () => {
@@ -85,7 +85,7 @@ class Home extends React.Component {
             <View style={style.lineGrayLight}></View>
             <View style={[style.inLine, {margin: 10}]}>
               <Text style={style.textRegular14GrayDark}>
-                { this.props.name} 
+                { this.props.name}
               </Text>
               <Button
                 icon={
@@ -99,26 +99,26 @@ class Home extends React.Component {
                 buttonStyle={ style.buttonShowInvoice }
                 titleStyle={ style.textButtonInvoice }
               />
-              
+
             </View>
           </View>
-          
+
             <ActionButton buttonColor='#EE6123'>
-              <ActionButton.Item 
-                title="Clientes" 
+              <ActionButton.Item
+                title="Clientes"
                 onPress={ this.newClientNavigate }
                 buttonColor="#61B54C"
               >
                 <Icon name="md-person" style={style.actionButtonIcon} />
               </ActionButton.Item>
-              <ActionButton.Item 
-                title="Items" 
+              <ActionButton.Item
+                title="Items"
                 onPress={ this.newItemNavigate }
                 buttonColor="#B31212"
               >
                 <Icon name="md-paper" style={style.actionButtonIcon} />
               </ActionButton.Item>
-              <ActionButton.Item 
+              <ActionButton.Item
                 title="Facturas"
                 onPress={ this.newInvoiceNavigate }
                 buttonColor="#3687D1"
@@ -126,10 +126,10 @@ class Home extends React.Component {
                 <Icon name="md-cash" style={style.actionButtonIcon} />
               </ActionButton.Item>
             </ActionButton>
-          
+
         </View>
       </View>
-      
+
       </KeyboardAwareScrollView>
     )
   }

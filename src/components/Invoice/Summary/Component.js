@@ -41,7 +41,7 @@ class InvoiceSummary extends React.Component {
           <View style={style.lineGray}></View>
 
           <View style={style.boxCustomer}>
-            <Text style={[style.textRegular14GrayDark,style.marginBottom5]}>{ this.props.identitiFiscal.name }</Text>
+            <Text style={[style.textRegular14GrayDark,style.marginBottom5]}>{ this.props.fiscalIdentity.name }</Text>
             <Text style={style.textRegular11Gray}>CUIT: {'00-00000000-0'}</Text>
             <Text style={style.textRegular11Gray}>Localidad: {'Río Cuarto'}</Text>
             <Text style={style.textRegular11Gray}>Provincia: {'Córdoba'}</Text>

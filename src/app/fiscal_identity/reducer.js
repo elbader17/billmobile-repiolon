@@ -8,17 +8,17 @@ const initialState = {
   cuit: '',
 };
 
-function setIdentitiFiscal({ draftState, name, cuit }) {
+function setfiscalIdentity({ draftState, name, cuit }) {
   draftState.name = name;
   draftState.cuit = cuit;
   return draftState;
 }
 
-export default identitiFiscalReducer = (state = initialState, action) => {
+export default fiscalIdentityReducer = (state = initialState, action) => {
   return producer(state, (draftState) => {
     switch (action.type) {
       case SET_FISCAL_IDENTITY:
-        return setIdentitiFiscal({
+        return setfiscalIdentity({
           draftState,
           name: action.name,
           cuit: action.cuit,

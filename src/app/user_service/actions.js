@@ -6,7 +6,7 @@ import {
   SET_MY_FISCAL_IDENTITY,
 } from './constants';
 
-function setParams(name, cuit) {
+function setMyFiscalIdentity(name, cuit) {
   return {
     type: SET_MY_FISCAL_IDENTITY,
     name,
@@ -27,7 +27,7 @@ const updateFiscalIdentity = function (name, cuit) {
     });
     return instance.put('/v1/my/fiscal_identity', { resource })
       .then(() => {
-        dispatch(setParams(name, cuit));
+        dispatch(setMyFiscalIdentity(name, cuit));
       })
       .catch((error) => {
         console.log(error);
@@ -42,7 +42,8 @@ const getFiscalIdentity = function () {
     });
     return instance.get('/v1/my/fiscal_identity')
       .then((response) => {
-        dispatch(setParams(response.data.name, response.data.cuit));
+        const { name, identification } = response.data.data.attributes;
+        dispatch(setMyFiscalIdentity(name, identification));
         return response.data;
       })
       .catch((error) => {

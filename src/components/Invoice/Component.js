@@ -2,58 +2,27 @@ import React from 'react';
 import { View, Text, Modal, TextInput, TouchableOpacity, ScrollView, TouchableWithoutFeedback, Alert} from 'react-native';
 import { Button } from "react-native-elements";
 import { withNavigation } from 'react-navigation';
-import style from './style';
-import Icon from 'react-native-vector-icons/Ionicons';
 import DateTimePicker from 'react-native-modal-datetime-picker';
-
-const voucher = [
-  {
-    label: 'FACTURA-C',
-    value: 'fc',
-  },
-  {
-    label: 'RECIBO-C',
-    value: 'rc',
-  },
-  {
-    label: 'NOTA DE CRÉDITO-C',
-    value: 'ncc',
-  },
-  {
-    label: 'NOTA DE DÉBITO-C',
-    value: 'ndc',
-  },
-];
+import Icon from 'react-native-vector-icons/Ionicons';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import style from './style';
+import { VOUCHER_TYPES } from '../../constants/invoice';
 
 class Invoice extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      typeVoucher: '',
-      cf: false,
+      voucherType: 'fc',
+      selectedIndex: 0,
       isDateTimePickerVisible: false,
       isDateTimeVisible:false,
       bool:false,
-      date: new Date().getDate()+'/'+ new Date().getMonth()+'/'+ new Date().getFullYear(),
+      invoiceDate: this.props.invoiceDate,
+      fcIndentification: '',
       modalVisible: false,
-      voucher: voucher[0],
-      selectCustomer: false,
     }
   }
-
-  setModalVisible(visible) {
-    this.setState({modalVisible: visible});
-  }
-
-  showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true});
- 
-  hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
-
-  handleDatePicked = (date) => {
-    this.setState({ date: date.getDate()+'/'+ date.getMonth()+'/'+date.getFullYear() })
-    this.hideDateTimePicker();
-  };
 
   static navigationOptions = {
     title: 'GENERACIÓN DE COMPROBANTE',
@@ -61,35 +30,51 @@ class Invoice extends React.Component {
     headerTintColor: '#3687D1',
   };
 
-  updateIndex = () => {
+  showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true});
+
+  hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
+
+  handleDatePicked = (date) => {
+    this.setState({ invoiceDate: date })
+    this.hideDateTimePicker();
+  };
+
+  selectCustomerType = () => {
     const newIndex = this.state.selectedIndex === 0 ? 1 : 0;
     this.setState({ selectedIndex: newIndex });
+  }
+
+  presentInvoiceDate = () => {
+    const d = this.state.invoiceDate;
+    return `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
   }
 
   navigateClient = () => {
     this.props.navigation.navigate('NewCustomer');
   }
 
-  navigateClient = () => {
-    this.props.navigation.navigate('NewCostumer');
-  }
-
-  xxx = () => {
-    this.props.navigation.navigate('Items');
+  addItems = () => {
+    this.props.navigation.navigate('InvoiceItemList');
   }
 
   newInvoice = () => {
-    const { identitiFiscal } = this.props.identitiFiscal;
+    const { fiscalIdentity } = this.props.fiscalIdentity;
     const { items} = this.props.items;
     //createInvoice()
-
     this.props.navigation.navigate('InvoiceSummary');
+  }
 
+  addFinalConsumer = () => {
+
+  }
+
+  setFcIndentification = (value) => {
+    this.setState({ fcIndentification: value });
   }
 
   selectionVoucher = (date) => {
     this.setModalVisible(!this.state.modalVisible);
-    this.setState({voucher: date})
+    this.setState({voucherType: date})
   }
 
   changeTypeCustomer = () => {
@@ -223,7 +208,6 @@ class Invoice extends React.Component {
           </Text>
        );
       }
-
   }
 
   render() {
@@ -239,14 +223,14 @@ class Invoice extends React.Component {
               style={style.buttonVoucher}
             >
               <Text style={style.textRegular16WhiteCenter}>
-                {this.state.voucher.label}
+                {this.state.voucherType.label}
               </Text>
             </TouchableOpacity>
           </View>
           <View style={style.boxDate}>
             <TouchableOpacity onPress={this.showDateTimePicker} style={style.buttonDate}>
               <Text style={style.textRegular16WhiteCenter}>
-                {this.state.date}
+                {this.state.invoiceDate}
               </Text>
             </TouchableOpacity>
             <DateTimePicker
@@ -343,7 +327,7 @@ class Invoice extends React.Component {
                 <Text style={style.textRegular16WhiteCenter}>Tipo de Comprobante</Text>
               </View>
               <View style={style.boxVoucherType}>
-                {voucher.map((i) => (
+                {VOUCHER_TYPES.map((i) => (
                 <View>
                   <TouchableOpacity 
                     style={[style.borderVoucher,style.marginVertical8]}

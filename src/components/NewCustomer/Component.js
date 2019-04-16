@@ -26,7 +26,22 @@ const conditionIVA = [
   },
 ];
 
-class NewCostumer extends React.Component {
+const conditionSale = [
+  {
+    label: 'CONTADO',
+    value: 'contado',
+  },
+  {
+    label: 'DÉBITO',
+    value: 'debito',
+  },
+  {
+    label: 'CRÉDITO',
+    value: 'credito',
+  },
+];
+
+class NewCustomer extends React.Component {
 
   constructor(props) {
     super(props);
@@ -41,10 +56,10 @@ class NewCostumer extends React.Component {
     }
   }
 
-  newCostumer = () => {
+  newCustomer = () => {
     const { name, category, cuit } = this.state;
-    const { registerFiscalIdentity } = this.props;
-    registerFiscalIdentity(name, cuit)
+    const { addFiscalIdentityToInvoice } = this.props;
+    addFiscalIdentityToInvoice(name, cuit)
     .then((data) => {
       Alert.alert("Cliente Cargado: "+this.props.name+" "+this.props.cuit);
       this.props.navigation.navigate('Invoice');
@@ -106,12 +121,14 @@ class NewCostumer extends React.Component {
           </View>
           <View style={style.positionFinalButton}>
             <Button
-              onPress={this.newCostumer}
+              onPress={this.newCustomer}
               title='GUARDAR'
               buttonStyle={ style.buttonConfirm }
               titleStyle={ style.textRegular14White }
             />
           </View>
+          <Text style={ style.textRegular11White }> Esta condición será la que aparecerá para el cliente per luego pordrás cambiarla en la facturación</Text>
+          <View style={style.lineWhite}></View>
       </View>
       </KeyboardAwareScrollView>
     )
@@ -119,4 +136,4 @@ class NewCostumer extends React.Component {
 }
 
 
-export default withNavigation(NewCostumer);
+export default withNavigation(NewCustomer);

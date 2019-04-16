@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import Home from './Component';
 
 const mapStateToProps = state => ({
-  name: state.identitiFiscal.name,
+  name: state.fiscalIdentity.name,
 });
 
 const component = connect(
