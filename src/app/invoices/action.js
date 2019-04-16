@@ -3,19 +3,26 @@ import {
   LIST_INVOICE,
   GET_INVOICE,
   CREATE_INVOICE,
+  UPDATE_INVOICE,
 } from './constant';
 
-function createInvoiceAction(name, price) {
+function createInvoiceAction(invoice) {
   return {
     type: CREATE_INVOICE,
-    name,
-    price,
+    invoice,
+  };
+}
+
+function updateInvoiceAction(invoice) {
+  return {
+    type: UPDATE_INVOICE,
+    invoice,
   };
 }
 
 function getInvoiceAction(invoice) {
   return {
-    type: CREATE_INVOICE,
+    type: GET_INVOICE,
     invoice,
   };
 }
@@ -27,17 +34,48 @@ function listInvoiceAction(invoices) {
   };
 }
 
-const createInvoice = () => {
+const createInvoice = (invoiceDate, voucherType) => {
+  const resource = {
+    invoice_date: invoiceDate,
+    invoice_type: voucherType,
+  };
+
   return (dispatch, getState) => {
     const instance = axios.create({
       headers: { 'JWT-TOKEN': getState().authentication.jwtToken },
     });
-    return instance.post('v1/invoices')
+    return instance.post('v1/invoices', { resource })
       .then((response) => {
-        dispatch(createInvoiceAction(response.data));
+        return dispatch(createInvoiceAction(response.data.data));
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.response);
+      });
+  };
+};
+
+const updateInvoice = (values) => {
+  let resource = {};
+  if (values.invoiceDate != null) {
+    resource.invoice_date = values.invoiceDate;
+  }
+  if (values.voucherType != null) {
+    resource.invoice_type = values.voucherType;
+  }
+
+  return (dispatch, getState) => {
+    const { jwtToken } = getState().authentication;
+    const { id: invoiceId } = getState().invoices.currentInvoice;
+    const instance = axios.create({
+      headers: { 'JWT-TOKEN': jwtToken },
+    });
+
+    return instance.put(`v1/invoices/${invoiceId}`, { resource })
+      .then((response) => {
+        return dispatch(updateInvoiceAction(response.data.data));
+      })
+      .catch((error) => {
+        console.log(error.response);
       });
   };
 };
@@ -73,4 +111,4 @@ const getInvoice = (id) => {
 };
 
 
-export { listInvoice, getInvoice, createInvoice };
+export { listInvoice, getInvoice, createInvoice, updateInvoice };

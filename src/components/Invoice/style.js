@@ -174,7 +174,7 @@ const styles = StyleSheet.create({
   containerFinalConsumer: {
     maxHeight: hp('10%'),
     justifyContent: 'center',
-    marginHorizontal: 15,
+    marginHorizontal: 7,
   },
   containerInputCustomer: {
     backgroundColor: 'red',

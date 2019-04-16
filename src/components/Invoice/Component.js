@@ -12,15 +12,17 @@ class Invoice extends React.Component {
 
   constructor(props) {
     super(props);
+    const { fiscalIdentity } = this.props;
+    fcIndentification = fiscalIdentity.name === 'fc' ? fiscalIdentity.cuit : ''
     this.state = {
-      voucherType: 'fc',
+      voucherType: VOUCHER_TYPES.find((v) => v.value===this.props.voucherType),
       selectedIndex: 0,
       isDateTimePickerVisible: false,
       isDateTimeVisible:false,
       bool:false,
       invoiceDate: this.props.invoiceDate,
-      fcIndentification: '',
       modalVisible: false,
+      fcIndentification,
     }
   }
 
@@ -30,18 +32,36 @@ class Invoice extends React.Component {
     headerTintColor: '#3687D1',
   };
 
+  setModalVisible(visible) {
+    this.setState({modalVisible: visible});
+  }
+
   showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true});
 
   hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
 
   handleDatePicked = (date) => {
-    this.setState({ invoiceDate: date })
+    this.setState({ invoiceDate: date });
     this.hideDateTimePicker();
+    this.createOrUpdateInvoice({ invoiceDate: date });
+  }
+
+  createOrUpdateInvoice = (values) => {
+    const {
+      updateInvoice,
+      createInvoice,
+      invoiceId,
+    } = this.props;
+    const { invoiceDate, voucherType } = this.state ;
+    if (invoiceId != null) {
+      updateInvoice(values);
+    } else {
+      createInvoice(invoiceDate, voucherType);
+    }
   };
 
   selectCustomerType = () => {
-    const newIndex = this.state.selectedIndex === 0 ? 1 : 0;
-    this.setState({ selectedIndex: newIndex });
+    
   }
 
   presentInvoiceDate = () => {
@@ -50,7 +70,7 @@ class Invoice extends React.Component {
   }
 
   navigateClient = () => {
-    this.props.navigation.navigate('NewCustomer');
+    this.props.navigation.navigate('NewInvoiceCustomer');
   }
 
   addItems = () => {
@@ -65,7 +85,13 @@ class Invoice extends React.Component {
   }
 
   addFinalConsumer = () => {
-
+    const { fcIndentification } = this.state;
+    console.log('fcIndentification; ', fcIndentification);
+    const {
+      fiscalIdentity,
+      addFiscalIdentityToInvoice,
+    } = this.props;
+    addFiscalIdentityToInvoice('fc', fcIndentification, fiscalIdentity.id);
   }
 
   setFcIndentification = (value) => {
@@ -159,7 +185,7 @@ class Invoice extends React.Component {
           <View style={[style.inLineSpaceBetween, {alignItems: 'center'}]}>
             <TextInput 
               placeholder="DNI"
-              onChangeText={this.setDni}
+              onChangeText={this.setFcIndentification}
               style={[style.textRegular18GrayDark,style.inputDNICustomer]}
             />
             <Button
@@ -182,11 +208,11 @@ class Invoice extends React.Component {
   renderListCustomers = () => {
     //PREGUNTAR A NICO
     //Alert.alert('fasas'+this.props.identitiFiscal.name)
-    if (this.props.identitiFiscal.name!='') {
+    if (this.props.fiscalIdentity.name!='') {
       return(
         <View style={style.inLineSpaceBetween}>
         <Text style={style.textRegular14GrayDark}>
-          {this.props.identitiFiscal.name}
+          {this.props.fiscalIdentity.name}
         </Text>  
         <Button
           icon={
@@ -230,13 +256,14 @@ class Invoice extends React.Component {
           <View style={style.boxDate}>
             <TouchableOpacity onPress={this.showDateTimePicker} style={style.buttonDate}>
               <Text style={style.textRegular16WhiteCenter}>
-                {this.state.invoiceDate}
+                {this.presentInvoiceDate()}
               </Text>
             </TouchableOpacity>
             <DateTimePicker
               isVisible={this.state.isDateTimePickerVisible}
               onConfirm={this.handleDatePicked}
               onCancel={this.hideDateTimePicker}
+              date={this.state.invoiceDate}
             />
           </View>
         </View>
@@ -300,7 +327,7 @@ class Invoice extends React.Component {
             </View>
           }
           iconRight
-          onPress={ this.xxx }
+          onPress={ this.addItems }
           buttonStyle={ style.buttonAddItems }
           titleStyle={ style.textRegular14GrayDark }
         />

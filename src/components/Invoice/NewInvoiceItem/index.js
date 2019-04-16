@@ -7,7 +7,7 @@ const mapStateToProps = state => ({
 
 function mapDispatchToProps(dispatch) {
   return {
-    createItem: (category, name, price) => { 
+    createItem: (category, name, price) => {
       dispatch(createInvoiceItem(category, name, price))
         .then((data) => {
           //Alert.alert("Exito al Guardar!");
