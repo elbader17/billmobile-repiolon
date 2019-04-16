@@ -9,11 +9,13 @@ import {
 const initialState = {
   name: null,
   cuit: null,
+  completed: false,
 };
 
-function setParams({ draftState, name, cuit }) {
+function setMyFiscalIdentity({ draftState, name, cuit }) {
   draftState.name = name;
   draftState.cuit = cuit;
+  draftState.completed = name != null && cuit != null;
   return draftState;
 }
 
@@ -21,7 +23,7 @@ export default userserviceReducer = (state = initialState, action) => {
   return producer(state, (draftState) => {
     switch (action.type) {
       case SET_MY_FISCAL_IDENTITY:
-        return setParams({
+        return setMyFiscalIdentity({
           draftState,
           name: action.name,
           cuit: action.cuit,

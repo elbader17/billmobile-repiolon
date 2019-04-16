@@ -31,7 +31,7 @@ class SignIn extends React.Component {
     signIn(email, password)
     .then( (_data) => {
       if(this.props.jwtToken !== ''){
-        this.props.navigation.navigate('Configure');
+        this.navigateNext();
       } else {
         if ( _data.message === 'User does not exist.'){
           Alert.alert(_data.message);
@@ -49,6 +49,18 @@ class SignIn extends React.Component {
 
     })
     .catch(err => Alert.alert("Error al Ingresar: ",err.message));
+  }
+
+  navigageToSignUp = () => {
+    this.props.navigation.navigate('SignUp');
+  }
+
+  navigateNext = () => {
+    if (this.props.fiscalIdentityComplete) {
+      this.props.navigation.navigate('Invoice');
+    } else {
+      this.props.navigation.navigate('Configure');
+    }
   }
 
   validateData = () => {
@@ -97,7 +109,7 @@ class SignIn extends React.Component {
             </TouchableOpacity>
           </View>
 
-          <TouchableOpacity>
+          <TouchableOpacity onPress={ this.navigageToSignUp }>
             <Text style={[style.textRegular11GrayDark, {paddingVertical: 15}] }>
               ¿No tienes una cuenta?
               <Text style={ style.textRed }> Registrate</Text>

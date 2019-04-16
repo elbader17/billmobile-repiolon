@@ -5,7 +5,6 @@ import { updateFiscalIdentity } from '../../../app/user_service/actions';
 const mapStateToProps = state => ({
   name: state.userservice.name,
   cuit: state.userservice.cuit,
-  keyfiscal: state.userservice.keyfiscal,
 });
 
 function mapDispatchToProps(dispatch) {

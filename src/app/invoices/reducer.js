@@ -14,7 +14,12 @@ import {
 import { addFiscalIdentityToInvoice } from '../fiscal_identity/actions';
 
 function defaultCurrentInvoice() {
-  return { fiscalIdentity: {}, invoiceItems: [] };
+  return {
+    fiscalIdentity: {},
+    invoiceItems: [],
+    invoiceDate: new Date(),
+    voucherType: 'fc',
+  };
 }
 
 const initialState = {

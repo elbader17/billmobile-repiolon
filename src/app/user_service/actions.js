@@ -6,7 +6,7 @@ import {
   SET_MY_FISCAL_IDENTITY,
 } from './constants';
 
-function setParams(name, cuit) {
+function setMyFiscalIdentity(name, cuit) {
   return {
     type: SET_MY_FISCAL_IDENTITY,
     name,
@@ -25,10 +25,9 @@ const updateFiscalIdentity = function (name, cuit) {
     const instance = axios.create({
       headers: { 'JWT-TOKEN': getState().authentication.jwtToken },
     });
-    console.log('UPDATING FISCAL IDENTITY ', name, ' ', cuit);
     return instance.put('/v1/my/fiscal_identity', { resource })
       .then(() => {
-        dispatch(setParams(name, cuit));
+        dispatch(setMyFiscalIdentity(name, cuit));
       })
       .catch((error) => {
         console.log(error);
@@ -41,11 +40,10 @@ const getFiscalIdentity = function () {
     const instance = axios.create({
       headers: { 'JWT-TOKEN': getState().authentication.jwtToken },
     });
-    console.log('GETTING FISCAL IDENTITY');
     return instance.get('/v1/my/fiscal_identity')
       .then((response) => {
-        console.log(response);
-        dispatch(setParams(response.data.name, response.data.cuit));
+        const { name, identification } = response.data.data.attributes;
+        dispatch(setMyFiscalIdentity(name, identification));
         return response.data;
       })
       .catch((error) => {

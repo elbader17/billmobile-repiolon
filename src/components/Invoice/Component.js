@@ -2,52 +2,26 @@ import React from 'react';
 import { View, Text, Picker, TextInput, TouchableOpacity} from 'react-native';
 import { Button, ButtonGroup } from "react-native-elements";
 import { withNavigation } from 'react-navigation';
-import style from './style';
+import DateTimePicker from 'react-native-modal-datetime-picker';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import DateTimePicker from 'react-native-modal-datetime-picker';
-
-const voucher = [
-  {
-    label: 'FACTURA-C',
-    value: 'fc',
-  },
-  {
-    label: 'RECIBO-C',
-    value: 'rc',
-  },
-  {
-    label: 'NOTA DE CRÉDITO-C',
-    value: 'ncc',
-  },
-  {
-    label: 'NOTA DE DÉBITO-C',
-    value: 'ndc',
-  },
-];
+import style from './style';
+import { VOUCHER_TYPES } from '../../constants/invoice';
 
 class Invoice extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      typeVoucher: '',
+      voucherType: 'fc',
       selectedIndex: 0,
       isDateTimePickerVisible: false,
       isDateTimeVisible:false,
       bool:false,
-      date: new Date().getDate()+'/'+ new Date().getMonth()+'/'+ new Date().getFullYear(),
+      invoiceDate: this.props.invoiceDate,
+      fcIndentification: '',
     }
   }
-
-  showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true});
- 
-  hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
-
-  handleDatePicked = (date) => {
-    this.setState({ date: date.getDate()+'/'+ date.getMonth()+date.getFullYear() })
-    this.hideDateTimePicker();
-  };
 
   static navigationOptions = {
     title: 'GENERACIÓN DE COMPROBANTE',
@@ -55,16 +29,30 @@ class Invoice extends React.Component {
     headerTintColor: '#3687D1',
   };
 
-  updateIndex = () => {
+  showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true});
+
+  hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
+
+  handleDatePicked = (date) => {
+    this.setState({ invoiceDate: date })
+    this.hideDateTimePicker();
+  };
+
+  selectCustomerType = () => {
     const newIndex = this.state.selectedIndex === 0 ? 1 : 0;
     this.setState({ selectedIndex: newIndex });
+  }
+
+  presentInvoiceDate = () => {
+    const d = this.state.invoiceDate;
+    return `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
   }
 
   navigateClient = () => {
     this.props.navigation.navigate('NewCustomer');
   }
 
-  xxx = () => {
+  addItems = () => {
     this.props.navigation.navigate('InvoiceItemList');
   }
 
@@ -72,19 +60,21 @@ class Invoice extends React.Component {
     const { fiscalIdentity } = this.props.fiscalIdentity;
     const { items} = this.props.items;
     //createInvoice()
-
     this.props.navigation.navigate('InvoiceSummary');
+  }
+
+  addFinalConsumer = () => {
 
   }
-  createCustomer = () => {
-    
+
+  setFcIndentification = (value) => {
+    this.setState({ fcIndentification: value });
   }
 
   renderCustomer = () => {
     if (this.state.selectedIndex === 0) {
       return (
         <View style={style.listCustomer}>
-          <Text>Listado de Clientes</Text>
           <Text>{ this.props.fiscalIdentity.name }</Text>
           <Button
             title=' AGREGAR CLIENTE'
@@ -98,22 +88,22 @@ class Invoice extends React.Component {
             onPress={ this.navigateClient }
             buttonStyle={ style.addCustomer }
             titleStyle={ style.submitTextCustomer }
-          />   
-        
+          />
+
         </View>
       );
     }else {
       return (
         <View style={style.inLineSpace}>
           <View style={style.textBoxBtnHolder}>
-          <Text>Listado de Clientes</Text>
           <Text>{ this.props.fiscalIdentity.name }</Text>
-            <TextInput 
+            <TextInput
               placeholder="DNI"
-              onChangeText={this.setDni}
+              onChangeText={this.setFcIndentification}
+              value={this.state.fcIndentification}
               style={ style.textInputDNI }
             />
-          </View> 
+          </View>
           <Button
             icon={
               <Icon
@@ -122,12 +112,18 @@ class Invoice extends React.Component {
                 color="#EE6123"
               />
             }
-            onPress={ this.createCustomer }
+            onPress={ this.addFinalConsumer }
             buttonStyle={ style.buttonConfirm }
-          />            
+          />
         </View>
       );
     }
+  }
+
+  renderVoucherTypes = () => {
+    return VOUCHER_TYPES.map((voucherType, index) => (
+      <Picker.Item key={index} label={voucherType.label} value={voucherType.value} />
+    ))
   }
 
   render() {
@@ -140,17 +136,16 @@ class Invoice extends React.Component {
         <View style={style.containerDateInvoice}>
         <View style={ style.textBoxBtnHolderAux }>
           <Picker
-            selectedValue={this.state.typeVoucher}
+            selectedValue={this.state.voucherType}
             style={{color: 'white'}}
-            onValueChange={itemValue => this.setState({ typeVoucher: itemValue })}>
-            {voucher.map((i, index) => (
-              <Picker.Item key={index} label={i.label} value={i.value} />
-            ))}
+            onValueChange={itemValue => this.setState({ voucherType: itemValue })}
+          >
+            {this.renderVoucherTypes()}
           </Picker>
         </View>
         <View >
           <TouchableOpacity onPress={this.showDateTimePicker} style={style.styleDate}>
-            <Text style={style.textRegular14White}>{ this.state.date }</Text>
+            <Text style={style.textRegular14White}>{ this.presentInvoiceDate() }</Text>
           </TouchableOpacity>
           <DateTimePicker
             isVisible={this.state.isDateTimePickerVisible}
@@ -162,14 +157,14 @@ class Invoice extends React.Component {
         <View style={style.containerCustomers}>
           <View style={style.inLine}>
             <ButtonGroup
-              onPress={ this.updateIndex }
+              onPress={ this.selectCustomerType }
               selectedIndex={ this.state.selectedIndex }
               buttons={ buttons }
               containerStyle={ style.buttons }
               buttonStyle = {style.borderButton}
               innerBorderStyle={{color: 'white'}}
               selectedButtonStyle={style.backgroundColorButton}
-            /> 
+            />
           </View>
           <View style={[style.lineGray, {marginHorizontal: 3}]}></View>
           { this.renderCustomer() }
@@ -196,13 +191,13 @@ class Invoice extends React.Component {
               color="#EE6123"
             />
           }
-          onPress={ this.xxx }
+          onPress={ this.addItems }
           buttonStyle={ style.addItems }
           titleStyle={ style.submitTextItems }
         />
         <View>
           <Button
-            title='CONTUNUAR'
+            title='CONTINUAR'
             onPress={ this.newInvoice }
             buttonStyle={ style.buttonContinue }
             titleStyle={ style.textRegular14White }

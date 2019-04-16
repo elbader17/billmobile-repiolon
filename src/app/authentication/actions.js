@@ -33,7 +33,7 @@ const signIn = (email, password) => {
         } else {
           const { jwtToken } = data.signInUserSession.idToken;
           dispatch(setJwtToken(jwtToken));
-          dispatch(getFiscalIdentity());
+          return dispatch(getFiscalIdentity());
         }
       })
       .catch((err) => {
