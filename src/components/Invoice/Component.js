@@ -1,10 +1,9 @@
 import React from 'react';
 import { View, Text, Modal, TextInput, TouchableOpacity, ScrollView, TouchableWithoutFeedback, Alert} from 'react-native';
-import { Button, ButtonGroup } from "react-native-elements";
+import { Button } from "react-native-elements";
 import { withNavigation } from 'react-navigation';
 import style from './style';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 
 const voucher = [
@@ -163,7 +162,7 @@ class Invoice extends React.Component {
   renderCustomer = () => {
     if (!this.state.cf) {
       return (
-        <ScrollView pagingEnabled={true}>
+        <ScrollView>
           <View style={style.listCustomer}>
             {this.renderListCustomers()}
           </View>
@@ -219,7 +218,7 @@ class Invoice extends React.Component {
       );
     } else {
         return(
-          <Text>
+          <Text style={style.textRegular14Gray}>
             No hay Clientes Cargados
           </Text>
        );
@@ -231,7 +230,7 @@ class Invoice extends React.Component {
     const buttonCfEnable = style.buttonCfEnable;
     const buttonCfDisable = style.buttonCfDisable;
     return(
-      <KeyboardAwareScrollView>
+      <ScrollView>
       <View style={style.container}>
         <View style={style.inLineSpaceBetween}>
           <View style={style.boxVoucher}>
@@ -267,13 +266,13 @@ class Invoice extends React.Component {
               titleStyle={style.textRegular11GrayDark}
             />
             <Button
-              title='R. INSCRIPTO'
+              title='CANCELAR'
               onPress={() => this.setState({cf: false})}
-              buttonStyle={style.buttonRI}
+              buttonStyle={style.buttonCancel}
               titleStyle={style.textRegular11Gray}
               disabled={!this.state.cf}
-              disabledStyle={style.buttonRIdisabled}
-              disabledTitleStyle={style.textButtonRIdisabled}
+              disabledStyle={style.buttonCanceldisabled}
+              disabledTitleStyle={style.textButtonCanceldisabled}
               TouchableComponent={TouchableWithoutFeedback}
             />
             <Button
@@ -362,7 +361,7 @@ class Invoice extends React.Component {
         </Modal> 
 
       </View>
-      </KeyboardAwareScrollView>
+      </ScrollView>
     )
   }
 }

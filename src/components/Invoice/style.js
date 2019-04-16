@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     paddingVertical: 7,
   },
   containerCustomers: {
-    height: hp('25%'),
+    maxHeight: hp('25%'),
     backgroundColor: COLORS.white,
     borderRadius: 5,
     marginVertical: 15,
@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
   },
   containerFinalConsumer: {
-    flex:1 ,
+    maxHeight: hp('10%'),
     justifyContent: 'center',
     marginHorizontal: 15,
   },
@@ -194,18 +194,18 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: COLORS.gray,
   },
-  buttonRI: {
+  buttonCancel: {
     width: wp('25%'),
     height: hp('5%'),
     backgroundColor: 'transparent',
     borderWidth: 1,
     borderColor: COLORS.grayLight,
   },
-  buttonRIdisabled: {
+  buttonCanceldisabled: {
     borderWidth: 0,
     backgroundColor: 'transparent'
   },
-  textButtonRIdisabled: {
+  textButtonCanceldisabled: {
     color: 'transparent'
   },
   buttonShowAll: {
@@ -274,10 +274,7 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size14,
     color: COLORS.gray,
-    marginTop: 5,
-    marginBottom: 2.5,
-    marginLeft: 10,
-    marginRight: 10,
+    
   },
   buttonContinue: {
     backgroundColor: COLORS.red,
@@ -322,9 +319,10 @@ const styles = StyleSheet.create({
   inputDNICustomer: {
     width: wp('60%'),
     height: hp('7%'),
-    borderWidth: 1,
-    borderColor: COLORS.gray,
-    borderRadius: 3
+    borderBottomWidth: 1,
+    borderColor: COLORS.grayLight,
+    borderRadius: 3,
+    marginBottom: 10 
   },
   headerText: {
     fontFamily: FONTS.latoRegular,
@@ -378,6 +376,7 @@ const styles = StyleSheet.create({
     height: hp('3.5%'),
     borderWidth: 1,
     borderColor: COLORS.red,
+    opacity: 0.8,
   },
   positionFinalButton: {
     position: 'absolute', 
