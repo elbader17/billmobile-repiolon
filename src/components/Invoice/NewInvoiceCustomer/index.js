@@ -1,20 +1,20 @@
 /* eslint-disable import/no-named-as-default */
 import { connect } from 'react-redux';
-import NewCustomer from './Component';
-import { addFiscalIdentityToInvoice } from '../../app/fiscal_identity/actions';
+import NewCustomer from '../../NewCustomer/Component';
+import { addFiscalIdentityToInvoice } from '../../../app/fiscal_identity/actions';
 
 const mapStateToProps = state => ({
-  jwtToken: state.authentication.jwtToken,
+  fiscalIdentity: state.invoices.currentInvoice.fiscalIdentity,
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addFiscalIdentity: (name, cuit, navigation) => {
-      dispatch(addFiscalIdentityToInvoice(name, cuit))
+    addFiscalIdentity: (name, cuit, id, navigation) => {
+      return dispatch(addFiscalIdentityToInvoice(name, cuit, id))
         .then(() => navigation.navigate('Invoice'));
     },
   };
-};
+}
 
 const component = connect(
   mapStateToProps,

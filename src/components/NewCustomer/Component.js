@@ -4,67 +4,39 @@ import { Button } from "react-native-elements";
 import { withNavigation } from 'react-navigation';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import style from './style';
+import {
+  CONDITION_IVA,
+  CONDITION_SALE,
+} from '../../constants/fiscal_identity';
 
 const grayLight = '#cecece';
-
-const conditionIVA = [
-  {
-    label: 'RESPONSABLE INSCRIPTO',
-    value: 'ri',
-  },
-  {
-    label: 'IVA EXENTO',
-    value: 'ie',
-  },
-  {
-    label: 'MONOTRIBUTISTA',
-    value: 'm',
-  },
-  {
-    label: 'RESPONSABLE NO INSCRIPTO',
-    value: 'rni',
-  },
-];
-
-const conditionSale = [
-  {
-    label: 'CONTADO',
-    value: 'contado',
-  },
-  {
-    label: 'DÉBITO',
-    value: 'debito',
-  },
-  {
-    label: 'CRÉDITO',
-    value: 'credito',
-  },
-];
 
 class NewCustomer extends React.Component {
 
   constructor(props) {
     super(props);
+    const { fiscalIdentity } = this.props;
     this.state = {
       condition: '',
-      name: "",
-      category: "m",
-      cuit:"",
-      conditionSale:"",
+      name: fiscalIdentity.name,
+      category: fiscalIdentity.category,
+      cuit: fiscalIdentity.identity,
       conditionIva: '',
-      conditionSale: '',
     }
   }
 
   newCustomer = () => {
     const { name, category, cuit } = this.state;
-    const { addFiscalIdentityToInvoice } = this.props;
-    addFiscalIdentityToInvoice(name, cuit)
-    .then((data) => {
-      Alert.alert("Cliente Cargado: "+this.props.name+" "+this.props.cuit);
-      this.props.navigation.navigate('Invoice');
-    })
-    .catch(err => Alert.alert("Error al Ingresar: ",err.message));
+    const {
+      addFiscalIdentity,
+      fiscalIdentity,
+      navigation,
+    } = this.props;
+    addFiscalIdentity(name, cuit, fiscalIdentity.id, navigation)
+      .then(() => {
+        Alert.alert("Cliente Cargado: "+this.props.name+" "+this.props.cuit);
+      })
+      .catch(err => Alert.alert("Error al Ingresar: ",err.message));
   }
 
   static navigationOptions = {
@@ -74,7 +46,6 @@ class NewCustomer extends React.Component {
   };
 
   setName = (value) => this.setState({ name: value})
-  setConditionSale = (value) => this.setState({ conditionSale: value })
   setCuitDni = (value) => this.setState({ cuit: value })
 
   render() {
@@ -88,7 +59,7 @@ class NewCustomer extends React.Component {
                 selectedValue={this.state.conditionIva}
                 style= {style.picker}
                 onValueChange={itemValue => this.setState({ conditionIva: itemValue })}>
-                  {conditionIVA.map((i, index) => (
+                  {CONDITION_IVA.map((i, index) => (
                     <Picker.Item key={index} color='gray' label={i.label} value={i.value} />
                 ))}
               </Picker>
@@ -103,11 +74,11 @@ class NewCustomer extends React.Component {
               />
             </View>
           <Text style={ style.textRegular12White }>La información fiscal de los clientes se cargan automaticamente poniendo su N° de CUIT</Text>
-          
+
           <View style={style.lineWhite}></View>
           <Text style={ style.textRegular12White }>DATOS DEL CLIENTE</Text>
           <View style={style.lineWhite}></View>
-          
+
           <Text style={style.textRegular14White} >NOMBRE DE FANTASÍA (OPCIONAL)</Text>
           <View style={ style.boxBtnHolder }>
             <TextInput
@@ -117,7 +88,7 @@ class NewCustomer extends React.Component {
               placeholderTextColor={grayLight}
             />
           </View>
-          
+
           </View>
           <View style={style.positionFinalButton}>
             <Button

@@ -3,6 +3,7 @@ import {
   CREATE_INVOICE,
   LIST_INVOICE,
   GET_INVOICE,
+  UPDATE_INVOICE,
 } from './constant';
 import {
   CREATE_INVOICE_ITEM,
@@ -11,7 +12,6 @@ import {
 import {
   ADD_FISCAL_IDENTIY_TO_INVOICE,
 } from '../fiscal_identity/constants';
-import { addFiscalIdentityToInvoice } from '../fiscal_identity/actions';
 
 function defaultCurrentInvoice() {
   return {
@@ -19,6 +19,7 @@ function defaultCurrentInvoice() {
     invoiceItems: [],
     invoiceDate: new Date(),
     voucherType: 'fc',
+    id: null,
   };
 }
 
@@ -28,7 +29,10 @@ const initialState = {
 };
 
 function setCurrentInvoice({ draftState, invoice }) {
-  draftState.currentInvoice = invoice;
+  const { invoice_date, invoice_type } = invoice.attributes;
+  draftState.currentInvoice.id = invoice.id;
+  draftState.currentInvoice.invoiceDate = new Date(invoice_date);
+  draftState.currentInvoice.voucherType = invoice_type;
   return draftState;
 }
 
@@ -43,7 +47,8 @@ function addInvoiceItem({ draftState, invoiceItem }) {
 }
 
 function addFiscalIdentity({ draftState, fiscalIdentity }) {
-  draftState.currentInvoice.fiscalIdentity = fiscalIdentity;
+  draftState.currentInvoice.fiscalIdentity = fiscalIdentity.attributes;
+  draftState.currentInvoice.fiscalIdentity.id = fiscalIdentity.id;
   return draftState;
 }
 
@@ -60,6 +65,11 @@ export default addInvoiceReducer = (state = initialState, action) => {
   return producer(state, (draftState) => {
     switch (action.type) {
       case CREATE_INVOICE:
+        return setCurrentInvoice({
+          draftState,
+          invoice: action.invoice,
+        });
+      case UPDATE_INVOICE:
         return setCurrentInvoice({
           draftState,
           invoice: action.invoice,

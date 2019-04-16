@@ -12,14 +12,16 @@ class Invoice extends React.Component {
 
   constructor(props) {
     super(props);
+    const { fiscalIdentity } = this.props;
+    fcIndentification = fiscalIdentity.name === 'fc' ? fiscalIdentity.cuit : ''
     this.state = {
-      voucherType: 'fc',
+      voucherType: this.props.voucherType,
       selectedIndex: 0,
       isDateTimePickerVisible: false,
       isDateTimeVisible:false,
       bool:false,
       invoiceDate: this.props.invoiceDate,
-      fcIndentification: '',
+      fcIndentification,
     }
   }
 
@@ -34,8 +36,23 @@ class Invoice extends React.Component {
   hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
 
   handleDatePicked = (date) => {
-    this.setState({ invoiceDate: date })
+    this.setState({ invoiceDate: date });
     this.hideDateTimePicker();
+    this.createOrUpdateInvoice({ invoiceDate: date });
+  }
+
+  createOrUpdateInvoice = (values) => {
+    const {
+      updateInvoice,
+      createInvoice,
+      invoiceId,
+    } = this.props;
+    const { invoiceDate, voucherType } = this.state ;
+    if (invoiceId != null) {
+      updateInvoice(values);
+    } else {
+      createInvoice(invoiceDate, voucherType);
+    }
   };
 
   selectCustomerType = () => {
@@ -49,7 +66,7 @@ class Invoice extends React.Component {
   }
 
   navigateClient = () => {
-    this.props.navigation.navigate('NewCustomer');
+    this.props.navigation.navigate('NewInvoiceCustomer');
   }
 
   addItems = () => {
@@ -64,7 +81,13 @@ class Invoice extends React.Component {
   }
 
   addFinalConsumer = () => {
-
+    const { fcIndentification } = this.state;
+    console.log('fcIndentification; ', fcIndentification);
+    const {
+      fiscalIdentity,
+      addFiscalIdentityToInvoice,
+    } = this.props;
+    addFiscalIdentityToInvoice('fc', fcIndentification, fiscalIdentity.id);
   }
 
   setFcIndentification = (value) => {
@@ -128,7 +151,7 @@ class Invoice extends React.Component {
 
   render() {
     const component1 = () => <Text style={ style.buttonOn }>Consumidor Final</Text>
-    const component2 = () => <Text></Text>
+    const component2 = () => <Text>Cliente</Text>
     const buttons = [{ element: component1 }, { element: component2 }]
     return(
       <KeyboardAwareScrollView>
@@ -148,6 +171,7 @@ class Invoice extends React.Component {
             <Text style={style.textRegular14White}>{ this.presentInvoiceDate() }</Text>
           </TouchableOpacity>
           <DateTimePicker
+            date={this.state.invoiceDate}
             isVisible={this.state.isDateTimePickerVisible}
             onConfirm={this.handleDatePicked}
             onCancel={this.hideDateTimePicker}

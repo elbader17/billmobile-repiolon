@@ -8,6 +8,7 @@ import NewCustomer from './NewCustomer';
 import InvoiceItemList from './Invoice/ItemList';
 import NewItem from './Item/NewItem';
 import NewInvoiceItem from './Invoice/NewInvoiceItem';
+import NewInvoiceCustomer from './Invoice/NewInvoiceCustomer';
 import Invoice from './Invoice';
 import ListEditableItem from './Item/ListEditableItem';
 import InvoiceSummary from './Invoice/Summary';
@@ -20,11 +21,11 @@ const AppStack = createStackNavigator(
     NewCustomer,
     InvoiceItemList,
     NewInvoiceItem,
+    NewInvoiceCustomer,
     NewItems: NewItem,
     Invoice,
     ListEditableItem,
     InvoiceSummary,
-
   },
 );
 
