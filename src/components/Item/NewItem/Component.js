@@ -31,22 +31,22 @@ class NewItem extends React.Component {
 
   saveProduct = () => {
     const { nameProduct,price } = this.state;
-    const { createItem } = this.props;
-    createItem("product", nameProduct, price)
+    const { createItem, navigation } = this.props;
+    createItem("product", nameProduct, price, navigation);
     //.catch(err => Alert.alert("Error al Ingresar: ",err.message))
   }
 
   saveService = () => {
     const { nameService,price } = this.state;
-    const { createItem } = this.props;
-    createItem("service", nameService, price)
+    const { createItem, navigation } = this.props;
+    createItem("service", nameService, price, navigation);
     //.catch(err => Alert.alert("Error al Ingresar: ",err.message));
   }
 
   setNameProduct = (value) => this.setState({ nameProduct: value})
   setNameService = (value) => this.setState({ nameService: value})
   setPrice = (value) => this.setState({ price:value })
-  
+
   renderNewItems = () => {
     if (this.state.isProduct) {
       return (
@@ -93,7 +93,7 @@ class NewItem extends React.Component {
     return(
       <ScrollView>
       <View style={style.container}>
-        
+
           <View style={[style.boxSelectButton,style.inLineSpaceAround]}>
             <Button
               title='PRODUCTO'
@@ -106,7 +106,7 @@ class NewItem extends React.Component {
               onPress={() => this.setState({isProduct: false}) }
               buttonStyle={ this.state.isProduct ? style.buttonServiceDisabled : style.buttonService  }
               titleStyle={ this.state.isProduct ? style.textRegular12BlueBold : style.textRegular12WhiteBold }
-            />  
+            />
           </View>
 
           <View style={style.boxInput}>
@@ -119,7 +119,7 @@ class NewItem extends React.Component {
               onPress={ this.saveProduct }
               buttonStyle={ style.buttonSave }
               titleStyle={ style.textSemiBold14White }
-            /> 
+            />
           </View>
 
       </View>

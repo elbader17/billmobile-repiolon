@@ -61,7 +61,7 @@ class Invoice extends React.Component {
   };
 
   selectCustomerType = () => {
-    
+
   }
 
   presentInvoiceDate = () => {
@@ -74,13 +74,10 @@ class Invoice extends React.Component {
   }
 
   addItems = () => {
-    this.props.navigation.navigate('InvoiceItemList');
+    this.props.navigation.navigate('NewInvoiceItem');
   }
 
-  newInvoice = () => {
-    const { fiscalIdentity } = this.props.fiscalIdentity;
-    const { items} = this.props.items;
-    //createInvoice()
+  navigateToBewInvoice = () => {
     this.props.navigation.navigate('InvoiceSummary');
   }
 
@@ -115,16 +112,16 @@ class Invoice extends React.Component {
     if (this.props.items.length != 0) {
       return (
         <View style={[style.containerItemsInvoice,style.inColumnSpaceBetween]}>
-          <View style={style.boxItemsInvoice}> 
+          <View style={style.boxItemsInvoice}>
           <ScrollView>
             <View style={style.listItems}>
-              {this.props.items.map((i) => (
-              <View>
+              {this.props.items.map((item, index) => (
+              <View key={index}>
                 <View style={[style.lineGrayLight, style.marginVertical5]}></View>
                 <View style={style.inLineSpaceBetween}>
                   <View style={style.boxItems1}>
                     <Text style={style.textRegular16GrayDark}>
-                      {i.name}
+                      {item.name}
                     </Text>
                   </View>
                   <View style={[style.inLineSpaceBetween,style.boxItems2]}>
@@ -146,7 +143,7 @@ class Invoice extends React.Component {
                   </View>
                   <View style={style.boxItems3}>
                     <Text style={style.textRegular16GrayDark}>
-                      ${i.price}
+                      ${item.price}
                     </Text>
                   </View>
                 </View>
@@ -156,7 +153,7 @@ class Invoice extends React.Component {
           </ScrollView>
           </View>
 
-          <View style={style.boxItemsInvoiceTotal}>   
+          <View style={style.boxItemsInvoiceTotal}>
             <View style={style.center}>
               <View style={[style.lineGray, {bottom: 6}]}></View>
               <View style={style.inLineSpaceBetween}>
@@ -183,7 +180,7 @@ class Invoice extends React.Component {
       return (
         <View style={style.containerFinalConsumer}>
           <View style={[style.inLineSpaceBetween, {alignItems: 'center'}]}>
-            <TextInput 
+            <TextInput
               placeholder="DNI"
               onChangeText={this.setFcIndentification}
               style={[style.textRegular18GrayDark,style.inputDNICustomer]}
@@ -198,7 +195,7 @@ class Invoice extends React.Component {
               }
               onPress={ this.createCustomer }
               buttonStyle={ style.buttonCheck }
-            />            
+            />
           </View>
         </View>
       );
@@ -213,7 +210,7 @@ class Invoice extends React.Component {
         <View style={style.inLineSpaceBetween}>
         <Text style={style.textRegular14GrayDark}>
           {this.props.fiscalIdentity.name}
-        </Text>  
+        </Text>
         <Button
           icon={
             <Icon
@@ -224,8 +221,8 @@ class Invoice extends React.Component {
           }
           onPress={() => {this.selectCustomer()} }
           buttonStyle={ this.state.selectCustomer ? style.buttonCheckCustomerEnabled : style.buttonCheckCustomerDisabled }
-        />  
-        </View> 
+        />
+        </View>
       );
     } else {
         return(
@@ -267,7 +264,7 @@ class Invoice extends React.Component {
             />
           </View>
         </View>
-          
+
         <View style={[style.containerCustomers,style.inColumnSpaceBetween]}>
           <View style={[style.inLineSpaceBetween,style.margin7]}>
             <Button
@@ -296,7 +293,7 @@ class Invoice extends React.Component {
               }
               onPress={ this.navigateClient }
               buttonStyle={style.buttonAddCustomer}
-  
+
             />
           </View>
           <View style={[style.lineGray, style.marginHorizontal5]}></View>
@@ -314,7 +311,7 @@ class Invoice extends React.Component {
         <Button
           title={
             <Text>
-              <Text style={style.textRegular14GrayDark}>AGREGAR </Text> 
+              <Text style={style.textRegular14GrayDark}>AGREGAR </Text>
               <Text style={style.textRegular14GrayDarkBold}>ITEMS</Text>
             </Text>}
           icon={
@@ -337,12 +334,12 @@ class Invoice extends React.Component {
         <View style={style.positionFinalButton}>
           <Button
             title='CONTINUAR'
-            onPress={ this.newInvoice }
+            onPress={ this.navigateToBewInvoice }
             buttonStyle={ style.buttonContinue }
             titleStyle={ style.textSemiBold14White }
           />
         </View>
-        
+
         <Modal
           animationType="fade"
           transparent={true}
@@ -356,7 +353,7 @@ class Invoice extends React.Component {
               <View style={style.boxVoucherType}>
                 {VOUCHER_TYPES.map((i) => (
                 <View>
-                  <TouchableOpacity 
+                  <TouchableOpacity
                     style={[style.borderVoucher,style.marginVertical8]}
                     onPress={() => this.selectionVoucher(i)}
                   >
@@ -369,7 +366,7 @@ class Invoice extends React.Component {
               </View>
             </View>
           </View>
-        </Modal> 
+        </Modal>
 
       </View>
       </ScrollView>

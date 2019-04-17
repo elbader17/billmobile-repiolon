@@ -16,8 +16,8 @@ import ConfirmationCodeRegister from './Authentication/Confirmation';
 
 const AppStack = createStackNavigator(
   {
-    Configure: TaxConfiguration,
     HomeScreen: Home,
+    Configure: TaxConfiguration,
     NewCustomer,
     InvoiceItemList,
     NewInvoiceItem,
@@ -56,7 +56,7 @@ const AppNavigator = createAppContainer(createSwitchNavigator(
     Prueba,
   },
   {
-    initialRouteName: 'App',
+    initialRouteName: 'Login',
   },
 ));
 
