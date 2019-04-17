@@ -46,11 +46,12 @@ const updateFiscalIdentity = (resource, dispatch, getState) => {
 // eslint-disable-next-line func-names
 const addFiscalIdentityToInvoice = (name, cuit, id) => {
   return (dispatch, getState) => {
-    const { invoiceDate, voucherType, id: invoiceId } = getState().invoices.currentInvoice;
+    const { id: invoiceId } = getState().invoices.currentInvoice;
     let promise;
     if (invoiceId != null) {
       promise = Promise.resolve();
     } else {
+      const { invoiceDate, voucherType } = getState().invoices.currentInvoice;
       promise = dispatch(createInvoice(invoiceDate, voucherType));
     }
     return promise.then(() => {

@@ -15,7 +15,7 @@ import {
 
 function defaultCurrentInvoice() {
   return {
-    fiscalIdentity: {},
+    fiscalIdentity: {name:''},
     invoiceItems: [],
     invoiceDate: new Date(),
     voucherType: 'fc',
@@ -42,7 +42,18 @@ function setInvoices({ draftState, invoices }) {
 }
 
 function addInvoiceItem({ draftState, invoiceItem }) {
-  draftState.currentInvoice.invoiceItems.push(invoiceItem);
+  const {
+    category,
+    name,
+    price,
+  } = invoiceItem.attributes;
+
+  draftState.currentInvoice.invoiceItems.push({
+    category,
+    name,
+    price,
+    id: invoiceItem.id,
+  });
   return draftState;
 }
 

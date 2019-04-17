@@ -1,84 +1,272 @@
 import { StyleSheet } from 'react-native';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { COLORS } from '../../constants/colors';
 import { FONTS } from '../../constants/fonts';
 import { METRICS } from '../../constants/metrics';
 
 const styles = StyleSheet.create({
   container: {
-    height: METRICS.screenHeight,
+    height: hp('100%') - METRICS.heightHeader - METRICS.heightStatusBar,
     backgroundColor: COLORS.blue,
-    alignItems: 'center',
-    paddingHorizontal: 25,
-    paddingTop: 15,
-  },
-  containerDateInvoice: {
-    flexDirection: "row",
+    paddingHorizontal: 18,
+    paddingVertical: 7,
   },
   containerCustomers: {
-    backgroundColor: 'white',
+    maxHeight: hp('25%'),
+    backgroundColor: COLORS.white,
     borderRadius: 5,
-    borderWidth: 1,
-    borderColor: COLORS.gray,
-    marginVertical: 20
+    marginVertical: 15,
+    elevation: 3,
   },
-  listCustomer: {
-    padding: 10,
+  containerItemsInvoice: {
+    maxHeight: hp('30%'),
+    backgroundColor: COLORS.white,
+    borderRadius: 5,
+    elevation: 3,
+    marginTop: 10,
+    overflow: 'hidden'
+  },
+  modalVoucher: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0.6)'
+  },
+  boxVoucher: {
+    width: '60%',
+  },
+  boxDate: {
+    width: '35%',
+  },
+  boxModal: {
+    width: wp('70%'),
+    height: hp('40%'),
+    backgroundColor: COLORS.white,
+    borderRadius: 3,
+    elevation: 20,
+  },
+  boxItemsInvoice: {
+    maxHeight: hp('23%'),
+    backgroundColor: 'transparent',
+    paddingTop: 2,
+  },
+  boxItemsInvoiceTotal: {
+    height: hp('7%'),
+    backgroundColor: 'transparent',
+    paddingHorizontal: 15
+  },
+  boxItems1: {
+    flex: 1,
+  },
+  boxItems2: {},
+  boxItems3: {
+    flex: 0.5, 
+    alignItems: 'flex-end',
+  },
+  boxVoucherType: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  headerModal: {
+    borderTopLeftRadius: 3,
+    borderTopRightRadius: 3,
+    backgroundColor: COLORS.blue,
+    paddingVertical: 15
+  },
+  inLineSpaceBetween: {
+    flexDirection: "row",
+    justifyContent: 'space-between',
+  },
+  inColumnSpaceBetween: {
+    flexDirection: "column",
+    justifyContent: 'space-between',
+  },
+  buttonVoucher: {
+    paddingVertical: 10,
+    borderBottomColor: COLORS.white,
+    borderBottomWidth: 1,
+    borderRadius: 1,
+  },
+  borderVoucher: {
+    borderWidth: 1,
+    borderColor: COLORS.blue,
+    borderRadius: 3,
+    paddingVertical: 3,
+    paddingHorizontal: 10,
+    backgroundColor: 'transparent'
+  },
+  buttonDate: {
+    paddingVertical: 10,
+    borderBottomColor: COLORS.white,
+    borderBottomWidth: 1,
+    borderRadius: 1,
+  },
+  buttonOn: {
+    borderColor: COLORS.grayDark,
+    borderRadius: 3,
+    borderWidth: 1,
+    paddingVertical: 10,
+    paddingHorizontal: 4,
+    marginRight: 7
+  },
+  textButtonOn: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size11,
+  },
+  textVoucher: {
+    textAlign: 'center',
+    fontWeight: 'bold'
+  },
+  marginVertical8: {
+    marginVertical: 8
+  },
+  marginVertical5: {
+    marginVertical: 5
+  },
+  marginTop3: {
+    marginTop: 3
+  },
+  textRegular16White: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size16,
+    color: COLORS.white,
+  },
+  textRegular16Blue: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size16,
+    color: COLORS.blue,
+  },
+  textRegular16WhiteCenter: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size16,
+    color: COLORS.white,
+    textAlign: 'center',
+  },
+  lineGrayLight: {
+    backgroundColor: COLORS.grayLight,
+    height: 1,
+  },
+  lineGrayDark: {
+    backgroundColor: COLORS.grayDark,
+    height: 1,
   },
   lineGray: {
     backgroundColor: COLORS.gray,
-    height: 1.2,
-    marginTop: 0,
-    marginBottom: 0,
+    height: 1,
   },
-  containerInvoice: {
-    margin: 10,
+  marginHorizontal5: {
+    marginHorizontal: 5
+  },
+  margin7: {
+    margin: 7
+  },
+  margin5: {
+    margin: 5
+  },
+  listCustomer:{
+    marginHorizontal: 15,
+    marginVertical: 5
+  },
+  listItems: {
+    marginHorizontal: 15,
+  },
+  containerFinalConsumer: {
+    maxHeight: hp('10%'),
+    justifyContent: 'center',
+    marginHorizontal: 7,
+  },
+  containerInputCustomer: {
+    backgroundColor: 'red',
+    height: hp('7%'),
+  },
+  buttonCfDisable: {
+    width: wp('40%'),
+    height: hp('5%'),
+    backgroundColor: 'transparent',
     borderWidth: 1,
-    borderRadius: 4,
     borderColor: COLORS.gray,
-    backgroundColor: COLORS.white,
   },
-  buttons: {
-    width: '95%',
-    borderRadius: 4,
-    borderColor: COLORS.white,
-  },
-  borderButton: {
-    borderRadius: 4, 
-    borderWidth: 0, 
-    borderColor: COLORS.blue, 
-    width: 122,
-  },
-  backgroundColorButton : {
-    backgroundColor: COLORS.white,
-  },
-  buttonOn: {
+  buttonCfEnable: {
+    width: wp('40%'),
+    height: hp('5%'),
+    backgroundColor: COLORS.grayLight,
     borderWidth: 1,
-    borderRadius: 4,
     borderColor: COLORS.gray,
-    padding: 5,
-    color: COLORS.gray,
+  },
+  buttonCancel: {
+    width: wp('25%'),
+    height: hp('5%'),
+    backgroundColor: 'transparent',
+    borderWidth: 1,
+    borderColor: COLORS.grayLight,
+  },
+  buttonCanceldisabled: {
+    borderWidth: 0,
+    backgroundColor: 'transparent'
+  },
+  textButtonCanceldisabled: {
+    color: 'transparent'
+  },
+  buttonShowAll: {
+    backgroundColor: 'transparent',
+    opacity: 0.8
   },
   inLine: {
     flexDirection: "row",
   },
-  inLineSpace: {
-    flexDirection: "row",
-    justifyContent: 'space-between',
+  textRegular11GrayDark: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size11,
+    color: COLORS.grayDark,
   },
-  spacingText: {
-    marginLeft: 'auto',
+  textRegular12GrayDark: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size12,
+    color: COLORS.grayDark,
+  },
+  textRegular16GrayDark: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size16,
+    color: COLORS.grayDark,
   },
   textRegular11Gray: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size11,
     color: COLORS.gray,
-    marginTop: 5,
-    marginBottom: 2.5,
-    marginLeft: 10,
-    marginRight: 10,
   },
-  textRegular14White: {
+  textRegular14GrayDark: {
     fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size14,
+    color: COLORS.grayDark,
+  },
+  textRegular14GrayDarkBold: {
+    fontFamily: FONTS.latoSemiBold,
+    fontSize: FONTS.size14,
+    color: COLORS.grayDark,
+  },
+  textRegular12RedkBold: {
+    fontFamily: FONTS.latoSemiBold,
+    fontSize: FONTS.size12,
+    color: COLORS.red,
+  },
+  textRegular16GrayDarkBold: {
+    fontFamily: FONTS.latoSemiBold,
+    fontSize: FONTS.size16,
+    color: COLORS.grayDark,
+  },
+  textRegular18GrayDark: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size18,
+    color: COLORS.grayDark,
+  },
+  textRegular12Red: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size12,
+    color: COLORS.red,
+  },
+  textSemiBold14White: {
+    fontFamily: FONTS.latoSemiBold,
     fontSize: FONTS.size14,
     color: COLORS.white,
   },
@@ -86,55 +274,7 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size14,
     color: COLORS.gray,
-    marginTop: 5,
-    marginBottom: 2.5,
-    marginLeft: 10,
-    marginRight: 10,
-  },
-  textBoxBtnHolder: {
-    position: 'relative',
-    alignSelf: 'stretch',
-    justifyContent: 'center',
-    marginTop: 0,
-    backgroundColor: COLORS.white,
-    borderRadius: 4,
-    borderBottomColor: COLORS.white,
-    borderBottomWidth: 1,
-  },
-  styleDate: {
-    borderRadius: 1,
-    borderBottomColor: COLORS.white,
-    borderBottomWidth: 1,
-    marginTop: 1,
-    width: 100,
-    alignItems: 'center',
-    paddingVertical: 15,
-    marginLeft: 10
-  },
-  textBoxBtnHolderAux: {
-    width: '65%',
-    alignSelf: 'center',
-    marginTop: 0,
-    borderBottomColor: COLORS.white,
-    borderBottomWidth: 1,
-    borderRadius: 1,
-    color: COLORS.white,
-  },
-  picker: {
-    height: 45,
-    color: COLORS.white,
-  },
-  textBox: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size18,
-    alignSelf: 'stretch',
-    height: 45,
-    paddingRight: 45,
-    paddingLeft: 8,
-    borderWidth: 1,
-    paddingVertical: 0,
-    borderColor: COLORS.gray,
-    borderRadius: 2,
+    
   },
   buttonContinue: {
     backgroundColor: COLORS.red,
@@ -147,29 +287,23 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size14,
   },
-  addCustomer: {
-    backgroundColor: COLORS.white,
-    borderWidth: 1,
+  buttonAddCustomer: {
+    backgroundColor: 'transparent',
     borderColor: COLORS.red,
-    opacity: 0.7,
-    width: '100%',
-    height: 40,
-    borderRadius: 2,
-  },
-  addItems: {
-    backgroundColor: COLORS.white,
-    width: 320,
-    height: 40,
+    borderRadius: 3,
     borderWidth: 1,
-    borderColor: COLORS.gray
+    width: wp('14%'),
+    height: hp('5%'),
   },
-  buttonConfirm: {
+  buttonAddItems: {
     backgroundColor: COLORS.white,
-    width: 50,
-    height: 28,
-    borderWidth: 1,
-    borderColor: COLORS.red,
-    margin: 7,
+    height: hp('7%'),
+    borderRadius: 5,
+    elevation: 3,
+  },
+  positionIconAdd: {
+    right: 15, 
+    position: 'absolute'
   },
   submitTextCustomer: {
     fontFamily: FONTS.latoRegular,
@@ -182,29 +316,13 @@ const styles = StyleSheet.create({
     color: COLORS.grayDark,
     opacity: 0.7,
   },
-  submitDisabled: {
-    backgroundColor: COLORS.gray,
-    width: 320,
-    height: 40,
-    borderRadius: 2,
-  },
-  textRegular14White: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size14,
-    color: COLORS.white
-  },
-  textInputDNI: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size18,
-    width: '100%',
-    height: 40,
-    color: COLORS.grayDark,
-    marginHorizontal: 10
-  },
-  actionButtonIcon: {
-    fontSize: 20,
-    height: 22,
-    color: 'white',
+  inputDNICustomer: {
+    width: wp('60%'),
+    height: hp('7%'),
+    borderBottomWidth: 1,
+    borderColor: COLORS.grayLight,
+    borderRadius: 3,
+    marginBottom: 10 
   },
   headerText: {
     fontFamily: FONTS.latoRegular,
@@ -217,44 +335,59 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#EE6123',
   },
-  buttonRed: {
-    borderRadius: 0,
-    height: 45,
+  buttonContinue: {
+    height: hp('8%'),
     backgroundColor: COLORS.red,
+    borderRadius: 0,
   },
-  buttonEdite: {
-    borderRadius: 4,
+  buttonCheck: {
+    backgroundColor: 'transparent',
+    borderColor: COLORS.red,
+    borderRadius: 3,
     borderWidth: 1,
-    borderColor: COLORS.blue,
-    height: 40,
-    backgroundColor: COLORS.white,
-    width: 150,
+    width: wp('14%'),
+    height: hp('5%'),
   },
-  textButtonEdite:{
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size14,
-    color: COLORS.blue,
+  buttonCheckCustomerDisabled: {
+    backgroundColor: 'transparent',
+    borderColor: COLORS.red,
+    borderRadius: 3,
+    borderWidth: 1,
+    width: wp('13%'),
+    height: hp('3.5%'),
+    opacity: 0.6
   },
-  lineGray: {
-    backgroundColor: COLORS.gray,
-    height: 1.2,
-    marginTop: 2.5,
-    marginBottom: 2.5,
+  buttonCheckCustomerEnabled: {
+    backgroundColor: '#fceaea',
+    borderColor: COLORS.red,
+    borderRadius: 3,
+    borderWidth: 1,
+    width: wp('13%'),
+    height: hp('3.5%'),
   },
-  lineGrayLight: {
-    backgroundColor: COLORS.grayLight,
-    height: 1.2,
-    marginTop: 2.5,
-    marginBottom: 2.5,
-    marginLeft: 10,
-    marginRight: 10,
+  buttonDelete: {
+    backgroundColor: 'transparent',
+    height: hp('3.5%'),
+    opacity: 0.9,
+    paddingHorizontal: 12
   },
-  lineHorizontalGrayLight: {
-    borderColor: COLORS.grayLight,
-    borderRightWidth: 1.2,
-    borderRadius: 1,
-    marginVertical: 1,
+  buttonCantProduct: {
+    backgroundColor: 'transparent',
+    height: hp('3.5%'),
+    borderWidth: 1,
+    borderColor: COLORS.red,
+    opacity: 0.8,
   },
+  positionFinalButton: {
+    position: 'absolute', 
+    bottom: 0, 
+    left:0, 
+    right:0
+  },
+  center: {
+    flex: 1,
+    justifyContent: 'center'
+  }
 });
 
 export default styles;

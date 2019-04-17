@@ -25,8 +25,19 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12
   },
   boxListItems: {
+    maxHeight: hp('30%'),
     paddingVertical: 7,
-    paddingHorizontal: 12
+    paddingHorizontal: 0
+  },
+  boxItems1: {
+    width: '50%',
+  },
+  boxItems2: {
+    width: '20%',
+  },
+  boxItems3: {
+    width: '30%',
+    alignItems: 'flex-end',
   },
   boxTotal: {
     paddingVertical: 10,
@@ -50,6 +61,9 @@ const styles = StyleSheet.create({
   },
   boxPriceFinal: {
     width: wp('50%')
+  },
+  paddingHorizontal10: {
+    paddingHorizontal: 10
   },
   lineGray: {
     backgroundColor: COLORS.gray,
@@ -104,7 +118,11 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size14,
     color: COLORS.white,
-    fontWeight: 'bold',
+  },
+  textSemiBold14White: {
+    fontFamily: FONTS.latoSemiBold,
+    fontSize: FONTS.size14,
+    color: COLORS.white,
   },
   textRegular14: {
     fontFamily: FONTS.latoRegular,
@@ -158,8 +176,9 @@ const styles = StyleSheet.create({
     color: COLORS.blue,
   },
   buttonConfirm: {
-    height: wp('14%'),
+    height: hp('8%'),
     backgroundColor: COLORS.red,
+    borderRadius: 0,
   },
   positionFinalButton: {
     position: 'absolute', 

@@ -5,13 +5,16 @@ import { Button } from "react-native-elements";
 import { withNavigation } from 'react-navigation';
 import style from './style';
 
+
+const PASSWORD_REGEXP = new RegExp("(^([20]|[23]|[24]|[27]|[30]|[23]|[34]){1})(.[0-9]{6,8})(.[0-9]{1})");
+
 class TaxConfiguration extends React.Component{
 
   constructor(props) {
     super(props);
     this.state = {
-      name: this.props.name,
-      cuit: this.props.cuit,
+      name: "",//this.props.name,
+      cuit: "",//this.props.cuit"",
     };
   }
 
@@ -28,6 +31,12 @@ class TaxConfiguration extends React.Component{
      .then((data) => {
       this.props.navigation.push('HomeScreen');
     })
+  }
+
+  validateData = () => {
+    const isValidCuit = PASSWORD_REGEXP.test(this.state.cuit);
+    
+    return ( isValidCuit  );
   }
 
   setName = (value) => this.setState({ name: value})
@@ -67,6 +76,7 @@ class TaxConfiguration extends React.Component{
           titleStyle={ style.textRegular14White }
           disabledTitleStyle={ style.textRegular14White}
           disabledStyle={ style.submitDisabled }
+          disabled={ !this.validateData() }
         />
       </View>
       </KeyboardAwareScrollView>

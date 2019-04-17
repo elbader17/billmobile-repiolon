@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Text, Alert, TextInput} from 'react-native';
-import { ButtonGroup, Button} from "react-native-elements";
+import { View, Text, Alert, TextInput, ScrollView} from 'react-native';
+import { Button} from "react-native-elements";
 import { withNavigation } from 'react-navigation';
 import style from '../style';
 
@@ -14,6 +14,7 @@ class NewItem extends React.Component {
       nameProduct:"",
       nameService:"",
       price:"",
+      isProduct: true,
     };
   }
 
@@ -29,19 +30,16 @@ class NewItem extends React.Component {
   }
 
   saveProduct = () => {
-
     const { nameProduct,price } = this.state;
-    const { createItem } = this.props;
-    createItem("product", nameProduct, price)
+    const { createItem, navigation } = this.props;
+    createItem("product", nameProduct, price, navigation);
     //.catch(err => Alert.alert("Error al Ingresar: ",err.message))
-
-
   }
 
   saveService = () => {
     const { nameService,price } = this.state;
-    const { createItem } = this.props;
-    createItem("service", nameService, price)
+    const { createItem, navigation } = this.props;
+    createItem("service", nameService, price, navigation);
     //.catch(err => Alert.alert("Error al Ingresar: ",err.message));
   }
 
@@ -49,16 +47,15 @@ class NewItem extends React.Component {
   setNameService = (value) => this.setState({ nameService: value})
   setPrice = (value) => this.setState({ price:value })
 
-
   renderNewItems = () => {
-    if (this.state.selectedIndex === 0) {
+    if (this.state.isProduct) {
       return (
         <View>
           <View style={ style.textBoxBtnHolder }>
             <TextInput
               placeholder="Nombre de Producto"
               onChangeText={this.setNameProduct}
-              style={ style.textBoxTop }
+              style={ style.textName }
             />
           </View>
           <View style={ style.textBoxBtnHolder }>
@@ -68,12 +65,6 @@ class NewItem extends React.Component {
               style={ style.textBox }
             />
           </View>
-          <Button
-            title='GUARDAR PRODUCTO'
-            onPress={ this.saveProduct }
-            buttonStyle={ style.submit }
-            titleStyle={ style.submitText }
-          />
         </View>
       );
     }else {
@@ -83,48 +74,56 @@ class NewItem extends React.Component {
             <TextInput
               placeholder="Concepto del Servicio"
               onChangeText={this.setNameService}
-              style={ style.textBoxTop }
+              style={ style.textName }
             />
           </View>
           <View style={ style.textBoxBtnHolder }>
             <TextInput
-              placeholder="Precio"
+              placeholder="Precio | $ 0.00"
               onChangeText={this.setPrice}
               style={ style.textBox }
             />
           </View>
-          <Button
-            title='GUARDAR SERVICIO'
-            onPress={ this.saveService }
-            buttonStyle={ style.submit }
-            titleStyle={ style.submitText }
-          />
         </View>
       );
     }
   }
 
   render() {
-    const a = style.buttonOn
-    const b = style.buttonOff
-    const component1 = () => <Text style={this.state.selectedIndex === 0 ? a : b}>PRODUCTO</Text>
-    const component2 = () => <Text style={this.state.selectedIndex === 1 ? a : b}>SERVICIO</Text>
-    const buttons = [{ element: component1 }, { element: component2 }]
     return(
+      <ScrollView>
       <View style={style.container}>
-        <View style={style.container2}>
-          <ButtonGroup
-            onPress={ this.updateIndex }
-            selectedIndex={ this.state.selectedIndex }
-            buttons={ buttons }
-            containerStyle={ style.buttons }
-            buttonStyle = {style.borderButton}
-            innerBorderStyle={{color: 'white'}}
-            selectedButtonStyle={style.backgroundColorButton}
-          />
-          { this.renderNewItems() }
-        </View>
+
+          <View style={[style.boxSelectButton,style.inLineSpaceAround]}>
+            <Button
+              title='PRODUCTO'
+              onPress={() => this.setState({isProduct: true}) }
+              buttonStyle={ this.state.isProduct ? style.buttonProduct : style.buttonProductDisabled }
+              titleStyle={ this.state.isProduct ? style.textRegular12WhiteBold : style.textRegular12RedBold }
+            />
+            <Button
+              title='SERVICIO'
+              onPress={() => this.setState({isProduct: false}) }
+              buttonStyle={ this.state.isProduct ? style.buttonServiceDisabled : style.buttonService  }
+              titleStyle={ this.state.isProduct ? style.textRegular12BlueBold : style.textRegular12WhiteBold }
+            />
+          </View>
+
+          <View style={style.boxInput}>
+            { this.renderNewItems() }
+          </View>
+
+          <View style={style.positionFinalButton}>
+            <Button
+              title={<Text>GUARDAR {this.state.isProduct ? 'PRODUCTO' : 'SERVICIO'}</Text>}
+              onPress={ this.saveProduct }
+              buttonStyle={ style.buttonSave }
+              titleStyle={ style.textSemiBold14White }
+            />
+          </View>
+
       </View>
+      </ScrollView>
     )
   }
 

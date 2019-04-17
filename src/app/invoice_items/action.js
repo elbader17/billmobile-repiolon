@@ -3,6 +3,7 @@ import {
   CREATE_INVOICE_ITEM,
   UPDATE_INVOICE_ITEM,
 } from './constant';
+import { createInvoice } from '../invoices/action';
 
 function createInvoiceItemAction(invoiceItem) {
   return {
@@ -19,25 +20,36 @@ function updateInvoiceItemAction(invoiceItem) {
 }
 
 // eslint-disable-next-line func-names
-const createInvoiceItem = (category, name, price, invoiceId) => {
-
-  const resource = {
-    category,
-    name,
-    price,
-  };
+const createInvoiceItem = (category, name, price) => {
 
   return (dispatch, getState) => {
-    const instance = axios.create({
-      headers: { 'JWT-TOKEN': getState().authentication.jwtToken },
-    });
-    return instance.post(`v1/invoice_items?invoice_id=${invoiceId}`, { resource })
-      .then((response) => {
-        dispatch(createInvoiceItemAction(response.data));
-      })
-      .catch((error) => {
-        console.log(error);
+    const { id: invoiceId } = getState().invoices.currentInvoice;
+    let promise;
+    if (invoiceId != null) {
+      promise = Promise.resolve();
+    } else {
+      const { invoiceDate, voucherType } = getState().invoices.currentInvoice;
+      promise = dispatch(createInvoice(invoiceDate, voucherType));
+    }
+    return promise.then(() => {
+      const instance = axios.create({
+        headers: { 'JWT-TOKEN': getState().authentication.jwtToken },
       });
+      const { id: updatedInvoiceId } = getState().invoices.currentInvoice;
+      const resource = {
+        category,
+        name,
+        price,
+        invoice_id: updatedInvoiceId,
+      };
+      return instance.post('v1/invoice_items', { resource })
+        .then((response) => {
+          dispatch(createInvoiceItemAction(response.data.data));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    });
   };
 };
 

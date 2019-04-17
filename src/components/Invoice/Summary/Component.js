@@ -1,7 +1,6 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 import { Button} from "react-native-elements";
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { withNavigation } from 'react-navigation';
 import style from './style';
 
@@ -30,7 +29,7 @@ class InvoiceSummary extends React.Component {
 
   render() {
     return(
-      <KeyboardAwareScrollView>
+      <ScrollView>
       <View style={style.container}>
         <View style={style.containerInvoice}>
           
@@ -53,21 +52,37 @@ class InvoiceSummary extends React.Component {
           <View style={style.lineGray}></View>
 
           <View style={style.boxListItems}>
-            <View style={style.inLineSpaceBetween}>
-
-              { this.props.items.map((i) => (
-                <View style={{flexDirection: 'row',justifyContent:'space-between'}}>
-                  <View>
-                    <Text>{i.name}</Text>
-                  </View>
-                  <View>
-                    <Text>${i.price}</Text>
-                  </View>
-                  <View style={style.lineGrayLight}></View>
+          <ScrollView style={style.paddingHorizontal10}>
+            {this.props.items.map((i) => (
+            <View>
+              <View style={style.inLineSpaceBetween}>
+                <View style={style.boxItems1}>
+                  <Text style={style.textRegular14GrayDark}>
+                    {i.name}
+                  </Text>
                 </View>
-              ))
-              }
+                <View style={[style.boxItems2,style.inLineSpaceBetween]}>
+                  <View>
+                    <Text style={style.textRegular14GrayDark}>
+                      X{'1'}
+                    </Text>
+                  </View>
+                  <View>
+                    <Text style={style.textRegular14Gray}>
+                      ${'0'}
+                    </Text>
+                  </View>
+                </View>
+                <View style={style.boxItems3}>
+                  <Text style={style.textRegular14GrayDrak}>
+                    ${i.price}
+                  </Text>
+                </View>
+              </View>
+              <View style={style.lineGrayLight}></View>
             </View>
+            ))}
+          </ScrollView>
           </View>
 
           <View style={style.lineGray}></View>
@@ -121,11 +136,11 @@ class InvoiceSummary extends React.Component {
           <Button
             title='CONFIRMAR FACTURA'
             buttonStyle={ style.buttonConfirm }
-            titleStyle={ style.textRegular14White }
+            titleStyle={ style.textSemiBold14White }
           />
         </View>
       </View>
-      </KeyboardAwareScrollView>
+      </ScrollView>
     )
   }
 }

@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Text, Picker, TextInput, TouchableOpacity} from 'react-native';
-import { Button, ButtonGroup } from "react-native-elements";
+import { View, Text, Modal, TextInput, TouchableOpacity, ScrollView, TouchableWithoutFeedback, Alert} from 'react-native';
+import { Button } from "react-native-elements";
 import { withNavigation } from 'react-navigation';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -15,12 +15,13 @@ class Invoice extends React.Component {
     const { fiscalIdentity } = this.props;
     fcIndentification = fiscalIdentity.name === 'fc' ? fiscalIdentity.cuit : ''
     this.state = {
-      voucherType: this.props.voucherType,
+      voucherType: VOUCHER_TYPES.find((v) => v.value===this.props.voucherType),
       selectedIndex: 0,
       isDateTimePickerVisible: false,
       isDateTimeVisible:false,
       bool:false,
       invoiceDate: this.props.invoiceDate,
+      modalVisible: false,
       fcIndentification,
     }
   }
@@ -30,6 +31,10 @@ class Invoice extends React.Component {
     headerTitleStyle: style.headerText,
     headerTintColor: '#3687D1',
   };
+
+  setModalVisible(visible) {
+    this.setState({modalVisible: visible});
+  }
 
   showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true});
 
@@ -56,8 +61,7 @@ class Invoice extends React.Component {
   };
 
   selectCustomerType = () => {
-    const newIndex = this.state.selectedIndex === 0 ? 1 : 0;
-    this.setState({ selectedIndex: newIndex });
+
   }
 
   presentInvoiceDate = () => {
@@ -70,13 +74,10 @@ class Invoice extends React.Component {
   }
 
   addItems = () => {
-    this.props.navigation.navigate('InvoiceItemList');
+    this.props.navigation.navigate('NewInvoiceItem');
   }
 
-  newInvoice = () => {
-    const { fiscalIdentity } = this.props.fiscalIdentity;
-    const { items} = this.props.items;
-    //createInvoice()
+  navigateToBewInvoice = () => {
     this.props.navigation.navigate('InvoiceSummary');
   }
 
@@ -94,143 +95,281 @@ class Invoice extends React.Component {
     this.setState({ fcIndentification: value });
   }
 
-  renderCustomer = () => {
-    if (this.state.selectedIndex === 0) {
-      return (
-        <View style={style.listCustomer}>
-          <Text>{ this.props.fiscalIdentity.name }</Text>
-          <Button
-            title=' AGREGAR CLIENTE'
-            icon={
-              <Icon
-                name="md-person-add"
-                size={20}
-                color="#EE6123"
-              />
-            }
-            onPress={ this.navigateClient }
-            buttonStyle={ style.addCustomer }
-            titleStyle={ style.submitTextCustomer }
-          />
+  selectionVoucher = (date) => {
+    this.setModalVisible(!this.state.modalVisible);
+    this.setState({voucherType: date})
+  }
 
-        </View>
-      );
-    }else {
+  changeTypeCustomer = () => {
+    this.setState({cf:true})
+  }
+
+  selectCustomer() {
+    this.setState({selectCustomer:!this.state.selectCustomer})
+  }
+
+  renderViewItemsAdd = () => {
+    if (this.props.items.length != 0) {
       return (
-        <View style={style.inLineSpace}>
-          <View style={style.textBoxBtnHolder}>
-          <Text>{ this.props.fiscalIdentity.name }</Text>
-            <TextInput
-              placeholder="DNI"
-              onChangeText={this.setFcIndentification}
-              value={this.state.fcIndentification}
-              style={ style.textInputDNI }
-            />
+        <View style={[style.containerItemsInvoice,style.inColumnSpaceBetween]}>
+          <View style={style.boxItemsInvoice}>
+          <ScrollView>
+            <View style={style.listItems}>
+              {this.props.items.map((item, index) => (
+              <View key={index}>
+                <View style={[style.lineGrayLight, style.marginVertical5]}></View>
+                <View style={style.inLineSpaceBetween}>
+                  <View style={style.boxItems1}>
+                    <Text style={style.textRegular16GrayDark}>
+                      {item.name}
+                    </Text>
+                  </View>
+                  <View style={[style.inLineSpaceBetween,style.boxItems2]}>
+                    <Button
+                      title='X1'
+                      buttonStyle={style.buttonCantProduct}
+                      titleStyle={ style.textRegular12RedkBold }
+                    />
+                    <Button
+                      icon={
+                        <Icon
+                          name="md-trash"
+                          size={23}
+                          color="#EE6123"
+                        />
+                      }
+                      buttonStyle={style.buttonDelete}
+                    />
+                  </View>
+                  <View style={style.boxItems3}>
+                    <Text style={style.textRegular16GrayDark}>
+                      ${item.price}
+                    </Text>
+                  </View>
+                </View>
+              </View>
+              ))}
+            </View>
+          </ScrollView>
           </View>
-          <Button
-            icon={
-              <Icon
-                name="md-checkmark"
-                size={25}
-                color="#EE6123"
-              />
-            }
-            onPress={ this.addFinalConsumer }
-            buttonStyle={ style.buttonConfirm }
-          />
+
+          <View style={style.boxItemsInvoiceTotal}>
+            <View style={style.center}>
+              <View style={[style.lineGray, {bottom: 6}]}></View>
+              <View style={style.inLineSpaceBetween}>
+                <Text style={style.textRegular16GrayDarkBold}>TOTAL</Text>
+                <Text style={style.textRegular16GrayDarkBold}>$0</Text>
+              </View>
+            </View>
+          </View>
         </View>
       );
     }
   }
 
-  renderVoucherTypes = () => {
-    return VOUCHER_TYPES.map((voucherType, index) => (
-      <Picker.Item key={index} label={voucherType.label} value={voucherType.value} />
-    ))
-  }
-
-  render() {
-    const component1 = () => <Text style={ style.buttonOn }>Consumidor Final</Text>
-    const component2 = () => <Text>Cliente</Text>
-    const buttons = [{ element: component1 }, { element: component2 }]
-    return(
-      <KeyboardAwareScrollView>
-      <View style={style.container}>
-        <View style={style.containerDateInvoice}>
-        <View style={ style.textBoxBtnHolderAux }>
-          <Picker
-            selectedValue={this.state.voucherType}
-            style={{color: 'white'}}
-            onValueChange={itemValue => this.setState({ voucherType: itemValue })}
-          >
-            {this.renderVoucherTypes()}
-          </Picker>
-        </View>
-        <View >
-          <TouchableOpacity onPress={this.showDateTimePicker} style={style.styleDate}>
-            <Text style={style.textRegular14White}>{ this.presentInvoiceDate() }</Text>
-          </TouchableOpacity>
-          <DateTimePicker
-            date={this.state.invoiceDate}
-            isVisible={this.state.isDateTimePickerVisible}
-            onConfirm={this.handleDatePicked}
-            onCancel={this.hideDateTimePicker}
-          />
-        </View>
-      </View>
-        <View style={style.containerCustomers}>
-          <View style={style.inLine}>
-            <ButtonGroup
-              onPress={ this.selectCustomerType }
-              selectedIndex={ this.state.selectedIndex }
-              buttons={ buttons }
-              containerStyle={ style.buttons }
-              buttonStyle = {style.borderButton}
-              innerBorderStyle={{color: 'white'}}
-              selectedButtonStyle={style.backgroundColorButton}
+  renderCustomer = () => {
+    if (!this.state.cf) {
+      return (
+        <ScrollView>
+          <View style={style.listCustomer}>
+            {this.renderListCustomers()}
+          </View>
+        </ScrollView>
+      );
+    }else {
+      return (
+        <View style={style.containerFinalConsumer}>
+          <View style={[style.inLineSpaceBetween, {alignItems: 'center'}]}>
+            <TextInput
+              placeholder="DNI"
+              onChangeText={this.setFcIndentification}
+              style={[style.textRegular18GrayDark,style.inputDNICustomer]}
+            />
+            <Button
+              icon={
+                <Icon
+                name="md-checkmark"
+                size={25}
+                color="#EE6123"
+                />
+              }
+              onPress={ this.createCustomer }
+              buttonStyle={ style.buttonCheck }
             />
           </View>
-          <View style={[style.lineGray, {marginHorizontal: 3}]}></View>
-          { this.renderCustomer() }
         </View>
-        <View style={style.containerCustomers}>
-        { this.props.items.map((i) => (
-              <View style={{flexDirection: 'row',justifyContent:'space-between'}}>
-                <View>
-                  <Text>{i.name}</Text>
-                </View>
-                <View>
-                  <Text>${i.price}</Text>
-                </View>
-              </View>
-            ))
-          }
-          </View>
+      );
+    }
+  }
+
+  renderListCustomers = () => {
+    //PREGUNTAR A NICO
+    //Alert.alert('fasas'+this.props.identitiFiscal.name)
+    if (this.props.fiscalIdentity.name!='') {
+      return(
+        <View style={style.inLineSpaceBetween}>
+        <Text style={style.textRegular14GrayDark}>
+          {this.props.fiscalIdentity.name}
+        </Text>
         <Button
-          title=' AGEGAR ITEMS'
           icon={
             <Icon
-              name="md-add"
+              name="md-checkmark"
               size={20}
               color="#EE6123"
             />
           }
-          onPress={ this.addItems }
-          buttonStyle={ style.addItems }
-          titleStyle={ style.submitTextItems }
+          onPress={() => {this.selectCustomer()} }
+          buttonStyle={ this.state.selectCustomer ? style.buttonCheckCustomerEnabled : style.buttonCheckCustomerDisabled }
         />
-        <View>
+        </View>
+      );
+    } else {
+        return(
+          <Text style={style.textRegular14Gray}>
+            No hay Clientes Cargados
+          </Text>
+       );
+      }
+  }
+
+  render() {
+    const buttonCfEnable = style.buttonCfEnable;
+    const buttonCfDisable = style.buttonCfDisable;
+    return(
+      <ScrollView>
+      <View style={style.container}>
+        <View style={style.inLineSpaceBetween}>
+          <View style={style.boxVoucher}>
+            <TouchableOpacity
+              onPress={() => {this.setModalVisible(true)}}
+              style={style.buttonVoucher}
+            >
+              <Text style={style.textRegular16WhiteCenter}>
+                {this.state.voucherType.label}
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <View style={style.boxDate}>
+            <TouchableOpacity onPress={this.showDateTimePicker} style={style.buttonDate}>
+              <Text style={style.textRegular16WhiteCenter}>
+                {this.presentInvoiceDate()}
+              </Text>
+            </TouchableOpacity>
+            <DateTimePicker
+              isVisible={this.state.isDateTimePickerVisible}
+              onConfirm={this.handleDatePicked}
+              onCancel={this.hideDateTimePicker}
+              date={this.state.invoiceDate}
+            />
+          </View>
+        </View>
+
+        <View style={[style.containerCustomers,style.inColumnSpaceBetween]}>
+          <View style={[style.inLineSpaceBetween,style.margin7]}>
+            <Button
+              title='CONSUMIDOR FINAL'
+              onPress={this.changeTypeCustomer}
+              buttonStyle = {this.state.cf ? buttonCfEnable : buttonCfDisable}
+              titleStyle={style.textRegular11GrayDark}
+            />
+            <Button
+              title='CANCELAR'
+              onPress={() => this.setState({cf: false})}
+              buttonStyle={style.buttonCancel}
+              titleStyle={style.textRegular11Gray}
+              disabled={!this.state.cf}
+              disabledStyle={style.buttonCanceldisabled}
+              disabledTitleStyle={style.textButtonCanceldisabled}
+              TouchableComponent={TouchableWithoutFeedback}
+            />
+            <Button
+              icon={
+                <Icon
+                  name="md-person-add"
+                  size={20}
+                  color="#EE6123"
+                />
+              }
+              onPress={ this.navigateClient }
+              buttonStyle={style.buttonAddCustomer}
+
+            />
+          </View>
+          <View style={[style.lineGray, style.marginHorizontal5]}></View>
+          { this.renderCustomer() }
+          <View style={style.containerButtonShowAll}>
+            <View style={[style.lineGray, style.marginHorizontal5]}></View>
+            <Button
+              title='VER TODOS'
+              buttonStyle = {style.buttonShowAll}
+              titleStyle={style.textRegular12Red}
+            />
+          </View>
+        </View>
+
+        <Button
+          title={
+            <Text>
+              <Text style={style.textRegular14GrayDark}>AGREGAR </Text>
+              <Text style={style.textRegular14GrayDarkBold}>ITEMS</Text>
+            </Text>}
+          icon={
+            <View style={style.positionIconAdd}>
+            <Icon
+              name="md-add"
+              size={30}
+              color="#EE6123"
+            />
+            </View>
+          }
+          iconRight
+          onPress={ this.addItems }
+          buttonStyle={ style.buttonAddItems }
+          titleStyle={ style.textRegular14GrayDark }
+        />
+
+        { this.renderViewItemsAdd() }
+
+        <View style={style.positionFinalButton}>
           <Button
             title='CONTINUAR'
-            onPress={ this.newInvoice }
+            onPress={ this.navigateToBewInvoice }
             buttonStyle={ style.buttonContinue }
-            titleStyle={ style.textRegular14White }
-            disabledTitleStyle={ style.textRegular14White}
-            disabledStyle={ style.submitDisabled }
-                      />
+            titleStyle={ style.textSemiBold14White }
+          />
         </View>
+
+        <Modal
+          animationType="fade"
+          transparent={true}
+          visible={this.state.modalVisible}
+        >
+          <View style={style.modalVoucher}>
+            <View style={style.boxModal}>
+              <View style={style.headerModal}>
+                <Text style={style.textRegular16WhiteCenter}>Tipo de Comprobante</Text>
+              </View>
+              <View style={style.boxVoucherType}>
+                {VOUCHER_TYPES.map((i) => (
+                <View>
+                  <TouchableOpacity
+                    style={[style.borderVoucher,style.marginVertical8]}
+                    onPress={() => this.selectionVoucher(i)}
+                  >
+                    <Text style={style.textRegular16Blue}>
+                      {i.label}
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+                ))}
+              </View>
+            </View>
+          </View>
+        </Modal>
+
       </View>
-      </KeyboardAwareScrollView>
+      </ScrollView>
     )
   }
 }

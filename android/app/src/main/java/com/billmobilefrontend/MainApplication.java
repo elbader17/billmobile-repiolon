@@ -3,6 +3,7 @@ package com.billmobilefrontend;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.henninghall.date_picker.DatePickerPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.amazonaws.RNAWSCognitoPackage;
@@ -26,6 +27,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new DatePickerPackage(),
             new VectorIconsPackage(),
             new RNGestureHandlerPackage(),
             new RNAWSCognitoPackage()
