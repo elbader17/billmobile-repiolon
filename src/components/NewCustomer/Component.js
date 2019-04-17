@@ -1,8 +1,7 @@
 import React from 'react';
-import { View, Text, Alert, Picker, TextInput } from 'react-native';
+import { View, Text, Alert, Picker, TextInput, ScrollView } from 'react-native';
 import { Button } from "react-native-elements";
 import { withNavigation } from 'react-navigation';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import style from './style';
 import {
   CONDITION_IVA,
@@ -18,9 +17,9 @@ class NewCustomer extends React.Component {
     const { fiscalIdentity } = this.props;
     this.state = {
       condition: '',
-      name: fiscalIdentity.name,
-      category: fiscalIdentity.category,
-      cuit: fiscalIdentity.identity,
+      //name: fiscalIdentity.name,
+      //category: fiscalIdentity.category,
+      //cuit: fiscalIdentity.identity,
       conditionIva: '',
     }
   }
@@ -50,7 +49,7 @@ class NewCustomer extends React.Component {
 
   render() {
     return(
-      <KeyboardAwareScrollView>
+      <ScrollView>
         <View style={style.container}>
           <View style={style.containerInputs}>
             <Text style={style.textRegular14White}>CONDICIÓN FRENTE AL IVA</Text>
@@ -75,8 +74,8 @@ class NewCustomer extends React.Component {
             </View>
           <Text style={ style.textRegular12White }>La información fiscal de los clientes se cargan automaticamente poniendo su N° de CUIT</Text>
 
-          <View style={style.lineWhite}></View>
-          <Text style={ style.textRegular12White }>DATOS DEL CLIENTE</Text>
+          {/*<View style={style.lineWhite}></View>
+          <Text style={ style.textRegular12White }>{''}</Text>*/}
           <View style={style.lineWhite}></View>
 
           <Text style={style.textRegular14White} >NOMBRE DE FANTASÍA (OPCIONAL)</Text>
@@ -92,16 +91,15 @@ class NewCustomer extends React.Component {
           </View>
           <View style={style.positionFinalButton}>
             <Button
-              onPress={this.newCustomer}
+              //onPress={this.newCustomer}
               title='GUARDAR'
               buttonStyle={ style.buttonConfirm }
               titleStyle={ style.textRegular14White }
             />
           </View>
-          <Text style={ style.textRegular11White }> Esta condición será la que aparecerá para el cliente per luego pordrás cambiarla en la facturación</Text>
-          <View style={style.lineWhite}></View>
+          
       </View>
-      </KeyboardAwareScrollView>
+      </ScrollView>
     )
   }
 }
