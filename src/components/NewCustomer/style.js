@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
   picker: {
     flex: 1,
     justifyContent: 'center',
+    color: COLORS.grayDark,
   },
   textRegular14White: {
     fontFamily: FONTS.latoRegular,

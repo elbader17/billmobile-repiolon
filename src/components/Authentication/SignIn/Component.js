@@ -76,8 +76,8 @@ class SignIn extends React.Component {
     const hide = require('../../../images/hide.png')
     const show = require('../../../images/show.png')
     return(
-      <View>
-        <View style={ style.container }>
+      <View style={style.container}>
+        <View style={style.containerInputs}>
           <View style={ style.textBoxBtnHolder }>
             <TextInput
               label="Email"
@@ -127,15 +127,7 @@ class SignIn extends React.Component {
             disabled={ !this.validateData() }
           />
         </View>
-
-        <View style={style.containerFooter}>
-          <Text style={style.textRegular11GrayDark}>
-            Al registrarte estas aceptando nuestros
-          </Text>
-          <Text style={style.textRegular11GrayDarkBold}>
-            Términos y Condiciones y Políticas de Privacidad
-          </Text>
-        </View>
+        
       </View>
     )
   }

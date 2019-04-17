@@ -1,16 +1,24 @@
 import { StyleSheet } from 'react-native';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { COLORS } from '../../constants/colors';
 import { FONTS } from '../../constants/fonts';
+import { METRICS } from '../../constants/metrics';
 
 const styles = StyleSheet.create({
   container: {
+    height: hp('100%') - METRICS.heightStatusBar,
     backgroundColor: COLORS.white
   },
   containerHeader: {
-    backgroundColor: COLORS.blue,
     alignItems: 'center',
+    backgroundColor: COLORS.blue,
     paddingTop: 30,
     marginBottom: -5, //To join the buttons with the header
+  },
+  containerFooter: {
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    marginBottom: 20,
   },
   textRegular14White: {
     fontFamily: FONTS.latoRegular,
@@ -38,7 +46,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white
   },
   buttonOn: {
-    fontFamily: FONTS.latoRegular,
+    fontFamily: FONTS.latoSemiBold,
     fontSize: FONTS.size11,
     color: COLORS.blue
   },
@@ -46,6 +54,23 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size11,
     color: COLORS.white
+  },
+  textRegular11GrayDark: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size11,
+    color: COLORS.grayDark,
+    textAlign: 'center',
+  },
+  textRegular11GrayDarkBold: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size11,
+    color: COLORS.grayDark,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  inColumnSpaceBetween: {
+    flexDirection: 'column',
+    justifyContent: 'space-between'
   },
 });
 
