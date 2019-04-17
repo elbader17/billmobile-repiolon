@@ -17,9 +17,9 @@ class NewCustomer extends React.Component {
     const { fiscalIdentity } = this.props;
     this.state = {
       condition: '',
-      //name: fiscalIdentity.name,
-      //category: fiscalIdentity.category,
-      //cuit: fiscalIdentity.identity,
+      name: fiscalIdentity.name,
+      category: fiscalIdentity.category,
+      cuit: fiscalIdentity.identity,
       conditionIva: '',
     }
   }
@@ -74,8 +74,6 @@ class NewCustomer extends React.Component {
             </View>
           <Text style={ style.textRegular12White }>La información fiscal de los clientes se cargan automaticamente poniendo su N° de CUIT</Text>
 
-          {/*<View style={style.lineWhite}></View>
-          <Text style={ style.textRegular12White }>{''}</Text>*/}
           <View style={style.lineWhite}></View>
 
           <Text style={style.textRegular14White} >NOMBRE DE FANTASÍA (OPCIONAL)</Text>
@@ -91,7 +89,7 @@ class NewCustomer extends React.Component {
           </View>
           <View style={style.positionFinalButton}>
             <Button
-              //onPress={this.newCustomer}
+              onPress={this.newCustomer}
               title='GUARDAR'
               buttonStyle={ style.buttonConfirm }
               titleStyle={ style.textRegular14White }
