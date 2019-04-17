@@ -60,8 +60,8 @@ class SignUp extends React.Component {
     const hide = require('../../../images/hide.png')
     const show = require('../../../images/show.png')
     return(
-      <View>
-        <View style = { style.container }>
+      <View style={style.container}>
+        <View style = { style.containerInputs }>
           <View style={ style.textBoxBtnHolder }>
             <TextInput
               label="Nombre"
@@ -137,20 +137,12 @@ class SignUp extends React.Component {
             onPress={ this.handleSignUp }
             value={this.state.email}
             buttonStyle={ style.submit }
-            titleStyle={ style.textRegular14White }
-            disabledTitleStyle={ style.textRegular14White}
+            titleStyle={ style.textRegular14WhiteBold }
+            disabledTitleStyle={ style.textRegular14WhiteBold}
             disabledStyle={ style.submitDisabled }
             disabled={ !this.validateData() }
           />
         </View>
-        <View style={style.containerFooter}>
-            <Text style={style.textRegular11GrayDark}>
-              Al registrarte estas aceptando nuestros
-            </Text>
-            <Text style={style.textRegular11GrayDarkBold}>
-              Términos y Condiciones y Políticas de Privacidad
-            </Text>
-          </View>
         <Modal visible={ this.props.showConfirmationModal }>
           <Confirmation/>
         </Modal>

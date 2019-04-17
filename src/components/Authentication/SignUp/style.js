@@ -1,16 +1,15 @@
 import { StyleSheet } from 'react-native';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { COLORS } from '../../../constants/colors';
 import { FONTS } from '../../../constants/fonts';
 
 const styles = StyleSheet.create({
   container:{
-    alignItems: 'center',
-    marginVertical: 10,
-    marginHorizontal: 40,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
   },
-  containerFooter: {
-    justifyContent: 'flex-end',
-    marginBottom: 20,
+  containerInputs:{
+    alignItems: 'center',
   },
   textBoxBtnHolder: {
     position: 'relative',
@@ -18,6 +17,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: 5
   },
+
   textBox: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size18,
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   submit: {
     backgroundColor: COLORS.red,
     width: 266,
-    height: 40,
+    height: hp('7%'),
     borderRadius: 2,
   },
   submitDisabled: {
@@ -54,11 +54,6 @@ const styles = StyleSheet.create({
     width: 266,
     height: 40,
     borderRadius: 2,
-  },
-  textRegular14White: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size14,
-    color: COLORS.white
   },
   textRegular11GrayDark: {
     fontFamily: FONTS.latoRegular,
@@ -72,6 +67,11 @@ const styles = StyleSheet.create({
     color: COLORS.grayDark,
     fontWeight: 'bold',
     textAlign: 'center',
+  },
+  textRegular14WhiteBold: {
+    fontFamily: FONTS.latoSemiBold,
+    fontSize: FONTS.size14,
+    color: COLORS.white
   },
   textRed: {
     color: COLORS.red
