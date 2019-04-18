@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
     margin: 5
   },
   listCustomer:{
-    marginHorizontal: 15,
+    marginHorizontal: 8,
     marginVertical: 5
   },
   listItems: {
@@ -365,6 +365,11 @@ const styles = StyleSheet.create({
     width: wp('13%'),
     height: hp('3.5%'),
   },
+  buttonCheek: {
+    backgroundColor: 'transparent',
+    width: wp('13%'),
+    height: hp('3.5%'),
+  },
   buttonDelete: {
     backgroundColor: 'transparent',
     height: hp('3.5%'),
@@ -374,8 +379,11 @@ const styles = StyleSheet.create({
   buttonCantProduct: {
     backgroundColor: 'transparent',
     height: hp('3.5%'),
+    borderRadius: 5,
     borderWidth: 1,
     borderColor: COLORS.red,
+    paddingHorizontal: 5,
+    justifyContent: 'center',
     opacity: 0.8,
   },
   positionFinalButton: {

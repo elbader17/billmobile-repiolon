@@ -135,7 +135,7 @@ class Invoice extends React.Component {
                       style={style.buttonCantProduct}
                     >
                       <Text style={style.textRegular12RedkBold}>
-                        {`X ${item.quantity}`}
+                        {`X${item.quantity}`}
                       </Text>
                     </TouchableOpacity>
                   </View>
@@ -216,7 +216,8 @@ class Invoice extends React.Component {
             />
           }
           onPress={() => {this.selectCustomer()} }
-          buttonStyle={ this.state.selectCustomer ? style.buttonCheckCustomerEnabled : style.buttonCheckCustomerDisabled }
+          buttonStyle={style.buttonCheek}
+          //buttonStyle={ this.state.selectCustomer ? style.buttonCheckCustomerEnabled : style.buttonCheckCustomerDisabled }
         />
         </View>
       );
