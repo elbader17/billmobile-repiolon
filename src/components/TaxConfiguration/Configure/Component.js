@@ -4,26 +4,17 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { Button } from "react-native-elements";
 import { withNavigation } from 'react-navigation';
 import style from './style';
-import { ConsoleLogger } from '@aws-amplify/core';
 import  { validateCuit } from '../../../utils/identity';
-
-const CUIT_REGEXP =  /\b(20|23|24|27|30|33|34)(\D)?[0-9]{8}(\D)?[0-9]/g;
-
 
 class TaxConfiguration extends React.Component{
 
   constructor(props) {
     super(props);
     this.state = {
-<<<<<<< HEAD
-      name: "",//this.props.name,
-      cuit: "",//this.props.cuit,
-=======
       name: this.props.name,
       cuit: this.props.cuit,
       onInputName: false,
       onInputCuit: false
->>>>>>> 09d1f86713e59ea16be092539925ac6933889ae0
     };
   }
 
@@ -43,10 +34,8 @@ class TaxConfiguration extends React.Component{
   }
 
   validateData = () => {
-    const isValidCuit = CUIT_REGEXP.test(this.state.cuit);
     const { cuit } = this.state;
-    const bool = validateCuit(cuit);
-    return bool;
+    return validateCuit(cuit);
   }
 
   setName = (value) => this.setState({ name: value})
@@ -122,7 +111,7 @@ class TaxConfiguration extends React.Component{
           titleStyle={ style.textRegular14White }
           disabledTitleStyle={ style.textRegular14White}
           disabledStyle={ style.submitDisabled }
-          disabled={ !this.validateData() }
+          disabled={!this.validateData() }
         />
       </View>
       </ScrollView>

@@ -7,8 +7,8 @@ import {
 } from './constants';
 
 const initialState = {
-  name: null,
-  cuit: null,
+  name: '',
+  cuit: '',
   completed: false,
 };
 

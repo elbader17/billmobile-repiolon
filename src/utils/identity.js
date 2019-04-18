@@ -2,10 +2,9 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable no-else-return */
 /* eslint-disable eqeqeq */
-import CUIT_REGEXP from '../constants/fiscal_identity';
+//import { CUIT_REGEXP } from '../constants/fiscal_identity';
 
 export const validateCuit = (cuit) => {
-  const isValidCuit = CUIT_REGEXP.test(this.state.cuit);
   let acumulado = 0;
   const digitos = cuit.split('');
   const digito	= digitos.pop();
@@ -18,12 +17,9 @@ export const validateCuit = (cuit) => {
   if (verif == 11) {
     verif = 0;
   }
-  console.log(`${digito}--${verif}`);
-  console.log(digito==verif);
-  console.log(isValidCuit);
   if(digito==verif) {
-    return (true && isValidCuit);
+    return (true);
   }else{
-    return (false && isValidCuit);
+    return (false);
   }
 };
