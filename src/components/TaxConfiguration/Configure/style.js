@@ -1,13 +1,21 @@
 import { StyleSheet } from 'react-native';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { COLORS } from '../../../constants/colors';
 import { FONTS } from '../../../constants/fonts';
 import { METRICS } from '../../../constants/metrics';
 
 const styles = StyleSheet.create({
   container: {
+    height: hp('100%') - METRICS.heightHeader - METRICS.heightStatusBar,
     alignItems: 'center',
-    marginVertical: 10,
-    marginHorizontal: 40,
+    paddingVertical: 15,
+    paddingHorizontal: 18,
+  },
+  boxName: {
+    //height: hp('20%'),
+  },
+  boxCuit: {
+    //height: hp('20%'),
   },
   textBoxBtnHolder: {
     position: 'relative',
@@ -27,6 +35,27 @@ const styles = StyleSheet.create({
     borderColor: COLORS.gray,
     borderRadius: 2,
   },
+  message: {
+    backgroundColor: COLORS.blue,
+    borderRadius: 5,
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+    bottom: 15
+  },
+  positionIcon: {
+    width: 50,
+    left: 10,
+    bottom: 5
+  },
+  paddingVertical5: {
+    paddingVertical: 5
+  },
+  lineGray: {
+    backgroundColor: COLORS.grayLight,
+    height: 1,
+    marginTop: 10,
+    marginBottom: 10,
+  },
   visibilityBtn: {
     position: 'absolute',
     right: 3,
@@ -42,8 +71,8 @@ const styles = StyleSheet.create({
   },
   submitReady: {
     backgroundColor: COLORS.red,
-    width: 285,
-    height: 40,
+    width: wp('90%'),
+    height: hp('6%'),
     borderRadius: 2,
   },
   submitDisabled: {
@@ -57,25 +86,16 @@ const styles = StyleSheet.create({
     fontSize: FONTS.size14,
     color: COLORS.white
   },
-  textRegular14DarkGray: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size14,
-    color: COLORS.grayDark,
-    paddingVertical: 15,
-    textAlign: 'center',
-  },
   textDescription: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size14,
     color: COLORS.grayDark,
   },
-  textRegular18GrayDark: {
+  textRegular16GrayDark: {
     fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size18,
+    fontSize: FONTS.size16,
     color: COLORS.grayDark,
     textAlign: 'center',
-    lineHeight: 26,
-    padding: 15
   },
   headerText: {
     fontFamily: FONTS.latoRegular,

@@ -1,7 +1,6 @@
 import React from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, ScrollView} from 'react-native';
 import { ButtonGroup } from "react-native-elements";
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Signup from './SignUp';
 import Signin from './SignIn';
 import style from './style';
@@ -48,25 +47,35 @@ class Authentication extends React.Component {
     const component2 = () => <Text style={this.state.selectedIndex === 1 ? a : b}>INICIAR SESIÓN</Text>
     const buttons = [{ element: component1 }, { element: component2 }]
     return(
-      <KeyboardAwareScrollView>
-        <View style={ style.container }>
-          <View style={ style.containerHeader }>
-            <Image source={ logo } style={ style.imageHeader } />
-            <Text style={ style.textRegular14White }>Hacé facturas electronicas rápido.{"\n"} 
-            Y hacelo seguro</Text>
+      <ScrollView>
+        <View style={[style.container, style.inColumnSpaceBetween]}>
+          <View>
+            <View style={ style.containerHeader }>
+              <Image source={ logo } style={ style.imageHeader } />
+              <Text style={ style.textRegular14White }>Hacé facturas electronicas rápido.{"\n"} 
+              Y hacelo seguro</Text>
+            </View>
+            <ButtonGroup
+              testID={ 'buttonGroup' }
+              onPress={ this.updateIndex }
+              selectedIndex={ this.state.selectedIndex }
+              buttons={ buttons }
+              containerStyle={ style.buttons }
+              textStyle={ style.textRegular14White }
+              selectedButtonStyle={ style.buttonSelected }
+            />
+            { this.renderSignUpSignIn() }
           </View>
-          <ButtonGroup
-            testID={ 'buttonGroup' }
-            onPress={ this.updateIndex }
-            selectedIndex={ this.state.selectedIndex }
-            buttons={ buttons }
-            containerStyle={ style.buttons }
-            textStyle={ style.textRegular14White }
-            selectedButtonStyle={ style.buttonSelected }
-          />
-          { this.renderSignUpSignIn() }
+          <View style={style.containerFooter}>
+            <Text style={style.textRegular11GrayDark}>
+              Al registrarte estas aceptando nuestros
+            </Text>
+            <Text style={style.textRegular11GrayDarkBold}>
+              Términos y Condiciones y Políticas de Privacidad
+            </Text>
+          </View>
         </View>
-      </KeyboardAwareScrollView>
+      </ScrollView>
     );
   }
 }
