@@ -26,7 +26,7 @@ class TaxConfiguration extends React.Component{
     const { updateFiscalIdentity } = this.props;
     updateFiscalIdentity(name, cuit)
      .then((data) => {
-      this.props.navigation.push('HomeScreen');
+      this.props.navigation.push('Invoice');
     })
   }
 

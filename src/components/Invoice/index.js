@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import Invoice from './Component';
 import { addFiscalIdentityToInvoice } from '../../app/fiscal_identity/actions';
 import { updateInvoice, createInvoice } from '../../app/invoices/action';
+import { updateInvoiceItem } from '../../app/invoice_items/action';
 
 const mapStateToProps = state => ({
   fiscalIdentity: state.invoices.currentInvoice.fiscalIdentity,
@@ -9,12 +10,16 @@ const mapStateToProps = state => ({
   invoiceDate: state.invoices.currentInvoice.invoiceDate,
   voucherType: state.invoices.currentInvoice.voucherType,
   invoiceId: state.invoices.currentInvoice.id,
+  invoiceTotal: state.invoices.currentInvoice.total,
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
     addFiscalIdentityToInvoice: (name, cuit, id) => (
       dispatch(addFiscalIdentityToInvoice(name, cuit, id))
+    ),
+    updateInvoiceItemQuantity: (id, quantity) => (
+      dispatch(updateInvoiceItem(id, { quantity }))
     ),
     updateInvoice: values => (
       dispatch(updateInvoice(values))

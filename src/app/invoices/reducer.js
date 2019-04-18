@@ -15,11 +15,12 @@ import {
 
 function defaultCurrentInvoice() {
   return {
-    fiscalIdentity: {name:''},
+    fiscalIdentity: { name: '' },
     invoiceItems: [],
     invoiceDate: new Date(),
     voucherType: 'fc',
     id: null,
+    total: 0.0,
   };
 }
 
@@ -29,10 +30,12 @@ const initialState = {
 };
 
 function setCurrentInvoice({ draftState, invoice }) {
-  const { invoice_date, invoice_type } = invoice.attributes;
+  const { invoice_date, invoice_type, total } = invoice.attributes;
+  console.log("invoice.", invoice);
   draftState.currentInvoice.id = invoice.id;
   draftState.currentInvoice.invoiceDate = new Date(invoice_date);
   draftState.currentInvoice.voucherType = invoice_type;
+  draftState.currentInvoice.total = total;
   return draftState;
 }
 
@@ -46,12 +49,14 @@ function addInvoiceItem({ draftState, invoiceItem }) {
     category,
     name,
     price,
+    quantity,
   } = invoiceItem.attributes;
 
   draftState.currentInvoice.invoiceItems.push({
     category,
     name,
     price,
+    quantity,
     id: invoiceItem.id,
   });
   return draftState;
@@ -63,8 +68,24 @@ function addFiscalIdentity({ draftState, fiscalIdentity }) {
   return draftState;
 }
 
-function updateInvoiceItem({ draftState }) {
-  return draftState;
+function updateInvoiceItem({ draftState, invoiceItem }) {
+  const {
+    category,
+    name,
+    price,
+    quantity,
+  } = invoiceItem.attributes;
+  const itemIndex = draftState.currentInvoice.invoiceItems.findIndex(
+    item => item.id === invoiceItem.id,
+  );
+  draftState.currentInvoice.invoiceItems[itemIndex] = {
+    category,
+    name,
+    price,
+    quantity,
+    id: invoiceItem.id,
+  };
+  return { ...draftState };
 }
 
 function resetCurrentInvoice({ draftState }) {

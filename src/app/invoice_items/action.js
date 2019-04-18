@@ -3,7 +3,10 @@ import {
   CREATE_INVOICE_ITEM,
   UPDATE_INVOICE_ITEM,
 } from './constant';
-import { createInvoice } from '../invoices/action';
+import {
+  createInvoice,
+  getInvoice,
+} from '../invoices/action';
 
 function createInvoiceItemAction(invoiceItem) {
   return {
@@ -39,38 +42,38 @@ const createInvoiceItem = (category, name, price) => {
       const resource = {
         category,
         name,
-        price,
+        price: parseFloat(price, 10),
         invoice_id: updatedInvoiceId,
       };
       return instance.post('v1/invoice_items', { resource })
         .then((response) => {
           dispatch(createInvoiceItemAction(response.data.data));
+          return dispatch(getInvoice(updatedInvoiceId));
         })
         .catch((error) => {
-          console.log(error);
+          console.log(error.response);
         });
     });
   };
 };
 
 
-const updateInvoiceItem = (id, name, price) => {
-  const resource = {
-    name,
-    price,
-  };
+const updateInvoiceItem = (id, values) => {
 
   return (dispatch, getState) => {
+    const { id: invoiceId } = getState().invoices.currentInvoice;
     const instance = axios.create({
       headers: { 'JWT-TOKEN': getState().authentication.jwtToken },
     });
-    return instance.put(`v1/invoice_items/${id}`, { resource })
-      .then((response) => {
-        dispatch(updateInvoiceItemAction(response.data));
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    return instance.put(
+      `v1/invoice_items/${id}`,
+      { resource: { ...values, invoice_id: invoiceId } },
+    ).then((response) => {
+      dispatch(updateInvoiceItemAction(response.data));
+      return dispatch(getInvoice(invoiceId));
+    }).catch((error) => {
+      console.log(error.response)
+    });
   };
 };
 

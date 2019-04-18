@@ -12,10 +12,10 @@ class Invoice extends React.Component {
 
   constructor(props) {
     super(props);
-    const { fiscalIdentity } = this.props;
+    const { fiscalIdentity, voucherType } = this.props;
     fcIndentification = fiscalIdentity.name === 'fc' ? fiscalIdentity.cuit : ''
     this.state = {
-      voucherType: VOUCHER_TYPES.find((v) => v.value===this.props.voucherType),
+      voucherType,
       selectedIndex: 0,
       isDateTimePickerVisible: false,
       isDateTimeVisible:false,
@@ -60,13 +60,14 @@ class Invoice extends React.Component {
     }
   };
 
-  selectCustomerType = () => {
-
-  }
-
   presentInvoiceDate = () => {
     const d = this.state.invoiceDate;
     return `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
+  }
+
+  presentVoucherType = () => {
+    const { voucherType } = this.state;
+    return VOUCHER_TYPES.find((v) => v.value === voucherType).label;
   }
 
   navigateClient = () => {
@@ -83,7 +84,6 @@ class Invoice extends React.Component {
 
   addFinalConsumer = () => {
     const { fcIndentification } = this.state;
-    console.log('fcIndentification; ', fcIndentification);
     const {
       fiscalIdentity,
       addFiscalIdentityToInvoice,
@@ -91,13 +91,18 @@ class Invoice extends React.Component {
     addFiscalIdentityToInvoice('fc', fcIndentification, fiscalIdentity.id);
   }
 
+  updateInvoiceItemQuantity = (invoiceItemId, quantity) => {
+    const { updateInvoiceItemQuantity } = this.props;
+    updateInvoiceItemQuantity(invoiceItemId, quantity);
+  }
+
   setFcIndentification = (value) => {
     this.setState({ fcIndentification: value });
   }
 
-  selectionVoucher = (date) => {
+  selectionVoucher = (voucherType) => {
     this.setModalVisible(!this.state.modalVisible);
-    this.setState({voucherType: date})
+    this.setState({voucherType: voucherType.value });
   }
 
   changeTypeCustomer = () => {
@@ -125,21 +130,14 @@ class Invoice extends React.Component {
                     </Text>
                   </View>
                   <View style={[style.inLineSpaceBetween,style.boxItems2]}>
-                    <Button
-                      title='X1'
-                      buttonStyle={style.buttonCantProduct}
-                      titleStyle={ style.textRegular12RedkBold }
-                    />
-                    <Button
-                      icon={
-                        <Icon
-                          name="md-trash"
-                          size={23}
-                          color="#EE6123"
-                        />
-                      }
-                      buttonStyle={style.buttonDelete}
-                    />
+                    <TouchableOpacity
+                      onPress={() => this.updateInvoiceItemQuantity(item.id, item.quantity + 1)}
+                      style={style.buttonCantProduct}
+                    >
+                      <Text style={style.textRegular12RedkBold}>
+                        {`X ${item.quantity}`}
+                      </Text>
+                    </TouchableOpacity>
                   </View>
                   <View style={style.boxItems3}>
                     <Text style={style.textRegular16GrayDark}>
@@ -158,7 +156,7 @@ class Invoice extends React.Component {
               <View style={[style.lineGray, {bottom: 6}]}></View>
               <View style={style.inLineSpaceBetween}>
                 <Text style={style.textRegular16GrayDarkBold}>TOTAL</Text>
-                <Text style={style.textRegular16GrayDarkBold}>$0</Text>
+                <Text style={style.textRegular16GrayDarkBold}>${this.props.invoiceTotal}</Text>
               </View>
             </View>
           </View>
@@ -193,7 +191,7 @@ class Invoice extends React.Component {
                 color="#EE6123"
                 />
               }
-              onPress={ this.createCustomer }
+              onPress={ this.addFinalConsumer }
               buttonStyle={ style.buttonCheck }
             />
           </View>
@@ -203,8 +201,6 @@ class Invoice extends React.Component {
   }
 
   renderListCustomers = () => {
-    //PREGUNTAR A NICO
-    //Alert.alert('fasas'+this.props.identitiFiscal.name)
     if (this.props.fiscalIdentity.name!='') {
       return(
         <View style={style.inLineSpaceBetween}>
@@ -246,7 +242,7 @@ class Invoice extends React.Component {
               style={style.buttonVoucher}
             >
               <Text style={style.textRegular16WhiteCenter}>
-                {this.state.voucherType.label}
+                {this.presentVoucherType()}
               </Text>
             </TouchableOpacity>
           </View>
@@ -351,14 +347,14 @@ class Invoice extends React.Component {
                 <Text style={style.textRegular16WhiteCenter}>Tipo de Comprobante</Text>
               </View>
               <View style={style.boxVoucherType}>
-                {VOUCHER_TYPES.map((i) => (
-                <View>
+                {VOUCHER_TYPES.map((voucherType, index) => (
+                <View key={index}>
                   <TouchableOpacity
                     style={[style.borderVoucher,style.marginVertical8]}
-                    onPress={() => this.selectionVoucher(i)}
+                    onPress={() => this.selectionVoucher(voucherType)}
                   >
                     <Text style={style.textRegular16Blue}>
-                      {i.label}
+                      {voucherType.label}
                     </Text>
                   </TouchableOpacity>
                 </View>

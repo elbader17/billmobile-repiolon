@@ -87,7 +87,7 @@ const listInvoice = () => {
     });
     return instance.get('v1/invoices')
       .then((response) => {
-        dispatch(listInvoiceAction(response.data));
+        dispatch(listInvoiceAction(response.data.data));
       })
       .catch((error) => {
         console.log(error);
@@ -102,7 +102,8 @@ const getInvoice = (id) => {
     });
     return instance.get(`v1/invoices/${id}`)
       .then((response) => {
-        dispatch(getInvoiceAction(response.data));
+        console.log(response);
+        dispatch(getInvoiceAction(response.data.data));
       })
       .catch((error) => {
         console.log(error);
