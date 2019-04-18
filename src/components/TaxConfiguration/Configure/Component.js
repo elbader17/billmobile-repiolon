@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Text, TextInput, Alert } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { View, Text, TextInput, Alert, ScrollView } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { Button } from "react-native-elements";
 import { withNavigation } from 'react-navigation';
 import style from './style';
@@ -12,6 +12,8 @@ class TaxConfiguration extends React.Component{
     this.state = {
       name: this.props.name,
       cuit: this.props.cuit,
+      onInputName: false,
+      onInputCuit: false
     };
   }
 
@@ -33,32 +35,68 @@ class TaxConfiguration extends React.Component{
   setName = (value) => this.setState({ name: value})
   setCuit = (value) => this.setState({ cuit: value })
 
+  renderMessageName = () => {
+    if (this.state.onInputName) {
+      return(
+      <View>
+        <Icon 
+          name= 'md-arrow-dropup' size={25} color='#3687d1' style={style.positionIcon}/>
+        <Text style={[style.textRegular14White, style.message]}>
+          Nombre de fantasía de la empresa o tu nombre y apellido.
+        </Text>
+      </View>
+      )
+    }
+  }
 
-  render() {
-    return(
-    <KeyboardAwareScrollView>
-      <View style={style.container}>
-        <View style={ style.textBoxBtnHolder }>
-          <Text style={ style.textRegular18GrayDark }>
-            NOMBRE DE LA EMPRESA
-          </Text>
-          <TextInput style={ style.textRegular14DarkGray }
-            onChangeText={this.setName}
-            style={ style.textBox }
-            value={this.state.name}
-          />
-          <Text style={ style.textRegular18GrayDark }>
-            INGRESA TU CUIT
-          </Text>
-          <TextInput style={ style.textRegular14DarkGray }
-            onChangeText={this.setCuit}
-            style={ style.textBox }
-            value={this.state.cuit}
-          />
-          <Text style={[style.textDescription, {paddingVertical: 15}] }>
+  renderMessageCuit = () => {
+    if (this.state.onInputCuit) {
+      return(
+        <View>
+          <Icon 
+            name= 'md-arrow-dropup' size={25} color='#3687d1' style={style.positionIcon}/>
+          <Text style={[style.textRegular14White, style.message]}>
             Con el CUIT podremos acceder a tu informacion y
             configurar la cuenta por ti.
           </Text>
+        </View>
+      )  
+    }
+  }
+
+  render() {
+    return(
+    <ScrollView>
+      <View style={style.container}>
+        <View style={ style.textBoxBtnHolder }>
+          <View style={style.boxName}>
+            <Text style={[style.textRegular16GrayDark,style.paddingVertical5]}>
+              NOMBRE DE LA EMPRESA
+            </Text>
+            <TextInput style={ style.textRegular14DarkGray }
+              onChangeText={this.setName}
+              onFocus = {() => this.setState({onInputName: true})}
+              onEndEditing={() => this.setState({onInputName: false})}
+              style={ style.textBox }
+              value={this.state.name}
+            />
+            {this.renderMessageName()}
+          </View>
+          <View style={style.lineGray}></View>
+          <View style={style.boxCuit}>
+            <Text style={[style.textRegular16GrayDark,style.paddingVertical5]}>
+              INGRESA TU CUIT
+            </Text>
+            <TextInput style={ style.textRegular14DarkGray }
+              onChangeText={this.setCuit}
+              onFocus={() => this.setState({onInputCuit: true})}
+              onEndEditing={() => this.setState({onInputCuit: false})}
+              style={ style.textBox }
+              value={this.state.cuit}
+            />
+            {this.renderMessageCuit()}
+          </View>
+          <View style={style.lineGray}></View>
         </View>
         <Button
           title="LISTO"
@@ -69,7 +107,7 @@ class TaxConfiguration extends React.Component{
           disabledStyle={ style.submitDisabled }
         />
       </View>
-      </KeyboardAwareScrollView>
+      </ScrollView>
     )
   }
 }
