@@ -4,9 +4,11 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { Button } from "react-native-elements";
 import { withNavigation } from 'react-navigation';
 import style from './style';
+import { ConsoleLogger } from '@aws-amplify/core';
+import  { validateCuit } from '../../../utils/identity';
 
+const CUIT_REGEXP =  /\b(20|23|24|27|30|33|34)(\D)?[0-9]{8}(\D)?[0-9]/g;
 
-const PASSWORD_REGEXP = new RegExp("(^([20]|[23]|[24]|[27]|[30]|[23]|[34]){1})(.[0-9]{6,8})(.[0-9]{1})");
 
 class TaxConfiguration extends React.Component{
 
@@ -14,7 +16,7 @@ class TaxConfiguration extends React.Component{
     super(props);
     this.state = {
       name: "",//this.props.name,
-      cuit: "",//this.props.cuit"",
+      cuit: "",//this.props.cuit,
     };
   }
 
@@ -34,9 +36,10 @@ class TaxConfiguration extends React.Component{
   }
 
   validateData = () => {
-    const isValidCuit = PASSWORD_REGEXP.test(this.state.cuit);
-    
-    return ( isValidCuit  );
+    const isValidCuit = CUIT_REGEXP.test(this.state.cuit);
+    const { cuit } = this.state;
+    const bool = validateCuit(cuit);
+    return bool;
   }
 
   setName = (value) => this.setState({ name: value})
