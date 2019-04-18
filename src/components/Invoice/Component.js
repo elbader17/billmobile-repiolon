@@ -205,7 +205,7 @@ class Invoice extends React.Component {
       return(
         <View style={style.inLineSpaceBetween}>
         <Text style={style.textRegular14GrayDark}>
-          {this.props.fiscalIdentity.name}
+          {this.props.fiscalIdentity.name === 'fc' ? this.props.fiscalIdentity.identification : this.props.fiscalIdentity.name}
         </Text>
         <Button
           icon={
