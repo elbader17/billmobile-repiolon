@@ -70,6 +70,7 @@ class NewCustomer extends React.Component {
                 placeholder="00-00000000-0"
                 placeholderTextColor={grayLight}
                 style={[style.textRegular16GrayDark,style.marginLeft5]}
+                keyboardType='numeric'
               />
             </View>
           <Text style={ style.textRegular12White }>La información fiscal de los clientes se cargan automaticamente poniendo su N° de CUIT</Text>
