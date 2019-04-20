@@ -17,7 +17,72 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: 5
   },
-
+  textFormatPass: {
+    fontFamily: FONTS.latoSemiBold,
+    fontSize: FONTS.size11,
+    color: COLORS.red,
+    borderWidth: 0.5,
+    borderRadius: 3,
+    borderColor: COLORS.red,
+    textAlign: 'center',
+    marginBottom: 3,
+    opacity: 0.9
+  },
+  textFormatPassValid: {
+    fontFamily: FONTS.latoSemiBold,
+    fontSize: FONTS.size11,
+    color: 'green',
+    borderWidth: 0.5,
+    borderRadius: 3,
+    borderColor: 'green',
+    textAlign: 'center',
+    marginBottom: 3,
+    opacity: 0.9
+  },
+  textFormatEmail: {
+    fontFamily: FONTS.latoSemiBold,
+    fontSize: FONTS.size11,
+    color: COLORS.red,
+    borderWidth: 0.5,
+    borderRadius: 3,
+    borderColor: COLORS.red,
+    textAlign: 'center',
+    marginBottom: 3,
+    opacity: 0.9
+  },
+  textFormatEmailValid: {
+    fontFamily: FONTS.latoSemiBold,
+    fontSize: FONTS.size11,
+    color: 'green',
+    borderWidth: 0.5,
+    borderRadius: 3,
+    borderColor: 'green',
+    textAlign: 'center',
+    marginBottom: 3,
+    opacity: 0.9
+  },
+  textConfirmPass: {
+    fontFamily: FONTS.latoSemiBold,
+    fontSize: FONTS.size11,
+    color: COLORS.red,
+    borderWidth: 0.5,
+    borderRadius: 3,
+    borderColor: COLORS.red,
+    textAlign: 'center',
+    marginBottom: 3,
+    opacity: 0.9
+  },
+  textConfirmPassValid: {
+    fontFamily: FONTS.latoSemiBold,
+    fontSize: FONTS.size11,
+    color: 'green',
+    borderWidth: 0.5,
+    borderRadius: 3,
+    borderColor: 'green',
+    textAlign: 'center',
+    marginBottom: 3,
+    opacity: 0.9
+  },
   textBox: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size18,
@@ -30,12 +95,27 @@ const styles = StyleSheet.create({
     borderColor: COLORS.gray,
     borderRadius: 2
   },
+  textBoxPass: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size18,
+    alignSelf: 'stretch',
+    height: 43,
+    paddingRight: 45,
+    paddingLeft: 8,
+  },
   visibilityBtn: {
     position: 'absolute',
     right: 3,
     height: 40,
     width: 35,
-    padding: 5
+    padding: 6,
+    marginTop: 2,
+  },
+  inputPass: {
+    flexDirection: 'row',
+    borderColor: COLORS.gray, 
+    borderWidth: 1, 
+    borderRadius: 2
   },
   btnImage: {
     resizeMode: 'contain',
@@ -52,21 +132,13 @@ const styles = StyleSheet.create({
   submitDisabled: {
     backgroundColor: COLORS.gray,
     width: 266,
-    height: 40,
+    height: hp('7%'),
     borderRadius: 2,
   },
   textRegular11GrayDark: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size11,
     color: COLORS.grayDark,
-    textAlign: 'center',
-  },
-  textRegular11GrayDarkBold: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size11,
-    color: COLORS.grayDark,
-    fontWeight: 'bold',
-    textAlign: 'center',
   },
   textRegular14WhiteBold: {
     fontFamily: FONTS.latoSemiBold,

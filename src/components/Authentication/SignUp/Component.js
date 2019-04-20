@@ -1,10 +1,10 @@
 import React from 'react';
-import { View, Text, Modal, TextInput, TouchableOpacity, Image } from 'react-native';
+import { View, Text, Modal, TextInput, TouchableOpacity, Image, Alert } from 'react-native';
 import { Button } from "react-native-elements";
 import Confirmation from '../Confirmation';
 import style from './style';
 
-const EMAIL_REGEXP = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
+const EMAIL_REGEXP = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
 const PASSWORD_REGEXP = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
 
 class SignUp extends React.Component {
@@ -15,10 +15,13 @@ class SignUp extends React.Component {
       email: '',
       password: '@Martin44',
       name:'Agustin',
-      confirmPassword: '@Martin44',
+      confirmPassword: '',
       confirmationEmail:'',
       hidePassword: true,
-      hideConfirmPassword: true
+      hideConfirmPassword: true,
+      messagePassFormat: false,
+      messageEmailFormat: false,
+      messageMatchPass: false,
     };
   }
 
@@ -45,17 +48,60 @@ class SignUp extends React.Component {
     confirmCode(confirmationEmail,confirmationCode,{})
   }
 
-  validateData = () => {
+  validatePass = () => {
     const isValidPassword = PASSWORD_REGEXP.test(this.state.password);
-    const isValidEmail = true// EMAIL_REGEXP.test(String(this.state.email).toLowerCase());
-    return (isValidPassword && isValidEmail);
+    return isValidPassword;
+  }
+
+  validateEmail = () => {
+    const isValidEmail = EMAIL_REGEXP.test(this.state.email);
+    return isValidEmail;
+  }
+
+  validateConfirmPass = () => {
+    const matchPass = this.state.password === this.state.confirmPassword;
+    return matchPass;
+  }
+
+  validateData = () => {
+    return (this.validatePass() && this.validateConfirmPass() && this.validateEmail());
+  }
+
+  showMessagePassFormat = () => {
+    if (this.state.messagePassFormat) {
+      return(
+        <Text style={this.validatePass() ? style.textFormatPassValid : style.textFormatPass }>
+          Al menos 8 Caracteres, 1 Mayus, 1 Número y 1 Caracter Especial
+        </Text>
+      )
+    }
+  }
+
+  showMessageEmailFormat = () => {
+    if (this.state.messageEmailFormat) {
+      return(
+        <Text style={this.validateEmail() ? style.textFormatEmailValid : style.textFormatEmail }>
+          Nombre@Dominio.xxx
+        </Text>
+      )
+    }
+  }
+
+  showMessageMatchPass = () => {
+    if (this.state.messageMatchPass) {
+      return(
+        <Text style={this.validateConfirmPass() ? style.textConfirmPassValid : style.textConfirmPass }>
+          Contraseñas coincidentes
+        </Text>
+      )  
+    }
   }
 
   setName = (value) => this.setState({ name: value})
   setEmail = (value) => this.setState({ email: value })
-  setPassword = (value) => this.setState({ password: value })
+  setPassword = (value) => this.setState({ password: value });
   setConfirmPassword = (value) => this.setState({ confirmPassword: value })
-
+  
   render() {
     const hide = require('../../../images/hide.png')
     const show = require('../../../images/show.png')
@@ -71,10 +117,14 @@ class SignUp extends React.Component {
             />
           </View>
           <View style={ style.textBoxBtnHolder }>
+            {this.showMessageEmailFormat()}
             <TextInput
               label="Email"
               value={ this.state.email }
+              onChange={ this.validateEmail }
               onChangeText={ this.setEmail }
+              onFocus={() => this.setState({messageEmailFormat: true})}
+              onEndEditing={() => this.setState({messageEmailFormat: false})}
               placeholder="Tu email"
               style={ style.textBox }
               onRef={ r => { this.state.email = r }}
@@ -84,12 +134,18 @@ class SignUp extends React.Component {
             />
           </View>
           <View style={ style.textBoxBtnHolder }>
+            {this.showMessagePassFormat()}
+            <View>
+            <View style={style.inputPass}>
             <TextInput
               label="Password"
               value={ this.state.password }
+              onChange={ this.validatePass }
               onChangeText={ this.setPassword }
+              onFocus={() => this.setState({messagePassFormat: true})}
+              onEndEditing={() => this.setState({messagePassFormat: false})}
               placeholder="Contraseña"
-              style={ style.textBox }
+              style={ style.textBoxPass }
               secureTextEntry={ this.state.hidePassword }
             />
             <TouchableOpacity
@@ -102,26 +158,36 @@ class SignUp extends React.Component {
                 style={ style.btnImage }
               />
             </TouchableOpacity>
+            </View>
+            </View>
           </View>
           <View style={ style.textBoxBtnHolder }>
-            <TextInput
-              label="ConfirmPassword"
-              onChangeText={ this.setConfirmPassword }
-              value={ this.confirmPassword }
-              placeholder="Confirmar Contraseña"
-              style={ style.textBox }
-              secureTextEntry={ this.state.hideConfirmPassword }
-            />
-            <TouchableOpacity
-              activeOpacity={ 0.8 }
-              style={ style.visibilityBtn }
-              onPress={ this.manageConfirmPasswordVisibility }
-            >
-              <Image
-                source={( this.state.hideConfirmPassword ) ? hide : show }
-                style={ style.btnImage }
+            <View>
+            {this.showMessageMatchPass()}
+            <View style={style.inputPass}>
+              <TextInput
+                label="ConfirmPassword"
+                onChange={ this.validateConfirmPass }
+                onChangeText={ this.setConfirmPassword }
+                onFocus={() => this.setState({messageMatchPass: true})}
+                onEndEditing={() => this.setState({messageMatchPass: false})}
+                value={ this.confirmPassword }
+                placeholder="Confirmar Contraseña"
+                style={ style.textBoxPass }
+                secureTextEntry={ this.state.hideConfirmPassword }
               />
-            </TouchableOpacity>
+              <TouchableOpacity
+                activeOpacity={ 0.8 }
+                style={ style.visibilityBtn }
+                onPress={ this.manageConfirmPasswordVisibility }
+              >
+                <Image
+                  source={( this.state.hideConfirmPassword ) ? hide : show }
+                  style={ style.btnImage }
+                />
+              </TouchableOpacity>
+            </View>
+            </View>
           </View>
 
           <TouchableOpacity>
