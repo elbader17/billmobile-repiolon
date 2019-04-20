@@ -77,8 +77,8 @@ const styles = StyleSheet.create({
   },
   submitDisabled: {
     backgroundColor: COLORS.gray,
-    width: 266,
-    height: 40,
+    width: wp('90%'),
+    height: hp('6%'),
     borderRadius: 2,
   },
   textRegular14White: {

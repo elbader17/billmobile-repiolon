@@ -99,6 +99,7 @@ class TaxConfiguration extends React.Component{
               onEndEditing={() => this.setState({onInputCuit: false})}
               style={ style.textBox }
               value={this.state.cuit}
+              keyboardType='numeric'
             />
             {this.renderMessageCuit()}
           </View>
