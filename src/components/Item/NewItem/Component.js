@@ -58,11 +58,13 @@ class NewItem extends React.Component {
               style={ style.textName }
             />
           </View>
-          <View style={ style.textBoxBtnHolder }>
+          <View style={style.price}>
+            <Text style={style.textRegular14GrayDarkPrice}>Precio $ </Text>
             <TextInput
-              placeholder="Precio"
+              placeholder="0.00"
               onChangeText={this.setPrice}
-              style={ style.textBox }
+              style={ style.textBoxPrice }
+              keyboardType='numeric'
             />
           </View>
         </View>
@@ -77,11 +79,13 @@ class NewItem extends React.Component {
               style={ style.textName }
             />
           </View>
-          <View style={ style.textBoxBtnHolder }>
+          <View style={style.price}>
+            <Text style={style.textRegular14GrayDarkPrice}>Precio $ </Text>
             <TextInput
-              placeholder="Precio | $ 0.00"
+              placeholder="0.00"
               onChangeText={this.setPrice}
-              style={ style.textBox }
+              style={ style.textBoxPrice }
+              keyboardType='numeric'
             />
           </View>
         </View>

@@ -55,6 +55,20 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.red,
     borderRadius: 0,
   },
+  price: {
+    flexDirection:'row', 
+    alignItems: 'center', 
+    borderWidth: 1,
+    borderRadius: 3,
+    borderColor: COLORS.gray
+  },
+  textRegular14GrayDarkPrice: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size18,
+    color: COLORS.grayDark,
+    marginHorizontal: 7,
+    paddingBottom: 3
+  },
   textRegular12WhiteBold: {
     fontFamily: FONTS.latoSemiBold,
     fontSize: FONTS.size12,
@@ -117,6 +131,13 @@ const styles = StyleSheet.create({
     paddingVertical: 0,
     borderColor: COLORS.gray,
     borderRadius: 2,
+  },
+  textBoxPrice: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size18,
+    width: '80%',
+    height: hp('7%'),
+    paddingRight: 7,
   },
   textName: {
     fontFamily: FONTS.latoRegular,
