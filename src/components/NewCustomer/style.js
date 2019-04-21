@@ -30,6 +30,11 @@ const styles = StyleSheet.create({
     fontSize: FONTS.size14,
     color: COLORS.white,
   },
+  textRegular14WhiteBold: {
+    fontFamily: FONTS.latoSemiBold,
+    fontSize: FONTS.size14,
+    color: COLORS.white,
+  },
   textRegular12White: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size12,
@@ -48,6 +53,12 @@ const styles = StyleSheet.create({
   buttonConfirm: {
     height: wp('14%'),
     backgroundColor: COLORS.red,
+    borderRadius: 0
+  },
+  buttonConfirmDisabled: {
+    height: wp('14%'),
+    backgroundColor: COLORS.gray,
+    borderRadius: 0
   },
   marginLeft5: {
     marginLeft: 5,

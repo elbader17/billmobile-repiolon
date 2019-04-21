@@ -99,7 +99,9 @@ class NewCustomer extends React.Component {
               onPress={this.newCustomer}
               title='GUARDAR'
               buttonStyle={ style.buttonConfirm }
-              titleStyle={ style.textRegular14White }
+              titleStyle={ style.textRegular14WhiteBold }
+              disabledStyle= { style.buttonConfirmDisabled }
+              disabledTitleStyle = { style.textRegular14WhiteBold }
               disabled={!this.validateData() }
             />
           </View>
