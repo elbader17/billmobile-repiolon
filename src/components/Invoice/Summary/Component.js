@@ -11,7 +11,6 @@ class InvoiceSummary extends React.Component {
     this.state = {
       impuesto: '',
       subTotal: '',
-      total: 0,
     };
   }
 
@@ -27,6 +26,11 @@ class InvoiceSummary extends React.Component {
 
   setImpuesto = (value) => this.setState({ impuesto: value})
 
+  presentInvoiceDate = () => {
+    const d = this.props.invoiceDate;
+    return `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
+  }
+
   render() {
     return(
       <ScrollView>
@@ -35,7 +39,7 @@ class InvoiceSummary extends React.Component {
           
           <View style={[style.boxHeaderInvoice, style.inLineSpaceBetween]}>
             <Text style={style.textRegular14}>{"FACTURA-C"}</Text>
-            <Text style={style.textRegular14}>{"JUE 22 NOV"}</Text>
+            <Text style={style.textRegular14}>{this.presentInvoiceDate()}</Text>
           </View>
 
           <View style={style.lineGray}></View>
@@ -103,15 +107,16 @@ class InvoiceSummary extends React.Component {
                 <View style={[style.lineHorizontalGrayLight,style.marginLeft5]}></View>
                 <View>
                   <Text style={style.textRegular14GrayDark}>
-                    ${ this.props.items.map((i) => parseFloat(i.price, 10))
-                      .reduce((partial_sum, a) => { return partial_sum + a }, 0) }
+                    ${this.props.invoiceTotal}
+                    {/*${ this.props.items.map((i) => parseFloat(i.price, 10))
+                      .reduce((partial_sum, a) => { return partial_sum + a }, 0) } */}
                   </Text>
                 </View>
               </View>
               <View style={style.inLineSpaceBetween}>
                 <View style={[style.lineHorizontalGrayLight,style.marginLeft5]}></View>
                 <View>
-                  <Text style={style.textRegular14GrayDark}>${'0'}</Text>
+                  <Text style={style.textRegular14GrayDark}>${'0.0'}</Text>
                 </View>
               </View>
             </View>
@@ -127,7 +132,7 @@ class InvoiceSummary extends React.Component {
             />
             <View style={[style.boxPriceFinal, style.inLineSpaceBetween]}>
               <Text style={style.textRegular17GrayDark}>TOTAL</Text>
-              <Text style={style.textRegular18GrayDark}>${this.total}</Text>
+              <Text style={style.textRegular18GrayDark}>${this.props.invoiceTotal}</Text>
             </View>
           </View>
 

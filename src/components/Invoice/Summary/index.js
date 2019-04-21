@@ -5,6 +5,9 @@ const mapStateToProps = state => ({
   jwtToken: state.authentication.jwtToken,
   fiscalIdentity: state.invoices.currentInvoice.fiscalIdentity,
   items: state.invoices.currentInvoice.invoiceItems,
+  invoiceDate: state.invoices.currentInvoice.invoiceDate,
+  invoiceTotal: state.invoices.currentInvoice.total,
+  voucherType: state.invoices.currentInvoice.voucherType,
 });
 
 
