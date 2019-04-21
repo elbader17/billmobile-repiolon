@@ -17,7 +17,8 @@ class SignIn extends React.Component {
       email: 'hh@mozej.com',
       password: '@Martin44',
       name:'',
-      hidePassword: true
+      hidePassword: true,
+      loading: false
     };
   }
 
@@ -28,6 +29,7 @@ class SignIn extends React.Component {
   handleSignIn = () => {
     const { email, password } = this.state;
     const { signIn, getFiscalIdentity } = this.props;
+    this.setLoading(true);
     signIn(email, password)
     .then( (_data) => {
       if(this.props.jwtToken !== ''){
@@ -43,10 +45,8 @@ class SignIn extends React.Component {
           Alert.alert(_data.message);
           this.props.navigation.navigate('Authentication');
         }
-
-
+        this.setLoading(false);
       }
-
     })
     .catch(err => Alert.alert("Error al Ingresar: ",err.message));
   }
@@ -71,6 +71,7 @@ class SignIn extends React.Component {
 
   setEmail = (value) => this.setState({ email: value })
   setPassword = (value) => this.setState({ password: value })
+  setLoading = (bool) => this.setState({ loading: bool })
 
   render() {
     const hide = require('../../../images/hide.png')
@@ -125,6 +126,7 @@ class SignIn extends React.Component {
             disabledTitleStyle={ style.textRegular14White }
             disabledStyle={ style.submitDisabled }
             disabled={ !this.validateData() }
+            loading = {this.state.loading}
           />
         </View>
         
