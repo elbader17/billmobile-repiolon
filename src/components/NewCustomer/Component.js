@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, Alert, Picker, TextInput, ScrollView } from 'react-native';
 import { Button } from "react-native-elements";
 import { withNavigation } from 'react-navigation';
+import  { validateCuit } from '../../utils/identity';
 import style from './style';
 import {
   CONDITION_IVA,
@@ -19,23 +20,28 @@ class NewCustomer extends React.Component {
       condition: '',
       name: fiscalIdentity.name,
       category: fiscalIdentity.category,
-      cuit: fiscalIdentity.identity,
+      identification: fiscalIdentity.identification,
       conditionIva: '',
     }
   }
 
   newCustomer = () => {
-    const { name, category, cuit } = this.state;
+    const { name, category, identification } = this.state;
     const {
       addFiscalIdentity,
       fiscalIdentity,
       navigation,
     } = this.props;
-    addFiscalIdentity(name, cuit, fiscalIdentity.id, navigation)
+    addFiscalIdentity(name, identification, fiscalIdentity.id, navigation)
       .then(() => {
-        Alert.alert("Cliente Cargado: "+this.props.name+" "+this.props.cuit);
+        Alert.alert("Cliente Cargado: "+this.props.fiscalIdentity.name+" "+this.props.fiscalIdentity.identification);
       })
       .catch(err => Alert.alert("Error al Ingresar: ",err.message));
+  }
+
+  validateData = () => {
+    const { identification } = this.state;
+    return validateCuit(identification);
   }
 
   static navigationOptions = {
@@ -45,7 +51,7 @@ class NewCustomer extends React.Component {
   };
 
   setName = (value) => this.setState({ name: value})
-  setCuitDni = (value) => this.setState({ cuit: value })
+  setIdentification = (value) => this.setState({ identification: value })
 
   render() {
     return(
@@ -66,7 +72,7 @@ class NewCustomer extends React.Component {
             <Text style={style.textRegular14White}>NÚMERO DE CUIT</Text>
             <View style={ style.boxBtnHolder }>
               <TextInput
-                onChangeText={this.setCuitDni}
+                onChangeText={this.setIdentification}
                 placeholder="00-00000000-0"
                 placeholderTextColor={grayLight}
                 style={[style.textRegular16GrayDark,style.marginLeft5]}
@@ -94,6 +100,7 @@ class NewCustomer extends React.Component {
               title='GUARDAR'
               buttonStyle={ style.buttonConfirm }
               titleStyle={ style.textRegular14White }
+              disabled={!this.validateData() }
             />
           </View>
           

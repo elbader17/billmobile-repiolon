@@ -44,8 +44,8 @@ const Prueba = createStackNavigator(
   {
     //InvoiceSummary,
     //VerticalStackLayout,
-    //NewCustomer,
-    TaxConfiguration,
+    NewCustomer,
+    //TaxConfiguration,
   },
 );
 
@@ -57,7 +57,7 @@ const AppNavigator = createAppContainer(createSwitchNavigator(
     Prueba,
   },
   {
-    initialRouteName: 'Prueba',
+    initialRouteName: 'Login',
   },
 ));
 

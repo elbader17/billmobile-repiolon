@@ -44,7 +44,7 @@ const updateFiscalIdentity = (resource, dispatch, getState) => {
 
 
 // eslint-disable-next-line func-names
-const addFiscalIdentityToInvoice = (name, cuit, id) => {
+const addFiscalIdentityToInvoice = (name, identity, category, id) => {
   return (dispatch, getState) => {
     const { id: invoiceId } = getState().invoices.currentInvoice;
     let promise;
@@ -60,7 +60,7 @@ const addFiscalIdentityToInvoice = (name, cuit, id) => {
         category: 'monotributo',
         name,
         id,
-        identification: cuit,
+        identification: identity,
         invoice_id: updatedInvoiceId,
       };
       return createFiscalIdentity(resource, dispatch, getState);

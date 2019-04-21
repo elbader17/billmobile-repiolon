@@ -15,7 +15,7 @@ import {
 
 function defaultCurrentInvoice() {
   return {
-    fiscalIdentity: { name: '' },
+    fiscalIdentity: { name: '', cuit: '' },
     invoiceItems: [],
     invoiceDate: new Date(),
     voucherType: 'fc',
