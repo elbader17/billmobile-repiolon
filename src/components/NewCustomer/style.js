@@ -6,7 +6,7 @@ import { FONTS } from '../../constants/fonts';
 
 const styles = StyleSheet.create({
   container: {
-    height: hp('100%') - METRICS.heightHeader - METRICS.heightStatusBar,
+    height: hp('100%') - METRICS.heightHeader,
     backgroundColor: COLORS.blue,
     padding: 18,
   },

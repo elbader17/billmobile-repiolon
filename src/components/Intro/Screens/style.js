@@ -1,4 +1,5 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { COLORS } from '../../../constants/colors';
 import { FONTS } from '../../../constants/fonts';
 import { METRICS } from '../../../constants/metrics';
@@ -6,21 +7,20 @@ import { METRICS } from '../../../constants/metrics';
 const styles = StyleSheet.create({
   wrapper: {},
   silde: {
-    //width: METRICS.screenWidth,
-    height: METRICS.screenHeight,
+    height: hp('100%'),
     alignItems: 'center',
     backgroundColor: COLORS.blue,
   },
   centerVertical: {
-    justifyContent: 'center',
+    //justifyContent: 'c',
   },
   number: {
     fontFamily: FONTS.regular,
     fontSize: FONTS.size78,
     color: COLORS.white,
     textAlign: 'center',
-    marginTop: 80,
-    marginBottom: 50,
+    marginTop: 70,
+    marginBottom: 40,
   },
   textTittle: {
     fontFamily: FONTS.semiBold,
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: COLORS.white,
     textAlign: 'center',
-    width: 289,
+    width: wp('80%'),
     lineHeight: 32,
   },
   textDescription: {
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     fontSize: FONTS.size14,
     color: COLORS.white,
     textAlign: 'center',
-    width: 289,
+    width: wp('80%'),
     lineHeight: 21,
     marginTop: 15,
   },
@@ -55,11 +55,11 @@ const styles = StyleSheet.create({
   },
   positionButtonNext: { 
     justifyContent: 'center',
-    marginTop: 190
+    marginTop: 150
   },
   prev: {},
   positionButtonEnd: { 
-    top: 134, 
+    top: 126, 
   },
   buttonReady: {
     borderColor: COLORS.white, 

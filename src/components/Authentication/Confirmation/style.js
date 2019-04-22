@@ -1,16 +1,16 @@
 import { StyleSheet } from 'react-native';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { COLORS } from '../../../constants/colors';
 import { FONTS } from '../../../constants/fonts';
 import { METRICS } from '../../../constants/metrics';
 
 const styles = StyleSheet.create({
   container:{
-    width: METRICS.screenWidth,
-    height: METRICS.screenHeight
+    height: hp('100%') - METRICS.heightHeader,
   },
-  container2:{
+  containerInputs:{
     alignItems: 'center',
-    paddingHorizontal: 45,
+    paddingHorizontal: 35,
     paddingTop: 15,
   },
   textBoxBtnHolder: {
@@ -32,22 +32,35 @@ const styles = StyleSheet.create({
     borderColor: COLORS.gray,
     borderRadius: 2
   },
-  text: {
+  textRegular14GrayDark: {
     fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size18,
-    fontWeight: 'bold'
+    fontSize: FONTS.size14,
+    color: COLORS.grayDark,
   },
-  submit: {
+  buttonVerify: {
     backgroundColor: COLORS.red,
-    width: 266,
+    width: wp('80%'),
     height: 40,
     borderRadius: 2
   },
-  submitText: {
-    fontFamily: FONTS.latoRegular,
+  textRegular14WhiteBold: {
+    fontFamily: FONTS.latoSemiBold,
     fontSize: FONTS.size14,
     color: COLORS.white
-  }
+  },
+  headerText: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size16,
+    fontWeight: 'normal',
+    color: COLORS.blue,
+  },
+  lineGray: {
+    backgroundColor: COLORS.gray,
+    width: wp('80%'),
+    height: 1,
+    marginVertical: 10
+
+  },
 });
 
 export default styles;

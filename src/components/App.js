@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { StatusBar} from 'react-native';
 import { Provider } from 'react-redux';
 import store from '../store';
 import Amplify from 'aws-amplify';
@@ -14,7 +15,9 @@ Amplify.configure(aws_exports);
 axios.defaults.baseURL = API_HOST;
 
 class App extends React.Component {
-  
+  componentDidMount() {
+    StatusBar.setHidden(true);
+  }
   render() {
     console.disableYellowBox = true;
     return (
