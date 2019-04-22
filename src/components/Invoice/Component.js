@@ -180,8 +180,10 @@ class Invoice extends React.Component {
           <View style={[style.inLineSpaceBetween, {alignItems: 'center'}]}>
             <TextInput
               placeholder="DNI"
+              placeholderTextColor={'#cecece'}
               onChangeText={this.setFcIndentification}
               style={[style.textRegular18GrayDark,style.inputDNICustomer]}
+              keyboardType='numeric'
             />
             <Button
               icon={
@@ -271,7 +273,7 @@ class Invoice extends React.Component {
               titleStyle={style.textRegular11GrayDark}
             />
             <Button
-              title='CANCELAR'
+              title='VOLVER'
               onPress={() => this.setState({cf: false})}
               buttonStyle={style.buttonCancel}
               titleStyle={style.textRegular11Gray}
