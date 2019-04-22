@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Modal, TextInput, TouchableOpacity, ScrollView, TouchableWithoutFeedback, Alert} from 'react-native';
+import { View, Text, Modal, TextInput, TouchableOpacity, ScrollView, TouchableWithoutFeedback, Alert, ImageBackground} from 'react-native';
 import { Button } from "react-native-elements";
 import { withNavigation } from 'react-navigation';
 import DateTimePicker from 'react-native-modal-datetime-picker';
@@ -236,6 +236,7 @@ class Invoice extends React.Component {
     const buttonCfEnable = style.buttonCfEnable;
     const buttonCfDisable = style.buttonCfDisable;
     return(
+      <ImageBackground source={require('../../images/gradiant.png')} style={{width: '100%', height: '100%'}}>
       <ScrollView>
       <View style={style.container}>
         <View style={style.inLineSpaceBetween}>
@@ -369,6 +370,7 @@ class Invoice extends React.Component {
 
       </View>
       </ScrollView>
+      </ImageBackground>
     )
   }
 }

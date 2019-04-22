@@ -7,7 +7,7 @@ import { METRICS } from '../../constants/metrics';
 const styles = StyleSheet.create({
   container: {
     height: hp('100%') - METRICS.heightHeader,
-    backgroundColor: COLORS.blue,
+    //backgroundColor: COLORS.blue,
     paddingHorizontal: 18,
     paddingVertical: 7,
   },
