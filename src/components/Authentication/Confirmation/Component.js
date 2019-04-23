@@ -14,11 +14,16 @@ class Confirmation extends React.Component {
     };
   }
 
+  static navigationOptions = {
+    title: 'VERIFICAR CUENTA',
+    headerTitleStyle: style.headerText,
+    headerTintColor: '#3687D1',
+  };
+
   handleConfirmationCode = () => {
     const { confirmationEmail, confirmationCode } = this.state;
     const { confirmCode } = this.props;
     confirmCode(confirmationEmail,confirmationCode,{});
-
   }
 
   setConfirmPassword = (value) => this.setState({ confirmPassword: value })
@@ -26,10 +31,11 @@ class Confirmation extends React.Component {
   render() {
     return(
       <View state={ style.container }>
-        <View style={ style.container2 }>
-          <Text style={ style.text }>
-            Verificar Cuenta
+        <View style={ style.containerInputs }>
+          <Text style={ style.textRegular14GrayDark }>
+            Se envió el Código de Confirmacion a tu email.
           </Text>
+          <View style={style.lineGray}></View>
           <View style={ style.textBoxBtnHolder }>
             <TextInput
               label="Email"
@@ -47,13 +53,15 @@ class Confirmation extends React.Component {
               style={ style.textBox }
             />
           </View>
+          <View style={style.lineGray}></View>
           <Button
             title='VERIFICAR'
             testID={'submitConfirmation'}
             onPress={ this.handleConfirmationCode }
-            buttonStyle={ style.submit }
-            titleStyle={ style.submitText }
+            buttonStyle={ style.buttonVerify }
+            titleStyle={ style.textRegular14WhiteBold }
           />
+          <View style={style.lineGrayDrak}></View>
         </View>
       </View>
     )

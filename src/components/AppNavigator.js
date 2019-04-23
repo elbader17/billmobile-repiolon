@@ -2,36 +2,33 @@ import { createStackNavigator, createAppContainer, createSwitchNavigator } from 
 import Intro from './Intro';
 import Authentication from './Authentication';
 import TaxConfiguration from './TaxConfiguration/Configure';
-import Loading from './Loading';
-import Home from './Home';
 import NewCustomer from './NewCustomer';
-import InvoiceItemList from './Invoice/ItemList';
 import NewItem from './Item/NewItem';
 import NewInvoiceItem from './Invoice/NewInvoiceItem';
 import NewInvoiceCustomer from './Invoice/NewInvoiceCustomer';
 import Invoice from './Invoice';
-import ListEditableItem from './Item/ListEditableItem';
 import InvoiceSummary from './Invoice/Summary';
 import ConfirmationCodeRegister from './Authentication/Confirmation';
 
 const AppStack = createStackNavigator(
   {
-    HomeScreen: Home,
-    Configure: TaxConfiguration,
+    Invoice,
     NewCustomer,
-    InvoiceItemList,
     NewInvoiceItem,
     NewInvoiceCustomer,
     NewItems: NewItem,
-    Invoice,
-    ListEditableItem,
     InvoiceSummary,
+  },
+);
+
+const AppTaxConfiguration = createStackNavigator(
+  {
+    TaxConfiguration,
   },
 );
 
 const AppLogin = createStackNavigator(
   {
-    // Intro,
     Authentication,
     ConfirmationCodeRegister,
   },
@@ -40,24 +37,15 @@ const AppLogin = createStackNavigator(
   },
 );
 
-const Prueba = createStackNavigator(
-  {
-    //InvoiceSummary,
-    //VerticalStackLayout,
-    NewCustomer,
-    //TaxConfiguration,
-  },
-);
-
 const AppNavigator = createAppContainer(createSwitchNavigator(
   {
-    Loading,
+    Intro,
     Login: AppLogin,
+    Configure: AppTaxConfiguration,
     App: AppStack,
-    Prueba,
   },
   {
-    initialRouteName: 'Login',
+    initialRouteName: 'Intro',
   },
 ));
 
