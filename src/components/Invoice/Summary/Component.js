@@ -20,6 +20,10 @@ class InvoiceSummary extends React.Component {
     headerTintColor: '#3687D1',
   };
 
+  navigateToInvoice = () => {
+    this.props.navigation.navigate('Invoice');
+  }
+
   setTotal = () => {
     this.total = this.subTotal + this.impuesto;
   }
@@ -108,8 +112,6 @@ class InvoiceSummary extends React.Component {
                 <View>
                   <Text style={style.textRegular14GrayDark}>
                     ${this.props.invoiceTotal}
-                    {/*${ this.props.items.map((i) => parseFloat(i.price, 10))
-                      .reduce((partial_sum, a) => { return partial_sum + a }, 0) } */}
                   </Text>
                 </View>
               </View>
@@ -127,6 +129,7 @@ class InvoiceSummary extends React.Component {
           <View style={[style.boxTotalFinal,style.inLineSpaceBetween]}>
             <Button
               title='EDITAR'
+              onPress={ this.navigateToInvoice}
               buttonStyle={ style.buttonEdite }
               titleStyle={ style.textButtonEdite }
             />
