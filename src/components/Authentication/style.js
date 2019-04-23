@@ -1,46 +1,50 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { COLORS } from '../../constants/colors';
 import { FONTS } from '../../constants/fonts';
-import { METRICS } from '../../constants/metrics';
 
 const styles = StyleSheet.create({
   container: {
-    height: hp('100%') - METRICS.heightStatusBar,
-    backgroundColor: COLORS.white
+    backgroundColor: 'transparent',
+    height: hp('100%'),
+    //width: Dimensions.get('window').width,
   },
   containerHeader: {
+    paddingVertical: 40,
     alignItems: 'center',
     backgroundColor: COLORS.blue,
-    paddingTop: 30,
-    marginBottom: -5, //To join the buttons with the header
   },
   containerFooter: {
-    alignItems: 'center',
+    flex: 1,
     justifyContent: 'flex-end',
-    marginBottom: 20,
+    alignItems: 'center',
+    paddingBottom: 10,
   },
   textRegular14White: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size14,
     color: COLORS.white,
-    textAlign: 'center',
-    paddingBottom: 25,
-    paddingTop: 10,
     lineHeight: 22,
-    opacity: 0.7
+    textAlign: 'center',
+    opacity: 0.9
   },
   imageHeader: {
     width: 136,
     height: 99
   },
-  buttons: {
+  button: {
+    backgroundColor: COLORS.white,
+    borderRadius: 0,
+    borderWidth: 0,
+    width: wp('50%'),
+    height: hp('7%'),
+  },
+  buttonDisabled: {
     backgroundColor: COLORS.blue,
     borderRadius: 0,
     borderWidth: 0,
-    height: 45,
-    width: '100%',
-    right: 10 
+    width: wp('50%'),
+    height: hp('7%'),
   },
   buttonSelected: {
     backgroundColor: COLORS.white
@@ -54,6 +58,18 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size11,
     color: COLORS.white
+  },
+  textRegular12WhiteBold: {
+    fontFamily: FONTS.latoSemiBold,
+    fontSize: FONTS.size12,
+    color: COLORS.white,
+    textAlign: 'center',
+  },
+  textRegular12BlueBold: {
+    fontFamily: FONTS.latoSemiBold,
+    fontSize: FONTS.size12,
+    color: COLORS.blue,
+    textAlign: 'center',
   },
   textRegular11GrayDark: {
     fontFamily: FONTS.latoRegular,
@@ -71,6 +87,10 @@ const styles = StyleSheet.create({
   inColumnSpaceBetween: {
     flexDirection: 'column',
     justifyContent: 'space-between'
+  },
+  inLine: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 });
 

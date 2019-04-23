@@ -24,11 +24,6 @@ class NewItem extends React.Component {
     headerTintColor: '#3687D1',
   };
 
-  updateIndex = () => {
-    const newIndex = this.state.selectedIndex === 0 ? 1 : 0;
-    this.setState({ selectedIndex: newIndex });
-  }
-
   saveProduct = () => {
     const { nameProduct,price } = this.state;
     const { createItem, navigation } = this.props;
