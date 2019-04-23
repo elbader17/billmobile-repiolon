@@ -43,7 +43,7 @@ class Authentication extends React.Component {
           <View style={style.container}>
             <View style={ style.containerHeader }>
               <Image source={ logo } style={ style.imageHeader } />
-              <Text style={ style.textRegular14White }>Hacé facturas electronicas rápido.{"\n"} 
+              <Text style={[style.textRegular14White, {paddingTop: 10}]}>Hacé facturas electronicas rápido.{"\n"} 
               Y hacelo seguro</Text>
             </View>
             <View style={style.inLine}>
