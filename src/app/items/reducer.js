@@ -9,7 +9,7 @@ const initialState = {
 };
 
 function addItem({ draftState, category, name, price }) {
-  draftState.items.push({category, name, price});
+  draftState.items.push({ category, name, price });
   return draftState;
 }
 

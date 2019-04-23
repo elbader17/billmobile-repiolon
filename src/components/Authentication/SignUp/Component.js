@@ -14,7 +14,7 @@ class SignUp extends React.Component {
     this.state = {
       email: '',
       password: '@Martin44',
-      name:'Agustin',
+      name:'',
       confirmPassword: '',
       confirmationEmail:'',
       hidePassword: true,
@@ -64,7 +64,7 @@ class SignUp extends React.Component {
   }
 
   validateData = () => {
-    return (this.validatePass() && this.validateConfirmPass() && this.validateEmail());
+    return (this.validatePass() && this.validateConfirmPass() && this.validateEmail() && this.state.name!='');
   }
 
   showMessagePassFormat = () => {
@@ -111,6 +111,7 @@ class SignUp extends React.Component {
           <View style={ style.textBoxBtnHolder }>
             <TextInput
               label="Nombre"
+              value={ this.state.name }
               onChangeText={ this.setName }
               placeholder="Tu nombre"
               style={ style.textBox }

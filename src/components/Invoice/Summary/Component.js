@@ -28,7 +28,7 @@ class InvoiceSummary extends React.Component {
 
   presentInvoiceDate = () => {
     const d = this.props.invoiceDate;
-    return `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
+    return `${d.getDate() + 1}/${d.getMonth() + 1}/${d.getFullYear()}`;
   }
 
   render() {

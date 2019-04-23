@@ -114,6 +114,8 @@ class Invoice extends React.Component {
   }
 
   renderViewItemsAdd = () => {
+    console.log(this.props.items.length);
+    console.log(this.props.items);
     if (this.props.items.length != 0) {
       return (
         <View style={[style.containerItemsInvoice,style.inColumnSpaceBetween]}>

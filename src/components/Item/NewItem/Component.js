@@ -42,6 +42,14 @@ class NewItem extends React.Component {
     createItem("service", nameService, price, navigation);
     //.catch(err => Alert.alert("Error al Ingresar: ",err.message));
   }
+  validateData = () => {
+    const { nameProduct, nameService, price } = this.state;
+    if((nameProduct!="" || nameService!="")&&price!=""){
+      return true;
+    }else{
+      return false;
+    }
+  }
 
   setNameProduct = (value) => this.setState({ nameProduct: value})
   setNameService = (value) => this.setState({ nameService: value})
@@ -123,6 +131,7 @@ class NewItem extends React.Component {
               onPress={ this.saveProduct }
               buttonStyle={ style.buttonSave }
               titleStyle={ style.textSemiBold14White }
+              disabled={!this.validateData() }
             />
           </View>
 

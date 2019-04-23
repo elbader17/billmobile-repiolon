@@ -3,12 +3,13 @@ import NewItem from './Component';
 import { createItem } from '../../../app/items/action';
 
 const mapStateToProps = state => ({
+  items: state.items,
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    createItem: (category, name, price) => {
-      dispatch(createItem(category, name, price))
+    createItem: (category, name, price, quantity) => {
+      dispatch(createItem(category, name, price, quantity))
         .then((data) => {
           //Alert.alert("Exito al Guardar!");
           this.props.navigation.navigate('Items');

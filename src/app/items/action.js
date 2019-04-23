@@ -5,6 +5,7 @@ import {
   LIST_ITEMS,
 } from './constant';
 
+
 function createItemAction(category, name, price) {
   return {
     type: CREATE_ITEM,
@@ -49,6 +50,7 @@ const createItem = (category, name, price) => {
         return dispatch(createItemAction(category, name, price));
       })
       .catch((error) => {
+        
         console.log(error);
       });
   };
