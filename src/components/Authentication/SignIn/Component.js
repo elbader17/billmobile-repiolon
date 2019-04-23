@@ -51,11 +51,11 @@ class SignIn extends React.Component {
   }
 
   navigateNext = () => {
-    if (this.props.fiscalIdentityComplete) {
-      this.props.navigation.navigate('Invoice');
-    } else {
-      this.props.navigation.navigate('Configure');
-    }
+  //if (this.props.fiscalIdentityComplete) {
+  // this.props.navigation.navigate('Invoice');
+  //} else {
+      this.props.navigation.navigate('TaxConfiguration');
+  //}
   }
 
   validateData = () => {
