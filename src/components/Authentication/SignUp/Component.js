@@ -71,7 +71,7 @@ class SignUp extends React.Component {
     if (this.state.messagePassFormat) {
       return(
         <Text style={this.validatePass() ? style.textFormatPassValid : style.textFormatPass }>
-          Al menos 8 Caracteres, 1 Mayus, 1 Número y 1 Caracter Especial
+          Debe contener al menos: 8 Caracteres, 1 Mayúscula, 1 Número y 1 Caracter Especial
         </Text>
       )
     }
@@ -190,14 +190,12 @@ class SignUp extends React.Component {
             </View>
             </View>
           </View>
-
-          <TouchableOpacity>
-            <Text style={[style.textRegular11GrayDark, {paddingVertical: 15}] }>
+          
+          <Text style={[style.textRegular11GrayDark, {paddingVertical: 15}] }>
             ¿Ya tienes una cuenta?
             <Text style={ style.textRed }> Iniciar Sesión</Text>
-            </Text>
-          </TouchableOpacity>
-
+          </Text>
+          
           <Button
             title='CREAR CUENTA'
             testID={ 'submitSignUp' }

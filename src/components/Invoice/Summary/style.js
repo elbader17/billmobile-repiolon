@@ -57,10 +57,11 @@ const styles = StyleSheet.create({
   boxTotalFinal: {
     paddingVertical: 10,
     paddingHorizontal: 12,
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   boxPriceFinal: {
-    width: wp('50%')
+    width: wp('50%'),
+    paddingTop: 4
   },
   paddingHorizontal10: {
     paddingHorizontal: 10

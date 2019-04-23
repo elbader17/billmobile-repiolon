@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Image, ScrollView} from 'react-native';
-import { ButtonGroup } from "react-native-elements";
+import { Button } from "react-native-elements";
 import Signup from './SignUp';
 import Signin from './SignIn';
 import style from './style';
@@ -14,17 +14,12 @@ class Authentication extends React.Component {
       password: '',
       name:'',
       confirmPassword: '',
-      selectedIndex: 0
+      selectedSignUp: false
     };
-  }
-
-  updateIndex = () => {
-    const newIndex = this.state.selectedIndex === 0 ? 1 : 0;
-    this.setState({ selectedIndex: newIndex });
   }
   
   renderSignUpSignIn = () => {
-    if (this.state.selectedIndex === 0) {
+    if (this.state.selectedSignUp) {
       return (
         <View>
           <Signup/>
@@ -41,40 +36,40 @@ class Authentication extends React.Component {
     
   render() {
     const logo = require('../../images/iconBill.png')
-    const a = style.buttonOn
-    const b = style.buttonOff
-    const component1 = () => <Text style={this.state.selectedIndex === 0 ? a : b}>REGISTRAR</Text>
-    const component2 = () => <Text style={this.state.selectedIndex === 1 ? a : b}>INICIAR SESIÓN</Text>
-    const buttons = [{ element: component1 }, { element: component2 }]
+    const buttonOn = [style.button,style.textRegular12BlueBold];
+    const buttonOff = [style.buttonDisabled,style.textRegular12WhiteBold];
     return(
       <ScrollView>
-        <View style={[style.container, style.inColumnSpaceBetween]}>
-          <View>
+          <View style={style.container}>
             <View style={ style.containerHeader }>
               <Image source={ logo } style={ style.imageHeader } />
-              <Text style={ style.textRegular14White }>Hacé facturas electronicas rápido.{"\n"} 
+              <Text style={[style.textRegular14White, {paddingTop: 10}]}>Hacé facturas electronicas rápido.{"\n"} 
               Y hacelo seguro</Text>
             </View>
-            <ButtonGroup
-              testID={ 'buttonGroup' }
-              onPress={ this.updateIndex }
-              selectedIndex={ this.state.selectedIndex }
-              buttons={ buttons }
-              containerStyle={ style.buttons }
-              textStyle={ style.textRegular14White }
-              selectedButtonStyle={ style.buttonSelected }
-            />
-            { this.renderSignUpSignIn() }
+            <View style={style.inLine}>
+              <Button
+                title='REGISTRAR'
+                onPress={() => this.setState({selectedSignUp: true})}
+                buttonStyle={ this.state.selectedSignUp ? buttonOn[0] : buttonOff[0] }
+                titleStyle={ this.state.selectedSignUp ? buttonOn[1] : buttonOff[1] }
+              />
+              <Button
+                title='INICIAR SESIÓN'
+                onPress={() => this.setState({selectedSignUp: false})}
+                buttonStyle={ this.state.selectedSignUp ? buttonOff[0] : buttonOn[0] }
+                titleStyle={ this.state.selectedSignUp ? buttonOff[1] : buttonOn[1] }
+              />
+            </View>
+            {this.renderSignUpSignIn()}  
+            <View style={style.containerFooter}>
+              <Text style={style.textRegular11GrayDark}>
+                Al registrarte estas aceptando nuestros
+              </Text>
+              <Text style={style.textRegular11GrayDarkBold}>
+                Términos y Condiciones y Políticas de Privacidad
+              </Text> 
+            </View>
           </View>
-          <View style={style.containerFooter}>
-            <Text style={style.textRegular11GrayDark}>
-              Al registrarte estas aceptando nuestros
-            </Text>
-            <Text style={style.textRegular11GrayDarkBold}>
-              Términos y Condiciones y Políticas de Privacidad
-            </Text>
-          </View>
-        </View>
       </ScrollView>
     );
   }

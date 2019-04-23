@@ -5,8 +5,8 @@ import { FONTS } from '../../../constants/fonts';
 
 const styles = StyleSheet.create({
   container:{
-    paddingVertical: 10,
-    paddingHorizontal: 20,
+    paddingVertical: 20,
+    paddingHorizontal: 30,
   },
   containerInputs:{
     alignItems: 'center',
@@ -125,13 +125,13 @@ const styles = StyleSheet.create({
   },
   submit: {
     backgroundColor: COLORS.red,
-    width: 266,
+    width: wp('80%'),
     height: hp('7%'),
     borderRadius: 2,
   },
   submitDisabled: {
     backgroundColor: COLORS.gray,
-    width: 266,
+    width: wp('80%'),
     height: hp('7%'),
     borderRadius: 2,
   },

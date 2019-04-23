@@ -3,7 +3,6 @@ import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 import { Button } from "react-native-elements";
 import { Alert } from 'react-native';
 import { withNavigation } from 'react-navigation';
-import { Auth } from 'aws-amplify';
 import style from '../SignUp/style';
 
 const EMAIL_REGEXP = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
@@ -49,10 +48,6 @@ class SignIn extends React.Component {
       }
     })
     .catch(err => Alert.alert("Error al Ingresar: ",err.message));
-  }
-
-  navigageToSignUp = () => {
-    this.props.navigation.navigate('SignUp');
   }
 
   navigateNext = () => {
@@ -109,13 +104,11 @@ class SignIn extends React.Component {
               />
             </TouchableOpacity>
           </View>
-
-          <TouchableOpacity onPress={ this.navigageToSignUp }>
-            <Text style={[style.textRegular11GrayDark, {paddingVertical: 15}] }>
-              ¿No tienes una cuenta?
-              <Text style={ style.textRed }> Registrate</Text>
-            </Text>
-          </TouchableOpacity>
+          
+          <Text style={[style.textRegular11GrayDark, {paddingVertical: 15}] }>
+            ¿No tienes una cuenta?
+            <Text style={ style.textRed }> Registrate</Text>
+          </Text>
 
           <Button
             title='ENTRAR'
@@ -123,7 +116,7 @@ class SignIn extends React.Component {
             onPress={ this.handleSignIn }
             buttonStyle={ style.submit }
             titleStyle={ style.textRegular14White }
-            disabledTitleStyle={ style.textRegular14White }
+            disabledTitleStyle={ style.textRegular14WhiteBold}
             disabledStyle={ style.submitDisabled }
             disabled={ !this.validateData() }
             loading = {this.state.loading}
