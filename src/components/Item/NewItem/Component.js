@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, Text, Alert, TextInput, ScrollView} from 'react-native';
+import { View, Text, Alert, TextInput, ScrollView, KeyboardAvoidingView} from 'react-native';
 import { Button} from "react-native-elements";
 import { withNavigation } from 'react-navigation';
 import style from '../style';
-
+import { METRICS } from '../../../constants/metrics';
 
 class NewItem extends React.Component {
 
@@ -98,45 +98,43 @@ class NewItem extends React.Component {
 
   render() {
     return(
-      <ScrollView>
-      <View style={style.container}>
-
-          <View style={[style.boxSelectButton,style.inLineSpaceAround]}>
-            <Button
-              title='PRODUCTO'
-              onPress={() => this.setState({isProduct: true}) }
-              buttonStyle={ this.state.isProduct ? style.buttonProduct : style.buttonProductDisabled }
-              titleStyle={ this.state.isProduct ? style.textRegular12WhiteBold : style.textRegular12RedBold }
-            />
-            <Button
-              title='SERVICIO'
-              onPress={() => this.setState({isProduct: false}) }
-              buttonStyle={ this.state.isProduct ? style.buttonServiceDisabled : style.buttonService  }
-              titleStyle={ this.state.isProduct ? style.textRegular12BlueBold : style.textRegular12WhiteBold }
-            />
+      <KeyboardAvoidingView
+          behavior={'padding'}
+          style={{flex: 1}}
+          keyboardVerticalOffset={METRICS.heightHeader}>
+        <ScrollView>
+          <View style={style.container}>
+            <View style={[style.boxSelectButton,style.inLineSpaceAround]}>
+              <Button
+                title='PRODUCTO'
+                onPress={() => this.setState({isProduct: true}) }
+                buttonStyle={ this.state.isProduct ? style.buttonProduct : style.buttonProductDisabled }
+                titleStyle={ this.state.isProduct ? style.textRegular12WhiteBold : style.textRegular12RedBold }
+              />
+              <Button
+                title='SERVICIO'
+                onPress={() => this.setState({isProduct: false}) }
+                buttonStyle={ this.state.isProduct ? style.buttonServiceDisabled : style.buttonService  }
+                titleStyle={ this.state.isProduct ? style.textRegular12BlueBold : style.textRegular12WhiteBold }
+              />
+            </View>
+            <View style={style.boxInput}>
+              { this.renderNewItems() }
+            </View>
           </View>
-
-          <View style={style.boxInput}>
-            { this.renderNewItems() }
-          </View>
-
-          <View style={style.positionFinalButton}>
-            <Button
-              title={<Text>GUARDAR {this.state.isProduct ? 'PRODUCTO' : 'SERVICIO'}</Text>}
-              onPress={ this.saveProduct }
-              buttonStyle={ style.buttonSave }
-              titleStyle={ style.textSemiBold14White }
-              disabledStyle={ style.buttonSaveDisabled }
-              disabledTitleStyle={ style.textRegular14WhiteBold}
-              disabled={!this.validateData() }
-            />
-          </View>
-
-      </View>
-      </ScrollView>
+        </ScrollView>
+        <Button
+          title={<Text>GUARDAR {this.state.isProduct ? 'PRODUCTO' : 'SERVICIO'}</Text>}
+          onPress={ this.saveProduct }
+          buttonStyle={ style.buttonSave }
+          titleStyle={ style.textSemiBold14White }
+          disabledStyle={ style.buttonSaveDisabled }
+          disabledTitleStyle={ style.textRegular14WhiteBold}
+          disabled={!this.validateData() }
+        />
+      </KeyboardAvoidingView>
     )
   }
-
 }
 
 export default withNavigation(NewItem);

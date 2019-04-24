@@ -6,10 +6,10 @@ import { METRICS } from '../../constants/metrics';
 
 const styles = StyleSheet.create({
   container: {
-    height: hp('100%') - METRICS.heightHeader,
+    height: hp('100%') - METRICS.heightHeader - hp('8%'),
     backgroundColor: 'white',
     paddingHorizontal: 18,
-    paddingVertical: 7,
+    paddingVertical: 10,
   },
   boxInput: {
     backgroundColor: 'transparent',
