@@ -24,6 +24,10 @@ class InvoiceSummary extends React.Component {
     this.props.navigation.navigate('Invoice');
   }
 
+  navigateToOpinion = () => {
+    this.props.navigation.navigate('Opinion');
+  }
+
   setTotal = () => {
     this.total = this.subTotal + this.impuesto;
   }
@@ -143,6 +147,7 @@ class InvoiceSummary extends React.Component {
         <View style={style.positionFinalButton}>
           <Button
             title='CONFIRMAR FACTURA'
+            onPress={ this.navigateToOpinion}
             buttonStyle={ style.buttonConfirm }
             titleStyle={ style.textSemiBold14White }
           />

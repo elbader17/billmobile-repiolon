@@ -115,7 +115,7 @@ class SignIn extends React.Component {
             testID={'submitSignIn'}
             onPress={ this.handleSignIn }
             buttonStyle={ style.submit }
-            titleStyle={ style.textRegular14White }
+            titleStyle={ style.textRegular14WhiteBold }
             disabledTitleStyle={ style.textRegular14WhiteBold}
             disabledStyle={ style.submitDisabled }
             disabled={ !this.validateData() }

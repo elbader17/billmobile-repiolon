@@ -16,7 +16,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 10
   },
   boxSelectButton: {
-    marginVertical: 12
+    marginVertical: 12,
+    marginHorizontal: 20
   },
   inColumnSpaceBetween: {
     flexDirection: "column",
@@ -55,12 +56,22 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.red,
     borderRadius: 0,
   },
+  buttonSaveDisabled: {
+    height: hp('8%'),
+    backgroundColor: COLORS.gray,
+    borderRadius: 0,
+  },
   price: {
     flexDirection:'row', 
     alignItems: 'center', 
     borderWidth: 1,
     borderRadius: 3,
     borderColor: COLORS.gray
+  },
+  textRegular14WhiteBold: {
+    fontFamily: FONTS.latoSemiBold,
+    fontSize: FONTS.size14,
+    color: COLORS.white
   },
   textRegular14GrayDarkPrice: {
     fontFamily: FONTS.latoRegular,

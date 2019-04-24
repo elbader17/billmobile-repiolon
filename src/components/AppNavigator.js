@@ -9,6 +9,7 @@ import NewInvoiceCustomer from './Invoice/NewInvoiceCustomer';
 import Invoice from './Invoice';
 import InvoiceSummary from './Invoice/Summary';
 import ConfirmationCodeRegister from './Authentication/Confirmation';
+import Opinion from './Opinion';
 
 const AppStack = createStackNavigator(
   {
@@ -43,6 +44,7 @@ const AppNavigator = createAppContainer(createSwitchNavigator(
     Login: AppLogin,
     Configure: AppTaxConfiguration,
     App: AppStack,
+    Opinion,
   },
   {
     initialRouteName: 'Intro',

@@ -126,6 +126,8 @@ class NewItem extends React.Component {
               onPress={ this.saveProduct }
               buttonStyle={ style.buttonSave }
               titleStyle={ style.textSemiBold14White }
+              disabledStyle={ style.buttonSaveDisabled }
+              disabledTitleStyle={ style.textRegular14WhiteBold}
               disabled={!this.validateData() }
             />
           </View>

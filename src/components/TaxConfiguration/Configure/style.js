@@ -102,6 +102,8 @@ const styles = StyleSheet.create({
     fontSize: FONTS.size16,
     fontWeight: 'normal',
     color: COLORS.blue,
+    textAlign:"center", 
+    flex:1 
   },
 });
 

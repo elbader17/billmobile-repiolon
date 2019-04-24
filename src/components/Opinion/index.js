@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
-
+import { withNavigation } from 'react-navigation';
 
 class Opinion extends React.Component {
 
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#3687d1',
     alignItems: 'center',
-    paddingVertical: 100
+    justifyContent: 'center'
   },
   imageHeader: {
     width: 136,
@@ -47,4 +47,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Opinion;
+export default withNavigation(Opinion);
