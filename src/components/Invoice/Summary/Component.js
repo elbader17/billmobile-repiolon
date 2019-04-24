@@ -39,6 +39,10 @@ class InvoiceSummary extends React.Component {
     return `${d.getDate() + 1}/${d.getMonth() + 1}/${d.getFullYear()}`;
   }
 
+  validateData = () => {
+    return ((this.props.fiscalIdentity.name!="") && (this.props.items!=null));
+  }
+
   render() {
     return(
       <ScrollView>
@@ -150,6 +154,7 @@ class InvoiceSummary extends React.Component {
             onPress={ this.navigateToOpinion}
             buttonStyle={ style.buttonConfirm }
             titleStyle={ style.textSemiBold14White }
+            disabled={ !this.validateData() }
           />
         </View>
       </View>

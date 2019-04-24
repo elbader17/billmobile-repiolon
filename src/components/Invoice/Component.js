@@ -113,6 +113,10 @@ class Invoice extends React.Component {
     this.setState({selectCustomer:!this.state.selectCustomer})
   }
 
+  validateData = () => {
+    return ((this.props.fiscalIdentity.name!="") && (this.props.items!=null));
+  }
+
   renderViewItemsAdd = () => {
     console.log(this.props.items.length);
     console.log(this.props.items);
@@ -339,6 +343,7 @@ class Invoice extends React.Component {
             onPress={ this.navigateToBewInvoice }
             buttonStyle={ style.buttonContinue }
             titleStyle={ style.textSemiBold14White }
+            disabled={ !this.validateData() }
           />
         </View>
 
