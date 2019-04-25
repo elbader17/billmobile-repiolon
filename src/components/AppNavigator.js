@@ -44,7 +44,7 @@ const AppNavigator = createAppContainer(createSwitchNavigator(
     Login: AppLogin,
     Configure: AppTaxConfiguration,
     App: AppStack,
-    Opinion,
+    Opinion
   },
   {
     initialRouteName: 'Intro',

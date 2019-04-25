@@ -114,12 +114,10 @@ class Invoice extends React.Component {
   }
 
   validateData = () => {
-    return ((this.props.fiscalIdentity.name!="") && (this.props.items!=null));
+    return ((this.props.fiscalIdentity.name!="") && (this.props.items.length!= 0));
   }
 
   renderViewItemsAdd = () => {
-    console.log(this.props.items.length);
-    console.log(this.props.items);
     if (this.props.items.length != 0) {
       return (
         <View style={[style.containerItemsInvoice,style.inColumnSpaceBetween]}>
