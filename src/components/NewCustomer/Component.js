@@ -76,6 +76,7 @@ class NewCustomer extends React.Component {
                 placeholder="00-00000000-0"
                 value={this.state.identification}
                 placeholderTextColor={grayLight}
+                value={this.state.identification}
                 style={[style.textRegular16GrayDark,style.marginLeft5]}
                 keyboardType='numeric'
               />
@@ -91,6 +92,7 @@ class NewCustomer extends React.Component {
               onChangeText={this.setName}
               value={this.state.name}
               placeholder="Inserta el Nombre"
+              value={this.state.name}
               placeholderTextColor={grayLight}
             />
           </View>

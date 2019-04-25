@@ -114,14 +114,10 @@ class Invoice extends React.Component {
   }
 
   validateData = () => {
-    console.log(this.props.fiscalIdentity.name);
-    console.log(this.props.items.length);
-    return ((this.props.fiscalIdentity.name!="") && (this.props.items.length!=0));
+    return ((this.props.fiscalIdentity.name!="") && (this.props.items.length!= 0));
   }
 
   renderViewItemsAdd = () => {
-    console.log(this.props.items.length);
-    console.log(this.props.items);
     if (this.props.items.length != 0) {
       return (
         <View style={[style.containerItemsInvoice,style.inColumnSpaceBetween]}>
@@ -346,6 +342,7 @@ class Invoice extends React.Component {
             buttonStyle={ style.buttonContinue }
             titleStyle={ style.textSemiBold14White }
             disabled={ !this.validateData() }
+            disabledTitleStyle = { style.textSemiBold14White }
           />
         </View>
 
