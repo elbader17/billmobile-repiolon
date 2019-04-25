@@ -6,7 +6,7 @@ import { FONTS } from '../../constants/fonts';
 
 const styles = StyleSheet.create({
   container: {
-    height: hp('100%') - METRICS.heightHeader,
+    height: hp('100%') - METRICS.heightHeader - hp('8%'),
     backgroundColor: COLORS.blue,
     padding: 18,
   },
@@ -50,13 +50,13 @@ const styles = StyleSheet.create({
     fontSize: FONTS.size16,
     color: COLORS.grayDark,
   },
-  buttonConfirm: {
-    height: wp('14%'),
+  buttonSave: {
+    height: hp('8%'),
     backgroundColor: COLORS.red,
     borderRadius: 0
   },
-  buttonConfirmDisabled: {
-    height: wp('14%'),
+  buttonSaveDisabled: {
+    height: hp('8%'),
     backgroundColor: COLORS.gray,
     borderRadius: 0
   },

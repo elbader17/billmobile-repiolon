@@ -274,18 +274,16 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size14,
     color: COLORS.gray,
-    
   },
   buttonContinue: {
     backgroundColor: COLORS.red,
-    width: 320,
-    height: 40,
-    borderRadius: 2,
-    marginVertical: 20,
+    borderRadius: 0,
+    height: hp('8%'),
   },
-  textButtonContinue: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size14,
+  buttonContinueDisabled: {
+    backgroundColor: COLORS.gray,
+    borderRadius: 0,
+    height: hp('8%'),
   },
   buttonAddCustomer: {
     backgroundColor: 'transparent',

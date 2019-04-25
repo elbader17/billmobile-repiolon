@@ -6,7 +6,7 @@ import { METRICS } from '../../../constants/metrics';
 
 const styles = StyleSheet.create({
   container: {
-    height: hp('100%') - METRICS.heightHeader,
+    height: hp('100%') - METRICS.heightHeader - hp('8%'),
     alignItems: 'center',
     paddingVertical: 15,
     paddingHorizontal: 18,
@@ -26,7 +26,8 @@ const styles = StyleSheet.create({
   textBox: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size18,
-    alignSelf: 'stretch',
+    color: COLORS.grayDark,
+    textAlign: 'center',
     height: 45,
     paddingRight: 45,
     paddingLeft: 8,
@@ -71,18 +72,21 @@ const styles = StyleSheet.create({
   },
   submitReady: {
     backgroundColor: COLORS.red,
-    width: wp('90%'),
-    height: hp('6%'),
-    borderRadius: 2,
+    height: hp('8%'),
+    borderRadius: 0,
   },
   submitDisabled: {
     backgroundColor: COLORS.gray,
-    width: wp('90%'),
-    height: hp('6%'),
-    borderRadius: 2,
+    height: hp('8%'),
+    borderRadius: 0,
   },
   textRegular14White: {
     fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size14,
+    color: COLORS.white
+  },
+  textRegular14WhiteBold: {
+    fontFamily: FONTS.latoSemiBold,
     fontSize: FONTS.size14,
     color: COLORS.white
   },

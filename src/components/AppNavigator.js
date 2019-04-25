@@ -47,7 +47,7 @@ const AppNavigator = createAppContainer(createSwitchNavigator(
     Opinion
   },
   {
-    initialRouteName: 'Intro',
+    initialRouteName: 'Login',
   },
 ));
 

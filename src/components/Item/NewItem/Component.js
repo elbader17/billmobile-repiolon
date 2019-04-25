@@ -16,6 +16,7 @@ class NewItem extends React.Component {
       price:"",
       isProduct: true,
       isEnableButton: false,
+      loading: false
     };
   }
 
@@ -29,6 +30,7 @@ class NewItem extends React.Component {
     const { nameProduct,price } = this.state;
     const { createItem, navigation } = this.props;
     this.setState({ isEnableButton: false});
+    this.setLoading(true);
     createItem("product", nameProduct, price, navigation);
     //.catch(err => Alert.alert("Error al Ingresar: ",err.message))
   }
@@ -36,7 +38,8 @@ class NewItem extends React.Component {
   saveService = () => {
     const { nameService,price } = this.state;
     const { createItem, navigation } = this.props;
-    this.setState({ isEnableButton: false})
+    this.setState({ isEnableButton: false});
+    this.setLoading(true);
     createItem("service", nameService, price, navigation);
     //.catch(err => Alert.alert("Error al Ingresar: ",err.message));
   }
@@ -52,6 +55,7 @@ class NewItem extends React.Component {
   setNameProduct = (value) => this.setState({ nameProduct: value, isEnableButton: true})
   setNameService = (value) => this.setState({ nameService: value, isEnableButton: true})
   setPrice = (value) => this.setState({ price:value, isEnableButton: true })
+  setLoading = (bool) => this.setState({ loading: bool })
 
   renderNewItems = () => {
     if (this.state.isProduct) {
@@ -134,6 +138,7 @@ class NewItem extends React.Component {
           disabledStyle={ style.buttonSaveDisabled }
           disabledTitleStyle={ style.textRegular14WhiteBold}
           disabled={(!this.validateData() || !this.state.isEnableButton) }
+          loading = {this.state.loading}
         />
       </KeyboardAvoidingView>
     )

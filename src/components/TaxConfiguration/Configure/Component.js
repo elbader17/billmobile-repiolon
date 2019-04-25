@@ -1,10 +1,11 @@
 import React from 'react';
-import { View, Text, TextInput, Alert, ScrollView } from 'react-native';
+import { View, Text, TextInput, Alert, ScrollView, KeyboardAvoidingView } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Button } from "react-native-elements";
 import { withNavigation } from 'react-navigation';
 import style from './style';
 import  { validateCuit } from '../../../utils/identity';
+import { METRICS } from '../../../constants/metrics';
 
 class TaxConfiguration extends React.Component{
 
@@ -14,7 +15,8 @@ class TaxConfiguration extends React.Component{
       name: this.props.name,
       cuit: this.props.cuit,
       onInputName: false,
-      onInputCuit: false
+      onInputCuit: false,
+      loading: false,
     };
   }
 
@@ -27,6 +29,7 @@ class TaxConfiguration extends React.Component{
   handleConfigFiscal = () => {
     const { name, cuit } = this.state;
     const { updateFiscalIdentity } = this.props;
+    this.setLoading(true);
     updateFiscalIdentity(name, cuit)
      .then((data) => {
       this.props.navigation.navigate('Invoice');
@@ -40,6 +43,7 @@ class TaxConfiguration extends React.Component{
 
   setName = (value) => this.setState({ name: value})
   setCuit = (value) => this.setState({ cuit: value })
+  setLoading = (bool) => this.setState({ loading: bool })
 
   renderMessageName = () => {
     if (this.state.onInputName) {
@@ -72,6 +76,10 @@ class TaxConfiguration extends React.Component{
 
   render() {
     return(
+    <KeyboardAvoidingView
+      behavior={'padding'}
+      style={{flex: 1}}
+      keyboardVerticalOffset={METRICS.heightHeader}>
     <ScrollView>
       <View style={style.container}>
         <View style={ style.textBoxBtnHolder }>
@@ -105,17 +113,19 @@ class TaxConfiguration extends React.Component{
           </View>
           <View style={style.lineGray}></View>
         </View>
-        <Button
-          title="LISTO"
-          onPress={ this.handleConfigFiscal }
-          buttonStyle={ style.submitReady }
-          titleStyle={ style.textRegular14White }
-          disabledTitleStyle={ style.textRegular14White}
-          disabledStyle={ style.submitDisabled }
-          disabled={!this.validateData() }
-        />
       </View>
       </ScrollView>
+      <Button
+        title="LISTO"
+        onPress={ this.handleConfigFiscal }
+        buttonStyle={ style.submitReady }
+        titleStyle={ style.textRegular14WhiteBold }
+        disabledTitleStyle={ style.textRegular14WhiteBold }
+        disabledStyle={ style.submitDisabled }
+        disabled={!this.validateData() }
+        loading={this.state.loading}
+      />
+      </KeyboardAvoidingView>
     )
   }
 }

@@ -43,6 +43,30 @@ class InvoiceSummary extends React.Component {
     return ((this.props.fiscalIdentity.name!="") && (this.props.items!=null));
   }
 
+  showInfoCustomer = () => {
+    if (this.props.fiscalIdentity.name==='fc') {
+      return(
+        <View style={style.boxCustomer}>
+          <Text style={style.textRegular14GrayDark}>Consumidor Final</Text>
+          <Text style={style.textRegular11Gray}>DNI: {this.props.fiscalIdentity.identification}</Text>
+        </View>
+      )
+    } else {
+        return(
+          <View style={style.boxCustomer}>
+            <Text style={[style.textRegular14GrayDark,style.marginBottom5]}>
+              { this.props.fiscalIdentity.name }
+            </Text>
+            <Text style={style.textRegular11Gray}>CUIT: {'00-00000000-0'}</Text>
+            <Text style={style.textRegular11Gray}>Localidad: {'Río Cuarto'}</Text>
+            <Text style={style.textRegular11Gray}>Provincia: {'Córdoba'}</Text>
+            <Text style={style.textRegular11Gray}>IVA: {'Responsable Inscripto'}</Text>
+            <Text style={style.textRegular11Gray}>Domicilio Fiscal: {'Dean Funes 645'}</Text>
+          </View>
+        )
+    }
+  }
+
   render() {
     return(
       <ScrollView>
@@ -56,14 +80,7 @@ class InvoiceSummary extends React.Component {
 
           <View style={style.lineGray}></View>
 
-          <View style={style.boxCustomer}>
-            <Text style={[style.textRegular14GrayDark,style.marginBottom5]}>{ this.props.fiscalIdentity.name }</Text>
-            <Text style={style.textRegular11Gray}>CUIT: {'00-00000000-0'}</Text>
-            <Text style={style.textRegular11Gray}>Localidad: {'Río Cuarto'}</Text>
-            <Text style={style.textRegular11Gray}>Provincia: {'Córdoba'}</Text>
-            <Text style={style.textRegular11Gray}>IVA: {'Responsable Inscripto'}</Text>
-            <Text style={style.textRegular11Gray}>Domicilio Fiscal: {'Dean Funes 645'}</Text>
-          </View>
+          {this.showInfoCustomer()}
 
           <View style={style.lineGray}></View>
 
