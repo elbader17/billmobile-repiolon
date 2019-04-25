@@ -74,6 +74,7 @@ class NewCustomer extends React.Component {
               <TextInput
                 onChangeText={this.setIdentification}
                 placeholder="00-00000000-0"
+                value={this.state.identification}
                 placeholderTextColor={grayLight}
                 style={[style.textRegular16GrayDark,style.marginLeft5]}
                 keyboardType='numeric'
@@ -88,6 +89,7 @@ class NewCustomer extends React.Component {
             <TextInput
               style={[style.textRegular16GrayDark,style.marginLeft5]}
               onChangeText={this.setName}
+              value={this.state.name}
               placeholder="Inserta el Nombre"
               placeholderTextColor={grayLight}
             />
@@ -102,7 +104,7 @@ class NewCustomer extends React.Component {
               titleStyle={ style.textRegular14WhiteBold }
               disabledStyle= { style.buttonConfirmDisabled }
               disabledTitleStyle = { style.textRegular14WhiteBold }
-              disabled={!this.validateData() }
+              disabled={ !this.validateData() }
             />
           </View>
           
