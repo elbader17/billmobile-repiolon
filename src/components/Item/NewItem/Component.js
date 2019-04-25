@@ -15,7 +15,7 @@ class NewItem extends React.Component {
       nameService:"",
       price:"",
       isProduct: true,
-      isEnableButoon: false,
+      isEnableButton: false,
     };
   }
 
@@ -28,7 +28,7 @@ class NewItem extends React.Component {
   saveProduct = () => {
     const { nameProduct,price } = this.state;
     const { createItem, navigation } = this.props;
-    this.setState({ isEnableButoon: false});
+    this.setState({ isEnableButton: false});
     createItem("product", nameProduct, price, navigation);
     //.catch(err => Alert.alert("Error al Ingresar: ",err.message))
   }
@@ -36,12 +36,11 @@ class NewItem extends React.Component {
   saveService = () => {
     const { nameService,price } = this.state;
     const { createItem, navigation } = this.props;
-    this.setState({ isEnableButoon: false})
+    this.setState({ isEnableButton: false})
     createItem("service", nameService, price, navigation);
     //.catch(err => Alert.alert("Error al Ingresar: ",err.message));
   }
   validateData = () => {
-    console.log(this.state.isEnableButoon)
     const { nameProduct, nameService, price } = this.state;
     if((nameProduct!="" || nameService!="")&&price!=""){
       return true;
@@ -50,9 +49,9 @@ class NewItem extends React.Component {
     }
   }
 
-  setNameProduct = (value) => this.setState({ nameProduct: value, isEnableButoon: true})
-  setNameService = (value) => this.setState({ nameService: value, isEnableButoon: true})
-  setPrice = (value) => this.setState({ price:value, isEnableButoon: true })
+  setNameProduct = (value) => this.setState({ nameProduct: value, isEnableButton: true})
+  setNameService = (value) => this.setState({ nameService: value, isEnableButton: true})
+  setPrice = (value) => this.setState({ price:value, isEnableButton: true })
 
   renderNewItems = () => {
     if (this.state.isProduct) {
@@ -134,7 +133,7 @@ class NewItem extends React.Component {
           titleStyle={ style.textSemiBold14White }
           disabledStyle={ style.buttonSaveDisabled }
           disabledTitleStyle={ style.textRegular14WhiteBold}
-          disabled={!this.validateData() && !this.state.isEnableButoon }
+          disabled={(!this.validateData() || !this.state.isEnableButton) }
         />
       </KeyboardAvoidingView>
     )

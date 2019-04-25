@@ -342,6 +342,7 @@ class Invoice extends React.Component {
             buttonStyle={ style.buttonContinue }
             titleStyle={ style.textSemiBold14White }
             disabled={ !this.validateData() }
+            disabledTitleStyle = { style.textSemiBold14White }
           />
         </View>
 
