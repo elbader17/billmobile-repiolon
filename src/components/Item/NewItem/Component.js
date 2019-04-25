@@ -41,7 +41,6 @@ class NewItem extends React.Component {
     //.catch(err => Alert.alert("Error al Ingresar: ",err.message));
   }
   validateData = () => {
-    console.log(this.state.isEnableButoon)
     const { nameProduct, nameService, price } = this.state;
     if((nameProduct!="" || nameService!="")&&price!=""){
       return true;
@@ -126,24 +125,6 @@ class NewItem extends React.Component {
               { this.renderNewItems() }
             </View>
           </View>
-<<<<<<< HEAD
-
-          <View style={style.positionFinalButton}>
-            <Button
-              title={<Text>GUARDAR {this.state.isProduct ? 'PRODUCTO' : 'SERVICIO'}</Text>}
-              onPress={ this.saveProduct }
-              buttonStyle={ style.buttonSave }
-              titleStyle={ style.textSemiBold14White }
-              disabledStyle={ style.buttonSaveDisabled }
-              disabledTitleStyle={ style.textRegular14WhiteBold}
-              disabled={(!this.validateData() || !this.state.isEnableButoon) }
-                
-            />
-          </View>
-
-      </View>
-      </ScrollView>
-=======
         </ScrollView>
         <Button
           title={<Text>GUARDAR {this.state.isProduct ? 'PRODUCTO' : 'SERVICIO'}</Text>}
@@ -152,10 +133,9 @@ class NewItem extends React.Component {
           titleStyle={ style.textSemiBold14White }
           disabledStyle={ style.buttonSaveDisabled }
           disabledTitleStyle={ style.textRegular14WhiteBold}
-          disabled={!this.validateData() }
+          disabled={(!this.validateData() || !this.state.isEnableButoon) }
         />
       </KeyboardAvoidingView>
->>>>>>> 226303ffe3d11f7d31aeec8f7593f03583fd7291
     )
   }
 }

@@ -114,7 +114,9 @@ class Invoice extends React.Component {
   }
 
   validateData = () => {
-    return ((this.props.fiscalIdentity.name!="") && (this.props.items!=null));
+    console.log(this.props.fiscalIdentity.name);
+    console.log(this.props.items.length);
+    return ((this.props.fiscalIdentity.name!="") && (this.props.items.length!=0));
   }
 
   renderViewItemsAdd = () => {
