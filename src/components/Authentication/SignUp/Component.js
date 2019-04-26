@@ -22,6 +22,7 @@ class SignUp extends React.Component {
       messagePassFormat: false,
       messageEmailFormat: false,
       messageMatchPass: false,
+      loading: false
     };
   }
 
@@ -39,7 +40,9 @@ class SignUp extends React.Component {
       name:name,
     };
     const { signUp } = this.props;
-    signUp(password, email, attributes);
+    this.setLoading(true);
+    signUp(password, email, attributes)
+      .then(() => this.setLoading(false))
   }
 
   handleConfirmationCode = () => {
@@ -99,8 +102,9 @@ class SignUp extends React.Component {
 
   setName = (value) => this.setState({ name: value})
   setEmail = (value) => this.setState({ email: value })
-  setPassword = (value) => this.setState({ password: value });
+  setPassword = (value) => this.setState({ password: value })
   setConfirmPassword = (value) => this.setState({ confirmPassword: value })
+  setLoading = (bool) => this.setState({ loading: bool })
   
   render() {
     const hide = require('../../../images/hide.png')
@@ -206,6 +210,7 @@ class SignUp extends React.Component {
             disabledTitleStyle={ style.textRegular14WhiteBold}
             disabledStyle={ style.submitDisabled }
             disabled={ !this.validateData() }
+            loading = {this.state.loading}
           />
         </View>
         <Modal visible={ this.props.showConfirmationModal }>
