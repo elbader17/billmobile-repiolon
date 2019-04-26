@@ -1,8 +1,9 @@
 import React from 'react';
-import { Text, View, TextInput } from 'react-native';
+import { Text, View, TextInput, ScrollView, KeyboardAvoidingView } from 'react-native';
 import { Button } from "react-native-elements";
 import { withNavigation } from 'react-navigation';
 import style from './style';
+import { METRICS } from '../../../constants/metrics';
 
 class Confirmation extends React.Component {
 
@@ -30,40 +31,47 @@ class Confirmation extends React.Component {
 
   render() {
     return(
-      <View state={ style.container }>
-        <View style={ style.containerInputs }>
-          <Text style={ style.textRegular14GrayDark }>
-            Se envió el Código de Confirmacion a tu email.
-          </Text>
-          <View style={style.lineGray}></View>
-          <View style={ style.textBoxBtnHolder }>
+      <KeyboardAvoidingView
+        behavior={'padding'}
+        style={{flex: 1}}
+        keyboardVerticalOffset={METRICS.heightHeader}>
+        <View style={ style.container }>
+          <ScrollView>  
+            <Text style={[style.textRegular14WhiteBold,{textAlign: 'center'}]}>
+              Se envió el Código de Confirmación a tu email.
+            </Text>
+            <View style={style.lineWhite}></View>
+            <Text style={style.textRegular16White}>
+              Ingresá tu email
+            </Text>
             <TextInput
               label="Email"
               onChangeText={ (value) => this.setState({ confirmationEmail: value }) }
-              placeholder="Tu email"
-              style={ style.textBox }
-              disabled={ true }
+              placeholder="email"
+               style={ style.textBox }
+               disabled={ true }
             />
-          </View>
-          <View style={ style.textBoxBtnHolder }>
+            <Text style={style.textRegular16White}>
+              Ingresá el Código de Confirmación
+            </Text>
             <TextInput
               label="Codigo de confirmación"
               onChangeText={ (value) => this.setState({ confirmationCode: value }) }
-              placeholder="Codigo de Confirmación"
+              placeholder="xxxxxx"
               style={ style.textBox }
+              keyboardType='numeric'
             />
-          </View>
-          <View style={style.lineGray}></View>
-          <Button
-            title='VERIFICAR'
-            testID={'submitConfirmation'}
-            onPress={ this.handleConfirmationCode }
-            buttonStyle={ style.buttonVerify }
-            titleStyle={ style.textRegular14WhiteBold }
-          />
-          <View style={style.lineGrayDrak}></View>
+            <View style={style.lineWhite}></View>
+          </ScrollView>
         </View>
-      </View>
+        <Button
+          title='VERIFICAR CUENTA'
+          testID={'submitConfirmation'}
+          onPress={ this.handleConfirmationCode }
+          buttonStyle={ style.buttonVerify }
+          titleStyle={ style.textRegular14WhiteBold }
+        />
+      </KeyboardAvoidingView>
     )
   }
 }
