@@ -299,6 +299,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     elevation: 3,
   },
+
   positionIconAdd: {
     right: 15, 
     position: 'absolute'
@@ -347,6 +348,16 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     width: wp('14%'),
     height: hp('5%'),
+  },
+  buttonCheckDisabled: {
+    backgroundColor: COLORS.gray,
+    borderColor: COLORS.gray,
+    borderRadius: 3,
+    borderWidth: 1,
+    width: wp('14%'),
+    height: hp('6%'),
+    paddingTop: 10,
+    opacity: 0.7
   },
   buttonCheckCustomerDisabled: {
     backgroundColor: 'transparent',

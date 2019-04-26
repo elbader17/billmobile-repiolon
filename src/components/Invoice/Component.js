@@ -4,7 +4,6 @@ import { Button } from "react-native-elements";
 import { withNavigation } from 'react-navigation';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import style from './style';
 import { VOUCHER_TYPES } from '../../constants/invoice';
 
@@ -16,13 +15,14 @@ class Invoice extends React.Component {
     fcIndentification = fiscalIdentity.name === 'fc' ? fiscalIdentity.cuit : ''
     this.state = {
       voucherType,
-      selectedIndex: 0,
+      cf: false,
       isDateTimePickerVisible: false,
       isDateTimeVisible:false,
       bool:false,
       invoiceDate: this.props.invoiceDate,
       modalVisible: false,
       fcIndentification,
+      loading: false
     }
   }
 
@@ -88,7 +88,12 @@ class Invoice extends React.Component {
       fiscalIdentity,
       addFiscalIdentityToInvoice,
     } = this.props;
-    addFiscalIdentityToInvoice('fc', fcIndentification, fiscalIdentity.id);
+    this.setLoading(true);
+    addFiscalIdentityToInvoice('fc', fcIndentification, fiscalIdentity.id)
+      .then(() => {
+        this.setLoading(false);
+        this.setState({cf: false});
+      })
   }
 
   updateInvoiceItemQuantity = (invoiceItemId, quantity) => {
@@ -116,6 +121,8 @@ class Invoice extends React.Component {
   validateData = () => {
     return ((this.props.fiscalIdentity.name!="") && (this.props.items.length!= 0));
   }
+
+  setLoading = (bool) => this.setState({ loading: bool })
 
   renderViewItemsAdd = () => {
     if (this.props.items.length != 0) {
@@ -192,13 +199,16 @@ class Invoice extends React.Component {
             <Button
               icon={
                 <Icon
-                name="md-checkmark"
-                size={25}
+                name="md-return-right"
+                size={18}
                 color="#EE6123"
                 />
               }
               onPress={ this.addFinalConsumer }
               buttonStyle={ style.buttonCheck }
+              disabledStyle= { style.buttonCheckDisabled }
+              loading = {this.state.loading}
+              disabled = { this.state.loading }
             />
           </View>
         </View>
@@ -229,7 +239,7 @@ class Invoice extends React.Component {
       );
     } else {
         return(
-          <Text style={style.textRegular14Gray}>
+          <Text style={[style.textRegular14Gray,{padding: 5}]}>
             No hay Clientes Cargados
           </Text>
        );
