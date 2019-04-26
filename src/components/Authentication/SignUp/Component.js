@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, Modal, TextInput, TouchableOpacity, Image, Alert } from 'react-native';
 import { Button } from "react-native-elements";
+import { withNavigation } from 'react-navigation';
 import Confirmation from '../Confirmation';
 import style from './style';
 
@@ -15,7 +16,7 @@ class SignUp extends React.Component {
       email: '',
       password: '@Martin44',
       name:'',
-      confirmPassword: '',
+      confirmPassword: '@Martin44',
       confirmationEmail:'',
       hidePassword: true,
       hideConfirmPassword: true,
@@ -39,14 +40,21 @@ class SignUp extends React.Component {
       name:name,
     };
     const { signUp } = this.props;
-    signUp(password, email, attributes);
+    signUp(password, email, attributes)
+    .then((data) => {
+      console.log("data"+data);
+      if(data){
+        this.props.navigation.navigate('Authentication', { index: true  });
+      }else{
+        this.props.navigation.navigate('ConfirmationCodeRegister', { email: this.state.email });
+      }
+    })
+    .catch(() => {
+      this.props.navigation.navigate('ConfirmationCodeRegister', { email: this.state.email });
+    })
   }
 
-  handleConfirmationCode = () => {
-    const { confirmationEmail, confirmationCode } = this.state;
-    const { confirmCode } = this.props;
-    confirmCode(confirmationEmail,confirmationCode,{})
-  }
+  
 
   validatePass = () => {
     const isValidPassword = PASSWORD_REGEXP.test(this.state.password);
@@ -172,7 +180,7 @@ class SignUp extends React.Component {
                 onChangeText={ this.setConfirmPassword }
                 onFocus={() => this.setState({messageMatchPass: true})}
                 onEndEditing={() => this.setState({messageMatchPass: false})}
-                value={ this.confirmPassword }
+                value={ this.state.confirmPassword }
                 placeholder="Confirmar Contraseña"
                 style={ style.textBoxPass }
                 secureTextEntry={ this.state.hideConfirmPassword }
@@ -208,12 +216,10 @@ class SignUp extends React.Component {
             disabled={ !this.validateData() }
           />
         </View>
-        <Modal visible={ this.props.showConfirmationModal }>
-          <Confirmation/>
-        </Modal>
+        
       </View>
     )
   }
 }
 
-export default SignUp;
+export default withNavigation(SignUp);

@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, Text, Alert, Picker, TextInput, ScrollView } from 'react-native';
+import { View, Text, Alert, Picker, TextInput, ScrollView, KeyboardAvoidingView } from 'react-native';
 import { Button } from "react-native-elements";
 import { withNavigation } from 'react-navigation';
 import  { validateCuit } from '../../utils/identity';
+import { METRICS } from '../../constants/metrics';
 import style from './style';
 import {
   CONDITION_IVA,
@@ -22,6 +23,7 @@ class NewCustomer extends React.Component {
       category: fiscalIdentity.category,
       identification: fiscalIdentity.identification,
       conditionIva: '',
+      loading: false
     }
   }
 
@@ -32,11 +34,15 @@ class NewCustomer extends React.Component {
       fiscalIdentity,
       navigation,
     } = this.props;
+    this.setLoading(true);
     addFiscalIdentity(name, identification, fiscalIdentity.id, navigation)
       .then(() => {
         Alert.alert("Cliente Cargado: "+this.props.fiscalIdentity.name+" "+this.props.fiscalIdentity.identification);
       })
-      .catch(err => Alert.alert("Error al Ingresar: ",err.message));
+      .catch(err => {
+        Alert.alert("Error al Ingresar: ",err.message);
+        this.setLoading(false);
+      });
   }
 
   validateData = () => {
@@ -52,9 +58,14 @@ class NewCustomer extends React.Component {
 
   setName = (value) => this.setState({ name: value})
   setIdentification = (value) => this.setState({ identification: value })
+  setLoading = (bool) => this.setState({ loading: bool })
 
   render() {
     return(
+      <KeyboardAvoidingView
+        behavior={'padding'}
+        style={{flex: 1}}
+        keyboardVerticalOffset={METRICS.heightHeader}>
       <ScrollView>
         <View style={style.container}>
           <View style={style.containerInputs}>
@@ -96,22 +107,20 @@ class NewCustomer extends React.Component {
               placeholderTextColor={grayLight}
             />
           </View>
-
           </View>
-          <View style={style.positionFinalButton}>
-            <Button
-              onPress={this.newCustomer}
-              title='GUARDAR'
-              buttonStyle={ style.buttonConfirm }
-              titleStyle={ style.textRegular14WhiteBold }
-              disabledStyle= { style.buttonConfirmDisabled }
-              disabledTitleStyle = { style.textRegular14WhiteBold }
-              disabled={ !this.validateData() }
-            />
-          </View>
-          
       </View>
       </ScrollView>
+      <Button
+        onPress={this.newCustomer}
+        title='GUARDAR'
+        buttonStyle={ style.buttonSave }
+        titleStyle={ style.textRegular14WhiteBold }
+        disabledStyle= { style.buttonSaveDisabled }
+        disabledTitleStyle = { style.textRegular14WhiteBold }
+        disabled={!this.validateData() }
+        loading = {this.state.loading}
+      />
+      </KeyboardAvoidingView>
     )
   }
 }

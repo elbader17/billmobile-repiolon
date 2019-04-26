@@ -14,11 +14,11 @@ class Authentication extends React.Component {
       password: '',
       name:'',
       confirmPassword: '',
-      selectedSignUp: false
+      selectedSignUp: false, 
     };
   }
   
-  renderSignUpSignIn = () => {
+  renderSignUpSignIn = () => {  
     if (this.state.selectedSignUp) {
       return (
         <View>
@@ -33,8 +33,13 @@ class Authentication extends React.Component {
       );
     }
   }
+
+  componentDidMount(){
+    this.setState({ selectedSignUp: this.props.navigation.getParam('index', 'false') })
+  }
     
   render() {
+    
     const logo = require('../../images/iconBill.png')
     const buttonOn = [style.button,style.textRegular12BlueBold];
     const buttonOff = [style.buttonDisabled,style.textRegular12WhiteBold];
@@ -43,7 +48,7 @@ class Authentication extends React.Component {
           <View style={style.container}>
             <View style={ style.containerHeader }>
               <Image source={ logo } style={ style.imageHeader } />
-              <Text style={[style.textRegular14White, {paddingTop: 10}]}>Hacé facturas electronicas rápido.{"\n"} 
+              <Text style={[style.textRegular14White, {paddingTop: 10}]}>{"Hacé facturas electronicas rápido"}.{"\n"} 
               Y hacelo seguro</Text>
             </View>
             <View style={style.inLine}>

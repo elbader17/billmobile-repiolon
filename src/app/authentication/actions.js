@@ -1,5 +1,6 @@
 import { Auth } from 'aws-amplify';
 import { Alert } from 'react-native';
+
 import {
   SET_JWT_TOKEN,
   SHOW_CONFIRMATION_MODAL,
@@ -29,7 +30,7 @@ const signIn = (email, password) => {
     return Auth.signIn(email, password)
       .then((data) => {
         if (data.message === USER_NOT_CONFIRMED_MESSAGE) {
-          dispatch(userSignedUp(null, password));
+          dispatch(userSignedUp(email, password));
         } else {
           const { jwtToken } = data.signInUserSession.idToken;
           dispatch(setJwtToken(jwtToken));
@@ -37,7 +38,7 @@ const signIn = (email, password) => {
         }
       })
       .catch((err) => {
-        Alert.alert('Error al Ingresar: ', err.message);
+        //Alert.alert('Error al Ingresar: ', err.message);
         return err;
       });
   };
@@ -51,9 +52,14 @@ const signUp = (password, email, attributes) => {
       attributes,
       validationData: [],
     })
-      .then(() => {
-        dispatch(userSignedUp(email, password));
-        dispatch(showConfirmationModal());
+      .then((data) => {
+        console.log(data.userConfirmed);
+        if (data.userConfirmed) {
+          return dispatch(userSignedUp(email, password));
+        } else {
+           return data.userConfirmed;
+        }
+        //dispatch(showConfirmationModal());
       }).catch(err => Alert.alert('Error al Registrar: ', err.message));
   };
 };
@@ -63,8 +69,9 @@ const confirmCode = (email, confirmationCode) => {
     return Auth.confirmSignUp(email, confirmationCode, {})
       .then(() => {
         const { password } = getState().authentication.registration;
-        dispatch(hideConfirmationModal());
-        return dispatch(signIn(password, email));
+        return true;
+        //return dispatch(signIn(password, email));
+        
       })
       .catch((err) => {
         Alert.alert('Error al Confirmar: ', err.message);

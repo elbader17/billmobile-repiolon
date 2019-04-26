@@ -2,9 +2,7 @@ import { connect } from 'react-redux';
 import Confirmation from './Component';
 import { confirmCode } from '../../../app/authentication/actions';
 
-const mapStateToProps = (state) => {
-  return { email: state.authentication.registration.email };
-};
+const mapStateToProps = state => ({ email: state.authentication.registration });
 
 function mapDispatchToProps(dispatch) {
   return {
