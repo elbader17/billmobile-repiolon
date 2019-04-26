@@ -1,0 +1,1 @@
+export const RE_DNI =  /^\d{8}(?:[-\s]\d{4})?$/;

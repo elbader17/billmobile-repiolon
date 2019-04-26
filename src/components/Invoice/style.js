@@ -195,11 +195,11 @@ const styles = StyleSheet.create({
     borderColor: COLORS.gray,
   },
   buttonCancel: {
-    width: wp('25%'),
+    width: wp('18%'),
     height: hp('5%'),
     backgroundColor: 'transparent',
     borderWidth: 1,
-    borderColor: COLORS.grayLight,
+    borderColor: COLORS.gray,
   },
   buttonCanceldisabled: {
     borderWidth: 0,
@@ -230,9 +230,9 @@ const styles = StyleSheet.create({
     fontSize: FONTS.size16,
     color: COLORS.grayDark,
   },
-  textRegular11Gray: {
+  textRegular12Gray: {
     fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size11,
+    fontSize: FONTS.size12,
     color: COLORS.gray,
   },
   textRegular14GrayDark: {
@@ -299,6 +299,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     elevation: 3,
   },
+
   positionIconAdd: {
     right: 15, 
     position: 'absolute'
@@ -347,6 +348,16 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     width: wp('14%'),
     height: hp('5%'),
+  },
+  buttonCheckDisabled: {
+    backgroundColor: COLORS.gray,
+    borderColor: COLORS.grayDark,
+    borderRadius: 3,
+    borderWidth: 1,
+    width: wp('14%'),
+    height: hp('5%'),
+    paddingTop: 10,
+    opacity: 0.7
   },
   buttonCheckCustomerDisabled: {
     backgroundColor: 'transparent',

@@ -6,41 +6,42 @@ import { METRICS } from '../../../constants/metrics';
 
 const styles = StyleSheet.create({
   container:{
-    height: hp('100%') - METRICS.heightHeader,
-  },
-  containerInputs:{
-    alignItems: 'center',
-    paddingHorizontal: 35,
-    paddingTop: 15,
-  },
-  textBoxBtnHolder: {
-    position: 'relative',
-    alignSelf: 'stretch',
-    justifyContent: 'center',
-    marginTop: 2,
-    marginBottom: 6
+    flex: 1,
+    backgroundColor: COLORS.blue,
+    paddingTop: 30,
+    paddingHorizontal: 10,
+    alignItems: 'center'
   },
   textBox: {
+    backgroundColor: COLORS.white,
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size18,
-    alignSelf: 'stretch',
-    height: 45,
-    paddingRight: 45,
-    paddingLeft: 8,
+    width: wp('82%'),
+    height: hp('8%'),
+    paddingHorizontal: 10,
     borderWidth: 1,
-    paddingVertical: 0,
+    borderRadius: 5,
     borderColor: COLORS.gray,
-    borderRadius: 2
+    marginVertical: 7
   },
-  textRegular14GrayDark: {
+  textRegular14White: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size14,
-    color: COLORS.grayDark,
+    color: COLORS.white,
+  },
+  textRegular14WhiteBold: {
+    fontFamily: FONTS.latoSemiBold,
+    fontSize: FONTS.size14,
+    color: COLORS.white,
+  },
+  textRegular16White: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size16,
+    color: COLORS.white,
   },
   buttonVerify: {
     backgroundColor: COLORS.red,
-    width: wp('80%'),
-    height: 40,
+    height: hp('8%'),
     borderRadius: 2
   },
   textRegular14WhiteBold: {
@@ -54,12 +55,11 @@ const styles = StyleSheet.create({
     fontWeight: 'normal',
     color: COLORS.blue,
   },
-  lineGray: {
-    backgroundColor: COLORS.gray,
-    width: wp('80%'),
+  lineWhite: {
+    backgroundColor: COLORS.white,
+    width: wp('82%'),
     height: 1,
-    marginVertical: 10
-
+    marginVertical: 15
   },
 });
 

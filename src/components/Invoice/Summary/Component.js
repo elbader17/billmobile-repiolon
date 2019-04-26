@@ -57,7 +57,7 @@ class InvoiceSummary extends React.Component {
             <Text style={[style.textRegular14GrayDark,style.marginBottom5]}>
               { this.props.fiscalIdentity.name }
             </Text>
-            <Text style={style.textRegular11Gray}>CUIT: {'00-00000000-0'}</Text>
+            <Text style={style.textRegular11Gray}>CUIT: {this.props.fiscalIdentity.identification}</Text>
             <Text style={style.textRegular11Gray}>Localidad: {'Río Cuarto'}</Text>
             <Text style={style.textRegular11Gray}>Provincia: {'Córdoba'}</Text>
             <Text style={style.textRegular11Gray}>IVA: {'Responsable Inscripto'}</Text>
@@ -97,7 +97,7 @@ class InvoiceSummary extends React.Component {
                 <View style={[style.boxItems2,style.inLineSpaceBetween]}>
                   <View>
                     <Text style={style.textRegular14GrayDark}>
-                      X{'1'}
+                      x{'1'}
                     </Text>
                   </View>
                   <View>

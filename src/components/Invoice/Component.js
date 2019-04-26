@@ -4,9 +4,9 @@ import { Button } from "react-native-elements";
 import { withNavigation } from 'react-navigation';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import style from './style';
 import { VOUCHER_TYPES } from '../../constants/invoice';
+import { RE_DNI } from '../../constants/regular_expressions';
 
 class Invoice extends React.Component {
 
@@ -16,13 +16,14 @@ class Invoice extends React.Component {
     fcIndentification = fiscalIdentity.name === 'fc' ? fiscalIdentity.cuit : ''
     this.state = {
       voucherType,
-      selectedIndex: 0,
+      cf: false,
       isDateTimePickerVisible: false,
       isDateTimeVisible:false,
       bool:false,
       invoiceDate: this.props.invoiceDate,
       modalVisible: false,
       fcIndentification,
+      loading: false
     }
   }
 
@@ -88,7 +89,13 @@ class Invoice extends React.Component {
       fiscalIdentity,
       addFiscalIdentityToInvoice,
     } = this.props;
-    addFiscalIdentityToInvoice('fc', fcIndentification, fiscalIdentity.id);
+    this.setLoading(true);
+    addFiscalIdentityToInvoice('fc', fcIndentification, fiscalIdentity.id)
+      .then(() => {
+        this.setLoading(false);
+        this.setState({cf: false});
+        this.setFcIndentification(''); //Para que al cargar otro cf el botton aparezca desabilitado.
+      })
   }
 
   updateInvoiceItemQuantity = (invoiceItemId, quantity) => {
@@ -117,6 +124,12 @@ class Invoice extends React.Component {
     return ((this.props.fiscalIdentity.name!="") && (this.props.items.length!= 0));
   }
 
+  validateDni = () => {
+    return RE_DNI.test(this.state.fcIndentification);
+  }
+
+  setLoading = (bool) => this.setState({ loading: bool })
+
   renderViewItemsAdd = () => {
     if (this.props.items.length != 0) {
       return (
@@ -139,7 +152,7 @@ class Invoice extends React.Component {
                       style={style.buttonCantProduct}
                     >
                       <Text style={style.textRegular12RedkBold}>
-                        {`X${item.quantity}`}
+                        {`x${item.quantity}`}
                       </Text>
                     </TouchableOpacity>
                   </View>
@@ -170,6 +183,8 @@ class Invoice extends React.Component {
   }
 
   renderCustomer = () => {
+    const iconEnabled = <Icon name="md-return-right" size={18} color="#EE6123"/>;
+    const iconDisabled = <Icon name="md-return-right" size={18} color="#858585"/>;
     if (!this.state.cf) {
       return (
         <ScrollView>
@@ -190,15 +205,12 @@ class Invoice extends React.Component {
               keyboardType='numeric'
             />
             <Button
-              icon={
-                <Icon
-                name="md-checkmark"
-                size={25}
-                color="#EE6123"
-                />
-              }
+              icon={ this.validateDni() ? iconEnabled : iconDisabled  }
               onPress={ this.addFinalConsumer }
               buttonStyle={ style.buttonCheck }
+              disabledStyle= { style.buttonCheckDisabled }
+              loading = {this.state.loading}
+              disabled = { this.state.loading || !this.validateDni() }
             />
           </View>
         </View>
@@ -210,7 +222,7 @@ class Invoice extends React.Component {
     if (this.props.fiscalIdentity.name!='') {
       return(
         <View style={style.inLineSpaceBetween}>
-        <Text style={style.textRegular14GrayDark}>
+        <Text style={[style.textRegular14GrayDark,{padding: 2}]}>
           {this.props.fiscalIdentity.name === 'fc' ? this.props.fiscalIdentity.identification : this.props.fiscalIdentity.name}
         </Text>
         <Button
@@ -229,7 +241,7 @@ class Invoice extends React.Component {
       );
     } else {
         return(
-          <Text style={style.textRegular14Gray}>
+          <Text style={[style.textRegular14Gray,{padding: 3}]}>
             No hay Clientes Cargados
           </Text>
        );
@@ -278,10 +290,10 @@ class Invoice extends React.Component {
               titleStyle={style.textRegular11GrayDark}
             />
             <Button
-              title='VOLVER'
+              title='Cancelar'
               onPress={() => this.setState({cf: false})}
               buttonStyle={style.buttonCancel}
-              titleStyle={style.textRegular11Gray}
+              titleStyle={style.textRegular12Gray}
               disabled={!this.state.cf}
               disabledStyle={style.buttonCanceldisabled}
               disabledTitleStyle={style.textButtonCanceldisabled}
