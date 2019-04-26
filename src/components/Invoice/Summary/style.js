@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   },
   boxCustomer: {
     paddingVertical: 7,
-    paddingHorizontal: 12
+    paddingHorizontal: 9
   },
   boxListItems: {
     maxHeight: hp('30%'),

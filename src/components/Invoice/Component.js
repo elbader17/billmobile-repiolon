@@ -146,7 +146,7 @@ class Invoice extends React.Component {
                       style={style.buttonCantProduct}
                     >
                       <Text style={style.textRegular12RedkBold}>
-                        {`X${item.quantity}`}
+                        {`x${item.quantity}`}
                       </Text>
                     </TouchableOpacity>
                   </View>
