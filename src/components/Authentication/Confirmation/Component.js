@@ -15,12 +15,6 @@ class Confirmation extends React.Component {
     };
   }
 
-  static navigationOptions = {
-    title: 'VERIFICAR CUENTA',
-    headerTitleStyle: style.headerText,
-    headerTintColor: '#3687D1',
-  };
-
   handleConfirmationCode = () => {
     const { confirmationEmail, confirmationCode } = this.state;
     const { confirmCode } = this.props;
@@ -34,9 +28,13 @@ class Confirmation extends React.Component {
       <KeyboardAvoidingView
         behavior={'padding'}
         style={{flex: 1}}
-        keyboardVerticalOffset={METRICS.heightHeader}>
+      >
+      <ScrollView>
         <View style={ style.container }>
-          <ScrollView>  
+            <Text style={[style.textRegular16WhiteBold,{textAlign: 'center', paddingVertical: 10}]}>
+              VERIFICACIÓN DE CUENTA
+            </Text>  
+            <View style={style.lineWhite}></View>
             <Text style={[style.textRegular14WhiteBold,{textAlign: 'center'}]}>
               Se envió el Código de Confirmación a tu email.
             </Text>
@@ -61,9 +59,9 @@ class Confirmation extends React.Component {
               style={ style.textBox }
               keyboardType='numeric'
             />
-            <View style={style.lineWhite}></View>
-          </ScrollView>
+            
         </View>
+      </ScrollView>
         <Button
           title='VERIFICAR CUENTA'
           testID={'submitConfirmation'}

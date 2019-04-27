@@ -6,10 +6,9 @@ import { METRICS } from '../../../constants/metrics';
 
 const styles = StyleSheet.create({
   container:{
-    flex: 1,
+    height: hp('100%'),
     backgroundColor: COLORS.blue,
     paddingTop: 30,
-    paddingHorizontal: 10,
     alignItems: 'center'
   },
   textBox: {
@@ -39,10 +38,15 @@ const styles = StyleSheet.create({
     fontSize: FONTS.size16,
     color: COLORS.white,
   },
+  textRegular16WhiteBold: {
+    fontFamily: FONTS.latoSemiBold,
+    fontSize: FONTS.size16,
+    color: COLORS.white,
+  },
   buttonVerify: {
     backgroundColor: COLORS.red,
     height: hp('8%'),
-    borderRadius: 2
+    borderRadius: 0
   },
   textRegular14WhiteBold: {
     fontFamily: FONTS.latoSemiBold,
