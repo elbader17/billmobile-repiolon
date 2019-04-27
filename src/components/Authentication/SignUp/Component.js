@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, Modal, TextInput, TouchableOpacity, Image, Alert } from 'react-native';
 import { Button } from "react-native-elements";
+import { withNavigation } from 'react-navigation';
 import Confirmation from '../Confirmation';
 import style from './style';
 
@@ -12,10 +13,10 @@ class SignUp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
+      email: '@mozej.com',
       password: '@Martin44',
-      name:'',
-      confirmPassword: '',
+      name:'Martin',
+      confirmPassword: '@Martin44',
       confirmationEmail:'',
       hidePassword: true,
       hideConfirmPassword: true,
@@ -42,13 +43,10 @@ class SignUp extends React.Component {
     const { signUp } = this.props;
     this.setLoading(true);
     signUp(password, email, attributes)
-      .then(() => this.setLoading(false))
-  }
-
-  handleConfirmationCode = () => {
-    const { confirmationEmail, confirmationCode } = this.state;
-    const { confirmCode } = this.props;
-    confirmCode(confirmationEmail,confirmationCode,{})
+      .then(() => {
+        this.setLoading(false);
+        this.props.navigation.navigate('ConfirmationCodeRegister');
+      })
   }
 
   validatePass = () => {
@@ -176,7 +174,7 @@ class SignUp extends React.Component {
                 onChangeText={ this.setConfirmPassword }
                 onFocus={() => this.setState({messageMatchPass: true})}
                 onEndEditing={() => this.setState({messageMatchPass: false})}
-                value={ this.confirmPassword }
+                value={ this.state.confirmPassword }
                 placeholder="Confirmar Contraseña"
                 style={ style.textBoxPass }
                 secureTextEntry={ this.state.hideConfirmPassword }
@@ -213,12 +211,9 @@ class SignUp extends React.Component {
             loading = {this.state.loading}
           />
         </View>
-        <Modal visible={ this.props.showConfirmationModal }>
-          <Confirmation/>
-        </Modal>
       </View>
     )
   }
 }
 
-export default SignUp;
+export default withNavigation(SignUp);

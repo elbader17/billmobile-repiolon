@@ -3,10 +3,6 @@ import SignUp from './Component';
 import { signUp } from '../../../app/authentication/actions';
 import { confirmCode } from '../../../app/authentication/actions';
 
-const mapStateToProps = (state) => ({
-  showConfirmationModal: state.authentication.showConfirmationModal,
-}) ;
-
 function mapDispatchToProps(dispatch) {
     return {
         signUp: (password, name,attributes) => dispatch(signUp(password, name,attributes)),
@@ -15,7 +11,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 const component = connect( 
-    mapStateToProps,
     mapDispatchToProps,
 )(SignUp);
 

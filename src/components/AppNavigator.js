@@ -8,7 +8,7 @@ import NewInvoiceItem from './Invoice/NewInvoiceItem';
 import NewInvoiceCustomer from './Invoice/NewInvoiceCustomer';
 import Invoice from './Invoice';
 import InvoiceSummary from './Invoice/Summary';
-import ConfirmationCodeRegister from './Authentication/Confirmation';
+import ConfirmationCodeRegister from './Authentication/Confirmation/Component';
 import Opinion from './Opinion';
 
 const AppStack = createStackNavigator(
@@ -31,10 +31,10 @@ const AppTaxConfiguration = createStackNavigator(
 const AppLogin = createStackNavigator(
   {
     Authentication,
-    ConfirmationCodeRegister,
+    ConfirmationCodeRegister
   },
   {
-    headerMode: 'none',
+    headerMode: 'none'
   },
 );
 
@@ -47,7 +47,7 @@ const AppNavigator = createAppContainer(createSwitchNavigator(
     Opinion
   },
   {
-    initialRouteName: 'Login',
+    initialRouteName: 'Intro',
   },
 ));
 
