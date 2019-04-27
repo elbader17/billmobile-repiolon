@@ -2,8 +2,9 @@ import React from 'react';
 import { Text, View, TextInput, ScrollView, KeyboardAvoidingView } from 'react-native';
 import { Button } from "react-native-elements";
 import { withNavigation } from 'react-navigation';
+import { CODE_CONFIRM } from '../../../constants/regular_expressions'
+import { COLORS } from '../../../constants/colors';
 import style from './style';
-import { METRICS } from '../../../constants/metrics';
 
 class Confirmation extends React.Component {
 
@@ -11,23 +12,36 @@ class Confirmation extends React.Component {
     super(props);
     this.state = {
       confirmationEmail: this.props.navigation.getParam('email', 'e-mail'),
-      confirmPassword: '',
+      confirmationCode: '',
+      loading: false
     };
   }
+
+  static navigationOptions = {
+    title: 'VERIFICAR CUENTA',
+    headerTitleStyle: style.headerText,
+    headerTintColor: '#3687D1',
+  };
 
   handleConfirmationCode = () => {
     const { confirmationEmail, confirmationCode } = this.state;
     const { confirmCode } = this.props;
+    this.setLoading(true);
     confirmCode(confirmationEmail,confirmationCode,{})
     .then((data) => {
-      console.log("data"+data);
       this.props.navigation.navigate('Authentication', { index: true });
     })
     .catch((err) => {
       this.props.navigation.navigate('ConfirmationCodeRegister');
-      console.log("err"+err);
+      this.setLoading(false);
     });
   }
+
+  validateData = () => {
+    return CODE_CONFIRM.test(this.state.confirmationCode)
+  }
+
+  setLoading = (bool) => this.setState({ loading: bool })
 
   render() {
     return(
@@ -35,26 +49,27 @@ class Confirmation extends React.Component {
         behavior={'padding'}
         style={{flex: 1}}
       >
-      <ScrollView>
         <View style={ style.container }>
-            <Text style={[style.textRegular16WhiteBold,{textAlign: 'center', paddingVertical: 10}]}>
-              VERIFICACIÓN DE CUENTA
-            </Text>  
-            <View style={style.lineWhite}></View>
+          <ScrollView> 
             <Text style={[style.textRegular14WhiteBold,{textAlign: 'center'}]}>
-              Se envió el Código de Confirmación a tu email.
+              VERIFICACIÓN DE CUENTA
+            </Text>
+            <View style={style.lineWhite}></View>
+            <Text style={[style.textRegular14White,{textAlign: 'center'}]}>
+              Se envió el Código de Confirmación a su email.
             </Text>
             <View style={style.lineWhite}></View>
             <Text style={style.textRegular16White}>
-              Ingresá tu email
+              Tu Email
             </Text>
             <TextInput
               label="Email"
               value= { this.state.confirmationEmail }
               onChangeText={ (value) => this.setState({ confirmationEmail: value }) }
-              placeholder="email"
-               style={ style.textBox }
-               disabled={ true }
+              placeholder="Email"
+              placeholderTextColor={COLORS.gray}
+              style={ style.textBox }
+              disabled={ true }
             />
             <Text style={style.textRegular16White}>
               Ingresá el Código de Confirmación
@@ -62,19 +77,23 @@ class Confirmation extends React.Component {
             <TextInput
               label="Codigo de confirmación"
               onChangeText={ (value) => this.setState({ confirmationCode: value }) }
-              placeholder="xxxxxx"
+              placeholder="Número de 6 dígitos"
+              placeholderTextColor={COLORS.gray}
               style={ style.textBox }
               keyboardType='numeric'
             />
-            
+          </ScrollView>
         </View>
-      </ScrollView>
         <Button
           title='VERIFICAR CUENTA'
           testID={'submitConfirmation'}
           onPress={ this.handleConfirmationCode }
           buttonStyle={ style.buttonVerify }
           titleStyle={ style.textRegular14WhiteBold }
+          disabledTitleStyle={ style.textRegular14WhiteBold}
+          disabledStyle={ style.buttonVerifyDisabled }
+          disabled={ !this.validateData() }
+          loading = {this.state.loading}
         />
       </KeyboardAvoidingView>
     )

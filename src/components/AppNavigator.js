@@ -8,7 +8,7 @@ import NewInvoiceItem from './Invoice/NewInvoiceItem';
 import NewInvoiceCustomer from './Invoice/NewInvoiceCustomer';
 import Invoice from './Invoice';
 import InvoiceSummary from './Invoice/Summary';
-import ConfirmationCodeRegister from './Authentication/Confirmation/Component';
+import ConfirmationCodeRegister from './Authentication/Confirmation';
 import Opinion from './Opinion';
 
 const AppStack = createStackNavigator(
@@ -18,7 +18,7 @@ const AppStack = createStackNavigator(
     NewInvoiceItem,
     NewInvoiceCustomer,
     NewItems: NewItem,
-    InvoiceSummary,it 
+    InvoiceSummary,
   },
 );
 
@@ -31,10 +31,10 @@ const AppTaxConfiguration = createStackNavigator(
 const AppLogin = createStackNavigator(
   {
     Authentication,
-    ConfirmationCodeRegister
+    ConfirmationCodeRegister,
   },
   {
-    headerMode: 'none'
+    headerMode: 'none',
   },
 );
 

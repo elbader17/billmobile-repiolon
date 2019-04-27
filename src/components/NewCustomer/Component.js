@@ -4,13 +4,12 @@ import { Button } from "react-native-elements";
 import { withNavigation } from 'react-navigation';
 import  { validateCuit } from '../../utils/identity';
 import { METRICS } from '../../constants/metrics';
+import { COLORS } from '../../constants/colors';
 import style from './style';
 import {
   CONDITION_IVA,
   CONDITION_SALE,
 } from '../../constants/fiscal_identity';
-
-const grayLight = '#cecece';
 
 class NewCustomer extends React.Component {
 
@@ -86,7 +85,7 @@ class NewCustomer extends React.Component {
                 onChangeText={this.setIdentification}
                 placeholder="00-00000000-0"
                 value={this.state.identification}
-                placeholderTextColor={grayLight}
+                placeholderTextColor={COLORS.grayLight}
                 value={this.state.identification}
                 style={[style.textRegular16GrayDark,style.marginLeft5]}
                 keyboardType='numeric'
@@ -104,7 +103,7 @@ class NewCustomer extends React.Component {
               value={this.state.name}
               placeholder="Inserta el Nombre"
               value={this.state.name}
-              placeholderTextColor={grayLight}
+              placeholderTextColor={COLORS.grayLight}
             />
           </View>
           </View>

@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, Modal, TextInput, TouchableOpacity, Image, Alert } from 'react-native';
 import { Button } from "react-native-elements";
 import { withNavigation } from 'react-navigation';
-import Confirmation from '../Confirmation';
+import { COLORS } from '../../../constants/colors';
 import style from './style';
 
 const EMAIL_REGEXP = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
@@ -15,7 +15,7 @@ class SignUp extends React.Component {
     this.state = {
       email: '@mozej.com',
       password: '@Martin44',
-      name:'',
+      name:'Martin',
       confirmPassword: '@Martin44',
       confirmationEmail:'',
       hidePassword: true,
@@ -41,20 +41,15 @@ class SignUp extends React.Component {
       name:name,
     };
     const { signUp } = this.props;
+    this.setLoading(true);
     signUp(password, email, attributes)
-<<<<<<< HEAD
-      .then(() => {
-        this.setLoading(false);
-        this.props.navigation.navigate('ConfirmationCodeRegister');
-      })
-  }
-=======
     .then((data) => {
-      console.log("data"+data);
+      this.setLoading(false);
       if(data){
-        this.props.navigation.navigate('Authentication', { index: true  });
+        this.props.navigation.navigate('Authentication', { index: false  });
       }else{
-        this.props.navigation.navigate('ConfirmationCodeRegister', { email: this.state.email });
+        if (data != undefined)
+          this.props.navigation.navigate('ConfirmationCodeRegister', { email: this.state.email });
       }
     })
     .catch(() => {
@@ -63,7 +58,6 @@ class SignUp extends React.Component {
   }
 
   
->>>>>>> e99a09740ae9f1acd4a2b98fb49b3cbcc3325b37
 
   validatePass = () => {
     const isValidPassword = PASSWORD_REGEXP.test(this.state.password);
@@ -132,6 +126,7 @@ class SignUp extends React.Component {
               value={ this.state.name }
               onChangeText={ this.setName }
               placeholder="Tu nombre"
+              placeholderTextColor={COLORS.gray}
               style={ style.textBox }
             />
           </View>
@@ -145,6 +140,7 @@ class SignUp extends React.Component {
               onFocus={() => this.setState({messageEmailFormat: true})}
               onEndEditing={() => this.setState({messageEmailFormat: false})}
               placeholder="Tu email"
+              placeholderTextColor={COLORS.gray}
               style={ style.textBox }
               onRef={ r => { this.state.email = r }}
               editable={ !this.props.fetching }
@@ -164,6 +160,7 @@ class SignUp extends React.Component {
               onFocus={() => this.setState({messagePassFormat: true})}
               onEndEditing={() => this.setState({messagePassFormat: false})}
               placeholder="Contraseña"
+              placeholderTextColor={COLORS.gray}
               style={ style.textBoxPass }
               secureTextEntry={ this.state.hidePassword }
             />
@@ -192,6 +189,7 @@ class SignUp extends React.Component {
                 onEndEditing={() => this.setState({messageMatchPass: false})}
                 value={ this.state.confirmPassword }
                 placeholder="Confirmar Contraseña"
+                placeholderTextColor={COLORS.gray}
                 style={ style.textBoxPass }
                 secureTextEntry={ this.state.hideConfirmPassword }
               />
@@ -227,10 +225,7 @@ class SignUp extends React.Component {
             loading = {this.state.loading}
           />
         </View>
-<<<<<<< HEAD
-=======
         
->>>>>>> e99a09740ae9f1acd4a2b98fb49b3cbcc3325b37
       </View>
     )
   }

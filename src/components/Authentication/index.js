@@ -17,7 +17,7 @@ class Authentication extends React.Component {
       selectedSignUp: false, 
     };
   }
-  
+
   renderSignUpSignIn = () => {  
     if (this.state.selectedSignUp) {
       return (
@@ -34,12 +34,7 @@ class Authentication extends React.Component {
     }
   }
 
-  componentDidMount(){
-    this.setState({ selectedSignUp: this.props.navigation.getParam('index', 'false') })
-  }
-    
   render() {
-    
     const logo = require('../../images/iconBill.png')
     const buttonOn = [style.button,style.textRegular12BlueBold];
     const buttonOff = [style.buttonDisabled,style.textRegular12WhiteBold];
@@ -65,7 +60,7 @@ class Authentication extends React.Component {
                 titleStyle={ this.state.selectedSignUp ? buttonOff[1] : buttonOn[1] }
               />
             </View>
-            {this.renderSignUpSignIn()}  
+            {this.renderSignUpSignIn()} 
             <View style={style.containerFooter}>
               <Text style={style.textRegular11GrayDark}>
                 Al registrarte estas aceptando nuestros
