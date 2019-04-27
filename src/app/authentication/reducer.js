@@ -6,7 +6,8 @@ import {
 
 const initialState = {
   jwtToken: '',
-  registration: null,
+  showConfirmationModal: false,
+  registration: '',
 };
 
 function setJwtToken({ draftState, jwtToken }) {

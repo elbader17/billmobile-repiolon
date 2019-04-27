@@ -18,7 +18,7 @@ const AppStack = createStackNavigator(
     NewInvoiceItem,
     NewInvoiceCustomer,
     NewItems: NewItem,
-    InvoiceSummary,
+    InvoiceSummary,it 
   },
 );
 

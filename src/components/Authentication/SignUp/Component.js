@@ -15,7 +15,7 @@ class SignUp extends React.Component {
     this.state = {
       email: '@mozej.com',
       password: '@Martin44',
-      name:'Martin',
+      name:'',
       confirmPassword: '@Martin44',
       confirmationEmail:'',
       hidePassword: true,
@@ -41,13 +41,29 @@ class SignUp extends React.Component {
       name:name,
     };
     const { signUp } = this.props;
-    this.setLoading(true);
     signUp(password, email, attributes)
+<<<<<<< HEAD
       .then(() => {
         this.setLoading(false);
         this.props.navigation.navigate('ConfirmationCodeRegister');
       })
   }
+=======
+    .then((data) => {
+      console.log("data"+data);
+      if(data){
+        this.props.navigation.navigate('Authentication', { index: true  });
+      }else{
+        this.props.navigation.navigate('ConfirmationCodeRegister', { email: this.state.email });
+      }
+    })
+    .catch(() => {
+      this.props.navigation.navigate('ConfirmationCodeRegister', { email: this.state.email });
+    })
+  }
+
+  
+>>>>>>> e99a09740ae9f1acd4a2b98fb49b3cbcc3325b37
 
   validatePass = () => {
     const isValidPassword = PASSWORD_REGEXP.test(this.state.password);
@@ -211,6 +227,10 @@ class SignUp extends React.Component {
             loading = {this.state.loading}
           />
         </View>
+<<<<<<< HEAD
+=======
+        
+>>>>>>> e99a09740ae9f1acd4a2b98fb49b3cbcc3325b37
       </View>
     )
   }

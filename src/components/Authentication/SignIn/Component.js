@@ -39,7 +39,7 @@ class SignIn extends React.Component {
           this.props.navigation.navigate('Authentication');
         }else if ( _data.message === 'User is not confirmed.'){
           Alert.alert(_data.message);
-          this.props.navigation.navigate('ConfirmationCodeRegister');
+          this.props.navigation.navigate('ConfirmationCodeRegister', { email: this.state.email });
         }else {
           Alert.alert(_data.message);
           this.props.navigation.navigate('Authentication');

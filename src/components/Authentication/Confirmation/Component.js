@@ -10,7 +10,7 @@ class Confirmation extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: this.props.email,
+      confirmationEmail: this.props.navigation.getParam('email', 'e-mail'),
       confirmPassword: '',
     };
   }
@@ -18,10 +18,16 @@ class Confirmation extends React.Component {
   handleConfirmationCode = () => {
     const { confirmationEmail, confirmationCode } = this.state;
     const { confirmCode } = this.props;
-    confirmCode(confirmationEmail,confirmationCode,{});
+    confirmCode(confirmationEmail,confirmationCode,{})
+    .then((data) => {
+      console.log("data"+data);
+      this.props.navigation.navigate('Authentication', { index: true });
+    })
+    .catch((err) => {
+      this.props.navigation.navigate('ConfirmationCodeRegister');
+      console.log("err"+err);
+    });
   }
-
-  setConfirmPassword = (value) => this.setState({ confirmPassword: value })
 
   render() {
     return(
@@ -44,6 +50,7 @@ class Confirmation extends React.Component {
             </Text>
             <TextInput
               label="Email"
+              value= { this.state.confirmationEmail }
               onChangeText={ (value) => this.setState({ confirmationEmail: value }) }
               placeholder="email"
                style={ style.textBox }
