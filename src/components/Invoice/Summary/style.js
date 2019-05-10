@@ -157,12 +157,6 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: 'space-between',
   },
-  headerTextNav: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size16,
-    fontWeight: 'normal',
-    color: COLORS.blue,
-  },
   buttonEdite: {
     borderRadius: 4,
     borderWidth: 1,

@@ -13,13 +13,7 @@ class InvoiceSummary extends React.Component {
       subTotal: '',
     };
   }
-
-  static navigationOptions = {
-    title: 'DOCUMENTO FINAL',
-    headerTitleStyle: style.headerTextNav,
-    headerTintColor: '#3687D1',
-  };
-
+  
   navigateToInvoice = () => {
     this.props.navigation.navigate('Invoice');
   }

@@ -8,7 +8,7 @@ const mapStateToProps = state => ({
   fiscalIdentity: state.fiscalIdentity,
 });
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
     addFiscalIdentity: (name, cuit, navigation) => {
       dispatch(addFiscalIdentityToInvoice(name, cuit))

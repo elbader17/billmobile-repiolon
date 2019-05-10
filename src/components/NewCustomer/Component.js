@@ -8,7 +8,6 @@ import { COLORS } from '../../constants/colors';
 import style from './style';
 import {
   CONDITION_IVA,
-  CONDITION_SALE,
 } from '../../constants/fiscal_identity';
 
 class NewCustomer extends React.Component {
@@ -17,11 +16,10 @@ class NewCustomer extends React.Component {
     super(props);
     const { fiscalIdentity } = this.props;
     this.state = {
-      condition: '',
-      name: fiscalIdentity.name,
+      conditionIva: '',
       category: fiscalIdentity.category,
       identification: fiscalIdentity.identification,
-      conditionIva: '',
+      name: fiscalIdentity.name,
       loading: false
     }
   }

@@ -323,14 +323,6 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     marginBottom: 10 
   },
-  headerText: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size16,
-    fontWeight: 'normal',
-    color: COLORS.blue,
-    textAlign:"center", 
-    flex:1 
-  },
   buttonAddClient: {
     backgroundColor: COLORS.white,
     borderWidth: 1,

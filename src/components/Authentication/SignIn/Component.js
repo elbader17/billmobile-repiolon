@@ -54,7 +54,7 @@ class SignIn extends React.Component {
     if (this.props.fiscalIdentityComplete) {
       this.props.navigation.navigate('Invoice');
     } else{
-      this.props.navigation.navigate('TaxConfiguration');
+      this.props.navigation.navigate('Configure');
     }
   }
 

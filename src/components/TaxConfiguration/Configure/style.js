@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     height: hp('100%') - METRICS.heightHeader - hp('8%'),
     alignItems: 'center',
     paddingVertical: 15,
-    paddingHorizontal: 18,
+    paddingHorizontal: 18
   },
   boxName: {
     //height: hp('20%'),
@@ -100,15 +100,7 @@ const styles = StyleSheet.create({
     fontSize: FONTS.size16,
     color: COLORS.grayDark,
     textAlign: 'center',
-  },
-  headerText: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size16,
-    fontWeight: 'normal',
-    color: COLORS.blue,
-    textAlign:"center", 
-    flex:1 
-  },
+  }
 });
 
 export default styles;

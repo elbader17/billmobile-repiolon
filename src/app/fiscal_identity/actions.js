@@ -1,4 +1,3 @@
-
 import axios from 'axios';
 
 import {
@@ -44,7 +43,7 @@ const updateFiscalIdentity = (resource, dispatch, getState) => {
 
 
 // eslint-disable-next-line func-names
-const addFiscalIdentityToInvoice = (name, identity, category, id) => {
+const addFiscalIdentityToInvoice = (name, identity, id) => {
   return (dispatch, getState) => {
     const { id: invoiceId } = getState().invoices.currentInvoice;
     let promise;

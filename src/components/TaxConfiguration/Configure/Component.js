@@ -20,12 +20,6 @@ class TaxConfiguration extends React.Component{
     };
   }
 
-  static navigationOptions = {
-    title: 'CONFIGURACIÓN DE CUIT',
-    headerTitleStyle: style.headerText,
-    headerTintColor: '#3687D1',
-  };
-
   handleConfigFiscal = () => {
     const { name, cuit } = this.state;
     const { updateFiscalIdentity } = this.props;

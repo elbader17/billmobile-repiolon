@@ -27,12 +27,6 @@ class Invoice extends React.Component {
     }
   }
 
-  static navigationOptions = {
-    title: 'GENERACIÓN DE COMPROBANTE',
-    headerTitleStyle: style.headerText,
-    headerTintColor: '#3687D1',
-  };
-
   setModalVisible(visible) {
     this.setState({modalVisible: visible});
   }

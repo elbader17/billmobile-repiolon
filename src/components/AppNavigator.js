@@ -1,54 +1,85 @@
-import { createStackNavigator, createAppContainer, createSwitchNavigator } from 'react-navigation';
+import { 
+  createStackNavigator, 
+  createAppContainer, 
+  createSwitchNavigator 
+} from 'react-navigation';
+import style from '../utils/style';
+import { COLORS } from '../constants/colors';
+
 import Intro from './Intro';
 import Authentication from './Authentication';
+import ConfirmationCodeRegister from './Authentication/Confirmation';
+import InitialCofiguration from './TaxConfiguration/InitialConfigure/Component';
 import TaxConfiguration from './TaxConfiguration/Configure';
 import NewCustomer from './NewCustomer';
 import NewItem from './Item/NewItem';
-import NewInvoiceItem from './Invoice/NewInvoiceItem';
-import NewInvoiceCustomer from './Invoice/NewInvoiceCustomer';
 import Invoice from './Invoice';
 import InvoiceSummary from './Invoice/Summary';
-import ConfirmationCodeRegister from './Authentication/Confirmation';
+import NewInvoiceItem from './Invoice/NewInvoiceItem';
+import NewInvoiceCustomer from './Invoice/NewInvoiceCustomer';
 import Opinion from './Opinion';
 
-const AppStack = createStackNavigator(
-  {
-    Invoice,
-    NewCustomer,
-    NewInvoiceItem,
-    NewInvoiceCustomer,
-    NewItems: NewItem,
-    InvoiceSummary,
-  },
-);
-
-const AppTaxConfiguration = createStackNavigator(
-  {
-    TaxConfiguration,
-  },
-);
-
-const AppLogin = createStackNavigator(
+const LoginStack = createStackNavigator(
   {
     Authentication,
     ConfirmationCodeRegister,
   },
-  {
-    headerMode: 'none',
-  },
+  { headerMode: 'none'}
 );
 
-const AppNavigator = createAppContainer(createSwitchNavigator(
+const TaxConfigurationStack = createStackNavigator({
+  InitialConfigure: {
+    screen: InitialCofiguration,
+    headerMode: 'none'
+  },
+  TaxConfigure: {
+    screen: TaxConfiguration,
+    navigationOptions: () => ({
+      title: 'CONFIGURACIÓN DE CUIT',
+      headerTitleStyle: style.textNavigation,
+      headerTintColor: COLORS.blue,
+    }),
+  },
+});
+
+const InvoiceStack = createStackNavigator({
+  Invoice: {
+    screen: Invoice,
+    navigationOptions: () => ({
+      title: 'GENERACIÓN DE COMPROBANTE',
+      headerTitleStyle: style.textNavigation,
+      headerTintColor: COLORS.blue,
+    }),
+  },
+  NewInvoiceItem,
+  NewInvoiceCustomer,
+  InvoiceSummary: {
+    screen: InvoiceSummary,
+    navigationOptions: () => ({
+      title: 'DOCUMENTO FINAL',
+      headerTitleStyle: style.textNavigation,
+      headerTintColor: COLORS.blue,
+    }),
+  },
+});
+
+const AppSwitchNavigator = createSwitchNavigator(
   {
     Intro,
-    Login: AppLogin,
-    Configure: AppTaxConfiguration,
-    App: AppStack,
+    Login: LoginStack,
+    Configure: TaxConfigurationStack,
+    Invoices: InvoiceStack,
+    NewCustomer,
+    NewItem,
     Opinion
   },
   {
     initialRouteName: 'Intro',
-  },
-));
+  }
+);
+
+const AppNavigator = createAppContainer(
+  AppSwitchNavigator
+);
 
 export default AppNavigator;

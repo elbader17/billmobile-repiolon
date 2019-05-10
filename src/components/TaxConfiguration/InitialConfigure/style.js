@@ -1,106 +1,57 @@
 import { StyleSheet } from 'react-native';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { COLORS } from '../../../constants/colors';
 import { FONTS } from '../../../constants/fonts';
-import { METRICS } from '../../../constants/metrics';
+//import { METRICS } from '../../../constants/metrics';
 
 const styles = StyleSheet.create({
   container: {
-    width: METRICS.screenWidth,
-    height: METRICS.screenHeight,
-  },
-  container2: {
+    height: hp('100%'),
     alignItems: 'center',
-    paddingHorizontal: 45,
-    paddingTop: 15,
+    paddingVertical: 15,
+    paddingHorizontal: 18,
   },
-  textBoxBtnHolder: {
-    position: 'relative',
-    alignSelf: 'stretch',
-    justifyContent: 'center',
-    marginTop: 5,
+  boxText: {
+    flex: 1,
+    paddingVertical: 10
   },
-  textBox: {
+  boxButton: {
+    marginBottom: 15,
+  },
+  textTitle: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size18,
-    alignSelf: 'stretch',
-    height: 45,
-    paddingRight: 45,
-    paddingLeft: 8,
-    borderWidth: 1,
-    paddingVertical: 0,
-    borderColor: COLORS.gray,
-    borderRadius: 2,
+    color: COLORS.grayDark,
+    textAlign: 'center',
+    paddingHorizontal: 40,
   },
-  visibilityBtn: {
-    position: 'absolute',
-    right: 3,
-    height: 40,
-    width: 35,
-    padding: 5,
-  },
-  btnImage: {
-    resizeMode: 'contain',
-    height: '100%',
-    width: '100%',
-    opacity: 0.4,
+  textDescription: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size14,
+    color: COLORS.grayDark,
+    lineHeight: 20,
+    paddingVertical: 15,
   },
   submit: {
     backgroundColor: COLORS.red,
-    width: 266,
-    height: 40,
+    width: wp('60%'),
+    height: hp('7%'),
     borderRadius: 2,
     marginTop: 10
   },
   submitDisabled: {
-    backgroundColor: COLORS.redLight,
-    width: 266,
-    height: 40,
+    backgroundColor: COLORS.gray,
+    height: hp('7%'),
     borderRadius: 2,
   },
   submitText: {
-    fontFamily: FONTS.latoRegular,
+    fontFamily: FONTS.latoSemiBold,
     fontSize: FONTS.size14,
     color: COLORS.white,
   },
-  textRegister: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size14,
-    color: COLORS.grayDark,
-    paddingVertical: 15,
-    textAlign: 'center',
-  },
-  red: {
-    color: COLORS.red,
-  },
-  textFooterA: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size11,
-    color: COLORS.grayDark,
-    marginTop: 110,
-  },
-  textFooterB: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size11,
-    color: COLORS.grayDark,
-    fontWeight: 'bold',
-  },
   image: {
     width: 360,
-    height: 225
-  },
-  text: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size18,
-    textAlign: 'center',
-    lineHeight: 26,
-    padding: 10
-  },
-  text1: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size14,
-    lineHeight: 20,
-    paddingTop: 5,
-    paddingBottom: 5
+    height: 225,
   }
 });
 

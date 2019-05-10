@@ -31,7 +31,6 @@ const initialState = {
 
 function setCurrentInvoice({ draftState, invoice }) {
   const { invoice_date, invoice_type, total } = invoice.attributes;
-  console.log("invoice.", invoice);
   draftState.currentInvoice.id = invoice.id;
   draftState.currentInvoice.invoiceDate = new Date(invoice_date);
   draftState.currentInvoice.voucherType = invoice_type;
