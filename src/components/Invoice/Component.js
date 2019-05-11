@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Modal, TextInput, TouchableOpacity, ScrollView, TouchableWithoutFeedback, Alert, ImageBackground} from 'react-native';
+import { View, Text, Modal, TouchableOpacity, ScrollView, TouchableWithoutFeedback, ImageBackground} from 'react-native';
 import { Button } from "react-native-elements";
 import { withNavigation } from 'react-navigation';
 import DateTimePicker from 'react-native-modal-datetime-picker';
@@ -8,6 +8,7 @@ import InvoiceItems from './InvoiceItems';
 import InvoiceCustomer from './InvoiceCustomer';
 import style from './style';
 import { VOUCHER_TYPES } from '../../constants/invoice';
+import { validateData } from '../../utils/validations';
 
 class Invoice extends React.Component {
 
@@ -28,14 +29,16 @@ class Invoice extends React.Component {
     }
   }
 
-  setModalVisible(visible) {
-    this.setState({modalVisible: visible});
-  }
-
+  setModalVisible = visible => this.setState({modalVisible: visible});
   showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true});
-
   hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
-
+  setFcIndentification = value => this.setState({ fcIndentification: value });
+  setLoading = (bool) => this.setState({ loading: bool });
+  changeTypeCustomer = () => this.setState({cf:true});
+  navigateClient = () => this.props.navigation.navigate('NewInvoiceCustomer');
+  navigateAddItems = () => this.props.navigation.navigate('NewInvoiceItem');
+  navigateToBewInvoice = () => this.props.navigation.navigate('InvoiceSummary');
+  
   updateInvoiceItemQuantity = (invoiceItemId, quantity) => {
     const { updateInvoiceItemQuantity } = this.props;
     updateInvoiceItemQuantity(invoiceItemId, quantity);
@@ -71,16 +74,9 @@ class Invoice extends React.Component {
     return VOUCHER_TYPES.find((v) => v.value === voucherType).label;
   }
 
-  navigateClient = () => {
-    this.props.navigation.navigate('NewInvoiceCustomer');
-  }
-
-  addItems = () => {
-    this.props.navigation.navigate('NewInvoiceItem');
-  }
-
-  navigateToBewInvoice = () => {
-    this.props.navigation.navigate('InvoiceSummary');
+  selectionVoucher = (voucherType) => {
+    this.setModalVisible(!this.state.modalVisible);
+    this.setState({voucherType: voucherType.value });
   }
 
   addFinalConsumer = () => {
@@ -97,25 +93,6 @@ class Invoice extends React.Component {
         this.setFcIndentification(''); //Para que al cargar otro cf el botton aparezca desabilitado.
       })
   }
-
-  setFcIndentification = (value) => {
-    this.setState({ fcIndentification: value });
-  }
-
-  selectionVoucher = (voucherType) => {
-    this.setModalVisible(!this.state.modalVisible);
-    this.setState({voucherType: voucherType.value });
-  }
-
-  changeTypeCustomer = () => {
-    this.setState({cf:true})
-  }
-
-  validateData = () => {
-    return ((this.props.fiscalIdentity.name!="") && (this.props.items.length!= 0));
-  }
-
-  setLoading = (bool) => this.setState({ loading: bool })
 
   renderViewItemsAdd = () => {
     if (this.props.items.length != 0) {
@@ -145,8 +122,10 @@ class Invoice extends React.Component {
   render() {
     const buttonCfEnable = style.buttonCfEnable;
     const buttonCfDisable = style.buttonCfDisable;
+    const iconAddCustomer = <Icon name="md-person-add" size={20} color="#EE6123" />
+    const styleImage = {width: '100%', height: '100%'}
     return(
-      <ImageBackground source={require('../../images/gradiant.png')} style={{width: '100%', height: '100%'}}>
+      <ImageBackground source={require('../../images/gradiant.png')} style={styleImage}>
       <ScrollView>
       <View style={style.container}>
         <View style={style.inLineSpaceBetween}>
@@ -194,22 +173,15 @@ class Invoice extends React.Component {
               TouchableComponent={TouchableWithoutFeedback}
             />
             <Button
-              icon={
-                <Icon
-                  name="md-person-add"
-                  size={20}
-                  color="#EE6123"
-                />
-              }
+              icon={iconAddCustomer}
               onPress={ this.navigateClient }
               buttonStyle={style.buttonAddCustomer}
-
             />
           </View>
           <View style={[style.lineGray, style.marginHorizontal5]}></View>
-          { this.renderCustomer() }
+            { this.renderCustomer() }
           <View style={style.containerButtonShowAll}>
-            <View style={[style.lineGray, style.marginHorizontal5]}></View>
+          <View style={[style.lineGray, style.marginHorizontal5]}></View>
             <Button
               title='VER TODOS'
               buttonStyle = {style.buttonShowAll}
@@ -224,17 +196,9 @@ class Invoice extends React.Component {
               <Text style={style.textRegular14GrayDark}>AGREGAR </Text>
               <Text style={style.textRegular14GrayDarkBold}>ITEMS</Text>
             </Text>}
-          icon={
-            <View style={style.positionIconAdd}>
-            <Icon
-              name="md-add"
-              size={30}
-              color="#EE6123"
-            />
-            </View>
-          }
+          icon={<View style={style.positionIconAdd}><Icon name="md-add" size={30} color="#EE6123" /></View>}
           iconRight
-          onPress={ this.addItems }
+          onPress={ this.navigateAddItems }
           buttonStyle={ style.buttonAddItems }
           titleStyle={ style.textRegular14GrayDark }
         />
@@ -247,7 +211,7 @@ class Invoice extends React.Component {
             onPress={ this.navigateToBewInvoice }
             buttonStyle={ style.buttonContinue }
             titleStyle={ style.textSemiBold14White }
-            disabled={ !this.validateData() }
+            disabled={ !validateData(this.props.fiscalIdentity.name, this.props.items.length) }
             disabledStyle={ style.buttonContinueDisabled }
             disabledTitleStyle = { style.textSemiBold14White }
           />
