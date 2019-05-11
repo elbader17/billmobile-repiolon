@@ -4,16 +4,17 @@ import { Button } from "react-native-elements";
 import { withNavigation } from 'react-navigation';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import Icon from 'react-native-vector-icons/Ionicons';
+import InvoiceItems from './InvoiceItems';
+import InvoiceCustomer from './InvoiceCustomer';
 import style from './style';
 import { VOUCHER_TYPES } from '../../constants/invoice';
-import { RE_DNI } from '../../constants/regular_expressions';
 
 class Invoice extends React.Component {
 
   constructor(props) {
     super(props);
     const { fiscalIdentity, voucherType } = this.props;
-    fcIndentification = fiscalIdentity.name === 'fc' ? fiscalIdentity.cuit : ''
+    fcIndentification = fiscalIdentity.name === 'fc' ? '' : fiscalIdentity.cuit;
     this.state = {
       voucherType,
       cf: false,
@@ -35,6 +36,11 @@ class Invoice extends React.Component {
 
   hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
 
+  updateInvoiceItemQuantity = (invoiceItemId, quantity) => {
+    const { updateInvoiceItemQuantity } = this.props;
+    updateInvoiceItemQuantity(invoiceItemId, quantity);
+  }
+  
   handleDatePicked = (date) => {
     this.setState({ invoiceDate: date });
     this.hideDateTimePicker();
@@ -92,11 +98,6 @@ class Invoice extends React.Component {
       })
   }
 
-  updateInvoiceItemQuantity = (invoiceItemId, quantity) => {
-    const { updateInvoiceItemQuantity } = this.props;
-    updateInvoiceItemQuantity(invoiceItemId, quantity);
-  }
-
   setFcIndentification = (value) => {
     this.setState({ fcIndentification: value });
   }
@@ -110,16 +111,8 @@ class Invoice extends React.Component {
     this.setState({cf:true})
   }
 
-  selectCustomer() {
-    this.setState({selectCustomer:!this.state.selectCustomer})
-  }
-
   validateData = () => {
     return ((this.props.fiscalIdentity.name!="") && (this.props.items.length!= 0));
-  }
-
-  validateDni = () => {
-    return RE_DNI.test(this.state.fcIndentification);
   }
 
   setLoading = (bool) => this.setState({ loading: bool })
@@ -127,119 +120,26 @@ class Invoice extends React.Component {
   renderViewItemsAdd = () => {
     if (this.props.items.length != 0) {
       return (
-        <View style={[style.containerItemsInvoice,style.inColumnSpaceBetween]}>
-          <View style={style.boxItemsInvoice}>
-          <ScrollView>
-            <View style={style.listItems}>
-              {this.props.items.map((item, index) => (
-              <View key={index}>
-                <View style={[style.lineGrayLight, style.marginVertical5]}></View>
-                <View style={style.inLineSpaceBetween}>
-                  <View style={style.boxItems1}>
-                    <Text style={style.textRegular16GrayDark}>
-                      {item.name}
-                    </Text>
-                  </View>
-                  <View style={[style.inLineSpaceBetween,style.boxItems2]}>
-                    <TouchableOpacity
-                      onPress={() => this.updateInvoiceItemQuantity(item.id, item.quantity + 1)}
-                      style={style.buttonCantProduct}
-                    >
-                      <Text style={style.textRegular12RedkBold}>
-                        {`x${item.quantity}`}
-                      </Text>
-                    </TouchableOpacity>
-                  </View>
-                  <View style={style.boxItems3}>
-                    <Text style={style.textRegular16GrayDark}>
-                      ${item.price}
-                    </Text>
-                  </View>
-                </View>
-              </View>
-              ))}
-            </View>
-          </ScrollView>
-          </View>
-
-          <View style={style.boxItemsInvoiceTotal}>
-            <View style={style.center}>
-              <View style={[style.lineGray, {bottom: 6}]}></View>
-              <View style={style.inLineSpaceBetween}>
-                <Text style={style.textRegular16GrayDarkBold}>TOTAL</Text>
-                <Text style={style.textRegular16GrayDarkBold}>${this.props.invoiceTotal}</Text>
-              </View>
-            </View>
-          </View>
-        </View>
+        <InvoiceItems
+          items={this.props.items}
+          total={this.props.invoiceTotal} 
+          onPress={this.updateInvoiceItemQuantity} 
+        />
       );
     }
   }
 
   renderCustomer = () => {
-    const iconEnabled = <Icon name="md-return-right" size={18} color="#EE6123"/>;
-    const iconDisabled = <Icon name="md-return-right" size={18} color="#858585"/>;
-    if (!this.state.cf) {
-      return (
-        <ScrollView>
-          <View style={style.listCustomer}>
-            {this.renderListCustomers()}
-          </View>
-        </ScrollView>
-      );
-    }else {
-      return (
-        <View style={style.containerFinalConsumer}>
-          <View style={[style.inLineSpaceBetween, {alignItems: 'center'}]}>
-            <TextInput
-              placeholder="DNI"
-              placeholderTextColor={'#cecece'}
-              onChangeText={this.setFcIndentification}
-              style={[style.textRegular18GrayDark,style.inputDNICustomer]}
-              keyboardType='numeric'
-            />
-            <Button
-              icon={ this.validateDni() ? iconEnabled : iconDisabled  }
-              onPress={ this.addFinalConsumer }
-              buttonStyle={ style.buttonCheck }
-              disabledStyle= { style.buttonCheckDisabled }
-              loading = {this.state.loading}
-              disabled = { this.state.loading || !this.validateDni() }
-            />
-          </View>
-        </View>
-      );
-    }
-  }
-
-  renderListCustomers = () => {
-    if (this.props.fiscalIdentity.name!='') {
-      return(
-        <View style={style.inLineSpaceBetween}>
-        <Text style={[style.textRegular14GrayDark,{padding: 2}]}>
-          {this.props.fiscalIdentity.name === 'fc' ? this.props.fiscalIdentity.identification : this.props.fiscalIdentity.name}
-        </Text>
-        <Button
-          icon={
-            <Icon
-              name="md-checkmark"
-              size={20}
-              color="#EE6123"
-            />
-          }
-          onPress={() => {this.selectCustomer()} }
-          buttonStyle={style.buttonCheek}
-          //buttonStyle={ this.state.selectCustomer ? style.buttonCheckCustomerEnabled : style.buttonCheckCustomerDisabled }
-        />
-        </View>
-      );
-    } else {
-        return(
-          <Text style={[style.textRegular14Gray,{padding: 3}]}>
-            No hay Clientes Cargados
-          </Text>
-       );
-      }
+    return(
+      <InvoiceCustomer 
+        finalConsumer={this.state.cf}
+        setFinalConsumer={this.setFcIndentification}
+        addFinalConsumer={this.addFinalConsumer}
+        loading={this.state.loading}
+        identity={this.state.fcIndentification}
+        fiscalIdentity={this.props.fiscalIdentity}
+      />
+    );
   }
 
   render() {

@@ -24,6 +24,12 @@ class NewCustomer extends React.Component {
     }
   }
 
+  static navigationOptions = {
+    title: 'NUEVO CLIENTE',
+    headerTitleStyle: style.headerText,
+    headerTintColor: COLORS.blue,
+  };
+
   newCustomer = () => {
     const { name, category, identification } = this.state;
     const {
@@ -46,12 +52,6 @@ class NewCustomer extends React.Component {
     const { identification } = this.state;
     return validateCuit(identification);
   }
-
-  static navigationOptions = {
-    title: 'NUEVO CLIENTE',
-    headerTitleStyle: style.headerText,
-    headerTintColor: '#3687D1',
-  };
 
   setName = (value) => this.setState({ name: value})
   setIdentification = (value) => this.setState({ identification: value })
@@ -121,6 +121,5 @@ class NewCustomer extends React.Component {
     )
   }
 }
-
 
 export default withNavigation(NewCustomer);
