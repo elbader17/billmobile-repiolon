@@ -48,11 +48,6 @@ class NewCustomer extends React.Component {
       });
   }
 
-  validateData = () => {
-    const { identification } = this.state;
-    return validateCuit(identification);
-  }
-
   setName = (value) => this.setState({ name: value})
   setIdentification = (value) => this.setState({ identification: value })
   setLoading = (bool) => this.setState({ loading: bool })
@@ -114,7 +109,7 @@ class NewCustomer extends React.Component {
         titleStyle={ style.textRegular14WhiteBold }
         disabledStyle= { style.buttonSaveDisabled }
         disabledTitleStyle = { style.textRegular14WhiteBold }
-        disabled={!this.validateData() }
+        disabled={!validateCuit(this.state.identification) }
         loading = {this.state.loading}
       />
       </KeyboardAvoidingView>
