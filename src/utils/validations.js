@@ -5,8 +5,8 @@ export const validateDni = (dni) => {
   return RE_DNI.test(dni);
 }
 
+//Condiciones Necesarias para Agregar un nuevo Item
 export const validateAddItem = (product, service, price) => {
-  alert('product: '+ product + '- service: '+ service + '- price: '+ price);
   if((product!="" || service!="") && (price!="" || NUMBER.test(price)))
     return true;
   else
