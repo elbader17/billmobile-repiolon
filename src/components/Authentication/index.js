@@ -10,10 +10,6 @@ class Authentication extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
-      password: '',
-      name:'',
-      confirmPassword: '',
       selectedSignUp: false, 
     };
   }
@@ -49,12 +45,14 @@ class Authentication extends React.Component {
             <View style={style.inLine}>
               <Button
                 title='REGISTRAR'
+                testID='register'
                 onPress={() => this.setState({selectedSignUp: true})}
                 buttonStyle={ this.state.selectedSignUp ? buttonOn[0] : buttonOff[0] }
                 titleStyle={ this.state.selectedSignUp ? buttonOn[1] : buttonOff[1] }
               />
               <Button
                 title='INICIAR SESIÓN'
+                testID='signin'
                 onPress={() => this.setState({selectedSignUp: false})}
                 buttonStyle={ this.state.selectedSignUp ? buttonOff[0] : buttonOn[0] }
                 titleStyle={ this.state.selectedSignUp ? buttonOff[1] : buttonOn[1] }

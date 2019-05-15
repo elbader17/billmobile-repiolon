@@ -1,19 +1,22 @@
 import React from 'react';
-import { View, Text, Modal, TextInput, TouchableOpacity, Image, Alert } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
 import { Button } from "react-native-elements";
 import { withNavigation } from 'react-navigation';
 import { COLORS } from '../../../constants/colors';
+import { 
+  showMessageEmailFormat, 
+  showMessagePassFormat, 
+  showMessageMatchPass 
+} from '../../../utils/showMessage';
+import { validateDataSignUp } from '../../../utils/validations';
 import style from './style';
-
-const EMAIL_REGEXP = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
-const PASSWORD_REGEXP = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
 
 class SignUp extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      email: '@mozej.com',
+      email: 'nnn@mozej.com',
       password: '@Martin44',
       name:'Martin',
       confirmPassword: '@Martin44',
@@ -27,12 +30,8 @@ class SignUp extends React.Component {
     };
   }
 
-  managePasswordVisibility = () => {
-    this.setState({ hidePassword: !this.state.hidePassword });
-  }
-  manageConfirmPasswordVisibility = () => {
-    this.setState({ hideConfirmPassword: !this.state.hideConfirmPassword });
-  }
+  managePasswordVisibility = () => this.setState({ hidePassword: !this.state.hidePassword });
+  manageConfirmPasswordVisibility = () => this.setState({ hideConfirmPassword: !this.state.hideConfirmPassword });
 
   handleSignUp = () => {
     const { name, email, password } = this.state;
@@ -55,57 +54,6 @@ class SignUp extends React.Component {
     .catch(() => {
       this.props.navigation.navigate('ConfirmationCodeRegister', { email: this.state.email });
     })
-  }
-
-  
-
-  validatePass = () => {
-    const isValidPassword = PASSWORD_REGEXP.test(this.state.password);
-    return isValidPassword;
-  }
-
-  validateEmail = () => {
-    const isValidEmail = EMAIL_REGEXP.test(this.state.email);
-    return isValidEmail;
-  }
-
-  validateConfirmPass = () => {
-    const matchPass = this.state.password === this.state.confirmPassword;
-    return matchPass;
-  }
-
-  validateData = () => {
-    return (this.validatePass() && this.validateConfirmPass() && this.validateEmail() && this.state.name!='');
-  }
-
-  showMessagePassFormat = () => {
-    if (this.state.messagePassFormat) {
-      return(
-        <Text style={this.validatePass() ? style.textFormatPassValid : style.textFormatPass }>
-          Debe contener al menos: 8 Caracteres, 1 Mayúscula, 1 Número y 1 Caracter Especial
-        </Text>
-      )
-    }
-  }
-
-  showMessageEmailFormat = () => {
-    if (this.state.messageEmailFormat) {
-      return(
-        <Text style={this.validateEmail() ? style.textFormatEmailValid : style.textFormatEmail }>
-          Nombre@Dominio.xxx
-        </Text>
-      )
-    }
-  }
-
-  showMessageMatchPass = () => {
-    if (this.state.messageMatchPass) {
-      return(
-        <Text style={this.validateConfirmPass() ? style.textConfirmPassValid : style.textConfirmPass }>
-          Contraseñas coincidentes
-        </Text>
-      )  
-    }
   }
 
   setName = (value) => this.setState({ name: value})
@@ -131,7 +79,7 @@ class SignUp extends React.Component {
             />
           </View>
           <View style={ style.textBoxBtnHolder }>
-            {this.showMessageEmailFormat()}
+            {showMessageEmailFormat(this.state.messageEmailFormat, this.state.email)}
             <TextInput
               label="Email"
               value={ this.state.email }
@@ -149,7 +97,7 @@ class SignUp extends React.Component {
             />
           </View>
           <View style={ style.textBoxBtnHolder }>
-            {this.showMessagePassFormat()}
+            {showMessagePassFormat(this.state.messagePassFormat, this.state.password)}
             <View>
             <View style={style.inputPass}>
             <TextInput
@@ -179,7 +127,7 @@ class SignUp extends React.Component {
           </View>
           <View style={ style.textBoxBtnHolder }>
             <View>
-            {this.showMessageMatchPass()}
+            {showMessageMatchPass(this.state.messageMatchPass, this.state.password, this.state.confirmPassword)}
             <View style={style.inputPass}>
               <TextInput
                 label="ConfirmPassword"
@@ -221,7 +169,7 @@ class SignUp extends React.Component {
             titleStyle={ style.textRegular14WhiteBold }
             disabledTitleStyle={ style.textRegular14WhiteBold}
             disabledStyle={ style.submitDisabled }
-            disabled={ !this.validateData() }
+            disabled={ validateDataSignUp(this.state.password, this.state.confirmPassword, this.state.email, this.state.name) }
             loading = {this.state.loading}
           />
         </View>

@@ -1,7 +1,6 @@
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import SignUp from './Component';
 import { signUp } from '../../../app/authentication/actions';
-import { confirmCode } from '../../../app/authentication/actions';
 
 const mapStateToProps = state => ({
   showConfirmationModal: state.authentication.showConfirmationModal,

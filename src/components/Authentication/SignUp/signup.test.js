@@ -2,11 +2,9 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import SignUp from './Component';
 
-describe('Rendering Component SigUp', () => {
-  it('renders correctly SignUp', () => {
-    const component = shallow(<SignUp />);
-    expect(component).toMatchSnapshot();
-  })
+test('render correctly component SigUp', () => {
+  const component = shallow(<SignUp />);
+  expect(component).toMatchSnapshot();
 });
 
 describe('Rendering Component and call handeleSigUp', () => {

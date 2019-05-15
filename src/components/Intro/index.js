@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import { withNavigation } from 'react-navigation';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import {SLIDES_INTRO} from '../../constants/slides_intro';
 import style from './style';
@@ -42,4 +41,4 @@ class Intro extends React.Component {
   }
 }
 
-export default withNavigation(Intro);
+export default Intro;

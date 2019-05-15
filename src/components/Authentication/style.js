@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { COLORS } from '../../constants/colors';
 import { FONTS } from '../../constants/fonts';
@@ -7,7 +7,6 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: 'transparent',
     height: hp('100%'),
-    //width: Dimensions.get('window').width,
   },
   containerHeader: {
     paddingVertical: 40,
