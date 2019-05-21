@@ -17,12 +17,6 @@ class Confirmation extends React.Component {
     };
   }
 
-  static navigationOptions = {
-    title: 'VERIFICAR CUENTA',
-    headerTitleStyle: style.headerText,
-    headerTintColor: '#3687D1',
-  };
-
   handleConfirmationCode = () => {
     const { confirmationEmail, confirmationCode } = this.state;
     const { confirmCode } = this.props;
@@ -37,10 +31,7 @@ class Confirmation extends React.Component {
     });
   }
 
-  validateData = () => {
-    return CODE_CONFIRM.test(this.state.confirmationCode)
-  }
-
+  validateData = () => { return CODE_CONFIRM.test(this.state.confirmationCode) }
   setLoading = (bool) => this.setState({ loading: bool })
 
   render() {

@@ -1,42 +1,126 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import SignUp from './Component';
+import SignUp  from './Component';
 
-test('render correctly component SigUp', () => {
+const promise = Promise.resolve(0);
+const signUpMock = jest.fn(() => promise);
+
+test('render correctly component SignUp', () => {
   const component = shallow(<SignUp />);
   expect(component).toMatchSnapshot();
 });
 
-describe('Rendering Component and call handeleSigUp', () => {
-  it('call the handleSignUp', () => {
-    const clickFn = jest.fn();
-    const wrapper = shallow(<SignUp  signUp={clickFn} />);
-    const button = wrapper.findWhere(node => node.prop('testID') === 'submitSignUp');
-    button.simulate('press');
-    expect(clickFn).toBeCalled();
-  })
+test('call the handleSignUp function', () => {
+  const component = shallow(<SignUp signUp={signUpMock} />);
+  const button = component.findWhere(node => node.prop('testID') === 'submitSignUp');
+  button.simulate('press');
+  expect(signUpMock).toBeCalled();
 });
 
-describe('Test to validate data of form ',() => {
-  it('Test Password with atributes disabled true, initial state', () => {
-    const clickFn = jest.fn();
-    const wrapper = shallow(<SignUp signUp={clickFn} />);
-    const button = wrapper.findWhere(node => node.prop('testID') === 'submitSignUp');
-    expect(button.props().disabled).toEqual(true);
+/* FALLA - DATOS POR DEFAULT PARA NO COMPLETAR CONSTANTEMENTE (CAMBIAR)
+test('initial state with the correct values', () => {
+  const initialState = {
+    email: '',
+    password: '',
+    name:'',
+    confirmPassword: '',
+    hidePassword: true,
+    hideConfirmPassword: true,
+    messagePassFormat: false,
+    messageEmailFormat: false,
+    messageMatchPass: false,
+    loading: false
+  };
+  const component = shallow(<SignUp />);
+  const state = component.instance().state;
+  expect(state).toEqual(initialState);
+});*/
+
+describe('button CREAR CUENTA', () => {
+  test('button initially disabled', () => {
+    const component = shallow(<SignUp signUp={signUpMock} />);
+    const button = component.findWhere(node => node.prop('testID') === 'submitSignUp');
+    button.simulate('press');
+    expect(button.props().disabled).toBe(true);
+  });
   
-  })
-  it('Test Password with atributes disabled true', () => {
-   const wrapper = shallow(<SignUp />);
-    wrapper.setState({ password: 'agustin.com' });
-    wrapper.setState({ email: 'agus' });
-    const button = wrapper.findWhere(node => node.prop('testID') === 'submitSignUp');
-    expect(button.props().disabled).toEqual(true);
-  })
-  it('Test Password with atributes disabled false', () => {
-    const wrapper = shallow(<SignUp />);
-    wrapper.setState({ email: 'agustin@gmail.com' });
-    wrapper.setState({ password: '@Am1234-' });
-    const button = wrapper.findWhere(node => node.prop('testID') === 'submitSignUp');
-    expect(button.props().disabled).toEqual(false);
-   })
+  test('button enabled with the correct data', () => {
+    const component = shallow(<SignUp signUp={signUpMock} />);
+    component.setState({ 
+      email: 'martin@gmail.com',
+      password: '@Martin55',
+      name: 'Martin',
+      confirmPassword: '@Martin55'
+    });
+    const button = component.findWhere(node => node.prop('testID') === 'submitSignUp');
+    expect(button.props().disabled).toBe(false);
+  });
+  
+  test('button disabled with email incorrect', () => {
+    const component = shallow(<SignUp signUp={signUpMock} />);
+    component.setState({ 
+      email: 'martingmail.com',
+      password: '@Martin55',
+      name: 'Martin',
+      confirmPassword: '@Martin55'
+    });
+    const button = component.findWhere(node => node.prop('testID') === 'submitSignUp');
+    expect(button.props().disabled).toBe(true);
+  });
+  
+  test('button disabled with password incorrect', () => {
+    const component = shallow(<SignUp signUp={signUpMock} />);
+    component.setState({ 
+      email: 'martin@gmail.com',
+      password: '@Martin',
+      name: 'Martin',
+      confirmPassword: '@Martin55'
+    });
+    const button = component.findWhere(node => node.prop('testID') === 'submitSignUp');
+    expect(button.props().disabled).toBe(true);
+  });
+  
+  test('button disabled with confirmPassword incorrect', () => {
+    const component = shallow(<SignUp signUp={signUpMock} />);
+    component.setState({ 
+      email: 'martin@gmail.com',
+      password: '@Martin55',
+      name: 'Martin',
+      confirmPassword: '@Martin'
+    });
+    const button = component.findWhere(node => node.prop('testID') === 'submitSignUp');
+    expect(button.props().disabled).toBe(true);
+  });
+  
+  test('button disabled with password and confirmPassword no match', () => {
+    const component = shallow(<SignUp signUp={signUpMock} />);
+    component.setState({ 
+      email: 'martin@gmail.com',
+      password: '@Martin55',
+      name: 'Martin',
+      confirmPassword: '@Martin556'
+    });
+    const button = component.findWhere(node => node.prop('testID') === 'submitSignUp');
+    expect(button.props().disabled).toBe(true);
+  });
+  
+  test('button disabled with name empty', () => {
+    const component = shallow(<SignUp signUp={signUpMock} />);
+    component.setState({ 
+      email: 'martingmail.com',
+      password: '@Martin55',
+      name: '',
+      confirmPassword: '@Martin55'
+    });
+    const button = component.findWhere(node => node.prop('testID') === 'submitSignUp');
+    expect(button.props().disabled).toBe(true);
+  });
+  
+  test('button loading after press', () => {
+    const component = shallow(<SignUp signUp={signUpMock} />);
+    const button = component.findWhere(node => node.prop('testID') === 'submitSignUp');
+    button.simulate('press');
+    expect(component.instance().state.loading).toBe(true);
+  });
+  
 });

@@ -18,13 +18,13 @@ class Authentication extends React.Component {
     if (this.state.selectedSignUp) {
       return (
         <View>
-          <Signup/>
+          <Signup navigation={this.props.navigation} />
         </View>
       );
     }else {
       return (
         <View>
-          <Signin/>
+          <Signin navigation={this.props.navigation} />
         </View>
       );
     }

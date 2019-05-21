@@ -43,15 +43,15 @@
   },
   "devDependencies": {
     "babel-core": "^7.0.0-bridge.0",
-    "babel-jest": "^24.7.1",
+    "babel-jest": "^24.8.0",
     "babel-polyfill": "^6.26.0",
     "enzyme": "^3.9.0",
-    "enzyme-adapter-react-16": "^1.11.2",
+    "enzyme-adapter-react-16": "^1.13.0",
     "enzyme-to-json": "^3.3.5",
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.16.0",
-    "jest": "^24.7.1",
+    "jest": "^24.8.0",
     "jest-cli": "^24.7.1",
     "jsdom": "13.2.0",
     "jsdom-global": "3.0.2",
@@ -67,9 +67,16 @@
   },
   "jest": {
     "preset": "react-native",
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
     "setupFilesAfterEnv": [
       "<rootDir>setup-tests.js"
-    ]
+    ],
+    "transformIgnorePatterns": [
+      "node_modules/(?!((jest-)?react-native|react-navigation|@react-navigation/.*))"
+    ],
+    "testEnvironment": "jsdom"
   },
   "description": "This will help you install and build your first React Native application.",
   "main": "index.js",

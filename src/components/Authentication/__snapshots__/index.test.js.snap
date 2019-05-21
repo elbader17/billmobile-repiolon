@@ -1,3 +1,153 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly component Authentication 1`] = `ShallowWrapper {}`;
+exports[`renders correctly component Authentication 1`] = `
+<ScrollViewMock>
+  <View
+    style={
+      Object {
+        "backgroundColor": "transparent",
+        "height": 1334,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#3687d1",
+          "paddingVertical": 40,
+        }
+      }
+    >
+      <Image
+        source={
+          Object {
+            "testUri": "../../../src/images/iconBill.png",
+          }
+        }
+        style={
+          Object {
+            "height": 99,
+            "width": 136,
+          }
+        }
+      />
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#fff",
+              "fontFamily": "Lato-Regular",
+              "fontSize": 14,
+              "lineHeight": 22,
+              "opacity": 0.9,
+              "textAlign": "center",
+            },
+            Object {
+              "paddingTop": 10,
+            },
+          ]
+        }
+      >
+        Hacé facturas electronicas rápido
+        .
+        
+
+        Y hacelo seguro
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+        }
+      }
+    >
+      <ForwardRef(Themed.Button)
+        buttonStyle={
+          Object {
+            "backgroundColor": "#3687d1",
+            "borderRadius": 0,
+            "borderWidth": 0,
+            "height": 93.5,
+            "width": 375,
+          }
+        }
+        onPress={[Function]}
+        testID="register"
+        title="REGISTRAR"
+        titleStyle={
+          Object {
+            "color": "#fff",
+            "fontFamily": "Lato-Semibold",
+            "fontSize": 12,
+            "textAlign": "center",
+          }
+        }
+      />
+      <ForwardRef(Themed.Button)
+        buttonStyle={
+          Object {
+            "backgroundColor": "#fff",
+            "borderRadius": 0,
+            "borderWidth": 0,
+            "height": 93.5,
+            "width": 375,
+          }
+        }
+        onPress={[Function]}
+        testID="signin"
+        title="INICIAR SESIÓN"
+        titleStyle={
+          Object {
+            "color": "#3687d1",
+            "fontFamily": "Lato-Semibold",
+            "fontSize": 12,
+            "textAlign": "center",
+          }
+        }
+      />
+    </View>
+    <View>
+      <Connect(SignIn) />
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "flex-end",
+          "paddingBottom": 10,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#858585",
+            "fontFamily": "Lato-Regular",
+            "fontSize": 11,
+            "textAlign": "center",
+          }
+        }
+      >
+        Al registrarte estas aceptando nuestros
+      </Text>
+      <Text
+        style={
+          Object {
+            "color": "#858585",
+            "fontFamily": "Lato-Regular",
+            "fontSize": 11,
+            "fontWeight": "bold",
+            "textAlign": "center",
+          }
+        }
+      >
+        Términos y Condiciones y Políticas de Privacidad
+      </Text>
+    </View>
+  </View>
+</ScrollViewMock>
+`;

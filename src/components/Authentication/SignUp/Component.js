@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
 import { Button } from "react-native-elements";
-import { withNavigation } from 'react-navigation';
 import { COLORS } from '../../../constants/colors';
 import { 
   showMessageEmailFormat, 
@@ -16,11 +15,10 @@ class SignUp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: 'nnn@mozej.com',
+      email: '@mozej.com',
       password: '@Martin44',
-      name:'Martin',
+      name:'martin',
       confirmPassword: '@Martin44',
-      confirmationEmail:'',
       hidePassword: true,
       hideConfirmPassword: true,
       messagePassFormat: false,
@@ -162,14 +160,14 @@ class SignUp extends React.Component {
           
           <Button
             title='CREAR CUENTA'
-            testID={ 'submitSignUp' }
+            testID='submitSignUp'
             onPress={ this.handleSignUp }
             value={this.state.email}
             buttonStyle={ style.submit }
             titleStyle={ style.textRegular14WhiteBold }
             disabledTitleStyle={ style.textRegular14WhiteBold}
             disabledStyle={ style.submitDisabled }
-            disabled={ validateDataSignUp(this.state.password, this.state.confirmPassword, this.state.email, this.state.name) }
+            disabled={ !validateDataSignUp(this.state.password, this.state.confirmPassword, this.state.email, this.state.name)}
             loading = {this.state.loading}
           />
         </View>
@@ -179,4 +177,4 @@ class SignUp extends React.Component {
   }
 }
 
-export default withNavigation(SignUp);
+export default SignUp;

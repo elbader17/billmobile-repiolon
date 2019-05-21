@@ -24,7 +24,8 @@ export const validateConfirmPass = (pass, confirmPass) => {
 
 //Condiciones Necesarias para Registrarse
 export const validateDataSignUp = (pass, confirmPass, email, name) => {
-  return (validatePass(pass) && validateConfirmPass(confirmPass) && validateEmail(email) && name!='');
+  const bool = (validatePass(pass) && validateConfirmPass(pass,confirmPass) && validateEmail(email) && name!='');
+  return bool;
 }
 
 //Condiciones Necesarias para Agregar un nuevo Item

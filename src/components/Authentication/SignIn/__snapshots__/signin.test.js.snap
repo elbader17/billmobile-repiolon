@@ -1,0 +1,185 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render correctly component SignIn 1`] = `
+<View
+  style={
+    Object {
+      "paddingHorizontal": 30,
+      "paddingVertical": 20,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignSelf": "stretch",
+          "justifyContent": "center",
+          "marginTop": 5,
+          "position": "relative",
+        }
+      }
+    >
+      <TextInput
+        allowFontScaling={true}
+        keyboardType="email-address"
+        label="Email"
+        onChangeText={[Function]}
+        placeholder="Tu email"
+        rejectResponderTermination={true}
+        style={
+          Object {
+            "alignSelf": "stretch",
+            "borderColor": "#C4C4C4",
+            "borderRadius": 2,
+            "borderWidth": 1,
+            "color": "#858585",
+            "fontFamily": "Lato-Regular",
+            "fontSize": 18,
+            "height": 45,
+            "paddingLeft": 8,
+            "paddingRight": 45,
+            "paddingVertical": 0,
+          }
+        }
+        underlineColorAndroid="transparent"
+        value="@mozej.com"
+      />
+    </View>
+    <View
+      style={
+        Object {
+          "alignSelf": "stretch",
+          "justifyContent": "center",
+          "marginTop": 5,
+          "position": "relative",
+        }
+      }
+    >
+      <TextInput
+        allowFontScaling={true}
+        label="Password"
+        onChangeText={[Function]}
+        placeholder="Contraseña"
+        rejectResponderTermination={true}
+        secureTextEntry={true}
+        style={
+          Object {
+            "alignSelf": "stretch",
+            "borderColor": "#C4C4C4",
+            "borderRadius": 2,
+            "borderWidth": 1,
+            "color": "#858585",
+            "fontFamily": "Lato-Regular",
+            "fontSize": 18,
+            "height": 45,
+            "paddingLeft": 8,
+            "paddingRight": 45,
+            "paddingVertical": 0,
+          }
+        }
+        underlineColorAndroid="transparent"
+        value="@Martin44"
+      />
+      <TouchableOpacity
+        activeOpacity={0.8}
+        onPress={[Function]}
+        style={
+          Object {
+            "height": 40,
+            "marginTop": 2,
+            "padding": 6,
+            "position": "absolute",
+            "right": 3,
+            "width": 35,
+          }
+        }
+      >
+        <Image
+          source={
+            Object {
+              "testUri": "../../../src/images/hide.png",
+            }
+          }
+          style={
+            Object {
+              "height": "100%",
+              "opacity": 0.4,
+              "resizeMode": "contain",
+              "width": "100%",
+            }
+          }
+        />
+      </TouchableOpacity>
+    </View>
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#858585",
+            "fontFamily": "Lato-Regular",
+            "fontSize": 11,
+          },
+          Object {
+            "paddingVertical": 15,
+          },
+        ]
+      }
+    >
+      ¿No tienes una cuenta?
+      <Text
+        style={
+          Object {
+            "color": "#EE6123",
+          }
+        }
+      >
+         Registrate
+      </Text>
+    </Text>
+    <ForwardRef(Themed.Button)
+      buttonStyle={
+        Object {
+          "backgroundColor": "#EE6123",
+          "borderRadius": 2,
+          "height": 93.5,
+          "width": 600,
+        }
+      }
+      disabled={true}
+      disabledStyle={
+        Object {
+          "backgroundColor": "#C4C4C4",
+          "borderRadius": 2,
+          "height": 93.5,
+          "width": 600,
+        }
+      }
+      disabledTitleStyle={
+        Object {
+          "color": "#fff",
+          "fontFamily": "Lato-Semibold",
+          "fontSize": 14,
+        }
+      }
+      loading={false}
+      onPress={[Function]}
+      testID="submitSignIn"
+      title="ENTRAR"
+      titleStyle={
+        Object {
+          "color": "#fff",
+          "fontFamily": "Lato-Semibold",
+          "fontSize": 14,
+        }
+      }
+    />
+  </View>
+</View>
+`;
