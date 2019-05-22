@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, Alert, Picker, TextInput, ScrollView, KeyboardAvoidingView } from 'react-native';
 import { Button } from "react-native-elements";
-import { withNavigation } from 'react-navigation';
 import { CONDITION_IVA } from '../../constants/fiscal_identity';
 import { METRICS } from '../../constants/metrics';
 import { COLORS } from '../../constants/colors';
@@ -103,6 +102,7 @@ class NewCustomer extends React.Component {
       <Button
         onPress={this.newCustomer}
         title='GUARDAR'
+        testID='buttonNewCustomer'
         buttonStyle={ style.buttonSave }
         titleStyle={ style.textRegular14WhiteBold }
         disabledStyle= { style.buttonSaveDisabled }
@@ -115,4 +115,4 @@ class NewCustomer extends React.Component {
   }
 }
 
-export default withNavigation(NewCustomer);
+export default NewCustomer;
