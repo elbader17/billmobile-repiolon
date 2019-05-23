@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, Modal, TouchableOpacity, ScrollView, TouchableWithoutFeedback, ImageBackground} from 'react-native';
 import { Button } from "react-native-elements";
-import { withNavigation } from 'react-navigation';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import Icon from 'react-native-vector-icons/Ionicons';
 import InvoiceItems from './InvoiceItems';
@@ -9,6 +8,7 @@ import InvoiceCustomer from './InvoiceCustomer';
 import style from './style';
 import { VOUCHER_TYPES } from '../../constants/invoice';
 import { validateData } from '../../utils/validations';
+import { presentInvoiceDate } from '../../utils/date';
 
 class Invoice extends React.Component {
 
@@ -63,11 +63,6 @@ class Invoice extends React.Component {
       createInvoice(invoiceDate, voucherType);
     }
   };
-
-  presentInvoiceDate = () => {
-    const d = this.state.invoiceDate;
-    return `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
-  }
 
   presentVoucherType = () => {
     const { voucherType } = this.state;
@@ -142,7 +137,7 @@ class Invoice extends React.Component {
           <View style={style.boxDate}>
             <TouchableOpacity onPress={this.showDateTimePicker} style={style.buttonDate}>
               <Text style={style.textRegular16WhiteCenter}>
-                {this.presentInvoiceDate()}
+                {presentInvoiceDate(this.state.invoiceDate)}
               </Text>
             </TouchableOpacity>
             <DateTimePicker
@@ -158,12 +153,14 @@ class Invoice extends React.Component {
           <View style={[style.inLineSpaceBetween,style.margin7]}>
             <Button
               title='CONSUMIDOR FINAL'
+              testID='cf'
               onPress={this.changeTypeCustomer}
               buttonStyle = {this.state.cf ? buttonCfEnable : buttonCfDisable}
               titleStyle={style.textRegular11GrayDark}
             />
             <Button
               title='Cancelar'
+              testID='cancel'
               onPress={() => this.setState({cf: false})}
               buttonStyle={style.buttonCancel}
               titleStyle={style.textRegular12Gray}
@@ -173,6 +170,7 @@ class Invoice extends React.Component {
               TouchableComponent={TouchableWithoutFeedback}
             />
             <Button
+              testID='addCustomer'
               icon={iconAddCustomer}
               onPress={ this.navigateClient }
               buttonStyle={style.buttonAddCustomer}
@@ -191,6 +189,7 @@ class Invoice extends React.Component {
         </View>
 
         <Button
+          testID='addItems'
           title={
             <Text>
               <Text style={style.textRegular14GrayDark}>AGREGAR </Text>
@@ -208,6 +207,7 @@ class Invoice extends React.Component {
         <View style={style.positionFinalButton}>
           <Button
             title='CONTINUAR'
+            testID='continue'
             onPress={ this.navigateToBewInvoice }
             buttonStyle={ style.buttonContinue }
             titleStyle={ style.textSemiBold14White }
@@ -252,4 +252,4 @@ class Invoice extends React.Component {
   }
 }
 
-export default withNavigation(Invoice);
+export default Invoice;

@@ -32,6 +32,7 @@ const InvoiceCustomer = props => {
             keyboardType='numeric'
           />
           <Button
+            testID='addfc'
             icon={ validateDni(props.identity) ? iconEnabled : iconDisabled  }
             onPress={ props.addFinalConsumer }
             buttonStyle={ style.buttonCheck }

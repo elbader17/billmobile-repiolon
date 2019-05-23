@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, Text, ScrollView } from 'react-native';
-import { Button} from "react-native-elements";
-import { withNavigation } from 'react-navigation';
+import { Button } from "react-native-elements";
 import style from './style';
+import { presentInvoiceDate } from '../../../utils/date';
 
 class InvoiceSummary extends React.Component {
 
@@ -27,11 +27,6 @@ class InvoiceSummary extends React.Component {
   }
 
   setImpuesto = (value) => this.setState({ impuesto: value})
-
-  presentInvoiceDate = () => {
-    const d = this.props.invoiceDate;
-    return `${d.getDate() + 1}/${d.getMonth() + 1}/${d.getFullYear()}`;
-  }
 
   validateData = () => {
     return ((this.props.fiscalIdentity.name!="") && (this.props.items!=null));
@@ -69,7 +64,7 @@ class InvoiceSummary extends React.Component {
           
           <View style={[style.boxHeaderInvoice, style.inLineSpaceBetween]}>
             <Text style={style.textRegular14}>{"FACTURA-C"}</Text>
-            <Text style={style.textRegular14}>{this.presentInvoiceDate()}</Text>
+            <Text style={style.textRegular14}>{presentInvoiceDate(this.props.invoiceDate)}</Text>
           </View>
 
           <View style={style.lineGray}></View>
@@ -148,6 +143,7 @@ class InvoiceSummary extends React.Component {
           <View style={[style.boxTotalFinal,style.inLineSpaceBetween]}>
             <Button
               title='EDITAR'
+              testID='edit'
               onPress={ this.navigateToInvoice}
               buttonStyle={ style.buttonEdite }
               titleStyle={ style.textButtonEdite }
@@ -162,6 +158,7 @@ class InvoiceSummary extends React.Component {
         <View style={style.positionFinalButton}>
           <Button
             title='CONFIRMAR FACTURA'
+            testID='confirmInvoice'
             onPress={ this.navigateToOpinion}
             buttonStyle={ style.buttonConfirm }
             titleStyle={ style.textSemiBold14White }
@@ -174,4 +171,4 @@ class InvoiceSummary extends React.Component {
   }
 }
 
-export default withNavigation(InvoiceSummary);
+export default InvoiceSummary;
