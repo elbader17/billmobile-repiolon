@@ -2,6 +2,8 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import SignIn  from './Component';
 
+jest.mock('../../../constants/metrics', () => ({ METRICS: { heightHeader: {} } }));
+
 const promise = Promise.resolve(0);
 const signInMock = jest.fn(() => promise);
 
@@ -32,6 +34,7 @@ test('initial state with the correct values', () => {
 */
 
 describe('button INICIAR SESIÓN', () => {
+  
   test('button initially disabled', () => {
     const component = shallow(<SignIn signIn={signInMock} />);
     const button = component.findWhere(node => node.prop('testID') === 'submitSignIn');

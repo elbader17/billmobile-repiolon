@@ -1,11 +1,10 @@
 import React from 'react';
-import { View, Text, TextInput, Alert, ScrollView, KeyboardAvoidingView } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import { View, Text, TextInput, ScrollView, KeyboardAvoidingView } from 'react-native';
 import { Button } from "react-native-elements";
-import { withNavigation } from 'react-navigation';
 import style from './style';
 import  { validateCuit } from '../../../utils/identity';
 import { METRICS } from '../../../constants/metrics';
+import { renderMessageName, renderMessageCuit } from '../../../utils/showMessage';
 
 class TaxConfiguration extends React.Component{
 
@@ -31,42 +30,11 @@ class TaxConfiguration extends React.Component{
   }
 
   validateData = () => {
-    const { cuit } = this.state;
-    return validateCuit(cuit);
+    return validateCuit(this.state.cuit);
   }
-
   setName = (value) => this.setState({ name: value})
   setCuit = (value) => this.setState({ cuit: value })
   setLoading = (bool) => this.setState({ loading: bool })
-
-  renderMessageName = () => {
-    if (this.state.onInputName) {
-      return(
-      <View>
-        <Icon 
-          name= 'md-arrow-dropup' size={25} color='#3687d1' style={style.positionIcon}/>
-        <Text style={[style.textRegular14White, style.message]}>
-          Nombre de fantasía de la empresa o tu nombre y apellido.
-        </Text>
-      </View>
-      )
-    }
-  }
-
-  renderMessageCuit = () => {
-    if (this.state.onInputCuit) {
-      return(
-        <View>
-          <Icon 
-            name= 'md-arrow-dropup' size={25} color='#3687d1' style={style.positionIcon}/>
-          <Text style={[style.textRegular14White, style.message]}>
-            Con el CUIT podremos acceder a tu informacion y
-            configurar la cuenta por ti.
-          </Text>
-        </View>
-      )  
-    }
-  }
 
   render() {
     return(
@@ -88,7 +56,7 @@ class TaxConfiguration extends React.Component{
               style={ style.textBox }
               value={this.state.name}
             />
-            {this.renderMessageName()}
+            {renderMessageName(this.state.onInputName)}
           </View>
           <View style={style.lineGray}></View>
           <View style={style.boxCuit}>
@@ -103,7 +71,7 @@ class TaxConfiguration extends React.Component{
               value={this.state.cuit}
               keyboardType='numeric'
             />
-            {this.renderMessageCuit()}
+            {renderMessageCuit(this.state.onInputCuit)}
           </View>
           <View style={style.lineGray}></View>
         </View>
@@ -111,6 +79,7 @@ class TaxConfiguration extends React.Component{
       </ScrollView>
       <Button
         title="LISTO"
+        testID='ready'
         onPress={ this.handleConfigFiscal }
         buttonStyle={ style.submitReady }
         titleStyle={ style.textRegular14WhiteBold }
@@ -124,4 +93,4 @@ class TaxConfiguration extends React.Component{
   }
 }
 
-export default withNavigation(TaxConfiguration);
+export default TaxConfiguration;

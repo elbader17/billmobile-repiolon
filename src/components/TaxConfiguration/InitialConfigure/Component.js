@@ -1,7 +1,6 @@
 import React from 'react';
-import { View, Text, TextInput, Alert, Image} from 'react-native';
+import { View, Text, Image} from 'react-native';
 import { Button } from "react-native-elements";
-import { withNavigation } from 'react-navigation';
 import style from './style';
 
 class InitialConfiguration extends React.Component{
@@ -37,6 +36,7 @@ class InitialConfiguration extends React.Component{
         <View style={style.boxButton}>
           <Button
             title="CONFIGURAR MI CUIT"
+            testID='buttonConfigure'
             onPress={ this.navigateTaxConfiguration }
             buttonStyle={ style.submit }
             titleStyle={ style.submitText }
@@ -57,4 +57,4 @@ class InitialConfiguration extends React.Component{
   }
 }
 
-export default withNavigation(InitialConfiguration);
+export default InitialConfiguration;

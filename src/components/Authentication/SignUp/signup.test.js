@@ -2,6 +2,8 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import SignUp  from './Component';
 
+jest.mock('../../../constants/metrics', () => ({ METRICS: { heightHeader: {} } }));
+
 const promise = Promise.resolve(0);
 const signUpMock = jest.fn(() => promise);
 

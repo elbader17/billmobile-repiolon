@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, Text, ScrollView, KeyboardAvoidingView } from 'react-native';
-import { withNavigation } from 'react-navigation';
 import { Button } from "react-native-elements";
 import AddItem from './AddItem';
 import style from '../style';
@@ -64,12 +63,14 @@ class NewItem extends React.Component {
             <View style={[style.boxSelectButton,style.inLineSpaceAround]}>
               <Button
                 title='PRODUCTO'
+                testID='product'
                 onPress={() => this.setState({isProduct: true})}
                 buttonStyle={this.state.isProduct ? style.buttonProduct : style.buttonProductDisabled}
                 titleStyle={this.state.isProduct ? style.textRegular12WhiteBold : style.textRegular12RedBold}
               />
               <Button
                 title='SERVICIO'
+                testID='service'
                 onPress={() => this.setState({isProduct: false}) }
                 buttonStyle={this.state.isProduct ? style.buttonServiceDisabled : style.buttonService}
                 titleStyle={this.state.isProduct ? style.textRegular12BlueBold : style.textRegular12WhiteBold}
@@ -87,6 +88,7 @@ class NewItem extends React.Component {
         </ScrollView>
         <Button
           title={<Text>GUARDAR {this.state.isProduct ? 'PRODUCTO' : 'SERVICIO'}</Text>}
+          testID='buttonSave'
           onPress={this.state.isProduct ? this.saveProduct : this.saveService}
           buttonStyle={style.buttonSave}
           titleStyle={style.textSemiBold14White}
@@ -100,4 +102,4 @@ class NewItem extends React.Component {
   }
 }
 
-export default withNavigation(NewItem);
+export default NewItem;

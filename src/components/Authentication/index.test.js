@@ -2,6 +2,8 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import Authentication from './index';
 
+jest.mock('../../constants/metrics', () => ({ METRICS: { heightHeader: {} } }));
+
 it('renders correctly component Authentication', () => {
   const component = shallow(<Authentication />);
   expect(component).toMatchSnapshot();
