@@ -10,7 +10,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = dispatch => {
   return {
     signIn: (email, password) => dispatch(signIn(email, password)),
     getFiscalIdentity: () => dispatch(getFiscalIdentity()),

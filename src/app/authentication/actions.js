@@ -1,28 +1,18 @@
 import { Auth } from 'aws-amplify';
 import { Alert } from 'react-native';
-
+import { getFiscalIdentity } from '../user_service/actions';
 import {
   SET_JWT_TOKEN,
-  SHOW_CONFIRMATION_MODAL,
-  HIDE_CONFIRMATION_MODAL,
   USER_SIGNED_UP,
   USER_NOT_CONFIRMED_MESSAGE,
 } from './constants';
-import { getFiscalIdentity } from '../user_service/actions';
 
-function setJwtToken(jwtToken) {
+const setJwtToken = jwtToken => {
   return { type: SET_JWT_TOKEN, jwtToken };
 }
-function showConfirmationModal() {
-  return { type: SHOW_CONFIRMATION_MODAL };
-}
 
-function userSignedUp(email, password) {
+const userSignedUp = (email, password) => {
   return { type: USER_SIGNED_UP, registration: { email, password } };
-}
-
-function hideConfirmationModal() {
-  return { type: HIDE_CONFIRMATION_MODAL };
 }
 
 const signIn = (email, password) => {
@@ -38,7 +28,6 @@ const signIn = (email, password) => {
         }
       })
       .catch((err) => {
-        //Alert.alert('Error al Ingresar: ', err.message);
         return err;
       });
   };
@@ -53,31 +42,21 @@ const signUp = (password, email, attributes) => {
       validationData: [],
     })
       .then((data) => {
-        console.log(data.userConfirmed);
-        if (data.userConfirmed) {
+        if (data.userConfirmed)
           return dispatch(userSignedUp(email, password));
-        } else {
-           return data.userConfirmed;
-        }
-        //dispatch(showConfirmationModal());
-      }).catch(err => Alert.alert('Error al Registrar: ', err.message));
+        else
+          return data.userConfirmed;
+      })
+      .catch(err => Alert.alert('Error al Registrar: ', err.message));
   };
 };
 
-const confirmCode = (email, confirmationCode) => {
-  return (dispatch, getState) => {
-    return Auth.confirmSignUp(email, confirmationCode, {})
-      .then(() => {
-        const { password } = getState().authentication.registration;
-        return true;
-        //return dispatch(signIn(password, email));
-        
-      })
-      .catch((err) => {
-        Alert.alert('Error al Confirmar: ', err.message);
-        this.props.navigation.navigate('ConfirmationCodeRegister');
-      });
-  };
+const confirmCode = (confirmationEmail, confirmationCode) => {
+  return () => {
+    return Auth.confirmSignUp(confirmationEmail, confirmationCode, {})
+      .then(() => true)
+      .catch(() => false);
+  }
 };
 
 export { signIn, signUp, confirmCode };

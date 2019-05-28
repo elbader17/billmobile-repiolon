@@ -25,14 +25,14 @@ export default fiscalIdentityReducer = (state = initialState, action) => {
           draftState,
           name: action.name,
           category: action.category,
-          identity: action.identification,
+          identification: action.identification,
         });
       case ADD_FISCAL_IDENTITY:
         return setfiscalIdentity({
           draftState,
           name: action.name,
           category: action.category,
-          identity: action.identification,
+          identification: action.identification,
         });
       default:
         return draftState;

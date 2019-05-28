@@ -1,12 +1,10 @@
 import axios from 'axios';
-
+import { createInvoice } from '../invoices/action';
 import {
   ADD_FISCAL_IDENTIY_TO_INVOICE,
 } from './constants';
 
-import { createInvoice } from '../invoices/action';
-
-function addfiscalIdentityToInvoiceAction(fiscalIdentity) {
+const addfiscalIdentityToInvoiceAction = fiscalIdentity => {
   return {
     type: ADD_FISCAL_IDENTIY_TO_INVOICE,
     fiscalIdentity,
@@ -41,8 +39,6 @@ const updateFiscalIdentity = (resource, dispatch, getState) => {
     });
 };
 
-
-// eslint-disable-next-line func-names
 const addFiscalIdentityToInvoice = (name, identity, id) => {
   return (dispatch, getState) => {
     const { id: invoiceId } = getState().invoices.currentInvoice;

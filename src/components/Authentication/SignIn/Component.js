@@ -25,7 +25,7 @@ class SignIn extends React.Component {
 
   handleSignIn = () => {
     const { email, password } = this.state;
-    const { signIn, getFiscalIdentity } = this.props;
+    const { signIn } = this.props;
     this.setLoading(true);
     signIn(email, password)
     .then( (_data) => {

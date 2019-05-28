@@ -21,14 +21,16 @@ class Confirmation extends React.Component {
     const { confirmationEmail, confirmationCode } = this.state;
     const { confirmCode } = this.props;
     this.setLoading(true);
-    confirmCode(confirmationEmail,confirmationCode,{})
-    .then((data) => {
-      this.props.navigation.navigate('Authentication', { index: true });
-    })
-    .catch((err) => {
-      this.props.navigation.navigate('ConfirmationCodeRegister');
-      this.setLoading(false);
-    });
+    confirmCode(confirmationEmail,confirmationCode)
+      .then((data) => {
+        if (data)
+          this.props.navigation.navigate('Authentication');
+        else {
+          this.setLoading(false);
+          alert('Error: Datos incorrectos');
+          this.props.navigation.navigate('ConfirmationCodeRegister');
+        } 
+      })
   }
 
   validateData = () => { return CODE_CONFIRM.test(this.state.confirmationCode) }

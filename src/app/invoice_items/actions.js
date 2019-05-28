@@ -2,7 +2,7 @@ import axios from 'axios';
 import {
   CREATE_INVOICE_ITEM,
   UPDATE_INVOICE_ITEM,
-} from './constant';
+} from './constants';
 import {
   createInvoice,
   getInvoice,
@@ -22,9 +22,25 @@ function updateInvoiceItemAction(invoiceItem) {
   };
 }
 
-// eslint-disable-next-line func-names
-const createInvoiceItem = (category, name, price) => {
+const updateInvoiceItem = (id, values) => {
+  return (dispatch, getState) => {
+    const { id: invoiceId } = getState().invoices.currentInvoice;
+    const instance = axios.create({
+      headers: { 'JWT-TOKEN': getState().authentication.jwtToken },
+    });
+    return instance.put(
+      `v1/invoice_items/${id}`,
+      { resource: { ...values, invoice_id: invoiceId } },
+    ).then((response) => {
+      dispatch(updateInvoiceItemAction(response.data));
+      return dispatch(getInvoice(invoiceId));
+    }).catch((error) => {
+      console.log(error.response)
+    });
+  };
+};
 
+const createInvoiceItem = (category, name, price) => {
   return (dispatch, getState) => {
     const { id: invoiceId } = getState().invoices.currentInvoice;
     let promise;
@@ -56,26 +72,5 @@ const createInvoiceItem = (category, name, price) => {
     });
   };
 };
-
-
-const updateInvoiceItem = (id, values) => {
-
-  return (dispatch, getState) => {
-    const { id: invoiceId } = getState().invoices.currentInvoice;
-    const instance = axios.create({
-      headers: { 'JWT-TOKEN': getState().authentication.jwtToken },
-    });
-    return instance.put(
-      `v1/invoice_items/${id}`,
-      { resource: { ...values, invoice_id: invoiceId } },
-    ).then((response) => {
-      dispatch(updateInvoiceItemAction(response.data));
-      return dispatch(getInvoice(invoiceId));
-    }).catch((error) => {
-      console.log(error.response)
-    });
-  };
-};
-
 
 export { createInvoiceItem, updateInvoiceItem };

@@ -37,20 +37,18 @@ class SignUp extends React.Component {
       email:email,
       name:name,
     };
-    const { signUp } = this.props;
     this.setLoading(true);
+    const { signUp } = this.props;
     signUp(password, email, attributes)
     .then((data) => {
       this.setLoading(false);
-      if(data){
-        this.props.navigation.navigate('Authentication', { index: false  });
-      }else{
-        if (data != undefined)
+      if(data)
+        this.props.navigation.navigate('Authentication');
+      else{
+        if (data != undefined){
           this.props.navigation.navigate('ConfirmationCodeRegister', { email: this.state.email });
+        }
       }
-    })
-    .catch(() => {
-      this.props.navigation.navigate('ConfirmationCodeRegister', { email: this.state.email });
     })
   }
 
