@@ -21,15 +21,26 @@ describe('test actions.createInvoiceItem', () => {
       await store.dispatch(actions.createInvoiceItem(name, category, price))
     });
 
-    it('the action.type should be CREATE_INVOICE_ITEM', () => {
+    it('the first action.type should be CREATE_INVOICE_ITEM', () => {
       const actions = store.getActions();
-      expect(actions.length).toEqual(1);
+      expect(actions.length).toEqual(2);
       expect(actions[0].type).toEqual(CREATE_INVOICE_ITEM);
     });
 
-    it('the action.invoiceItem should be {}', () => {
+    it('the second action.type should be GET_INVOICE', () => {
+      const actions = store.getActions();
+      expect(actions.length).toEqual(2);
+      expect(actions[1].type).toEqual('GET_INVOICE');
+    });
+
+    it('the first action.invoiceItem should be {}', () => {
       const actions = store.getActions();
       expect(actions[0].invoiceItem).toEqual({})
+    });
+
+    it('the second action.invoice should be {}', () => {
+      const actions = store.getActions();
+      expect(actions[1].invoice).toEqual({})
     });
 
   });
@@ -50,9 +61,9 @@ describe('test actions.createInvoiceItem', () => {
         await store.dispatch(actions.createInvoiceItem(name, category, price))
       });
 
-    it('the number of actions executed should be 2', () => {
+    it('the number of actions executed should be 3', () => {
       const actions = store.getActions();
-      expect(actions.length).toEqual(2);
+      expect(actions.length).toEqual(3);
     });
     
     it('the first action.type should be CREATE_INVOICE ', () => {
@@ -65,6 +76,11 @@ describe('test actions.createInvoiceItem', () => {
       expect(actions[1].type).toEqual('CREATE_INVOICE_ITEM');
     });
 
+    it('the third action.type should be GET_INVOICE ', () => {
+      const actions = store.getActions();
+      expect(actions[2].type).toEqual('GET_INVOICE');
+    });
+
     it('the first action.invoice should be {} ', () => {
       const actions = store.getActions();
       expect(actions[0].invoice).toEqual({});
@@ -73,6 +89,11 @@ describe('test actions.createInvoiceItem', () => {
     it('the second action.invoiceItem should be {}', () => {
       const actions = store.getActions();
       expect(actions[1].invoiceItem).toEqual({});
+    });
+
+    it('the third action.invoice should be {}', () => {
+      const actions = store.getActions();
+      expect(actions[2].invoice).toEqual({});
     });
     
   });

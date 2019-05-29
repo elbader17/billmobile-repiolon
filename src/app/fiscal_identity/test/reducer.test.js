@@ -1,4 +1,4 @@
-import fiscalIdentityReducer from '../reducer';
+import fiscalIdentityReducer from '../reducers';
 import { 
   SET_FISCAL_IDENTITY,
   ADD_FISCAL_IDENTITY,

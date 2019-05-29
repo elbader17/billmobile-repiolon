@@ -3,7 +3,7 @@ import {
   CREATE_ITEM,
   UPDATE_ITEM,
   LIST_ITEMS,
-} from './constant';
+} from './constants';
 
 
 function createItemAction(category, name, price) {
@@ -24,7 +24,6 @@ function updateItemAction(id, name, price) {
   };
 }
 
-
 function itemListAction(items) {
   return {
     type: LIST_ITEMS,
@@ -32,9 +31,7 @@ function itemListAction(items) {
   };
 }
 
-// eslint-disable-next-line func-names
 const createItem = (category, name, price) => {
-
   const resource = {
     category,
     name,
@@ -50,14 +47,12 @@ const createItem = (category, name, price) => {
         return dispatch(createItemAction(category, name, price));
       })
       .catch((error) => {
-        
         console.log(error);
       });
   };
 };
 
 const listItems = () => {
-
   return (dispatch, getState) => {
     const instance = axios.create({
       headers: { 'JWT-TOKEN': getState().authentication.jwtToken },
@@ -72,7 +67,6 @@ const listItems = () => {
   };
 };
 
-
 const updateItem = (id, name, price) => {
   const resource = {
     name,
@@ -85,13 +79,12 @@ const updateItem = (id, name, price) => {
     });
     return instance.put(`v1/items/${id}`, { resource })
       .then(() => {
-        dispatch(updateItemAction(name, price));
+        dispatch(updateItemAction(id, name, price));
       })
       .catch((error) => {
         console.log(error);
       });
   };
 };
-
 
 export { createItem, updateItem, itemListAction };

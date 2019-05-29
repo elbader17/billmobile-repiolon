@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { createInvoice } from '../invoices/action';
+import { createInvoice } from '../invoices/actions';
 import {
   ADD_FISCAL_IDENTIY_TO_INVOICE,
 } from './constants';

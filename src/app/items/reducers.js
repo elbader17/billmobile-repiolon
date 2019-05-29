@@ -2,7 +2,7 @@ import producer from 'immer';
 import {
   CREATE_ITEM,
   LIST_ITEMS,
-} from './constant';
+} from './constants';
 
 const initialState = {
   items: [],

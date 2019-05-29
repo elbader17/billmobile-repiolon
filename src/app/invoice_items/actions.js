@@ -6,7 +6,7 @@ import {
 import {
   createInvoice,
   getInvoice,
-} from '../invoices/action';
+} from '../invoices/actions';
 
 function createInvoiceItemAction(invoiceItem) {
   return {

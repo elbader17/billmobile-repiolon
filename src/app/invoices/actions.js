@@ -4,7 +4,7 @@ import {
   GET_INVOICE,
   CREATE_INVOICE,
   UPDATE_INVOICE,
-} from './constant';
+} from './constants';
 
 function createInvoiceAction(invoice) {
   return {
@@ -102,7 +102,6 @@ const getInvoice = (id) => {
     });
     return instance.get(`v1/invoices/${id}`)
       .then((response) => {
-        console.log(response);
         dispatch(getInvoiceAction(response.data.data));
       })
       .catch((error) => {

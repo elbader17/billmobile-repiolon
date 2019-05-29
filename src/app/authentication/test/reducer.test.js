@@ -1,4 +1,4 @@
-import authenticationReducer from '../reducer';
+import authenticationReducer from '../reducers';
 import {
   SET_JWT_TOKEN, USER_SIGNED_UP,
 } from '../constants';
