@@ -1,6 +1,3 @@
-/* eslint-disable no-param-reassign */
-/* eslint-disable no-undef */
-/* eslint-disable max-len */
 import producer from 'immer';
 import {
   SET_MY_FISCAL_IDENTITY,

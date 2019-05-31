@@ -83,25 +83,25 @@ describe('test actions.listInvoice', () => {
 });
 
 describe('test actions.getInvoice', () => {
-    let store;
-    const initiaState = {
-      authentication: {jwtToken: ''},
-      invoices: {currentInvoice: {id: '123'}}
-    };
+  let store;
+  const initiaState = {
+    authentication: {jwtToken: ''},
+    invoices: {currentInvoice: {id: '123'}}
+  };
       
-    beforeEach(async () => {
-      store = mockStore(initiaState);
-      await store.dispatch(actions.getInvoice('123'))
-    });
-      
-    it('the action.type should be GET_INVOICE', () => {
-      const actions = store.getActions();
-      expect(actions.length).toEqual(1);
-      expect(actions[0].type).toEqual(GET_INVOICE);
-    });
-      
-    it('the action.id should be {}', () => {
-      const actions = store.getActions();
-      expect(actions[0].invoice).toEqual({})
-    });
+  beforeEach(async () => {
+    store = mockStore(initiaState);
+    await store.dispatch(actions.getInvoice('123'))
   });
+      
+  it('the action.type should be GET_INVOICE', () => {
+    const actions = store.getActions();
+    expect(actions.length).toEqual(1);
+    expect(actions[0].type).toEqual(GET_INVOICE);
+  });
+      
+  it('the action.id should be {}', () => {
+    const actions = store.getActions();
+    expect(actions[0].invoice).toEqual({})
+  });
+});

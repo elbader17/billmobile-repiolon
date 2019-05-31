@@ -93,7 +93,8 @@ describe('test actions.createInvoiceItem', () => {
 
     it('the third action.invoice should be {}', () => {
       const actions = store.getActions();
-      expect(actions[2].invoice).toEqual({});
+      expect(actions[2].invoice).toEqual(undefined);
+      //Esta bien que sea undefined
     });
     
   });
@@ -112,15 +113,29 @@ describe('test actions.updateInvoiceItem', () => {
     store = mockStore(initiaState);
     await store.dispatch(actions.updateInvoiceItem(id, values))
   });
-  
-  it('the action.type should be UPDATE_INVOICE_ITEM', () => {
+
+  it('the number actions is two', () => {
     const actions = store.getActions();
-    expect(actions.length).toEqual(1);
+    expect(actions.length).toEqual(2);
+  });
+  
+  it('the first action.type should be UPDATE_INVOICE_ITEM', () => {
+    const actions = store.getActions();
     expect(actions[0].type).toEqual(UPDATE_INVOICE_ITEM);
   });
 
-  it('the action.invoiceItem should be {}', () => {
+  it('the second action.type should be GET_INVOICE', () => {
+    const actions = store.getActions();
+    expect(actions[1].type).toEqual('GET_INVOICE');
+  });
+
+  it('the first action.invoiceItem should be {}', () => {
     const actions = store.getActions();
     expect(actions[0].invoiceItem).toEqual({});
+  });
+
+  it('the second action.invoice should be {}', () => {
+    const actions = store.getActions();
+    expect(actions[1].invoice).toEqual({});
   });
 });

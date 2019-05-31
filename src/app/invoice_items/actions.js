@@ -63,6 +63,7 @@ const createInvoiceItem = (category, name, price) => {
       };
       return instance.post('v1/invoice_items', { resource })
         .then((response) => {
+          console.log(response);
           dispatch(createInvoiceItemAction(response.data.data));
           return dispatch(getInvoice(updatedInvoiceId));
         })

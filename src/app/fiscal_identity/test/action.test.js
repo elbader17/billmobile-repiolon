@@ -1,5 +1,5 @@
 import * as actions from '../actions';
-import { ADD_FISCAL_IDENTIY_TO_INVOICE } from '../constants';
+import { ADD_FISCAL_IDENTITY_TO_INVOICE } from '../constants';
 
 describe('test actions.addFiscalIdentityToInvoice', () => {
   describe('invoice created', () => {
@@ -21,7 +21,7 @@ describe('test actions.addFiscalIdentityToInvoice', () => {
     it('the action.type should be ADD_FISCAL_IDENTIY_TO_INVOICE', () => {
       const actions = store.getActions();
       expect(actions.length).toEqual(1);
-      expect(actions[0].type).toEqual(ADD_FISCAL_IDENTIY_TO_INVOICE);
+      expect(actions[0].type).toEqual(ADD_FISCAL_IDENTITY_TO_INVOICE);
     });
 
     it('the action.fiscalIdentity should be {}', () => {
@@ -60,7 +60,7 @@ describe('test actions.addFiscalIdentityToInvoice', () => {
 
     it('the second action.type should be ADD_FISCAL_IDENTIY_TO_INVOICE ', () => {
       const actions = store.getActions();
-      expect(actions[1].type).toEqual('ADD_FISCAL_IDENTIY_TO_INVOICE');
+      expect(actions[1].type).toEqual(ADD_FISCAL_IDENTITY_TO_INVOICE);
     });
 
     it('the first action.invoice should be {} ', () => {

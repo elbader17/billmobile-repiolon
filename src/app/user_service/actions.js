@@ -1,6 +1,3 @@
-/* eslint-disable no-restricted-globals */
-/* eslint-disable no-undef */
-/* eslint-disable func-names */
 import axios from 'axios';
 import {
   SET_MY_FISCAL_IDENTITY,
