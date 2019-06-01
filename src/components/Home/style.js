@@ -1,29 +1,68 @@
 import { StyleSheet } from 'react-native';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { COLORS } from '../../constants/colors';
 import { FONTS } from '../../constants/fonts';
 
 const styles = StyleSheet.create({
+  container: {
+    height: hp('100%'),
+    backgroundColor: COLORS.white,
+  },
+  containerHeader: {
+    flex:0.7,
+    backgroundColor: COLORS.blue
+  },
+  header: {
+    marginTop: 7,
+    marginHorizontal: 7
+  },
+  containerStatictis: {
+    flex:0.9,
+    marginHorizontal: 20,
+  },
+  containerListCustomer: {
+    flex:0.9,
+    marginBottom: 50,
+    marginTop: 5,
+    marginHorizontal: 20,
+    borderWidth: 1,
+    borderBottomWidth: 2,
+    borderColor: '#f5f5f0',
+    borderRadius: 5,
+  },
+  margin: {
+    marginHorizontal: 10,
+    marginVertical: 7
+  },
+  inLineSpaceBetween: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+  inLine: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  buttonHeader: {
+    backgroundColor: 'transparent'
+  },
+  textRegular20White: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size20,
+    color: COLORS.white,
+  },
+
+  
   containerActionButton: {
     alignItems: 'center',
     width: '100%',
     height: 420,
   },
-  containerListCustomer: {
-    width: '90%',
-    height: '24%',
-    margin: 35,
-    borderWidth: 1,
-    borderColor: COLORS.grayLight,
-    borderRadius: 4,
-  },
   containerInfo: {
     backgroundColor: COLORS.blue,
     height: 100,
   },
-  inLine: {
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  },
+ 
   lineGray: {
     backgroundColor: COLORS.gray,
     height: 1.2,

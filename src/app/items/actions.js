@@ -6,12 +6,10 @@ import {
 } from './constants';
 
 
-function createItemAction(category, name, price) {
+function createItemAction(item) {
   return {
     type: CREATE_ITEM,
-    category,
-    name,
-    price,
+    item //category, name, price
   };
 }
 
@@ -31,7 +29,7 @@ function itemListAction(items) {
   };
 }
 
-const createItem = (category, name, price) => {
+const createItem = ({ category, name, price }) => {
   const resource = {
     category,
     name,
@@ -43,8 +41,8 @@ const createItem = (category, name, price) => {
       headers: { 'JWT-TOKEN': getState().authentication.jwtToken },
     });
     return instance.post('v1/items', { resource })
-      .then(() => {
-        return dispatch(createItemAction(category, name, price));
+      .then((response) => {
+        return dispatch(createItemAction(response.data.data));
       })
       .catch((error) => {
         console.log(error);
@@ -67,10 +65,11 @@ const listItems = () => {
   };
 };
 
-const updateItem = (id, name, price) => {
+const updateItem = (id, name, price, category) => {
   const resource = {
     name,
     price,
+    category
   };
 
   return (dispatch, getState) => {
@@ -87,4 +86,4 @@ const updateItem = (id, name, price) => {
   };
 };
 
-export { createItem, updateItem, itemListAction };
+export { createItem, updateItem, listItems };

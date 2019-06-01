@@ -8,13 +8,13 @@ const initialState = {
   items: [],
 };
 
-function addItem({ draftState, category, name, price }) {
-  draftState.items.push({ category, name, price });
+function addItem({ draftState, item }) {
+  draftState.items.push(item);
   return draftState;
 }
 
 function setItems({ draftState, items }) {
-  draftState.items = items;
+  draftState.items = items.data;
   return draftState;
 }
 
@@ -24,9 +24,7 @@ export default itemsReducer = (state = initialState, action) => {
       case CREATE_ITEM:
         return addItem({
           draftState,
-          category: action.category,
-          name: action.name,
-          price: action.price,
+          item: action.item
         });
       case LIST_ITEMS:
         return setItems({

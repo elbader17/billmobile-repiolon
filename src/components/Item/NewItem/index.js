@@ -8,11 +8,10 @@ const mapStateToProps = state => ({
 
 function mapDispatchToProps(dispatch) {
   return {
-    createItem: (category, name, price, quantity) => {
-      dispatch(createItem(category, name, price, quantity))
-        .then((data) => {
-          //Alert.alert("Exito al Guardar!");
-          this.props.navigation.navigate('Items');
+    saveItem: (attributes, navigation) => {
+      dispatch(createItem(attributes))
+        .then(() => {
+          navigation.navigate('ItemList');
         });
     },
   };

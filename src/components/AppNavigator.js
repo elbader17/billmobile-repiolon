@@ -11,8 +11,13 @@ import Authentication from './Authentication';
 import ConfirmationCodeRegister from './Authentication/Confirmation';
 import InitialCofiguration from './TaxConfiguration/InitialConfigure/Component';
 import TaxConfiguration from './TaxConfiguration/Configure';
+import Home from './Home';
 import NewCustomer from './NewCustomer';
+//import EditCustomer from './Customer/EditCustomer';
+//import CustomerList from './Customer/List';
 import NewItem from './Item/NewItem';
+import EditItem from './Item/EditItem';
+import ItemList from './Item/List';
 import Invoice from './Invoice';
 import InvoiceSummary from './Invoice/Summary';
 import NewInvoiceItem from './Invoice/NewInvoiceItem';
@@ -68,13 +73,16 @@ const AppSwitchNavigator = createSwitchNavigator(
     Intro,
     Login: LoginStack,
     Configure: TaxConfigurationStack,
+    Home,
     Invoices: InvoiceStack,
     NewCustomer,
     NewItem,
+    EditItem,
+    ItemList,
     Opinion
   },
   {
-    initialRouteName: 'Intro',
+    initialRouteName: 'Login',
   }
 );
 

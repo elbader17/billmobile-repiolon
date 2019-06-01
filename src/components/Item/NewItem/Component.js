@@ -7,15 +7,15 @@ import { METRICS } from '../../../constants/metrics';
 import { validateAddItem } from '../../../utils/validations';
 
 class NewItem extends React.Component {
-
   constructor(props) {
     super(props);
+    const item = this.props.navigation.getParam('item', this.defaultItem());
     this.state = {
-      nameProduct:"",
-      nameService:"",
-      priceProduct:"",
-      valueService:"",
-      isProduct: true,
+      name: item.attributes.name,
+      price: item.attributes.price,
+      isProduct: item.attributes.category === 'product',
+      isEnableButton: true,
+      itemId: item.id,
       loading: false
     };
   }
@@ -26,79 +26,86 @@ class NewItem extends React.Component {
     headerTintColor: '#3687D1',
   };
 
-  saveProduct = () => {
-    const { nameProduct, priceProduct } = this.state;
-    const { createItem, navigation } = this.props;
-    this.setLoading(true);
-    createItem("product", nameProduct, priceProduct, navigation);
+  defaultItem = () => {
+    return {
+      attributes: {
+        name: '',
+        price: '',
+        category: 'product',
+      }
+    };
   }
 
-  saveService = () => {
-    const { nameService, valueService } = this.state;
-    const { createItem, navigation } = this.props;
+  saveItem = () => {
+    const { name, price, isProduct, itemId } = this.state;
+    const { saveItem, navigation } = this.props;
+    const category = isProduct ? 'product' : 'service';
+    this.setState({ isEnableButton: false});
     this.setLoading(true);
-    createItem("service", nameService, valueService, navigation);
+    saveItem(
+      {
+        id: itemId,
+        category,
+        name,
+        price,
+      },
+      navigation,
+    );
+    //.catch(err => Alert.alert("Error al Ingresar: ",err.message))
   }
 
-  setNameProduct = (value) => this.setState({ nameProduct: value })
-  setNameService = (value) => this.setState({ nameService: value })
-  setPriceProduct = (value) => this.setState({ priceProduct:value })
-  setValueService = (value) => this.setState({ valueService:value })
+  setName = (value) => this.setState({ name: value, isEnableButton: true})
+  setPrice = (value) => this.setState({ price:value, isEnableButton: true })
   setLoading = (bool) => this.setState({ loading: bool })
 
   render() {
     const data = {
-      nameProduct: this.state.nameProduct,
-      nameService: this.state.nameService,
-      price: this.state.priceProduct,
-      value: this.state.valueService
+      isProduct: this.state.isProduct,
+      name: this.state.name,
+      price: this.props.price
     }
     return(
       <KeyboardAvoidingView
-        behavior={'padding'}
-        style={{flex: 1}}
-        keyboardVerticalOffset={METRICS.heightHeader}>
+          behavior={'padding'}
+          style={{flex: 1}}
+          keyboardVerticalOffset={METRICS.heightHeader}>
         <ScrollView>
           <View style={style.container}>
             <View style={[style.boxSelectButton,style.inLineSpaceAround]}>
               <Button
                 title='PRODUCTO'
-                testID='product'
-                onPress={() => this.setState({isProduct: true})}
-                buttonStyle={this.state.isProduct ? style.buttonProduct : style.buttonProductDisabled}
-                titleStyle={this.state.isProduct ? style.textRegular12WhiteBold : style.textRegular12RedBold}
+                onPress={() => this.setState({isProduct: true}) }
+                buttonStyle={ this.state.isProduct ? style.buttonProduct : style.buttonProductDisabled }
+                titleStyle={ this.state.isProduct ? style.textRegular12WhiteBold : style.textRegular12RedBold }
               />
               <Button
                 title='SERVICIO'
-                testID='service'
                 onPress={() => this.setState({isProduct: false}) }
-                buttonStyle={this.state.isProduct ? style.buttonServiceDisabled : style.buttonService}
-                titleStyle={this.state.isProduct ? style.textRegular12BlueBold : style.textRegular12WhiteBold}
+                buttonStyle={ this.state.isProduct ? style.buttonServiceDisabled : style.buttonService  }
+                titleStyle={ this.state.isProduct ? style.textRegular12BlueBold : style.textRegular12WhiteBold }
               />
             </View>
             <View style={style.boxInput}>
               <AddItem
-                isProduct={this.state.isProduct}
-                setName={this.state.isProduct ? this.setNameProduct : this.setNameService}
-                setValueOrPrice={this.state.isProduct ? this.setPriceProduct: this.setValueService}
-                data={data}  
+                 data={data}
+                 setName={this.setName}
+                 setPrice={this.setPrice}
               />
             </View>
           </View>
         </ScrollView>
         <Button
           title={<Text>GUARDAR {this.state.isProduct ? 'PRODUCTO' : 'SERVICIO'}</Text>}
-          testID='buttonSave'
-          onPress={this.state.isProduct ? this.saveProduct : this.saveService}
-          buttonStyle={style.buttonSave}
-          titleStyle={style.textSemiBold14White}
-          disabledStyle={style.buttonSaveDisabled}
-          disabledTitleStyle={style.textRegular14WhiteBold}
-          disabled={!validateAddItem(this.state.nameProduct, this.state.nameService, this.state.isProduct ? this.state.priceProduct : this.state.valueService)}
+          onPress={ this.saveItem }
+          buttonStyle={ style.buttonSave }
+          titleStyle={ style.textSemiBold14White }
+          disabledStyle={ style.buttonSaveDisabled }
+          disabledTitleStyle={ style.textRegular14WhiteBold}
+          disabled={(!validateAddItem || !this.state.isEnableButton) }
           loading = {this.state.loading}
         />
       </KeyboardAvoidingView>
-    )
+    );
   }
 }
 

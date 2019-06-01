@@ -1,9 +1,9 @@
 import axios from 'axios';
 import {
-  LIST_INVOICE,
-  GET_INVOICE,
   CREATE_INVOICE,
   UPDATE_INVOICE,
+  LIST_INVOICE,
+  GET_INVOICE,
 } from './constants';
 
 function createInvoiceAction(invoice) {
