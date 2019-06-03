@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, Text, Alert, TextInput, ScrollView, KeyboardAvoidingView} from 'react-native';
-import { Button} from "react-native-elements";
+import { View, Text, TextInput, ScrollView, KeyboardAvoidingView} from 'react-native';
+import { Button } from "react-native-elements";
 import { withNavigation } from 'react-navigation';
+import Icon from 'react-native-vector-icons/Ionicons';
 import style from '../style';
 import { METRICS } from '../../../constants/metrics';
 
@@ -9,9 +10,15 @@ class ItemList extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      isProduct: false,
+      isProduct: true,
     };
   }
+
+  static navigationOptions = {
+    title: 'LISTA PRODUCTOS/SERVICIOS',
+    headerTitleStyle: style.headerText,
+    headerTintColor: '#3687D1',
+  };
 
   componentWillMount() {
     this.props.getItemList();
@@ -19,6 +26,10 @@ class ItemList extends React.Component {
 
   navigateToNewItem = () => {
     this.props.navigation.navigate('NewItem');
+  }
+
+  navigateToHome = () => {
+    this.props.navigation.navigate('Home');
   }
 
   navigateToEditItem = (item) => {
@@ -32,16 +43,22 @@ class ItemList extends React.Component {
       .filter(item => item.attributes.category === category)
       .map((item) => {
         return (
-          <View style={style.boxItems1} key={item.id}>
-            <Text style={style.textRegular16GrayDark}>
-              {item.attributes.name}
-              {item.attributes.price}
-            </Text>
+          <View style={[style.inLineSpaceBetween,{paddingVertical: 2}]} key={item.id}>
+            <View style={style.boxNameItems}>
+              <Text style={style.textRegular16GrayDark}>
+                {item.attributes.name}
+              </Text>
+            </View>
+            <View style={style.boxPriceItems}>
+              <Text style={style.textRegular16GrayDark}>
+                $ {item.attributes.price}
+              </Text>
+            </View>
             <Button
               title='Editar'
               onPress={() => this.navigateToEditItem(item) }
-              buttonStyle={ style.buttonService  }
-              titleStyle={ style.textRegular12WhiteBold }
+              buttonStyle={ this.state.isProduct ? style.buttonEditRed : style.buttonEditBlue }
+              titleStyle={ this.state.isProduct ? style.textButtonEditRed : style.textButtonEditBlue }
             />
           </View>
         );
@@ -50,21 +67,19 @@ class ItemList extends React.Component {
 
   renderSwtichButtons() {
     return (
-      <View style={style.container}>
-        <View style={[style.boxSelectButton,style.inLineSpaceAround]}>
-          <Button
-            title='PRODUCTO'
-            onPress={() => this.setState({isProduct: true}) }
-            buttonStyle={ this.state.isProduct ? style.buttonProduct : style.buttonProductDisabled }
-            titleStyle={ this.state.isProduct ? style.textRegular12WhiteBold : style.textRegular12RedBold }
-          />
-          <Button
-            title='SERVICIO'
-            onPress={() => this.setState({isProduct: false}) }
-            buttonStyle={ this.state.isProduct ? style.buttonServiceDisabled : style.buttonService  }
-            titleStyle={ this.state.isProduct ? style.textRegular12BlueBold : style.textRegular12WhiteBold }
-          />
-        </View>
+      <View style={[style.boxSelectButton,style.inLineSpaceAround, {marginBottom: 25}]}>
+        <Button
+          title='PRODUCTO'
+          onPress={() => this.setState({isProduct: true}) }
+          buttonStyle={ this.state.isProduct ? style.buttonProduct : style.buttonProductDisabled }
+          titleStyle={ this.state.isProduct ? style.textRegular12WhiteBold : style.textRegular12RedBold }
+        />
+        <Button
+          title='SERVICIO'
+          onPress={() => this.setState({isProduct: false}) }
+          buttonStyle={ this.state.isProduct ? style.buttonServiceDisabled : style.buttonService  }
+          titleStyle={ this.state.isProduct ? style.textRegular12BlueBold : style.textRegular12WhiteBold }
+        />
       </View>
     );
   }
@@ -75,17 +90,38 @@ class ItemList extends React.Component {
           behavior={'padding'}
           style={{flex: 1}}
           keyboardVerticalOffset={METRICS.heightHeader}>
-        {this.renderItems()}
-        <Button
-          title="Nuevo Item"
-          onPress={ this.navigateToNewItem }
-          buttonStyle={ style.buttonSave }
+        <ScrollView>
+          <View style={style.container}>
+            {this.renderSwtichButtons()}
+            <View style={style.boxInput}>
+              {this.renderItems()}
+            </View>
+          </View>
+        </ScrollView>
+        <View style={style.inLine}>
+          <Button
+            title=" Crear nuevo Item"
+            onPress={ this.navigateToNewItem }
+            buttonStyle={ style.buttonNewItem }
+            titleStyle={style.textButtonNewItem}
+            icon={
+              <Icon
+                name="md-add"
+                size={25}
+                color="#EE6123"
+              />
+            }
           />
-        {this.renderSwtichButtons()}
+          <Button
+            title="Listo"
+            onPress={ this.navigateToHome }
+            buttonStyle={ style.buttonContinue }
+            titleStyle={style.textRegular18WhiteBold}
+          />
+        </View>
       </KeyboardAvoidingView>
     );
   }
 }
-
 
 export default withNavigation(ItemList);

@@ -12,9 +12,9 @@ import ConfirmationCodeRegister from './Authentication/Confirmation';
 import InitialCofiguration from './TaxConfiguration/InitialConfigure/Component';
 import TaxConfiguration from './TaxConfiguration/Configure';
 import Home from './Home';
-import NewCustomer from './NewCustomer';
-//import EditCustomer from './Customer/EditCustomer';
-//import CustomerList from './Customer/List';
+import NewCustomer from './Customer/NewCustomer';
+import EditCustomer from './Customer/EditCustomer';
+import CustomerList from './Customer/List';
 import NewItem from './Item/NewItem';
 import EditItem from './Item/EditItem';
 import ItemList from './Item/List';
@@ -68,6 +68,12 @@ const InvoiceStack = createStackNavigator({
   },
 });
 
+const ItemStack = createStackNavigator({
+  ItemList,
+  NewItem,
+  EditItem,
+});
+
 const AppSwitchNavigator = createSwitchNavigator(
   {
     Intro,
@@ -75,10 +81,10 @@ const AppSwitchNavigator = createSwitchNavigator(
     Configure: TaxConfigurationStack,
     Home,
     Invoices: InvoiceStack,
+    Items: ItemStack,
     NewCustomer,
-    NewItem,
-    EditItem,
-    ItemList,
+    CustomerList,
+    EditCustomer,
     Opinion
   },
   {

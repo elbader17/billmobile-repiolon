@@ -29,7 +29,6 @@ function customerListAction(customers) {
   };
 }
 
-// eslint-disable-next-line func-names
 const createCustomer = ({ name, identification, category }) => {
   const resource = {
     category,
@@ -43,10 +42,10 @@ const createCustomer = ({ name, identification, category }) => {
     });
     return instance.post('v1/fiscal_identities', { resource })
       .then((response) => {
+        console.log(response.data);
         return dispatch(createCustomerAction(response.data));
       })
       .catch((error) => {
-
         console.log(error);
       });
   };

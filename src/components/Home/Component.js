@@ -17,7 +17,7 @@ class Home extends React.Component {
   }
 
   customerListNavigate = () => {
-    //this.props.navigation.navigate('CustomerList');
+    this.props.navigation.navigate('CustomerList');
   }
 
   itemListNavigate = () => {

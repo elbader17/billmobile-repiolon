@@ -7,10 +7,11 @@ const mapStateToProps = state => ({
 
 function mapDispatchToProps(dispatch) {
   return {
-    saveItem: (attributes, navigate) => {
+    saveItem: (attributes, navigation) => {
+      console.log(attributes);
       dispatch(updateItem(attributes))
         .then(() => {
-          navigate('Items');
+          navigation.navigate('ItemList');
         });
     },
   };

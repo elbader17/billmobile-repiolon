@@ -65,7 +65,7 @@ const listItems = () => {
   };
 };
 
-const updateItem = (id, name, price, category) => {
+const updateItem = ({id, category, name, price}) => {
   const resource = {
     name,
     price,

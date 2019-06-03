@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import NewCustomer from '../../NewCustomer/Component';
+import NewCustomer from '../../Customer/NewCustomer/Component';
 import { addFiscalIdentityToInvoice } from '../../../app/fiscal_identity/actions';
 
 const mapStateToProps = state => ({

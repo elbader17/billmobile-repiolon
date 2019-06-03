@@ -15,6 +15,15 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     marginHorizontal: 10
   },
+  boxItems:{
+    backgroundColor: 'red'
+  },
+  boxNameItems: {
+    width: wp('40%')
+  },
+  boxPriceItems: {
+    width: wp('30%')
+  },
   boxSelectButton: {
     marginVertical: 12,
     marginHorizontal: 20
@@ -121,6 +130,11 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size18,
   },
+  textRegular18WhiteBold: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size18,
+    color: COLORS.white
+  },
   spacingText: {
     marginLeft: 'auto',
   },
@@ -184,6 +198,10 @@ const styles = StyleSheet.create({
     color: COLORS.grayDark,
     paddingVertical: 15,
     textAlign: 'center',
+  },
+  inLine:{
+    flexDirection: "row",
+    alignItems:'center'
   },
   inLineSpaceAround: {
     flexDirection: "row",
@@ -251,17 +269,50 @@ const styles = StyleSheet.create({
   },
   buttonNewItem: {
     borderRadius: 0,
-    borderWidth: 0.5,
-    borderColor: COLORS.grayDark,
-    width: 230,
-    height: 45,
+    borderWidth: 1,
+    borderColor: COLORS.gray,
+    width: wp('70%'),
+    height: hp('8%'),
     backgroundColor: COLORS.white
+  },
+  textButtonNewItem:{
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size18,
+    color: COLORS.grayDark
   },
   buttonContinue: {
     borderRadius: 0,
-    width: 130,
-    height: 45,
+    width: wp('30%'),
+    height: hp('8%'),
     backgroundColor: COLORS.red
+  },
+  buttonEditRed:{
+    width: wp('15%'),
+    height: hp('4%'),
+    borderRadius: 2,
+    borderWidth: 1,
+    borderColor: COLORS.red,
+    backgroundColor: 'transparent',
+    opacity: 0.8
+  },
+  buttonEditBlue:{
+    width: wp('15%'),
+    height: hp('4%'),
+    borderRadius: 2,
+    borderWidth: 1,
+    borderColor: COLORS.blue,
+    backgroundColor: 'transparent',
+    opacity: 0.8
+  },
+  textButtonEditRed:{
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size12,
+    color: COLORS.red
+  },
+  textButtonEditBlue:{
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size12,
+    color: COLORS.blue
   },
   buttonRed: {
     borderRadius: 0,

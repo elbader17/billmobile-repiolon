@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, Text, Alert, Picker, TextInput, ScrollView, KeyboardAvoidingView } from 'react-native';
 import { Button } from "react-native-elements";
-import { CONDITION_IVA } from '../../constants/fiscal_identity';
-import { METRICS } from '../../constants/metrics';
-import { COLORS } from '../../constants/colors';
-import { validateCuit } from '../../utils/identity';
-import style from './style';
+import { CONDITION_IVA } from '../../../constants/fiscal_identity';
+import { METRICS } from '../../../constants/metrics';
+import { COLORS } from '../../../constants/colors';
+import { validateCuit } from '../../../utils/identity';
+import style from '../style';
 
 class NewCustomer extends React.Component {
 

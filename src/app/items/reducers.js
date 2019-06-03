@@ -2,6 +2,7 @@ import producer from 'immer';
 import {
   CREATE_ITEM,
   LIST_ITEMS,
+  UPDATE_ITEM
 } from './constants';
 
 const initialState = {
@@ -30,6 +31,11 @@ export default itemsReducer = (state = initialState, action) => {
         return setItems({
           draftState,
           items: action.items,
+        });
+      case UPDATE_ITEM:
+        return setItems({
+          draftState,
+          items: action.item,
         });
       default:
         return draftState;
