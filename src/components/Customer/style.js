@@ -14,6 +14,12 @@ const styles = StyleSheet.create({
     marginHorizontal: 2,
     marginVertical: 5
   },
+  containerList:{
+    height: hp('100%') - METRICS.heightHeader - hp('8%'),
+    backgroundColor: COLORS.white,
+    paddingHorizontal: 18,
+    paddingVertical: 10,
+  },
   boxBtnHolder: {
     backgroundColor: COLORS.white,
     height: hp('7%'),
@@ -30,6 +36,11 @@ const styles = StyleSheet.create({
     fontSize: FONTS.size14,
     color: COLORS.white,
   },
+  inLineSpaceBetween: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
   textRegular14WhiteBold: {
     fontFamily: FONTS.latoSemiBold,
     fontSize: FONTS.size14,
@@ -40,15 +51,37 @@ const styles = StyleSheet.create({
     fontSize: FONTS.size12,
     color: COLORS.white,
   },
+  textRegular16RedBold: {
+    fontFamily: FONTS.latoSemiBold,
+    fontSize: FONTS.size16,
+    color: COLORS.red,
+  },
   textRegular11GrayDark: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size11,
+    color: COLORS.grayDark,
+  },
+  textRegular14GrayDark: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size14,
     color: COLORS.grayDark,
   },
   textRegular16GrayDark: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size16,
     color: COLORS.grayDark,
+  },
+  textRegular16GrayDarkBold: {
+    fontFamily: FONTS.latoSemiBold,
+    fontSize: FONTS.size16,
+    color: COLORS.grayDark,
+  },
+  buttonNew: {
+    height: hp('8%'),
+    backgroundColor: 'transparent',
+    borderRadius: 0,
+    borderWidth: 1,
+    borderColor: COLORS.red
   },
   buttonSave: {
     height: hp('8%'),
@@ -59,6 +92,20 @@ const styles = StyleSheet.create({
     height: hp('8%'),
     backgroundColor: COLORS.gray,
     borderRadius: 0
+  },
+  buttonEditBlue:{
+    width: wp('16%'),
+    height: hp('5%'),
+    borderRadius: 2,
+    borderWidth: 1,
+    borderColor: COLORS.blue,
+    backgroundColor: 'transparent',
+    opacity: 0.8
+  },
+  textButtonEdit: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size12,
+    color: COLORS.blue,
   },
   marginLeft5: {
     marginLeft: 5,
@@ -78,6 +125,21 @@ const styles = StyleSheet.create({
     width: '100%',
     marginTop: 10,
     marginBottom: 10,
+  },
+  lineGray: {
+    backgroundColor: COLORS.grayLight,
+    height: 0.5,
+    width: '100%',
+    marginTop: 10,
+    marginBottom: 10,
+  },
+  styleScroll:{
+    borderWidth: 1,
+    borderColor: COLORS.gray,
+    borderRadius: 5,
+    paddingVertical: 2,
+    paddingHorizontal: 6,
+    borderColor: COLORS.grayLight,
   },
   positionFinalButton: {
     position: 'absolute', 

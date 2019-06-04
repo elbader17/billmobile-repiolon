@@ -74,6 +74,12 @@ const ItemStack = createStackNavigator({
   EditItem,
 });
 
+const CustomerStack = createStackNavigator({
+  CustomerList,
+  EditCustomer,
+  NewCustomer
+});
+
 const AppSwitchNavigator = createSwitchNavigator(
   {
     Intro,
@@ -82,9 +88,7 @@ const AppSwitchNavigator = createSwitchNavigator(
     Home,
     Invoices: InvoiceStack,
     Items: ItemStack,
-    NewCustomer,
-    CustomerList,
-    EditCustomer,
+    Customer: CustomerStack,
     Opinion
   },
   {

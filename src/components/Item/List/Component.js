@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TextInput, ScrollView, KeyboardAvoidingView} from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, KeyboardAvoidingView} from 'react-native';
 import { Button } from "react-native-elements";
 import { withNavigation } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -10,18 +10,23 @@ class ItemList extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      isProduct: true,
+      isProduct: true
     };
   }
 
-  static navigationOptions = {
-    title: 'LISTA DE PRODUCTOS/SERVICIOS',
-    headerTitleStyle: style.headerText,
-    headerTintColor: '#3687D1',
+  static navigationOptions = ({navigation}) => {
+    return {
+      title: 'LISTA DE PRODUCTOS/SERVICIOS',
+      headerTitleStyle: style.headerText,
+      headerTintColor: '#3687D1',
+      headerLeft: <TouchableOpacity onPress={()=> navigation.navigate('Home')}>
+                    <Icon name="md-arrow-back" size={24} color="#3687d1" style={{marginLeft:20}}/>
+                  </TouchableOpacity> 
+    }  
   };
 
   componentWillMount() {
-    this.props.getItemList();
+    this.props.getItemList()
   }
 
   navigateToNewItem = () => {
@@ -87,18 +92,18 @@ class ItemList extends React.Component {
   render() {
     return(
       <KeyboardAvoidingView
-          behavior={'padding'}
-          style={{flex: 1}}
-          keyboardVerticalOffset={METRICS.heightHeader}>
+        behavior={'padding'}
+        style={{flex: 1}}
+        keyboardVerticalOffset={METRICS.heightHeader}>
         
-          <View style={style.container}>
-            {this.renderSwtichButtons()}
-            <ScrollView style={style.styleScroll}>
+        <View style={style.container}>
+          {this.renderSwtichButtons()}
+          <ScrollView style={style.styleScroll}>
             <View style={style.boxInput}>
               {this.renderItems()}
             </View>
-            </ScrollView>
-          </View>
+          </ScrollView>
+        </View>
        
         <View style={style.inLine}>
           <Button
