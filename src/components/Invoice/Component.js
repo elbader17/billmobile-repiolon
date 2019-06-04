@@ -29,6 +29,17 @@ class Invoice extends React.Component {
     }
   }
 
+  static navigationOptions = ({navigation}) => {
+    return {
+      title: 'GENERACIÓN DE COMPROBANTE',
+      headerTitleStyle: style.headerText,
+      headerTintColor: '#3687D1',
+      headerLeft: <TouchableOpacity onPress={()=> navigation.navigate('Home')}>
+                    <Icon name="md-arrow-back" size={24} color="#3687d1" style={{marginLeft:20}}/>
+                  </TouchableOpacity> 
+    }  
+  };
+
   setModalVisible = visible => this.setState({modalVisible: visible});
   showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true});
   hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });

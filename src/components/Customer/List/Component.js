@@ -69,14 +69,16 @@ class CustomerList extends React.Component {
             {this.renderCustomers()}
           </ScrollView>
         </View>
-        <Button
-          title="NUEVO "
-          onPress={ this.navigateToNewCustomer }
-          buttonStyle={ style.buttonNew }
-          titleStyle={style.textRegular16RedBold}
-          icon={<Icon name="md-add" size={20} color="#EE6123"/>}
-          iconRight
-        />
+        <View style={style.center}>
+          <Button
+            title="NUEVO "
+            onPress={ this.navigateToNewCustomer }
+            buttonStyle={ style.buttonNew }
+            titleStyle={style.textRegular16RedBold}
+            icon={<Icon name="md-add" size={20} color="#EE6123"/>}
+            iconRight
+          />
+        </View>
       </KeyboardAvoidingView>
     );
   }

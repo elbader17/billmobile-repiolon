@@ -225,6 +225,12 @@ const styles = StyleSheet.create({
     fontSize: FONTS.size12,
     color: COLORS.grayDark,
   },
+  headerText: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size16,
+    fontWeight: 'normal',
+    color: COLORS.blue,
+  },
   textRegular16GrayDark: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size16,

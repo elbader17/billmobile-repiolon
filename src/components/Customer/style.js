@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     marginVertical: 5
   },
   containerList:{
-    height: hp('100%') - METRICS.heightHeader - hp('8%'),
+    height: hp('80%'),
     backgroundColor: COLORS.white,
     paddingHorizontal: 18,
     paddingVertical: 10,
@@ -76,7 +76,11 @@ const styles = StyleSheet.create({
     fontSize: FONTS.size16,
     color: COLORS.grayDark,
   },
+  center: {
+    alignItems: 'center',
+  },
   buttonNew: {
+    width: wp('90%'),
     height: hp('8%'),
     backgroundColor: 'transparent',
     borderRadius: 0,

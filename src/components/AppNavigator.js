@@ -48,14 +48,7 @@ const TaxConfigurationStack = createStackNavigator({
 });
 
 const InvoiceStack = createStackNavigator({
-  Invoice: {
-    screen: Invoice,
-    navigationOptions: () => ({
-      title: 'GENERACIÓN DE COMPROBANTE',
-      headerTitleStyle: style.textNavigation,
-      headerTintColor: COLORS.blue,
-    }),
-  },
+  Invoice,
   NewInvoiceItem,
   NewInvoiceCustomer,
   InvoiceSummary: {
