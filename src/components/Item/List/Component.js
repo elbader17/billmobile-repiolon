@@ -15,7 +15,7 @@ class ItemList extends React.Component {
   }
 
   static navigationOptions = {
-    title: 'LISTA PRODUCTOS/SERVICIOS',
+    title: 'LISTA DE PRODUCTOS/SERVICIOS',
     headerTitleStyle: style.headerText,
     headerTintColor: '#3687D1',
   };
@@ -90,14 +90,16 @@ class ItemList extends React.Component {
           behavior={'padding'}
           style={{flex: 1}}
           keyboardVerticalOffset={METRICS.heightHeader}>
-        <ScrollView>
+        
           <View style={style.container}>
             {this.renderSwtichButtons()}
+            <ScrollView style={style.styleScroll}>
             <View style={style.boxInput}>
               {this.renderItems()}
             </View>
+            </ScrollView>
           </View>
-        </ScrollView>
+       
         <View style={style.inLine}>
           <Button
             title=" Crear nuevo Item"
@@ -116,7 +118,7 @@ class ItemList extends React.Component {
             title="Listo"
             onPress={ this.navigateToHome }
             buttonStyle={ style.buttonContinue }
-            titleStyle={style.textRegular18WhiteBold}
+            titleStyle={style.textRegular16WhiteBold}
           />
         </View>
       </KeyboardAvoidingView>

@@ -13,7 +13,8 @@ const styles = StyleSheet.create({
   },
   boxInput: {
     backgroundColor: 'transparent',
-    marginHorizontal: 10
+    marginHorizontal: 10,
+    marginVertical: 5
   },
   boxItems:{
     backgroundColor: 'red'
@@ -27,6 +28,11 @@ const styles = StyleSheet.create({
   boxSelectButton: {
     marginVertical: 12,
     marginHorizontal: 20
+  },
+  styleScroll:{
+    borderWidth: 0.5,
+    borderColor: COLORS.gray,
+    borderRadius: 5,
   },
   inColumnSpaceBetween: {
     flexDirection: "column",
@@ -130,9 +136,9 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size18,
   },
-  textRegular18WhiteBold: {
+  textRegular16WhiteBold: {
     fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size18,
+    fontSize: FONTS.size16,
     color: COLORS.white
   },
   spacingText: {
