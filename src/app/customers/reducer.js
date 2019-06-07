@@ -9,7 +9,6 @@ const initialState = {
 };
 
 function addCustomer({ draftState, customer }) {
-  console.log(customer);
   draftState.customers.push(customer);
   return draftState;
 }

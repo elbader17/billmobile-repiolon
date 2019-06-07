@@ -18,7 +18,6 @@ const createFiscalIdentity = (resource, dispatch, getState) => {
   return instance.post('/v1/invoices_fiscal_identities', { resource })
     .then((response) => {
       const { data } = response.data;
-      console.log(data);
       dispatch(addfiscalIdentityToInvoiceAction(data));
     })
     .catch((error) => {
@@ -33,7 +32,6 @@ const updateFiscalIdentity = (resource, dispatch, getState) => {
   return instance.put(`/v1/invoices_fiscal_identities/${resource.id}`, { resource })
     .then((response) => {
       const { data } = response.data;
-      console.log(response.data);
       dispatch(addfiscalIdentityToInvoiceAction(data));
     })
     .catch((error) => {
@@ -60,7 +58,6 @@ const addFiscalIdentityToInvoice = (name, identity, id) => {
         identification: identity,
         invoice_id: updatedInvoiceId,
       };
-      console.log(resource);
       return createFiscalIdentity(resource, dispatch, getState);
     });
   };

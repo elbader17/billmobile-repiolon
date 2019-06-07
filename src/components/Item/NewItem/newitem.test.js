@@ -54,6 +54,13 @@ test('initial state of isProduct is true', () => {
 });
 
 describe('check title button save item', () => {
+  
+  const props = {
+    navigation: {
+      getParam: jest.fn()
+    }
+  }
+
   test('state isProduct true - button Text GUARDAR PRODUCTO', () => {
     const component = shallow(<NewItem />);
     const button = component.findWhere(node => node.prop('testID') === 'buttonSave');
@@ -62,7 +69,7 @@ describe('check title button save item', () => {
   });
 
   test('state isProduct false - button Text GUARDAR SERVICIO', () => {
-    const component = shallow(<NewItem />);
+    const component = shallow(<NewItem {...props}/>);
     component.setState({isProduct: false});
     const button = component.findWhere(node => node.prop('testID') === 'buttonSave');
     const title = [ 'GUARDAR ', 'SERVICIO' ];

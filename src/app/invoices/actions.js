@@ -46,7 +46,6 @@ const createInvoice = (invoiceDate, voucherType) => {
     });
     return instance.post('v1/invoices', { resource })
       .then((response) => {
-        console.log(response);
         return dispatch(createInvoiceAction(response.data.data));
       })
       .catch((error) => {
@@ -110,6 +109,5 @@ const getInvoice = (id) => {
       });
   };
 };
-
 
 export { listInvoice, getInvoice, createInvoice, updateInvoice };

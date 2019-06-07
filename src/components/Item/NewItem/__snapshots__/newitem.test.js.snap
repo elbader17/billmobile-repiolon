@@ -175,7 +175,6 @@ exports[`test functional component AddItem render correctly component AddItem 1`
         }
       }
       underlineColorAndroid="transparent"
-      value=""
     />
   </View>
   <View
@@ -200,7 +199,7 @@ exports[`test functional component AddItem render correctly component AddItem 1`
         }
       }
     >
-      Valor $ 
+      Precio $ 
     </Text>
     <TextInput
       allowFontScaling={true}

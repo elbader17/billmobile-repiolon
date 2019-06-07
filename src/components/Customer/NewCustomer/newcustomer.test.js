@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import NewCustomer  from './Component';
 
-jest.mock('../../constants/metrics', () => ({
+jest.mock('../../../constants/metrics', () => ({
   METRICS: {
     heightHeader: {} 
   },

@@ -9,7 +9,7 @@ import {
 function createItemAction(item) {
   return {
     type: CREATE_ITEM,
-    item //category, name, price
+    item //id,attributes
   };
 }
 

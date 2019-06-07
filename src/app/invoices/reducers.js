@@ -64,7 +64,6 @@ function addInvoiceItem({ draftState, invoiceItem }) {
 function addFiscalIdentity({ draftState, fiscalIdentity }) {
   draftState.currentInvoice.fiscalIdentity = fiscalIdentity.attributes;
   draftState.currentInvoice.fiscalIdentity.id = fiscalIdentity.id;
-  console.log(draftState);
   return draftState;
 }
 
