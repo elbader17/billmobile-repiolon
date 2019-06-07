@@ -96,7 +96,7 @@ class InvoiceSummary extends React.Component {
                   </View>
                 </View>
                 <View style={style.boxItems3}>
-                  <Text style={style.textRegular14GrayDrak}>
+                  <Text style={style.textRegular14GrayDark}>
                     ${i.price}
                   </Text>
                 </View>
@@ -150,7 +150,7 @@ class InvoiceSummary extends React.Component {
             />
             <View style={[style.boxPriceFinal, style.inLineSpaceBetween]}>
               <Text style={style.textRegular17GrayDark}>TOTAL</Text>
-              <Text style={style.textRegular18GrayDark}>${this.props.invoiceTotal}</Text>
+              <Text style={style.textRegular18GrayDark}>$ {this.props.invoiceTotal}</Text>
             </View>
           </View>
 

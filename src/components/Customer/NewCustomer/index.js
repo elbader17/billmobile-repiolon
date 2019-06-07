@@ -1,17 +1,17 @@
 import { connect } from 'react-redux';
 import NewCustomer from './Component';
-import { addFiscalIdentityToInvoice } from '../../../app/fiscal_identity/actions';
+import { createCustomer } from '../../../app/customers/action';
 
 const mapStateToProps = state => ({
   jwtToken: state.authentication.jwtToken,
   fiscalIdentity: state.fiscalIdentity,
 });
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    addFiscalIdentity: (name, cuit, navigation) => {
-      dispatch(addFiscalIdentityToInvoice(name, cuit))
-        .then(() => navigation.navigate('Invoice'));
+    saveFiscalIdentity: (name, identification, category, navigation) => {
+      dispatch(createCustomer({ name, identification, category }))
+        .then(() => navigation.navigate('CustomerList'));
     },
   };
 };

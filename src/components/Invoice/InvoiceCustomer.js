@@ -38,6 +38,7 @@ const InvoiceCustomer = props => {
             buttonStyle={ style.buttonCheck }
             disabledStyle= { style.buttonCheckDisabled }
             loading = { props.loading }
+            loadingStyle={{top: 2}}
             disabled = { props.loading || !validateDni(props.identity) }
           />
         </View>

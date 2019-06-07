@@ -14,11 +14,10 @@ function createItemAction(item) {
 }
 
 function updateItemAction(id, name, price) {
+  const item = {id, name, price};
   return {
     type: UPDATE_ITEM,
-    id,
-    name,
-    price,
+    item
   };
 }
 
@@ -77,8 +76,9 @@ const updateItem = ({id, category, name, price}) => {
       headers: { 'JWT-TOKEN': getState().authentication.jwtToken },
     });
     return instance.put(`v1/items/${id}`, { resource })
-      .then(() => {
-        dispatch(updateItemAction(id, name, price));
+      .then((response) => {
+        const item = response.data.data;
+        dispatch(updateItemAction(item.id, item.attributes.name, item.attributes.price));
       })
       .catch((error) => {
         console.log(error);

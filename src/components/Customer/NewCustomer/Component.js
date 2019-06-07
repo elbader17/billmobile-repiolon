@@ -11,12 +11,13 @@ class NewCustomer extends React.Component {
 
   constructor(props) {
     super(props);
-    const { fiscalIdentity } = this.props;
+    const customer = this.props.navigation.getParam('customer', this.defaultCustomer());
+
     this.state = {
-      conditionIva: '',
-      category: fiscalIdentity.category,
-      identification: fiscalIdentity.identification,
-      name: fiscalIdentity.name,
+      name: customer.attributes.name,
+      category: customer.attributes.category,
+      identification: customer.attributes.identification,
+      customerId: customer.id,
       loading: false
     }
   }
@@ -27,26 +28,30 @@ class NewCustomer extends React.Component {
     headerTintColor: COLORS.blue,
   };
 
-  newCustomer = () => {
-    const { name, category, identification } = this.state;
+  defaultCustomer= () => {
+    return {
+      attributes: {
+        name: '',
+        identification: '',
+        category: 'monotributo',
+      },
+    };
+  }
+
+  saveCustomer = () => {
+    const { name, category, identification, customerId } = this.state;
     const {
-      addFiscalIdentity,
-      fiscalIdentity,
+      saveFiscalIdentity,
       navigation,
     } = this.props;
     this.setLoading(true);
-    addFiscalIdentity(name, identification, fiscalIdentity.id, navigation)
-      .then(() => {
-        Alert.alert("Cliente Cargado: "+this.props.fiscalIdentity.name+" "+this.props.fiscalIdentity.identification);
-      })
-      .catch(err => {
-        Alert.alert("Error al Ingresar: ",err.message);
-        this.setLoading(false);
-      });
+    console.log(name+'-'+category+'-'+identification);
+    saveFiscalIdentity(name, identification, category, navigation)
   }
 
   setName = (value) => this.setState({ name: value})
   setIdentification = (value) => this.setState({ identification: value })
+  setCategory = (value) => this.setState({ category: value })
   setLoading = (bool) => this.setState({ loading: bool })
 
   render() {
@@ -61,9 +66,9 @@ class NewCustomer extends React.Component {
             <Text style={style.textRegular14White}>CONDICIÓN FRENTE AL IVA</Text>
             <View style={style.boxBtnHolder}>
               <Picker
-                selectedValue={this.state.conditionIva}
+                selectedValue={this.state.category}
                 style= {style.picker}
-                onValueChange={itemValue => this.setState({ conditionIva: itemValue })}>
+                onValueChange={this.setCategory}>
                   {CONDITION_IVA.map((i, index) => (
                     <Picker.Item key={index} color='gray' label={i.label} value={i.value} />
                 ))}
@@ -73,7 +78,7 @@ class NewCustomer extends React.Component {
             <View style={ style.boxBtnHolder }>
               <TextInput
                 onChangeText={this.setIdentification}
-                placeholder="00-00000000-0"
+                placeholder=" 00-00000000-0"
                 value={this.state.identification}
                 placeholderTextColor={COLORS.grayLight}
                 value={this.state.identification}
@@ -91,7 +96,7 @@ class NewCustomer extends React.Component {
               style={[style.textRegular16GrayDark,style.marginLeft5]}
               onChangeText={this.setName}
               value={this.state.name}
-              placeholder="Inserta el Nombre"
+              placeholder=" Inserta el Nombre"
               value={this.state.name}
               placeholderTextColor={COLORS.grayLight}
             />
@@ -100,9 +105,8 @@ class NewCustomer extends React.Component {
       </View>
       </ScrollView>
       <Button
-        onPress={this.newCustomer}
+        onPress={this.saveCustomer}
         title='GUARDAR'
-        testID='buttonNewCustomer'
         buttonStyle={ style.buttonSave }
         titleStyle={ style.textRegular14WhiteBold }
         disabledStyle= { style.buttonSaveDisabled }

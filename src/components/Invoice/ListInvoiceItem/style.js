@@ -1,8 +1,8 @@
 import { StyleSheet } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import { COLORS } from '../../constants/colors';
-import { FONTS } from '../../constants/fonts';
-import { METRICS } from '../../constants/metrics';
+import { COLORS } from '../../../constants/colors';
+import { FONTS } from '../../../constants/fonts';
+import { METRICS } from '../../../constants/metrics';
 
 const styles = StyleSheet.create({
   container: {
@@ -20,10 +20,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'red'
   },
   boxNameItems: {
-    width: wp('40%')
+    width: wp('35%')
   },
   boxPriceItems: {
-    width: wp('30%')
+    width: wp('25%')
   },
   boxSelectButton: {
     marginVertical: 12,
@@ -83,6 +83,11 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     borderColor: COLORS.gray
   },
+  center: {
+    marginTop: 25,
+    justifyContent: 'center', 
+    alignItems: 'center'
+  },
   textRegular14WhiteBold: {
     fontFamily: FONTS.latoSemiBold,
     fontSize: FONTS.size14,
@@ -141,6 +146,11 @@ const styles = StyleSheet.create({
     fontSize: FONTS.size16,
     color: COLORS.white
   },
+  textRegular16GrayDark: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size16,
+    color: COLORS.grayDark,
+  },
   spacingText: {
     marginLeft: 'auto',
   },
@@ -185,18 +195,6 @@ const styles = StyleSheet.create({
     color: COLORS.white,
     textAlign: 'center',
     paddingTop: 15
-  },
-  borde: {
-    borderWidth: 0.5,
-    borderRadius: 4,
-    borderColor: COLORS.grayLight,
-    marginVertical: 1,
-    paddingHorizontal: 4
-  },
-  center: {
-    marginTop: 25,
-    justifyContent: 'center', 
-    alignItems: 'center'
   },
   textTotalPrice: {
     fontFamily: FONTS.latoRegular,
@@ -289,15 +287,22 @@ const styles = StyleSheet.create({
   buttonNewItem: {
     borderRadius: 0,
     borderWidth: 1,
-    borderColor: COLORS.gray,
+    borderColor: COLORS.red,
     width: wp('70%'),
     height: hp('8%'),
     backgroundColor: COLORS.white
   },
+  borde: {
+    borderWidth: 0.5,
+    borderRadius: 4,
+    borderColor: COLORS.grayLight,
+    marginVertical: 1,
+    paddingHorizontal: 4
+  },
   textButtonNewItem:{
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size18,
-    color: COLORS.grayDark
+    color: COLORS.red
   },
   buttonContinue: {
     borderRadius: 0,
@@ -306,7 +311,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.red
   },
   buttonEditRed:{
-    width: wp('15%'),
+    width: wp('14%'),
     height: hp('4%'),
     borderRadius: 2,
     borderWidth: 1,
@@ -315,7 +320,7 @@ const styles = StyleSheet.create({
     opacity: 0.8
   },
   buttonEditBlue:{
-    width: wp('15%'),
+    width: wp('14%'),
     height: hp('4%'),
     borderRadius: 2,
     borderWidth: 1,
@@ -323,15 +328,48 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     opacity: 0.8
   },
-  textButtonEditRed:{
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size12,
-    color: COLORS.red
+  buttonCheckRed: {
+    width: wp('10%'),
+    height: hp('4%'),
+    borderRadius: 2,
+    borderWidth: 1,
+    borderColor: COLORS.red,
+    backgroundColor: 'transparent',
+    opacity: 0.8,
+    marginRight: 3
   },
-  textButtonEditBlue:{
-    fontFamily: FONTS.latoRegular,
+  buttonCheckBlue: {
+    width: wp('10%'),
+    height: hp('4%'),
+    borderRadius: 2,
+    borderWidth: 1,
+    borderColor: COLORS.blue,
+    backgroundColor: 'transparent',
+    opacity: 0.8,
+    marginRight: 3
+  },
+  buttonSelectRed: {
+    width: wp('16%'),
+    height: hp('4%'),
+    borderRadius: 2,
+    borderWidth: 1,
+    borderColor: COLORS.red,
+    backgroundColor: COLORS.red,
+    marginRight: 3
+  },
+  buttonSelectBlue: {
+    width: wp('16%'),
+    height: hp('4%'),
+    borderRadius: 2,
+    borderWidth: 1,
+    borderColor: COLORS.blue,
+    backgroundColor: COLORS.blue,
+    marginRight: 3
+  },
+  textButtonAñadir:{
+    fontFamily: FONTS.latoSemiBold,
     fontSize: FONTS.size12,
-    color: COLORS.blue
+    color: COLORS.white
   },
   buttonRed: {
     borderRadius: 0,

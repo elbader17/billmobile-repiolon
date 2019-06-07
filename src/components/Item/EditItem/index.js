@@ -1,8 +1,9 @@
 import { connect } from 'react-redux';
 import NewItem from '../NewItem/Component';
-import { updateItem, listItems } from '../../../app/items/actions';
+import { updateItem } from '../../../app/items/actions';
 
 const mapStateToProps = state => ({
+  
 });
 
 function mapDispatchToProps(dispatch) {
@@ -10,10 +11,7 @@ function mapDispatchToProps(dispatch) {
     saveItem: (attributes, navigation) => {
       dispatch(updateItem(attributes))
         .then(() => {
-          dispatch(listItems())
-            .then(() => {
-              navigation.navigate('ItemList');
-            })
+          navigation.navigate('ItemList');
         });
     },
   };

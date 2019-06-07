@@ -19,6 +19,16 @@ function setItems({ draftState, items }) {
   return draftState;
 }
 
+function setItem({ draftState, item }) {
+  function findItem(x) { 
+    return x.id === item.id;
+  };
+  const itemFind = draftState.items.find(findItem);
+  itemFind.attributes.name = item.name;
+  itemFind.attributes.price = item.price;
+  return draftState;
+}
+
 export default itemsReducer = (state = initialState, action) => {
   return producer(state, (draftState) => {
     switch (action.type) {
@@ -33,9 +43,9 @@ export default itemsReducer = (state = initialState, action) => {
           items: action.items,
         });
       case UPDATE_ITEM:
-        return setItems({
+        return setItem({
           draftState,
-          items: action.item,
+          item: action.item,
         });
       default:
         return draftState;

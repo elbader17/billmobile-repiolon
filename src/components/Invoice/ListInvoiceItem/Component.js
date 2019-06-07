@@ -3,26 +3,26 @@ import { View, Text, TouchableOpacity, ScrollView, KeyboardAvoidingView, Activit
 import { Button } from "react-native-elements";
 import { withNavigation } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Ionicons';
-import style from '../style';
+import style from './style';
 import { METRICS } from '../../../constants/metrics';
 import { orderByName } from '../../../utils/functions';
 
-class ItemList extends React.Component {
+class ListInvoiceItem extends React.Component {
   constructor(props){
     super(props);
-    this.props.getItemList();
     this.state = {
       isProduct: true,
-      loading: false
+      loading: true,
+      touchItem: null
     };
   }
 
   static navigationOptions = ({navigation}) => {
     return {
-      title: 'LISTA DE PRODUCTOS/SERVICIOS',
+      title: 'ELEGIR PRODUCTOS/SERVICIOS',
       headerTitleStyle: style.headerText,
       headerTintColor: '#3687D1',
-      headerLeft: <TouchableOpacity onPress={()=> navigation.navigate('Home')}>
+      headerLeft: <TouchableOpacity onPress={()=> navigation.navigate('Invoice')}>
                     <Icon name="md-arrow-back" size={24} color="#3687d1" style={{marginLeft:20}}/>
                   </TouchableOpacity> 
     }  
@@ -30,19 +30,15 @@ class ItemList extends React.Component {
 
   componentWillMount() {
     this.props.getItemList()
-      .then(()=> {this.setState({loading: true})})
+     .then(()=> {this.setState({loading: false})})
   }
 
   navigateToNewItem = () => {
-    this.props.navigation.navigate('NewItem');
+    this.props.navigation.navigate('NewInvoiceItem');
   }
 
-  navigateToHome = () => {
-    this.props.navigation.navigate('Home');
-  }
-
-  navigateToEditItem = (item) => {
-    this.props.navigation.navigate('EditItem', { item });
+  navigateToInvoice = () => {
+    this.props.navigation.navigate('Invoice');
   }
 
   renderLoading = () => {
@@ -52,6 +48,36 @@ class ItemList extends React.Component {
         <Text style={style.textRegular16GrayDark} >Cargando</Text>
       </View>
     );
+  }
+
+  /*editItemInvoice = item => {
+    //this.props.navigation.navigate('EditItem', { item });
+    const id = item.id;
+    const name = item.attributes.name;
+    const category = item.attributes.category;
+    const price = item.attributes.price;
+    const attributes = {
+      id,
+      category,
+      name,
+      price
+    }
+    updateItem(attributes, this.props.navigation)
+  }*/
+
+  saveItemInvoice = (id, category, name, price) => {
+    this.setState({touchItem: id});
+    const { saveItemInvoice } = this.props;
+    const resourse = {
+      category,
+      name,
+      price
+    }
+    saveItemInvoice(resourse)
+      .then(() => {
+        this.setState({touchItem: null});
+        this.props.navigation.navigate('Invoice')
+      });
   }
 
   renderItems = () => {
@@ -73,11 +99,21 @@ class ItemList extends React.Component {
               </Text>
             </View>
             <Button
+              title = 'Añadir'
+              onPress={() => this.saveItemInvoice(item.id, item.attributes.category, item.attributes.name, item.attributes.price) }
+              buttonStyle={ this.state.isProduct ? style.buttonSelectBlue : style.buttonSelectRed }
+              titleStyle={ style.textButtonAñadir }
+              loading={this.state.touchItem === item.id ? true : false}
+              loadingStyle={{top: 4}}
+              //icon={this.state.isProduct ? <Icon name="md-checkmark" size={20} color="#3687d1"/> : <Icon name="md-checkmark" size={20} color="#EE6123"/>}
+              //buttonStyle={ this.state.isProduct ? style.buttonCheckBlue : style.buttonCheckRed }
+            />
+            {/*<Button
               title='Editar'
-              onPress={() => this.navigateToEditItem(item) }
+              onPress={() => this.editItemInvoice(items, item) }
               buttonStyle={ this.state.isProduct ? style.buttonEditRed : style.buttonEditBlue }
               titleStyle={ this.state.isProduct ? style.textButtonEditRed : style.textButtonEditBlue }
-            />
+            />*/}
           </View>
         );
       });
@@ -113,14 +149,14 @@ class ItemList extends React.Component {
           {this.renderSwtichButtons()}
           <ScrollView style={style.styleScroll}>
             <View style={style.boxInput}>
-              {this.state.loading ? this.renderItems() : this.renderLoading()}
+              {this.state.loading ? this.renderLoading() : this.renderItems()}
             </View>
           </ScrollView>
         </View>
        
         <View style={style.inLine}>
           <Button
-            title=" Crear nuevo Item"
+            title=" Añadir Nuevo"
             onPress={ this.navigateToNewItem }
             buttonStyle={ style.buttonNewItem }
             titleStyle={style.textButtonNewItem}
@@ -134,7 +170,7 @@ class ItemList extends React.Component {
           />
           <Button
             title="Listo"
-            onPress={ this.navigateToHome }
+            onPress={ this.navigateToInvoice }
             buttonStyle={ style.buttonContinue }
             titleStyle={style.textRegular16WhiteBold}
           />
@@ -144,4 +180,4 @@ class ItemList extends React.Component {
   }
 }
 
-export default withNavigation(ItemList);
+export default withNavigation(ListInvoiceItem);

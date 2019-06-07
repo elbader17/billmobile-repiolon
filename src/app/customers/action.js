@@ -40,6 +40,7 @@ const createCustomer = ({ name, identification, category }) => {
     const instance = axios.create({
       headers: { 'JWT-TOKEN': getState().authentication.jwtToken },
     });
+    console.log(getState().authentication.jwtToken);
     return instance.post('v1/fiscal_identities', { resource })
       .then((response) => {
         console.log(response.data);

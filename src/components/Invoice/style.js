@@ -45,15 +45,24 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     elevation: 20,
   },
+  styleScroll: {
+    borderWidth: 1,
+    borderColor: COLORS.grayLight,
+    borderRadius: 5,
+    marginVertical: 7,
+    marginHorizontal: 7
+  },
   boxItemsInvoice: {
-    maxHeight: hp('23%'),
+    maxHeight: hp('24%'),
     backgroundColor: 'transparent',
     paddingTop: 2,
   },
   boxItemsInvoiceTotal: {
-    height: hp('7%'),
+    height: hp('4.5%'),
     backgroundColor: 'transparent',
-    paddingHorizontal: 15
+    paddingHorizontal: 15,
+    
+    justifyContent:'flex-end'
   },
   boxItems1: {
     flex: 1,
@@ -77,6 +86,14 @@ const styles = StyleSheet.create({
   inLineSpaceBetween: {
     flexDirection: "row",
     justifyContent: 'space-between',
+  },
+  borde: {
+    borderWidth: 0.5,
+    borderRadius: 4,
+    borderColor: COLORS.grayLight,
+    marginVertical: 1,
+    paddingVertical: 3,
+    paddingHorizontal: 5
   },
   inColumnSpaceBetween: {
     flexDirection: "column",
@@ -145,7 +162,7 @@ const styles = StyleSheet.create({
   },
   lineGrayLight: {
     backgroundColor: COLORS.grayLight,
-    height: 1,
+    height: 0.5,
   },
   lineGrayDark: {
     backgroundColor: COLORS.grayDark,
@@ -169,7 +186,8 @@ const styles = StyleSheet.create({
     marginVertical: 5
   },
   listItems: {
-    marginHorizontal: 15,
+    marginVertical: 4,
+    marginHorizontal: 5,
   },
   containerFinalConsumer: {
     maxHeight: hp('10%'),
@@ -348,7 +366,7 @@ const styles = StyleSheet.create({
     height: hp('5%'),
   },
   buttonCheckDisabled: {
-    backgroundColor: COLORS.gray,
+    backgroundColor: COLORS.grayLight,
     borderColor: COLORS.grayDark,
     borderRadius: 3,
     borderWidth: 1,
@@ -404,6 +422,10 @@ const styles = StyleSheet.create({
   center: {
     flex: 1,
     justifyContent: 'center'
+  },
+  begin: {
+    flex: 1,
+    justifyContent: 'flex-start'
   }
 });
 

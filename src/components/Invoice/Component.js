@@ -47,7 +47,7 @@ class Invoice extends React.Component {
   setLoading = (bool) => this.setState({ loading: bool });
   changeTypeCustomer = () => this.setState({cf:true});
   navigateClient = () => this.props.navigation.navigate('NewInvoiceCustomer');
-  navigateAddItems = () => this.props.navigation.navigate('NewInvoiceItem');
+  navigateAddItems = () => this.props.navigation.navigate('ListInvoiceItem');
   navigateToBewInvoice = () => this.props.navigation.navigate('InvoiceSummary');
   
   updateInvoiceItemQuantity = (invoiceItemId, quantity) => {

@@ -31,8 +31,7 @@ class CustomerList extends React.Component {
   }
 
   renderCustomers() {
-    const customers = [{attributes: {name: 'Martin Daniotti SRL', identification: '20363095721'}},{attributes: {name: 'Martin Daniotti SRL', identification: '20363095721'}},{attributes: {name: 'Martin Daniotti SRL', identification: '20363095721'}},{attributes: {name: 'Martin Daniotti SRL', identification: '20363095721'}},{attributes: {name: 'Martin Daniotti SRL', identification: '20363095721'}},{attributes: {name: 'Martin Daniotti SRL', identification: '20363095721'}},{attributes: {name: 'Martin Daniotti SRL', identification: '20363095721'}},{attributes: {name: 'Martin Daniotti SRL', identification: '20363095721'}},{attributes: {name: 'Martin Daniotti SRL', identification: '20363095721'}}]
-    return customers.map((customer) => {
+    return this.props.customers.map((customer) => {
        return (
         <View>
         <View style={style.inLineSpaceBetween} key={customer.id}>

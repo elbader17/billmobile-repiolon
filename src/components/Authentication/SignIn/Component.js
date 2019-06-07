@@ -30,7 +30,6 @@ class SignIn extends React.Component {
     signIn(email, password)
     .then( (_data) => {
       if(this.props.jwtToken !== ''){
-        console.log(this.props);
         this.navigateNext();
       } else {
         if ( _data.message === 'User does not exist.'){
