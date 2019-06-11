@@ -5,32 +5,26 @@ import { validateEmail, validatePass, validateConfirmPass} from '../utils/valida
 import style from '../components/Authentication/SignUp/style';
 import stylee from '../components/TaxConfiguration/Configure/style'
 
-export const showMessagePassFormat = (messagePassFormat, password) => {
+export const showBarPassFormat = (messagePassFormat, password) => {
   if (messagePassFormat) {
     return(
-      <Text style={validatePass(password) ? style.textFormatPassValid : style.textFormatPass }>
-        Debe contener al menos: 8 Caracteres, 1 Mayúscula, 1 Número y 1 Caracter Especial
-      </Text>
+      <View style={validatePass(password) ? style.lineFormatValid : style.lineFormatInvalid }></View>
     )
   }
 }
 
-export const showMessageEmailFormat = (messageEmailFormat, email) => {
+export const showBarEmailFormat = (messageEmailFormat, email) => {
   if (messageEmailFormat) {
     return(
-      <Text style={validateEmail(email) ? style.textFormatEmailValid : style.textFormatEmail }>
-        Nombre@Dominio.xxx
-      </Text>
+      <View style={validateEmail(email) ? style.lineFormatValid : style.lineFormatInvalid }></View>
     )
   }
 }
 
-export const showMessageMatchPass = (messageMatchPass, pass, confirmPass) => {
+export const showBarMatchPass = (messageMatchPass, pass, confirmPass) => {
   if (messageMatchPass) {
     return(
-      <Text style={validateConfirmPass(pass, confirmPass) ? style.textConfirmPassValid : style.textConfirmPass }>
-        Contraseñas coincidentes
-      </Text>
+      <View style={validateConfirmPass(pass, confirmPass) ? style.lineFormatValid : style.lineFormatInvalid }></View>
     )  
   }
 }

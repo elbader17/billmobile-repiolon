@@ -9,6 +9,7 @@ import {
 } from 'react-native-dotenv';
 import aws_exports from '../constants/aws-exports';
 import AppNavigator from './AppNavigator';
+import FlashMessage from "react-native-flash-message";
 
 Amplify.configure(aws_exports);
 
@@ -21,8 +22,9 @@ class App extends React.Component {
   render() {
     console.disableYellowBox = true;
     return (
-      <Provider store={store}>
+      <Provider store={store}>    
         <AppNavigator />
+        <FlashMessage position="top" animated={true} />
       </Provider>
     );
   }

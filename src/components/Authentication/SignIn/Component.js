@@ -1,5 +1,12 @@
 import React from 'react';
 import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
+import { showMessage } from "react-native-flash-message";
+import { 
+  messageErrorSignIn,
+  messageErrorSignInConfirm,
+  messageErrorSignInExist,
+  messageErrorSignInData
+} from '../../../utils/messagesNotifications';
 import { Button } from "react-native-elements";
 import { Alert } from 'react-native';
 import style from '../SignUp/style';
@@ -33,19 +40,19 @@ class SignIn extends React.Component {
         this.navigateNext();
       } else {
         if ( _data.message === 'User does not exist.'){
-          Alert.alert(_data.message);
+          showMessage(messageErrorSignInExist)
           this.props.navigation.navigate('Authentication');
         }else if ( _data.message === 'User is not confirmed.'){
-          Alert.alert(_data.message);
+          showMessage(messageErrorSignInConfirm);
           this.props.navigation.navigate('ConfirmationCodeRegister', { email: this.state.email });
         }else {
-          Alert.alert(_data.message);
+          showMessage(messageErrorSignInData);
           this.props.navigation.navigate('Authentication');
         }
         this.setLoading(false);
       }
     })
-    .catch(err => Alert.alert("Error al Ingresar: ",err.message));
+    .catch(err => showMessage(messageErrorSignIn)); //incluir err.message
   }
 
   navigateNext = () => {

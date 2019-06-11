@@ -1,5 +1,6 @@
 import { Auth } from 'aws-amplify';
-import { Alert } from 'react-native';
+import { showMessage } from "react-native-flash-message";
+import { messageErrorRegister } from '../../utils/messagesNotifications';
 import { getFiscalIdentity } from '../user_service/actions';
 import {
   SET_JWT_TOKEN,
@@ -47,7 +48,7 @@ const signUp = (password, email, attributes) => {
         else
           return data.userConfirmed;
       })
-      .catch(err => Alert.alert('Error al Registrar: ', err.message));
+      .catch(err => showMessage(messageErrorRegister));
   };
 };
 

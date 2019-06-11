@@ -1,12 +1,18 @@
 import React from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
+import { showMessage, hideMessage } from "react-native-flash-message";
 import { Button } from "react-native-elements";
 import { COLORS } from '../../../constants/colors';
 import { 
-  showMessageEmailFormat, 
-  showMessagePassFormat, 
-  showMessageMatchPass 
+  showBarEmailFormat, 
+  showBarPassFormat, 
+  showBarMatchPass
 } from '../../../utils/showMessage';
+import { 
+  messageEmail, 
+  messagePass, 
+  messageConfirmPass
+} from '../../../utils/messagesNotifications'
 import { validateDataSignUp } from '../../../utils/validations';
 import style from './style';
 
@@ -24,7 +30,8 @@ class SignUp extends React.Component {
       messagePassFormat: false,
       messageEmailFormat: false,
       messageMatchPass: false,
-      loading: false
+      loading: false,
+      typeMessage: 'danger'
     };
   }
 
@@ -52,6 +59,37 @@ class SignUp extends React.Component {
     })
   }
 
+  showFormatMessage = type => {
+    switch (type) {
+      case 'email':
+        this.setState({messageEmailFormat: true});
+        showMessage(messageEmail); 
+        break;  
+      case 'pass':
+        this.setState({messagePassFormat: true});
+        showMessage(messagePass);  
+        break; 
+      case 'confirmpass':
+        this.setState({messageMatchPass: true});
+        showMessage(messageConfirmPass);  
+        break; 
+      default: null
+    }
+  }
+  
+  hideFormatMessage = type => {
+    switch (type) {
+      case 'email':
+        this.setState({messageEmailFormat: false});
+      case 'pass':
+        this.setState({messagePassFormat: false});
+      case 'confirmpass':
+        this.setState({messageMatchPass: false});
+      default: null
+    }
+    hideMessage();   
+  }
+
   setName = (value) => this.setState({ name: value})
   setEmail = (value) => this.setState({ email: value })
   setPassword = (value) => this.setState({ password: value })
@@ -75,14 +113,14 @@ class SignUp extends React.Component {
             />
           </View>
           <View style={ style.textBoxBtnHolder }>
-            {showMessageEmailFormat(this.state.messageEmailFormat, this.state.email)}
+            {showBarEmailFormat(this.state.messageEmailFormat, this.state.email)}
             <TextInput
               label="Email"
               value={ this.state.email }
               onChange={ this.validateEmail }
               onChangeText={ this.setEmail }
-              onFocus={() => this.setState({messageEmailFormat: true})}
-              onEndEditing={() => this.setState({messageEmailFormat: false})}
+              onFocus={() => this.showFormatMessage('email')}
+              onEndEditing={() => this.hideFormatMessage('email')}
               placeholder="Tu email"
               placeholderTextColor={COLORS.gray}
               style={ style.textBox }
@@ -93,16 +131,16 @@ class SignUp extends React.Component {
             />
           </View>
           <View style={ style.textBoxBtnHolder }>
-            {showMessagePassFormat(this.state.messagePassFormat, this.state.password)}
             <View>
+            {showBarPassFormat(this.state.messagePassFormat, this.state.password)}
             <View style={style.inputPass}>
             <TextInput
               label="Password"
               value={ this.state.password }
               onChange={ this.validatePass }
               onChangeText={ this.setPassword }
-              onFocus={() => this.setState({messagePassFormat: true})}
-              onEndEditing={() => this.setState({messagePassFormat: false})}
+              onFocus={() => this.showFormatMessage('pass')}
+              onEndEditing={() => this.hideFormatMessage('pass')}
               placeholder="Contraseña"
               placeholderTextColor={COLORS.gray}
               style={ style.textBoxPass }
@@ -123,14 +161,14 @@ class SignUp extends React.Component {
           </View>
           <View style={ style.textBoxBtnHolder }>
             <View>
-            {showMessageMatchPass(this.state.messageMatchPass, this.state.password, this.state.confirmPassword)}
+            {showBarMatchPass(this.state.messageMatchPass, this.state.password, this.state.confirmPassword)}
             <View style={style.inputPass}>
               <TextInput
                 label="ConfirmPassword"
                 onChange={ this.validateConfirmPass }
                 onChangeText={ this.setConfirmPassword }
-                onFocus={() => this.setState({messageMatchPass: true})}
-                onEndEditing={() => this.setState({messageMatchPass: false})}
+                onFocus={() => this.showFormatMessage('confirmpass')}
+                onEndEditing={() => this.hideFormatMessage('confirmpass')}
                 value={ this.state.confirmPassword }
                 placeholder="Confirmar Contraseña"
                 placeholderTextColor={COLORS.gray}

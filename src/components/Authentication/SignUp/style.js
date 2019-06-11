@@ -17,71 +17,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: 5
   },
-  textFormatPass: {
-    fontFamily: FONTS.latoSemiBold,
-    fontSize: FONTS.size11,
-    color: COLORS.red,
-    borderWidth: 0.5,
-    borderRadius: 3,
-    borderColor: COLORS.red,
-    textAlign: 'center',
-    marginBottom: 3,
-    opacity: 0.9
+  lineFormatInvalid: {
+    backgroundColor: COLORS.red,
+    height: 2,
+    marginHorizontal: 1,
+    borderRadius: 1,
+    opacity: 0.6
   },
-  textFormatPassValid: {
-    fontFamily: FONTS.latoSemiBold,
-    fontSize: FONTS.size11,
-    color: 'green',
-    borderWidth: 0.5,
-    borderRadius: 3,
-    borderColor: 'green',
-    textAlign: 'center',
-    marginBottom: 3,
-    opacity: 0.9
-  },
-  textFormatEmail: {
-    fontFamily: FONTS.latoSemiBold,
-    fontSize: FONTS.size11,
-    color: COLORS.red,
-    borderWidth: 0.5,
-    borderRadius: 3,
-    borderColor: COLORS.red,
-    textAlign: 'center',
-    marginBottom: 3,
-    opacity: 0.9
-  },
-  textFormatEmailValid: {
-    fontFamily: FONTS.latoSemiBold,
-    fontSize: FONTS.size11,
-    color: 'green',
-    borderWidth: 0.5,
-    borderRadius: 3,
-    borderColor: 'green',
-    textAlign: 'center',
-    marginBottom: 3,
-    opacity: 0.9
-  },
-  textConfirmPass: {
-    fontFamily: FONTS.latoSemiBold,
-    fontSize: FONTS.size11,
-    color: COLORS.red,
-    borderWidth: 0.5,
-    borderRadius: 3,
-    borderColor: COLORS.red,
-    textAlign: 'center',
-    marginBottom: 3,
-    opacity: 0.9
-  },
-  textConfirmPassValid: {
-    fontFamily: FONTS.latoSemiBold,
-    fontSize: FONTS.size11,
-    color: 'green',
-    borderWidth: 0.5,
-    borderRadius: 3,
-    borderColor: 'green',
-    textAlign: 'center',
-    marginBottom: 3,
-    opacity: 0.9
+  lineFormatValid: {
+    backgroundColor: 'green',
+    height: 2,
+    marginHorizontal: 1,
+    borderRadius: 1,
+    opacity: 0.5
   },
   textBox: {
     fontFamily: FONTS.latoRegular,
