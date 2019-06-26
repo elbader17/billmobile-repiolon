@@ -2,9 +2,12 @@ import React from 'react';
 import { View, Text, ImageBackground } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Button } from "react-native-elements";
+import { showMessage } from "react-native-flash-message";
+import { messageLogOut, messageOptions } from '../../utils/messagesNotifications';
 import style from './style';
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { ScrollView } from 'react-native-gesture-handler';
 
 class Home extends React.Component {
 
@@ -16,17 +19,9 @@ class Home extends React.Component {
     }
   }
 
-  customerListNavigate = () => {
-    this.props.navigation.navigate('CustomerList');
-  }
-
-  itemListNavigate = () => {
-    this.props.navigation.navigate('ItemList');
-  }
-
-  newInvoiceNavigate = () => {
-    this.props.navigation.navigate('Invoice');
-  }
+  customerListNavigate = () => this.props.navigation.navigate('CustomerList');
+  itemListNavigate = () => this.props.navigation.navigate('ItemList');
+  newInvoiceNavigate = () => this.props.navigation.navigate('Invoice');
 
   render() {
     return(
@@ -34,11 +29,13 @@ class Home extends React.Component {
         <View style={style.container}>
           
           <View style={style.containerHeader}>
+          <ImageBackground source={require('../../images/imgHome.png')} style={{width: '100%', height: '99.9%'}}> 
             <View style={[style.header,style.inLineSpaceBetween]}>
               <View style={style.inLine}>
               <Button
                 icon={<Icon name="md-more" size={30} color="white" />}
                 buttonStyle={style.buttonHeader}
+                onPress={() => showMessage(messageOptions)}
               />
               <Text style={[style.textRegular20White,{marginLeft:20}]}>
                 {this.state.name}
@@ -47,18 +44,39 @@ class Home extends React.Component {
               <Button
                 icon={<Icon name="md-settings" size={25} color="white" />}
                 buttonStyle={style.buttonHeader}
+                onPress={() => showMessage(messageLogOut)}
               />
             </View>
-            
+          </ImageBackground>
+          </View>
+
+          <View style={style.containerBar}>
+            <Text style={style.textRegular11GrayDark}>FACTURACIÓN DEL PERÍODO</Text>
+            <View style={[style.inLine,{borderRadius: 3}]}>  
+              <View style={style.lineBlue}></View>
+              <View style={style.lineWhite}></View>
+            </View>
+            <Text style={style.textRegular24GrayDark}>20.000/250.000</Text>
           </View>
           
           <View style={style.containerStatictis}>
-          
+            <View style={style.inLine}>
+              <View style={style.boxCobros}>
+                <Text style={style.textRegular36GrayDark}>02/12</Text>
+                <Text style={style.textRegular12Gray}>Cobros Pendientes</Text>
+              </View>
+              <View style={style.boxFacturacion}>
+                <Text style={style.textRegular36GrayDark}>20 mil</Text>
+                <Text style={[style.textRegular12Gray,{textAlign: 'center'}]}>
+                  Total Facturación en el período
+                </Text>
+              </View>
+            </View>
           </View>
 
           <View style={style.containerListCustomer}>
             <View style={[style.inLineSpaceBetween, style.margin]}>
-              <Text style={style.textRegular14Gray}>
+              <Text style={style.textLight14GrayDark}>
                 CLIENTES RECIENTES
               </Text>
               <Button
@@ -67,17 +85,42 @@ class Home extends React.Component {
               />
             </View>
             <View style={style.lineGrayLight}></View>
-            {/*<View style={[style.inLineSpaceBetween, {margin: 10}]}>
-              <Text style={style.textRegular14GrayDark}>
-                { this.props.name}
-              </Text>
-              <Button
-                icon={<Icon name="md-paper" size={20} color="#3687d1"/>}
-                title=' $'
-                buttonStyle={ style.buttonShowInvoice }
-                titleStyle={ style.textButtonInvoice }
-              />
-            </View> */} 
+              <ScrollView style={style.scrollCustomers}>
+                
+                <View style={[style.inLineSpaceBetween,{marginHorizontal: 9, marginVertical: 5}]}>
+                  <Text style={style.textRegular14GrayDark}>Cliente A</Text>
+                  <Button
+                    icon={<Icon name="md-paper" size={20} color="#3687d1"/>}
+                    title=' $'
+                    buttonStyle={ style.buttonShowInvoice }
+                    titleStyle={ style.textButtonInvoice }
+                  />
+                </View>
+                <View style={[style.inLineSpaceBetween,{marginHorizontal: 9, marginVertical: 4}]}>
+                  <Text style={style.textRegular14GrayDark}>Cliente B</Text>
+                  <Button
+                    icon={<Icon name="md-paper" size={20} color="#3687d1"/>}
+                    title=' $'
+                    buttonStyle={ style.buttonShowInvoice }
+                    titleStyle={ style.textButtonInvoice }
+                  />
+                </View>
+                <View style={[style.inLineSpaceBetween,{marginHorizontal: 9, marginVertical: 4}]}>
+                  <Text style={style.textRegular14GrayDark}>Cliente C</Text>
+                  <Button
+                    icon={<Icon name="md-paper" size={20} color="#3687d1"/>}
+                    title=' $'
+                    buttonStyle={ style.buttonShowInvoice }
+                    titleStyle={ style.textButtonInvoice }
+                  />
+                </View>
+
+              </ScrollView>
+            <Button
+              title='Ver todos'
+              buttonStyle={style.buttonViewAll}
+              titleStyle={style.textRegular16Red}
+            />
           </View>
           
             <ActionButton buttonColor='#EE6123'>

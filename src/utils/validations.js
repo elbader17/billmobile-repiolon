@@ -29,11 +29,9 @@ export const validateDataSignUp = (pass, confirmPass, email, name) => {
 }
 
 //Condiciones Necesarias para Agregar un nuevo Item
-export const validateAddItem = (product, service, price) => {
-  if((product!="" || service!="") && (price!="" || NUMBER.test(price)))
-    return true;
-  else
-    return false;
+export const validateAddItem = (name, price) => {
+  if(name!="" && price!="") return true;
+  else return false;
 }
 
 //Condiciones Necesarias para crear un Invoice

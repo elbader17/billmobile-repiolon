@@ -35,13 +35,14 @@ const createCustomer = ({ name, identification, category }) => {
     name,
     identification,
   };
-
   return (dispatch, getState) => {
     const instance = axios.create({
       headers: { 'JWT-TOKEN': getState().authentication.jwtToken },
     });
+    console.log(getState().authentication.jwtToken);
     return instance.post('v1/fiscal_identities', { resource })
       .then((response) => {
+        console.log(response);
         return dispatch(createCustomerAction(response.data));
       })
       .catch((error) => {
@@ -51,13 +52,13 @@ const createCustomer = ({ name, identification, category }) => {
 };
 
 const listCustomers = () => {
-
   return (dispatch, getState) => {
     const instance = axios.create({
       headers: { 'JWT-TOKEN': getState().authentication.jwtToken },
     });
     return instance.get('v1/fiscal_identities')
       .then((resources) => {
+        console.log(resources);
         dispatch(customerListAction(resources.data));
       })
       .catch((error) => {

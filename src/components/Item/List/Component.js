@@ -10,8 +10,9 @@ import { orderByName } from '../../../utils/functions';
 class ItemList extends React.Component {
   constructor(props){
     super(props);
-    this.props.getItemList();
+    //this.props.getItemList();
     this.state = {
+      //items: this.props.items,
       isProduct: true,
       loading: false
     };
@@ -57,6 +58,7 @@ class ItemList extends React.Component {
   renderItems = () => {
     const category = this.state.isProduct ? 'product' : 'service';
     const items = this.props.items.slice().sort(orderByName);
+    //const itemss = this.state.items;
     return items
       .filter(item => item.attributes.category === category)
       .map((item) => {
@@ -120,7 +122,7 @@ class ItemList extends React.Component {
        
         <View style={style.inLine}>
           <Button
-            title=" Crear nuevo Item"
+            title=" Crear Nuevo"
             onPress={ this.navigateToNewItem }
             buttonStyle={ style.buttonNewItem }
             titleStyle={style.textButtonNewItem}

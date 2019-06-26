@@ -1,11 +1,13 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, ScrollView, KeyboardAvoidingView, ActivityIndicator} from 'react-native';
 import { Button } from "react-native-elements";
+import { showMessage } from "react-native-flash-message";
 import { withNavigation } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Ionicons';
 import style from './style';
 import { METRICS } from '../../../constants/metrics';
 import { orderByName } from '../../../utils/functions';
+import { messageAddItemInvoice } from '../../../utils/messagesNotifications'
 
 class ListInvoiceItem extends React.Component {
   constructor(props){
@@ -13,6 +15,7 @@ class ListInvoiceItem extends React.Component {
     this.state = {
       isProduct: true,
       loading: true,
+      touchItemsList: [],
       touchItem: null
     };
   }
@@ -35,6 +38,7 @@ class ListInvoiceItem extends React.Component {
 
   navigateToNewItem = () => {
     this.props.navigation.navigate('NewInvoiceItem');
+    showMessage(messageAddItemInvoice);
   }
 
   navigateToInvoice = () => {
@@ -56,17 +60,17 @@ class ListInvoiceItem extends React.Component {
     const name = item.attributes.name;
     const category = item.attributes.category;
     const price = item.attributes.price;
-    const attributes = {
-      id,
-      category,
-      name,
-      price
-    }
+    const attributes = { id, category, name, price }
     updateItem(attributes, this.props.navigation)
   }*/
 
+  finItemListForId = (array, elementId) => {
+    const findItem = x => x === elementId;
+    return array.find(findItem);
+  } 
+
   saveItemInvoice = (id, category, name, price) => {
-    this.setState({touchItem: id});
+    this.setState({touchItemsList: [...this.state.touchItemsList, id], touchItem: id});
     const { saveItemInvoice } = this.props;
     const resourse = {
       category,
@@ -76,14 +80,28 @@ class ListInvoiceItem extends React.Component {
     saveItemInvoice(resourse)
       .then(() => {
         this.setState({touchItem: null});
-        this.props.navigation.navigate('Invoice')
       });
+  }
+
+  setDisabled = id => {
+    const itemId = this.finItemListForId(this.state.touchItemsList,id);
+    if (itemId === id) return true;
+    else return false;
+  }
+
+  renderLoading = () => {
+    return (
+      <View style={style.center}>
+        <ActivityIndicator size="large" color="gray" style={{paddingBottom: 15}}/>
+        <Text style={style.textRegular16GrayDark} >Cargando</Text>
+      </View>
+    );
   }
 
   renderItems = () => {
     const category = this.state.isProduct ? 'product' : 'service';
-    const items = this.props.items.slice().sort(orderByName);
-    return items
+    const itemsList = this.props.items.slice().sort(orderByName);
+    return itemsList
       .filter(item => item.attributes.category === category)
       .map((item) => {
         return (
@@ -101,12 +119,13 @@ class ListInvoiceItem extends React.Component {
             <Button
               title = 'Añadir'
               onPress={() => this.saveItemInvoice(item.id, item.attributes.category, item.attributes.name, item.attributes.price) }
-              buttonStyle={ this.state.isProduct ? style.buttonSelectBlue : style.buttonSelectRed }
-              titleStyle={ style.textButtonAñadir }
-              loading={this.state.touchItem === item.id ? true : false}
+              buttonStyle = { this.state.isProduct ? style.buttonSelectBlue : style.buttonSelectRed }
+              titleStyle = { style.textButtonAñadir }
+              loading = { this.state.touchItem === item.id ? true : false }
               loadingStyle={{top: 4}}
-              //icon={this.state.isProduct ? <Icon name="md-checkmark" size={20} color="#3687d1"/> : <Icon name="md-checkmark" size={20} color="#EE6123"/>}
-              //buttonStyle={ this.state.isProduct ? style.buttonCheckBlue : style.buttonCheckRed }
+              disabled = { this.setDisabled(item.id) }
+              disabledStyle = { style.buttonSelectDisabled }
+              disabledTitleStyle = { style.textButtonAñadirDisabled }
             />
             {/*<Button
               title='Editar'
@@ -149,14 +168,14 @@ class ListInvoiceItem extends React.Component {
           {this.renderSwtichButtons()}
           <ScrollView style={style.styleScroll}>
             <View style={style.boxInput}>
-              {this.state.loading ? this.renderLoading() : this.renderItems()}
+              {this.state.loading ? this.renderLoading(): this.renderItems()}
             </View>
           </ScrollView>
         </View>
        
         <View style={style.inLine}>
           <Button
-            title=" Añadir Nuevo"
+            title=" Crear Nuevo"
             onPress={ this.navigateToNewItem }
             buttonStyle={ style.buttonNewItem }
             titleStyle={style.textButtonNewItem}

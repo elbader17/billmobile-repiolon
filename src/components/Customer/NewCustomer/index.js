@@ -9,7 +9,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    saveFiscalIdentity: (name, identification, category, navigation) => {
+    saveFiscalIdentity: (name, identification, category, id, navigation) => {
       dispatch(createCustomer({ name, identification, category }))
         .then(() => navigation.navigate('CustomerList'));
     },

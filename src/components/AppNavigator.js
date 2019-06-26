@@ -24,6 +24,7 @@ import NewInvoiceItem from './Invoice/NewInvoiceItem';
 import ListInvoiceItem from './Invoice/ListInvoiceItem';
 import NewInvoiceCustomer from './Invoice/NewInvoiceCustomer';
 import Opinion from './Opinion';
+import ListInvoiceCustomer from './Invoice/ListInvoiceCustomer';
 
 const LoginStack = createStackNavigator(
   {
@@ -53,6 +54,7 @@ const InvoiceStack = createStackNavigator({
   NewInvoiceItem,
   NewInvoiceCustomer,
   ListInvoiceItem,
+  ListInvoiceCustomer,
   InvoiceSummary: {
     screen: InvoiceSummary,
     navigationOptions: () => ({

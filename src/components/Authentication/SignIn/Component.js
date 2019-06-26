@@ -8,7 +8,6 @@ import {
   messageErrorSignInData
 } from '../../../utils/messagesNotifications';
 import { Button } from "react-native-elements";
-import { Alert } from 'react-native';
 import style from '../SignUp/style';
 
 const EMAIL_REGEXP = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
@@ -37,6 +36,7 @@ class SignIn extends React.Component {
     signIn(email, password)
     .then( (_data) => {
       if(this.props.jwtToken !== ''){
+        console.log(this.props.jwtToken);
         this.navigateNext();
       } else {
         if ( _data.message === 'User does not exist.'){

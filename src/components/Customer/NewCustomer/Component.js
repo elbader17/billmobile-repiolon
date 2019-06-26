@@ -45,8 +45,7 @@ class NewCustomer extends React.Component {
       navigation,
     } = this.props;
     this.setLoading(true);
-    console.log(name+'-'+category+'-'+identification);
-    saveFiscalIdentity(name, identification, category, navigation)
+    saveFiscalIdentity(name, identification, category, customerId, navigation)
   }
 
   setName = (value) => this.setState({ name: value})

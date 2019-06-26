@@ -2,10 +2,10 @@ import React from 'react';
 import { View, Text, TouchableOpacity, ScrollView, KeyboardAvoidingView, ActivityIndicator} from 'react-native';
 import { Button} from "react-native-elements";
 import Icon from 'react-native-vector-icons/Ionicons';
-import style from '../style';
+import style from './style';
 import { METRICS } from '../../../constants/metrics';
 
-class CustomerList extends React.Component {
+class ListInvoiceCustomer extends React.Component {
   constructor(props){
     super(props);
     this.state = {
@@ -18,7 +18,7 @@ class CustomerList extends React.Component {
       title: 'CLIENTES',
       headerTitleStyle: style.headerText,
       headerTintColor: '#3687D1',
-      headerLeft: <TouchableOpacity onPress={()=> navigation.navigate('Home')}>
+      headerLeft: <TouchableOpacity onPress={()=> navigation.navigate('Invoice')}>
                     <Icon name="md-arrow-back" size={24} color="#3687d1" style={{marginLeft:20}}/>
                   </TouchableOpacity> 
     }
@@ -29,7 +29,7 @@ class CustomerList extends React.Component {
      .then(()=> {this.setState({loading: true})})
   }
 
-  navigateToNewCustomer = () => this.props.navigation.navigate('NewCustomer');
+  navigateToNewCustomer = () => this.props.navigation.navigate('NewInvoiceCustomer');
 
   navigateToHome = () => this.props.navigation.navigate('Home');
 
@@ -59,7 +59,7 @@ class CustomerList extends React.Component {
             </Text>
           </View>
           <Button
-            title='Editar'
+            title='Añadir'
             onPress={() => this.navigateToEditCustomer(customer) }
             buttonStyle={ style.buttonEditBlue }
             titleStyle={ style.textButtonEdit }
@@ -104,4 +104,4 @@ class CustomerList extends React.Component {
   }
 }
 
-export default CustomerList;
+export default ListInvoiceCustomer;

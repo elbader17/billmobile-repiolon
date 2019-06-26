@@ -10,15 +10,53 @@ const styles = StyleSheet.create({
   },
   containerHeader: {
     flex:0.7,
-    backgroundColor: COLORS.blue
+    backgroundColor: COLORS.blue,
+    elevation: 3
   },
   header: {
     marginTop: 7,
     marginHorizontal: 7
   },
-  containerStatictis: {
-    flex:0.9,
+  containerBar: {
+    flex:0.5,
     marginHorizontal: 20,
+    alignItems:'center',
+    justifyContent: 'center',
+  },
+  containerStatictis: {
+    flex:0.5,
+    marginHorizontal: 20,
+    marginTop: 5
+  },
+  scrollCustomers: {
+    flex:1,
+    borderBottomWidth: 1,
+    borderRadius: 0,
+    margin: 2,
+    borderColor: COLORS.grayLight
+  },
+  boxCobros: {
+    flex: 0.5,
+    height: hp('16%'),
+    marginRight: 5,
+    borderWidth: 1,
+    borderBottomWidth: 2,
+    borderRadius: 5,
+    borderColor: COLORS.grayLight,
+    width: '50%',
+    alignItems:'center',
+    justifyContent: 'center'
+  },
+  boxFacturacion: {
+    flex: 0.5,
+    height: hp('16%'),
+    marginLeft: 5,
+    borderWidth: 1,
+    borderBottomWidth: 2,
+    borderColor: COLORS.grayLight,
+    borderRadius: 5,
+    alignItems:'center',
+    justifyContent: 'center'
   },
   containerListCustomer: {
     flex:0.9,
@@ -27,7 +65,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     borderWidth: 1,
     borderBottomWidth: 2,
-    borderColor: '#f5f5f0',
+    borderColor: COLORS.grayLight,
     borderRadius: 5,
   },
   margin: {
@@ -51,8 +89,11 @@ const styles = StyleSheet.create({
     fontSize: FONTS.size20,
     color: COLORS.white,
   },
-
-  
+  textRegular36GrayDark: {
+    fontFamily: FONTS.latoLight,
+    fontSize: FONTS.size36,
+    color: COLORS.grayDark,
+  },
   containerActionButton: {
     alignItems: 'center',
     width: '100%',
@@ -99,6 +140,30 @@ const styles = StyleSheet.create({
     width: 40,
     height: 25,
   },
+  buttonViewAll: {
+    height: hp('6.5%'),
+    backgroundColor: 'transparent',
+  },
+  lineBlue: {
+    height: 10,
+    width: '40%',
+    borderBottomLeftRadius: 3, 
+    borderTopLeftRadius: 3, 
+    marginVertical: 10,
+    backgroundColor: COLORS.blue,
+    elevation: 1.2,
+    opacity: 0.9
+  },
+  lineWhite: {
+    height: 10,
+    width: '20%',
+    borderBottomRightRadius: 3, 
+    borderTopRightRadius: 3, 
+    borderRadius: 0,
+    marginVertical: 10,
+    backgroundColor: '#f6f6f6',
+    elevation: 1.2,
+  },
   textButtonInvoice: {
     fontFamily: FONTS.latoRegular,
     color: '#3687d1',
@@ -109,10 +174,36 @@ const styles = StyleSheet.create({
     fontSize: FONTS.size14,
     color: COLORS.gray,
   },
+  textRegular12Gray: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size12,
+    color: COLORS.gray,
+  },
+  textRegular16Red: {
+    fontFamily: FONTS.latoLight,
+    fontSize: FONTS.size16,
+    color: COLORS.red,
+    opacity: 0.7
+  },
   textRegular14GrayDark: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size14,
     color: COLORS.grayDark,
+  },
+  textLight14GrayDark: {
+    fontFamily: FONTS.latoLight,
+    fontSize: FONTS.size14,
+    color: COLORS.grayDark,
+  },
+  textRegular11GrayDark: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size11,
+    color: COLORS.grayDark,
+  },
+  textRegular24GrayDark: {
+    fontFamily: FONTS.latoLight,
+    fontSize: FONTS.size24,
+    color: COLORS.gray,
   },
   textRegular14WhiteOpacity: {
     fontFamily: FONTS.latoRegular,

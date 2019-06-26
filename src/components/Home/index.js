@@ -4,7 +4,8 @@ import { listItems } from '../../app/items/actions';
 
 const mapStateToProps = state => ({
   user: state.userservice,
-  items: state.items.items
+  items: state.items.items,
+  customers: state.customers.customers
 });
 
 const mapDispatchToProps = (dispatch) => {

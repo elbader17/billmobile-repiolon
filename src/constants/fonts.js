@@ -12,6 +12,7 @@ export const FONTS = {
   size18: 18,
   size20: 20,
   size24: 24,
+  size36: 36,
   size42: 42,
   size78: 78,
 };

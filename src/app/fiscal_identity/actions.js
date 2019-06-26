@@ -18,6 +18,7 @@ const createFiscalIdentity = (resource, dispatch, getState) => {
   return instance.post('/v1/invoices_fiscal_identities', { resource })
     .then((response) => {
       const { data } = response.data;
+      console.log(data);
       dispatch(addfiscalIdentityToInvoiceAction(data));
     })
     .catch((error) => {
@@ -39,7 +40,7 @@ const updateFiscalIdentity = (resource, dispatch, getState) => {
     });
 };
 
-const addFiscalIdentityToInvoice = (name, identity, id) => {
+const addFiscalIdentityToInvoice = (name, identity, category, id) => {
   return (dispatch, getState) => {
     const { id: invoiceId } = getState().invoices.currentInvoice;
     let promise;
@@ -52,12 +53,13 @@ const addFiscalIdentityToInvoice = (name, identity, id) => {
     return promise.then(() => {
       const updatedInvoiceId = getState().invoices.currentInvoice.id;
       const resource = {
-        category: 'monotributo',
+        category: 'monotributo', //Luego usar parametro
         name,
         id,
         identification: identity,
         invoice_id: updatedInvoiceId,
       };
+      console.log(resource);
       return createFiscalIdentity(resource, dispatch, getState);
     });
   };

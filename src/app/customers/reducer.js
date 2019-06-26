@@ -14,6 +14,7 @@ function addCustomer({ draftState, customer }) {
 }
 
 function setCustomers({ draftState, customers }) {
+  console.log(customers);
   draftState.customers = customers;
   return draftState;
 }
@@ -24,7 +25,7 @@ export default customersReducer = (state = initialState, action) => {
       case CREATE_CUSTOMER:
         return addCustomer({
           draftState,
-          customer: action.customer,
+          customer: action.customer.data,
         });
       case LIST_CUSTOMERS:
         return setCustomers({

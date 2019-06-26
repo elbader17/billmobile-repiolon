@@ -8,7 +8,7 @@ const mapStateToProps = state => ({
 function mapDispatchToProps(dispatch) {
   return {
     saveItem: (attributes, navigation) => {
-      dispatch(createInvoiceItem(attributes.category, attributes.name, attributes.price))
+      dispatch(createInvoiceItem(attributes))
         .then(() => {
           navigation.navigate('Invoice');
         });

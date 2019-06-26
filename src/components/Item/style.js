@@ -141,6 +141,11 @@ const styles = StyleSheet.create({
     fontSize: FONTS.size16,
     color: COLORS.white
   },
+  textRegular16GrayDark: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size16,
+    color: COLORS.grayDark
+  },
   spacingText: {
     marginLeft: 'auto',
   },
@@ -289,7 +294,7 @@ const styles = StyleSheet.create({
   buttonNewItem: {
     borderRadius: 0,
     borderWidth: 1,
-    borderColor: COLORS.gray,
+    borderColor: COLORS.red,
     width: wp('70%'),
     height: hp('8%'),
     backgroundColor: COLORS.white
@@ -297,7 +302,7 @@ const styles = StyleSheet.create({
   textButtonNewItem:{
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size18,
-    color: COLORS.grayDark
+    color: COLORS.red
   },
   buttonContinue: {
     borderRadius: 0,

@@ -1,8 +1,8 @@
 import { StyleSheet } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import { METRICS } from '../../constants/metrics';
-import { COLORS } from '../../constants/colors';
-import { FONTS } from '../../constants/fonts';
+import { METRICS } from '../../../constants/metrics';
+import { COLORS } from '../../../constants/colors';
+import { FONTS } from '../../../constants/fonts';
 
 const styles = StyleSheet.create({
   container: {
@@ -133,13 +133,12 @@ const styles = StyleSheet.create({
     borderRadius: 2,
     borderWidth: 1,
     borderColor: COLORS.blue,
-    backgroundColor: 'transparent',
-    opacity: 0.8
+    backgroundColor: COLORS.blue
   },
   textButtonEdit: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size12,
-    color: COLORS.blue,
+    color: COLORS.white,
   },
   marginLeft5: {
     marginLeft: 5,

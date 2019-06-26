@@ -328,24 +328,13 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     opacity: 0.8
   },
-  buttonCheckRed: {
-    width: wp('10%'),
+  buttonSelectDisabled: {
+    width: wp('16%'),
     height: hp('4%'),
     borderRadius: 2,
     borderWidth: 1,
-    borderColor: COLORS.red,
-    backgroundColor: 'transparent',
-    opacity: 0.8,
-    marginRight: 3
-  },
-  buttonCheckBlue: {
-    width: wp('10%'),
-    height: hp('4%'),
-    borderRadius: 2,
-    borderWidth: 1,
-    borderColor: COLORS.blue,
-    backgroundColor: 'transparent',
-    opacity: 0.8,
+    borderColor: COLORS.grayDark,
+    backgroundColor: COLORS.gray,
     marginRight: 3
   },
   buttonSelectRed: {
@@ -370,6 +359,11 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.latoSemiBold,
     fontSize: FONTS.size12,
     color: COLORS.white
+  },
+  textButtonAñadirDisabled:{
+    fontFamily: FONTS.latoSemiBold,
+    fontSize: FONTS.size12,
+    color: COLORS.grayDark
   },
   buttonRed: {
     borderRadius: 0,

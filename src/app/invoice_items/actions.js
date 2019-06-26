@@ -40,7 +40,7 @@ const updateInvoiceItem = (id, values) => {
   };
 };
 
-const createInvoiceItem = (category, name, price) => {
+const createInvoiceItem = ({category, name, price, quantity}) => {
   return (dispatch, getState) => {
     const { id: invoiceId } = getState().invoices.currentInvoice;
     let promise;
@@ -60,6 +60,7 @@ const createInvoiceItem = (category, name, price) => {
         name,
         price: parseFloat(price, 10),
         invoice_id: updatedInvoiceId,
+        quantity
       };
       return instance.post('v1/invoice_items', { resource })
         .then((response) => {

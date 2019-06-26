@@ -40,6 +40,7 @@ class NewItem extends React.Component {
     const { name, price, isProduct, itemId } = this.state;
     const { saveItem, navigation } = this.props;
     const category = isProduct ? 'product' : 'service';
+    const quantity = 1;
     this.setState({ isEnableButton: false});
     this.setLoading(true);
     saveItem(
@@ -48,6 +49,7 @@ class NewItem extends React.Component {
         category,
         name,
         price,
+        quantity
       },
       navigation,
     );
@@ -101,7 +103,7 @@ class NewItem extends React.Component {
           titleStyle={ style.textSemiBold14White }
           disabledStyle={ style.buttonSaveDisabled }
           disabledTitleStyle={ style.textRegular14WhiteBold}
-          disabled={(!validateAddItem || !this.state.isEnableButton) }
+          disabled={(!validateAddItem(this.state.name, this.state.price) || !this.state.isEnableButton) }
           loading = {this.state.loading}
         />
       </KeyboardAvoidingView>

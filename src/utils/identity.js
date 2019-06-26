@@ -1,29 +1,14 @@
-/* eslint-disable no-tabs */
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable no-else-return */
-/* eslint-disable eqeqeq */
-//import { CUIT_REGEXP } from '../constants/fiscal_identity';
-
-export const validateCuit = (cuit) => {
-  let acumulado = 0;
-  if (cuit != null) {
-    const digitos = cuit.split('');
-    const digito	= digitos.pop();
-    console.log(digito);
-    // eslint-disable-next-line no-plusplus
-    for (let i = 0; i < digitos.length; i++) {
-      acumulado += digitos[9 - i] * (2 + (i % 6));
-    }
-    let verif = 11 - (acumulado % 11);
-    if (verif == 11) {
-      verif = 0;
-    }
-    if (digito == verif) {
-      return (true);
-    } else {
-      return (false);
-    }
-  } else {
-    return (false);
+export const validateCuit = cuit => {
+  inputString = cuit.toString()
+  if (inputString.length == 11) {
+      var Caracters_1_2 = inputString.charAt(0) + inputString.charAt(1)
+      if (Caracters_1_2 == "20" || Caracters_1_2 == "23" || Caracters_1_2 == "24" || Caracters_1_2 == "27" || Caracters_1_2 == "30" || Caracters_1_2 == "33" || Caracters_1_2 == "34") {
+          var Count = inputString.charAt(0) * 5 + inputString.charAt(1) * 4 + inputString.charAt(2) * 3 + inputString.charAt(3) * 2 + inputString.charAt(4) * 7 + inputString.charAt(5) * 6 + inputString.charAt(6) * 5 + inputString.charAt(7) * 4 + inputString.charAt(8) * 3 + inputString.charAt(9) * 2 + inputString.charAt(10) * 1
+          Division = Count / 11;
+          if (Division == Math.floor(Division)) {
+              return true
+          }
+      }
   }
+  return false
 };
