@@ -60,7 +60,7 @@ class ListInvoiceCustomer extends React.Component {
           </View>
           <Button
             title='Añadir'
-            onPress={() => this.navigateToEditCustomer(customer) }
+            //onPress={() => this.navigateToEditCustomer(customer) }
             buttonStyle={ style.buttonEditBlue }
             titleStyle={ style.textButtonEdit }
           />

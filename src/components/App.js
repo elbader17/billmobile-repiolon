@@ -1,15 +1,17 @@
 import * as React from 'react';
 import { StatusBar} from 'react-native';
 import { Provider } from 'react-redux';
-import store from '../store';
+import { store, persistor } from '../store/index';
 import Amplify from 'aws-amplify';
 import axios from 'axios';
 import {
   API_HOST,
 } from 'react-native-dotenv';
+import FlashMessage from "react-native-flash-message";
+import { PersistGate } from 'redux-persist/integration/react';
 import aws_exports from '../constants/aws-exports';
 import AppNavigator from './AppNavigator';
-import FlashMessage from "react-native-flash-message";
+import { Text } from 'react-native';
 
 Amplify.configure(aws_exports);
 
@@ -22,8 +24,12 @@ class App extends React.Component {
   render() {
     console.disableYellowBox = true;
     return (
-      <Provider store={store}>    
-        <AppNavigator />
+      <Provider store={store}> 
+        <PersistGate 
+          loading={<Text>Cargando...</Text>} 
+          persistor={persistor}>   
+          <AppNavigator />
+        </PersistGate>
         <FlashMessage position="top" animated={true} />
       </Provider>
     );

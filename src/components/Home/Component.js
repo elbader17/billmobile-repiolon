@@ -16,6 +16,7 @@ class Home extends React.Component {
     const { user } = this.props
     this.state = {
       name: user.name,
+      persistencia: 'No'
     }
   }
 
@@ -51,6 +52,10 @@ class Home extends React.Component {
           </View>
 
           <View style={style.containerBar}>
+            <Button
+              title={this.state.persistencia}
+              onPress={()=>{this.setState({persistencia: 'Si'})}}
+            />
             <Text style={style.textRegular11GrayDark}>FACTURACIÓN DEL PERÍODO</Text>
             <View style={[style.inLine,{borderRadius: 3}]}>  
               <View style={style.lineBlue}></View>

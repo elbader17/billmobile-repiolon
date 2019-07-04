@@ -129,14 +129,14 @@ const styles = StyleSheet.create({
   },
   buttonEditBlue:{
     width: wp('16%'),
-    height: hp('5%'),
+    height: hp('4%'),
     borderRadius: 2,
     borderWidth: 1,
     borderColor: COLORS.blue,
     backgroundColor: COLORS.blue
   },
   textButtonEdit: {
-    fontFamily: FONTS.latoRegular,
+    fontFamily: FONTS.latoSemiBold,
     fontSize: FONTS.size12,
     color: COLORS.white,
   },
