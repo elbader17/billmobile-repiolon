@@ -58,3 +58,6 @@ buck-out/
 # env files
 .env
 .env.production
+package-lock.json
+yarn.lock
+
