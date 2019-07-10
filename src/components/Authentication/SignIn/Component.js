@@ -25,6 +25,10 @@ class SignIn extends React.Component {
     };
   }
 
+  componentWillMount() {
+    console.log(this.props.estado);
+  }
+
   managePasswordVisibility = () => {
     this.setState({ hidePassword: !this.state.hidePassword });
   }

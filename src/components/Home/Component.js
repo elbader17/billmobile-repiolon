@@ -16,13 +16,23 @@ class Home extends React.Component {
     const { user } = this.props
     this.state = {
       name: user.name,
-      persistencia: 'No'
     }
   }
 
   customerListNavigate = () => this.props.navigation.navigate('CustomerList');
   itemListNavigate = () => this.props.navigation.navigate('ItemList');
   newInvoiceNavigate = () => this.props.navigation.navigate('Invoice');
+
+  handleSignOut = () => {
+    const { signOut } = this.props;
+    signOut()
+      .then(() => {
+        this.props.navigation.navigate('Authentication');
+      })
+      .catch((err) => {
+        alert('Error al Cerrar Sesión ' + err)
+      })
+  }
 
   render() {
     return(
@@ -37,6 +47,7 @@ class Home extends React.Component {
                 icon={<Icon name="md-more" size={30} color="white" />}
                 buttonStyle={style.buttonHeader}
                 onPress={() => showMessage(messageOptions)}
+                
               />
               <Text style={[style.textRegular20White,{marginLeft:20}]}>
                 {this.state.name}
@@ -44,18 +55,14 @@ class Home extends React.Component {
               </View>
               <Button
                 icon={<Icon name="md-settings" size={25} color="white" />}
+                onPress={this.handleSignOut}
                 buttonStyle={style.buttonHeader}
-                onPress={() => showMessage(messageLogOut)}
               />
             </View>
           </ImageBackground>
           </View>
 
           <View style={style.containerBar}>
-            <Button
-              title={this.state.persistencia}
-              onPress={()=>{this.setState({persistencia: 'Si'})}}
-            />
             <Text style={style.textRegular11GrayDark}>FACTURACIÓN DEL PERÍODO</Text>
             <View style={[style.inLine,{borderRadius: 3}]}>  
               <View style={style.lineBlue}></View>

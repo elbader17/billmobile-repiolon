@@ -7,7 +7,8 @@ const mapStateToProps = (state) => {
   return {
     jwtToken: state.authentication.jwtToken,
     fiscalIdentityComplete: state.userservice.completed,
-    fiscalIdentity: state.userservice
+    fiscalIdentity: state.userservice,
+    estado: state
   };
 };
 

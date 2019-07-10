@@ -37,7 +37,7 @@ function listInvoiceAction(invoices) {
 const createInvoice = (invoiceDate, voucherType) => {
   const resource = {
     invoice_date: invoiceDate,
-    invoice_type: voucherType,
+    invoice_type: voucherType
   };
 
   return (dispatch, getState) => {
@@ -46,6 +46,7 @@ const createInvoice = (invoiceDate, voucherType) => {
     });
     return instance.post('v1/invoices', { resource })
       .then((response) => {
+        console.log(response.data.data);
         return dispatch(createInvoiceAction(response.data.data));
       })
       .catch((error) => {

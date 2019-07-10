@@ -34,6 +34,18 @@ const signIn = (email, password) => {
   };
 };
 
+const signOut = () => {
+  return (dispatch) => {
+    return Auth.signOut()
+      .then(() => {
+        return dispatch(setJwtToken(''));
+      })
+      .catch((err) => {
+        return err;
+      });
+  };
+};
+
 const signUp = (password, email, attributes) => {
   return (dispatch) => {
     return Auth.signUp({
@@ -60,4 +72,4 @@ const confirmCode = (confirmationEmail, confirmationCode) => {
   }
 };
 
-export { signIn, signUp, confirmCode };
+export { signIn, signOut, signUp, confirmCode };

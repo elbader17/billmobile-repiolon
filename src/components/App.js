@@ -12,6 +12,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import aws_exports from '../constants/aws-exports';
 import AppNavigator from './AppNavigator';
 import { Text } from 'react-native';
+import Initializing from './Initializing/Component';
 
 Amplify.configure(aws_exports);
 
@@ -26,7 +27,6 @@ class App extends React.Component {
     return (
       <Provider store={store}> 
         <PersistGate 
-          loading={<Text>Cargando...</Text>} 
           persistor={persistor}>   
           <AppNavigator />
         </PersistGate>

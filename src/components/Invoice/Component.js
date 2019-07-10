@@ -22,7 +22,7 @@ class Invoice extends React.Component {
       isDateTimePickerVisible: false,
       isDateTimeVisible:false,
       bool:false,
-      invoiceDate: this.props.invoiceDate,
+      invoiceDate: new Date(),
       modalVisible: false,
       fcIndentification,
       loading: false
@@ -148,7 +148,7 @@ class Invoice extends React.Component {
           <View style={style.boxDate}>
             <TouchableOpacity onPress={this.showDateTimePicker} style={style.buttonDate}>
               <Text style={style.textRegular16WhiteCenter}>
-                {presentInvoiceDate(this.state.invoiceDate)}
+                {/*{presentInvoiceDate(this.state.invoiceDate)}*/} Fecha
               </Text>
             </TouchableOpacity>
             <DateTimePicker

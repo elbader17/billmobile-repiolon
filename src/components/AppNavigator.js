@@ -6,6 +6,7 @@ import {
 import style from '../utils/style';
 import { COLORS } from '../constants/colors';
 
+import Initializing from './Initializing/Component';
 import Intro from './Intro';
 import Authentication from './Authentication';
 import ConfirmationCodeRegister from './Authentication/Confirmation';
@@ -80,6 +81,7 @@ const CustomerStack = createStackNavigator({
 const AppSwitchNavigator = createSwitchNavigator(
   {
     Intro,
+    Initializing,
     Login: LoginStack,
     Configure: TaxConfigurationStack,
     Home,
@@ -89,7 +91,7 @@ const AppSwitchNavigator = createSwitchNavigator(
     Opinion
   },
   {
-    initialRouteName: 'Login',
+    initialRouteName: 'Initializing',
   }
 );
 
