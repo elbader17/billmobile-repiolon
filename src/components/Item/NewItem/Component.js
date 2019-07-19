@@ -10,10 +10,12 @@ class NewItem extends React.Component {
   constructor(props) {
     super(props);
     const item = this.props.navigation.getParam('item', this.defaultItem());
+    const productOrService = item.attributes.category==='product';
+    const isProducts = this.props.navigation.getParam('isProduct', productOrService );
     this.state = {
       name: item.attributes.name,
       price: item.attributes.price,
-      isProduct: item.attributes.category === 'product',
+      isProduct: isProducts,
       isEnableButton: true,
       itemId: item.id,
       loading: false
@@ -53,7 +55,6 @@ class NewItem extends React.Component {
       },
       navigation,
     );
-    //.catch(err => Alert.alert("Error al Ingresar: ",err.message))
   }
 
   setName = (value) => this.setState({ name: value, isEnableButton: true})
@@ -64,7 +65,7 @@ class NewItem extends React.Component {
     const data = {
       isProduct: this.state.isProduct,
       name: this.state.name,
-      price: this.props.price
+      price: this.state.price
     }
     return(
       <KeyboardAvoidingView

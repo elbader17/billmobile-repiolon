@@ -34,8 +34,8 @@ class ItemList extends React.Component {
       .then(()=> {this.setState({loading: true})})
   }
 
-  navigateToNewItem = () => {
-    this.props.navigation.navigate('NewItem');
+  navigateToNewItem = (isProduct) => {
+    this.props.navigation.navigate('NewItem', { isProduct });
   }
 
   navigateToHome = () => {
@@ -58,7 +58,6 @@ class ItemList extends React.Component {
   renderItems = () => {
     const category = this.state.isProduct ? 'product' : 'service';
     const items = this.props.items.slice().sort(orderByName);
-    //const itemss = this.state.items;
     return items
       .filter(item => item.attributes.category === category)
       .map((item) => {
@@ -123,7 +122,7 @@ class ItemList extends React.Component {
         <View style={style.inLine}>
           <Button
             title=" Crear Nuevo"
-            onPress={ this.navigateToNewItem }
+            onPress={() => this.navigateToNewItem(this.state.isProduct) }
             buttonStyle={ style.buttonNewItem }
             titleStyle={style.textButtonNewItem}
             icon={
