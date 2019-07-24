@@ -2,3 +2,4 @@ export const LIST_INVOICE = 'LIST_INVOICE';
 export const GET_INVOICE = 'GET_INVOICE';
 export const CREATE_INVOICE = 'CREATE_INVOICE';
 export const UPDATE_INVOICE = 'UPDATE_INVOICE';
+export const CONFIRM_INVOICE = 'CONFIRM_INVOICE';

@@ -4,6 +4,7 @@ import { Button} from "react-native-elements";
 import Icon from 'react-native-vector-icons/Ionicons';
 import style from '../style';
 import { METRICS } from '../../../constants/metrics';
+import { orderByName } from '../../../utils/functions';
 
 class CustomerList extends React.Component {
   constructor(props){
@@ -47,7 +48,8 @@ class CustomerList extends React.Component {
   }
 
   renderCustomers() {
-    return this.props.customers.map((customer) => {
+    const customers = this.props.customers.slice().sort(orderByName);
+    return customers.map((customer) => {
        return (
         <View style={[style.inLineSpaceBetween, style.boxInfoCustomer]} key={customer.id}>
           <View>

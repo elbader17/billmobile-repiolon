@@ -18,8 +18,11 @@ class InvoiceSummary extends React.Component {
     this.props.navigation.navigate('Invoice');
   }
 
-  navigateToOpinion = () => {
-    this.props.navigation.navigate('Opinion');
+  confirmInvoice = () => {
+    const {
+      confirmInvoice,
+    } = this.props;
+    confirmInvoice(resource);
   }
 
   setTotal = () => {
@@ -159,7 +162,7 @@ class InvoiceSummary extends React.Component {
           <Button
             title='CONFIRMAR FACTURA'
             testID='confirmInvoice'
-            onPress={ this.navigateToOpinion}
+            onPress={ () =>  this.confirmInvoice}
             buttonStyle={ style.buttonConfirm }
             titleStyle={ style.textSemiBold14White }
             disabled={ !this.validateData() }

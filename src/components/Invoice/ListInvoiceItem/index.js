@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch) => {
   return {
     getItemList: () => (dispatch(listItems())),
-    saveItemInvoice: (attributes) => dispatch(createInvoiceItem(attributes.category, attributes.name, attributes.price)),
+    saveItemInvoice: (attributes) => dispatch(createInvoiceItem(attributes)),
     saveItem: (attributes, navigation) => {
       dispatch(updateItem(attributes))
         .then(() => {

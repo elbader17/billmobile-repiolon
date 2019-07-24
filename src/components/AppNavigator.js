@@ -74,8 +74,8 @@ const ItemStack = createStackNavigator({
 
 const CustomerStack = createStackNavigator({
   CustomerList,
-  EditCustomer,
-  NewCustomer
+  NewCustomer,
+  EditCustomer
 });
 
 const AppSwitchNavigator = createSwitchNavigator(

@@ -2,6 +2,7 @@ import producer from 'immer';
 import {
   CREATE_CUSTOMER,
   LIST_CUSTOMERS,
+  UPDATE_CUSTOMER
 } from './constant';
 
 const initialState = {
@@ -14,8 +15,18 @@ function addCustomer({ draftState, customer }) {
 }
 
 function setCustomers({ draftState, customers }) {
-  console.log(customers);
   draftState.customers = customers;
+  return draftState;
+}
+
+function setCustomer({ draftState, customer }) {
+  function findCustomer(x) { 
+    return x.id === customer.id;
+  };
+  const customerFind = draftState.customers.find(findCustomer);
+  customerFind.attributes.name = customer.name;
+  customerFind.attributes.category = customer.category;
+  customerFind.attributes.identification = customer.identification;
   return draftState;
 }
 
@@ -31,6 +42,11 @@ export default customersReducer = (state = initialState, action) => {
         return setCustomers({
           draftState,
           customers: action.customers.data,
+        });
+      case UPDATE_CUSTOMER:
+        return setCustomer({
+          draftState,
+          customer: action.customer,
         });
       default:
         return draftState;

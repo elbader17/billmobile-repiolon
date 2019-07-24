@@ -12,13 +12,11 @@ function createCustomerAction(customer) {
   };
 }
 
-function updateCustomerAction(id, name, identity, category) {
+function updateCustomerAction(id, name, identification, category) {
+  const customer = {id, name, identification, category};
   return {
     type: UPDATE_CUSTOMER,
-    id,
-    name,
-    identity,
-    category,
+    customer
   };
 }
 
@@ -39,10 +37,8 @@ const createCustomer = ({ name, identification, category }) => {
     const instance = axios.create({
       headers: { 'JWT-TOKEN': getState().authentication.jwtToken },
     });
-    console.log(getState().authentication.jwtToken);
     return instance.post('v1/fiscal_identities', { resource })
       .then((response) => {
-        console.log(response);
         return dispatch(createCustomerAction(response.data));
       })
       .catch((error) => {
@@ -58,7 +54,6 @@ const listCustomers = () => {
     });
     return instance.get('v1/fiscal_identities')
       .then((resources) => {
-        console.log(resources);
         dispatch(customerListAction(resources.data));
       })
       .catch((error) => {
@@ -71,16 +66,19 @@ const updateCustomer = ({ id, name, identification, category }) => {
   const resource = {
     name,
     identification,
-    category,
+    category
   };
 
   return (dispatch, getState) => {
     const instance = axios.create({
       headers: { 'JWT-TOKEN': getState().authentication.jwtToken },
     });
+
     return instance.put(`v1/fiscal_identities/${id}`, { resource })
-      .then(() => {
-        dispatch(updateCustomerAction(name, identification, category));
+      .then((response) => {
+        const customer = response.data.data;
+        console.log(customer);
+        dispatch(updateCustomerAction(customer.id, customer.attributes.name, customer.attributes.identification, customer.attributes.category));
       })
       .catch((error) => {
         console.log(error);

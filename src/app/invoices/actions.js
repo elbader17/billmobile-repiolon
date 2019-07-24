@@ -34,6 +34,13 @@ function listInvoiceAction(invoices) {
   };
 }
 
+function confirmInvoiceAction(invoice) {
+  return {
+    type: CONFIRM_INVOICE,
+    invoice,
+  };
+}
+
 const createInvoice = (invoiceDate, voucherType) => {
   const resource = {
     invoice_date: invoiceDate,
@@ -111,4 +118,27 @@ const getInvoice = (id) => {
   };
 };
 
-export { listInvoice, getInvoice, createInvoice, updateInvoice };
+const confirmInvoice = (attributes) => {
+  const resource = {
+    state:"confirm",
+    invoice_id: 8,
+    user_id :1,
+    total: "10",
+    id: "1"
+  }
+  return (dispatch, getState) => {
+    const instance = axios.create({
+      headers: { 'JWT-TOKEN': getState().authentication.jwtToken },
+    });
+    return instance.put(`v1/invoices/confirm`, { resource })
+      .then((response) => {
+        dispatch(confirmInvoiceAction(response.data.data));
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+};
+
+export { listInvoice, getInvoice, createInvoice, updateInvoice, confirmInvoice };
