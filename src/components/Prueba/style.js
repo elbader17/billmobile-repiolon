@@ -11,6 +11,8 @@ const styles = StyleSheet.create({
     flex:0.7,
     paddingVertical: 2,
     paddingHorizontal: 5,
+    borderBottomLeftRadius: 100, 
+    borderBottomRightRadius: 100,
     elevation: 2
   },
   containerBar: {
@@ -33,18 +35,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   containerListCustomer: {
-    flex:0.60,
+    flex:0.75,
     paddingHorizontal: 15,
-    paddingTop: 20,
-    paddingBottom: 25
+    paddingTop: 15,
+    paddingBottom: 5
   },
   gradientFooter: { 
-    width: '100%',
-    height: hp('8%'), 
+    flex: 0.30,
+    width: '100%', 
     justifyContent: 'center',
     paddingHorizontal: 35,
-    borderTopLeftRadius: 0, 
-    borderTopRightRadius: 0, 
+    borderTopLeftRadius: 100, 
+    borderTopRightRadius: 100, 
   },
   gradientInfo: {
     width: '35%',
@@ -61,9 +63,9 @@ const styles = StyleSheet.create({
     opacity: 0.9
   },
   scrollCustomers: {
-    //height: hp('5%'),
+    flex:1,
     borderRadius: 0,
-    margin: 2,
+    margin: 1,
   },
   margin: {
     marginHorizontal: 10,
@@ -92,14 +94,9 @@ const styles = StyleSheet.create({
     color: COLORS.white,
   },
   textRegular14White: {
-    fontFamily: FONTS.latoRegular,
+    fontFamily: FONTS.latoLight,
     fontSize: FONTS.size14,
     color: COLORS.blueLight,
-  },
-  textRegular16Blue: {
-    fontFamily: FONTS.latoLight,
-    fontSize: FONTS.size16,
-    color: COLORS.blueMedium,
   },
   textRegular32White: {
     fontFamily: FONTS.latoLight,
@@ -116,12 +113,6 @@ const styles = StyleSheet.create({
     height: 1,
     marginBottom: 2.5,
   },
-  lineWhiteAux: {
-    backgroundColor: COLORS.white,
-    height: 2.5,
-    marginBottom: 2.5,
-    marginHorizontal: 110
-  },
   buttonShowInvoice: {
     backgroundColor: COLORS.white,
     borderRadius: 5,
@@ -129,7 +120,7 @@ const styles = StyleSheet.create({
     height: 25,
   },
   buttonViewAll: {
-    height: hp('5%'),
+    height: hp('4.5%'),
     backgroundColor: 'transparent'
   },
   buttonViewInvoice: {

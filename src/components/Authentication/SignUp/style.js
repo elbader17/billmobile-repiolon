@@ -5,7 +5,7 @@ import { FONTS } from '../../../constants/fonts';
 
 const styles = StyleSheet.create({
   container:{
-    paddingVertical: 20,
+    paddingVertical: 12,
     paddingHorizontal: 30,
   },
   containerInputs:{
@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     position: 'relative',
     alignSelf: 'stretch',
     justifyContent: 'center',
-    marginTop: 5
+    marginTop: 7
   },
   lineFormatInvalid: {
     backgroundColor: COLORS.red,
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     paddingVertical: 0,
     borderColor: COLORS.gray,
-    borderRadius: 2
+    borderRadius: 5
   },
   textBoxPass: {
     fontFamily: FONTS.latoRegular,
@@ -74,16 +74,17 @@ const styles = StyleSheet.create({
     opacity: 0.4
   },
   submit: {
-    backgroundColor: COLORS.red,
-    width: wp('80%'),
+    backgroundColor: 'transparent',
+    width: wp('85%'),
     height: hp('7%'),
-    borderRadius: 2,
+    borderRadius: 15,
   },
   submitDisabled: {
     backgroundColor: COLORS.gray,
-    width: wp('80%'),
+    width: wp('85%'),
     height: hp('7%'),
-    borderRadius: 2,
+    borderRadius: 25,
+    opacity: 0.85
   },
   textRegular11GrayDark: {
     fontFamily: FONTS.latoRegular,

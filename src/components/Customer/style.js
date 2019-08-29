@@ -6,38 +6,47 @@ import { FONTS } from '../../constants/fonts';
 
 const styles = StyleSheet.create({
   container: {
-    height: hp('100%') - METRICS.heightHeader - hp('8%'),
-    backgroundColor: COLORS.blue,
-    padding: 18,
+    height: hp('100%') - METRICS.heightHeader,
+    paddingHorizontal: 10,
+  },
+  containerBody: {
+    flex: 0.87,
+  }, 
+  containerFooter: {
+    flex: 0.13,
+    justifyContent: 'center'
   },
   containerInputs: {
-    marginHorizontal: 2,
-    marginVertical: 5
-  },
-  containerList:{
-    height: hp('100%') - METRICS.heightHeader - hp('8%'),
-    backgroundColor: COLORS.white,
-    paddingHorizontal: 18,
-    paddingVertical: 10,
+    paddingHorizontal: 10,
+    paddingTop: 20
   },
   boxBtnHolder: {
-    backgroundColor: COLORS.white,
+    backgroundColor: COLORS.grayLight,
     height: hp('7%'),
     marginVertical: 8,
-    borderRadius: 4,
+    borderRadius: 5,
+    elevation: 1
   },
   boxCustomer: {
-    backgroundColor: 'transparent',
+    flex: 1,
+    backgroundColor: COLORS.white,
+    borderWidth: 0,
+    borderColor: COLORS.blueMedium,
+    borderRadius: 15,
+    paddingHorizontal: 5,
+    paddingVertical: 5,
     marginHorizontal: 5,
-    marginVertical: 4
+    marginTop: 20,
+    marginBottom: 5,
+    elevation: 4
   },
   boxInfoCustomer: {
-    borderWidth: 0.5,
-    borderRadius: 5,
+    borderBottomWidth: 0.5,
+    borderRadius: 10,
     paddingHorizontal: 6,
-    paddingVertical: 4,
+    paddingVertical: 5,
     marginVertical: 1.5,
-    borderColor: COLORS.grayLight
+    borderColor: COLORS.grayLight,
   },
   picker: {
     flex: 1,
@@ -49,9 +58,19 @@ const styles = StyleSheet.create({
     fontSize: FONTS.size14,
     color: COLORS.white,
   },
+  textRegular14Blue: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size14,
+    color: COLORS.blueMedium,
+  },
   inLineSpaceBetween: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+  inLineSpaceAround: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
     alignItems: 'center'
   },
   center: {
@@ -69,10 +88,15 @@ const styles = StyleSheet.create({
     fontSize: FONTS.size12,
     color: COLORS.white,
   },
-  textRegular18RedBold: {
+  textRegular12Blue: {
     fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size18,
-    color: COLORS.red,
+    fontSize: FONTS.size12,
+    color: COLORS.blueMedium,
+  },
+  textLight18White: {
+    fontFamily: FONTS.latoSemiBold,
+    fontSize: FONTS.size16,
+    color: COLORS.white,
   },
   textRegular16WhiteBold: {
     fontFamily: FONTS.latoRegular,
@@ -94,33 +118,39 @@ const styles = StyleSheet.create({
     fontSize: FONTS.size16,
     color: COLORS.grayDark,
   },
-  textRegular14GrayDarkBold: {
+  textLight14Blue: {
     fontFamily: FONTS.latoLight,
     fontSize: FONTS.size14,
-    color: COLORS.grayDark,
+    color: COLORS.blueMedium,
   },
   inLine:{
     flexDirection: "row",
     alignItems:'center'
   },
-  buttonNew: {
-    width: wp('70%'),
+  gradientNew: {
+    width: wp('74%'),
     height: hp('8%'),
     backgroundColor: 'transparent',
-    borderRadius: 0,
-    borderWidth: 1,
-    borderColor: COLORS.red
+    borderRadius: 25,
+    elevation: 1.5,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
-  buttonContinue: {
-    borderRadius: 0,
-    width: wp('30%'),
+  gradientReady: {
+    width: wp('14%'),
     height: hp('8%'),
-    backgroundColor: COLORS.red
+    borderRadius: 25,
+    elevation: 1.5,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
-  buttonSave: {
+  gradientSave: {
+    width: wp('90%'),
     height: hp('8%'),
-    backgroundColor: COLORS.red,
-    borderRadius: 0
+    backgroundColor: 'transparent',
+    borderRadius: 25,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   buttonSaveDisabled: {
     height: hp('8%'),
@@ -130,16 +160,15 @@ const styles = StyleSheet.create({
   buttonEditBlue:{
     width: wp('16%'),
     height: hp('5%'),
-    borderRadius: 2,
-    borderWidth: 1,
-    borderColor: COLORS.blue,
-    backgroundColor: 'transparent',
-    opacity: 0.8
+    borderWidth: 0.5,
+    borderRadius: 17,
+    borderColor: COLORS.blueMedium,
+    backgroundColor: 'transparent'
   },
   textButtonEdit: {
-    fontFamily: FONTS.latoRegular,
+    fontFamily: FONTS.latoLight,
     fontSize: FONTS.size12,
-    color: COLORS.blue,
+    color: COLORS.blueMedium,
   },
   marginLeft5: {
     marginLeft: 5,
@@ -149,9 +178,9 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size16,
+    fontSize: FONTS.size18,
     fontWeight: 'normal',
-    color: COLORS.blue,
+    color: COLORS.white,
   },
   lineWhite: {
     backgroundColor: COLORS.white,
@@ -162,16 +191,10 @@ const styles = StyleSheet.create({
   },
   lineGray: {
     backgroundColor: COLORS.grayLight,
-    height: 0.5,
+    height: 1,
     width: '100%',
     marginTop: 10,
     marginBottom: 10,
-  },
-  styleScroll:{
-    borderWidth: 0.5,
-    borderColor: COLORS.gray,
-    borderRadius: 5,
-    marginVertical: 6
   },
   positionFinalButton: {
     position: 'absolute', 

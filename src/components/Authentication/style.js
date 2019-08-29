@@ -9,15 +9,39 @@ const styles = StyleSheet.create({
     height: hp('100%'),
   },
   containerHeader: {
-    paddingVertical: 40,
+    paddingVertical: 30,
     alignItems: 'center',
-    backgroundColor: COLORS.blue,
+    backgroundColor: COLORS.white,
   },
   containerFooter: {
     flex: 1,
     justifyContent: 'flex-end',
     alignItems: 'center',
-    paddingBottom: 10,
+  },
+  textCenter: {
+    flex:1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  buttonContainer: {
+    width: 196,
+    height: 44,
+    alignItems: 'center',
+    backgroundColor: 'white'
+  },
+  gradientStyle: { 
+    width: wp('56%'),
+    height: hp('6%'),
+    borderRadius: 20,
+    marginTop: 5,
+  },
+  buttonText: {
+    textAlign: 'center',
+    color: '#4C64FF',
+    padding: 15,
+    marginLeft: 1,
+    marginRight: 1,
+    width: 198
   },
   textRegular14White: {
     fontFamily: FONTS.latoRegular,
@@ -27,21 +51,31 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     opacity: 0.9
   },
+  textRegular16White: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size18,
+    color: COLORS.white,
+    lineHeight: 22,
+    textAlign: 'center',
+    justifyContent: 'center'
+  },
   imageHeader: {
-    width: 136,
-    height: 99
+    width: 219,
+    height: 132
   },
   button: {
-    backgroundColor: COLORS.white,
-    borderRadius: 0,
-    borderWidth: 0,
+    backgroundColor: 'transparent',
+    borderRadius: 2,
+    borderBottomWidth: 2,
     width: wp('50%'),
     height: hp('7%'),
+    paddingHorizontal: 5
   },
   buttonDisabled: {
-    backgroundColor: COLORS.blue,
-    borderRadius: 0,
-    borderWidth: 0,
+    backgroundColor: 'transparent',
+    borderRadius: 2,
+    borderTopWidth: 2,
+    borderColor: COLORS.grayLight,
     width: wp('50%'),
     height: hp('7%'),
   },
@@ -56,32 +90,41 @@ const styles = StyleSheet.create({
   buttonOff: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size11,
-    color: COLORS.white
+    color: COLORS.blue
   },
-  textRegular12WhiteBold: {
+  gradientBottom: { 
+    width: '100%', 
+    borderTopLeftRadius: 100, 
+    borderTopRightRadius: 100, 
+    height: hp('8%'),
+    justifyContent: 'center'
+  },
+  textRegular14Gray: {
     fontFamily: FONTS.latoSemiBold,
-    fontSize: FONTS.size12,
-    color: COLORS.white,
+    fontSize: FONTS.size14,
+    color: COLORS.gray,
     textAlign: 'center',
   },
-  textRegular12BlueBold: {
+  textRegular14BlueBold: {
     fontFamily: FONTS.latoSemiBold,
-    fontSize: FONTS.size12,
+    fontSize: FONTS.size14,
     color: COLORS.blue,
     textAlign: 'center',
   },
-  textRegular11GrayDark: {
+  textRegular11White: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size11,
-    color: COLORS.grayDark,
+    color: COLORS.white,
     textAlign: 'center',
+    opacity: 0.9
   },
-  textRegular11GrayDarkBold: {
+  textRegular11WhiteBold: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size11,
-    color: COLORS.grayDark,
+    color: COLORS.white,
     fontWeight: 'bold',
     textAlign: 'center',
+    opacity: 0.9
   },
   inColumnSpaceBetween: {
     flexDirection: 'column',

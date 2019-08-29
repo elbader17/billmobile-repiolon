@@ -12,7 +12,7 @@ class Initializing extends React.Component {
 
   async componentDidMount() {
     try {
-      const user = await Auth.currentAuthenticatedUser();      
+      const user = await Auth.currentAuthenticatedUser();  
       console.log('user: ', user);
       if (user) this.props.navigation.navigate('Home');
       else this.props.navigation.navigate('Authentication');
@@ -23,7 +23,7 @@ class Initializing extends React.Component {
   }
 
   render() {
-    const logo = require('../../images/iconBill.png')
+    const logo = require('../../images/iconInit.png')
     return(
       <View style={styles.container}>
         <View style={ styles.containerHeader }>
@@ -37,7 +37,7 @@ class Initializing extends React.Component {
 const styles = StyleSheet.create({
     container: {
       height: hp('100%'),
-      backgroundColor: COLORS.blue
+      backgroundColor: COLORS.white
     },
     containerHeader: {
       flex: 1,
@@ -45,8 +45,8 @@ const styles = StyleSheet.create({
       justifyContent: 'center'
     },
     imageHeader: {
-      width: 136,
-      height: 99
+      width: 176,
+      height: 109
     }
 });
 

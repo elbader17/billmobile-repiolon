@@ -27,6 +27,8 @@ import NewInvoiceCustomer from './Invoice/NewInvoiceCustomer';
 import Opinion from './Opinion';
 import ListInvoiceCustomer from './Invoice/ListInvoiceCustomer';
 
+import Prueba from './Prueba';
+
 const LoginStack = createStackNavigator(
   {
     Authentication,
@@ -88,7 +90,8 @@ const AppSwitchNavigator = createSwitchNavigator(
     Invoices: InvoiceStack,
     Items: ItemStack,
     Customer: CustomerStack,
-    Opinion
+    Opinion,
+    Prueba
   },
   {
     initialRouteName: 'Initializing',

@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 import { showMessage } from "react-native-flash-message";
+import LinearGradient from 'react-native-linear-gradient';
 import { 
   messageErrorSignIn,
   messageErrorSignInConfirm,
@@ -9,6 +10,8 @@ import {
 } from '../../../utils/messagesNotifications';
 import { Button } from "react-native-elements";
 import style from '../SignUp/style';
+import { GRADIENTYELLOW } from '../../../constants/colors';
+
 
 const EMAIL_REGEXP = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
 const PASSWORD_REGEXP = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
@@ -113,23 +116,24 @@ class SignIn extends React.Component {
               />
             </TouchableOpacity>
           </View>
-          
-          <Text style={[style.textRegular11GrayDark, {paddingVertical: 15}] }>
-            ¿No tienes una cuenta?
-            <Text style={ style.textRed }> Registrate</Text>
-          </Text>
-
-          <Button
-            title='ENTRAR'
-            testID={'submitSignIn'}
-            onPress={ this.handleSignIn }
-            buttonStyle={ style.submit }
-            titleStyle={ style.textRegular14WhiteBold }
-            disabledTitleStyle={ style.textRegular14WhiteBold}
-            disabledStyle={ style.submitDisabled }
-            disabled={ !this.validateData() }
-            loading = {this.state.loading}
-          />
+          <LinearGradient
+            colors={ GRADIENTYELLOW }
+            start={{x: 0.0, y: 1.0}} 
+            end={{x: 1.0, y: 1.0}}
+            style={{borderRadius: 25, marginTop: 15}}
+          >
+            <Button
+              title='ENTRAR'
+              testID={'submitSignIn'}
+              onPress={ this.handleSignIn }
+              buttonStyle={ style.submit }
+              titleStyle={ style.textRegular14WhiteBold }
+              disabledTitleStyle={ style.textRegular14WhiteBold}
+              disabledStyle={ style.submitDisabled }
+              disabled={ !this.validateData() }
+              loading = {this.state.loading}
+            />
+          </LinearGradient>
         </View>
         
       </View>

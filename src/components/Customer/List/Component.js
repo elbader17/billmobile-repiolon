@@ -1,10 +1,12 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, ScrollView, KeyboardAvoidingView, ActivityIndicator} from 'react-native';
 import { Button} from "react-native-elements";
-import Icon from 'react-native-vector-icons/Ionicons';
+import LinearGradient from 'react-native-linear-gradient';
 import style from '../style';
 import { METRICS } from '../../../constants/metrics';
 import { orderByName } from '../../../utils/functions';
+import Icon from 'react-native-vector-icons/AntDesign';
+import { GRADIANTBLUE, GRADIENTYELLOW, GRADIANTBLUE2 } from '../../../constants/colors';
 
 class CustomerList extends React.Component {
   constructor(props){
@@ -16,11 +18,19 @@ class CustomerList extends React.Component {
   
   static navigationOptions = ({navigation}) => {
     return {
-      title: 'CLIENTES',
+      title: 'Clientes',
+      headerBackground: (
+        <LinearGradient
+          colors={ GRADIANTBLUE2 }
+          style={{ flex: 1 }}
+          start={{x: 0, y: 0}}
+          end={{x: 1, y: 0}}
+        />
+      ),
       headerTitleStyle: style.headerText,
-      headerTintColor: '#3687D1',
+      headerTintColor: 'white',
       headerLeft: <TouchableOpacity onPress={()=> navigation.navigate('Home')}>
-                    <Icon name="md-arrow-back" size={24} color="#3687d1" style={{marginLeft:20}}/>
+                    <Icon name="left" size={20} color="white" style={{marginLeft:20}}/>
                   </TouchableOpacity> 
     }
   };
@@ -56,7 +66,7 @@ class CustomerList extends React.Component {
             <Text style={style.textRegular14GrayDark}>
               {customer.attributes.name} 
             </Text>
-            <Text style={style.textRegular14GrayDarkBold}>
+            <Text style={style.textLight14Blue}>
               {customer.attributes.identification}
             </Text>
           </View>
@@ -75,31 +85,52 @@ class CustomerList extends React.Component {
     return(
       <KeyboardAvoidingView
           behavior={'padding'}
-          style={{flex: 1}}
+          style={style.container}
           keyboardVerticalOffset={METRICS.heightHeader}
       >
-        <View style={style.containerList}>
-          <ScrollView style={style.styleScroll}> 
-            <View style={style.boxCustomer}>
+        <View style={style.containerBody}>
+          <View style={style.boxCustomer}>
+            <ScrollView > 
               {this.state.loading ? this.renderCustomers() : this.renderLoading()}
-            </View>
-          </ScrollView>
+            </ScrollView>
+          </View>
         </View>
 
-        <View style={style.inLine}>
-          <Button
-            title=" Crear Nuevo"
-            onPress={ this.navigateToNewCustomer }
-            buttonStyle={ style.buttonNew }
-            titleStyle={style.textRegular18RedBold}
-            icon={<Icon name="md-add" size={25} color="#EE6123"/>}
-          />
-          <Button
-            title="Listo"
-            onPress={ this.navigateToHome }
-            buttonStyle={ style.buttonContinue }
-            titleStyle={style.textRegular16WhiteBold}
-          />
+        <View style={style.containerFooter}>
+
+          <View style={style.inLineSpaceAround}>    
+            <TouchableOpacity 
+              onPress={ this.navigateToNewCustomer }
+            >
+              <LinearGradient 
+                colors={GRADIANTBLUE2}
+                style={style.gradientNew}  
+                start={{x: 0, y: 1}} 
+                end={{x: 1, y: 0.9}}
+              >
+                <Text style={style.textLight18White}>
+                <Icon name="plus" size={18} color="white"/> Nuevo Cliente
+                </Text>     
+              </LinearGradient>
+            </TouchableOpacity>
+
+            <TouchableOpacity 
+              onPress={ this.navigateToHome }
+            >
+              <LinearGradient 
+                colors={GRADIENTYELLOW}
+                style={style.gradientReady}  
+                start={{x: 0, y: 1}} 
+                end={{x: 1, y: 0.9}}
+              >
+                <Text style={style.textLight18White}>
+                  <Icon name="check" size={25} color="white"/>
+                </Text>     
+              </LinearGradient>
+          
+            </TouchableOpacity>
+          </View>
+
         </View>
       </KeyboardAvoidingView>
     );

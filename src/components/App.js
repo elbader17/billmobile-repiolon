@@ -4,19 +4,27 @@ import { Provider } from 'react-redux';
 import { store, persistor } from '../store/index';
 import Amplify from 'aws-amplify';
 import axios from 'axios';
-import {
-  API_HOST,
-} from 'react-native-dotenv';
+//import createAuthRefreshInterceptor from 'axios-auth-refresh';
+import { API_HOST } from 'react-native-dotenv';
 import FlashMessage from "react-native-flash-message";
 import { PersistGate } from 'redux-persist/integration/react';
 import aws_exports from '../constants/aws-exports';
 import AppNavigator from './AppNavigator';
-import { Text } from 'react-native';
-import Initializing from './Initializing/Component';
+import { getAuthToken, refreshToken, error } from '../utils/interceptors';
+import NavigationService from './NavigationService';
 
 Amplify.configure(aws_exports);
 
 axios.defaults.baseURL = API_HOST;
+axios.interceptors.request.use(getAuthToken(store));
+axios.interceptors.response.use(undefined, err => {error(err)});
+
+/*
+options = {
+  statusCodes: [ 500 ]
+}
+createAuthRefreshInterceptor(axios, refreshToken, options);
+*/
 
 class App extends React.Component {
   componentDidMount() {
@@ -25,10 +33,12 @@ class App extends React.Component {
   render() {
     console.disableYellowBox = true;
     return (
-      <Provider store={store}> 
+      <Provider store={store}>
         <PersistGate 
           persistor={persistor}>   
-          <AppNavigator />
+          <AppNavigator 
+            ref={ navigatorRef => {NavigationService.setTopLevelNavigator(navigatorRef)} }  
+          />
         </PersistGate>
         <FlashMessage position="top" animated={true} />
       </Provider>
@@ -37,4 +47,3 @@ class App extends React.Component {
 }
 
 export default App;
-

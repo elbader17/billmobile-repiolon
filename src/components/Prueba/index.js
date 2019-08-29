@@ -1,24 +1,20 @@
 import React from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Button } from "react-native-elements";
 import LinearGradient from 'react-native-linear-gradient';
 import { showMessage } from "react-native-flash-message";
 import { messageOptions } from '../../utils/messagesNotifications';
 import style from './style';
-import Icon from 'react-native-vector-icons/Feather';
-import IconOne from 'react-native-vector-icons/AntDesign';
-import IconTwo from 'react-native-vector-icons/Entypo';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { ScrollView } from 'react-native-gesture-handler';
-import { GRADIANTBLUE2, GRADIENTYELLOW } from '../../constants/colors';
+import { GRADIANTBLUE2 } from '../../constants/colors';
 
-class Home extends React.Component {
+class Prueba extends React.Component {
 
   constructor(props) {
     super(props);
-    const { user } = this.props
     this.state = {
-      name: user.name,
     }
   }
 
@@ -50,21 +46,21 @@ class Home extends React.Component {
           >
             <View style={style.inLineSpaceBetween}>
               <View style={style.inLine}>
-                <Button
-                  icon={<Icon name="menu" size={25} color="white" />}
-                  buttonStyle={style.buttonHeader}
-                  onPress={() => showMessage(messageOptions)}
-                />
-                <Text style={[style.textLight20White,{marginLeft:20}]}>
-                  {this.state.name}
-                </Text>
+              <Button
+                icon={<Icon name="md-more" size={30} color="white" />}
+                buttonStyle={style.buttonHeader}
+                onPress={() => showMessage(messageOptions)}
+              />
+              <Text style={[style.textLight20White,{marginLeft:20}]}>
+                {this.state.name}
+              </Text>
               </View>
-              
+              <Button
+                icon={<Icon name="md-settings" size={25} color="white" />}
+                onPress={this.handleSignOut}
+                buttonStyle={style.buttonHeader}
+              />
             </View>
-            <View style={{alignItems: 'center'}}>
-              <IconTwo name="area-graph" size={90} w color="white" />
-            </View>
-              <View style={style.lineWhiteAux}></View>
           </LinearGradient>
           
           <View style={style.containerBar}>
@@ -105,7 +101,7 @@ class Home extends React.Component {
             <Text style={style.textLight14Blue}>
               Clientes Recientes
             </Text>  
-            <View style={[style.lineBlueMedium, {marginTop: 5}]}></View>
+            <View style={[style.lineBlueMedium, {marginTop: 7}]}></View>
               <ScrollView style={style.scrollCustomers}>
                 
                 <View style={[style.inLineSpaceBetween,{marginHorizontal: 6, marginVertical: 3,}]}>
@@ -138,8 +134,13 @@ class Home extends React.Component {
 
               </ScrollView>
               <View style={style.lineBlueMedium}></View>
+              <Button
+                title='Ver Todos'
+                buttonStyle={style.buttonViewAll}
+                titleStyle={style.textRegular16Blue}
+              />
           </View>
-
+          
           <LinearGradient
             colors={ GRADIANTBLUE2 }
             start={{x: 0.0, y: 1.0}} 
@@ -149,37 +150,29 @@ class Home extends React.Component {
             <View style={style.inLineCenter}>
               
               <Button
-                //title=' Clientes'
-                onPress={ this.customerListNavigate }
-                icon={<IconOne name="user" size={23} color="white"/>}
+                title=' Clientes'
+                icon={<Icon name="ios-contact" size={35} color="white"/>}
                 buttonStyle={style.buttonViewAll}
                 titleStyle={style.textRegular14White}
               />
 
               <Button
-                //title=' Facturar'
-                onPress={ this.newInvoiceNavigate }
-                icon={<IconOne name="file1" size={23} color="white"/>}
+                title=' Facturar'
+                icon={<Icon name="ios-paper" size={32} color="white"/>}
                 buttonStyle={style.buttonViewAll}
                 titleStyle={style.textRegular14White}
               />
 
               <Button
-                //title=' Items'
-                onPress={ this.itemListNavigate }
-                icon={<Icon name="shopping-cart" size={23} color="white"/>}
+                title=' Items'
+                icon={<Icon name="md-cart" size={35} color="white"/>}
                 buttonStyle={style.buttonViewAll}
                 titleStyle={style.textRegular14White}
-              />
-
-              <Button
-                icon={<IconOne name="poweroff" size={23} color="white" />}
-                onPress={this.handleSignOut}
-                buttonStyle={style.buttonHeader}
               />
 
             </View>
-          </LinearGradient>  
+          </LinearGradient> 
+            
         </View>
 
       </KeyboardAwareScrollView>
@@ -187,4 +180,4 @@ class Home extends React.Component {
   }
 }
 
-export default Home;
+export default Prueba;

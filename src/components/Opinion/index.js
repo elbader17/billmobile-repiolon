@@ -9,7 +9,7 @@ class Opinion extends React.Component {
   }
 
   render() {
-    const logo = require('../../images/iconBill.png')
+    const logo = require('../../images/iconInit.png')
     return(
       <View style={styles.container}>
         <Image source={ logo } style={ styles.imageHeader } />

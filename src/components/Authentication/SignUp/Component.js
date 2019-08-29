@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
 import { showMessage, hideMessage } from "react-native-flash-message";
+import LinearGradient from 'react-native-linear-gradient';
 import { Button } from "react-native-elements";
 import { COLORS } from '../../../constants/colors';
 import { 
@@ -15,6 +16,7 @@ import {
 } from '../../../utils/messagesNotifications'
 import { validateDataSignUp } from '../../../utils/validations';
 import style from './style';
+import { GRADIENTYELLOW } from '../../../constants/colors';
 
 class SignUp extends React.Component {
 
@@ -188,24 +190,25 @@ class SignUp extends React.Component {
             </View>
             </View>
           </View>
-          
-          <Text style={[style.textRegular11GrayDark, {paddingVertical: 15}] }>
-            ¿Ya tienes una cuenta?
-            <Text style={ style.textRed }> Iniciar Sesión</Text>
-          </Text>
-          
-          <Button
-            title='CREAR CUENTA'
-            testID='submitSignUp'
-            onPress={ this.handleSignUp }
-            value={this.state.email}
-            buttonStyle={ style.submit }
-            titleStyle={ style.textRegular14WhiteBold }
-            disabledTitleStyle={ style.textRegular14WhiteBold}
-            disabledStyle={ style.submitDisabled }
-            disabled={ !validateDataSignUp(this.state.password, this.state.confirmPassword, this.state.email, this.state.name)}
-            loading = {this.state.loading}
-          />
+          <LinearGradient
+            colors={ GRADIENTYELLOW }
+            start={{x: 0.0, y: 1.0}} 
+            end={{x: 1.0, y: 1.0}}
+            style={{borderRadius: 25, marginTop: 15}}
+          >
+            <Button
+              title='CREAR CUENTA'
+              testID='submitSignUp'
+              onPress={ this.handleSignUp }
+              value={this.state.email}
+              buttonStyle={ style.submit }
+              titleStyle={ style.textRegular14WhiteBold }
+              disabledTitleStyle={ style.textRegular14WhiteBold}
+              disabledStyle={ style.submitDisabled }
+              disabled={ !validateDataSignUp(this.state.password, this.state.confirmPassword, this.state.email, this.state.name)}
+              loading = {this.state.loading}
+            />
+          </LinearGradient>
         </View>
         
       </View>

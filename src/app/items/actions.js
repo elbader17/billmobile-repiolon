@@ -5,7 +5,6 @@ import {
   LIST_ITEMS,
 } from './constants';
 
-
 function createItemAction(item) {
   return {
     type: CREATE_ITEM,
@@ -50,12 +49,10 @@ const createItem = ({ category, name, price }) => {
 };
 
 const listItems = () => {
-  return (dispatch, getState) => {
-    const instance = axios.create({
-      headers: { 'JWT-TOKEN': getState().authentication.jwtToken },
-    });
-    return instance.get('v1/items')
+  return (dispatch) => {
+    return axios.get('v1/items')
       .then((resources) => {
+        console.log(resources);
         dispatch(itemListAction(resources.data));
       })
       .catch((error) => {

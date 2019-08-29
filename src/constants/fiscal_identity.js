@@ -1,18 +1,18 @@
 export const CONDITION_IVA = [
   {
-    label: 'RESPONSABLE INSCRIPTO',
+    label: 'Responsable Inscripto',
     value: 'ri',
   },
   {
-    label: 'IVA EXENTO',
+    label: 'IVA Exento',
     value: 'ie',
   },
   {
-    label: 'MONOTRIBUTISTA',
+    label: 'Monotributista',
     value: 'm',
   },
   {
-    label: 'RESPONSABLE NO INSCRIPTO',
+    label: 'Responsable No Inscripto',
     value: 'rni',
   },
 ];

@@ -1,11 +1,14 @@
 import React from 'react';
-import { View, Text, Alert, Picker, TextInput, ScrollView, KeyboardAvoidingView } from 'react-native';
+import { View, Text, Picker, TextInput, ScrollView, KeyboardAvoidingView, TouchableOpacity } from 'react-native';
 import { Button } from "react-native-elements";
+import Icon from 'react-native-vector-icons/AntDesign';
+import LinearGradient from 'react-native-linear-gradient';
 import { CONDITION_IVA } from '../../../constants/fiscal_identity';
 import { METRICS } from '../../../constants/metrics';
 import { COLORS } from '../../../constants/colors';
 import { validateCuit } from '../../../utils/identity';
 import style from '../style';
+import { GRADIANTBLUE2 } from '../../../constants/colors';
 
 class NewCustomer extends React.Component {
 
@@ -22,10 +25,23 @@ class NewCustomer extends React.Component {
     }
   }
 
-  static navigationOptions = {
-    title: 'NUEVO CLIENTE',
-    headerTitleStyle: style.headerText,
-    headerTintColor: COLORS.blue,
+  static navigationOptions = ({navigation}) => {
+    return {
+      title: 'Nuevo Cliente',
+      headerBackground: (
+        <LinearGradient
+          colors={ GRADIANTBLUE2 }
+          style={{ flex: 1 }}
+          start={{x: 0, y: 0}}
+          end={{x: 1, y: 0}}
+        />
+      ),
+      headerTitleStyle: style.headerText,
+      headerTintColor: 'white',
+      headerLeft: <TouchableOpacity onPress={()=> navigation.navigate('CustomerList')}>
+                    <Icon name="left" size={20} color="white" style={{marginLeft:20}}/>
+                  </TouchableOpacity> 
+    }  
   };
 
   defaultCustomer= () => {
@@ -57,12 +73,13 @@ class NewCustomer extends React.Component {
     return(
       <KeyboardAvoidingView
         behavior={'padding'}
-        style={{flex: 1}}
-        keyboardVerticalOffset={METRICS.heightHeader}>
-      <ScrollView>
-        <View style={style.container}>
+        style={style.container}
+        keyboardVerticalOffset={METRICS.heightHeader}
+      >
+      <View style={style.containerBody}>
+        <ScrollView>
           <View style={style.containerInputs}>
-            <Text style={style.textRegular14White}>CONDICIÓN FRENTE AL IVA</Text>
+            <Text style={style.textRegular14Blue}>Condición frente al IVA</Text>
             <View style={style.boxBtnHolder}>
               <Picker
                 selectedValue={this.state.category}
@@ -73,23 +90,25 @@ class NewCustomer extends React.Component {
                 ))}
               </Picker>
             </View>
-            <Text style={style.textRegular14White}>NÚMERO DE CUIT</Text>
+            <Text style={style.textRegular14Blue}>Número de CUIT</Text>
             <View style={ style.boxBtnHolder }>
               <TextInput
                 onChangeText={this.setIdentification}
                 placeholder=" 00-00000000-0"
                 value={this.state.identification}
-                placeholderTextColor={COLORS.grayLight}
+                placeholderTextColor={COLORS.gray}
                 value={this.state.identification}
                 style={[style.textRegular16GrayDark,style.marginLeft5]}
                 keyboardType='numeric'
               />
             </View>
-          <Text style={ style.textRegular12White }>La información fiscal de los clientes se cargan automaticamente poniendo su N° de CUIT</Text>
+          <Text style={ style.textRegular12Blue }>
+            <Icon name="infocirlceo" size={12} color="#0097D9"/> La información fiscal de los clientes se cargan automaticamente ingresando su número de CUIT
+          </Text>
 
-          <View style={style.lineWhite}></View>
+          <View style={style.lineGray}></View>
 
-          <Text style={style.textRegular14White} >NOMBRE DE FANTASÍA (OPCIONAL)</Text>
+          <Text style={style.textRegular14Blue} >Nombre de Fantasía (opcional)</Text>
           <View style={ style.boxBtnHolder }>
             <TextInput
               style={[style.textRegular16GrayDark,style.marginLeft5]}
@@ -97,22 +116,35 @@ class NewCustomer extends React.Component {
               value={this.state.name}
               placeholder=" Inserta el Nombre"
               value={this.state.name}
-              placeholderTextColor={COLORS.grayLight}
+              placeholderTextColor={COLORS.gray}
             />
           </View>
           </View>
+        </ScrollView>
       </View>
-      </ScrollView>
-      <Button
-        onPress={this.saveCustomer}
-        title='GUARDAR'
-        buttonStyle={ style.buttonSave }
-        titleStyle={ style.textRegular14WhiteBold }
-        disabledStyle= { style.buttonSaveDisabled }
-        disabledTitleStyle = { style.textRegular14WhiteBold }
-        disabled={!validateCuit(this.state.identification) }
-        loading = {this.state.loading}
-      />
+
+      <View style={style.containerFooter}>
+        <TouchableOpacity
+          onPress={this.saveCustomer} 
+          style={{alignItems:'center'}}
+          disabledStyle= { style.buttonSaveDisabled }
+          disabledTitleStyle = { style.textRegular14WhiteBold }
+          disabled={!validateCuit(this.state.identification) }
+          loading = {this.state.loading}
+        >
+          <LinearGradient 
+            colors={GRADIANTBLUE2}
+            style={style.gradientSave}  
+            start={{x: 0, y: 1}} 
+            end={{x: 1, y: 0.9}}
+          >
+            <Text style={style.textRegular14WhiteBold}>
+              Guardar
+            </Text>     
+          </LinearGradient>
+        </TouchableOpacity>
+      </View>
+
       </KeyboardAvoidingView>
     )
   }
