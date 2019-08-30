@@ -2,13 +2,15 @@ import React from 'react';
 import { View, Text, Modal, TouchableOpacity, ScrollView, TouchableWithoutFeedback, ImageBackground} from 'react-native';
 import { Button } from "react-native-elements";
 import DateTimePicker from 'react-native-modal-datetime-picker';
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/AntDesign';
+import LinearGradient from 'react-native-linear-gradient';
 import InvoiceItems from './InvoiceItems';
 import InvoiceCustomer from './InvoiceCustomer';
 import style from './style';
 import { VOUCHER_TYPES } from '../../constants/invoice';
 import { validateData } from '../../utils/validations';
 import { presentInvoiceDate } from '../../utils/date';
+import { GRADIANTBLUE, GRADIENTYELLOW, GRADIANTBLUE3, COLORS } from '../../constants/colors';
 
 class Invoice extends React.Component {
 
@@ -18,7 +20,7 @@ class Invoice extends React.Component {
     fcIndentification = fiscalIdentity.name === 'fc' ? '' : fiscalIdentity.cuit;
     this.state = {
       voucherType,
-      cf: false,
+      cf: true,
       isDateTimePickerVisible: false,
       isDateTimeVisible:false,
       bool:false,
@@ -31,11 +33,17 @@ class Invoice extends React.Component {
 
   static navigationOptions = ({navigation}) => {
     return {
-      title: 'GENERACIÓN DE COMPROBANTE',
+      title: 'Generación de Comprobante',
+      headerTransparent: true,
+      headerStyle: {
+        elevation: 0,
+        shadowOpacity: 0,
+        borderBottomWidth: 0,
+      },
       headerTitleStyle: style.headerText,
-      headerTintColor: '#3687D1',
+      headerTintColor: 'white',
       headerLeft: <TouchableOpacity onPress={()=> navigation.navigate('Home')}>
-                    <Icon name="md-arrow-back" size={24} color="#3687d1" style={{marginLeft:20}}/>
+                    <Icon name="left" size={20} color="white" style={{marginLeft:20}}/>
                   </TouchableOpacity> 
     }  
   };
@@ -128,26 +136,33 @@ class Invoice extends React.Component {
   render() {
     const buttonCfEnable = style.buttonCfEnable;
     const buttonCfDisable = style.buttonCfDisable;
-    const iconAddCustomer = <Icon name="md-person-add" size={20} color="#EE6123" />
-    const styleImage = {width: '100%', height: '100%'}
     return(
-      <ImageBackground source={require('../../images/gradiant.png')} style={styleImage}>
-      <ScrollView>
+      
+      <LinearGradient 
+        colors={GRADIANTBLUE}
+        style={{flex:1}}  
+        start={{x: 0, y: 1}} 
+        end={{x: 1, y: 0.9}}
+      >
+
       <View style={style.container}>
+        
+        <View style={style.containerBody}>
+
         <View style={style.inLineSpaceBetween}>
           <View style={style.boxVoucher}>
             <TouchableOpacity
               onPress={() => {this.setModalVisible(true)}}
               style={style.buttonVoucher}
             >
-              <Text style={style.textRegular16WhiteCenter}>
+              <Text style={style.textRegular16BlueCenter}>
                 {this.presentVoucherType()}
               </Text>
             </TouchableOpacity>
           </View>
           <View style={style.boxDate}>
             <TouchableOpacity onPress={this.showDateTimePicker} style={style.buttonDate}>
-              <Text style={style.textRegular16WhiteCenter}>
+              <Text style={style.textRegular16BlueCenter}>
                 {presentInvoiceDate(this.state.invoiceDate)}
               </Text>
             </TouchableOpacity>
@@ -161,71 +176,88 @@ class Invoice extends React.Component {
         </View>
 
         <View style={[style.containerCustomers,style.inColumnSpaceBetween]}>
-          <View style={[style.inLineSpaceBetween,style.margin7]}>
-            <Button
-              title='CONSUMIDOR FINAL'
-              testID='cf'
-              onPress={this.changeTypeCustomer}
-              buttonStyle = {this.state.cf ? buttonCfEnable : buttonCfDisable}
-              titleStyle={style.textRegular11GrayDark}
-            />
-            <Button
-              title='Cancelar'
+          <View style={style.inLineSpaceBetween}>
+            <View style={style.textConsumerFinal}>
+              <Text style={style.textRegular14Blue}> Consumidor Final</Text>
+            </View>
+            <TouchableOpacity
+              onPress={ this.navigateClient }
+              style={{alignItems:'center'}}
+              testID='addCustomer'
+            >
+              <LinearGradient 
+                colors={GRADIENTYELLOW}
+                style={style.buttonAddCustomer}  
+                start={{x: 0, y: 1}} 
+                end={{x: 1, y: 0.9}}
+              >
+                <Text style={style.textRegular14White}>
+                  <Icon name="adduser" size={17} color={COLORS.white} /> Otro Cliente
+                </Text>
+              </LinearGradient>
+            </TouchableOpacity>
+
+            {/*<Button
+              title='X'
               testID='cancel'
               onPress={() => this.setState({cf: false})}
               buttonStyle={style.buttonCancel}
-              titleStyle={style.textRegular12Gray}
+              titleStyle={style.textRegular12Blue}
               disabled={!this.state.cf}
               disabledStyle={style.buttonCanceldisabled}
               disabledTitleStyle={style.textButtonCanceldisabled}
               TouchableComponent={TouchableWithoutFeedback}
-            />
-            <Button
-              testID='addCustomer'
-              icon={iconAddCustomer}
-              onPress={ this.navigateClient }
-              buttonStyle={style.buttonAddCustomer}
-            />
-          </View>
-          <View style={[style.lineGray, style.marginHorizontal5]}></View>
-            { this.renderCustomer() }
-          <View style={style.containerButtonShowAll}>
-          <View style={[style.lineGray, style.marginHorizontal5]}></View>
-            <Button
-              title='VER TODOS'
-              buttonStyle = {style.buttonShowAll}
-              titleStyle={style.textRegular12Red}
-            />
-          </View>
-        </View>
+            />*/}
 
-        <Button
-          testID='addItems'
-          title={
-            <Text>
-              <Text style={style.textRegular14GrayDark}>AGREGAR </Text>
-              <Text style={style.textRegular14GrayDarkBold}>ITEMS</Text>
-            </Text>}
-          icon={<View style={style.positionIconAdd}><Icon name="md-add" size={30} color="#EE6123" /></View>}
-          iconRight
+          </View>
+            { this.renderCustomer() }
+          {/*<View style={style.lineBlue}></View>*/}
+
+        </View>
+        <TouchableOpacity
           onPress={ this.navigateAddItems }
-          buttonStyle={ style.buttonAddItems }
-          titleStyle={ style.textRegular14GrayDark }
-        />
+          style={{alignItems:'center'}}
+          testID='addItems'
+          disabled={ !validateData(this.props.fiscalIdentity.name, this.props.items.length) }
+          disabledStyle={ style.buttonContinueDisabled }
+          disabledTitleStyle = { style.textSemiBold14White }
+        >
+          <LinearGradient 
+            colors={GRADIENTYELLOW}
+            style={style.gradientAddItems}  
+            start={{x: 0, y: 1}} 
+            end={{x: 1, y: 0.9}}
+          >
+            <Text style={style.textRegular14WhiteBold}>
+              <Icon name="plus" size={15} color="white" />  Agregar Items
+            </Text>     
+          </LinearGradient>
+        </TouchableOpacity>
 
         { this.renderViewItemsAdd() }
 
-        <View style={style.positionFinalButton}>
-          <Button
-            title='CONTINUAR'
-            testID='continue'
+      </View>
+
+      <View style={style.containerFooter}>
+          <TouchableOpacity
             onPress={ this.navigateToBewInvoice }
-            buttonStyle={ style.buttonContinue }
-            titleStyle={ style.textSemiBold14White }
+            style={{alignItems:'center'}}
+            testID='continue'
             disabled={ !validateData(this.props.fiscalIdentity.name, this.props.items.length) }
             disabledStyle={ style.buttonContinueDisabled }
             disabledTitleStyle = { style.textSemiBold14White }
-          />
+          >
+            <LinearGradient 
+              colors={GRADIENTYELLOW}
+              style={style.gradientContinue}  
+              start={{x: 0, y: 1}} 
+              end={{x: 1, y: 0.9}}
+            >
+              <Text style={style.textRegular14WhiteBold}>
+                Continuar
+              </Text>     
+            </LinearGradient>
+          </TouchableOpacity>
         </View>
 
         <Modal
@@ -257,8 +289,7 @@ class Invoice extends React.Component {
         </Modal>
 
       </View>
-      </ScrollView>
-      </ImageBackground>
+      </LinearGradient>
     )
   }
 }

@@ -6,17 +6,25 @@ import { METRICS } from '../../constants/metrics';
 
 const styles = StyleSheet.create({
   container: {
-    height: hp('100%') - METRICS.heightHeader,
-    //backgroundColor: COLORS.blue,
-    paddingHorizontal: 18,
-    paddingVertical: 7,
+    height: hp('100%'),
+    paddingTop: METRICS.heightHeader + 15,
+    paddingHorizontal: 20,
+  },
+  containerBody: {
+    flex: 0.87
+  }, 
+  containerFooter: {
+    flex: 0.13,
+    justifyContent: 'center'
   },
   containerCustomers: {
     maxHeight: hp('25%'),
     backgroundColor: COLORS.white,
     borderRadius: 5,
     marginVertical: 15,
-    elevation: 3,
+    paddingVertical: 8,
+    paddingHorizontal: 10,
+    elevation: 4,
   },
   containerItemsInvoice: {
     maxHeight: hp('30%'),
@@ -83,6 +91,24 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.blue,
     paddingVertical: 15
   },
+  gradientContinue: {
+    width: wp('90%'),
+    height: hp('8%'),
+    backgroundColor: 'transparent',
+    borderRadius: 25,
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 2
+  },
+  gradientAddItems: {
+    width: wp('90%'),
+    height: hp('7%'),
+    backgroundColor: 'transparent',
+    borderRadius: 25,
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 2
+  },
   inLineSpaceBetween: {
     flexDirection: "row",
     justifyContent: 'space-between',
@@ -101,9 +127,15 @@ const styles = StyleSheet.create({
   },
   buttonVoucher: {
     paddingVertical: 10,
-    borderBottomColor: COLORS.white,
-    borderBottomWidth: 1,
-    borderRadius: 1,
+    backgroundColor: COLORS.white,
+    borderRadius: 5,
+    elevation: 4,
+  },
+  buttonDate: {
+    backgroundColor: COLORS.white,
+    paddingVertical: 10,
+    borderRadius: 5,
+    elevation: 4,
   },
   borderVoucher: {
     borderWidth: 1,
@@ -112,12 +144,6 @@ const styles = StyleSheet.create({
     paddingVertical: 3,
     paddingHorizontal: 10,
     backgroundColor: 'transparent'
-  },
-  buttonDate: {
-    paddingVertical: 10,
-    borderBottomColor: COLORS.white,
-    borderBottomWidth: 1,
-    borderRadius: 1,
   },
   buttonOn: {
     borderColor: COLORS.grayDark,
@@ -144,6 +170,16 @@ const styles = StyleSheet.create({
   marginTop3: {
     marginTop: 3
   },
+  textRegular14White: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size14,
+    color: COLORS.white
+  },
+  textRegular14WhiteBold: {
+    fontFamily: FONTS.latoSemiBold,
+    fontSize: FONTS.size14,
+    color: COLORS.white,
+  },
   textRegular16White: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size16,
@@ -154,10 +190,10 @@ const styles = StyleSheet.create({
     fontSize: FONTS.size16,
     color: COLORS.blue,
   },
-  textRegular16WhiteCenter: {
+  textRegular16BlueCenter: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size16,
-    color: COLORS.white,
+    color: COLORS.blueMedium,
     textAlign: 'center',
   },
   lineGrayLight: {
@@ -171,6 +207,12 @@ const styles = StyleSheet.create({
   lineGray: {
     backgroundColor: COLORS.gray,
     height: 1,
+  },
+  lineBlue: {
+    backgroundColor: COLORS.blueMedium,
+    height: 1,
+    marginVertical: 7,
+    borderRadius: 5
   },
   marginHorizontal5: {
     marginHorizontal: 5
@@ -200,24 +242,26 @@ const styles = StyleSheet.create({
   },
   buttonCfDisable: {
     width: wp('40%'),
-    height: hp('5%'),
+    height: hp('6%'),
     backgroundColor: 'transparent',
-    borderWidth: 1,
-    borderColor: COLORS.gray,
+    borderRadius: 1,
+    borderBottomWidth: 2,
+    borderColor: COLORS.blueMedium
   },
   buttonCfEnable: {
     width: wp('40%'),
     height: hp('5%'),
     backgroundColor: COLORS.grayLight,
-    borderWidth: 1,
+    borderWidth: 0.5,
     borderColor: COLORS.gray,
   },
   buttonCancel: {
-    width: wp('18%'),
-    height: hp('5%'),
+    width: 32,
+    height: 32,
     backgroundColor: 'transparent',
-    borderWidth: 1,
-    borderColor: COLORS.gray,
+    borderWidth: 0.5,
+    borderRadius: 20,
+    borderColor: COLORS.blueMedium,
   },
   buttonCanceldisabled: {
     borderWidth: 0,
@@ -233,21 +277,35 @@ const styles = StyleSheet.create({
   inLine: {
     flexDirection: "row",
   },
+  textConsumerFinal: {
+    width: '45%',
+    justifyContent: 'center',
+  },
   textRegular11GrayDark: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size11,
     color: COLORS.grayDark,
   },
+  textRegular12Blue: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size12,
+    color: COLORS.blueMedium,
+  },
+  textRegular14Blue: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size14,
+    color: COLORS.blueMedium,
+  },
   textRegular12GrayDark: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size12,
-    color: COLORS.grayDark,
+    color: COLORS.gray,
   },
   headerText: {
     fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size16,
+    fontSize: FONTS.size18,
     fontWeight: 'normal',
-    color: COLORS.blue,
+    color: COLORS.white,
   },
   textRegular16GrayDark: {
     fontFamily: FONTS.latoRegular,
@@ -311,11 +369,12 @@ const styles = StyleSheet.create({
   },
   buttonAddCustomer: {
     backgroundColor: 'transparent',
-    borderColor: COLORS.red,
-    borderRadius: 3,
-    borderWidth: 1,
-    width: wp('14%'),
+    borderRadius: 25,
+    width: wp('40%'),
     height: hp('5%'),
+    alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 1
   },
   buttonAddItems: {
     backgroundColor: COLORS.white,
@@ -323,7 +382,6 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     elevation: 3,
   },
-
   positionIconAdd: {
     right: 15, 
     position: 'absolute'
@@ -359,20 +417,19 @@ const styles = StyleSheet.create({
   },
   buttonCheck: {
     backgroundColor: 'transparent',
-    borderColor: COLORS.red,
-    borderRadius: 3,
+    borderColor: COLORS.blueMedium,
+    borderRadius: 30,
     borderWidth: 1,
     width: wp('14%'),
-    height: hp('5%'),
+    height: hp('6%'),
   },
   buttonCheckDisabled: {
     backgroundColor: COLORS.grayLight,
     borderColor: COLORS.grayDark,
-    borderRadius: 3,
+    borderRadius: 30,
     borderWidth: 1,
     width: wp('14%'),
-    height: hp('5%'),
-    paddingTop: 10,
+    height: hp('6%'),
     opacity: 0.7
   },
   buttonCheckCustomerDisabled: {
@@ -415,7 +472,7 @@ const styles = StyleSheet.create({
   },
   positionFinalButton: {
     position: 'absolute', 
-    bottom: 0, 
+    bottom: 10, 
     left:0, 
     right:0
   },

@@ -1,15 +1,16 @@
 import React from 'react';
 import { View, TextInput, ScrollView } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/AntDesign';
 import { Button } from "react-native-elements";
 import PropTypes from 'prop-types';
 import InvoiceListCustomer from './InvoiceListCustomers';
 import { validateDni } from '../../utils/validations'
 import style from './style';
+import { COLORS } from '../../constants/colors';
 
 const InvoiceCustomer = props => {
-  const iconEnabled = <Icon name="md-return-right" size={18} color="#EE6123"/>;
-  const iconDisabled = <Icon name="md-return-right" size={18} color="#858585"/>;
+  const iconEnabled = <Icon name="right" size={18} color={COLORS.blueMedium}/>;
+  const iconDisabled = <Icon name="right" size={18} color={COLORS.grayDark}/>;
   if (!props.finalConsumer) {
     return (
       <ScrollView>
@@ -25,10 +26,10 @@ const InvoiceCustomer = props => {
       <View style={style.containerFinalConsumer}>
         <View style={[style.inLineSpaceBetween, {alignItems: 'center'}]}>
           <TextInput
-            placeholder="DNI"
+            placeholder="Ingrese DNI"
             placeholderTextColor={'#cecece'}
             onChangeText={props.setFinalConsumer}
-            style={[style.textRegular18GrayDark,style.inputDNICustomer]}
+            style={[style.textRegular16GrayDark,style.inputDNICustomer]}
             keyboardType='numeric'
           />
           <Button

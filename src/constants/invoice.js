@@ -1,6 +1,6 @@
 export const VOUCHER_TYPES = [
   {
-    label: 'FACTURA-C',
+    label: 'Factura-C',
     value: 'fc',
   },
 ];

@@ -27,7 +27,7 @@ const InvoiceListCustomer = props => {
   }else {
     return(
       <Text style={[style.textRegular14Gray,{padding: 3}]}>
-        No hay Clientes Cargados
+        Click en + para añadir Cliente existente
       </Text>
     );
   }
