@@ -151,6 +151,9 @@ class Invoice extends React.Component {
 
         <View style={style.inLineSpaceBetween}>
           <View style={style.boxVoucher}>
+            <Text style={[style.textRegular12White, {paddingBottom: 5}]}>
+              Tipo de Comprobante
+            </Text>
             <TouchableOpacity
               onPress={() => {this.setModalVisible(true)}}
               style={style.buttonVoucher}
@@ -161,6 +164,9 @@ class Invoice extends React.Component {
             </TouchableOpacity>
           </View>
           <View style={style.boxDate}>
+            <Text style={[style.textRegular12White, {paddingBottom: 5}]}>
+              Fecha de Emisión
+            </Text>
             <TouchableOpacity onPress={this.showDateTimePicker} style={style.buttonDate}>
               <Text style={style.textRegular16BlueCenter}>
                 {presentInvoiceDate(this.state.invoiceDate)}
@@ -174,7 +180,11 @@ class Invoice extends React.Component {
             />
           </View>
         </View>
-
+        
+        <View style={style.containerReceptor}>
+        <Text style={[style.textRegular12White, {paddingBottom: 5}]}>
+          Datos del Receptor
+        </Text>
         <View style={[style.containerCustomers,style.inColumnSpaceBetween]}>
           <View style={style.inLineSpaceBetween}>
             <View style={style.textConsumerFinal}>
@@ -213,6 +223,7 @@ class Invoice extends React.Component {
             { this.renderCustomer() }
           {/*<View style={style.lineBlue}></View>*/}
 
+        </View>
         </View>
         <TouchableOpacity
           onPress={ this.navigateAddItems }

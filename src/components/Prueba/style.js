@@ -7,69 +7,48 @@ const styles = StyleSheet.create({
   container: {
     height: hp('100%'),
   },
-  gradientHeader: { 
-    flex:0.7,
-    paddingVertical: 2,
+  containerHeader: { 
+    flex:1,
+    paddingTop: 3,
     paddingHorizontal: 5,
-    borderBottomLeftRadius: 100, 
-    borderBottomRightRadius: 100,
-    elevation: 2
-  },
-  containerBar: {
-    flex:0.45,
-    alignItems:'center',
-    justifyContent: 'center',
-  },
-  gradientBarer: { 
-    height: 10,
-    width: '40%',
-    borderBottomLeftRadius: 3, 
-    borderTopLeftRadius: 3,
-    borderBottomRightRadius: 2, 
-    borderTopRightRadius: 2,
-    elevation: 2,
   },
   containerStatictis: {
     flex:0.6,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  containerListCustomer: {
-    flex:0.75,
-    paddingHorizontal: 15,
-    paddingTop: 15,
+    marginHorizontal: 12,
+    paddingTop: 17,
     paddingBottom: 5
   },
-  gradientFooter: { 
-    flex: 0.30,
-    width: '100%', 
-    justifyContent: 'center',
-    paddingHorizontal: 35,
-    borderTopLeftRadius: 100, 
-    borderTopRightRadius: 100, 
+  containerListCustomer: {
+    flex:0.60,
+    paddingVertical: 5,
   },
-  gradientInfo: {
-    width: '35%',
-    height: hp('20%'),
-    marginHorizontal: 15,
-    borderRadius: 90,
-    borderBottomColor: COLORS.blue,
-    borderColor: COLORS.blue,
-    alignItems:'center',
+  containerFooter: { 
+    width: '100%',
+    height: hp('7.5%'), 
     justifyContent: 'center',
-    borderWidth: 0.5,
-    borderColor: COLORS.grayLight,
-    elevation: 3,
-    opacity: 0.9
+    paddingHorizontal: 20,
+    borderTopLeftRadius: 0, 
+    borderTopRightRadius: 0, 
   },
   scrollCustomers: {
-    flex:1,
-    borderRadius: 0,
-    margin: 1,
+    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+    borderRadius: 10,
+    marginTop: 7,
+    marginHorizontal: 12,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    elevation: 0.5,
   },
-  margin: {
-    marginHorizontal: 10,
-    marginVertical: 7
+  styleChart: {
+    borderRadius: 15,
+    elevation: 1
+  },
+  circlePercentaje: {
+    borderWidth: 0, 
+    borderRadius: 65, 
+    elevation: 5, 
+    borderColor: COLORS.grayLight,
+    marginBottom: 10
   },
   inLineSpaceBetween: {
     flexDirection: 'row',
@@ -80,112 +59,95 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center'
   },
+  inColumn: {
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
   inLineCenter: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between'
   },
-  buttonHeader: {
-    backgroundColor: 'transparent'
+  inLineSpaceAround: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around'
   },
-  textLight20White: {
+  textFacPeriodo: {
+    alignItems: 'flex-end',
+    marginBottom: 3,
+    marginRight: 15
+  },
+  textRegular16Blue: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size16,
+    color: COLORS.blueMedium,
+  },
+  textLight12BlueLight: {
     fontFamily: FONTS.latoLight,
-    fontSize: FONTS.size20,
-    color: COLORS.white,
+    fontSize: FONTS.size12,
+    color: COLORS.blueLight,
   },
-  textRegular14White: {
+  textLight12BlueLight: {
     fontFamily: FONTS.latoLight,
     fontSize: FONTS.size14,
     color: COLORS.blueLight,
+    opacity: 0.7,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
-  textRegular32White: {
-    fontFamily: FONTS.latoLight,
-    fontSize: FONTS.size32,
+  textRegular14White: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size14,
     color: COLORS.white,
   },
-  containerActionButton: {
-    alignItems: 'center',
-    width: '100%',
-    height: 420,
+  textRegular16White: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size16,
+    color: COLORS.white,
   },
-  lineBlueMedium: {
-    backgroundColor: COLORS.blueMedium,
-    height: 1,
+  textLight14White: {
+    fontFamily: FONTS.latoLight,
+    fontSize: FONTS.size14,
+    color: COLORS.white,
+  },
+  textLight16White: {
+    fontFamily: FONTS.latoLight,
+    fontSize: FONTS.size18,
+    color: COLORS.white,
+  },
+  textLight18White: {
+    fontFamily: FONTS.latoLight,
+    fontSize: FONTS.size18,
+    color: COLORS.white,
+  },
+  lineBlueLightTop: {
+    width:'45%',
+    backgroundColor: COLORS.blueLight,
+    height: 4,
+    borderRadius: 10,
     marginBottom: 2.5,
+    elevation: 0.5,
+    opacity: 0.9
   },
-  buttonShowInvoice: {
-    backgroundColor: COLORS.white,
+  lineBlueLight: {
+    backgroundColor: COLORS.blueMedium,
+    height: 0.3,
     borderRadius: 5,
-    width: 40,
-    height: 25,
+    marginHorizontal: 10
   },
-  buttonViewAll: {
-    height: hp('4.5%'),
+  buttonFooter: {
+    height: hp('5%'),
+    backgroundColor: 'transparent'
+  },
+  buttonHeader: {
     backgroundColor: 'transparent'
   },
   buttonViewInvoice: {
     height: hp('4%'),
     backgroundColor: 'transparent',
-    borderWidth: 0.5,
-    borderRadius: 10,
-    borderColor: COLORS.blueMedium,
-  },
-  lineBlue: {
-    height: 10,
-    width: '40%',
-    borderBottomLeftRadius: 4, 
-    borderTopLeftRadius: 4,
-    borderBottomRightRadius: 1, 
-    borderTopRightRadius: 1, 
-    marginVertical: 10,
-    backgroundColor: COLORS.blueMedium,
-    elevation: 1.2,
-    opacity: 0.9
-  },
-  lineWhite: {
-    height: 10,
-    width: '20%',
-    borderBottomRightRadius: 4, 
-    borderTopRightRadius: 4, 
-    borderRadius: 0,
-    marginVertical: 10,
-    backgroundColor: '#f6f6f6',
-    elevation: 1.2,
-  },
-  textRegular12BlueLight: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size11,
-    color: COLORS.blueLight,
-  },
-  
-  textRegular14Blue: {
-    fontFamily: FONTS.latoLight,
-    fontSize: FONTS.size14,
-    color: COLORS.blueMedium,
-    opacity: 0.7,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  textRegular14GrayDark: {
-    fontFamily: FONTS.latoLight,
-    fontSize: FONTS.size14,
-    color: COLORS.grayDark,
-  },
-  textLight14Blue: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size16,
-    color: COLORS.blueMedium,
-  },
-  textRegular12GrayDark: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size14,
-    color: COLORS.grayDark,
-  },
-  textRegular24GrayDark: {
-    fontFamily: FONTS.latoLight,
-    fontSize: FONTS.size22,
-    color: COLORS.gray,
-  },
+    borderColor: COLORS.blueLight,
+  }
 });
 
 export default styles;

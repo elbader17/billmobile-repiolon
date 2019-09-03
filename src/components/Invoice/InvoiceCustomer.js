@@ -10,7 +10,7 @@ import { COLORS } from '../../constants/colors';
 
 const InvoiceCustomer = props => {
   const iconEnabled = <Icon name="right" size={18} color={COLORS.blueMedium}/>;
-  const iconDisabled = <Icon name="right" size={18} color={COLORS.grayDark}/>;
+  const iconDisabled = <Icon name="right" size={18} color={COLORS.gray}/>;
   if (!props.finalConsumer) {
     return (
       <ScrollView>
@@ -24,7 +24,7 @@ const InvoiceCustomer = props => {
   }else {
     return (
       <View style={style.containerFinalConsumer}>
-        <View style={[style.inLineSpaceBetween, {alignItems: 'center'}]}>
+        <View style={style.inLineSpaceBetween}>
           <TextInput
             placeholder="Ingrese DNI"
             placeholderTextColor={'#cecece'}

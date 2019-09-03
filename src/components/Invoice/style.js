@@ -17,13 +17,15 @@ const styles = StyleSheet.create({
     flex: 0.13,
     justifyContent: 'center'
   },
+  containerReceptor: {
+    marginTop: 10,
+    marginBottom: 15
+  },
   containerCustomers: {
-    maxHeight: hp('25%'),
     backgroundColor: COLORS.white,
     borderRadius: 5,
-    marginVertical: 15,
-    paddingVertical: 8,
-    paddingHorizontal: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 15,
     elevation: 4,
   },
   containerItemsInvoice: {
@@ -125,6 +127,9 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: 'space-between',
   },
+  inColumn: {
+    flexDirection: "column"
+  },
   buttonVoucher: {
     paddingVertical: 10,
     backgroundColor: COLORS.white,
@@ -169,6 +174,11 @@ const styles = StyleSheet.create({
   },
   marginTop3: {
     marginTop: 3
+  },
+  textRegular12White: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size12,
+    color: COLORS.white
   },
   textRegular14White: {
     fontFamily: FONTS.latoRegular,
@@ -232,9 +242,9 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
   },
   containerFinalConsumer: {
-    maxHeight: hp('10%'),
+    height: hp('10%'),
     justifyContent: 'center',
-    marginHorizontal: 7,
+    paddingTop: 10
   },
   containerInputCustomer: {
     backgroundColor: 'red',
@@ -369,8 +379,8 @@ const styles = StyleSheet.create({
   },
   buttonAddCustomer: {
     backgroundColor: 'transparent',
-    borderRadius: 25,
-    width: wp('40%'),
+    borderRadius: 5,
+    width: wp('35%'),
     height: hp('5%'),
     alignItems: 'center',
     justifyContent: 'center',
@@ -399,11 +409,12 @@ const styles = StyleSheet.create({
   },
   inputDNICustomer: {
     width: wp('60%'),
-    height: hp('7%'),
-    borderBottomWidth: 1,
+    height: hp('6%'),
+    borderWidth: 1,
     borderColor: COLORS.grayLight,
-    borderRadius: 3,
-    marginBottom: 10 
+    borderRadius: 5,
+    marginBottom: 10,
+    paddingLeft: 10
   },
   buttonAddClient: {
     backgroundColor: COLORS.white,
@@ -424,13 +435,12 @@ const styles = StyleSheet.create({
     height: hp('6%'),
   },
   buttonCheckDisabled: {
-    backgroundColor: COLORS.grayLight,
-    borderColor: COLORS.grayDark,
+    backgroundColor: COLORS.white,
+    borderColor: COLORS.gray,
     borderRadius: 30,
     borderWidth: 1,
     width: wp('14%'),
-    height: hp('6%'),
-    opacity: 0.7
+    height: hp('6%')
   },
   buttonCheckCustomerDisabled: {
     backgroundColor: 'transparent',
