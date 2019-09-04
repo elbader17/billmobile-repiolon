@@ -1,11 +1,13 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, ScrollView, KeyboardAvoidingView, ActivityIndicator} from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator} from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Button } from "react-native-elements";
 import { withNavigation } from 'react-navigation';
-import Icon from 'react-native-vector-icons/Ionicons';
-import style from '../style';
-import { METRICS } from '../../../constants/metrics';
+import LinearGradient from 'react-native-linear-gradient';
+import Icon from 'react-native-vector-icons/AntDesign';
+import { GRADIANTBLUE, GRADIANTBLUE2, GRADIENTYELLOW } from '../../../constants/colors';
 import { orderByName } from '../../../utils/functions';
+import style from '../style';
 
 class ItemList extends React.Component {
   constructor(props){
@@ -20,11 +22,19 @@ class ItemList extends React.Component {
 
   static navigationOptions = ({navigation}) => {
     return {
-      title: 'LISTA DE PRODUCTOS/SERVICIOS',
+      title: 'Productos y Servicios',
+      headerBackground: (
+        <LinearGradient
+          colors={ GRADIANTBLUE2 }
+          style={{ flex: 1 }}
+          start={{x: 0, y: 0}}
+          end={{x: 1, y: 0}}
+        />
+      ),
       headerTitleStyle: style.headerText,
-      headerTintColor: '#3687D1',
+      headerTintColor: 'white',
       headerLeft: <TouchableOpacity onPress={()=> navigation.navigate('Home')}>
-                    <Icon name="md-arrow-back" size={24} color="#3687d1" style={{marginLeft:20}}/>
+                    <Icon name="left" size={20} color="white" style={{marginLeft:20}}/>
                   </TouchableOpacity> 
     }  
   };
@@ -37,11 +47,9 @@ class ItemList extends React.Component {
   navigateToNewItem = (isProduct) => {
     this.props.navigation.navigate('NewItem', { isProduct });
   }
-
   navigateToHome = () => {
     this.props.navigation.navigate('Home');
   }
-
   navigateToEditItem = (item) => {
     this.props.navigation.navigate('EditItem', { item });
   }
@@ -86,61 +94,88 @@ class ItemList extends React.Component {
 
   renderSwtichButtons() {
     return (
-      <View style={[style.boxSelectButton,style.inLineSpaceAround, {marginBottom: 25}]}>
-        <Button
-          title='PRODUCTO'
-          onPress={() => this.setState({isProduct: true}) }
-          buttonStyle={ this.state.isProduct ? style.buttonProduct : style.buttonProductDisabled }
-          titleStyle={ this.state.isProduct ? style.textRegular12WhiteBold : style.textRegular12RedBold }
-        />
-        <Button
-          title='SERVICIO'
-          onPress={() => this.setState({isProduct: false}) }
-          buttonStyle={ this.state.isProduct ? style.buttonServiceDisabled : style.buttonService  }
-          titleStyle={ this.state.isProduct ? style.textRegular12BlueBold : style.textRegular12WhiteBold }
-        />
+      <View style={[style.boxSelectButton, style.inLineSpaceAround]}>
+        
+        <TouchableOpacity 
+          onPress={() => this.setState({isProduct: true}) }>
+          <LinearGradient 
+            colors={this.state.isProduct ? GRADIENTYELLOW : GRADIANTBLUE2}
+            style={style.buttonSelect}  
+            start={{x: 0, y: 1}} 
+            end={{x: 1, y: 0.9}}
+          >
+            <Text style={style.textRegular16White}>
+              Productos
+            </Text>     
+          </LinearGradient>
+        </TouchableOpacity>
+
+        <TouchableOpacity 
+          onPress={() => this.setState({isProduct: false}) }>
+          <LinearGradient 
+            colors={this.state.isProduct ? GRADIANTBLUE2 : GRADIENTYELLOW }
+            style={style.buttonSelect}  
+            start={{x: 0, y: 1}} 
+            end={{x: 1, y: 0.9}}
+          >
+            <Text style={style.textRegular16White}>
+              Servicios
+            </Text>     
+          </LinearGradient>
+        </TouchableOpacity>
+
       </View>
     );
   }
 
   render() {
     return(
-      <KeyboardAvoidingView
-        behavior={'padding'}
-        style={{flex: 1}}
-        keyboardVerticalOffset={METRICS.heightHeader}>
-        
+      <KeyboardAwareScrollView>
         <View style={style.container}>
-          {this.renderSwtichButtons()}
-          <ScrollView style={style.styleScroll}>
-            <View style={style.boxInput}>
-              {this.state.loading ? this.renderItems() : this.renderLoading()}
+          
+          <View style={style.containerBody}>
+            {this.renderSwtichButtons()}
+            <View style={style.boxItems}>
+              <ScrollView>
+                {this.state.loading ? this.renderItems() : this.renderLoading()}
+              </ScrollView>
             </View>
-          </ScrollView>
+          </View>
+          
+          <View style={style.containerFooter}>
+            <View style={style.inLineSpaceAround}>
+              <TouchableOpacity 
+                onPress={() => this.navigateToNewItem(this.state.isProduct) }>
+                <LinearGradient 
+                  colors={GRADIANTBLUE2}
+                  style={style.buttonNew}  
+                  start={{x: 0, y: 1}} 
+                  end={{x: 1, y: 0.9}}
+                >
+                  <Text style={style.textRegular16White}>
+                    <Icon name="plus" size={18} color="white"/> Agregar {this.state.isProduct ? 'Producto' : 'Servicio'}
+                  </Text>     
+                </LinearGradient>
+              </TouchableOpacity>
+
+              <TouchableOpacity 
+                onPress={ this.navigateToHome }>
+                <LinearGradient 
+                  colors={GRADIANTBLUE}
+                  style={style.buttonReady}  
+                  start={{x: 0, y: 1}} 
+                  end={{x: 1, y: 0.9}}
+                >
+                  <Text>
+                    <Icon name="check" size={25} color="white"/>
+                  </Text>     
+                </LinearGradient>
+              </TouchableOpacity>
+            </View>
+          </View>
+
         </View>
-       
-        <View style={style.inLine}>
-          <Button
-            title=" Crear Nuevo"
-            onPress={() => this.navigateToNewItem(this.state.isProduct) }
-            buttonStyle={ style.buttonNewItem }
-            titleStyle={style.textButtonNewItem}
-            icon={
-              <Icon
-                name="md-add"
-                size={25}
-                color="#EE6123"
-              />
-            }
-          />
-          <Button
-            title="Listo"
-            onPress={ this.navigateToHome }
-            buttonStyle={ style.buttonContinue }
-            titleStyle={style.textRegular16WhiteBold}
-          />
-        </View>
-      </KeyboardAvoidingView>
+      </KeyboardAwareScrollView>
     );
   }
 }

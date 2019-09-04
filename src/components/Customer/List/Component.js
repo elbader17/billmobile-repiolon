@@ -86,7 +86,7 @@ class CustomerList extends React.Component {
         
         <View style={style.containerBody}>
           <View style={style.boxCustomer}>
-            <ScrollView > 
+            <ScrollView> 
               {this.state.loading ? this.renderCustomers() : this.renderLoading()}
             </ScrollView>
           </View>
@@ -117,7 +117,7 @@ class CustomerList extends React.Component {
                 start={{x: 0, y: 1}} 
                 end={{x: 1, y: 0.9}}
               >
-                <Text style={style.textLight18White}>
+                <Text>
                   <Icon name="check" size={25} color="white"/>
                 </Text>     
               </LinearGradient>

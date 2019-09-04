@@ -6,18 +6,86 @@ import { METRICS } from '../../constants/metrics';
 
 const styles = StyleSheet.create({
   container: {
-    height: hp('100%') - METRICS.heightHeader - hp('8%'),
-    backgroundColor: 'white',
-    paddingHorizontal: 18,
-    paddingVertical: 10,
+    height: hp('100%') - METRICS.heightHeader,
+    paddingHorizontal: 10
   },
+  containerBody: {
+    flex: 0.87
+  }, 
+  containerFooter: {
+    flex: 0.13,
+    justifyContent: 'center'
+  },
+  boxItems: {
+    flex: 1,
+    backgroundColor: COLORS.white,
+    borderWidth: 0,
+    borderColor: COLORS.blueMedium,
+    borderRadius: 10,
+    paddingHorizontal: 5,
+    paddingVertical: 5,
+    marginHorizontal: 5,
+    marginBottom: 5,
+    elevation: 4
+  },
+  boxSelectButton: {
+    marginVertical: 17,
+    marginHorizontal: 5
+  },
+  buttonReady: {
+    width: wp('14%'),
+    height: hp('8%'),
+    borderRadius: 25,
+    elevation: 1.5,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  button: {
+    elevation: 1,
+    borderRadius: 25,
+  },
+  buttonNew: {
+    width: wp('74%'),
+    height: hp('8%'),
+    backgroundColor: 'transparent',
+    borderRadius: 25,
+    elevation: 1.5,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  buttonSelect: {
+    width: wp('40%'),
+    height: hp('6%'),
+    borderRadius: 25,
+    elevation: 1.5,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  inLine:{
+    flexDirection: "row",
+    alignItems:'center'
+  },
+  inLineSpaceAround: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center'
+  },
+  inLineSpaceBetween: {
+    flexDirection: "row",
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+  textRegular14White: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size14,
+    color: COLORS.white
+  },
+
+
   boxInput: {
     backgroundColor: 'transparent',
     marginHorizontal: 5,
     marginVertical: 5
-  },
-  boxItems:{
-    backgroundColor: 'red'
   },
   boxNameItems: {
     width: wp('40%')
@@ -25,24 +93,10 @@ const styles = StyleSheet.create({
   boxPriceItems: {
     width: wp('30%')
   },
-  boxSelectButton: {
-    marginVertical: 12,
-    marginHorizontal: 20
-  },
   styleScroll:{
     borderWidth: 0.5,
     borderColor: COLORS.gray,
     borderRadius: 5,
-  },
-  inColumnSpaceBetween: {
-    flexDirection: "column",
-    justifyContent: 'space-between',
-  },
-  buttonProduct: {
-    backgroundColor: COLORS.red,
-    borderRadius: 5,
-    width: hp('20%'),
-    height: hp('5%'),
   },
   buttonProductDisabled: {
     backgroundColor: 'transparent',
@@ -82,6 +136,11 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 3,
     borderColor: COLORS.gray
+  },
+  textRegular16White: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size16,
+    color: COLORS.white
   },
   textRegular14WhiteBold: {
     fontFamily: FONTS.latoSemiBold,
@@ -222,19 +281,6 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     textAlign: 'center',
   },
-  inLine:{
-    flexDirection: "row",
-    alignItems:'center'
-  },
-  inLineSpaceAround: {
-    flexDirection: "row",
-    justifyContent: 'space-around',
-  },
-  inLineSpaceBetween: {
-    flexDirection: "row",
-    justifyContent: 'space-between',
-    alignItems: 'center'
-  },
   marginVertical10: {
     marginVertical: 10
   },
@@ -257,9 +303,9 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size16,
+    fontSize: FONTS.size18,
     fontWeight: 'normal',
-    color: COLORS.blue,
+    color: COLORS.white,
   },
   buttons: {
     width: 260,

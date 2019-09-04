@@ -1,9 +1,12 @@
 import React from 'react';
-import { View, Text, ScrollView, KeyboardAvoidingView } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Button } from "react-native-elements";
+import LinearGradient from 'react-native-linear-gradient';
+import Icon from 'react-native-vector-icons/AntDesign';
+import { GRADIANTBLUE, GRADIANTBLUE2, GRADIENTYELLOW } from '../../../constants/colors';
 import AddItem from './AddItem';
 import style from '../style';
-import { METRICS } from '../../../constants/metrics';
 import { validateAddItem } from '../../../utils/validations';
 
 class NewItem extends React.Component {
@@ -22,10 +25,23 @@ class NewItem extends React.Component {
     };
   }
 
-  static navigationOptions = {
-    title: 'CARGAR PRODUCTO/SERVICIO',
-    headerTitleStyle: style.headerText,
-    headerTintColor: '#3687D1',
+  static navigationOptions = ({navigation}) => {
+    return {
+      title: 'Cargar Producto o Servicio',
+        headerBackground: (
+          <LinearGradient
+            colors={ GRADIANTBLUE2 }
+            style={{ flex: 1 }}
+            start={{x: 0, y: 0}}
+            end={{x: 1, y: 0}}
+          />
+        ),
+        headerTitleStyle: style.headerText,
+        headerTintColor: 'white',
+        headerLeft: <TouchableOpacity onPress={()=> navigation.navigate('ItemList')}>
+                      <Icon name="left" size={20} color="white" style={{marginLeft:20}}/>
+                    </TouchableOpacity> 
+    }
   };
 
   defaultItem = () => {
@@ -68,46 +84,64 @@ class NewItem extends React.Component {
       price: this.state.price
     }
     return(
-      <KeyboardAvoidingView
-          behavior={'padding'}
-          style={{flex: 1}}
-          keyboardVerticalOffset={METRICS.heightHeader}>
-        <ScrollView>
-          <View style={style.container}>
-            <View style={[style.boxSelectButton,style.inLineSpaceAround]}>
-              <Button
-                title='PRODUCTO'
-                onPress={() => this.setState({isProduct: true}) }
-                buttonStyle={ this.state.isProduct ? style.buttonProduct : style.buttonProductDisabled }
-                titleStyle={ this.state.isProduct ? style.textRegular12WhiteBold : style.textRegular12RedBold }
-              />
-              <Button
-                title='SERVICIO'
-                onPress={() => this.setState({isProduct: false}) }
-                buttonStyle={ this.state.isProduct ? style.buttonServiceDisabled : style.buttonService  }
-                titleStyle={ this.state.isProduct ? style.textRegular12BlueBold : style.textRegular12WhiteBold }
-              />
+      <KeyboardAwareScrollView>
+        <View style={style.container}>
+
+          <View style={style.containerBody}>
+            <View style={[style.boxSelectButton, style.inLineSpaceAround]}>
+              <TouchableOpacity 
+                onPress={() => this.setState({isProduct: true}) }>
+                <LinearGradient 
+                  colors={this.state.isProduct ? GRADIENTYELLOW : GRADIANTBLUE2}
+                  style={style.buttonSelect}  
+                  start={{x: 0, y: 1}} 
+                  end={{x: 1, y: 0.9}}
+                >
+                  <Text style={style.textRegular16White}>
+                    Productos
+                  </Text>     
+                </LinearGradient>
+              </TouchableOpacity>
+
+              <TouchableOpacity 
+                onPress={() => this.setState({isProduct: false}) }>
+                <LinearGradient 
+                  colors={this.state.isProduct ? GRADIANTBLUE2 : GRADIENTYELLOW }
+                  style={style.buttonSelect}  
+                  start={{x: 0, y: 1}} 
+                  end={{x: 1, y: 0.9}}
+                >
+                  <Text style={style.textRegular16White}>
+                    Servicios
+                  </Text>     
+                </LinearGradient>
+              </TouchableOpacity>
             </View>
+
             <View style={style.boxInput}>
               <AddItem
-                 data={data}
-                 setName={this.setName}
-                 setPrice={this.setPrice}
+                data={data}
+                setName={this.setName}
+                setPrice={this.setPrice}
               />
             </View>
-          </View>
-        </ScrollView>
-        <Button
-          title={<Text>GUARDAR {this.state.isProduct ? 'PRODUCTO' : 'SERVICIO'}</Text>}
-          onPress={ this.saveItem }
-          buttonStyle={ style.buttonSave }
-          titleStyle={ style.textSemiBold14White }
-          disabledStyle={ style.buttonSaveDisabled }
-          disabledTitleStyle={ style.textRegular14WhiteBold}
-          disabled={(!validateAddItem(this.state.name, this.state.price) || !this.state.isEnableButton) }
-          loading = {this.state.loading}
-        />
-      </KeyboardAvoidingView>
+          </View> 
+          
+          <View style={style.containerFooter}>
+            <Button
+              title={<Text>GUARDAR {this.state.isProduct ? 'PRODUCTO' : 'SERVICIO'}</Text>}
+              onPress={ this.saveItem }
+              buttonStyle={ style.buttonSave }
+              titleStyle={ style.textSemiBold14White }
+              disabledStyle={ style.buttonSaveDisabled }
+              disabledTitleStyle={ style.textRegular14WhiteBold}
+              disabled={(!validateAddItem(this.state.name, this.state.price) || !this.state.isEnableButton) }
+              loading = {this.state.loading}
+            />
+          </View> 
+
+        </View>
+      </KeyboardAwareScrollView>
     );
   }
 }
