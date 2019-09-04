@@ -7,32 +7,26 @@ import { FONTS } from '../../constants/fonts';
 const styles = StyleSheet.create({
   container: {
     height: hp('100%') - METRICS.heightHeader,
-    paddingHorizontal: 10,
+    paddingHorizontal: 10
   },
   containerBody: {
-    flex: 0.87,
+    flex: 0.87
   }, 
   containerFooter: {
     flex: 0.13,
     justifyContent: 'center'
   },
   containerInputs: {
-    paddingHorizontal: 10,
+    flex: 1,
+    paddingHorizontal: 15,
     paddingTop: 20
-  },
-  boxBtnHolder: {
-    backgroundColor: COLORS.grayLight,
-    height: hp('7%'),
-    marginVertical: 8,
-    borderRadius: 5,
-    elevation: 1
   },
   boxCustomer: {
     flex: 1,
     backgroundColor: COLORS.white,
     borderWidth: 0,
     borderColor: COLORS.blueMedium,
-    borderRadius: 15,
+    borderRadius: 10,
     paddingHorizontal: 5,
     paddingVertical: 5,
     marginHorizontal: 5,
@@ -48,20 +42,21 @@ const styles = StyleSheet.create({
     marginVertical: 1.5,
     borderColor: COLORS.grayLight,
   },
+  inputPicker: {
+    height: 35,
+    borderBottomWidth: 1,
+    borderBottomColor: COLORS.gray
+  },
   picker: {
     flex: 1,
     justifyContent: 'center',
-    color: COLORS.grayDark,
+    color: 'rgb(153, 153, 153)',
+    marginVertical: 0,
+    marginLeft: -8
   },
-  textRegular14White: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size14,
-    color: COLORS.white,
-  },
-  textRegular14Blue: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size14,
-    color: COLORS.blueMedium,
+  inLine:{
+    flexDirection: "row",
+    alignItems:'center'
   },
   inLineSpaceBetween: {
     flexDirection: 'row',
@@ -78,35 +73,20 @@ const styles = StyleSheet.create({
     justifyContent: 'center', 
     alignItems: 'center'
   },
-  textRegular14WhiteBold: {
-    fontFamily: FONTS.latoSemiBold,
-    fontSize: FONTS.size14,
-    color: COLORS.white,
-  },
-  textRegular12White: {
+  textRegular16White: {
     fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size12,
+    fontSize: FONTS.size16,
     color: COLORS.white,
-  },
-  textRegular12Blue: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size12,
-    color: COLORS.blueMedium,
   },
   textLight18White: {
     fontFamily: FONTS.latoSemiBold,
     fontSize: FONTS.size16,
     color: COLORS.white,
   },
-  textRegular16WhiteBold: {
+  textRegular12Gray: {
     fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size16,
-    color: COLORS.white,
-  },
-  textRegular11GrayDark: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size11,
-    color: COLORS.grayDark,
+    fontSize: FONTS.size12,
+    color: COLORS.gray,
   },
   textRegular14GrayDark: {
     fontFamily: FONTS.latoRegular,
@@ -123,11 +103,11 @@ const styles = StyleSheet.create({
     fontSize: FONTS.size14,
     color: COLORS.blueMedium,
   },
-  inLine:{
-    flexDirection: "row",
-    alignItems:'center'
+  button: {
+    elevation: 1,
+    borderRadius: 25,
   },
-  gradientNew: {
+  buttonNew: {
     width: wp('74%'),
     height: hp('8%'),
     backgroundColor: 'transparent',
@@ -136,7 +116,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
-  gradientReady: {
+  buttonReady: {
     width: wp('14%'),
     height: hp('8%'),
     borderRadius: 25,
@@ -144,18 +124,22 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
-  gradientSave: {
+  buttonSave: {
     width: wp('90%'),
     height: hp('8%'),
     backgroundColor: 'transparent',
-    borderRadius: 25,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    borderRadius: 25,
   },
   buttonSaveDisabled: {
+    width: wp('90%'),
     height: hp('8%'),
-    backgroundColor: COLORS.gray,
-    borderRadius: 0
+    backgroundColor: 'transparent',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 25,
+    opacity: 0.5
   },
   buttonEditBlue:{
     width: wp('16%'),
@@ -170,38 +154,12 @@ const styles = StyleSheet.create({
     fontSize: FONTS.size12,
     color: COLORS.blueMedium,
   },
-  marginLeft5: {
-    marginLeft: 5,
-  },
-  marginTop25: {
-    marginTop: 25,
-  },
   headerText: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size18,
     fontWeight: 'normal',
     color: COLORS.white,
-  },
-  lineWhite: {
-    backgroundColor: COLORS.white,
-    height: 1,
-    width: '100%',
-    marginTop: 10,
-    marginBottom: 10,
-  },
-  lineGray: {
-    backgroundColor: COLORS.grayLight,
-    height: 1,
-    width: '100%',
-    marginTop: 10,
-    marginBottom: 10,
-  },
-  positionFinalButton: {
-    position: 'absolute', 
-    bottom: 0, 
-    left:0, 
-    right:0
-  },
+  }
 });
 
 export default styles;

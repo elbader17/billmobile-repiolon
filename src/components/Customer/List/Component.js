@@ -1,12 +1,12 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, ScrollView, KeyboardAvoidingView, ActivityIndicator} from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator} from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Button} from "react-native-elements";
 import LinearGradient from 'react-native-linear-gradient';
-import style from '../style';
-import { METRICS } from '../../../constants/metrics';
-import { orderByName } from '../../../utils/functions';
 import Icon from 'react-native-vector-icons/AntDesign';
-import { GRADIANTBLUE, GRADIENTYELLOW, GRADIANTBLUE2 } from '../../../constants/colors';
+import { GRADIANTBLUE, GRADIANTBLUE2 } from '../../../constants/colors';
+import { orderByName } from '../../../utils/functions';
+import style from '../style';
 
 class CustomerList extends React.Component {
   constructor(props){
@@ -41,9 +41,7 @@ class CustomerList extends React.Component {
   }
 
   navigateToNewCustomer = () => this.props.navigation.navigate('NewCustomer');
-
   navigateToHome = () => this.props.navigation.navigate('Home');
-
   navigateToEditCustomer = (customer) => {
     this.props.navigation.navigate('EditCustomer', { customer });
   }
@@ -83,11 +81,9 @@ class CustomerList extends React.Component {
 
   render() {
     return(
-      <KeyboardAvoidingView
-          behavior={'padding'}
-          style={style.container}
-          keyboardVerticalOffset={METRICS.heightHeader}
-      >
+      <KeyboardAwareScrollView>
+      <View style={style.container}>
+        
         <View style={style.containerBody}>
           <View style={style.boxCustomer}>
             <ScrollView > 
@@ -100,26 +96,24 @@ class CustomerList extends React.Component {
 
           <View style={style.inLineSpaceAround}>    
             <TouchableOpacity 
-              onPress={ this.navigateToNewCustomer }
-            >
+              onPress={ this.navigateToNewCustomer }>
               <LinearGradient 
                 colors={GRADIANTBLUE2}
-                style={style.gradientNew}  
+                style={style.buttonNew}  
                 start={{x: 0, y: 1}} 
                 end={{x: 1, y: 0.9}}
               >
-                <Text style={style.textLight18White}>
-                <Icon name="plus" size={18} color="white"/> Nuevo Cliente
+                <Text style={style.textRegular16White}>
+                  <Icon name="plus" size={18} color="white"/> Nuevo Cliente
                 </Text>     
               </LinearGradient>
             </TouchableOpacity>
 
             <TouchableOpacity 
-              onPress={ this.navigateToHome }
-            >
+              onPress={ this.navigateToHome }>
               <LinearGradient 
-                colors={GRADIENTYELLOW}
-                style={style.gradientReady}  
+                colors={GRADIANTBLUE}
+                style={style.buttonReady}  
                 start={{x: 0, y: 1}} 
                 end={{x: 1, y: 0.9}}
               >
@@ -127,12 +121,13 @@ class CustomerList extends React.Component {
                   <Icon name="check" size={25} color="white"/>
                 </Text>     
               </LinearGradient>
-          
             </TouchableOpacity>
           </View>
 
         </View>
-      </KeyboardAvoidingView>
+      
+      </View>
+      </KeyboardAwareScrollView>
     );
   }
 }

@@ -1,14 +1,15 @@
 import React from 'react';
-import { View, Text, Picker, TextInput, ScrollView, KeyboardAvoidingView, TouchableOpacity } from 'react-native';
+import { View, Text, Picker, ScrollView, TouchableOpacity } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { TextField } from 'react-native-material-textfield';
 import { Button } from "react-native-elements";
-import Icon from 'react-native-vector-icons/AntDesign';
 import LinearGradient from 'react-native-linear-gradient';
+import Icon from 'react-native-vector-icons/AntDesign';
 import { CONDITION_IVA } from '../../../constants/fiscal_identity';
-import { METRICS } from '../../../constants/metrics';
-import { COLORS } from '../../../constants/colors';
-import { validateCuit } from '../../../utils/identity';
-import style from '../style';
 import { GRADIANTBLUE2 } from '../../../constants/colors';
+import { validateCuit } from '../../../utils/identity';
+import { COLORS } from '../../../constants/colors';
+import style from '../style';
 
 class NewCustomer extends React.Component {
 
@@ -21,7 +22,8 @@ class NewCustomer extends React.Component {
       category: customer.attributes.category,
       identification: customer.attributes.identification,
       customerId: customer.id,
-      loading: false
+      loading: false,
+      error: undefined
     }
   }
 
@@ -56,12 +58,15 @@ class NewCustomer extends React.Component {
 
   saveCustomer = () => {
     const { name, category, identification, customerId } = this.state;
-    const {
-      saveFiscalIdentity,
-      navigation,
-    } = this.props;
-    this.setLoading(true);
-    saveFiscalIdentity(name, identification, category, customerId, navigation)
+    console.log(validateCuit(identification));
+    if (validateCuit(identification)) {
+      const { saveFiscalIdentity, navigation } = this.props;
+      this.setLoading(true);
+      saveFiscalIdentity(name, identification, category, customerId, navigation)
+    }
+    else {
+      this.setState({error: 'CUIT Inválido'})
+    }
   }
 
   setName = (value) => this.setState({ name: value})
@@ -71,81 +76,78 @@ class NewCustomer extends React.Component {
 
   render() {
     return(
-      <KeyboardAvoidingView
-        behavior={'padding'}
-        style={style.container}
-        keyboardVerticalOffset={METRICS.heightHeader}
-      >
-      <View style={style.containerBody}>
-        <ScrollView>
-          <View style={style.containerInputs}>
-            <Text style={style.textRegular14Blue}>Condición frente al IVA</Text>
-            <View style={style.boxBtnHolder}>
-              <Picker
-                selectedValue={this.state.category}
-                style= {style.picker}
-                onValueChange={this.setCategory}>
-                  {CONDITION_IVA.map((i, index) => (
-                    <Picker.Item key={index} color='gray' label={i.label} value={i.value} />
-                ))}
-              </Picker>
-            </View>
-            <Text style={style.textRegular14Blue}>Número de CUIT</Text>
-            <View style={ style.boxBtnHolder }>
-              <TextInput
-                onChangeText={this.setIdentification}
-                placeholder=" 00-00000000-0"
-                value={this.state.identification}
-                placeholderTextColor={COLORS.gray}
-                value={this.state.identification}
-                style={[style.textRegular16GrayDark,style.marginLeft5]}
-                keyboardType='numeric'
+      <KeyboardAwareScrollView>
+        <View style={style.container}>
+
+          <View style={style.containerBody}>
+            <ScrollView>
+              <View style={style.containerInputs}>
+                <View style={style.inputPicker}>
+                  <Picker
+                    selectedValue={this.state.category}
+                    style= {style.picker}
+                    onValueChange={this.setCategory}>
+                      {CONDITION_IVA.map((i, index) => (
+                        <Picker.Item key={index} color='gray' label={i.label} value={i.value} />
+                       ))}
+                  </Picker>
+                </View>
+                <Text style={[style.textRegular12Gray, {marginTop: 5}]}>
+                  Condición frente al IVA
+                </Text>
+
+                <TextField
+                  title='Su información fiscal se cargará con su CUIT'
+                  label='Número de CUIT'
+                  value={this.state.identification}
+                  onChangeText={this.setIdentification}
+                  onFocus={()=>{this.setState({error: undefined})}}
+                  keyboardType='numeric'
+                  tintColor={COLORS.blueMedium}
+                  textColor= {COLORS.grayDark}
+                  baseColor={COLORS.gray}
+                  lineWidth={1}
+                  labelFontSize={15}
+                  labelPadding={6}
+                  characterRestriction={11}
+                  error={this.state.error}
+                  errorColor={'#ff6666'}
+                />
+                <TextField
+                  title='Opcional'
+                  label='Nombre de Fantasía'
+                  value={this.state.name}
+                  onChangeText={this.setName}
+                  textColor= {COLORS.grayDark}
+                  tintColor={COLORS.blueMedium}
+                  baseColor={COLORS.gray}
+                  lineWidth={1}
+                  labelFontSize={15}
+                  labelPadding={6}
+                />
+              </View>
+            </ScrollView>
+          </View>
+
+          <View style={style.containerFooter}>
+            <LinearGradient 
+              colors={GRADIANTBLUE2}
+              style={style.button}  
+              start={{x: 0, y: 1}} 
+              end={{x: 1, y: 0.9}}
+            >
+              <Button
+                onPress={this.saveCustomer}
+                title='Guardar'
+                buttonStyle={ style.buttonSave }
+                titleStyle={ style.textRegular16White }
+                loading={this.state.loading}
               />
-            </View>
-          <Text style={ style.textRegular12Blue }>
-            <Icon name="infocirlceo" size={12} color="#0097D9"/> La información fiscal de los clientes se cargan automaticamente ingresando su número de CUIT
-          </Text>
-
-          <View style={style.lineGray}></View>
-
-          <Text style={style.textRegular14Blue} >Nombre de Fantasía (opcional)</Text>
-          <View style={ style.boxBtnHolder }>
-            <TextInput
-              style={[style.textRegular16GrayDark,style.marginLeft5]}
-              onChangeText={this.setName}
-              value={this.state.name}
-              placeholder=" Inserta el Nombre"
-              value={this.state.name}
-              placeholderTextColor={COLORS.gray}
-            />
+            </LinearGradient>
           </View>
-          </View>
-        </ScrollView>
-      </View>
-
-      <View style={style.containerFooter}>
-        <TouchableOpacity
-          onPress={this.saveCustomer} 
-          style={{alignItems:'center'}}
-          disabledStyle= { style.buttonSaveDisabled }
-          disabledTitleStyle = { style.textRegular14WhiteBold }
-          disabled={!validateCuit(this.state.identification) }
-          loading = {this.state.loading}
-        >
-          <LinearGradient 
-            colors={GRADIANTBLUE2}
-            style={style.gradientSave}  
-            start={{x: 0, y: 1}} 
-            end={{x: 1, y: 0.9}}
-          >
-            <Text style={style.textRegular14WhiteBold}>
-              Guardar
-            </Text>     
-          </LinearGradient>
-        </TouchableOpacity>
-      </View>
-
-      </KeyboardAvoidingView>
+      
+        </View>
+      </KeyboardAwareScrollView>
     )
   }
 }

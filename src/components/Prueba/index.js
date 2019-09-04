@@ -1,209 +1,172 @@
-import React from 'react';
-import { View, Text, Dimensions } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { Button } from "react-native-elements";
-import LinearGradient from 'react-native-linear-gradient';
-import { showMessage } from "react-native-flash-message";
-import { AnimatedCircularProgress } from 'react-native-circular-progress';
-import { LineChart } from 'react-native-chart-kit';
-import IconOne from 'react-native-vector-icons/AntDesign';
-import IconTwo from 'react-native-vector-icons/Entypo';
-import Icon from 'react-native-vector-icons/Feather';
-import { messageOptions } from '../../utils/messagesNotifications';
-import { ScrollView } from 'react-native-gesture-handler';
-import { GRADIANTBLUE2, COLORS } from '../../constants/colors';
-import style from './style';
-import { dataChart, dataConfig } from '../../constants/lineChart';
+import React, { Component } from 'react';
+import { ScrollView, View, Button } from 'react-native';
+import { TextField } from 'react-native-material-textfield';
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
-class Prueba extends React.Component {
+let styles = {
+  scroll: {
+    backgroundColor: '#E8EAF6',
+  },
 
-  constructor(props) {
-    super(props);
-    const { user } = this.props
-    this.state = {
-      //name: user.name,
+  container: {
+    margin: 8,
+    marginTop: 24,
+  },
+  contentContainer: {
+    padding: 8,
+  },
+};
+
+  class Prueba extends Component {
+    constructor(props) {
+      super(props);
+      /*
+      this.onFocus = this.onFocus.bind(this);
+      this.onSubmit = this.onSubmit.bind(this);
+      this.onChangeText = this.onChangeText.bind(this);
+      this.onSubmitFirstName = this.onSubmitFirstName.bind(this);
+      this.onSubmitPassword = this.onSubmitPassword.bind(this);
+      this.onAccessoryPress = this.onAccessoryPress.bind(this);
+
+      this.firstnameRef = this.updateRef.bind(this, 'firstname');
+      this.passwordRef = this.updateRef.bind(this, 'password');
+
+      this.renderPasswordAccessory = this.renderPasswordAccessory.bind(this);
+      */
+     
+      this.state = {
+        firstname: 'Eddard',
+        secureTextEntry: true,
+      };
+    }
+
+    onFocus() {
+      let { errors = {} } = this.state;
+
+      for (let name in errors) {
+        let ref = this[name];
+
+        if (ref && ref.isFocused()) {
+          delete errors[name];
+        }
+      }
+
+      this.setState({ errors });
+    }
+
+    onChangeText(text) {
+      ['firstname', 'password']
+        .map((name) => ({ name, ref: this[name] }))
+        .forEach(({ name, ref }) => {
+          if (ref.isFocused()) {
+            this.setState({ [name]: text });
+          }
+        });
+    }
+
+    onAccessoryPress() {
+      this.setState(({ secureTextEntry }) => ({ secureTextEntry: !secureTextEntry }));
+    }
+
+    onSubmitFirstName() {
+      this.lastname.focus();
+    }
+
+    onSubmitPassword() {
+      this.password.blur();
+    }
+
+    onSubmit() {
+      let errors = {};
+
+      ['firstname', 'password']
+        .forEach((name) => {
+          let value = this[name].value();
+
+          if (!value) {
+            errors[name] = 'Should not be empty';
+          } else {
+            if ('password' === name && value.length < 6) {
+              errors[name] = 'Too short';
+            }
+          }
+        });
+
+      this.setState({ errors });
+    }
+
+    updateRef(name, ref) {
+      this[name] = ref;
+    }
+
+    renderPasswordAccessory() {
+      let { secureTextEntry } = this.state;
+
+      let name = secureTextEntry?
+        'visibility':
+        'visibility-off';
+
+      return (
+        <MaterialIcon
+          size={24}
+          name={name}
+          color={TextField.defaultProps.baseColor}
+          onPress={this.onAccessoryPress}
+          suppressHighlighting
+        />
+      );
+    }
+
+    render() {
+      let { errors = {}, secureTextEntry, ...data } = this.state;
+
+      return (
+        <ScrollView
+          style={styles.scroll}
+          contentContainerStyle={styles.contentContainer}
+          keyboardShouldPersistTaps='handled'
+        >
+          <View style={styles.container}>
+            <TextField
+              ref={this.firstnameRef}
+              value={data.firstname}
+              autoCorrect={false}
+              enablesReturnKeyAutomatically={true}
+              onFocus={this.onFocus}
+              onChangeText={this.onChangeText}
+              onSubmitEditing={this.onSubmitFirstName}
+              returnKeyType='next'
+              label='First Name'
+              error={errors.firstname}
+            />
+
+            <TextField
+              ref={this.passwordRef}
+              value={data.password}
+              secureTextEntry={secureTextEntry}
+              autoCapitalize='none'
+              autoCorrect={false}
+              enablesReturnKeyAutomatically={true}
+              clearTextOnFocus={true}
+              onFocus={this.onFocus}
+              onChangeText={this.onChangeText}
+              onSubmitEditing={this.onSubmitPassword}
+              returnKeyType='done'
+              label='Password'
+              error={errors.password}
+              title='Choose wisely'
+              maxLength={30}
+              characterRestriction={20}
+              renderAccessory={this.renderPasswordAccessory}
+            />
+
+          </View>
+
+          <View style={styles.container}>
+            <Button onPress={this.onSubmit} title='submit' />
+          </View>
+        </ScrollView>
+      );
     }
   }
-
-  customerListNavigate = () => this.props.navigation.navigate('CustomerList');
-  itemListNavigate = () => this.props.navigation.navigate('ItemList');
-  newInvoiceNavigate = () => this.props.navigation.navigate('Invoice');
-  handleSignOut = () => {
-    const { signOut } = this.props;
-    signOut()
-      .then(() => {
-        this.props.navigation.navigate('Authentication');
-      })
-      .catch((err) => {
-        alert('Error al Cerrar Sesión ' + err)
-      })
-  }
-
-  render() {
-    return(
-      <KeyboardAwareScrollView>
-        <LinearGradient
-          colors={ GRADIANTBLUE2 }
-          start={{x: 0.0, y: 1.0}} 
-          end={{x: 1.0, y: 1.0}}
-          style={style.container}
-        >
-          <View style={style.containerHeader}>
-
-            <View style={style.inLine}>
-              <Button
-                icon={<Icon name="menu" size={25} color="white" />}
-                buttonStyle={style.buttonHeader}
-                onPress={() => showMessage(messageOptions)}
-              />
-              <Text style={[style.textLight18White,{marginLeft:12}]}>
-                {/*this.state.name*/}Juan Perez 
-              </Text>
-            </View>
-
-            <View style={style.textFacPeriodo}>
-              <Text style={style.textLight12BlueLight}>
-                <IconTwo name="area-graph"/> Facturación del Período
-              </Text>
-            </View>
-
-            <LineChart
-              height={190}
-              width={Dimensions.get('window').width-10}
-              style={style.styleChart}
-              data={dataChart}
-              chartConfig={dataConfig}
-            />  
-          </View>
-          
-          <View style={style.containerStatictis}>
-            <View style={style.inLineSpaceAround}>
-              <AnimatedCircularProgress
-                size={145}
-                width={12}
-                fill={80}
-                rotation={0}
-                tintColor={COLORS.blueLight}
-                backgroundColor={COLORS.white}
-                lineCap={"round"}
-                style={style.circlePercentaje}>
-                {(fill) => (
-                  <View style={style.inColumn}>
-                    <Text style={style.textLight16White}>
-                      0{ fill/10 }/12 
-                    </Text>
-                    <Text style={style.textLight12BlueLight}>
-                      Cobros Pendientes
-                    </Text>
-                  </View>
-                )}
-              </AnimatedCircularProgress>
-
-              <AnimatedCircularProgress
-                size={145}
-                width={12}
-                fill={20}
-                rotation={0}
-                tintColor={COLORS.blueLight}
-                backgroundColor={COLORS.white}
-                lineCap={"round"}
-                style={style.circlePercentaje}>
-                {(fill) => (
-                  <View style={style.inColumn}>
-                    <Text style={style.textLight16White}>
-                      { fill }/250 Mil 
-                    </Text>
-                    <Text style={style.textLight12BlueLight}>
-                      Total del Período
-                    </Text>
-                  </View>
-                )}
-              </AnimatedCircularProgress>
-            </View>
-          </View>
-
-          <View style={style.containerListCustomer}>
-
-            <Text style={[style.textRegular16White,{marginBottom: 5, marginLeft: 15}]}>
-              Clientes Recientes
-            </Text>  
-            <View style={style.lineBlueLightTop}></View>
-            <ScrollView style={style.scrollCustomers}>
-              
-              <View style={[style.inLineSpaceBetween,{marginVertical: 3}]}>
-                <Text style={style.textLight14White}>Fulano Automotores & Hnos</Text>
-                <Button
-                  icon={<IconOne name="filetext1" size={18} style={{opacity: 0.7}} color={COLORS.blueLight}/>}
-                  title='Ver Factura '
-                  iconRight
-                  buttonStyle={style.buttonViewInvoice}
-                  titleStyle={style.textLight14BlueLight}
-                />
-              </View>
-
-              <View style={style.lineBlueLight}></View>
-                
-              <View style={[style.inLineSpaceBetween,{marginVertical: 3}]}>
-                <Text style={style.textLight14White}>Estudio Jurídico Juniors</Text>
-                <Button
-                  icon={<IconOne name="filetext1" size={18} style={{opacity: 0.7}} color={COLORS.blueLight}/>}
-                  title='Ver Factura '
-                  iconRight
-                  buttonStyle={style.buttonViewInvoice}
-                  titleStyle={style.textLight14BlueLight}
-                />
-              </View>
-
-              <View style={style.lineBlueLight}></View>
-
-              <View style={[style.inLineSpaceBetween,{marginVertical: 3}]}>
-                <Text style={style.textLight14White}>Pedro Rodriguez</Text>
-                <Button
-                  icon={<IconOne name="filetext1" size={18} style={{opacity: 0.7}} color={COLORS.blueLight}/>}
-                  title='Ver Factura '
-                  iconRight
-                  buttonStyle={style.buttonViewInvoice}
-                  titleStyle={style.textLight14BlueLight}
-                />
-              </View>
-              <View style={style.lineBlueLight}></View>
-            </ScrollView>
-              
-          </View>
-
-          <View style={style.containerFooter}>
-
-            <View style={style.inLineCenter}>
-              <Button
-                onPress={ this.customerListNavigate }
-                icon={<IconOne name="user" size={23} color="white"/>}
-                buttonStyle={style.buttonFooter}
-                titleStyle={style.textRegular14White}
-              />
-              <Button
-                onPress={ this.newInvoiceNavigate }
-                icon={<IconOne name="file1" size={23} color="white"/>}
-                buttonStyle={style.buttonFooter}
-                titleStyle={style.textRegular14White}
-              />
-              <Button
-                onPress={ this.itemListNavigate }
-                icon={<Icon name="shopping-cart" size={23} color="white"/>}
-                buttonStyle={style.buttonFooter}
-                titleStyle={style.textRegular14White}
-              />
-              <Button
-                icon={<IconOne name="poweroff" size={23} color="white" />}
-                onPress={this.handleSignOut}
-                buttonStyle={style.buttonFooter}
-              />
-            </View>
-
-          </View>
-        </LinearGradient>
-      </KeyboardAwareScrollView>
-    )
-  }
-}
-
-export default Prueba;
+ export default Prueba;
