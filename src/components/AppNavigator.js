@@ -25,7 +25,7 @@ import NewInvoiceItem from './Invoice/NewInvoiceItem';
 import ListInvoiceItem from './Invoice/ListInvoiceItem';
 import NewInvoiceCustomer from './Invoice/NewInvoiceCustomer';
 import Opinion from './Opinion';
-import ListInvoiceCustomer from './Invoice/ListInvoiceCustomer';
+//import ListInvoiceCustomer from './Invoice/ListInvoiceCustomer';
 
 import Prueba from './Prueba';
 
@@ -57,7 +57,7 @@ const InvoiceStack = createStackNavigator({
   NewInvoiceItem,
   NewInvoiceCustomer,
   ListInvoiceItem,
-  ListInvoiceCustomer,
+  //ListInvoiceCustomer,
   InvoiceSummary: {
     screen: InvoiceSummary,
     navigationOptions: () => ({
@@ -94,7 +94,7 @@ const AppSwitchNavigator = createSwitchNavigator(
     Prueba
   },
   {
-    initialRouteName: 'Items',
+    initialRouteName: 'Intro',
   }
 );
 

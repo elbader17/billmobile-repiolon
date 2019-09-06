@@ -112,7 +112,7 @@ class CustomerList extends React.Component {
             <TouchableOpacity 
               onPress={ this.navigateToHome }>
               <LinearGradient 
-                colors={GRADIANTBLUE}
+                colors={GRADIANTBLUE2}
                 style={style.buttonReady}  
                 start={{x: 0, y: 1}} 
                 end={{x: 1, y: 0.9}}

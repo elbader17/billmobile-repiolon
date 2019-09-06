@@ -54,7 +54,7 @@ class Invoice extends React.Component {
   setFcIndentification = value => this.setState({ fcIndentification: value });
   setLoading = (bool) => this.setState({ loading: bool });
   changeTypeCustomer = () => this.setState({cf:true});
-  navigateClient = () => this.props.navigation.navigate('ListInvoiceCustomer');
+  navigateClient = () => this.props.navigation.navigate('ListCustomer');
   navigateAddItems = () => this.props.navigation.navigate('ListInvoiceItem');
   navigateToBewInvoice = () => this.props.navigation.navigate('InvoiceSummary');
   

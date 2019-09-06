@@ -6,7 +6,7 @@ import { FONTS } from '../../constants/fonts';
 const styles = StyleSheet.create({
   silde: {
     flex: 1,
-    backgroundColor: COLORS.blue,
+    backgroundColor: 'transparent',
     alignItems: 'center',
   },
   box1: {
@@ -27,20 +27,19 @@ const styles = StyleSheet.create({
     color: COLORS.white,
   },
   textTittle: {
-    fontFamily: FONTS.latoRegular,
+    fontFamily: FONTS.latoSemiBold,
     fontSize: FONTS.size18,
-    fontWeight: 'bold',
     color: COLORS.white,
     textAlign: 'center',
     width: wp('80%'),
     lineHeight: 32,
   },
   textDescription: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size14,
+    fontFamily: FONTS.latoLight,
+    fontSize: FONTS.size16,
     color: COLORS.white,
     textAlign: 'center',
-    width: wp('80%'),
+    width: wp('85%'),
     lineHeight: 21,
   },
   activeDotStyle: {
@@ -56,11 +55,11 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: 'transparent',
     borderColor: COLORS.white, 
-    borderRadius: 2, 
+    borderRadius: 30, 
     borderWidth: 1,
   },
   buttonText: {
-    fontFamily: FONTS.latoSemiBold, 
+    fontFamily: FONTS.latoRegular, 
     fontSize: FONTS.size16, 
     color: COLORS.white,
   }

@@ -1,30 +1,38 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ImageBackground } from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import {SLIDES_INTRO} from '../../constants/slides_intro';
 import style from './style';
+import LinearGradient from 'react-native-linear-gradient';
+import { GRADIANTBLUE2 } from '../../constants/colors';
 
 class Intro extends React.Component {
   _renderItem = (item) => {
     return (
-      <View style={style.silde}>
-        <View style={style.box1}>
-          <Text style={style.number}>{item.title}</Text>
+      <LinearGradient 
+        colors={GRADIANTBLUE2}
+        style={{flex: 1}}  
+        start={{x: 1, y: 0}} 
+        end={{x: 0.9, y: 1}}>
+        <View style={style.silde}>
+          <View style={style.box1}>
+            <Text style={style.number}>{item.title}</Text>
+          </View>
+          <View style={style.box2}>
+            <Text style={style.textTittle}>{item.text}</Text>
+          </View>
+          <View style={style.box3}>
+            <Text style={style.textDescription}>{item.description}</Text>
+          </View>
         </View>
-        <View style={style.box2}>
-          <Text style={style.textTittle}>{item.text}</Text>
-        </View>
-        <View style={style.box3}>
-          <Text style={style.textDescription}>{item.description}</Text>
-        </View>
-      </View>
+      </LinearGradient>
     );
   }
   _onDone = () => {
     this.props.navigation.navigate('Authentication')
   }
   render() {
-    return (    
+    return ( 
       <AppIntroSlider 
         renderItem={this._renderItem} 
         slides={SLIDES_INTRO} 
