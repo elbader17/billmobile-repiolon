@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { fetch_api } from '../../utils/fetchrefresh';
 import {
   CREATE_ITEM,
   UPDATE_ITEM,
@@ -34,14 +34,9 @@ const createItem = ({ category, name, price }) => {
     price,
   };
 
-  return (dispatch, getState) => {
-    const instance = axios.create({
-      headers: { 'JWT-TOKEN': getState().authentication.jwtToken },
-    });
-    return instance.post('v1/items', { resource })
-      .then((response) => {
-        return dispatch(createItemAction(response.data.data));
-      })
+  return (dispatch) => {
+    return fetch_api('/v1/items', 'POST', false, { resource })
+      .then((response) => dispatch(createItemAction(response.data)))
       .catch((error) => {
         console.log(error);
       });
@@ -49,15 +44,12 @@ const createItem = ({ category, name, price }) => {
 };
 
 const listItems = () => {
-  return (dispatch) => {
-    return axios.get('v1/items')
-      .then((resources) => {
-        console.log(resources);
-        dispatch(itemListAction(resources.data));
+  return (dispatch) => {    
+    return fetch_api('/v1/items', 'GET', false)
+      .then(response => {
+        dispatch(itemListAction(response))
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch(error => console.log(error))
   };
 };
 
@@ -68,13 +60,10 @@ const updateItem = ({id, category, name, price}) => {
     category
   };
 
-  return (dispatch, getState) => {
-    const instance = axios.create({
-      headers: { 'JWT-TOKEN': getState().authentication.jwtToken },
-    });
-    return instance.put(`v1/items/${id}`, { resource })
+  return (dispatch) => {
+    return fetch_api(`/v1/items/${id}`,'PUT', false, { resource })
       .then((response) => {
-        const item = response.data.data;
+        const item = response.data;
         dispatch(updateItemAction(item.id, item.attributes.name, item.attributes.price));
       })
       .catch((error) => {

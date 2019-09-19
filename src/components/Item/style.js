@@ -21,13 +21,21 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     borderWidth: 0,
     borderColor: COLORS.blueMedium,
-    borderRadius: 10,
-    paddingHorizontal: 5,
+    borderRadius: 5,
+    paddingHorizontal: 2,
     paddingVertical: 5,
-    marginHorizontal: 5,
-    marginTop: 15,
+    marginHorizontal: 0,
+    marginTop: 20,
     marginBottom: 5,
-    elevation: 4
+    elevation: 3
+  },
+  boxInfoItems: {
+    borderBottomWidth: 0.5,
+    borderRadius: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 3,
+    marginVertical: 1.5,
+    borderColor: COLORS.grayLight,
   },
   boxInput: {
     backgroundColor: 'transparent',
@@ -66,6 +74,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
+  buttonEditBlue:{
+    backgroundColor: COLORS.blueMedium,
+    width: wp('15%'),
+    height: hp('5%'),
+    borderRadius: 20
+  },
+  textButtonEdit: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size12,
+    color: COLORS.white,
+  },
   buttonSelect: {
     width: wp('40%'),
     height: hp('6%'),
@@ -100,16 +119,13 @@ const styles = StyleSheet.create({
   },
   textRegular14GrayDark: {
     fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size16,
+    fontSize: FONTS.size14,
     color: COLORS.grayDark
   },
-  boxPrice: {
-    marginTop: 12,
-    flexDirection:'row', 
-    alignItems: 'center', 
-    borderWidth: 1,
-    borderRadius: 3,
-    borderColor: COLORS.gray
+  textRegular14Blue: {
+    fontFamily: FONTS.latoLight,
+    fontSize: FONTS.size14,
+    color: COLORS.blueMedium
   },
   textRegular16White: {
     fontFamily: FONTS.latoRegular,

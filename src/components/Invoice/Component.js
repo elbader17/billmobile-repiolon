@@ -10,7 +10,7 @@ import style from './style';
 import { VOUCHER_TYPES } from '../../constants/invoice';
 import { validateData } from '../../utils/validations';
 import { presentInvoiceDate } from '../../utils/date';
-import { GRADIANTBLUE, GRADIENTYELLOW, GRADIANTBLUE3, COLORS } from '../../constants/colors';
+import { GRADIANTBLUE, GRADIENTYELLOW, COLORS } from '../../constants/colors';
 
 class Invoice extends React.Component {
 
@@ -134,8 +134,7 @@ class Invoice extends React.Component {
   }
 
   render() {
-    const buttonCfEnable = style.buttonCfEnable;
-    const buttonCfDisable = style.buttonCfDisable;
+    const iconAddCustomer = <Icon name="adduser" size={17} color={COLORS.blueMedium} />
     return(
       
       <LinearGradient 
@@ -190,22 +189,14 @@ class Invoice extends React.Component {
             <View style={style.textConsumerFinal}>
               <Text style={style.textRegular14Blue}> Consumidor Final</Text>
             </View>
-            <TouchableOpacity
-              onPress={ this.navigateClient }
-              style={{alignItems:'center'}}
+            <Button
+              title='Otro Cliente'
               testID='addCustomer'
-            >
-              <LinearGradient 
-                colors={GRADIENTYELLOW}
-                style={style.buttonAddCustomer}  
-                start={{x: 0, y: 1}} 
-                end={{x: 1, y: 0.9}}
-              >
-                <Text style={style.textRegular14White}>
-                  <Icon name="adduser" size={17} color={COLORS.white} /> Otro Cliente
-                </Text>
-              </LinearGradient>
-            </TouchableOpacity>
+              icon={iconAddCustomer}
+              onPress={ this.navigateClient }
+              buttonStyle={style.buttonAddCustomer}
+              titleStyle={style.textRegular12Blue}
+            />
 
             {/*<Button
               title='X'

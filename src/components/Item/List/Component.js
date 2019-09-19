@@ -70,23 +70,23 @@ class ItemList extends React.Component {
       .filter(item => item.attributes.category === category)
       .map((item) => {
         return (
-          <View style={[style.inLineSpaceBetween,{paddingVertical: 2}, style.borde]} key={item.id}>
-            <View style={style.boxNameItems}>
-              <Text style={style.textRegular16GrayDark}>
-                {item.attributes.name}
-              </Text>
-            </View>
-            <View style={style.boxPriceItems}>
-              <Text style={style.textRegular16GrayDark}>
-                $ {item.attributes.price}
-              </Text>
-            </View>
-            <Button
-              title='Editar'
-              onPress={() => this.navigateToEditItem(item) }
-              buttonStyle={ this.state.isProduct ? style.buttonEditRed : style.buttonEditBlue }
-              titleStyle={ this.state.isProduct ? style.textButtonEditRed : style.textButtonEditBlue }
+          <View style={style.boxInfoItems} key={item.id}>
+            <View style={style.inLineSpaceBetween} >
+              <View>
+                <Text style={style.textRegular14GrayDark}>
+                  {item.attributes.name}
+                </Text>
+                <Text style={style.textRegular14Blue}>
+                  $ {item.attributes.price}
+                </Text>
+              </View>
+              <Button
+                title='Editar'
+                onPress={() => this.navigateToEditItem(item) }
+                buttonStyle={ style.buttonEditBlue }
+                titleStyle={ style.textButtonEdit }
             />
+            </View>
           </View>
         );
       });
@@ -99,7 +99,7 @@ class ItemList extends React.Component {
         <TouchableOpacity 
           onPress={() => this.setState({isProduct: true}) }>
           <LinearGradient 
-            colors={this.state.isProduct ? GRADIENTYELLOW : GRADIANTBLUE2}
+            colors={this.state.isProduct ? GRADIANTBLUE : GRADIANTBLUE2}
             style={style.buttonSelect}  
             start={{x: 0, y: 1}} 
             end={{x: 1, y: 0.9}}
@@ -113,7 +113,7 @@ class ItemList extends React.Component {
         <TouchableOpacity 
           onPress={() => this.setState({isProduct: false}) }>
           <LinearGradient 
-            colors={this.state.isProduct ? GRADIANTBLUE2 : GRADIENTYELLOW }
+            colors={this.state.isProduct ? GRADIANTBLUE2 : GRADIANTBLUE }
             style={style.buttonSelect}  
             start={{x: 0, y: 1}} 
             end={{x: 1, y: 0.9}}

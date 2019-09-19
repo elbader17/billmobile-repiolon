@@ -59,7 +59,8 @@ class CustomerList extends React.Component {
     const customers = this.props.customers.slice().sort(orderByName);
     return customers.map((customer) => {
        return (
-        <View style={[style.inLineSpaceBetween, style.boxInfoCustomer]} key={customer.id}>
+        <View style={style.boxInfoCustomer}>
+        <View style={style.inLineSpaceBetween} key={customer.id}>
           <View>
             <Text style={style.textRegular14GrayDark}>
               {customer.attributes.name} 
@@ -74,6 +75,7 @@ class CustomerList extends React.Component {
             buttonStyle={ style.buttonEditBlue }
             titleStyle={ style.textButtonEdit }
           />
+        </View>
         </View>
        );
     });

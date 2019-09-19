@@ -94,7 +94,7 @@ const AppSwitchNavigator = createSwitchNavigator(
     Prueba
   },
   {
-    initialRouteName: 'Intro',
+    initialRouteName: 'Initializing',
   }
 );
 

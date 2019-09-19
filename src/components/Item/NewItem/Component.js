@@ -4,7 +4,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { Button } from "react-native-elements";
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/AntDesign';
-import { GRADIANTBLUE2, GRADIENTYELLOW } from '../../../constants/colors';
+import { GRADIANTBLUE2, GRADIANTBLUE } from '../../../constants/colors';
 import { validateAddItem } from '../../../utils/validations';
 import AddItem from './AddItem';
 import style from '../style';
@@ -111,7 +111,7 @@ class NewItem extends React.Component {
               <TouchableOpacity 
                 onPress={() => this.setState({isProduct: true}) }>
                 <LinearGradient 
-                  colors={this.state.isProduct ? GRADIENTYELLOW : GRADIANTBLUE2}
+                  colors={this.state.isProduct ? GRADIANTBLUE : GRADIANTBLUE2}
                   style={style.buttonSelect}  
                   start={{x: 0, y: 1}} 
                   end={{x: 1, y: 0.9}}
@@ -125,7 +125,7 @@ class NewItem extends React.Component {
               <TouchableOpacity 
                 onPress={() => this.setState({isProduct: false}) }>
                 <LinearGradient 
-                  colors={this.state.isProduct ? GRADIANTBLUE2 : GRADIENTYELLOW }
+                  colors={this.state.isProduct ? GRADIANTBLUE2 : GRADIANTBLUE }
                   style={style.buttonSelect}  
                   start={{x: 0, y: 1}} 
                   end={{x: 1, y: 0.9}}

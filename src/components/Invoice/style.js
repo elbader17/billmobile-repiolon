@@ -379,12 +379,13 @@ const styles = StyleSheet.create({
   },
   buttonAddCustomer: {
     backgroundColor: 'transparent',
-    borderRadius: 5,
-    width: wp('35%'),
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: COLORS.blueMedium,
+    width: 110,
     height: hp('5%'),
     alignItems: 'center',
     justifyContent: 'center',
-    elevation: 1
   },
   buttonAddItems: {
     backgroundColor: COLORS.white,

@@ -26,20 +26,20 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     borderWidth: 0,
     borderColor: COLORS.blueMedium,
-    borderRadius: 10,
-    paddingHorizontal: 5,
+    borderRadius: 5,
+    paddingHorizontal: 2,
     paddingVertical: 5,
-    marginHorizontal: 5,
+    marginHorizontal: 0,
     marginTop: 20,
     marginBottom: 5,
-    elevation: 4
+    elevation: 3
   },
   boxInfoCustomer: {
     borderBottomWidth: 0.5,
     borderRadius: 10,
-    paddingHorizontal: 6,
+    paddingHorizontal: 10,
     paddingVertical: 5,
-    marginVertical: 1.5,
+    marginVertical: 1,
     borderColor: COLORS.grayLight,
   },
   inputPicker: {
@@ -142,17 +142,15 @@ const styles = StyleSheet.create({
     opacity: 0.5
   },
   buttonEditBlue:{
-    width: wp('16%'),
+    backgroundColor: COLORS.blueMedium,
+    width: wp('15%'),
     height: hp('5%'),
-    borderWidth: 0.5,
-    borderRadius: 17,
-    borderColor: COLORS.blueMedium,
-    backgroundColor: 'transparent'
+    borderRadius: 20
   },
   textButtonEdit: {
-    fontFamily: FONTS.latoLight,
+    fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size12,
-    color: COLORS.blueMedium,
+    color: COLORS.white,
   },
   headerText: {
     fontFamily: FONTS.latoRegular,
