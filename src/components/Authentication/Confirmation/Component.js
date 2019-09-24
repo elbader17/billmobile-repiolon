@@ -1,10 +1,14 @@
 import React from 'react';
-import { Text, View, TextInput, ScrollView, KeyboardAvoidingView } from 'react-native';
+import { Text, View } from 'react-native';
+import { TextField } from 'react-native-material-textfield';
+import { showMessage } from "react-native-flash-message";
+import LinearGradient from 'react-native-linear-gradient';
 import { Button } from "react-native-elements";
 import { withNavigation } from 'react-navigation';
 import { CODE_CONFIRM } from '../../../constants/regular_expressions'
-import { COLORS } from '../../../constants/colors';
-import style from './style';
+import { messageConfirmAccount } from '../../../utils/messagesNotifications';
+import { COLORS, COLORGB2 } from '../../../constants/colors';
+import style from '../style';
 
 class Confirmation extends React.Component {
 
@@ -23,8 +27,10 @@ class Confirmation extends React.Component {
     this.setLoading(true);
     confirmCode(confirmationEmail,confirmationCode)
       .then((data) => {
-        if (data)
+        if (data) {
+          showMessage(messageConfirmAccount);
           this.props.navigation.navigate('Authentication');
+        }
         else {
           this.setLoading(false);
           alert('Error: Datos incorrectos');
@@ -32,63 +38,79 @@ class Confirmation extends React.Component {
         } 
       })
   }
-
+  navigateAuth = () => this.props.navigation.navigate('Authentication');
   validateData = () => { return CODE_CONFIRM.test(this.state.confirmationCode) }
   setLoading = (bool) => this.setState({ loading: bool })
 
   render() {
     return(
-      <KeyboardAvoidingView
-        behavior={'padding'}
-        style={{flex: 1}}
-      >
-        <View style={ style.container }>
-          <ScrollView> 
-            <Text style={[style.textRegular14WhiteBold,{textAlign: 'center'}]}>
-              VERIFICACIÓN DE CUENTA
+      <View style={ style.container }>
+
+        <View style={style.containerBody}>
+          <View style={style.containerHeader}>
+            <Text style={style.textRegular18BlueMedium}>
+              Verificación de Cuenta
             </Text>
-            <View style={style.lineWhite}></View>
-            <Text style={[style.textRegular14White,{textAlign: 'center'}]}>
+            <Text style={style.textRegular12GrayDark}>
               Se envió el Código de Confirmación a su email.
             </Text>
-            <View style={style.lineWhite}></View>
-            <Text style={style.textRegular16White}>
-              Tu Email
-            </Text>
-            <TextInput
-              label="Email"
+          </View>
+          <View style={style.containerInputs}>
+            <TextField
+              label="Email a Verificar"
               value= { this.state.confirmationEmail }
               onChangeText={ (value) => this.setState({ confirmationEmail: value }) }
-              placeholder="Email"
-              placeholderTextColor={COLORS.gray}
-              style={ style.textBox }
-              disabled={ true }
+              baseColor={COLORS.gray}
+              tintColor={COLORS.blueMedium}
+              textColor= {COLORS.grayDark}
+              labelFontSize={12}
+              lineWidth={1}
+              inputContainerPadding={6}
+              error={this.state.errorName}
+              errorColor={COLORS.redMedium}
             />
-            <Text style={style.textRegular16White}>
-              Ingresá el Código de Confirmación
-            </Text>
-            <TextInput
-              label="Codigo de confirmación"
+              
+            <TextField
+              title = 'Número de 6 Dígitos'
+              label="Código de Confirmación"
               onChangeText={ (value) => this.setState({ confirmationCode: value }) }
-              placeholder="Número de 6 dígitos"
-              placeholderTextColor={COLORS.gray}
-              style={ style.textBox }
               keyboardType='numeric'
+              baseColor={COLORS.gray}
+              tintColor={COLORS.blueMedium}
+              textColor= {COLORS.grayDark}
+              labelFontSize={12}
+              lineWidth={1}
+              inputContainerPadding={6}
+              error={this.state.errorName}
+              errorColor={COLORS.redMedium}
             />
-          </ScrollView>
-        </View>
-        <Button
-          title='VERIFICAR CUENTA'
-          testID={'submitConfirmation'}
-          onPress={ this.handleConfirmationCode }
-          buttonStyle={ style.buttonVerify }
-          titleStyle={ style.textRegular14WhiteBold }
-          disabledTitleStyle={ style.textRegular14WhiteBold}
-          disabledStyle={ style.buttonVerifyDisabled }
-          disabled={ !this.validateData() }
-          loading = {this.state.loading}
-        />
-      </KeyboardAvoidingView>
+
+            <Button
+              title='Verificar Cuenta'
+              testID={'submitConfirmation'}
+              onPress={ this.handleConfirmationCode }
+              buttonStyle={ style.buttonVerify }
+              titleStyle={ style.textRegular16White }
+              disabled={ !this.validateData() }
+              loading = {this.state.loading}
+              ViewComponent={LinearGradient}
+              linearGradientProps={COLORGB2}
+            />
+
+            <Button
+              title='Cancelar'
+              testID={'submitConfirmation'}
+              onPress={ this.navigateAuth }
+              buttonStyle={ style.buttonVerify }
+              titleStyle={ style.textRegular16White }
+              ViewComponent={LinearGradient}
+              linearGradientProps={COLORGB2}
+            />
+
+          </View>
+        </View>    
+     
+      </View>
     )
   }
 }

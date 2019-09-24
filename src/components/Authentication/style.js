@@ -5,111 +5,116 @@ import { FONTS } from '../../constants/fonts';
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'transparent',
     height: hp('100%'),
   },
+  containerBody: {
+    flex: 0.90
+  },
+  containerFooter: {
+    flex: 0.10,
+    justifyContent: 'flex-end'
+  },
   containerHeader: {
-    paddingVertical: 30,
+    paddingVertical: 25,
     alignItems: 'center',
     backgroundColor: COLORS.white,
   },
-  containerFooter: {
+  containerInputs: {
     flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
+    marginHorizontal: 28
   },
-  textCenter: {
+  containerButtonSignTwo: {
+    alignItems: 'center', 
+    marginTop: 18,
+  },
+  gradientStyle: { 
+    width: wp('50%'),
+    height: hp('5%'),
+    borderRadius: 20,
+    marginTop: 7,
+  },
+  textSubLogo: {
     flex:1,
+    marginTop: 5,
+    marginBottom: 5,
+    marginLeft: 35,
     justifyContent: 'center',
     alignItems: 'center'
   },
-  buttonContainer: {
-    width: 196,
-    height: 44,
-    alignItems: 'center',
-    backgroundColor: 'white'
-  },
-  gradientStyle: { 
-    width: wp('56%'),
-    height: hp('6%'),
-    borderRadius: 20,
-    marginTop: 5,
-  },
-  buttonText: {
-    textAlign: 'center',
-    color: '#4C64FF',
-    padding: 15,
-    marginLeft: 1,
-    marginRight: 1,
-    width: 198
+  textCenter: {
+    flex:1,
+    marginTop: 10,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   textRegular14White: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size14,
     color: COLORS.white,
     lineHeight: 22,
-    textAlign: 'center',
-    opacity: 0.9
+    textAlign: 'center'
   },
   textRegular16White: {
     fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size18,
+    fontSize: FONTS.size16,
     color: COLORS.white,
-    lineHeight: 22,
     textAlign: 'center',
     justifyContent: 'center'
   },
   imageHeader: {
     width: 219,
-    height: 132
+    height: 130
   },
-  button: {
+  buttonSign: {
+    width: wp('42%'),
+    height: hp('6%'),
     backgroundColor: 'transparent',
-    borderRadius: 2,
-    borderBottomWidth: 2,
-    width: wp('50%'),
-    height: hp('7%'),
-    paddingHorizontal: 5
+    borderRadius: 25,
+    elevation: 2,
   },
-  buttonDisabled: {
+  buttonSignTwo: {
+    width: wp('86%'),
+    height: hp('7%'),
     backgroundColor: 'transparent',
-    borderRadius: 2,
-    borderTopWidth: 2,
-    borderColor: COLORS.grayLight,
-    width: wp('50%'),
+    borderRadius: 25,
+    elevation: 2
+  },
+  buttonVerify: {
+    width: wp('86%'),
     height: hp('7%'),
+    backgroundColor: 'transparent',
+    borderRadius: 25,
+    marginTop: 35,
+    elevation: 2
   },
-  buttonSelected: {
-    backgroundColor: COLORS.white
-  },
-  buttonOn: {
-    fontFamily: FONTS.latoSemiBold,
-    fontSize: FONTS.size11,
-    color: COLORS.blue
-  },
-  buttonOff: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size11,
-    color: COLORS.blue
+  buttonConfirm: {
+    width: wp('50%'),
+    height: hp('6%'),
+    backgroundColor: 'transparent',
+    borderRadius: 25,
+    marginTop: 15,
+    elevation: 1
   },
   gradientBottom: { 
-    width: '100%', 
+    height: hp('8%'),
     borderTopLeftRadius: 100, 
     borderTopRightRadius: 100, 
-    height: hp('8%'),
     justifyContent: 'center'
   },
-  textRegular14Gray: {
-    fontFamily: FONTS.latoSemiBold,
-    fontSize: FONTS.size14,
-    color: COLORS.gray,
-    textAlign: 'center',
+  textMedium16Blue: {
+    fontFamily: FONTS.latoMedium,
+    fontSize: FONTS.size16,
+    color: COLORS.blue
   },
-  textRegular14BlueBold: {
-    fontFamily: FONTS.latoSemiBold,
-    fontSize: FONTS.size14,
-    color: COLORS.blue,
-    textAlign: 'center',
+  textRegular12GrayDark: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size12,
+    color: COLORS.grayDark
+  },
+  textRegular18BlueMedium: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size18,
+    color: COLORS.blueMedium
   },
   textRegular11White: {
     fontFamily: FONTS.latoRegular,
@@ -126,14 +131,17 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     opacity: 0.9
   },
-  inColumnSpaceBetween: {
-    flexDirection: 'column',
-    justifyContent: 'space-between'
-  },
-  inLine: {
+  inLineSpaceAround: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
+    alignItems: 'center'
   },
+  displayNone: {
+    display: 'none'
+  },
+  displayFlex: {
+    display: 'flex'
+  }
 });
 
 export default styles;

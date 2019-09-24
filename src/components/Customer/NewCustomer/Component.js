@@ -58,7 +58,6 @@ class NewCustomer extends React.Component {
 
   saveCustomer = () => {
     const { name, category, identification, customerId } = this.state;
-    console.log(validateCuit(identification));
     if (validateCuit(identification)) {
       const { saveFiscalIdentity, navigation } = this.props;
       this.setLoading(true);

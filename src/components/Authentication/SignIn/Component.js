@@ -1,20 +1,11 @@
 import React from 'react';
-import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
-import { showMessage } from "react-native-flash-message";
+import { View } from 'react-native';
+import { TextField } from 'react-native-material-textfield';
+import PasswordInputText from 'react-native-hide-show-password-input';
 import LinearGradient from 'react-native-linear-gradient';
-import { 
-  messageErrorSignIn,
-  messageErrorSignInConfirm,
-  messageErrorSignInExist,
-  messageErrorSignInData
-} from '../../../utils/messagesNotifications';
 import { Button } from "react-native-elements";
-import style from '../SignUp/style';
-import { GRADIENTYELLOW } from '../../../constants/colors';
-
-
-const EMAIL_REGEXP = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
-const PASSWORD_REGEXP = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+import { COLORGY, COLORS, COLORGB2 } from '../../../constants/colors';
+import style from '../style';
 
 class SignIn extends React.Component {
 
@@ -24,12 +15,10 @@ class SignIn extends React.Component {
       email: '@mozej.com',
       password: '@Martin44',
       hidePassword: true,
-      loading: false
+      loading: false,
+      confirm: false,
+      error: undefined
     };
-  }
-
-  managePasswordVisibility = () => {
-    this.setState({ hidePassword: !this.state.hidePassword });
   }
 
   handleSignIn = () => {
@@ -39,23 +28,29 @@ class SignIn extends React.Component {
     signIn(email, password)
     .then( (_data) => {
       if(this.props.jwtToken !== ''){
-        console.log(this.props.jwtToken);
         this.navigateNext();
       } else {
         if ( _data.message === 'User does not exist.'){
-          showMessage(messageErrorSignInExist)
+          this.setState({error: 'Email no registrado'})
           this.props.navigation.navigate('Authentication');
-        }else if ( _data.message === 'User is not confirmed.'){
-          showMessage(messageErrorSignInConfirm);
-          this.props.navigation.navigate('ConfirmationCodeRegister', { email: this.state.email });
-        }else {
-          showMessage(messageErrorSignInData);
+        } else if ( _data.message === 'User is not confirmed.'){
+          this.setState({confirm: true, error: 'Cuenta no verificada'});
+        } else {
+          this.setState({error: 'Email o Password incorrectos'})
           this.props.navigation.navigate('Authentication');
         }
         this.setLoading(false);
       }
     })
-    .catch(err => showMessage(messageErrorSignIn)); //incluir err.message
+    .catch(err => {
+      this.setState({error: 'ERROR al ingresar, intente nuevamente!'});
+      console.log(err);
+    });
+  }
+
+  handleConfirm = () => {
+    this.props.navigation.navigate('ConfirmationCodeRegister', { email: this.state.email });
+    this.setState({confirm: false})
   }
 
   navigateNext = () => {
@@ -66,72 +61,70 @@ class SignIn extends React.Component {
     }
   }
 
-  validateData = () => {
-    const isValidPassword = PASSWORD_REGEXP.test(this.state.password);
-    const isValidEmail = EMAIL_REGEXP.test(String(this.state.email).toLowerCase());
-    return (isValidPassword && isValidEmail);
-  }
-
   setEmail = (value) => this.setState({ email: value })
   setPassword = (value) => this.setState({ password: value })
   setLoading = (bool) => this.setState({ loading: bool })
 
   render() {
-    const hide = require('../../../images/hide.png')
-    const show = require('../../../images/show.png')
     return(
-      <View style={style.container}>
-        <View style={style.containerInputs}>
-          <View style={ style.textBoxBtnHolder }>
-            <TextInput
-              label="Email"
-              onChangeText={this.setEmail}
-              value={this.state.email}
-              placeholder="Tu email"
-              style={ style.textBox }
-              keyboardType='email-address'
-            />
-          </View>
-          <View style={ style.textBoxBtnHolder }>
-            <TextInput
-              label="Password"
-              onChangeText={this.setPassword}
-              value={this.state.password}
-              placeholder="Contraseña"
-              style={ style.textBox }
-              secureTextEntry={ this.state.hidePassword }
-            />
-            <TouchableOpacity
-              activeOpacity={ 0.8 }
-              style={ style.visibilityBtn }
-              onPress={ this.managePasswordVisibility }
-            >
-              <Image
-                source={( this.state.hidePassword ) ? hide : show }
-                style={ style.btnImage }
-              />
-            </TouchableOpacity>
-          </View>
-          <LinearGradient
-            colors={ GRADIENTYELLOW }
-            start={{x: 0.0, y: 1.0}} 
-            end={{x: 1.0, y: 1.0}}
-            style={{borderRadius: 25, marginTop: 15}}
-          >
-            <Button
-              title='ENTRAR'
-              testID={'submitSignIn'}
-              onPress={ this.handleSignIn }
-              buttonStyle={ style.submit }
-              titleStyle={ style.textRegular14WhiteBold }
-              disabledTitleStyle={ style.textRegular14WhiteBold}
-              disabledStyle={ style.submitDisabled }
-              disabled={ !this.validateData() }
-              loading = {this.state.loading}
-            />
-          </LinearGradient>
+      <View>
+        <TextField
+          label="Email"
+          value={this.state.email}
+          onChangeText={this.setEmail}
+          onFocus={()=>{this.setState({error: undefined, confirm: false})}}
+          baseColor={COLORS.gray}
+          textColor= {COLORS.grayDark}
+          tintColor={COLORS.blueMedium}
+          lineWidth={1}
+          labelFontSize={12}
+          inputContainerPadding={6}
+          error={this.state.error}
+          errorColor={COLORS.redMedium}
+        />
+        <View>
+          <PasswordInputText
+            label='Contraseña'
+            value={this.state.password}
+            onChangeText={this.setPassword}
+            onFocus={()=>{this.setState({error: undefined, confirm: false})}}
+            baseColor={COLORS.gray}
+            tintColor={COLORS.blueMedium}
+            textColor= {COLORS.grayDark}
+            labelFontSize={12}
+            labelHeight={25}
+            lineWidth={1}
+            inputContainerPadding={7}
+            iconColor= {COLORS.gray}
+            iconSize={20}
+            error={this.state.error}
+            errorColor={COLORS.redMedium}
+          />
         </View>
-        
+
+        <View style={style.containerButtonSignTwo}>
+          <Button
+            title='Ingresar'
+            testID={'submitSignIn'}
+            onPress={ this.handleSignIn }
+            buttonStyle={ style.buttonSignTwo }
+            titleStyle={ style.textRegular16White }
+            loading = {this.state.loading}
+            ViewComponent={LinearGradient}
+            linearGradientProps={COLORGY}
+          />
+          <View style={this.state.confirm ? style.displayFlex : style.displayNone}>
+            <Button
+              title='Confirmar Cuenta'
+              testID={'submitSignIn'}
+              onPress={ this.handleConfirm }
+              buttonStyle={ style.buttonConfirm }
+              titleStyle={ style.textRegular16White }
+              ViewComponent={LinearGradient}
+              linearGradientProps={COLORGB2}
+            />
+          </View>
+        </View>
       </View>
     )
   }

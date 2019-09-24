@@ -22,9 +22,13 @@ export const validateConfirmPass = (pass, confirmPass) => {
   return pass === confirmPass;
 }
 
+export const validateName = (name) => {
+  return name!='';
+}
+
 //Condiciones Necesarias para Registrarse
 export const validateDataSignUp = (pass, confirmPass, email, name) => {
-  const bool = (validatePass(pass) && validateConfirmPass(pass,confirmPass) && validateEmail(email) && name!='');
+  const bool = (validatePass(pass) && validateConfirmPass(pass,confirmPass) && validateEmail(email) && validateName(name));
   return bool;
 }
 

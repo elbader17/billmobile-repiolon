@@ -1,22 +1,18 @@
 import React from 'react';
-import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
-import { showMessage, hideMessage } from "react-native-flash-message";
+import { View } from 'react-native';
+import PasswordInputText from 'react-native-hide-show-password-input';
+import { TextField } from 'react-native-material-textfield';
 import LinearGradient from 'react-native-linear-gradient';
 import { Button } from "react-native-elements";
-import { COLORS } from '../../../constants/colors';
 import { 
-  showBarEmailFormat, 
-  showBarPassFormat, 
-  showBarMatchPass
-} from '../../../utils/showMessage';
-import { 
-  messageEmail, 
-  messagePass, 
-  messageConfirmPass
-} from '../../../utils/messagesNotifications'
-import { validateDataSignUp } from '../../../utils/validations';
-import style from './style';
-import { GRADIENTYELLOW } from '../../../constants/colors';
+  validateName,
+  validatePass, 
+  validateConfirmPass, 
+  validateEmail,
+  validateDataSignUp
+} from '../../../utils/validations';
+import { COLORS, COLORGY } from '../../../constants/colors';
+import style from '../style';
 
 class SignUp extends React.Component {
 
@@ -27,69 +23,43 @@ class SignUp extends React.Component {
       password: '@Martin44',
       name:'martin',
       confirmPassword: '@Martin44',
-      hidePassword: true,
-      hideConfirmPassword: true,
-      messagePassFormat: false,
-      messageEmailFormat: false,
-      messageMatchPass: false,
+      confirmAccount: false,
       loading: false,
-      typeMessage: 'danger'
+      errorName: undefined,
+      errorEmail: undefined,
+      errorPass: undefined,
+      errorConfirmPass: undefined
     };
   }
-
-  managePasswordVisibility = () => this.setState({ hidePassword: !this.state.hidePassword });
-  manageConfirmPasswordVisibility = () => this.setState({ hideConfirmPassword: !this.state.hideConfirmPassword });
 
   handleSignUp = () => {
-    const { name, email, password } = this.state;
-    const attributes = {
-      email:email,
-      name:name,
-    };
-    this.setLoading(true);
-    const { signUp } = this.props;
-    signUp(password, email, attributes)
-    .then((data) => {
-      this.setLoading(false);
-      if(data)
-        this.props.navigation.navigate('Authentication');
-      else{
-        if (data != undefined){
-          this.props.navigation.navigate('ConfirmationCodeRegister', { email: this.state.email });
+    const { name, email, password, confirmPassword } = this.state;
+    if(!validateDataSignUp(password, confirmPassword, email, name)) {
+      if(!validateName(name)) this.setState({errorName: 'Ingrese Nombre de Usuario'});
+      if(!validateEmail(email)) this.setState({errorEmail: 'Formato Inválido'});
+      if(!validatePass(password)) this.setState({errorPass: 'No Cumple Requisitos'});
+      if(!validateConfirmPass(password, confirmPassword)) this.setState({errorConfirmPass: 'Las Contraseñas No Coinciden'});
+    } else {
+      const attributes = {
+        email:email,
+        name:name,
+      };
+      this.setLoading(true);
+      const { signUp } = this.props;
+      signUp(password, email, attributes)
+      .then((data) => {
+        this.setLoading(false);
+        if(data === true)
+          this.props.navigation.navigate('Authentication');
+        else{
+          if (data === false){
+            this.props.navigation.navigate('ConfirmationCodeRegister', { email: this.state.email });
+          } else {
+              this.setState({errorEmail: 'Email ya existente'})
+          }
         }
-      }
-    })
-  }
-
-  showFormatMessage = type => {
-    switch (type) {
-      case 'email':
-        this.setState({messageEmailFormat: true});
-        showMessage(messageEmail); 
-        break;  
-      case 'pass':
-        this.setState({messagePassFormat: true});
-        showMessage(messagePass);  
-        break; 
-      case 'confirmpass':
-        this.setState({messageMatchPass: true});
-        showMessage(messageConfirmPass);  
-        break; 
-      default: null
+      })
     }
-  }
-  
-  hideFormatMessage = type => {
-    switch (type) {
-      case 'email':
-        this.setState({messageEmailFormat: false});
-      case 'pass':
-        this.setState({messagePassFormat: false});
-      case 'confirmpass':
-        this.setState({messageMatchPass: false});
-      default: null
-    }
-    hideMessage();   
   }
 
   setName = (value) => this.setState({ name: value})
@@ -99,118 +69,93 @@ class SignUp extends React.Component {
   setLoading = (bool) => this.setState({ loading: bool })
   
   render() {
-    const hide = require('../../../images/hide.png')
-    const show = require('../../../images/show.png')
     return(
-      <View style={style.container}>
-        <View style = { style.containerInputs }>
-          <View style={ style.textBoxBtnHolder }>
-            <TextInput
-              label="Nombre"
-              value={ this.state.name }
-              onChangeText={ this.setName }
-              placeholder="Tu nombre"
-              placeholderTextColor={COLORS.gray}
-              style={ style.textBox }
-            />
-          </View>
-          <View style={ style.textBoxBtnHolder }>
-            {showBarEmailFormat(this.state.messageEmailFormat, this.state.email)}
-            <TextInput
-              label="Email"
-              value={ this.state.email }
-              onChange={ this.validateEmail }
-              onChangeText={ this.setEmail }
-              onFocus={() => this.showFormatMessage('email')}
-              onEndEditing={() => this.hideFormatMessage('email')}
-              placeholder="Tu email"
-              placeholderTextColor={COLORS.gray}
-              style={ style.textBox }
-              onRef={ r => { this.state.email = r }}
-              editable={ !this.props.fetching }
-              returnKeyType='next'
-              keyboardType='email-address'
-            />
-          </View>
-          <View style={ style.textBoxBtnHolder }>
-            <View>
-            {showBarPassFormat(this.state.messagePassFormat, this.state.password)}
-            <View style={style.inputPass}>
-            <TextInput
-              label="Password"
-              value={ this.state.password }
-              onChange={ this.validatePass }
-              onChangeText={ this.setPassword }
-              onFocus={() => this.showFormatMessage('pass')}
-              onEndEditing={() => this.hideFormatMessage('pass')}
-              placeholder="Contraseña"
-              placeholderTextColor={COLORS.gray}
-              style={ style.textBoxPass }
-              secureTextEntry={ this.state.hidePassword }
-            />
-            <TouchableOpacity
-              activeOpacity={ 0.8 }
-              style={ style.visibilityBtn }
-              onPress={ this.managePasswordVisibility }
-            >
-              <Image
-                source={( this.state.hidePassword ) ? hide : show }
-                style={ style.btnImage }
-              />
-            </TouchableOpacity>
-            </View>
-            </View>
-          </View>
-          <View style={ style.textBoxBtnHolder }>
-            <View>
-            {showBarMatchPass(this.state.messageMatchPass, this.state.password, this.state.confirmPassword)}
-            <View style={style.inputPass}>
-              <TextInput
-                label="ConfirmPassword"
-                onChange={ this.validateConfirmPass }
-                onChangeText={ this.setConfirmPassword }
-                onFocus={() => this.showFormatMessage('confirmpass')}
-                onEndEditing={() => this.hideFormatMessage('confirmpass')}
-                value={ this.state.confirmPassword }
-                placeholder="Confirmar Contraseña"
-                placeholderTextColor={COLORS.gray}
-                style={ style.textBoxPass }
-                secureTextEntry={ this.state.hideConfirmPassword }
-              />
-              <TouchableOpacity
-                activeOpacity={ 0.8 }
-                style={ style.visibilityBtn }
-                onPress={ this.manageConfirmPasswordVisibility }
-              >
-                <Image
-                  source={( this.state.hideConfirmPassword ) ? hide : show }
-                  style={ style.btnImage }
-                />
-              </TouchableOpacity>
-            </View>
-            </View>
-          </View>
-          <LinearGradient
-            colors={ GRADIENTYELLOW }
-            start={{x: 0.0, y: 1.0}} 
-            end={{x: 1.0, y: 1.0}}
-            style={{borderRadius: 25, marginTop: 15}}
-          >
-            <Button
-              title='CREAR CUENTA'
-              testID='submitSignUp'
-              onPress={ this.handleSignUp }
-              value={this.state.email}
-              buttonStyle={ style.submit }
-              titleStyle={ style.textRegular14WhiteBold }
-              disabledTitleStyle={ style.textRegular14WhiteBold}
-              disabledStyle={ style.submitDisabled }
-              disabled={ !validateDataSignUp(this.state.password, this.state.confirmPassword, this.state.email, this.state.name)}
-              loading = {this.state.loading}
-            />
-          </LinearGradient>
+      <View>
+        <TextField
+          label='Nombre de usuario'
+          value={ this.state.name }
+          onChangeText={ this.setName }
+          onFocus={()=>{this.setState({errorName: undefined})}}
+          baseColor={COLORS.gray}
+          tintColor={COLORS.blueMedium}
+          textColor= {COLORS.grayDark}
+          labelFontSize={12}
+          lineWidth={1}
+          inputContainerPadding={6}
+          error={this.state.errorName}
+          errorColor={COLORS.redMedium}
+        />
+        <TextField  
+          label='Email'
+          value={ this.state.email }    
+          onChangeText={ this.setEmail }
+          onFocus={()=>{this.setState({errorEmail: undefined})}}
+          baseColor={COLORS.gray}
+          tintColor={COLORS.blueMedium}
+          textColor= {COLORS.grayDark}
+          titleFontSize={10}
+          labelFontSize={12}
+          labelHeight={20}
+          lineWidth={1}
+          inputContainerPadding={6}
+          error={this.state.errorEmail}
+          errorColor={COLORS.redMedium}
+        />
+        <View>
+          <PasswordInputText
+            title='Minimo 8 Caracteres, 1 Número, 1 Mayuscula y Minúscula, 1 Caracter Especial'
+            label='Contraseña'
+            value={ this.state.password }
+            onChangeText={ this.setPassword }
+            onFocus={()=>{this.setState({errorPass: undefined})}}
+            baseColor={COLORS.gray}
+            tintColor={COLORS.blueMedium}
+            textColor= {COLORS.grayDark}
+            titleFontSize={8.5}
+            labelHeight={25}
+            labelFontSize={12}
+            lineWidth={1}
+            inputContainerPadding={7}
+            iconColor= {COLORS.gray}
+            iconSize={20}
+            error={this.state.errorPass}
+            errorColor={COLORS.redMedium}
+          />
         </View>
-        
+        <View>
+          <PasswordInputText
+            label='Confirmar Contraseña'
+            value={ this.state.confirmPassword }
+            onChangeText={ this.setConfirmPassword }
+            onFocus={()=>{this.setState({errorConfirmPass: undefined})}}
+            baseColor={COLORS.gray}
+            textColor= {COLORS.grayDark}
+            titleFontSize={10}
+            tintColor={COLORS.blueMedium}
+            iconColor= {COLORS.gray}
+            iconSize={20}
+            inputContainerPadding={7}
+            lineWidth={1}
+            labelHeight={25}
+            labelFontSize={12}
+            error={this.state.errorConfirmPass}
+            errorColor={COLORS.redMedium}
+          />
+        </View>
+
+        <View style={style.containerButtonSignTwo}>
+          <Button
+            title='Crear Cuenta'
+            testID='submitSignUp'
+            onPress={ this.handleSignUp }
+            value={this.state.email}
+            buttonStyle={ style.buttonSignTwo }
+            titleStyle={ style.textRegular16White }
+            loading = {this.state.loading}
+            ViewComponent={LinearGradient}
+            linearGradientProps={COLORGY}
+          />
+        </View>
       </View>
     )
   }

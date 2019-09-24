@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { validateEmail, validatePass, validateConfirmPass} from '../utils/validations';
-import style from '../components/Authentication/SignUp/style';
+
 import stylee from '../components/TaxConfiguration/Configure/style'
 
 export const showBarPassFormat = (messagePassFormat, password) => {

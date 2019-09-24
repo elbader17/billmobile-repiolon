@@ -5,7 +5,7 @@ import { Button } from "react-native-elements";
 import Signup from './SignUp';
 import Signin from './SignIn';
 import style from './style';
-import { GRADIANTBLUE } from '../../constants/colors';
+import { GRADIANTBLUE, GRADIENTYELLOW } from '../../constants/colors';
 
 class Authentication extends React.Component {
 
@@ -34,43 +34,54 @@ class Authentication extends React.Component {
 
   render() {
     const logo = require('../../images/logoBill.png')
-    const buttonOn = [style.button,style.textRegular14BlueBold];
-    const buttonOff = [style.buttonDisabled,style.textRegular14Gray];
     return(
       <ScrollView>
           <View style={style.container}>
-            <View style={ style.containerHeader }>
-              <Image source={ logo } style={ style.imageHeader } />
-              <LinearGradient
-                colors={ GRADIANTBLUE }
-                start={{x: 0.0, y: 1.0}} 
-                end={{x: 1.0, y: 1.0}}
-                style={style.gradientStyle}
-              >
-                <View style={style.textCenter}>
-                  <Text style={style.textRegular16White}>
-                    "Tu contador online"
-                  </Text>
-                </View>
-              </LinearGradient>
+            <View style={ style.containerBody }>
+              
+              <View style={style.containerHeader}>
+                <Image source={ logo } style={ style.imageHeader } />
+                
+                  <View style={style.textSubLogo}>
+                    <Text style={style.textMedium16Blue}>
+                      "Tu contador online"
+                    </Text>
+                  </View>
+                
+              </View>
+            
+              <View style={style.inLineSpaceAround}>
+                <Button
+                  title='Registrarse'
+                  testID='register'
+                  onPress={() => this.setState({selectedSignUp: true})}
+                  buttonStyle={ style.buttonSign }
+                  titleStyle={ style.textRegular14White }
+                  ViewComponent={LinearGradient}
+                  linearGradientProps={{
+                    colors: this.state.selectedSignUp ? GRADIENTYELLOW : GRADIANTBLUE,
+                    start: {x: 0, y: 1}, end: {x: 1, y: 0.9}
+                  }}
+                />
+                <Button
+                  title='Iniciar Sesión'
+                  testID='signin'
+                  onPress={() => this.setState({selectedSignUp: false})}
+                  buttonStyle={ style.buttonSign }
+                  titleStyle={ style.textRegular14White }
+                  ViewComponent={LinearGradient}
+                  linearGradientProps={{
+                    colors: this.state.selectedSignUp ? GRADIANTBLUE : GRADIENTYELLOW,
+                    start: {x: 0, y: 1}, end: {x: 1, y: 0.9}
+                  }}
+                />
+                
+              </View>
+              <View style={style.containerInputs}>
+                {this.renderSignUpSignIn()} 
+              </View>
             </View>
-            <View style={style.inLine}>
-              <Button
-                title='Registrarse'
-                testID='register'
-                onPress={() => this.setState({selectedSignUp: true})}
-                buttonStyle={ this.state.selectedSignUp ? buttonOn[0] : buttonOff[0] }
-                titleStyle={ this.state.selectedSignUp ? buttonOn[1] : buttonOff[1] }
-              />
-              <Button
-                title='Iniciar Sesión'
-                testID='signin'
-                onPress={() => this.setState({selectedSignUp: false})}
-                buttonStyle={ this.state.selectedSignUp ? buttonOff[0] : buttonOn[0] }
-                titleStyle={ this.state.selectedSignUp ? buttonOff[1] : buttonOn[1] }
-              />
-            </View>
-            {this.renderSignUpSignIn()} 
+            
             <View style={style.containerFooter}>
               <LinearGradient
                 colors={ GRADIANTBLUE }

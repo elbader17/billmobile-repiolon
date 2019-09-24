@@ -1,6 +1,4 @@
 import { Auth } from 'aws-amplify';
-import { showMessage } from "react-native-flash-message";
-import { messageErrorRegister } from '../../utils/messagesNotifications';
 import { getFiscalIdentity } from '../user_service/actions';
 import {
   SET_JWT_TOKEN,
@@ -57,10 +55,13 @@ const signUp = (password, email, attributes) => {
       .then((data) => {
         if (data.userConfirmed)
           return dispatch(userSignedUp(email, password));
-        else
+        else {
           return data.userConfirmed;
+        }
       })
-      .catch(err => showMessage(messageErrorRegister));
+      .catch((err) => {
+        return err;
+      });
   };
 };
 
