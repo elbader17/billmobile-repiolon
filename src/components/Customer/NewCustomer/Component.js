@@ -5,10 +5,9 @@ import { TextField } from 'react-native-material-textfield';
 import { Button } from "react-native-elements";
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/AntDesign';
+import { COLORS, COLORGB2, GRADIANTBLUE2 } from '../../../constants/colors';
 import { CONDITION_IVA } from '../../../constants/fiscal_identity';
-import { GRADIANTBLUE2 } from '../../../constants/colors';
 import { validateCuit } from '../../../utils/identity';
-import { COLORS } from '../../../constants/colors';
 import style from '../style';
 
 class NewCustomer extends React.Component {
@@ -128,21 +127,16 @@ class NewCustomer extends React.Component {
             </ScrollView>
           </View>
 
-          <View style={style.containerFooter}>
-            <LinearGradient 
-              colors={GRADIANTBLUE2}
-              style={style.button}  
-              start={{x: 0, y: 1}} 
-              end={{x: 1, y: 0.9}}
-            >
-              <Button
-                onPress={this.saveCustomer}
-                title='Guardar'
-                buttonStyle={ style.buttonSave }
-                titleStyle={ style.textRegular16White }
-                loading={this.state.loading}
-              />
-            </LinearGradient>
+          <View style={[style.containerFooter, {alignItems: 'center'}]}>
+            <Button
+              title='Guardar'
+              onPress={this.saveCustomer}
+              buttonStyle={ style.buttonSave }
+              titleStyle={ style.textRegular16White }
+              loading={this.state.loading}
+              ViewComponent={LinearGradient}
+              linearGradientProps={COLORGB2}
+            /> 
           </View>
       
         </View>

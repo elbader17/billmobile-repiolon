@@ -1,13 +1,16 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator} from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import SearchInput, { createFilter } from 'react-native-search-filter';
 import { Button } from "react-native-elements";
 import { withNavigation } from 'react-navigation';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/AntDesign';
-import { GRADIANTBLUE, GRADIANTBLUE2, GRADIENTYELLOW } from '../../../constants/colors';
+import { GRADIANTBLUE, GRADIANTBLUE2, COLORS, COLORGB, COLORGB2 } from '../../../constants/colors';
 import { orderByName } from '../../../utils/functions';
 import style from '../style';
+
+const KEYS_TO_FILTERS = ['attributes.name', 'attributes.price'];
 
 class ItemList extends React.Component {
   constructor(props){
@@ -22,7 +25,14 @@ class ItemList extends React.Component {
 
   static navigationOptions = ({navigation}) => {
     return {
-      title: 'Productos y Servicios',
+      headerTitle: (
+        <SearchInput 
+          onChangeText={(term) => { navigation.setParams({text: term}) }} 
+          placeholder="Buscar items"
+          placeholderTextColor={COLORS.grayLight}
+          style={style.search}
+        />
+      ),
       headerBackground: (
         <LinearGradient
           colors={ GRADIANTBLUE2 }
@@ -33,9 +43,14 @@ class ItemList extends React.Component {
       ),
       headerTitleStyle: style.headerText,
       headerTintColor: 'white',
-      headerLeft: <TouchableOpacity onPress={()=> navigation.navigate('Home')}>
-                    <Icon name="left" size={20} color="white" style={{marginLeft:20}}/>
-                  </TouchableOpacity> 
+      headerLeft: ( 
+        <TouchableOpacity onPress={()=> navigation.navigate('Home')}>
+          <Icon name="left" size={20} color="white" style={{marginLeft:20}}/>
+        </TouchableOpacity>
+      ),
+      headerRight: (
+        <Icon name="search1" size={20} color={COLORS.grayLight} style={{marginRight:35}}/>
+      )
     }  
   };
 
@@ -57,8 +72,8 @@ class ItemList extends React.Component {
   renderLoading = () => {
     return (
       <View style={style.center}>
-        <ActivityIndicator size="large" color="gray" style={{paddingBottom: 15}}/>
-        <Text style={style.textRegular16GrayDark} >Cargando</Text>
+        <ActivityIndicator size="large" color={COLORS.blueMedium} style={{paddingBottom: 15}}/>
+        <Text style={style.textRegular16Blue} >Cargando</Text>
       </View>
     );
   }
@@ -66,7 +81,10 @@ class ItemList extends React.Component {
   renderItems = () => {
     const category = this.state.isProduct ? 'product' : 'service';
     const items = this.props.items.slice().sort(orderByName);
-    return items
+    const filteredItems = items.filter(
+      createFilter(this.props.navigation.getParam('text', ''), KEYS_TO_FILTERS)
+    );
+    return filteredItems
       .filter(item => item.attributes.category === category)
       .map((item) => {
         return (
@@ -80,12 +98,20 @@ class ItemList extends React.Component {
                   $ {item.attributes.price}
                 </Text>
               </View>
-              <Button
-                title='Editar'
-                onPress={() => this.navigateToEditItem(item) }
-                buttonStyle={ style.buttonEditBlue }
-                titleStyle={ style.textButtonEdit }
-            />
+              <View style={style.inLine}>
+                <Button
+                  title='Editar'
+                  onPress={() => this.navigateToEditItem(item) }
+                  buttonStyle={ style.buttonEditBlue }
+                  titleStyle={ style.textButtonEdit }
+                />
+                <Button
+                  icon={ <Icon name="delete" size={20} color={COLORS.blueMedium}/>}
+                  //onPress={() => this.navigateToEditCustomer(customer) }
+                  buttonStyle={ style.buttonDelete }
+                  titleStyle={ style.textDelete }
+                />
+              </View>
             </View>
           </View>
         );
@@ -95,35 +121,22 @@ class ItemList extends React.Component {
   renderSwtichButtons() {
     return (
       <View style={[style.boxSelectButton, style.inLineSpaceAround]}>
-        
-        <TouchableOpacity 
-          onPress={() => this.setState({isProduct: true}) }>
-          <LinearGradient 
-            colors={this.state.isProduct ? GRADIANTBLUE : GRADIANTBLUE2}
-            style={style.buttonSelect}  
-            start={{x: 0, y: 1}} 
-            end={{x: 1, y: 0.9}}
-          >
-            <Text style={style.textRegular16White}>
-              Productos
-            </Text>     
-          </LinearGradient>
-        </TouchableOpacity>
-
-        <TouchableOpacity 
-          onPress={() => this.setState({isProduct: false}) }>
-          <LinearGradient 
-            colors={this.state.isProduct ? GRADIANTBLUE2 : GRADIANTBLUE }
-            style={style.buttonSelect}  
-            start={{x: 0, y: 1}} 
-            end={{x: 1, y: 0.9}}
-          >
-            <Text style={style.textRegular16White}>
-              Servicios
-            </Text>     
-          </LinearGradient>
-        </TouchableOpacity>
-
+        <Button
+          title='Productos'
+          onPress={() => this.setState({isProduct: true}) }
+          buttonStyle={ style.buttonSelect }
+          titleStyle={ style.textRegular16White }
+          ViewComponent={LinearGradient}
+          linearGradientProps={this.state.isProduct ? COLORGB : COLORGB2}
+        />
+        <Button
+          title='Servicios'
+          onPress={() => this.setState({isProduct: false}) }
+          buttonStyle={ style.buttonSelect }
+          titleStyle={ style.textRegular16White }
+          ViewComponent={LinearGradient}
+          linearGradientProps={this.state.isProduct ? COLORGB2 : COLORGB}
+        />
       </View>
     );
   }
@@ -144,33 +157,23 @@ class ItemList extends React.Component {
           
           <View style={style.containerFooter}>
             <View style={style.inLineSpaceAround}>
-              <TouchableOpacity 
-                onPress={() => this.navigateToNewItem(this.state.isProduct) }>
-                <LinearGradient 
-                  colors={GRADIANTBLUE2}
-                  style={style.buttonNew}  
-                  start={{x: 0, y: 1}} 
-                  end={{x: 1, y: 0.9}}
-                >
-                  <Text style={style.textRegular16White}>
-                    <Icon name="plus" size={18} color="white"/> Agregar {this.state.isProduct ? 'Producto' : 'Servicio'}
-                  </Text>     
-                </LinearGradient>
-              </TouchableOpacity>
-
-              <TouchableOpacity 
-                onPress={ this.navigateToHome }>
-                <LinearGradient 
-                  colors={GRADIANTBLUE2}
-                  style={style.buttonReady}  
-                  start={{x: 0, y: 1}} 
-                  end={{x: 1, y: 0.9}}
-                >
-                  <Text>
-                    <Icon name="check" size={25} color="white"/>
-                  </Text>     
-                </LinearGradient>
-              </TouchableOpacity>
+              <Button
+                title=' Añadir Nuevo'
+                onPress={() => this.navigateToNewItem(this.state.isProduct) }
+                icon={<Icon name="plus" size={18} color="white"/>}
+                buttonStyle={ style.buttonNew }
+                titleStyle={ style.textRegular16White }
+                ViewComponent={LinearGradient}
+                linearGradientProps={COLORGB2}
+              />
+              <Button
+                onPress={ this.navigateToHome }
+                icon={<Icon name="check" size={25} color="white"/>}
+                buttonStyle={ style.buttonReady }
+                titleStyle={ style.textRegular16White }
+                ViewComponent={LinearGradient}
+                linearGradientProps={COLORGB2}
+              /> 
             </View>
           </View>
 

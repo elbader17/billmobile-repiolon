@@ -4,7 +4,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { Button } from "react-native-elements";
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/AntDesign';
-import { GRADIANTBLUE2, GRADIANTBLUE } from '../../../constants/colors';
+import { GRADIANTBLUE2, COLORGB, COLORGB2 } from '../../../constants/colors';
 import { validateAddItem } from '../../../utils/validations';
 import AddItem from './AddItem';
 import style from '../style';
@@ -108,33 +108,22 @@ class NewItem extends React.Component {
 
           <View style={style.containerBody}>
             <View style={[style.boxSelectButton, style.inLineSpaceAround]}>
-              <TouchableOpacity 
-                onPress={() => this.setState({isProduct: true}) }>
-                <LinearGradient 
-                  colors={this.state.isProduct ? GRADIANTBLUE : GRADIANTBLUE2}
-                  style={style.buttonSelect}  
-                  start={{x: 0, y: 1}} 
-                  end={{x: 1, y: 0.9}}
-                >
-                  <Text style={style.textRegular16White}>
-                    Producto
-                  </Text>     
-                </LinearGradient>
-              </TouchableOpacity>
-
-              <TouchableOpacity 
-                onPress={() => this.setState({isProduct: false}) }>
-                <LinearGradient 
-                  colors={this.state.isProduct ? GRADIANTBLUE2 : GRADIANTBLUE }
-                  style={style.buttonSelect}  
-                  start={{x: 0, y: 1}} 
-                  end={{x: 1, y: 0.9}}
-                >
-                  <Text style={style.textRegular16White}>
-                    Servicio
-                  </Text>     
-                </LinearGradient>
-              </TouchableOpacity>
+              <Button
+                title='Productos'
+                onPress={() => this.setState({isProduct: true}) }
+                buttonStyle={ style.buttonSelect }
+                titleStyle={ style.textRegular16White }
+                ViewComponent={LinearGradient}
+                linearGradientProps={this.state.isProduct ? COLORGB : COLORGB2}
+              />
+              <Button
+                title='Servicios'
+                onPress={() => this.setState({isProduct: false}) }
+                buttonStyle={ style.buttonSelect }
+                titleStyle={ style.textRegular16White }
+                ViewComponent={LinearGradient}
+                linearGradientProps={this.state.isProduct ? COLORGB2 : COLORGB}
+              />
             </View>
 
             <View style={style.boxInput}>
@@ -147,22 +136,17 @@ class NewItem extends React.Component {
               />
             </View>
           </View> 
-          
-          <View style={style.containerFooter}>
-            <LinearGradient 
-              colors={ GRADIANTBLUE2 }
-              style={style.button}  
-              start={{x: 0, y: 1}} 
-              end={{x: 1, y: 0.9}}
-            >
-              <Button
-                title= 'Guardar'
-                onPress={ this.saveItem }
-                buttonStyle={style.buttonSave}
-                titleStyle={ style.textRegular16White }
-                loading = {this.state.loading}
-              />
-            </LinearGradient>
+
+          <View style={[style.containerFooter, {alignItems: 'center'}]}>
+            <Button
+              title='Guardar'
+              onPress={ this.saveItem }
+              buttonStyle={ style.buttonSave }
+              titleStyle={ style.textRegular16White }
+              loading={this.state.loading}
+              ViewComponent={LinearGradient}
+              linearGradientProps={COLORGB2}
+            /> 
           </View> 
 
         </View>

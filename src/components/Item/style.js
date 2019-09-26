@@ -6,8 +6,7 @@ import { METRICS } from '../../constants/metrics';
 
 const styles = StyleSheet.create({
   container: {
-    height: hp('100%') - METRICS.heightHeader,
-    paddingHorizontal: 10
+    height: hp('100%') - METRICS.heightHeader
   },
   containerBody: {
     flex: 0.87
@@ -19,32 +18,31 @@ const styles = StyleSheet.create({
   boxItems: {
     flex: 1,
     backgroundColor: COLORS.white,
-    borderWidth: 0,
-    borderColor: COLORS.blueMedium,
-    borderRadius: 5,
-    paddingHorizontal: 2,
-    paddingVertical: 5,
-    marginHorizontal: 0,
-    marginTop: 20,
-    marginBottom: 5,
-    elevation: 3
+    marginBottom: 3,
+    marginTop: 10,
+    borderColor: COLORS.grayLight,
+    borderBottomWidth: 1,
+    borderTopWidth: 1
   },
   boxInfoItems: {
-    borderBottomWidth: 0.5,
-    borderRadius: 10,
-    paddingHorizontal: 10,
-    paddingVertical: 3,
-    marginVertical: 1.5,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
     borderColor: COLORS.grayLight,
+    borderBottomWidth: 1
   },
   boxInput: {
     backgroundColor: 'transparent',
-    marginHorizontal: 10
+    marginHorizontal: 20
   },
   boxSelectButton: {
     marginTop: 17,
     marginBottom: 5,
     marginHorizontal: 5
+  },
+  center: {
+    marginTop: 40,
+    justifyContent: 'center', 
+    alignItems: 'center'
   },
   buttonReady: {
     width: wp('14%'),
@@ -68,22 +66,46 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   buttonSave: {
+    width: wp('90%'),
     height: hp('8%'),
     backgroundColor: 'transparent',
-    borderRadius: 25,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    borderRadius: 25,
   },
   buttonEditBlue:{
-    backgroundColor: COLORS.blueMedium,
+    backgroundColor: 'transparent',
     width: wp('15%'),
     height: hp('5%'),
-    borderRadius: 20
+    borderWidth: 1,
+    borderColor: COLORS.blueMedium,
+    borderRadius: 10
+  },
+  buttonDelete:{
+    backgroundColor: 'transparent',
+    height: hp('5%')
   },
   textButtonEdit: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size12,
-    color: COLORS.white,
+    color: COLORS.blueMedium,
+  },
+  textDelete: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size12,
+    color: COLORS.redLight,
+  },
+  search: {
+    width: wp('75%'),
+    height: hp('5%'),
+    marginTop: 5,
+    marginBottom: 2,
+    paddingBottom: 7,
+    fontFamily: FONTS.latoLight,
+    fontSize: FONTS.size16,
+    borderBottomWidth: 0.5,
+    borderColor: COLORS.white,
+    color: COLORS.white
   },
   buttonSelect: {
     width: wp('40%'),
@@ -131,6 +153,11 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size16,
     color: COLORS.white
+  },
+  textRegular16Blue: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size16,
+    color: COLORS.blueMedium
   },
   headerText: {
     fontFamily: FONTS.latoRegular,

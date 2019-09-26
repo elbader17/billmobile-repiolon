@@ -7,7 +7,6 @@ import { FONTS } from '../../constants/fonts';
 const styles = StyleSheet.create({
   container: {
     height: hp('100%') - METRICS.heightHeader,
-    paddingHorizontal: 10
   },
   containerBody: {
     flex: 0.87
@@ -24,23 +23,16 @@ const styles = StyleSheet.create({
   boxCustomer: {
     flex: 1,
     backgroundColor: COLORS.white,
-    borderWidth: 0,
-    borderColor: COLORS.blueMedium,
-    borderRadius: 5,
-    paddingHorizontal: 2,
-    paddingVertical: 5,
-    marginHorizontal: 0,
-    marginTop: 20,
-    marginBottom: 5,
-    elevation: 3
+    marginBottom: 3,
+    paddingTop: 7,
+    borderColor: COLORS.grayLight,
+    borderBottomWidth: 1
   },
   boxInfoCustomer: {
-    borderBottomWidth: 0.5,
-    borderRadius: 10,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    marginVertical: 1,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
     borderColor: COLORS.grayLight,
+    borderBottomWidth: 1,
   },
   inputPicker: {
     height: 35,
@@ -53,6 +45,18 @@ const styles = StyleSheet.create({
     color: 'rgb(153, 153, 153)',
     marginVertical: 0,
     marginLeft: -8
+  },
+  search: {
+    width: wp('75%'),
+    height: hp('5%'),
+    marginTop: 5,
+    marginBottom: 2,
+    paddingBottom: 7,
+    fontFamily: FONTS.latoLight,
+    fontSize: FONTS.size16,
+    borderBottomWidth: 0.5,
+    borderColor: COLORS.white,
+    color: COLORS.white
   },
   inLine:{
     flexDirection: "row",
@@ -69,9 +73,14 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   center: {
-    marginTop: 25,
+    marginTop: 40,
     justifyContent: 'center', 
     alignItems: 'center'
+  },
+  textRegular16Blue: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size16,
+    color: COLORS.blueMedium
   },
   textRegular16White: {
     fontFamily: FONTS.latoRegular,
@@ -142,15 +151,26 @@ const styles = StyleSheet.create({
     opacity: 0.5
   },
   buttonEditBlue:{
-    backgroundColor: COLORS.blueMedium,
+    backgroundColor: 'transparent',
     width: wp('15%'),
     height: hp('5%'),
-    borderRadius: 20
+    borderWidth: 1,
+    borderColor: COLORS.blueMedium,
+    borderRadius: 10
+  },
+  buttonDelete:{
+    backgroundColor: 'transparent',
+    height: hp('5%')
   },
   textButtonEdit: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size12,
-    color: COLORS.white,
+    color: COLORS.blueMedium,
+  },
+  textDelete: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size12,
+    color: COLORS.redLight,
   },
   headerText: {
     fontFamily: FONTS.latoRegular,

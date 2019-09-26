@@ -1,10 +1,11 @@
 import React from 'react';
-import { View, Text, TextInput, ScrollView, KeyboardAvoidingView } from 'react-native';
+import { View } from 'react-native';
 import { Button } from "react-native-elements";
-import style from './style';
+import LinearGradient from 'react-native-linear-gradient';
+import { TextField } from 'react-native-material-textfield';
+import { GRADIANTBLUE2, COLORS, COLORGB2 } from '../../../constants/colors';
 import  { validateCuit } from '../../../utils/identity';
-import { METRICS } from '../../../constants/metrics';
-import { renderMessageName, renderMessageCuit } from '../../../utils/showMessage';
+import style from '../style';
 
 class TaxConfiguration extends React.Component{
 
@@ -13,11 +14,25 @@ class TaxConfiguration extends React.Component{
     this.state = {
       name: this.props.name,
       cuit: this.props.cuit,
-      onInputName: false,
-      onInputCuit: false,
       loading: false,
     };
   }
+
+  static navigationOptions = ({navigation}) => {
+    return {
+      title: 'Configuración de CUIT',
+      headerBackground: (
+        <LinearGradient
+          colors={ GRADIANTBLUE2 }
+          style={{ flex: 1 }}
+          start={{x: 0, y: 0}}
+          end={{x: 1, y: 0}}
+        />
+      ),
+      headerTitleStyle: style.headerText,
+      headerTintColor: 'white'
+    }  
+  };
 
   handleConfigFiscal = () => {
     const { name, cuit } = this.state;
@@ -29,66 +44,63 @@ class TaxConfiguration extends React.Component{
     })
   }
 
-  validateData = () => {
-    return validateCuit(this.state.cuit);
-  }
+  validateData = () => validateCuit(this.state.cuit) && this.state.name != '';
   setName = (value) => this.setState({ name: value})
   setCuit = (value) => this.setState({ cuit: value })
   setLoading = (bool) => this.setState({ loading: bool })
 
   render() {
     return(
-    <KeyboardAvoidingView
-      behavior={'padding'}
-      style={{flex: 1}}
-      keyboardVerticalOffset={METRICS.heightHeader}>
-    <ScrollView>
       <View style={style.container}>
-        <View style={ style.textBoxBtnHolder }>
-          <View style={style.boxName}>
-            <Text style={[style.textRegular16GrayDark,style.paddingVertical5]}>
-              NOMBRE DE LA EMPRESA
-            </Text>
-            <TextInput style={ style.textRegular14DarkGray }
-              onChangeText={this.setName}
-              onFocus = {() => this.setState({onInputName: true})}
-              onEndEditing={() => this.setState({onInputName: false})}
-              style={ style.textBox }
-              value={this.state.name}
+        <View style={style.containerInput}>
+          
+          <TextField
+            title='Nombre de Fantasía o tu Nombre y Apellido.'
+            label='Nombre de la empresa'
+            value={this.state.name}
+            onChangeText={this.setName}
+            tintColor={COLORS.blueMedium}
+            textColor= {COLORS.grayDark}
+            baseColor={COLORS.gray}
+            lineWidth={1}
+            labelFontSize={15}
+            labelPadding={6}
+            error={this.state.error}
+            errorColor={'#ff6666'}
+          />
+
+          <TextField
+            title='Para acceder a tu información y configurar tu cuenta.'
+            label='Ingresa tu CUIT'
+            value={this.state.cuit}
+            onChangeText={this.setCuit}
+            keyboardType='numeric'
+            tintColor={COLORS.blueMedium}
+            textColor= {COLORS.grayDark}
+            baseColor={COLORS.gray}
+            lineWidth={1}
+            labelFontSize={15}
+            labelPadding={6}
+            error={this.state.error}
+            errorColor={'#ff6666'}
+          />
+
+          <View style={style.center}>
+            <Button
+              title='Listo'
+              testID='ready'
+              onPress={ this.handleConfigFiscal }
+              buttonStyle={ style.button }
+              titleStyle={ style.textRegular14white }
+              disabled={!this.validateData() }
+              loading={this.state.loading}
+              ViewComponent={LinearGradient}
+              linearGradientProps={COLORGB2}
             />
-            {renderMessageName(this.state.onInputName)}
           </View>
-          <View style={style.lineGray}></View>
-          <View style={style.boxCuit}>
-            <Text style={[style.textRegular16GrayDark,style.paddingVertical5]}>
-              INGRESA TU CUIT
-            </Text>
-            <TextInput style={ style.textRegular14DarkGray }
-              onChangeText={this.setCuit}
-              onFocus={() => this.setState({onInputCuit: true})}
-              onEndEditing={() => this.setState({onInputCuit: false})}
-              style={ style.textBox }
-              value={this.state.cuit}
-              keyboardType='numeric'
-            />
-            {renderMessageCuit(this.state.onInputCuit)}
-          </View>
-          <View style={style.lineGray}></View>
+
         </View>
       </View>
-      </ScrollView>
-      <Button
-        title="LISTO"
-        testID='ready'
-        onPress={ this.handleConfigFiscal }
-        buttonStyle={ style.submitReady }
-        titleStyle={ style.textRegular14WhiteBold }
-        disabledTitleStyle={ style.textRegular14WhiteBold }
-        disabledStyle={ style.submitDisabled }
-        disabled={!this.validateData() }
-        loading={this.state.loading}
-      />
-      </KeyboardAvoidingView>
     )
   }
 }

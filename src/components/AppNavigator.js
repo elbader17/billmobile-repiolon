@@ -5,7 +5,6 @@ import {
 } from 'react-navigation';
 import style from '../utils/style';
 import { COLORS } from '../constants/colors';
-
 import Initializing from './Initializing/Component';
 import Intro from './Intro';
 import Authentication from './Authentication';
@@ -38,18 +37,8 @@ const LoginStack = createStackNavigator(
 );
 
 const TaxConfigurationStack = createStackNavigator({
-  InitialConfigure: {
-    screen: InitialCofiguration,
-    headerMode: 'none'
-  },
-  TaxConfigure: {
-    screen: TaxConfiguration,
-    navigationOptions: () => ({
-      title: 'CONFIGURACIÓN DE CUIT',
-      headerTitleStyle: style.textNavigation,
-      headerTintColor: COLORS.blue,
-    }),
-  },
+  InitialCofiguration,
+  TaxConfiguration,
 });
 
 const InvoiceStack = createStackNavigator({
@@ -94,7 +83,7 @@ const AppSwitchNavigator = createSwitchNavigator(
     Prueba
   },
   {
-    initialRouteName: 'Login',
+    initialRouteName: 'Initializing',
   }
 );
 

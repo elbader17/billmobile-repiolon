@@ -1,7 +1,9 @@
 import React from 'react';
 import { View, Text, Image} from 'react-native';
 import { Button } from "react-native-elements";
-import style from './style';
+import LinearGradient from 'react-native-linear-gradient';
+import { COLORGB2 } from '../../../constants/colors';
+import style from '../style';
 
 class InitialConfiguration extends React.Component{
 
@@ -14,7 +16,7 @@ class InitialConfiguration extends React.Component{
   };
 
   navigateTaxConfiguration = () => {
-    this.props.navigation.navigate('TaxConfigure');
+    this.props.navigation.navigate('TaxConfiguration');
   }
     
   render() {
@@ -22,33 +24,36 @@ class InitialConfiguration extends React.Component{
     return(
       <View style={style.container}>
         <Image source={ logo } style={style.image}/>
-        <View style={style.boxText}>
-          <Text style={style.textTitle}> 
+        <View style={style.containerBody}>
+          <Text style={style.textRegular18Blue}> 
             TU CELULAR SERÁ TU PUNTO DE VENTA
           </Text>
-          <Text style={style.textDescription}>
+          <Text style={style.textRegular14GrayDark}>
             Billmobil te permitirá emitir comprobantes electrónicos
             válidos, homologados por AFIP desde tu celular.{"\n"}{"\n"}
             Es necesario que nos proveas información, nosotros haremos
             de tu celular el punto de venta habilitado para facturar.
           </Text>
         </View>
-        <View style={style.boxButton}>
+        <View style={style.containerFooter}>
           <Button
-            title="CONFIGURAR MI CUIT"
+            title="Configurar mi CUIT"
             testID='buttonConfigure'
             onPress={ this.navigateTaxConfiguration }
-            buttonStyle={ style.submit }
-            titleStyle={ style.submitText }
-            disabledTitleStyle={ style.submitText }
-            disabledStyle={ style.submitDisabled }
+            buttonStyle={ style.button }
+            titleStyle={ style.textRegular14white }
+            disabledTitleStyle={ style.textRegular14Gray }
+            
+            ViewComponent={LinearGradient}
+            linearGradientProps={COLORGB2}
           />
           <Button
-            title="PROBAR APLICACIÓN"
-            buttonStyle={ style.submit }
+            title="Probar Aplicación"
+            buttonStyle={ style.button }
             titleStyle={ style.submitText }
-            disabledTitleStyle={ style.submitText }
-            disabledStyle={ style.submitDisabled }
+            disabledTitleStyle={ style.textRegular14Gray }
+            ViewComponent={LinearGradient}
+            linearGradientProps={COLORGB2}
             disabled
           />
         </View>

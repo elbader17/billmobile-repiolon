@@ -28,32 +28,3 @@ export const showBarMatchPass = (messageMatchPass, pass, confirmPass) => {
     )  
   }
 }
-
-export const renderMessageName = onInputName => {
-  if (onInputName) {
-    return(
-    <View>
-      <Icon 
-        name= 'md-arrow-dropup' size={25} color='#3687d1' style={stylee.positionIcon}/>
-      <Text style={[stylee.textRegular14White, stylee.message]}>
-        Nombre de fantasía de la empresa o tu nombre y apellido.
-      </Text>
-    </View>
-    )
-  }
-}
-
-export const renderMessageCuit = onInputCuit => {
-  if (onInputCuit) {
-    return(
-      <View>
-        <Icon 
-          name= 'md-arrow-dropup' size={25} color='#3687d1' style={stylee.positionIcon}/>
-        <Text style={[stylee.textRegular14White, stylee.message]}>
-          Con el CUIT podremos acceder a tu informacion y
-          configurar la cuenta por ti.
-        </Text>
-      </View>
-    )  
-  }
-}

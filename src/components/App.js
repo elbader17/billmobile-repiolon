@@ -9,14 +9,11 @@ import FlashMessage from "react-native-flash-message";
 import { PersistGate } from 'redux-persist/integration/react';
 import aws_exports from '../constants/aws-exports';
 import AppNavigator from './AppNavigator';
-import { getAuthToken, error } from '../utils/interceptors';
 import NavigationService from './NavigationService';
 
 Amplify.configure(aws_exports);
 
 axios.defaults.baseURL = API_HOST;
-//axios.interceptors.request.use(getAuthToken(store));
-//axios.interceptors.response.use(response => { console.log(response) }, err => {error(err)});
 
 class App extends React.Component {
   componentDidMount() {
