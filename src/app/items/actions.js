@@ -72,4 +72,12 @@ const updateItem = ({id, category, name, price}) => {
   };
 };
 
-export { createItem, updateItem, listItems };
+const deleteItem = (id) => {
+  return () => {
+    return fetch_api(`/v1/items/${id}`,'DELETE', false)
+      .then(() => console.log('OK'))
+      .catch((error) => console.log(error));
+  };
+};
+
+export { createItem, updateItem, listItems, deleteItem };

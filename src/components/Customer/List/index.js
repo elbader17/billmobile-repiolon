@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import CustomerList from './Component';
-import { listCustomers } from '../../../app/customers/action';
+import { listCustomers, deleteCustomer } from '../../../app/customers/action';
 
 const mapStateToProps = state => ({
   customers: state.customers.customers,
@@ -9,6 +9,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch) => {
   return {
     getCustomerList: () => (dispatch(listCustomers())),
+    deleteCustomer: (id) => (dispatch(deleteCustomer(id)))
   };
 };
 

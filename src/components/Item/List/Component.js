@@ -1,12 +1,13 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator} from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator, Alert} from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import SearchInput, { createFilter } from 'react-native-search-filter';
 import { Button } from "react-native-elements";
 import { withNavigation } from 'react-navigation';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/AntDesign';
-import { GRADIANTBLUE, GRADIANTBLUE2, COLORS, COLORGB, COLORGB2 } from '../../../constants/colors';
+import ListItems from './ListItems';
+import { GRADIANTBLUE2, COLORS, COLORGB, COLORGB2 } from '../../../constants/colors';
 import { orderByName } from '../../../utils/functions';
 import style from '../style';
 
@@ -15,11 +16,11 @@ const KEYS_TO_FILTERS = ['attributes.name', 'attributes.price'];
 class ItemList extends React.Component {
   constructor(props){
     super(props);
-    //this.props.getItemList();
     this.state = {
-      //items: this.props.items,
       isProduct: true,
-      loading: false
+      loading: false,
+      loadingDelete: false,
+      customerDelete: undefined
     };
   }
 
@@ -55,6 +56,7 @@ class ItemList extends React.Component {
   };
 
   componentWillMount() {
+    console.log(this.props.type);
     this.props.getItemList()
       .then(()=> {this.setState({loading: true})})
   }
@@ -67,6 +69,32 @@ class ItemList extends React.Component {
   }
   navigateToEditItem = (item) => {
     this.props.navigation.navigate('EditItem', { item });
+  }
+
+  actionItem = (item) => {
+    const isInvoice = this.props.type === 'invoice'
+    const title = isInvoice ? 'Añadir ' : 'Eliminar ';
+    Alert.alert(
+      title + item.attributes.name,'¿Está Seguro?',
+      [
+        {
+          text: 'Cancelar',
+          onPress: () => console.log('Cancel Delete Item'),
+          style: 'cancel',
+        },
+        {text: title, onPress: () => {
+          this.setState({loadingDelete: true, itemDelete: item.id})
+          const { actionItem } = this.props;
+          actionItem(item)
+            .then(() => {
+                this.props.getItemList()
+                  .then(()=> this.setState({loadingDelete: false}))
+            })
+        }},
+      ],
+      {cancelable: false},
+    );
+    
   }
 
   renderLoading = () => {
@@ -84,38 +112,17 @@ class ItemList extends React.Component {
     const filteredItems = items.filter(
       createFilter(this.props.navigation.getParam('text', ''), KEYS_TO_FILTERS)
     );
-    return filteredItems
-      .filter(item => item.attributes.category === category)
-      .map((item) => {
-        return (
-          <View style={style.boxInfoItems} key={item.id}>
-            <View style={style.inLineSpaceBetween} >
-              <View>
-                <Text style={style.textRegular14GrayDark}>
-                  {item.attributes.name}
-                </Text>
-                <Text style={style.textRegular14Blue}>
-                  $ {item.attributes.price}
-                </Text>
-              </View>
-              <View style={style.inLine}>
-                <Button
-                  title='Editar'
-                  onPress={() => this.navigateToEditItem(item) }
-                  buttonStyle={ style.buttonEditBlue }
-                  titleStyle={ style.textButtonEdit }
-                />
-                <Button
-                  icon={ <Icon name="delete" size={20} color={COLORS.blueMedium}/>}
-                  //onPress={() => this.navigateToEditCustomer(customer) }
-                  buttonStyle={ style.buttonDelete }
-                  titleStyle={ style.textDelete }
-                />
-              </View>
-            </View>
-          </View>
-        );
-      });
+    return (
+      <ListItems
+        type={this.props.type}
+        items={filteredItems}
+        loadingDelete={this.state.loadingDelete}
+        itemDelete={this.state.itemDelete}
+        category={category}
+        navigateToEditItem={this.navigateToEditItem}
+        actionItem={this.actionItem}
+      />
+    );
   }
 
   renderSwtichButtons() {

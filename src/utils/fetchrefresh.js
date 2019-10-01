@@ -48,7 +48,10 @@ export function fetch_api(url, method, retry, data) {
             unauthenticatedCallback();
             reject({error: 'Error to RefreshToken'});
           }
-          else return response.json()
+          else {
+            if (response.status === 201) resolve();
+            else return response.json()
+          }
       })
         .then(res => resolve(res))
         .catch(err => reject(err))

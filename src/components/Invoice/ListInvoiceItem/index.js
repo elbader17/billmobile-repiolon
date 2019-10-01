@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import ListInvoiceItem from './Component';
+import ItemList from '../../Item/List/Component';
 import { listItems } from '../../../app/items/actions';
 import { createInvoiceItem } from '../../../app/invoice_items/actions';
 
@@ -10,19 +10,14 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch) => {
   return {
     getItemList: () => (dispatch(listItems())),
-    saveItemInvoice: (attributes) => dispatch(createInvoiceItem(attributes)),
-    saveItem: (attributes, navigation) => {
-      dispatch(updateItem(attributes))
-        .then(() => {
-          navigation.navigate('ListInvoiceItem');
-        });
-    },
+    actionItem: (item) => dispatch(createInvoiceItem(item.attributes)),
+    type: 'invoice'
   };
 };
 
 const component = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(ListInvoiceItem);
+)(ItemList);
 
 export default component;

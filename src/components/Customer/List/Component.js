@@ -1,13 +1,15 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator} from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator, Alert } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import SearchInput, { createFilter } from 'react-native-search-filter';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/AntDesign';
-import { Button} from "react-native-elements";
+import Icon1 from 'react-native-vector-icons/Feather';
+import { Button } from "react-native-elements";
 import { GRADIANTBLUE2, COLORS, COLORGB2 } from '../../../constants/colors';
 import { orderByName } from '../../../utils/functions';
 import style from '../style';
+import ListCustomers from './ListCustomers';
 
 const KEYS_TO_FILTERS = ['attributes.name', 'attributes.identification'];
 
@@ -15,7 +17,9 @@ class CustomerList extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      loading: false
+      loading: false,
+      loadingDelete: false,
+      itemDelete: undefined
     };
   }
   
@@ -55,6 +59,30 @@ class CustomerList extends React.Component {
      .then(()=> {this.setState({loading: true})})
   }
 
+  deleteCustomer = (customer) => {
+    Alert.alert(
+      'Eliminar '+customer.attributes.name,'¿Está Seguro?',
+      [
+        {
+          text: 'Cancelar',
+          onPress: () => console.log('Cancel Delete Customr'),
+          style: 'cancel',
+        },
+        {text: 'Eliminar', onPress: () => {
+          this.setState({loadingDelete: true, customerDelete: customer.id})
+          const { deleteCustomer } = this.props;
+          const id = customer.id;
+          deleteCustomer(id)
+            .then(() => {
+                this.props.getCustomerList()
+                  .then(()=> this.setState({loadingDelete: false}))
+            })
+        }},
+      ],
+      {cancelable: false},
+    );
+  }
+
   navigateToNewCustomer = () => this.props.navigation.navigate('NewCustomer');
   navigateToHome = () => this.props.navigation.navigate('Home');
   navigateToEditCustomer = (customer) => {
@@ -75,36 +103,15 @@ class CustomerList extends React.Component {
     const filteredCustomer = customers.filter(
       createFilter(this.props.navigation.getParam('text', ''), KEYS_TO_FILTERS)
     );
-    return filteredCustomer.map((customer) => {
-       return (
-        <View style={style.boxInfoCustomer}>
-        <View style={style.inLineSpaceBetween} key={customer.id}>
-          <View>
-            <Text style={style.textRegular14GrayDark}>
-              {customer.attributes.name} 
-            </Text>
-            <Text style={style.textLight14Blue}>
-              {customer.attributes.identification}
-            </Text>
-          </View>
-          <View style={style.inLine}>
-            <Button
-              title='Editar'
-              onPress={() => this.navigateToEditCustomer(customer) }
-              buttonStyle={ style.buttonEditBlue }
-              titleStyle={ style.textButtonEdit }
-            />
-            <Button
-              icon={ <Icon name="delete" size={20} color={COLORS.blueMedium}/>}
-              //onPress={() => this.navigateToEditCustomer(customer) }
-              buttonStyle={ style.buttonDelete }
-              titleStyle={ style.textDelete }
-            />
-          </View>
-        </View>
-        </View>
-       );
-    });
+    return (
+      <ListCustomers 
+        customers={filteredCustomer}
+        loadingDelete={this.state.loadingDelete}
+        customerDelete={this.state.customerDelete}
+        navigateToEditCustomer={this.navigateToEditCustomer}
+        deleteCustomer={this.deleteCustomer}
+      />
+    );
   }
 
   render() {

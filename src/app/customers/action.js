@@ -1,3 +1,4 @@
+import { fetch_api } from '../../utils/fetchrefresh';
 import axios from 'axios';
 import {
   CREATE_CUSTOMER,
@@ -86,4 +87,12 @@ const updateCustomer = ({ id, name, identification, category }) => {
   };
 };
 
-export { createCustomer, updateCustomer, listCustomers };
+const deleteCustomer = (id) => {
+  return () => {
+    return fetch_api(`/v1/fiscal_identities/${id}`,'DELETE', false)
+      .then(() => console.log('Customer Delete OK'))
+      .catch((error) => console.log(error));
+  };
+};
+
+export { createCustomer, updateCustomer, listCustomers, deleteCustomer };

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import ListItem from './Component';
-import { listItems } from '../../../app/items/actions';
+import { listItems, deleteItem } from '../../../app/items/actions';
 
 const mapStateToProps = state => ({
   items: state.items.items,
@@ -9,6 +9,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch) => {
   return {
     getItemList: () => (dispatch(listItems())),
+    actionItem: (item) => (dispatch(deleteItem(item.id))),
+    type: 'collection'
   };
 };
 

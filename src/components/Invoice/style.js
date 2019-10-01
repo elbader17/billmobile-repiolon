@@ -7,40 +7,88 @@ import { METRICS } from '../../constants/metrics';
 const styles = StyleSheet.create({
   container: {
     height: hp('100%'),
-    paddingTop: METRICS.heightHeader + 15,
-    paddingHorizontal: 20,
   },
   containerBody: {
     flex: 0.87
   }, 
   containerFooter: {
     flex: 0.13,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   containerReceptor: {
-    marginTop: 10,
-    marginBottom: 15
+    flex: 1,
+    marginTop: METRICS.heightHeader + 5,
+    marginHorizontal: 20
   },
   containerCustomers: {
     backgroundColor: COLORS.white,
     borderRadius: 5,
     paddingVertical: 10,
     paddingHorizontal: 15,
-    elevation: 4,
+    elevation: 2.5,
   },
   containerItemsInvoice: {
-    maxHeight: hp('30%'),
+    maxHeight: hp('32%'),
     backgroundColor: COLORS.white,
     borderRadius: 5,
-    elevation: 3,
-    marginTop: 10,
-    overflow: 'hidden'
+    marginTop: 12,
+    elevation: 2.5
   },
-  modalVoucher: {
-    flex: 1,
+  buttonAdd: {
+    //width: wp('100%'),
+    height: hp('8%'),
+    marginTop: 12,
+    backgroundColor: 'transparent',
+    borderRadius: 25,
+    elevation: 1.5,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  buttonAddDisabled: {
+    height: hp('8%'),
+    marginTop: 12,
+    backgroundColor: 'transparent',
+    borderRadius: 25,
+    elevation: 1.5,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0,0,0,0.6)'
+    opacity: 0.9
+  },
+  buttonContinue: {
+    width: wp('90%'),
+    height: hp('8%'),
+    backgroundColor: 'transparent',
+    borderRadius: 25,
+    elevation: 1.5,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  buttonContinueDisabled: {
+    width: wp('90%'),
+    height: hp('8%'),
+    backgroundColor: 'transparent',
+    borderRadius: 25,
+    elevation: 1.5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    opacity: 0.9
+  },
+  buttonCheck: {
+    backgroundColor: 'transparent',
+    borderColor: COLORS.blueMedium,
+    borderRadius: 7,
+    borderWidth: 1,
+    width: wp('14%'),
+    height: hp('6%'),
+  },
+  buttonCheckDisabled: {
+    backgroundColor: COLORS.white,
+    borderColor: COLORS.gray,
+    borderRadius: 7,
+    borderWidth: 1,
+    width: wp('14%'),
+    height: hp('6%')
   },
   boxVoucher: {
     width: '60%',
@@ -49,12 +97,78 @@ const styles = StyleSheet.create({
     width: '35%',
   },
   boxModal: {
-    width: wp('70%'),
+    width: wp('75%'),
     height: hp('40%'),
     backgroundColor: COLORS.white,
     borderRadius: 3,
     elevation: 20,
   },
+  modalVoucher: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0.6)'
+  },
+  headerModal: {
+    alignItems: 'center',
+    borderTopLeftRadius: 3,
+    borderTopRightRadius: 3,
+    backgroundColor: COLORS.blueMedium,
+    paddingVertical: 10
+  },
+  boxVoucherType: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  borderVoucher: {
+    borderWidth: 1,
+    borderColor: COLORS.blueMedium,
+    borderRadius: 5,
+    paddingVertical: 3,
+    paddingHorizontal: 10,
+    backgroundColor: 'transparent'
+  },
+  inputDNICustomer: {
+    width: wp('60%'),
+    height: hp('6%'),
+    borderWidth: 1,
+    borderRadius: 7,
+    borderColor: COLORS.gray,
+    marginBottom: 12,
+    paddingLeft: 10
+  },
+  inLineSpaceBetween: {
+    flexDirection: "row",
+    justifyContent: 'space-between',
+  },
+  textRegular16GrayLight: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size16,
+    color: COLORS.grayLight
+  },
+  textRegular16White: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size16,
+    color: COLORS.white
+  },
+  textRegular16BlueMedium: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size16,
+    color: COLORS.blueMedium
+  },
+
+
+
+
+
+
+
+
+
+
+
+
   styleScroll: {
     borderWidth: 1,
     borderColor: COLORS.grayLight,
@@ -82,39 +196,6 @@ const styles = StyleSheet.create({
     flex: 0.5, 
     alignItems: 'flex-end',
   },
-  boxVoucherType: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  headerModal: {
-    borderTopLeftRadius: 3,
-    borderTopRightRadius: 3,
-    backgroundColor: COLORS.blue,
-    paddingVertical: 15
-  },
-  gradientContinue: {
-    width: wp('90%'),
-    height: hp('8%'),
-    backgroundColor: 'transparent',
-    borderRadius: 25,
-    justifyContent: 'center',
-    alignItems: 'center',
-    elevation: 2
-  },
-  gradientAddItems: {
-    width: wp('90%'),
-    height: hp('7%'),
-    backgroundColor: 'transparent',
-    borderRadius: 25,
-    justifyContent: 'center',
-    alignItems: 'center',
-    elevation: 2
-  },
-  inLineSpaceBetween: {
-    flexDirection: "row",
-    justifyContent: 'space-between',
-  },
   borde: {
     borderWidth: 0.5,
     borderRadius: 4,
@@ -141,14 +222,6 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderRadius: 5,
     elevation: 4,
-  },
-  borderVoucher: {
-    borderWidth: 1,
-    borderColor: COLORS.blue,
-    borderRadius: 3,
-    paddingVertical: 3,
-    paddingHorizontal: 10,
-    backgroundColor: 'transparent'
   },
   buttonOn: {
     borderColor: COLORS.grayDark,
@@ -188,11 +261,6 @@ const styles = StyleSheet.create({
   textRegular14WhiteBold: {
     fontFamily: FONTS.latoSemiBold,
     fontSize: FONTS.size14,
-    color: COLORS.white,
-  },
-  textRegular16White: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size16,
     color: COLORS.white,
   },
   textRegular16Blue: {
@@ -367,16 +435,6 @@ const styles = StyleSheet.create({
     fontSize: FONTS.size14,
     color: COLORS.gray,
   },
-  buttonContinue: {
-    backgroundColor: COLORS.red,
-    borderRadius: 0,
-    height: hp('8%'),
-  },
-  buttonContinueDisabled: {
-    backgroundColor: COLORS.gray,
-    borderRadius: 0,
-    height: hp('8%'),
-  },
   buttonAddCustomer: {
     backgroundColor: 'transparent',
     borderRadius: 20,
@@ -408,40 +466,10 @@ const styles = StyleSheet.create({
     color: COLORS.grayDark,
     opacity: 0.7,
   },
-  inputDNICustomer: {
-    width: wp('60%'),
-    height: hp('6%'),
-    borderWidth: 1,
-    borderColor: COLORS.grayLight,
-    borderRadius: 5,
-    marginBottom: 10,
-    paddingLeft: 10
-  },
   buttonAddClient: {
     backgroundColor: COLORS.white,
     borderWidth: 1,
     borderColor: '#EE6123',
-  },
-  buttonContinue: {
-    height: hp('8%'),
-    backgroundColor: COLORS.red,
-    borderRadius: 0,
-  },
-  buttonCheck: {
-    backgroundColor: 'transparent',
-    borderColor: COLORS.blueMedium,
-    borderRadius: 30,
-    borderWidth: 1,
-    width: wp('14%'),
-    height: hp('6%'),
-  },
-  buttonCheckDisabled: {
-    backgroundColor: COLORS.white,
-    borderColor: COLORS.gray,
-    borderRadius: 30,
-    borderWidth: 1,
-    width: wp('14%'),
-    height: hp('6%')
   },
   buttonCheckCustomerDisabled: {
     backgroundColor: 'transparent',

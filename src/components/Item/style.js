@@ -85,6 +85,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     height: hp('5%')
   },
+  buttonDeleteLoad:{
+    backgroundColor: COLORS.blueLight2,
+    height: hp('5%'),
+    borderRadius: 7,
+    marginLeft: 2
+  },
   textButtonEdit: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size12,

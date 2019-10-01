@@ -26,8 +26,8 @@ const InvoiceCustomer = props => {
       <View style={style.containerFinalConsumer}>
         <View style={style.inLineSpaceBetween}>
           <TextInput
-            placeholder="Ingrese DNI"
-            placeholderTextColor={'#cecece'}
+            placeholder="Ingrese Documento"
+            placeholderTextColor={COLORS.gray}
             onChangeText={props.setFinalConsumer}
             style={[style.textRegular16GrayDark,style.inputDNICustomer]}
             keyboardType='numeric'
@@ -39,7 +39,7 @@ const InvoiceCustomer = props => {
             buttonStyle={ style.buttonCheck }
             disabledStyle= { style.buttonCheckDisabled }
             loading = { props.loading }
-            loadingStyle={{top: 2}}
+            loadingStyle={{top: 2, backgroundColor: COLORS.gray, borderRadius: 10}}
             disabled = { props.loading || !validateDni(props.identity) }
           />
         </View>

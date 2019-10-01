@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { Button } from "react-native-elements";
 import PropTypes from 'prop-types';
 import style from './style';
+import { COLORS } from '../../constants/colors';
 
 const InvoiceListCustomer = props => {
   if (props.identityCustomer.name!='') {
@@ -17,7 +18,7 @@ const InvoiceListCustomer = props => {
             <Icon
               name="md-checkmark"
               size={20}
-              color="#EE6123"
+              color={COLORS.blueMedium}
             />
           }
           buttonStyle={style.buttonCheek}

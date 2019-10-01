@@ -1,16 +1,16 @@
 import React from 'react';
-import { View, Text, Modal, TouchableOpacity, ScrollView, TouchableWithoutFeedback, ImageBackground} from 'react-native';
-import { Button } from "react-native-elements";
+import { View, Text, Modal, TouchableOpacity } from 'react-native';
 import DateTimePicker from 'react-native-modal-datetime-picker';
-import Icon from 'react-native-vector-icons/AntDesign';
 import LinearGradient from 'react-native-linear-gradient';
+import Icon from 'react-native-vector-icons/AntDesign';
+import { Button } from "react-native-elements";
 import InvoiceItems from './InvoiceItems';
 import InvoiceCustomer from './InvoiceCustomer';
-import style from './style';
-import { VOUCHER_TYPES } from '../../constants/invoice';
-import { validateData } from '../../utils/validations';
 import { presentInvoiceDate } from '../../utils/date';
-import { GRADIANTBLUE, GRADIENTYELLOW, COLORS } from '../../constants/colors';
+import { validateData } from '../../utils/validations';
+import { GRADIANTBLUE, COLORS, COLORGY } from '../../constants/colors';
+import { VOUCHER_TYPES } from '../../constants/invoice';
+import style from './style';
 
 class Invoice extends React.Component {
 
@@ -42,9 +42,11 @@ class Invoice extends React.Component {
       },
       headerTitleStyle: style.headerText,
       headerTintColor: 'white',
-      headerLeft: <TouchableOpacity onPress={()=> navigation.navigate('Home')}>
-                    <Icon name="left" size={20} color="white" style={{marginLeft:20}}/>
-                  </TouchableOpacity> 
+      headerLeft: (
+        <TouchableOpacity onPress={()=> navigation.navigate('Home')}>
+          <Icon name="left" size={20} color="white" style={{marginLeft:20}}/>
+        </TouchableOpacity> 
+      )
     }  
   };
 
@@ -135,131 +137,93 @@ class Invoice extends React.Component {
 
   render() {
     const iconAddCustomer = <Icon name="adduser" size={17} color={COLORS.blueMedium} />
-    return(
-      
-      <LinearGradient 
-        colors={GRADIANTBLUE}
-        style={{flex:1}}  
-        start={{x: 0, y: 1}} 
-        end={{x: 1, y: 0.9}}
-      >
-
+    return(  
+      <LinearGradient colors={GRADIANTBLUE} style={{flex:1}} start={{x: 0, y: 1}} end={{x: 1, y: 0.9}}>
       <View style={style.container}>
         
         <View style={style.containerBody}>
-
-        <View style={style.inLineSpaceBetween}>
-          <View style={style.boxVoucher}>
-            <Text style={[style.textRegular12White, {paddingBottom: 5}]}>
-              Tipo de Comprobante
-            </Text>
-            <TouchableOpacity
-              onPress={() => {this.setModalVisible(true)}}
-              style={style.buttonVoucher}
-            >
-              <Text style={style.textRegular16BlueCenter}>
-                {this.presentVoucherType()}
-              </Text>
-            </TouchableOpacity>
-          </View>
-          <View style={style.boxDate}>
-            <Text style={[style.textRegular12White, {paddingBottom: 5}]}>
-              Fecha de Emisión
-            </Text>
-            <TouchableOpacity onPress={this.showDateTimePicker} style={style.buttonDate}>
-              <Text style={style.textRegular16BlueCenter}>
-                {presentInvoiceDate(this.state.invoiceDate)}
-              </Text>
-            </TouchableOpacity>
-            <DateTimePicker
-              isVisible={this.state.isDateTimePickerVisible}
-              onConfirm={this.handleDatePicked}
-              onCancel={this.hideDateTimePicker}
-              date={this.state.invoiceDate}
-            />
-          </View>
-        </View>
         
-        <View style={style.containerReceptor}>
-        <Text style={[style.textRegular12White, {paddingBottom: 5}]}>
-          Datos del Receptor
-        </Text>
-        <View style={[style.containerCustomers,style.inColumnSpaceBetween]}>
-          <View style={style.inLineSpaceBetween}>
-            <View style={style.textConsumerFinal}>
-              <Text style={style.textRegular14Blue}> Consumidor Final</Text>
+          <View style={style.containerReceptor}>
+            <View style={style.inLineSpaceBetween}>
+              <View style={style.boxVoucher}>
+                <Text style={[style.textRegular12White, {paddingBottom: 5}]}>
+                  Tipo de Comprobante
+                </Text>
+                <Button
+                  title={this.presentVoucherType()}
+                  onPress={() => {this.setModalVisible(true)}}
+                  buttonStyle={style.buttonVoucher}
+                  titleStyle={style.textRegular16BlueCenter}
+                />
+              </View>
+              <View style={style.boxDate}>
+                <Text style={[style.textRegular12White, {paddingBottom: 5}]}>
+                  Fecha de Emisión
+                </Text>
+                <Button
+                  title={presentInvoiceDate(this.state.invoiceDate)}
+                  onPress={this.showDateTimePicker}
+                  buttonStyle={style.buttonDate}
+                  titleStyle={style.textRegular16BlueCenter}
+                />
+                <DateTimePicker
+                  isVisible={this.state.isDateTimePickerVisible}
+                  onConfirm={this.handleDatePicked}
+                  onCancel={this.hideDateTimePicker}
+                  date={this.state.invoiceDate}
+                />
+              </View>
             </View>
+        
+            <Text style={[style.textRegular12White, {paddingVertical: 5}]}>
+              Datos del Receptor
+            </Text>
+            <View style={[style.containerCustomers,style.inColumnSpaceBetween]}>
+              <View style={style.inLineSpaceBetween}>
+                <View style={style.textConsumerFinal}>
+                  <Text style={style.textRegular14Blue}> Consumidor Final</Text>
+                </View>
+                <Button
+                  title='Otro Cliente'
+                  testID='addCustomer'
+                  icon={iconAddCustomer}
+                  onPress={ this.navigateClient }
+                  buttonStyle={style.buttonAddCustomer}
+                  titleStyle={style.textRegular12Blue}
+                />
+              </View>
+              { this.renderCustomer() }
+            </View>
+
             <Button
-              title='Otro Cliente'
-              testID='addCustomer'
-              icon={iconAddCustomer}
-              onPress={ this.navigateClient }
-              buttonStyle={style.buttonAddCustomer}
-              titleStyle={style.textRegular12Blue}
+              title=' Agregar Items'
+              onPress={ this.navigateAddItems }
+              icon={<Icon name="plus" size={15} color="white"/>}
+              buttonStyle={style.buttonAdd}  
+              titleStyle={ style.textRegular16White }
+              //disabled={ !this.props.fiscalIdentity.name }
+              disabledStyle={style.buttonAddDisabled}
+              disabledTitleStyle = { style.textRegular16GrayLight }
+              ViewComponent={LinearGradient}
+              linearGradientProps={COLORGY}
             />
 
-            {/*<Button
-              title='X'
-              testID='cancel'
-              onPress={() => this.setState({cf: false})}
-              buttonStyle={style.buttonCancel}
-              titleStyle={style.textRegular12Blue}
-              disabled={!this.state.cf}
-              disabledStyle={style.buttonCanceldisabled}
-              disabledTitleStyle={style.textButtonCanceldisabled}
-              TouchableComponent={TouchableWithoutFeedback}
-            />*/}
-
+          { this.renderViewItemsAdd() }
           </View>
-            { this.renderCustomer() }
-          {/*<View style={style.lineBlue}></View>*/}
-
         </View>
-        </View>
-        <TouchableOpacity
-          onPress={ this.navigateAddItems }
-          style={{alignItems:'center'}}
-          testID='addItems'
-          disabled={ !validateData(this.props.fiscalIdentity.name, this.props.items.length) }
-          disabledStyle={ style.buttonContinueDisabled }
-          disabledTitleStyle = { style.textSemiBold14White }
-        >
-          <LinearGradient 
-            colors={GRADIENTYELLOW}
-            style={style.gradientAddItems}  
-            start={{x: 0, y: 1}} 
-            end={{x: 1, y: 0.9}}
-          >
-            <Text style={style.textRegular14WhiteBold}>
-              <Icon name="plus" size={15} color="white" />  Agregar Items
-            </Text>     
-          </LinearGradient>
-        </TouchableOpacity>
 
-        { this.renderViewItemsAdd() }
-
-      </View>
-
-      <View style={style.containerFooter}>
-          <TouchableOpacity
+        <View style={style.containerFooter}>
+          <Button
+            title='Continuar'
             onPress={ this.navigateToBewInvoice }
-            style={{alignItems:'center'}}
-            testID='continue'
+            buttonStyle={style.buttonContinue}  
+            titleStyle={ style.textRegular16White }
             disabled={ !validateData(this.props.fiscalIdentity.name, this.props.items.length) }
-            disabledStyle={ style.buttonContinueDisabled }
-            disabledTitleStyle = { style.textSemiBold14White }
-          >
-            <LinearGradient 
-              colors={GRADIENTYELLOW}
-              style={style.gradientContinue}  
-              start={{x: 0, y: 1}} 
-              end={{x: 1, y: 0.9}}
-            >
-              <Text style={style.textRegular14WhiteBold}>
-                Continuar
-              </Text>     
-            </LinearGradient>
-          </TouchableOpacity>
+            disabledStyle={style.buttonContinueDisabled}
+            disabledTitleStyle = { style.textRegular16GrayLight }
+            ViewComponent={LinearGradient}
+            linearGradientProps={COLORGY}
+          />
         </View>
 
         <Modal
@@ -270,7 +234,7 @@ class Invoice extends React.Component {
           <View style={style.modalVoucher}>
             <View style={style.boxModal}>
               <View style={style.headerModal}>
-                <Text style={style.textRegular16WhiteCenter}>Tipo de Comprobante</Text>
+                <Text style={style.textRegular16White}>Tipo de Comprobante</Text>
               </View>
               <View style={style.boxVoucherType}>
                 {VOUCHER_TYPES.map((voucherType, index) => (
@@ -279,7 +243,7 @@ class Invoice extends React.Component {
                     style={[style.borderVoucher,style.marginVertical8]}
                     onPress={() => this.selectionVoucher(voucherType)}
                   >
-                    <Text style={style.textRegular16Blue}>
+                    <Text style={style.textRegular16BlueMedium}>
                       {voucherType.label}
                     </Text>
                   </TouchableOpacity>
