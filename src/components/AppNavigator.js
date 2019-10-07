@@ -20,8 +20,9 @@ import EditItem from './Item/EditItem';
 import ItemList from './Item/List';
 import Invoice from './Invoice';
 import InvoiceSummary from './Invoice/Summary';
-import NewInvoiceItem from './Invoice/NewInvoiceItem';
 import ListInvoiceItem from './Invoice/ListInvoiceItem';
+import ListInvoiceCustomer from './Invoice/ListInvoiceCustomer';
+import NewInvoiceItem from './Invoice/NewInvoiceItem';
 import NewInvoiceCustomer from './Invoice/NewInvoiceCustomer';
 import Opinion from './Opinion';
 
@@ -43,7 +44,7 @@ const InvoiceStack = createStackNavigator({
   NewInvoiceItem,
   NewInvoiceCustomer,
   ListInvoiceItem,
-  //ListInvoiceCustomer,
+  ListInvoiceCustomer,
   InvoiceSummary: {
     screen: InvoiceSummary,
     navigationOptions: () => ({

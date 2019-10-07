@@ -1,9 +1,8 @@
 import React from 'react';
-import { View, TextInput, ScrollView } from 'react-native';
+import { View, TextInput, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { Button } from "react-native-elements";
 import PropTypes from 'prop-types';
-import InvoiceListCustomer from './InvoiceListCustomers';
 import { validateDni } from '../../utils/validations'
 import style from './style';
 import { COLORS } from '../../constants/colors';
@@ -11,15 +10,23 @@ import { COLORS } from '../../constants/colors';
 const InvoiceCustomer = props => {
   const iconEnabled = <Icon name="right" size={18} color={COLORS.blueMedium}/>;
   const iconDisabled = <Icon name="right" size={18} color={COLORS.gray}/>;
-  if (!props.finalConsumer) {
+  const customer = props.fiscalIdentity;
+  const identification = customer.name === 'fc' ? customer.identification : customer.name;
+  const subIdentification = customer.name === 'fc' ? 'Número de Documento' : customer.identification;
+  if (!props.showFinalConsumer && props.fiscalIdentity.name != "") {
     return (
-      <ScrollView>
-        <View style={style.listCustomer}>
-          <InvoiceListCustomer
-            identityCustomer={props.fiscalIdentity}
-          />
+      <View style={style.listCustomer}>
+        <View style={style.inLineSpaceBetween}>
+          <Text style={style.textLight16GrayDark}>{identification}</Text>
+          <Text style={style.textLight16BlueMedium}>| {subIdentification} |</Text> 
+          <Button
+            icon={<Icon name="close" size={15} color={COLORS.blueMedium}/>}
+            onPress={ () => props.setShowFinalConsumer(true) }
+            buttonStyle={style.buttonDeleteCustomerInvoice}
+            titleStyle={style.textRegular12Blue}
+          />       
         </View>
-      </ScrollView>
+      </View>
     );
   }else {
     return (
@@ -51,6 +58,7 @@ const InvoiceCustomer = props => {
 InvoiceCustomer.propTypes = {
   finalConsumer: PropTypes.bool,
   setFinalConsumer: PropTypes.func,
+  setShowFinalConsumer: PropTypes.func,
   addFinalConsumer: PropTypes.func,
   loading: PropTypes.bool,
   identity: PropTypes.string

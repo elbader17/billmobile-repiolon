@@ -16,18 +16,16 @@ class Invoice extends React.Component {
 
   constructor(props) {
     super(props);
-    const { fiscalIdentity, voucherType } = this.props;
-    fcIndentification = fiscalIdentity.name === 'fc' ? '' : fiscalIdentity.cuit;
+    const { voucherType } = this.props;
     this.state = {
       voucherType,
-      cf: true,
+      invoiceDate: new Date(),
       isDateTimePickerVisible: false,
       isDateTimeVisible:false,
-      bool:false,
-      invoiceDate: new Date(),
-      modalVisible: false,
-      fcIndentification,
-      loading: false
+      modalVisible: false, //Modal voucher type
+      fcIdentification: undefined,
+      showFinalConsumer: this.props.fiscalIdentity ? false : true,
+      loading: false //for buttons
     }
   }
 
@@ -53,10 +51,13 @@ class Invoice extends React.Component {
   setModalVisible = visible => this.setState({modalVisible: visible});
   showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true});
   hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
-  setFcIndentification = value => this.setState({ fcIndentification: value });
+  setFcIdentification = value => this.setState({ fcIdentification: value });
+  setShowFinalConsumer = value => this.setState({ showFinalConsumer: value });
   setLoading = (bool) => this.setState({ loading: bool });
-  changeTypeCustomer = () => this.setState({cf:true});
-  navigateClient = () => this.props.navigation.navigate('ListCustomer');
+  navigateClient = () => {
+    this.props.navigation.navigate('ListInvoiceCustomer');
+    this.setShowFinalConsumer(false);
+  }
   navigateAddItems = () => this.props.navigation.navigate('ListInvoiceItem');
   navigateToBewInvoice = () => this.props.navigation.navigate('InvoiceSummary');
   
@@ -72,11 +73,7 @@ class Invoice extends React.Component {
   }
 
   createOrUpdateInvoice = (values) => {
-    const {
-      updateInvoice,
-      createInvoice,
-      invoiceId,
-    } = this.props;
+    const { updateInvoice, createInvoice, invoiceId } = this.props;
     const { invoiceDate, voucherType } = this.state ;
     if (invoiceId != null) {
       updateInvoice(values);
@@ -96,17 +93,16 @@ class Invoice extends React.Component {
   }
 
   addFinalConsumer = () => {
-    const { fcIndentification } = this.state;
+    const { fcIdentification } = this.state;
     const {
       fiscalIdentity,
       addFiscalIdentityToInvoice,
     } = this.props;
     this.setLoading(true);
-    addFiscalIdentityToInvoice('fc', fcIndentification, fiscalIdentity.id)
+    addFiscalIdentityToInvoice('fc', fcIdentification, fiscalIdentity.id)
       .then(() => {
         this.setLoading(false);
-        this.setState({cf: false});
-        this.setFcIndentification(''); //Para que al cargar otro cf el botton aparezca desabilitado.
+        this.setShowFinalConsumer(false)
       })
   }
 
@@ -125,17 +121,20 @@ class Invoice extends React.Component {
   renderCustomer = () => {
     return(
       <InvoiceCustomer 
-        finalConsumer={this.state.cf}
-        setFinalConsumer={this.setFcIndentification}
+        showFinalConsumer={this.state.showFinalConsumer}
+        setShowFinalConsumer={this.setShowFinalConsumer}
+        setFinalConsumer={this.setFcIdentification}
+        identity={this.state.fcIdentification} 
         addFinalConsumer={this.addFinalConsumer}
         loading={this.state.loading}
-        identity={this.state.fcIndentification}
         fiscalIdentity={this.props.fiscalIdentity}
       />
     );
   }
 
   render() {
+    const { fiscalIdentity } = this.props;
+    const typeCustomer = fiscalIdentity.name === 'fc' || this.state.showFinalConsumer ? 'Cosumidor Final' : 'Nombre Cliente';
     const iconAddCustomer = <Icon name="adduser" size={17} color={COLORS.blueMedium} />
     return(  
       <LinearGradient colors={GRADIANTBLUE} style={{flex:1}} start={{x: 0, y: 1}} end={{x: 1, y: 0.9}}>
@@ -181,7 +180,7 @@ class Invoice extends React.Component {
             <View style={[style.containerCustomers,style.inColumnSpaceBetween]}>
               <View style={style.inLineSpaceBetween}>
                 <View style={style.textConsumerFinal}>
-                  <Text style={style.textRegular14Blue}> Consumidor Final</Text>
+                  <Text style={style.textRegular16BlueMedium}>{typeCustomer}</Text>
                 </View>
                 <Button
                   title='Otro Cliente'
@@ -201,7 +200,6 @@ class Invoice extends React.Component {
               icon={<Icon name="plus" size={15} color="white"/>}
               buttonStyle={style.buttonAdd}  
               titleStyle={ style.textRegular16White }
-              //disabled={ !this.props.fiscalIdentity.name }
               disabledStyle={style.buttonAddDisabled}
               disabledTitleStyle = { style.textRegular16GrayLight }
               ViewComponent={LinearGradient}

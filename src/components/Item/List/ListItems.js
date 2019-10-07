@@ -13,7 +13,10 @@ const ListItems = props => {
       .map((item) => {
         const conditionLoading = props.loadingDelete && item.id === props.itemDelete;
         const isInvoice = props.type === 'invoice';
-        const icon = isInvoice ? <Icon name="add-shopping-cart" size={25} color={COLORS.blueMedium}/> : <Icon1 name="trash-2" size={20} color={COLORS.blueMedium}/> 
+        const color = props.loadingDelete ? COLORS.gray : COLORS.blueMedium //Disabled an enabled Button
+        const iconCart = <Icon name="add-shopping-cart" size={23} color={color}/>;
+        const iconTrash = <Icon1 name="trash-2" size={20} color={color}/>;
+        const icon = isInvoice ? iconCart : iconTrash  
         return (
           <View style={style.boxInfoItems} key={item.id}>
             <View style={style.inLineSpaceBetween} >
@@ -35,8 +38,10 @@ const ListItems = props => {
                 <Button
                   icon={icon}
                   onPress={() => props.actionItem(item) }
-                  buttonStyle={ conditionLoading ? style.buttonDeleteLoad : style.buttonDelete }
-                  titleStyle={ style.textDelete }
+                  buttonStyle={conditionLoading ? style.buttonDeleteLoad : style.buttonDelete}
+                  titleStyle={style.textDelete}
+                  disabledStyle={conditionLoading ? style.buttonDeleteLoad : style.buttonDelete}
+                  disabled = {props.loadingDelete}
                   loading={conditionLoading}
                 />    
               </View>
@@ -51,7 +56,7 @@ ListItems.propTypes = {
   deleteItem: PropTypes.func,
   category: PropTypes.string,
   loadingDelete: PropTypes.bool,
-  itemDelete: PropTypes.number
+  itemDelete: PropTypes.string
 };
 
 export default ListItems;

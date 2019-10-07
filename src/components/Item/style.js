@@ -86,10 +86,10 @@ const styles = StyleSheet.create({
     height: hp('5%')
   },
   buttonDeleteLoad:{
-    backgroundColor: COLORS.blueLight2,
+    backgroundColor: COLORS.gray,
     height: hp('5%'),
     borderRadius: 7,
-    marginLeft: 2
+    marginLeft: 3
   },
   textButtonEdit: {
     fontFamily: FONTS.latoRegular,

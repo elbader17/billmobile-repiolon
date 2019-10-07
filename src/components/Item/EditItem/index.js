@@ -8,12 +8,13 @@ const mapStateToProps = state => ({
 
 function mapDispatchToProps(dispatch) {
   return {
-    saveItem: (attributes, navigation) => {
+    saveItem: (attributes, navigation, type) => {
       dispatch(updateItem(attributes))
         .then(() => {
-          navigation.navigate('ItemList');
-        });
-    },
+          if (type === 'collection') navigation.navigate('ItemList');
+          else navigation.navigate('ListInvoiceItem');
+      })
+    }
   };
 }
 

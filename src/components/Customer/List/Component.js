@@ -4,22 +4,21 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import SearchInput, { createFilter } from 'react-native-search-filter';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/AntDesign';
-import Icon1 from 'react-native-vector-icons/Feather';
 import { Button } from "react-native-elements";
 import { GRADIANTBLUE2, COLORS, COLORGB2 } from '../../../constants/colors';
 import { orderByName } from '../../../utils/functions';
-import style from '../style';
 import ListCustomers from './ListCustomers';
+import style from '../style';
 
-const KEYS_TO_FILTERS = ['attributes.name', 'attributes.identification'];
+const KEYS_TO_FILTERS = ['attributes.name', 'attributes.identification']; //For list customer
 
 class CustomerList extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      loading: false,
+      loading: true, //Load list customer
       loadingDelete: false,
-      itemDelete: undefined
+      customerDelete: undefined
     };
   }
   
@@ -44,7 +43,10 @@ class CustomerList extends React.Component {
       headerTitleStyle: style.headerText,
       headerTintColor: 'white',
       headerLeft: ( 
-        <TouchableOpacity onPress={()=> navigation.navigate('Home')}>
+        <TouchableOpacity onPress={()=> {
+          if (navigation.state.params.type === 'collection') navigation.navigate('Home');
+          else navigation.navigate('Invoice');
+        }}>
           <Icon name="left" size={18} color="white" style={{marginLeft:20}}/>
         </TouchableOpacity> 
       ),
@@ -55,36 +57,50 @@ class CustomerList extends React.Component {
   };
 
   componentWillMount() {
-    this.props.getCustomerList()
-     .then(()=> {this.setState({loading: true})})
+    this.props.navigation.setParams({type: this.props.type}); //List for collection or invoice
   }
 
-  deleteCustomer = (customer) => {
+  componentDidMount() {
+    this.props.getCustomerList()
+     .then(()=> {this.setState({loading: false})})
+  }
+
+  actionCustomer = (customer) => {
+    const isInvoice = this.props.type === 'invoice'
+    const title = isInvoice ? 'Añadir ' : 'Eliminar ';
     Alert.alert(
-      'Eliminar '+customer.attributes.name,'¿Está Seguro?',
+      title + customer.attributes.name,'¿Está Seguro?',
       [
         {
           text: 'Cancelar',
-          onPress: () => console.log('Cancel Delete Customr'),
+          onPress: () => console.log('Cancel Delete Customer'),
           style: 'cancel',
         },
-        {text: 'Eliminar', onPress: () => {
+        {text: title, onPress: () => {
           this.setState({loadingDelete: true, customerDelete: customer.id})
-          const { deleteCustomer } = this.props;
-          const id = customer.id;
-          deleteCustomer(id)
+          const { actionCustomer, navigation } = this.props;
+          actionCustomer(customer, navigation)
             .then(() => {
-                this.props.getCustomerList()
-                  .then(()=> this.setState({loadingDelete: false}))
+              if (this.props.type === 'collection')
+                this.props.getCustomerList().then(()=> this.setState({loadingDelete: false}));
+              else navigation.navigate('Invoice');
             })
         }},
       ],
       {cancelable: false},
     );
+    
   }
-
-  navigateToNewCustomer = () => this.props.navigation.navigate('NewCustomer');
-  navigateToHome = () => this.props.navigation.navigate('Home');
+  navigateToNewCustomer = () => {
+    if (this.props.type === 'collection')
+      this.props.navigation.navigate('NewCustomer');
+    else this.props.navigation.navigate('NewInvoiceCustomer');
+  }
+  navigateToHome = () => {
+    if (this.props.type === 'collection')
+      this.props.navigation.navigate('Home');
+    else this.props.navigation.navigate('Invoice');
+  };
   navigateToEditCustomer = (customer) => {
     this.props.navigation.navigate('EditCustomer', { customer });
   }
@@ -105,11 +121,12 @@ class CustomerList extends React.Component {
     );
     return (
       <ListCustomers 
+        type={this.props.type}
         customers={filteredCustomer}
         loadingDelete={this.state.loadingDelete}
         customerDelete={this.state.customerDelete}
         navigateToEditCustomer={this.navigateToEditCustomer}
-        deleteCustomer={this.deleteCustomer}
+        actionCustomer={this.actionCustomer}
       />
     );
   }
@@ -122,7 +139,7 @@ class CustomerList extends React.Component {
         <View style={style.containerBody}>
           <View style={style.boxCustomer}>
             <ScrollView> 
-              {this.state.loading ? this.renderCustomers() : this.renderLoading()}
+              {this.state.loading ? this.renderLoading() : this.renderCustomers()}
             </ScrollView>
           </View>
         </View>

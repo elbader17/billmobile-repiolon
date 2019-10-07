@@ -44,11 +44,9 @@ const addFiscalIdentityToInvoice = (name, identity, category, id) => {
   return (dispatch, getState) => {
     const { id: invoiceId } = getState().invoices.currentInvoice;
     let promise;
-    console.log(invoiceId);
     if (invoiceId != null) {
       promise = Promise.resolve();
     } else {
-      console.log('No esta creada');
       const { invoiceDate, voucherType } = getState().invoices.currentInvoice;
       promise = dispatch(createInvoice(invoiceDate, voucherType));
     }
@@ -61,7 +59,6 @@ const addFiscalIdentityToInvoice = (name, identity, category, id) => {
         identification: identity,
         invoice_id: updatedInvoiceId,
       };
-      console.log(resource);
       return createFiscalIdentity(resource, dispatch, getState);
     });
   };

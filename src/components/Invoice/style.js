@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     elevation: 2.5,
   },
   containerItemsInvoice: {
-    maxHeight: hp('32%'),
+    maxHeight: hp('33%'),
     backgroundColor: COLORS.white,
     borderRadius: 5,
     marginTop: 12,
@@ -90,6 +90,27 @@ const styles = StyleSheet.create({
     width: wp('14%'),
     height: hp('6%')
   },
+  buttonCantProduct: {
+    backgroundColor: 'transparent',
+    height: hp('3.5%'),
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: COLORS.blueMedium,
+    paddingHorizontal: 5,
+    justifyContent: 'center',
+  },
+  buttonDeleteII: {
+    backgroundColor: 'transparent',
+    height: hp('3.5%'),
+    paddingHorizontal: 5,
+    justifyContent: 'center'
+  },
+  buttonDeleteCustomerInvoice: {
+    backgroundColor: 'transparent',
+    height: hp('3.5%'),
+    paddingHorizontal: 5,
+    justifyContent: 'center'
+  },
   boxVoucher: {
     width: '60%',
   },
@@ -121,6 +142,24 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
+  boxItemsInvoice: {
+    backgroundColor: 'transparent',
+    paddingTop: 4
+  },
+  boxItemsInvoiceTotal: {
+    height: hp('6%'),
+    backgroundColor: 'transparent',
+    paddingHorizontal: 15,
+    paddingBottom: 2,
+    justifyContent:'center'
+  },
+  boxItems1: {
+    flex: 1
+  },
+  boxItems2: {
+    flex: 0.4,
+    alignItems: 'flex-end',
+  },
   borderVoucher: {
     borderWidth: 1,
     borderColor: COLORS.blueMedium,
@@ -138,14 +177,38 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     paddingLeft: 10
   },
+  styleScroll: {
+    marginHorizontal: 12,
+    marginTop: 7
+  },
+  listCustomer:{
+    marginTop: 6,
+    marginBottom: 2
+  },
   inLineSpaceBetween: {
     flexDirection: "row",
     justifyContent: 'space-between',
+  },
+  inColumnSpaceBetween: {
+    flexDirection: "column",
+    justifyContent: 'space-between',
+  },
+  line: {
+    borderBottomWidth: 0.5,
+    borderColor: COLORS.grayLight,
+    marginVertical: 1,
+    paddingVertical: 4,
+    paddingHorizontal: 5
   },
   textRegular16GrayLight: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size16,
     color: COLORS.grayLight
+  },
+  textRegular16GrayDark: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size16,
+    color: COLORS.grayDark
   },
   textRegular16White: {
     fontFamily: FONTS.latoRegular,
@@ -157,57 +220,40 @@ const styles = StyleSheet.create({
     fontSize: FONTS.size16,
     color: COLORS.blueMedium
   },
-
-
-
-
-
-
-
-
-
-
-
-
-  styleScroll: {
-    borderWidth: 1,
-    borderColor: COLORS.grayLight,
-    borderRadius: 5,
-    marginVertical: 7,
-    marginHorizontal: 7
+  textLight18BlueMedium: {
+    fontFamily: FONTS.latoLight,
+    fontSize: FONTS.size18,
+    color: COLORS.blueMedium
   },
-  boxItemsInvoice: {
-    maxHeight: hp('24%'),
-    backgroundColor: 'transparent',
-    paddingTop: 2,
+  textLight16BlueMedium: {
+    fontFamily: FONTS.latoLight,
+    fontSize: FONTS.size16,
+    color: COLORS.blueMedium
   },
-  boxItemsInvoiceTotal: {
-    height: hp('4.5%'),
-    backgroundColor: 'transparent',
-    paddingHorizontal: 15,
-    
-    justifyContent:'flex-end'
+  textLight16GrayDark: {
+    fontFamily: FONTS.latoLight,
+    fontSize: FONTS.size16,
+    color: COLORS.grayDark,
   },
-  boxItems1: {
-    flex: 1,
+  textRegular12BlueMedium: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size12,
+    color: COLORS.blueMedium,
   },
-  boxItems2: {},
-  boxItems3: {
-    flex: 0.5, 
-    alignItems: 'flex-end',
-  },
-  borde: {
-    borderWidth: 0.5,
-    borderRadius: 4,
-    borderColor: COLORS.grayLight,
-    marginVertical: 1,
-    paddingVertical: 3,
-    paddingHorizontal: 5
-  },
-  inColumnSpaceBetween: {
-    flexDirection: "column",
-    justifyContent: 'space-between',
-  },
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+  
   inColumn: {
     flexDirection: "column"
   },
@@ -301,14 +347,6 @@ const styles = StyleSheet.create({
   margin5: {
     margin: 5
   },
-  listCustomer:{
-    marginHorizontal: 8,
-    marginVertical: 5
-  },
-  listItems: {
-    marginVertical: 4,
-    marginHorizontal: 5,
-  },
   containerFinalConsumer: {
     height: hp('10%'),
     justifyContent: 'center',
@@ -385,11 +423,6 @@ const styles = StyleSheet.create({
     fontWeight: 'normal',
     color: COLORS.white,
   },
-  textRegular16GrayDark: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size16,
-    color: COLORS.grayDark,
-  },
   textRegular12Gray: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size12,
@@ -404,11 +437,6 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.latoSemiBold,
     fontSize: FONTS.size14,
     color: COLORS.grayDark,
-  },
-  textRegular12RedkBold: {
-    fontFamily: FONTS.latoSemiBold,
-    fontSize: FONTS.size12,
-    color: COLORS.red,
   },
   textRegular16GrayDarkBold: {
     fontFamily: FONTS.latoSemiBold,
@@ -498,16 +526,6 @@ const styles = StyleSheet.create({
     height: hp('3.5%'),
     opacity: 0.9,
     paddingHorizontal: 12
-  },
-  buttonCantProduct: {
-    backgroundColor: 'transparent',
-    height: hp('3.5%'),
-    borderRadius: 5,
-    borderWidth: 1,
-    borderColor: COLORS.red,
-    paddingHorizontal: 5,
-    justifyContent: 'center',
-    opacity: 0.8,
   },
   positionFinalButton: {
     position: 'absolute', 

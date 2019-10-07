@@ -11,16 +11,15 @@ import { GRADIANTBLUE2, COLORS, COLORGB, COLORGB2 } from '../../../constants/col
 import { orderByName } from '../../../utils/functions';
 import style from '../style';
 
-const KEYS_TO_FILTERS = ['attributes.name', 'attributes.price'];
+const KEYS_TO_FILTERS = ['attributes.name', 'attributes.price']; //Attributes shown in the search item
 
 class ItemList extends React.Component {
   constructor(props){
     super(props);
     this.state = {
       isProduct: true,
-      loading: false,
-      loadingDelete: false,
-      customerDelete: undefined
+      loading: true, //loading items list
+      loadingDelete: false, //for button item delete
     };
   }
 
@@ -45,7 +44,10 @@ class ItemList extends React.Component {
       headerTitleStyle: style.headerText,
       headerTintColor: 'white',
       headerLeft: ( 
-        <TouchableOpacity onPress={()=> navigation.navigate('Home')}>
+        <TouchableOpacity onPress={()=> {
+          if (navigation.state.params.type === 'collection') navigation.navigate('Home');
+          else navigation.navigate('Invoice');
+        }}>
           <Icon name="left" size={20} color="white" style={{marginLeft:20}}/>
         </TouchableOpacity>
       ),
@@ -56,16 +58,23 @@ class ItemList extends React.Component {
   };
 
   componentWillMount() {
-    console.log(this.props.type);
+    this.props.navigation.setParams({type: this.props.type}); //Use in Header Left Navigation
+  }
+  
+  componentDidMount() {
     this.props.getItemList()
-      .then(()=> {this.setState({loading: true})})
+      .then(()=> {this.setState({loading: false})})
   }
 
   navigateToNewItem = (isProduct) => {
-    this.props.navigation.navigate('NewItem', { isProduct });
+    if (this.props.type === 'collection')
+      this.props.navigation.navigate('NewItem', { isProduct });
+    else this.props.navigation.navigate('NewInvoiceItem', { isProduct });
   }
   navigateToHome = () => {
-    this.props.navigation.navigate('Home');
+    if (this.props.type === 'collection')
+      this.props.navigation.navigate('Home');
+    else this.props.navigation.navigate('Invoice');
   }
   navigateToEditItem = (item) => {
     this.props.navigation.navigate('EditItem', { item });
@@ -84,11 +93,12 @@ class ItemList extends React.Component {
         },
         {text: title, onPress: () => {
           this.setState({loadingDelete: true, itemDelete: item.id})
-          const { actionItem } = this.props;
-          actionItem(item)
+          const { actionItem, navigation } = this.props;
+          actionItem(item, navigation)
             .then(() => {
-                this.props.getItemList()
-                  .then(()=> this.setState({loadingDelete: false}))
+              if(this.props.type === 'collection')
+                this.props.getItemList().then(()=> this.setState({loadingDelete: false}));
+              else navigation.navigate('Invoice');
             })
         }},
       ],
@@ -157,7 +167,7 @@ class ItemList extends React.Component {
             {this.renderSwtichButtons()}
             <View style={style.boxItems}>
               <ScrollView>
-                {this.state.loading ? this.renderItems() : this.renderLoading()}
+                {this.state.loading ? this.renderLoading() : this.renderItems()}
               </ScrollView>
             </View>
           </View>

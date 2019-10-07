@@ -9,7 +9,10 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch) => {
   return {
     getCustomerList: () => (dispatch(listCustomers())),
-    deleteCustomer: (id) => (dispatch(deleteCustomer(id)))
+    actionCustomer: (customer) => {
+      return (dispatch(deleteCustomer(customer.id)))
+    },
+    type: 'collection'
   };
 };
 

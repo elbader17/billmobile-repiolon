@@ -39,11 +39,18 @@ class NewItem extends React.Component {
       ),
       headerTitleStyle: style.headerText,
       headerTintColor: 'white',
-      headerLeft: <TouchableOpacity onPress={()=> navigation.navigate('ItemList')}>
+      headerLeft: <TouchableOpacity onPress={()=> {
+                    if (navigation.state.params.type === 'collection') navigation.navigate('ItemList');
+                    else navigation.navigate('ListInvoiceItem');
+                  }}>
                     <Icon name="left" size={20} color="white" style={{marginLeft:20}}/>
                   </TouchableOpacity> 
     }
   };
+
+  componentWillMount() {
+    this.props.navigation.setParams({type: this.props.type}); //Use in Header Left Navigation
+  }
 
   defaultItem = () => {
     return {
@@ -57,7 +64,7 @@ class NewItem extends React.Component {
 
   saveItem = () => {
     const { name, price, isProduct, itemId } = this.state;
-    const { saveItem, navigation } = this.props;
+    const { saveItem, type, navigation } = this.props;
     const category = isProduct ? 'product' : 'service';
     const quantity = 1;
     if (validateAddItem(name, price)) {
@@ -71,7 +78,7 @@ class NewItem extends React.Component {
           price,
           quantity
         },
-        navigation,
+        navigation, type
       );
     }
     else {

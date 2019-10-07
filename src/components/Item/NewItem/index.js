@@ -14,6 +14,7 @@ function mapDispatchToProps(dispatch) {
           navigation.navigate('ItemList');
         });
     },
+    type: 'collection'
   };
 }
 

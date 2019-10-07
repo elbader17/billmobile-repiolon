@@ -1,50 +1,52 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
+import { Button } from "react-native-elements";
+import Icon from 'react-native-vector-icons/Feather';
 import PropTypes from 'prop-types';
+import { COLORS } from '../../constants/colors';
 import style from './style';
 
 const InvoiceItems = props => {
   return (
     <View style={[style.containerItemsInvoice,style.inColumnSpaceBetween]}>
-      <View style={style.boxItemsInvoice}>
       <ScrollView style={style.styleScroll}>
-        <View style={style.listItems}>
-          {props.items.map((item, index) => (
+        {props.items.map((item, index) => (
           <View key={index}>
-            <View style={[style.inLineSpaceBetween, style.borde]}>
+            <View style={[style.inLineSpaceBetween, style.line]}>
               <View style={style.boxItems1}>
-                <Text style={style.textRegular16GrayDark}>
+                <Text style={style.textLight16GrayDark}>
                   {item.name}
                 </Text>
               </View>
-              <View style={[style.inLineSpaceBetween,style.boxItems2]}>
-                <TouchableOpacity
+              <View style={style.inLineSpaceBetween}>
+                <Button
+                  title={`+${item.quantity}`}
                   onPress={() => props.onPress(item.id, item.quantity + 1)}
-                  style={style.buttonCantProduct}
-                >
-                  <Text style={style.textRegular12RedkBold}>
-                    +{item.quantity}
-                  </Text>
-                </TouchableOpacity>
+                  buttonStyle={style.buttonCantProduct}
+                  titleStyle={style.textRegular12BlueMedium}
+                />
+                <Button
+                  icon = {<Icon name="x" size={13} color={COLORS.blueMedium} />}
+                  //onPress={() => {})}
+                  buttonStyle={[style.buttonCantProduct, {marginLeft: 5}]}
+                  titleStyle={style.textRegular12BlueMedium}
+                />
+                
               </View>
-              <View style={style.boxItems3}>
-                <Text style={style.textRegular16GrayDark}>
+              <View style={style.boxItems2}>
+                <Text style={style.textLight16GrayDark}>
                   ${item.price}
                 </Text>
               </View>
             </View>
           </View>
-          ))}
-        </View>
+        ))}
       </ScrollView>
-      </View>
 
       <View style={style.boxItemsInvoiceTotal}>
-        <View style={style.begin}>
-          <View style={style.inLineSpaceBetween}>
-            <Text style={style.textRegular16GrayDarkBold}>TOTAL</Text>
-            <Text style={style.textRegular16GrayDarkBold}>$ {props.total}</Text>
-          </View>
+        <View style={style.inLineSpaceBetween}>
+          <Text style={style.textLight18BlueMedium}>Total</Text>
+          <Text style={style.textLight18BlueMedium}>$ {props.total}</Text>
         </View>
       </View>
     </View>

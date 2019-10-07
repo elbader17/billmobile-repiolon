@@ -39,11 +39,18 @@ class NewCustomer extends React.Component {
       ),
       headerTitleStyle: style.headerText,
       headerTintColor: 'white',
-      headerLeft: <TouchableOpacity onPress={()=> navigation.navigate('CustomerList')}>
+      headerLeft: <TouchableOpacity onPress={()=> {
+                    if (navigation.state.params.type === 'collection') navigation.navigate('CustomerList');
+                    else navigation.navigate('ListInvoiceCustomer');
+                  }}>
                     <Icon name="left" size={20} color="white" style={{marginLeft:20}}/>
                   </TouchableOpacity> 
     }  
-  };
+  }
+
+  componentWillMount() {
+    this.props.navigation.setParams({type: this.props.type}); //Use in Header Left Navigation
+  }
 
   defaultCustomer= () => {
     return {

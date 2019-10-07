@@ -8,10 +8,11 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    saveFiscalIdentity: (name, cuit, category, id, navigation) => {
-      return dispatch(addFiscalIdentityToInvoice(name, cuit, category, id))
+    saveFiscalIdentity: (name, identification, category, id, navigation) => {
+      dispatch(addFiscalIdentityToInvoice(name, identification, category, id))
         .then(() => navigation.navigate('Invoice'));
     },
+    type: 'invoice'
   };
 }
 

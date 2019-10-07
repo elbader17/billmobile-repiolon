@@ -15,6 +15,7 @@ const mapDispatchToProps = (dispatch) => {
           navigation.navigate('CustomerList')
         });
     },
+    type: 'collection'
   };
 };
 
