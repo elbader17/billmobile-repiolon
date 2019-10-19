@@ -145,6 +145,9 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-screens')
+    implementation project(':react-native-reanimated')
+    implementation project(':react-native-text-input-mask')
     implementation project(':react-native-svg')
     implementation project(':react-native-linear-gradient')
     implementation project(':react-native-date-picker')

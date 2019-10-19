@@ -5,7 +5,7 @@ import { Button } from "react-native-elements";
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { GRADIANTBLUE2, COLORGB, COLORGB2 } from '../../../constants/colors';
-import { validateAddItem } from '../../../utils/validations';
+import { validateAddItem, validateName, validatePrice } from '../../../utils/validations';
 import AddItem from './AddItem';
 import style from '../style';
 
@@ -82,16 +82,13 @@ class NewItem extends React.Component {
       );
     }
     else {
-      if (name=='' && price=='') 
+      if (!validateName(name) && !validatePrice(price)) 
         this.setState({
-          errorPrice: 'Debe ingresar un valor', 
-          errorName: 'Este campo no puede ser vacio'
+          errorPrice: 'Valor incorrecto o vacío', 
+          errorName: 'Campo inválido'
         })  
-      else if (price=='') 
-        this.setState({errorPrice: 'Debe ingresar un valor'})
-        else 
-          this.setState({errorName: 'Este campo no puede ser vacio'})
-          
+      else if (!validatePrice(price)) this.setState({errorPrice: 'Valor incorrecto o vacío'})
+        else this.setState({errorName: 'Campo inválido'})
     }
   }
 

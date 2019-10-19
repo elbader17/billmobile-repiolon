@@ -4,6 +4,7 @@ import DateTimePicker from 'react-native-modal-datetime-picker';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { Button } from "react-native-elements";
+import { showMessage } from "react-native-flash-message";
 import InvoiceItems from './InvoiceItems';
 import InvoiceCustomer from './InvoiceCustomer';
 import { presentInvoiceDate } from '../../utils/date';
@@ -11,6 +12,10 @@ import { validateData } from '../../utils/validations';
 import { GRADIANTBLUE, COLORS, COLORGY } from '../../constants/colors';
 import { VOUCHER_TYPES } from '../../constants/invoice';
 import style from './style';
+import { 
+  messageItemsIncomplete, 
+  messageCustomerIncomplete 
+} from '../../utils/messagesNotifications';
 
 class Invoice extends React.Component {
 
@@ -19,17 +24,18 @@ class Invoice extends React.Component {
     const { voucherType } = this.props;
     this.state = {
       voucherType,
-      invoiceDate: new Date(),
+      invoiceDate: new Date(this.props.invoiceDate),
       isDateTimePickerVisible: false,
       isDateTimeVisible:false,
       modalVisible: false, //Modal voucher type
       fcIdentification: undefined,
       showFinalConsumer: this.props.fiscalIdentity ? false : true,
-      loading: false //for buttons
+      loading: false, //for buttons
+      quantity: 1, //Cant items
     }
   }
 
-  static navigationOptions = ({navigation}) => {
+ /* static navigationOptions = ({navigation}) => {
     return {
       title: 'Generación de Comprobante',
       headerTransparent: true,
@@ -47,9 +53,9 @@ class Invoice extends React.Component {
       )
     }  
   };
-
+*/
   setModalVisible = visible => this.setState({modalVisible: visible});
-  showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true});
+  showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true });
   hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
   setFcIdentification = value => this.setState({ fcIdentification: value });
   setShowFinalConsumer = value => this.setState({ showFinalConsumer: value });
@@ -59,8 +65,12 @@ class Invoice extends React.Component {
     this.setShowFinalConsumer(false);
   }
   navigateAddItems = () => this.props.navigation.navigate('ListInvoiceItem');
-  navigateToBewInvoice = () => this.props.navigation.navigate('InvoiceSummary');
-  
+  navigateToSummaryInvoice = () => {
+    if (validateData(this.props.fiscalIdentity.name, this.props.items.length))
+      this.props.navigation.navigate('InvoiceSummary');
+    else if (this.props.fiscalIdentity.name != '') showMessage(messageItemsIncomplete);
+      else showMessage(messageCustomerIncomplete)
+  }
   updateInvoiceItemQuantity = (invoiceItemId, quantity) => {
     const { updateInvoiceItemQuantity } = this.props;
     updateInvoiceItemQuantity(invoiceItemId, quantity);
@@ -106,13 +116,21 @@ class Invoice extends React.Component {
       })
   }
 
+  incrementQuantity = () => { 
+    this.setState({ quantity: this.state.quantity + 1 });
+    this.updateInvoiceItemQuantity(this.props.invoiceId, this.state.quantity)
+  }
+
   renderViewItemsAdd = () => {
     if (this.props.items.length != 0) {
       return (
         <InvoiceItems
           items={this.props.items}
           total={this.props.invoiceTotal} 
-          onPress={this.updateInvoiceItemQuantity} 
+          invoiceId ={this.props.invoiceId}
+          incrementQuantity={this.incrementQuantity}
+          quantity={this.state.quantity}
+          deleteItem={this.props.deleteInvoiceItem}
         />
       );
     }
@@ -136,6 +154,7 @@ class Invoice extends React.Component {
     const { fiscalIdentity } = this.props;
     const typeCustomer = fiscalIdentity.name === 'fc' || this.state.showFinalConsumer ? 'Cosumidor Final' : 'Nombre Cliente';
     const iconAddCustomer = <Icon name="adduser" size={17} color={COLORS.blueMedium} />
+    var date = presentInvoiceDate(this.state.invoiceDate);
     return(  
       <LinearGradient colors={GRADIANTBLUE} style={{flex:1}} start={{x: 0, y: 1}} end={{x: 1, y: 0.9}}>
       <View style={style.container}>
@@ -160,7 +179,7 @@ class Invoice extends React.Component {
                   Fecha de Emisión
                 </Text>
                 <Button
-                  title={presentInvoiceDate(this.state.invoiceDate)}
+                  title={date}
                   onPress={this.showDateTimePicker}
                   buttonStyle={style.buttonDate}
                   titleStyle={style.textRegular16BlueCenter}
@@ -213,12 +232,9 @@ class Invoice extends React.Component {
         <View style={style.containerFooter}>
           <Button
             title='Continuar'
-            onPress={ this.navigateToBewInvoice }
+            onPress={ this.navigateToSummaryInvoice }
             buttonStyle={style.buttonContinue}  
             titleStyle={ style.textRegular16White }
-            disabled={ !validateData(this.props.fiscalIdentity.name, this.props.items.length) }
-            disabledStyle={style.buttonContinueDisabled}
-            disabledTitleStyle = { style.textRegular16GrayLight }
             ViewComponent={LinearGradient}
             linearGradientProps={COLORGY}
           />

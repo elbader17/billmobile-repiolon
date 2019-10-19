@@ -7,6 +7,7 @@ import { COLORS } from '../../constants/colors';
 import style from './style';
 
 const InvoiceItems = props => {
+  console.log(props.items);
   return (
     <View style={[style.containerItemsInvoice,style.inColumnSpaceBetween]}>
       <ScrollView style={style.styleScroll}>
@@ -14,26 +15,25 @@ const InvoiceItems = props => {
           <View key={index}>
             <View style={[style.inLineSpaceBetween, style.line]}>
               <View style={style.boxItems1}>
-                <Text style={style.textLight16GrayDark}>
+                <Text style={style.textLight16GrayDark} numberOfLines={1}>
                   {item.name}
                 </Text>
               </View>
-              <View style={style.inLineSpaceBetween}>
+              <View style={[style.inLine, style.boxItems2]}>
                 <Button
                   title={`+${item.quantity}`}
-                  onPress={() => props.onPress(item.id, item.quantity + 1)}
+                  onPress={props.incrementQuantity}
                   buttonStyle={style.buttonCantProduct}
                   titleStyle={style.textRegular12BlueMedium}
                 />
                 <Button
                   icon = {<Icon name="x" size={13} color={COLORS.blueMedium} />}
-                  //onPress={() => {})}
+                  onPress={() => props.deleteItem(props.invoiceId)}
                   buttonStyle={[style.buttonCantProduct, {marginLeft: 5}]}
                   titleStyle={style.textRegular12BlueMedium}
                 />
-                
               </View>
-              <View style={style.boxItems2}>
+              <View style={style.boxItems3}>
                 <Text style={style.textLight16GrayDark}>
                   ${item.price}
                 </Text>

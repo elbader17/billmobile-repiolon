@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { fetch_api } from '../../utils/fetchrefresh';
 import {
   CREATE_INVOICE_ITEM,
   UPDATE_INVOICE_ITEM,
@@ -32,11 +33,29 @@ const updateInvoiceItem = (id, values) => {
       `v1/invoice_items/${id}`,
       { resource: { ...values, invoice_id: invoiceId } },
     ).then((response) => {
+      console.log(response);
       dispatch(updateInvoiceItemAction(response.data));
       return dispatch(getInvoice(invoiceId));
     }).catch((error) => {
-      console.log(error.response)
+      console.log(error)
     });
+  };
+};
+
+const deleteInvoiceItem = (id) => {
+  return () => {
+    return fetch_api(`/v1/invoice_items/${id}`,'GET', false)
+      .then(() => console.log('OK'))
+      .catch((error) => console.log(error));
+  };
+};
+
+const getInvoiceItems = () => {
+  return (getState) => {
+    const { id } = getState().invoices.currentInvoice;
+    return fetch_api(`/v1/invoice_items/${id}`,'GET', false)
+      .then((response) => console.log(response))
+      .catch((error) => console.log(error));
   };
 };
 
@@ -74,4 +93,4 @@ const createInvoiceItem = ({category, name, price, quantity}) => {
   };
 };
 
-export { createInvoiceItem, updateInvoiceItem };
+export { createInvoiceItem, updateInvoiceItem, deleteInvoiceItem, getInvoiceItems };

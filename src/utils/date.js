@@ -1,4 +1,5 @@
 
-export const presentInvoiceDate = invoiceDate => {
-  return `${invoiceDate.getDate() + 1}/${invoiceDate.getMonth() + 1}/${invoiceDate.getFullYear()}`;
+export const presentInvoiceDate = date => {
+  const dateFormat = new Date(date)
+  return `${dateFormat.getDate()}/${dateFormat.getMonth() + 1}/${dateFormat.getFullYear()}`;
 }

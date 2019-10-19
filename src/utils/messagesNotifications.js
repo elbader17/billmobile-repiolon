@@ -17,6 +17,24 @@ export const messageAddItemInvoice = {
     duration: 3450
 };
 
+export const messageItemsIncomplete = {
+    message: "Agregar Item/s",
+    description: "Añadir item/s a la Factura",
+    floating: true,
+    icon: { icon: "auto", position: "left" },
+    type: 'warning',
+    duration: 2000
+};
+
+export const messageCustomerIncomplete = {
+    message: "Agregar Cliente",
+    description: "Añadir un cliente a la Factura",
+    floating: true,
+    icon: { icon: "auto", position: "left" },
+    type: 'warning',
+    duration: 2000
+};
+
 export const messageLogOut = {
     message: "Cerrar Sesión",
     description: "No Implementado",

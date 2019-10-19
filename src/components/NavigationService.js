@@ -15,9 +15,14 @@ function navigate(routeName, params) {
   );
 }
 
+function goBack() {
+  navigator._navigation.goBack();
+}
+
 //Add other navigation functions that you need and export them
 
 export default {
   navigate,
   setTopLevelNavigator,
+  goBack,
 };

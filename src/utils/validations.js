@@ -1,10 +1,9 @@
 import { 
   RE_DNI, 
-  NUMBER, 
   EMAIL_REGEXP, 
-  PASSWORD_REGEXP 
+  PASSWORD_REGEXP, 
+  NUMBER
 } from '../constants/regular_expressions';
-
 
 export const validateDni = (dni) => {
   return RE_DNI.test(dni);
@@ -26,6 +25,10 @@ export const validateName = (name) => {
   return name!='';
 }
 
+export const validatePrice = (price) => {
+  return NUMBER.test(price) && price!='';
+}
+
 //Condiciones Necesarias para Registrarse
 export const validateDataSignUp = (pass, confirmPass, email, name) => {
   const bool = (validatePass(pass) && validateConfirmPass(pass,confirmPass) && validateEmail(email) && validateName(name));
@@ -34,8 +37,7 @@ export const validateDataSignUp = (pass, confirmPass, email, name) => {
 
 //Condiciones Necesarias para Agregar un nuevo Item
 export const validateAddItem = (name, price) => {
-  if(name!="" && price!="") return true;
-  else return false;
+  return (validateName(name) && validatePrice(price));
 }
 
 //Condiciones Necesarias para crear un Invoice

@@ -33,7 +33,7 @@ const InvoiceCustomer = props => {
       <View style={style.containerFinalConsumer}>
         <View style={style.inLineSpaceBetween}>
           <TextInput
-            placeholder="Ingrese Documento"
+            placeholder="Ingresar DNI"
             placeholderTextColor={COLORS.gray}
             onChangeText={props.setFinalConsumer}
             style={[style.textRegular16GrayDark,style.inputDNICustomer]}

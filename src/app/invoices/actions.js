@@ -46,14 +46,13 @@ const createInvoice = (invoiceDate, voucherType) => {
     invoice_date: invoiceDate,
     invoice_type: voucherType
   };
-
+  console.log(invoiceDate);  
   return (dispatch, getState) => {
     const instance = axios.create({
       headers: { 'JWT-TOKEN': getState().authentication.jwtToken },
     });
     return instance.post('v1/invoices', { resource })
       .then((response) => {
-        console.log(response.data.data);
         return dispatch(createInvoiceAction(response.data.data));
       })
       .catch((error) => {
@@ -63,6 +62,7 @@ const createInvoice = (invoiceDate, voucherType) => {
 };
 
 const updateInvoice = (values) => {
+  console.log(values);
   let resource = {};
   if (values.invoiceDate != null) {
     resource.invoice_date = values.invoiceDate;

@@ -6,7 +6,7 @@ import { METRICS } from '../../constants/metrics';
 
 const styles = StyleSheet.create({
   container: {
-    height: hp('100%') - METRICS.heightHeader
+    flex: 1
   },
   containerBody: {
     flex: 0.87
@@ -17,12 +17,8 @@ const styles = StyleSheet.create({
   },
   boxItems: {
     flex: 1,
-    backgroundColor: COLORS.white,
     marginBottom: 3,
-    marginTop: 10,
-    borderColor: COLORS.grayLight,
-    borderBottomWidth: 1,
-    borderTopWidth: 1
+    marginTop: 7
   },
   boxInfoItems: {
     paddingHorizontal: 20,
@@ -57,8 +53,8 @@ const styles = StyleSheet.create({
     borderRadius: 25,
   },
   buttonNew: {
-    width: wp('74%'),
-    height: hp('8%'),
+    width: wp('75%'),
+    height: hp('7%'),
     backgroundColor: 'transparent',
     borderRadius: 25,
     elevation: 1.5,
@@ -102,16 +98,17 @@ const styles = StyleSheet.create({
     color: COLORS.redLight,
   },
   search: {
-    width: wp('75%'),
-    height: hp('5%'),
-    marginTop: 5,
-    marginBottom: 2,
-    paddingBottom: 7,
-    fontFamily: FONTS.latoLight,
-    fontSize: FONTS.size16,
-    borderBottomWidth: 0.5,
-    borderColor: COLORS.white,
-    color: COLORS.white
+    backgroundColor: COLORS.white,
+    width: wp('90%'),
+    height: hp('6%'),
+    paddingLeft: 20,
+    marginTop: 15,
+    marginHorizontal: 15,
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size14,
+    borderRadius: 25,
+    color: 'black',
+    elevation: 4
   },
   buttonSelect: {
     width: wp('40%'),

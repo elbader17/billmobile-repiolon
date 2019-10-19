@@ -5,7 +5,7 @@ import SearchInput, { createFilter } from 'react-native-search-filter';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { Button } from "react-native-elements";
-import { GRADIANTBLUE2, COLORS, COLORGB2 } from '../../../constants/colors';
+import { COLORS, COLORGB, GRADIANTBLUE1, GRADIANTBLUE2 } from '../../../constants/colors';
 import { orderByName } from '../../../utils/functions';
 import ListCustomers from './ListCustomers';
 import style from '../style';
@@ -27,31 +27,24 @@ class CustomerList extends React.Component {
       headerTitle: (
         <SearchInput 
           onChangeText={(term) => { navigation.setParams({text: term}) }} 
-          placeholder="Buscar cliente"
-          placeholderTextColor={COLORS.grayLight}
+          placeholder= "Buscar Cliente"
+          placeholderTextColor={COLORS.grayDark}
           style={style.search}
         />
       ),
       headerBackground: (
         <LinearGradient
-          colors={ GRADIANTBLUE2 }
+          colors={ GRADIANTBLUE1 }
           style={{ flex: 1 }}
-          start={{x: 0, y: 0}}
-          end={{x: 1, y: 0}}
+          start={{x: 0, y: 1}}
+          end={{x: 0, y: 0}}
         />
       ),
+      headerStyle: { elevation: 0 },
       headerTitleStyle: style.headerText,
       headerTintColor: 'white',
-      headerLeft: ( 
-        <TouchableOpacity onPress={()=> {
-          if (navigation.state.params.type === 'collection') navigation.navigate('Home');
-          else navigation.navigate('Invoice');
-        }}>
-          <Icon name="left" size={18} color="white" style={{marginLeft:20}}/>
-        </TouchableOpacity> 
-      ),
       headerRight: (
-        <Icon name="search1" size={20} color={COLORS.grayLight} style={{marginRight:35}}/>
+        <Icon name="search1" size={20} color={COLORS.grayDark} style={{marginRight:35, marginTop: 15}}/>
       )
     }
   };
@@ -133,9 +126,12 @@ class CustomerList extends React.Component {
 
   render() {
     return(
-      <KeyboardAwareScrollView>
-      <View style={style.container}>
-        
+      <LinearGradient
+        colors={ GRADIANTBLUE2 }
+        style={style.container}
+        start={{x: 0, y: 1}}
+        end={{x: 0, y: 0}}
+      >
         <View style={style.containerBody}>
           <View style={style.boxCustomer}>
             <ScrollView> 
@@ -153,21 +149,13 @@ class CustomerList extends React.Component {
               buttonStyle={ style.buttonNew }
               titleStyle={ style.textRegular16White }
               ViewComponent={LinearGradient}
-              linearGradientProps={COLORGB2}
+              linearGradientProps={COLORGB}
             />
-            <Button
-              onPress={ this.navigateToHome }
-              icon={<Icon name="check" size={25} color="white"/>}
-              buttonStyle={ style.buttonReady }
-              titleStyle={ style.textRegular16White }
-              ViewComponent={LinearGradient}
-              linearGradientProps={COLORGB2}
-            /> 
           </View>
         </View>
       
-      </View>
-      </KeyboardAwareScrollView>
+      </LinearGradient>
+      
     );
   }
 }

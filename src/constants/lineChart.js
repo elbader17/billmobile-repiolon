@@ -9,7 +9,7 @@ export const dataChart = {
 
 export const dataConfig = {
   backgroundGradientFrom: 'rgba(0, 172, 230)',
-  backgroundGradientTo: 'rgba(26, 94, 255)',
+  backgroundGradientTo: 'rgba(55, 120, 255)',
   decimalPlaces: 1,
   color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`
 };

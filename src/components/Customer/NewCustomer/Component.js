@@ -29,14 +29,9 @@ class NewCustomer extends React.Component {
   static navigationOptions = ({navigation}) => {
     return {
       title: 'Nuevo Cliente',
-      headerBackground: (
-        <LinearGradient
-          colors={ GRADIANTBLUE2 }
-          style={{ flex: 1 }}
-          start={{x: 0, y: 0}}
-          end={{x: 1, y: 0}}
-        />
-      ),
+      headerStyle: {
+        backgroundColor: COLORS.blueMedium,
+      },
       headerTitleStyle: style.headerText,
       headerTintColor: 'white',
       headerLeft: <TouchableOpacity onPress={()=> {
@@ -118,6 +113,7 @@ class NewCustomer extends React.Component {
                   error={this.state.error}
                   errorColor={'#ff6666'}
                 />
+                
                 <TextField
                   title='Opcional'
                   label='Nombre de Fantasía'

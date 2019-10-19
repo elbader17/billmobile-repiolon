@@ -2,25 +2,24 @@ import { StyleSheet } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { COLORS } from '../../constants/colors';
 import { FONTS } from '../../constants/fonts';
+import { METRICS } from '../../constants/metrics';
 
 const styles = StyleSheet.create({
   container: {
-    height: hp('100%'),
+    flex: 1,
   },
   containerHeader: { 
-    flex:1,
-    paddingTop: 3,
+    flex:0.42,
+    paddingTop: 10,
     paddingHorizontal: 5,
   },
   containerStatictis: {
-    flex:0.6,
-    marginHorizontal: 12,
-    paddingTop: 17,
-    paddingBottom: 5
+    flex:0.33,
+    justifyContent: 'center',
+    paddingHorizontal: 12,
   },
   containerListCustomer: {
-    flex:0.60,
-    paddingVertical: 5,
+    flex:0.25,
   },
   containerFooter: { 
     width: '100%',
@@ -31,22 +30,20 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 0, 
   },
   scrollCustomers: {
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
-    borderRadius: 10,
-    marginTop: 7,
-    marginHorizontal: 12,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    elevation: 0.5,
+    marginTop: 2,
+    marginHorizontal: 18
   },
   styleChart: {
     borderRadius: 15,
-    elevation: 1
+    elevation: 3,
+    borderColor: COLORS.grayDark,
+    marginHorizontal: 5,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   circlePercentaje: {
-    borderWidth: 0, 
-    borderRadius: 65, 
     elevation: 5, 
+    borderRadius: 75, 
     borderColor: COLORS.grayLight,
     marginBottom: 10
   },
@@ -81,12 +78,27 @@ const styles = StyleSheet.create({
   textRegular16Blue: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size16,
-    color: COLORS.blueMedium,
+    color: COLORS.blue,
+  },
+  textRegular16GrayDark: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size16,
+    color: COLORS.grayDark,
+  },
+  textRegular16Bluelight: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size16,
+    color: COLORS.blueLight,
   },
   textLight12BlueLight: {
     fontFamily: FONTS.latoLight,
     fontSize: FONTS.size12,
     color: COLORS.blueLight,
+  },
+  textLight12White: {
+    fontFamily: FONTS.latoLight,
+    fontSize: FONTS.size12,
+    color: COLORS.white,
   },
   textRegular12BlueLight: {
     fontFamily: FONTS.latoRegular,
@@ -97,23 +109,18 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   textRegular14White: {
-    fontFamily: FONTS.latoRegular,
+    fontFamily: FONTS.latoLight,
     fontSize: FONTS.size14,
     color: COLORS.white,
+  },
+  textRegular18GrayDark: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size18,
+    color: COLORS.grayDark,
   },
   textRegular16White: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size16,
-    color: COLORS.white,
-  },
-  textLight14White: {
-    fontFamily: FONTS.latoLight,
-    fontSize: FONTS.size14,
-    color: COLORS.white,
-  },
-  textLight16White: {
-    fontFamily: FONTS.latoLight,
-    fontSize: FONTS.size18,
     color: COLORS.white,
   },
   textLight18White: {
@@ -121,20 +128,15 @@ const styles = StyleSheet.create({
     fontSize: FONTS.size18,
     color: COLORS.white,
   },
-  lineBlueLightTop: {
-    width:'40%',
+  lineWhiteLeft: {
+    width:'10%',
     backgroundColor: COLORS.blueLight,
-    height: 4,
-    borderBottomRightRadius: 5,
-    borderTopRightRadius: 5,
-    marginBottom: 2,
-    opacity: 0.9
+    height: 1
   },
-  lineBlueLight: {
-    backgroundColor: COLORS.blueMedium,
-    height: 0.3,
-    borderRadius: 5,
-    marginHorizontal: 10
+  lineWhiteRight: {
+    width:'60%',
+    backgroundColor: COLORS.blueLight,
+    height: 1
   },
   buttonFooter: {
     height: hp('5%'),
@@ -147,6 +149,12 @@ const styles = StyleSheet.create({
     height: hp('4%'),
     backgroundColor: 'transparent',
     borderColor: COLORS.blueLight,
+  },
+  headerText: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size18,
+    fontWeight: 'normal',
+    color: COLORS.white,
   }
 });
 

@@ -73,7 +73,7 @@ function updateInvoiceItem({ draftState, invoiceItem }) {
     name,
     price,
     quantity,
-  } = invoiceItem.attributes;
+  } = invoiceItem.data.attributes;
   const itemIndex = draftState.currentInvoice.invoiceItems.findIndex(
     item => item.id === invoiceItem.id,
   );

@@ -8,9 +8,20 @@ const styles = StyleSheet.create({
   container: {
     height: hp('100%'),
   },
+  containerSummary: {
+    height: hp('100%') - METRICS.heightHeader,
+  },
   containerBody: {
     flex: 0.87
   }, 
+  containerBodySummary: {
+    flex: 0.87,
+    marginTop: 15,
+    marginBottom: 5,
+    marginHorizontal: 20,
+    borderRadius: 8,
+    elevation: 1.5
+  },
   containerFooter: {
     flex: 0.13,
     justifyContent: 'center',
@@ -24,7 +35,7 @@ const styles = StyleSheet.create({
   containerCustomers: {
     backgroundColor: COLORS.white,
     borderRadius: 5,
-    paddingVertical: 10,
+    paddingVertical: 8,
     paddingHorizontal: 15,
     elevation: 2.5,
   },
@@ -34,6 +45,16 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginTop: 12,
     elevation: 2.5
+  },
+  buttonEditSummary: {
+    backgroundColor: 'transparent',
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: COLORS.blueMedium,
+    width: wp('25%'),
+    height: hp('5%'),
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   buttonAdd: {
     //width: wp('100%'),
@@ -117,6 +138,10 @@ const styles = StyleSheet.create({
   boxDate: {
     width: '35%',
   },
+  boxCustomer: {
+    marginVertical: 10,
+    marginHorizontal: 15,
+  },
   boxModal: {
     width: wp('75%'),
     height: hp('40%'),
@@ -148,17 +173,49 @@ const styles = StyleSheet.create({
   },
   boxItemsInvoiceTotal: {
     height: hp('6%'),
+    borderTopWidth: 0.5,
+    borderColor: COLORS.grayLight,
     backgroundColor: 'transparent',
     paddingHorizontal: 15,
     paddingBottom: 2,
     justifyContent:'center'
   },
   boxItems1: {
-    flex: 1
+    width: '40%'
   },
   boxItems2: {
-    flex: 0.4,
+    width: '26%'
+  },
+  boxItems3: {
+    width: '30%',
     alignItems: 'flex-end',
+  },
+  boxHeaderSummary: {
+    flex: 0.2,
+    justifyContent: 'center',
+    marginHorizontal: 5,
+    paddingHorizontal: 15,
+    borderBottomWidth: 1.5,
+    borderBottomColor: COLORS.grayLight
+  },
+  boxInfoCustomerSummary: {
+    //backgroundColor: 'gray',
+    justifyContent: 'center'
+  },
+  boxListItemsSummary: {
+    flex: 1,
+    justifyContent: 'center',
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    borderTopWidth: 1.5,
+    borderTopColor: COLORS.grayLight
+  },
+  boxTotalSummary: {
+    justifyContent: 'flex-end',
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    borderTopWidth: 1.5,
+    borderTopColor: COLORS.grayLight
   },
   borderVoucher: {
     borderWidth: 1,
@@ -174,7 +231,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 7,
     borderColor: COLORS.gray,
-    marginBottom: 12,
     paddingLeft: 10
   },
   styleScroll: {
@@ -188,12 +244,24 @@ const styles = StyleSheet.create({
   inLineSpaceBetween: {
     flexDirection: "row",
     justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+  inLineSpaceAround: {
+    flexDirection: "row",
+    justifyContent: 'space-around',
   },
   inColumnSpaceBetween: {
     flexDirection: "column",
     justifyContent: 'space-between',
   },
   line: {
+    borderTopWidth: 0.5,
+    borderColor: COLORS.grayLight,
+    marginVertical: 1,
+    paddingVertical: 4,
+    paddingHorizontal: 5
+  },
+  lineBottom: {
     borderBottomWidth: 0.5,
     borderColor: COLORS.grayLight,
     marginVertical: 1,
@@ -225,9 +293,24 @@ const styles = StyleSheet.create({
     fontSize: FONTS.size18,
     color: COLORS.blueMedium
   },
+  textLight18GrayDark: {
+    fontFamily: FONTS.latoLight,
+    fontSize: FONTS.size18,
+    color: COLORS.grayDark
+  },
+  textLight14GrayDark: {
+    fontFamily: FONTS.latoLight,
+    fontSize: FONTS.size14,
+    color: COLORS.grayDark
+  },
   textLight16BlueMedium: {
     fontFamily: FONTS.latoLight,
     fontSize: FONTS.size16,
+    color: COLORS.blueMedium
+  },
+  textLight14BlueMedium: {
+    fontFamily: FONTS.latoLight,
+    fontSize: FONTS.size14,
     color: COLORS.blueMedium
   },
   textLight16GrayDark: {
@@ -239,6 +322,16 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size12,
     color: COLORS.blueMedium,
+  },
+  textRegular14BlueMedium: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size14,
+    color: COLORS.blueMedium,
+  },
+  textRegular14Gray: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size14,
+    color: COLORS.gray,
   },
 
 
@@ -350,7 +443,7 @@ const styles = StyleSheet.create({
   containerFinalConsumer: {
     height: hp('10%'),
     justifyContent: 'center',
-    paddingTop: 10
+    paddingTop: 0
   },
   containerInputCustomer: {
     backgroundColor: 'red',
