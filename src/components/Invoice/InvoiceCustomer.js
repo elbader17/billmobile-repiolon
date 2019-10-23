@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TextInput, Text } from 'react-native';
+import { View, TextInput, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { Button } from "react-native-elements";
 import PropTypes from 'prop-types';
@@ -33,20 +33,22 @@ const InvoiceCustomer = props => {
       <View style={style.containerFinalConsumer}>
         <View style={style.inLineSpaceBetween}>
           <TextInput
-            placeholder="Ingresar DNI"
+            placeholder="Ingresar Documento"
             placeholderTextColor={COLORS.gray}
             onChangeText={props.setFinalConsumer}
             style={[style.textRegular16GrayDark,style.inputDNICustomer]}
             keyboardType='numeric'
           />
           <Button
+            title= 'Añadir'
             testID='addfc'
-            icon={ validateDni(props.identity) ? iconEnabled : iconDisabled  }
+            TouchableComponent={TouchableOpacity}
             onPress={ props.addFinalConsumer }
+            titleStyle={validateDni(props.identity) ? style.textRegular12Blue : style.textRegular12Gray}
             buttonStyle={ style.buttonCheck }
             disabledStyle= { style.buttonCheckDisabled }
             loading = { props.loading }
-            loadingStyle={{top: 2, backgroundColor: COLORS.gray, borderRadius: 10}}
+            loadingStyle={{top: 1.5, backgroundColor: COLORS.gray, borderRadius: 20}}
             disabled = { props.loading || !validateDni(props.identity) }
           />
         </View>

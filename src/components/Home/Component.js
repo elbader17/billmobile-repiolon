@@ -1,13 +1,12 @@
 import React from 'react';
-import { View, Text, Dimensions, TouchableOpacity, ScrollView, Image } from 'react-native';
+import { View, Text, Dimensions, TouchableOpacity, ScrollView, Image, Alert } from 'react-native';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import { Button } from "react-native-elements";
 import { LineChart } from 'react-native-chart-kit';
 import LinearGradient from 'react-native-linear-gradient';
-import IconTwo from 'react-native-vector-icons/Entypo';
-import IconThree from 'react-native-vector-icons/FontAwesome5';
+import { Icon } from 'react-native-elements';
 import { dataChart, dataConfig } from '../../constants/lineChart';
-import { GRADIANTBLUE2, GRADIANTBLUE1, COLORS } from '../../constants/colors';
+import { GRADIANTBLUE2, COLORS } from '../../constants/colors';
 import style from './style';
 
 class Home extends React.Component {
@@ -22,19 +21,12 @@ class Home extends React.Component {
 
   static navigationOptions = ({ navigation }) => ({
     title: 'Bill Mobile',
-    headerBackground: (
-      <LinearGradient
-        colors={ GRADIANTBLUE1 }
-        style={{ flex: 1 }}
-        start={{x: 0, y: 1}}
-        end={{x: 0, y: 0}}
-      />
-    ),
+    headerTransparent: true,
     headerStyle: { elevation: 0 },
     headerTitleStyle: style.headerText,
     headerLeft: (
       <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
-        <IconThree name='bars' size={22} color={COLORS.blueLight} style={{marginLeft: 10}}/>
+        <Icon type='feather' name='menu' size={30} color={COLORS.blueLight} iconStyle={{marginLeft: 10}}/>
       </TouchableOpacity>
     ),
     headerRight: (
@@ -55,19 +47,9 @@ class Home extends React.Component {
   customerListNavigate = () => this.props.navigation.navigate('CustomerList');
   itemListNavigate = () => this.props.navigation.navigate('ItemList');
   newInvoiceNavigate = () => this.props.navigation.navigate('Invoice');
-  handleSignOut = () => {
-    const { signOut } = this.props;
-    signOut()
-      .then(() => {
-        this.props.navigation.navigate('Authentication');
-      })
-      .catch((err) => {
-        alert('Error al Cerrar Sesión ' + err)
-      })
-  }
 
   render() {
-    const iconInvoice = <IconThree name="file" size={12} style={{opacity: 0.7}} color={COLORS.blueLight}/>
+    const iconInvoice = <Icon type='antdesign' name="filetext1" size={12} style={{opacity: 0.7}} color={COLORS.blueLight}/>
     return(
         <LinearGradient
           colors={ GRADIANTBLUE2 }
@@ -78,9 +60,12 @@ class Home extends React.Component {
           <View style={style.containerHeader}>
 
             <View style={style.textFacPeriodo}>
-              <Text style={style.textLight12White}>
-                <IconTwo name="area-graph" color={COLORS.blueLight}/> Facturación del Período
-              </Text>
+              <View style={style.inLine}>
+                <Icon type='entypo' name="area-graph" color={COLORS.blueLight} size={15} iconStyle={{marginRight: 3}}/>
+                <Text style={style.textLight12White}>
+                  Facturación del Período
+                </Text>
+              </View>
             </View>
 
             <LineChart

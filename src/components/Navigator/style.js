@@ -6,16 +6,15 @@ import { FONTS } from '../../constants/fonts';
 const styles = StyleSheet.create({
   containerDrawer: {
     height: hp('100%'),
-    backgroundColor: COLORS.blueMedium,
-    borderWidth: 1,
-    borderColor: COLORS.grayLight
+    borderWidth: 0.5,
+    borderColor: COLORS.blueMedium
   },
   headerContainerDrawer: {
     alignItems: 'center',
     paddingVertical: 20,
-    marginHorizontal: 3,
-    borderBottomWidth: 1,
-    borderColor: COLORS.grayLight
+    marginHorizontal: 5,
+    borderBottomWidth: 0.5,
+    borderColor: COLORS.blueMedium
   },
   logoDrawer: {
     width: 180,
@@ -28,10 +27,10 @@ const styles = StyleSheet.create({
     fontSize: FONTS.size16,
     color: COLORS.white
   },
-  textLight16White: {
+  textLight16Blue: {
     fontFamily: FONTS.latoLight,
     fontSize: FONTS.size16,
-    color: COLORS.white
+    color: COLORS.blueLight
   },
   textRegular11: {
     fontFamily: FONTS.latoRegular,

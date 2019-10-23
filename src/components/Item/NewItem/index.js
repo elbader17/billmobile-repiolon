@@ -11,7 +11,7 @@ function mapDispatchToProps(dispatch) {
     saveItem: (attributes, navigation) => {
       dispatch(createItem(attributes))
         .then(() => {
-          navigation.navigate('ItemList');
+          navigation.goBack();
         });
     },
     type: 'collection'

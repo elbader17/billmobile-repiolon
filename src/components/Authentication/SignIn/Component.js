@@ -1,10 +1,10 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import { TextField } from 'react-native-material-textfield';
 import PasswordInputText from 'react-native-hide-show-password-input';
 import LinearGradient from 'react-native-linear-gradient';
 import { Button } from "react-native-elements";
-import { COLORGY, COLORS, COLORGB2 } from '../../../constants/colors';
+import { COLORGY, COLORS, COLORGB2, COLORGBL } from '../../../constants/colors';
 import style from '../style';
 
 class SignIn extends React.Component {
@@ -39,8 +39,8 @@ class SignIn extends React.Component {
           this.setState({error: 'Email o Password incorrectos'})
           this.props.navigation.navigate('Authentication');
         }
-        this.setLoading(false);
       }
+      this.setLoading(false);
     })
     .catch(err => {
       this.setState({error: 'ERROR al ingresar, intente nuevamente!'});
@@ -105,13 +105,14 @@ class SignIn extends React.Component {
         <View style={style.containerButtonSignTwo}>
           <Button
             title='Ingresar'
+            TouchableComponent={TouchableOpacity}
             testID={'submitSignIn'}
             onPress={ this.handleSignIn }
             buttonStyle={ style.buttonSignTwo }
             titleStyle={ style.textRegular16White }
             loading = {this.state.loading}
             ViewComponent={LinearGradient}
-            linearGradientProps={COLORGY}
+            linearGradientProps={COLORGBL}
           />
           <View style={this.state.confirm ? style.displayFlex : style.displayNone}>
             <Button
@@ -121,7 +122,7 @@ class SignIn extends React.Component {
               buttonStyle={ style.buttonConfirm }
               titleStyle={ style.textRegular16White }
               ViewComponent={LinearGradient}
-              linearGradientProps={COLORGB2}
+              linearGradientProps={COLORGBL}
             />
           </View>
         </View>

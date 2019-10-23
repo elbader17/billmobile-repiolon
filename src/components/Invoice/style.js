@@ -6,20 +6,23 @@ import { METRICS } from '../../constants/metrics';
 
 const styles = StyleSheet.create({
   container: {
-    height: hp('100%'),
+    flex: 1
   },
   containerSummary: {
-    height: hp('100%') - METRICS.heightHeader,
+    flex: 1,
+    paddingTop: METRICS.heightHeader
   },
   containerBody: {
     flex: 0.87
   }, 
   containerBodySummary: {
     flex: 0.87,
-    marginTop: 15,
+    backgroundColor: 'rgba(255, 255, 255, 0.95)',
     marginBottom: 5,
     marginHorizontal: 20,
-    borderRadius: 8,
+    borderRadius: 10,
+    borderWidth: 0.5,
+    borderColor: COLORS.blue,
     elevation: 1.5
   },
   containerFooter: {
@@ -34,7 +37,7 @@ const styles = StyleSheet.create({
   },
   containerCustomers: {
     backgroundColor: COLORS.white,
-    borderRadius: 5,
+    borderRadius: 9,
     paddingVertical: 8,
     paddingHorizontal: 15,
     elevation: 2.5,
@@ -42,7 +45,7 @@ const styles = StyleSheet.create({
   containerItemsInvoice: {
     maxHeight: hp('33%'),
     backgroundColor: COLORS.white,
-    borderRadius: 5,
+    borderRadius: 9,
     marginTop: 12,
     elevation: 2.5
   },
@@ -57,8 +60,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   buttonAdd: {
-    //width: wp('100%'),
-    height: hp('8%'),
+    //width: wp('90%'),
+    height: hp('7%'),
     marginTop: 12,
     backgroundColor: 'transparent',
     borderRadius: 25,
@@ -78,7 +81,7 @@ const styles = StyleSheet.create({
   },
   buttonContinue: {
     width: wp('90%'),
-    height: hp('8%'),
+    height: hp('7%'),
     backgroundColor: 'transparent',
     borderRadius: 25,
     elevation: 1.5,
@@ -100,7 +103,7 @@ const styles = StyleSheet.create({
     borderColor: COLORS.blueMedium,
     borderRadius: 7,
     borderWidth: 1,
-    width: wp('14%'),
+    width: wp('15%'),
     height: hp('6%'),
   },
   buttonCheckDisabled: {
@@ -108,7 +111,7 @@ const styles = StyleSheet.create({
     borderColor: COLORS.gray,
     borderRadius: 7,
     borderWidth: 1,
-    width: wp('14%'),
+    width: wp('15%'),
     height: hp('6%')
   },
   buttonCantProduct: {
@@ -176,7 +179,8 @@ const styles = StyleSheet.create({
     borderTopWidth: 0.5,
     borderColor: COLORS.grayLight,
     backgroundColor: 'transparent',
-    paddingHorizontal: 15,
+    marginHorizontal: 10,
+    paddingHorizontal: 5,
     paddingBottom: 2,
     justifyContent:'center'
   },
@@ -195,8 +199,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginHorizontal: 5,
     paddingHorizontal: 15,
-    borderBottomWidth: 1.5,
-    borderBottomColor: COLORS.grayLight
+    borderBottomWidth: 1,
+    borderBottomColor: COLORS.blueMedium
   },
   boxInfoCustomerSummary: {
     //backgroundColor: 'gray',
@@ -206,16 +210,18 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     paddingVertical: 5,
-    paddingHorizontal: 10,
-    borderTopWidth: 1.5,
-    borderTopColor: COLORS.grayLight
+    marginHorizontal: 5,
+    paddingHorizontal: 5,
+    borderTopWidth: 1,
+    borderTopColor: COLORS.blueMedium
   },
   boxTotalSummary: {
     justifyContent: 'flex-end',
     paddingVertical: 10,
-    paddingHorizontal: 15,
-    borderTopWidth: 1.5,
-    borderTopColor: COLORS.grayLight
+    marginHorizontal: 5,
+    paddingHorizontal: 10,
+    borderTopWidth: 1,
+    borderTopColor: COLORS.blueMedium
   },
   borderVoucher: {
     borderWidth: 1,
@@ -235,11 +241,11 @@ const styles = StyleSheet.create({
   },
   styleScroll: {
     marginHorizontal: 12,
-    marginTop: 7
+    marginVertical: 7
   },
   listCustomer:{
     marginTop: 6,
-    marginBottom: 2
+    marginBottom: 6
   },
   inLineSpaceBetween: {
     flexDirection: "row",
@@ -255,10 +261,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   line: {
-    borderTopWidth: 0.5,
-    borderColor: COLORS.grayLight,
-    marginVertical: 1,
-    paddingVertical: 4,
+    paddingVertical: 3,
     paddingHorizontal: 5
   },
   lineBottom: {
@@ -296,6 +299,11 @@ const styles = StyleSheet.create({
   textLight18GrayDark: {
     fontFamily: FONTS.latoLight,
     fontSize: FONTS.size18,
+    color: COLORS.grayDark
+  },
+  textLight12GrayDark: {
+    fontFamily: FONTS.latoLight,
+    fontSize: FONTS.size12,
     color: COLORS.grayDark
   },
   textLight14GrayDark: {
@@ -353,13 +361,13 @@ const styles = StyleSheet.create({
   buttonVoucher: {
     paddingVertical: 10,
     backgroundColor: COLORS.white,
-    borderRadius: 5,
+    borderRadius: 9,
     elevation: 4,
   },
   buttonDate: {
     backgroundColor: COLORS.white,
     paddingVertical: 10,
-    borderRadius: 5,
+    borderRadius: 9,
     elevation: 4,
   },
   buttonOn: {

@@ -6,10 +6,11 @@ import { METRICS } from '../../constants/metrics';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   containerBody: {
-    flex: 0.87
+    flex: 0.87,
+    marginTop: METRICS.heightHeader
   }, 
   containerFooter: {
     flex: 0.13,
@@ -17,14 +18,17 @@ const styles = StyleSheet.create({
   },
   boxItems: {
     flex: 1,
-    marginBottom: 3,
-    marginTop: 7
+    borderColor: COLORS.blueMedium,
+    borderBottomWidth: 0.5,
+    borderTopWidth: 0.3,
+    marginTop: 10,
+    marginHorizontal: 12
   },
   boxInfoItems: {
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
     paddingVertical: 10,
-    borderColor: COLORS.grayLight,
-    borderBottomWidth: 1
+    borderColor: COLORS.blueMedium,
+    borderBottomWidth: 0.4,
   },
   boxInput: {
     backgroundColor: 'transparent',
@@ -53,7 +57,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
   },
   buttonNew: {
-    width: wp('75%'),
+    width: wp('90%'),
     height: hp('7%'),
     backgroundColor: 'transparent',
     borderRadius: 25,
@@ -63,34 +67,30 @@ const styles = StyleSheet.create({
   },
   buttonSave: {
     width: wp('90%'),
-    height: hp('8%'),
+    height: hp('7%'),
     backgroundColor: 'transparent',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 25,
+    elevation: 1.5,
   },
   buttonEditBlue:{
     backgroundColor: 'transparent',
     width: wp('15%'),
     height: hp('5%'),
     borderWidth: 1,
-    borderColor: COLORS.blueMedium,
+    borderColor: COLORS.blueLight,
     borderRadius: 10
   },
   buttonDelete:{
     backgroundColor: 'transparent',
-    height: hp('5%')
-  },
-  buttonDeleteLoad:{
-    backgroundColor: COLORS.gray,
     height: hp('5%'),
-    borderRadius: 7,
-    marginLeft: 3
+    width: 40
   },
   textButtonEdit: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size12,
-    color: COLORS.blueMedium,
+    color: COLORS.blueLight,
   },
   textDelete: {
     fontFamily: FONTS.latoRegular,
@@ -100,6 +100,18 @@ const styles = StyleSheet.create({
   search: {
     backgroundColor: COLORS.white,
     width: wp('90%'),
+    height: hp('6%'),
+    paddingLeft: 20,
+    marginHorizontal: 15,
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size14,
+    borderRadius: 25,
+    color: 'black',
+    elevation: 4
+  },
+  searchInvoice: {
+    backgroundColor: COLORS.white,
+    width: wp('70%'),
     height: hp('6%'),
     paddingLeft: 20,
     marginTop: 15,
@@ -147,20 +159,20 @@ const styles = StyleSheet.create({
     fontSize: FONTS.size14,
     color: COLORS.grayDark
   },
-  textRegular14Blue: {
+  textLight14BlueLight: {
     fontFamily: FONTS.latoLight,
     fontSize: FONTS.size14,
-    color: COLORS.blueMedium
+    color: COLORS.blueLight
   },
   textRegular16White: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size16,
     color: COLORS.white
   },
-  textRegular16Blue: {
+  textRegular16BlueLight: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size16,
-    color: COLORS.blueMedium
+    color: COLORS.blueLight
   },
   headerText: {
     fontFamily: FONTS.latoRegular,

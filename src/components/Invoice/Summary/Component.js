@@ -1,9 +1,8 @@
 import React from 'react';
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import Icon from 'react-native-vector-icons/AntDesign';
-import { Button } from "react-native-elements";
-import { GRADIANTBLUE2, COLORS, COLORGB2, COLORGB, COLORGY } from '../../../constants/colors';
+import { Button, Icon } from "react-native-elements";
+import { GRADIANTBLUE2, COLORS, COLORGB2, COLORGB, COLORGY, COLORGBL } from '../../../constants/colors';
 import style from '../style';
 import { presentInvoiceDate } from '../../../utils/date';
 
@@ -20,21 +19,19 @@ class InvoiceSummary extends React.Component {
   static navigationOptions = ({navigation}) => {
     return {
       title: 'Documento Final',
-      headerBackground: (
-        <LinearGradient
-          colors={ GRADIANTBLUE2 }
-          style={{ flex: 1 }}
-          start={{x: 0, y: 0}}
-          end={{x: 1, y: 0}}
-        />
-      ),
+      headerTransparent: true,
+      headerStyle: {
+        elevation: 0,
+        shadowOpacity: 0,
+        borderBottomWidth: 0,
+      },
       headerTitleStyle: style.headerText,
       headerTintColor: 'white',
-      headerLeft: ( 
-        <TouchableOpacity onPress={()=> {navigation.navigate('Invoice')}}>
-          <Icon name="left" size={18} color="white" style={{marginLeft:20}}/>
-        </TouchableOpacity> 
-      ),
+      headerLeft: (
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Icon type='ionicon' name="ios-arrow-back" size={25} color={COLORS.blueLight} iconStyle={{marginLeft:20}}/>
+        </TouchableOpacity>
+      )
     }
   };
   
@@ -56,8 +53,8 @@ class InvoiceSummary extends React.Component {
     if (this.props.fiscalIdentity.name==='fc') {
       return(
         <View style={style.boxCustomer}>
-          <Text style={style.textRegular18GrayDark}>Consumidor Final</Text>
-          <Text style={style.textRegular14Gray}>Documento: {this.props.fiscalIdentity.identification}</Text>
+          <Text style={style.textRegular16GrayDark}>Consumidor Final</Text>
+          <Text style={style.textLight14BlueMedium}>Documento: {this.props.fiscalIdentity.identification}</Text>
         </View>
       )
     } else {
@@ -66,11 +63,11 @@ class InvoiceSummary extends React.Component {
             <Text style={style.textRegular16GrayDark}>
               Martin Daniotti
             </Text>
-            <Text style={style.textLight14GrayDark}>CUIT: {this.props.fiscalIdentity.identification}</Text>
-            <Text style={style.textLight14GrayDark}>Localidad: {'Río Cuarto'}</Text>
-            <Text style={style.textLight14GrayDark}>Provincia: {'Córdoba'}</Text>
-            <Text style={style.textLight14GrayDark}>IVA: {'Responsable Inscripto'}</Text>
-            <Text style={style.textLight14GrayDark}>Domicilio Fiscal: {'Dean Funes 645'}</Text>
+            <Text style={style.textLight14BlueMedium}>CUIT: {this.props.fiscalIdentity.identification}</Text>
+            <Text style={style.textLight12GrayDark}>Localidad: {'Río Cuarto'}</Text>
+            <Text style={style.textLight12GrayDark}>Provincia: {'Córdoba'}</Text>
+            <Text style={style.textLight12GrayDark}>IVA: {'Responsable Inscripto'}</Text>
+            <Text style={style.textLight12GrayDark}>Domicilio Fiscal: {'Dean Funes 645'}</Text>
           </View>
         )
     }
@@ -78,8 +75,12 @@ class InvoiceSummary extends React.Component {
 
   render() {
     return(
-      <ScrollView>
-      <View style={style.containerSummary}>
+      <LinearGradient
+        colors={ GRADIANTBLUE2 }
+        style={style.containerSummary}
+        start={{x: 0, y: 1}}
+        end={{x: 0, y: 0}}
+      >
         <View style={style.containerBodySummary}>
           
           <View style={style.boxHeaderSummary}>
@@ -106,9 +107,9 @@ class InvoiceSummary extends React.Component {
                     <View style={[style.inLineSpaceBetween, style.boxItems2]}>
                       <Text numberOfLines={1}>
                         <Text style={style.textLight14BlueMedium}>
-                          x{'1' + '  '}
+                          {'1'}x{' '}
                         </Text>
-                        <Text style={style.textLight14BlueMedium}>
+                        <Text style={style.textLight14GrayDark}>
                           ${item.price}
                         </Text>
                       </Text>
@@ -129,11 +130,12 @@ class InvoiceSummary extends React.Component {
               <Button
                 title='Editar'
                 testID='edit'
+                TouchableComponent={TouchableOpacity}
                 onPress={ this.navigateToInvoice}
                 buttonStyle={ style.buttonEditSummary }
                 titleStyle={ style.textRegular14BlueMedium }
               />
-              <Text style={style.textLight18GrayDark}>Total:</Text>
+              <Text style={style.textLight18BlueMedium}>Total:</Text>
               <Text style={style.textRegular18GrayDark}>$ {this.props.invoiceTotal}</Text>
             </View>
           </View>
@@ -144,16 +146,16 @@ class InvoiceSummary extends React.Component {
           <Button
             title='Confirmar Factura'
             testID='confirmInvoice'
+            TouchableComponent={TouchableOpacity}
             onPress={ () =>  this.confirmInvoice}
             buttonStyle={ style.buttonContinue }
             titleStyle={ style.textRegular16White }
             disabled={ !this.validateData() }
             ViewComponent={LinearGradient}
-            linearGradientProps={COLORGB}
+            linearGradientProps={COLORGBL}
           />
         </View>
-      </View>
-      </ScrollView>
+      </LinearGradient>
     )
   }
 }

@@ -1,13 +1,10 @@
 import React from 'react';
-import { View, TouchableOpacity, Image } from 'react-native';
-//import Icon from 'react-native-vector-icons/Ionicons';
-import { 
-  //createStackNavigator, 
-  createAppContainer, 
-  createSwitchNavigator, 
-  //createBottomTabNavigator,
-  //createDrawerNavigator
-} from 'react-navigation';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
+import { createDrawerNavigator } from 'react-navigation-drawer';
+import { DrawerActions } from 'react-navigation-drawer';
+import { Icon } from 'react-native-elements';
 //All Screens and Components
 import Initializing from '../Initializing/Component';
 import Intro from '../Intro';
@@ -30,71 +27,42 @@ import NewItem from '../Item/NewItem';
 import ItemsList from '../Item/List';
 import EditItem from '../Item/EditItem';
 import DrawerComponent from './Drawer';
-import DrawerScreenn from '../ScreenDrawer/DrawerScreen';
-import SearchScreen from '../Search/SearchScreen';
+import DrawerScreen from '../ScreenDrawer/DrawerScreen';
 //Utils
-import { getTabBarIcon } from '../../utils/functions';
 import { COLORS } from '../../constants/colors';
 import style from './style'; 
 
+const HomeStack = createStackNavigator({
+  Home: HomeScreen,
+});
 
-import { createStackNavigator } from 'react-navigation-stack';
-import { createBottomTabNavigator } from 'react-navigation-tabs';
-import { createDrawerNavigator } from 'react-navigation-drawer';
-import { DrawerActions } from 'react-navigation-drawer';
-
-import { Icon } from 'react-native-elements';
-
-import { theme } from '../theme';
-
-const defaultHeader = {
-  headerStyle: {
-    backgroundColor: theme.colors.primary,
-  },
-  headerTitleStyle: {
-    ...theme.typography.titleTextSemiBold,
-    alignSelf: 'center',
-  },
-  headerBackTitle: null,
-  headerTintColor: theme.colors.appbarTint,
-};
-
-
-const HomeStack = createStackNavigator(
-  {
-    Home: HomeScreen,
-  },
-  {
-    initialRouteName: 'Home',
-    navigationOptions: defaultHeader,
-  },
-);
-
-
-const InvoiceStack = createStackNavigator(
-  {
-    Invoice
-  },
-  {
-    navigationOptions: defaultHeader,
-  },
-);
+const InvoiceStack = createStackNavigator({
+  Invoice,
+  ListInvoiceCustomer,
+  ListInvoiceItem,
+  NewInvoiceCustomer,
+  NewInvoiceItem,
+  InvoiceSummary
+});
 
 const CustomerStack = createStackNavigator({
   CustomersList,
   EditCustomer,
   NewCustomer
-}, {
-  navigationOptions: defaultHeader,
 });
 
 const ItemStack = createStackNavigator({
   ItemsList,
   EditItem,
   NewItem
-}, {
-  navigationOptions: defaultHeader,
 });
+
+const LoginStack = createStackNavigator({
+    Authentication,
+    ConfirmationCodeRegister,
+  },
+  { headerMode: 'none'}
+);
 
 const MainAppNavigator = createBottomTabNavigator(
   {
@@ -124,11 +92,10 @@ const MainAppNavigator = createBottomTabNavigator(
     },
   },
   {
-    //initialRouteName: Inicio
     tabBarOptions: {
       showLabel: true,
       labelStyle: style.textRegular11,
-      activeTintColor: COLORS.blueLight,
+      activeTintColor: '#33ffcf',
       inactiveTintColor: COLORS.white,
       style: {
         backgroundColor: COLORS.blueMedium,
@@ -138,32 +105,44 @@ const MainAppNavigator = createBottomTabNavigator(
   },
 );
 
-const Drawer = createDrawerNavigator({
-  Main: {
-    screen: MainAppNavigator,
-  },
-  DrawerS: {
-    screen: DrawerScreenn,
-    navigationOptions: { header: null },
-  },
-}, {
-  contentComponent: DrawerComponent,
-});
+const Drawer = createDrawerNavigator(
+  {
+    Main: {
+      screen: MainAppNavigator,
+    },
+    DrawerScreen: {
+      screen: DrawerScreen,
+      navigationOptions: { header: null },
+    },
+  }, 
+  { contentComponent: DrawerComponent }
+);
 
 const DrawerNavigator = createDrawerNavigator(
   {
-    Drawer,
-    HomeScreen
+    Drawer
   },
   {
-    contentComponent: DrawerScreenn,
+    contentComponent: DrawerScreen,
     getCustomActionCreators: (route, stateKey) => ({
       toggleFilterDrawer: () => DrawerActions.toggleDrawer({ key: stateKey }),
     }),
   },
 );
 
-const AppNavigator = createAppContainer(DrawerNavigator);
+//SwitchNavigator
+const AppSwitchNavigator = createSwitchNavigator(
+  {
+    Intro,
+    Login: LoginStack,
+    Home: DrawerNavigator
+  },
+  {
+    initialRouteName: 'Home',
+  }
+);
+
+const AppNavigator = createAppContainer(AppSwitchNavigator);
 
 export default AppNavigator; 
 

@@ -12,8 +12,8 @@ export const COLORS = {
   redLight: '#ff8080',
   redMedium: '#ff6666'
 };
-
-export const GRADIANTBLUE = ['#00e6e6', '#17C8FF', '#329BFF','#4C64FF', '#6536FF'];
+export const GRADIANTBLUELIGHT = ['#00E7B2','#00e6e6', '#17C8FF','#329BFF','#4C64FF','#6536FF'];
+export const GRADIANTBLUE = ['#009FD5', '#008CDE', '#329BFF','#4C64FF', '#6536FF'];
 export const GRADIANTBLUE1 = ['#0066F1', '#004BFE'];
 export const GRADIANTBLUE2 = ['#009FD5', '#008CDE', '#007DE6','#007DE6','#0066F1'];
 export const GRADIANTBLUE3 = ['#009FD5', '#008CDE', '#007DE6'];
@@ -26,6 +26,11 @@ export const COLORGY = {
 
 export const COLORGB = {
   colors: GRADIANTBLUE,
+  start: {x: 0, y: 1}, end: {x: 1, y: 1}
+}
+
+export const COLORGBL = {
+  colors: GRADIANTBLUELIGHT,
   start: {x: 0, y: 1}, end: {x: 1, y: 1}
 }
 

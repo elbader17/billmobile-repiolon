@@ -12,7 +12,7 @@ const mapDispatchToProps = (dispatch) => {
     saveFiscalIdentity: (name, identification, category, id, navigation) => {
       dispatch(createCustomer({ name, identification, category }))
         .then(() => {
-          navigation.navigate('CustomerList')
+          navigation.goBack();
         });
     },
     type: 'collection'

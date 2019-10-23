@@ -3,9 +3,8 @@ import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator, Alert } fr
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import SearchInput, { createFilter } from 'react-native-search-filter';
 import LinearGradient from 'react-native-linear-gradient';
-import Icon from 'react-native-vector-icons/AntDesign';
-import { Button } from "react-native-elements";
-import { COLORS, COLORGB, GRADIANTBLUE1, GRADIANTBLUE2 } from '../../../constants/colors';
+import { Button, Icon } from "react-native-elements";
+import { COLORS, COLORGB, GRADIANTBLUE1, GRADIANTBLUE2, COLORGBL } from '../../../constants/colors';
 import { orderByName } from '../../../utils/functions';
 import ListCustomers from './ListCustomers';
 import style from '../style';
@@ -18,33 +17,25 @@ class CustomerList extends React.Component {
     this.state = {
       loading: true, //Load list customer
       loadingDelete: false,
-      customerDelete: undefined
+      customerDelete: undefined,
+      inputSearch: ''
     };
   }
   
   static navigationOptions = ({navigation}) => {
     return {
-      headerTitle: (
-        <SearchInput 
-          onChangeText={(term) => { navigation.setParams({text: term}) }} 
-          placeholder= "Buscar Cliente"
-          placeholderTextColor={COLORS.grayDark}
-          style={style.search}
-        />
-      ),
-      headerBackground: (
-        <LinearGradient
-          colors={ GRADIANTBLUE1 }
-          style={{ flex: 1 }}
-          start={{x: 0, y: 1}}
-          end={{x: 0, y: 0}}
-        />
-      ),
+      title: 'Listado de Clientes',
+      headerTransparent: true,
       headerStyle: { elevation: 0 },
       headerTitleStyle: style.headerText,
       headerTintColor: 'white',
-      headerRight: (
-        <Icon name="search1" size={20} color={COLORS.grayDark} style={{marginRight:35, marginTop: 15}}/>
+      headerLeft: (
+        <TouchableOpacity onPress={()=> {
+          if (navigation.state.params.type === 'collection') navigation.navigate('Inicio');
+          else navigation.navigate('Invoice');
+        }}>
+          <Icon type='ionicon' name='ios-arrow-back' size={25} color={COLORS.blueLight} iconStyle={{marginLeft:20}}/>
+        </TouchableOpacity>
       )
     }
   };
@@ -101,8 +92,8 @@ class CustomerList extends React.Component {
   renderLoading = () => {
     return (
       <View style={style.center}>
-        <ActivityIndicator size="large" color={COLORS.blueMedium} style={{paddingBottom: 15}}/>
-        <Text style={style.textRegular16Blue} >Cargando</Text>
+        <ActivityIndicator size="large" color={COLORS.blueLight} style={{paddingBottom: 15}}/>
+        <Text style={style.textRegular16BlueLight} >Cargando</Text>
       </View>
     );
   }
@@ -110,7 +101,7 @@ class CustomerList extends React.Component {
   renderCustomers() {
     const customers = this.props.customers.slice().sort(orderByName);
     const filteredCustomer = customers.filter(
-      createFilter(this.props.navigation.getParam('text', ''), KEYS_TO_FILTERS)
+      createFilter(this.state.inputSearch, KEYS_TO_FILTERS)
     );
     return (
       <ListCustomers 
@@ -133,6 +124,12 @@ class CustomerList extends React.Component {
         end={{x: 0, y: 0}}
       >
         <View style={style.containerBody}>
+          <SearchInput 
+            onChangeText={(term) => { this.setState({inputSearch: term}) }} 
+            placeholder="Buscar Cliente"
+            placeholderTextColor={COLORS.grayDark}
+            style={ style.search }
+          />
           <View style={style.boxCustomer}>
             <ScrollView> 
               {this.state.loading ? this.renderLoading() : this.renderCustomers()}
@@ -144,12 +141,13 @@ class CustomerList extends React.Component {
           <View style={style.inLineSpaceAround}> 
             <Button
               title=' Nuevo Cliente'
+              TouchableComponent={TouchableOpacity}
               onPress={ this.navigateToNewCustomer }
-              icon={<Icon name="plus" size={18} color="white"/>}
+              icon={<Icon type='antdesign' name="plus" size={18} color="white"/>}
               buttonStyle={ style.buttonNew }
               titleStyle={ style.textRegular16White }
               ViewComponent={LinearGradient}
-              linearGradientProps={COLORGB}
+              linearGradientProps={COLORGBL}
             />
           </View>
         </View>

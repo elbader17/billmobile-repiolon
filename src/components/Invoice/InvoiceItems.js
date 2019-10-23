@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { Button } from "react-native-elements";
 import Icon from 'react-native-vector-icons/Feather';
 import PropTypes from 'prop-types';
@@ -22,12 +22,14 @@ const InvoiceItems = props => {
               <View style={[style.inLine, style.boxItems2]}>
                 <Button
                   title={`+${item.quantity}`}
+                  TouchableComponent={TouchableOpacity}
                   onPress={props.incrementQuantity}
                   buttonStyle={style.buttonCantProduct}
                   titleStyle={style.textRegular12BlueMedium}
                 />
                 <Button
                   icon = {<Icon name="x" size={13} color={COLORS.blueMedium} />}
+                  TouchableComponent={TouchableOpacity}
                   onPress={() => props.deleteItem(props.invoiceId)}
                   buttonStyle={[style.buttonCantProduct, {marginLeft: 5}]}
                   titleStyle={style.textRegular12BlueMedium}

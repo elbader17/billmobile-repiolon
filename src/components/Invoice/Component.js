@@ -9,7 +9,7 @@ import InvoiceItems from './InvoiceItems';
 import InvoiceCustomer from './InvoiceCustomer';
 import { presentInvoiceDate } from '../../utils/date';
 import { validateData } from '../../utils/validations';
-import { GRADIANTBLUE, COLORS, COLORGY } from '../../constants/colors';
+import { GRADIANTBLUE, COLORS, COLORGY, GRADIANTBLUE1, GRADIANTBLUE2, COLORGBL } from '../../constants/colors';
 import { VOUCHER_TYPES } from '../../constants/invoice';
 import style from './style';
 import { 
@@ -35,7 +35,7 @@ class Invoice extends React.Component {
     }
   }
 
- /* static navigationOptions = ({navigation}) => {
+  static navigationOptions = ({navigation}) => {
     return {
       title: 'Generación de Comprobante',
       headerTransparent: true,
@@ -47,13 +47,11 @@ class Invoice extends React.Component {
       headerTitleStyle: style.headerText,
       headerTintColor: 'white',
       headerLeft: (
-        <TouchableOpacity onPress={()=> navigation.navigate('Home')}>
-          <Icon name="left" size={20} color="white" style={{marginLeft:20}}/>
-        </TouchableOpacity> 
+        <Icon name="filetext1" size={20} color={COLORS.blueLight} style={{marginLeft:20}}/>
       )
     }  
   };
-*/
+
   setModalVisible = visible => this.setState({modalVisible: visible});
   showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true });
   hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
@@ -156,7 +154,9 @@ class Invoice extends React.Component {
     const iconAddCustomer = <Icon name="adduser" size={17} color={COLORS.blueMedium} />
     var date = presentInvoiceDate(this.state.invoiceDate);
     return(  
-      <LinearGradient colors={GRADIANTBLUE} style={{flex:1}} start={{x: 0, y: 1}} end={{x: 1, y: 0.9}}>
+      <LinearGradient colors={GRADIANTBLUE2} 
+        style={{flex:1}} start={{x: 1, y: 1}} end={{x: 1, y: 0}}
+      >
       <View style={style.container}>
         
         <View style={style.containerBody}>
@@ -204,6 +204,7 @@ class Invoice extends React.Component {
                 <Button
                   title='Otro Cliente'
                   testID='addCustomer'
+                  TouchableComponent={TouchableOpacity}
                   icon={iconAddCustomer}
                   onPress={ this.navigateClient }
                   buttonStyle={style.buttonAddCustomer}
@@ -215,6 +216,7 @@ class Invoice extends React.Component {
 
             <Button
               title=' Agregar Items'
+              TouchableComponent={TouchableOpacity}
               onPress={ this.navigateAddItems }
               icon={<Icon name="plus" size={15} color="white"/>}
               buttonStyle={style.buttonAdd}  
@@ -222,7 +224,7 @@ class Invoice extends React.Component {
               disabledStyle={style.buttonAddDisabled}
               disabledTitleStyle = { style.textRegular16GrayLight }
               ViewComponent={LinearGradient}
-              linearGradientProps={COLORGY}
+              linearGradientProps={COLORGBL}
             />
 
           { this.renderViewItemsAdd() }
@@ -232,11 +234,12 @@ class Invoice extends React.Component {
         <View style={style.containerFooter}>
           <Button
             title='Continuar'
+            TouchableComponent={TouchableOpacity}
             onPress={ this.navigateToSummaryInvoice }
             buttonStyle={style.buttonContinue}  
             titleStyle={ style.textRegular16White }
             ViewComponent={LinearGradient}
-            linearGradientProps={COLORGY}
+            linearGradientProps={COLORGBL}
           />
         </View>
 

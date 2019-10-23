@@ -1,13 +1,11 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator, Alert} from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import SearchInput, { createFilter } from 'react-native-search-filter';
-import { Button } from "react-native-elements";
+import { Button, Icon } from "react-native-elements";
 import { withNavigation } from 'react-navigation';
 import LinearGradient from 'react-native-linear-gradient';
-import Icon from 'react-native-vector-icons/AntDesign';
 import ListItems from './ListItems';
-import { GRADIANTBLUE2, COLORS, COLORGB, COLORGB2, GRADIANTBLUE1 } from '../../../constants/colors';
+import { GRADIANTBLUE2, COLORS, COLORGB, COLORGB2, GRADIANTBLUE1, COLORGBL, GRADIANTBLUELIGHT } from '../../../constants/colors';
 import { orderByName } from '../../../utils/functions';
 import style from '../style';
 
@@ -20,32 +18,24 @@ class ItemList extends React.Component {
       isProduct: true,
       loading: true, //loading items list
       loadingDelete: false, //for button item delete
+      inputSearch: '' //Item search
     };
   }
 
   static navigationOptions = ({navigation}) => {
     return {
-      headerTitle: (
-        <SearchInput 
-          onChangeText={(term) => { navigation.setParams({text: term}) }} 
-          placeholder="Buscar Item"
-          placeholderTextColor={COLORS.grayDark}
-          style={style.search}
-        />
-      ),
-      headerBackground: (
-        <LinearGradient
-          colors={ GRADIANTBLUE1 }
-          style={{ flex: 1 }}
-          start={{x: 0, y: 1}}
-          end={{x: 0, y: 0}}
-        />
-      ),
+      title: 'Listado de Items',
+      headerTransparent: true,
       headerStyle: { elevation: 0 },
       headerTitleStyle: style.headerText,
       headerTintColor: 'white',
-      headerRight: (
-        <Icon name="search1" size={20} color={COLORS.grayDark} style={{marginRight:35, marginTop: 15}}/>
+      headerLeft: (
+        <TouchableOpacity onPress={()=> {
+          if (navigation.state.params.type === 'collection') navigation.navigate('Inicio');
+          else navigation.navigate('Invoice');
+        }}>
+          <Icon type='ionicon' name='ios-arrow-back' size={25} color={COLORS.blueLight} iconStyle={{marginLeft:20}}/>
+        </TouchableOpacity>
       )
     }  
   };
@@ -103,8 +93,8 @@ class ItemList extends React.Component {
   renderLoading = () => {
     return (
       <View style={style.center}>
-        <ActivityIndicator size="large" color={COLORS.blueMedium} style={{paddingBottom: 15}}/>
-        <Text style={style.textRegular16Blue} >Cargando</Text>
+        <ActivityIndicator size="large" color={COLORS.blueLight} style={{paddingBottom: 15}}/>
+        <Text style={style.textRegular16BlueLight} >Cargando</Text>
       </View>
     );
   }
@@ -113,7 +103,7 @@ class ItemList extends React.Component {
     const category = this.state.isProduct ? 'product' : 'service';
     const items = this.props.items.slice().sort(orderByName);
     const filteredItems = items.filter(
-      createFilter(this.props.navigation.getParam('text', ''), KEYS_TO_FILTERS)
+      createFilter(this.state.inputSearch, KEYS_TO_FILTERS)
     );
     return (
       <ListItems
@@ -131,22 +121,27 @@ class ItemList extends React.Component {
   renderSwtichButtons() {
     return (
       <View style={[style.boxSelectButton, style.inLineSpaceAround]}>
-        <Button
-          title='Productos'
-          onPress={() => this.setState({isProduct: true}) }
-          buttonStyle={ style.buttonSelect }
-          titleStyle={ style.textRegular16White }
-          ViewComponent={LinearGradient}
-          linearGradientProps={this.state.isProduct ? COLORGB : COLORGB2}
-        />
-        <Button
-          title='Servicios'
-          onPress={() => this.setState({isProduct: false}) }
-          buttonStyle={ style.buttonSelect }
-          titleStyle={ style.textRegular16White }
-          ViewComponent={LinearGradient}
-          linearGradientProps={this.state.isProduct ? COLORGB2 : COLORGB}
-        />
+        
+        <TouchableOpacity onPress={() => this.setState({isProduct: true})} activeOpacity={0.8}>
+          <LinearGradient
+            colors={ this.state.isProduct ? GRADIANTBLUELIGHT : GRADIANTBLUE2 }
+            style={ style.buttonSelect }
+            start={{x: 0, y: 0}} end={{x: 1, y: 0}}
+          >
+            <Text style={style.textRegular14White}>Productos</Text>
+          </LinearGradient>
+        </TouchableOpacity>
+        
+        <TouchableOpacity onPress={() => this.setState({isProduct: false})} activeOpacity={0.8}>
+          <LinearGradient
+            colors={ this.state.isProduct ? GRADIANTBLUE2 : GRADIANTBLUELIGHT }
+            style={ style.buttonSelect }
+            start={{x: 0, y: 0}} end={{x: 1, y: 0}}
+          >
+            <Text style={style.textRegular14White}>Servicios</Text>
+          </LinearGradient>
+        </TouchableOpacity>
+      
       </View>
     );
   }
@@ -160,6 +155,13 @@ class ItemList extends React.Component {
         end={{x: 0, y: 0}}
       >
           <View style={style.containerBody}>
+            <SearchInput 
+              onChangeText={(term) => { this.setState({inputSearch: term}) }} 
+              placeholder="Buscar Item"
+              placeholderTextColor={COLORS.grayDark}
+              style={ style.search }
+              clearIcon={true && <Icon type='antdesign' name="plus" size={18} color="red"/>}
+            />
             {this.renderSwtichButtons()}
             <View style={style.boxItems}>
               <ScrollView>
@@ -172,12 +174,13 @@ class ItemList extends React.Component {
             <View style={style.inLineSpaceAround}>
               <Button
                 title=' Añadir Nuevo'
+                TouchableComponent={TouchableOpacity}
                 onPress={() => this.navigateToNewItem(this.state.isProduct) }
-                icon={<Icon name="plus" size={18} color="white"/>}
+                icon={<Icon type='antdesign' name="plus" size={18} color="white"/>}
                 buttonStyle={ style.buttonNew }
                 titleStyle={ style.textRegular16White }
                 ViewComponent={LinearGradient}
-                linearGradientProps={COLORGB}
+                linearGradientProps={COLORGBL}
               />
             </View>
           </View>

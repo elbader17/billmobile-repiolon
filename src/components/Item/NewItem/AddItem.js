@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { COLORS } from '../../../constants/colors';
 
 const AddItem = props => {
-  const placeholder = props.data.isProduct ? "Nombre de Producto" : "Concepto del Servicio";
+  const placeholder = props.data.isProduct ? "Nombre del Producto" : "Concepto del Servicio";
     return (
       <View>
         <TextField
@@ -13,14 +13,14 @@ const AddItem = props => {
           value={props.data.name}
           onChangeText={props.setName}
           onFocus={props.setErrorName}
-          tintColor={COLORS.blueMedium}
-          textColor= {COLORS.grayDark}
-          baseColor={COLORS.gray}
+          tintColor={COLORS.blueLight}
+          textColor= {COLORS.gray}
+          baseColor={COLORS.white}
           lineWidth={1}
           labelFontSize={15}
           labelPadding={6}
           error={props.data.errorName}
-          errorColor={'#ff6666'}
+          errorColor={'#ff9999'}
         />    
         <TextField
           title= {'$ ' + props.data.price }
@@ -29,15 +29,15 @@ const AddItem = props => {
           placeholderTextColor={ COLORS.gray }
           onChangeText={props.setPrice}
           onFocus={props.setErrorPrice}
-          tintColor={COLORS.blueMedium}
-          textColor= {COLORS.grayDark}
-          baseColor={COLORS.gray}
+          tintColor={COLORS.blueLight}
+          textColor= {COLORS.gray}
+          baseColor={COLORS.white}
           lineWidth={1}
           labelFontSize={15}
           labelPadding={6}
           keyboardType='numeric'
           error={props.data.errorPrice}
-          errorColor={'#ff6666'}
+          errorColor={'#ff9999'}
         />        
       </View>
     );  

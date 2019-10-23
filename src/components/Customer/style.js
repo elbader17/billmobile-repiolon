@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
   },
   containerBody: {
     flex: 0.87,
+    marginTop: METRICS.heightHeader,
   }, 
   containerFooter: {
     flex: 0.13,
@@ -17,29 +18,32 @@ const styles = StyleSheet.create({
   },
   containerInputs: {
     flex: 1,
-    paddingHorizontal: 15,
-    paddingTop: 20
+    paddingHorizontal: 20,
+    paddingTop: 7
   },
   boxCustomer: {
     flex: 1,
-    marginBottom: 3,
-    paddingTop: 7
+    borderColor: COLORS.blueMedium,
+    borderBottomWidth: 0.5,
+    borderTopWidth: 0.3,
+    marginTop: 10,
+    marginHorizontal: 12
   },
   boxInfoCustomer: {
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
     paddingVertical: 10,
-    borderColor: COLORS.grayLight,
-    borderBottomWidth: 1,
+    borderColor: COLORS.blueMedium,
+    borderBottomWidth: 0.4,
   },
   inputPicker: {
     height: 35,
     borderBottomWidth: 1,
-    borderBottomColor: COLORS.gray
+    borderBottomColor: COLORS.white
   },
   picker: {
     flex: 1,
     justifyContent: 'center',
-    color: 'rgb(153, 153, 153)',
+    color: 'white',
     marginVertical: 0,
     marginLeft: -8
   },
@@ -48,7 +52,6 @@ const styles = StyleSheet.create({
     width: wp('90%'),
     height: hp('6%'),
     paddingLeft: 20,
-    marginTop: 15,
     marginHorizontal: 15,
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size14,
@@ -75,14 +78,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center', 
     alignItems: 'center'
   },
-  textRegular16Blue: {
+  textRegular16BlueLight: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size16,
-    color: COLORS.blueMedium
+    color: COLORS.blueLight
   },
   textRegular16White: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size16,
+    color: COLORS.white,
+  },
+  textRegular14White: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size14,
     color: COLORS.white,
   },
   textLight18White: {
@@ -90,10 +98,10 @@ const styles = StyleSheet.create({
     fontSize: FONTS.size16,
     color: COLORS.white,
   },
-  textRegular12Gray: {
+  textRegular12White: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size12,
-    color: COLORS.gray,
+    color: COLORS.white,
   },
   textRegular14GrayDark: {
     fontFamily: FONTS.latoRegular,
@@ -105,17 +113,17 @@ const styles = StyleSheet.create({
     fontSize: FONTS.size16,
     color: COLORS.grayDark,
   },
-  textLight14Blue: {
+  textLight14BlueLight: {
     fontFamily: FONTS.latoLight,
     fontSize: FONTS.size14,
-    color: COLORS.blueMedium,
+    color: COLORS.blueLight,
   },
   button: {
     elevation: 1,
     borderRadius: 25,
   },
   buttonNew: {
-    width: wp('75%'),
+    width: wp('90%'),
     height: hp('7%'),
     backgroundColor: 'transparent',
     borderRadius: 25,
@@ -133,11 +141,12 @@ const styles = StyleSheet.create({
   },
   buttonSave: {
     width: wp('90%'),
-    height: hp('8%'),
+    height: hp('7%'),
     backgroundColor: 'transparent',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 25,
+    elevation: 1.5,
   },
   buttonSaveDisabled: {
     width: wp('90%'),
@@ -153,23 +162,18 @@ const styles = StyleSheet.create({
     width: wp('15%'),
     height: hp('5%'),
     borderWidth: 1,
-    borderColor: COLORS.blueMedium,
+    borderColor: COLORS.blueLight,
     borderRadius: 10
   },
   buttonDelete:{
     backgroundColor: 'transparent',
-    height: hp('5%')
-  },
-  buttonDeleteLoad:{
-    backgroundColor: COLORS.gray,
     height: hp('5%'),
-    borderRadius: 7,
-    marginLeft: 3
+    width: 40
   },
   textButtonEdit: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size12,
-    color: COLORS.blueMedium,
+    color: COLORS.blueLight,
   },
   textDelete: {
     fontFamily: FONTS.latoRegular,

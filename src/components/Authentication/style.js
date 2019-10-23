@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
     height: hp('6%'),
     backgroundColor: 'transparent',
     borderRadius: 25,
+    justifyContent: 'center',
     elevation: 2,
   },
   buttonSignTwo: {
@@ -134,6 +135,10 @@ const styles = StyleSheet.create({
   inLineSpaceAround: {
     flexDirection: 'row',
     justifyContent: 'space-around',
+    alignItems: 'center'
+  },
+  inLine: {
+    flexDirection: 'row',
     alignItems: 'center'
   },
   displayNone: {

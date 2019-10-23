@@ -11,7 +11,7 @@ import {
   validateEmail,
   validateDataSignUp
 } from '../../../utils/validations';
-import { COLORS, COLORGY } from '../../../constants/colors';
+import { COLORS, COLORGY, COLORGBL } from '../../../constants/colors';
 import style from '../style';
 
 class SignUp extends React.Component {
@@ -153,7 +153,7 @@ class SignUp extends React.Component {
             titleStyle={ style.textRegular16White }
             loading = {this.state.loading}
             ViewComponent={LinearGradient}
-            linearGradientProps={COLORGY}
+            linearGradientProps={COLORGBL}
           />
         </View>
       </View>

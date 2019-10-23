@@ -9,12 +9,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    saveFiscalIdentity: (name, identification, category, id, navigation) => {
+    saveFiscalIdentity: (name, identification, category, id) => (
       dispatch(updateCustomer({id, name, identification, category }))
-        .then(() => {
-          navigation.navigate('CustomerList')
-        });
-    },
+    ),
   };
 };
 

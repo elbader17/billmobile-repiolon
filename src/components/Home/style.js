@@ -7,6 +7,7 @@ import { METRICS } from '../../constants/metrics';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: METRICS.heightHeader
   },
   containerHeader: { 
     flex:0.42,
