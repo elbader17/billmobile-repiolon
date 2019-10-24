@@ -1,6 +1,6 @@
 import { API_HOST } from 'react-native-dotenv';
 import { Auth } from 'aws-amplify';
-import NavigationService from '../components/NavigationService';
+import NavigationService from '../components/Navigator/NavigationService';
 import { store } from '../store/index';
 
 function saveNewToken(newToken) {

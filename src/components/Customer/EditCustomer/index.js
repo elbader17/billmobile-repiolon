@@ -12,6 +12,7 @@ const mapDispatchToProps = (dispatch) => {
     saveFiscalIdentity: (name, identification, category, id) => (
       dispatch(updateCustomer({id, name, identification, category }))
     ),
+    type: 'collection'
   };
 };
 

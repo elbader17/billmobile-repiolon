@@ -86,7 +86,9 @@ class CustomerList extends React.Component {
     else this.props.navigation.navigate('Invoice');
   };
   navigateToEditCustomer = (customer) => {
-    this.props.navigation.navigate('EditCustomer', { customer });
+    if (this.props.type === 'collection')
+      this.props.navigation.navigate('EditCustomer', { customer });
+    else this.props.navigation.navigate('EditInvoiceCustomer', { customer });
   }
 
   renderLoading = () => {

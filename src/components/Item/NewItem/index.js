@@ -8,12 +8,9 @@ const mapStateToProps = state => ({
 
 function mapDispatchToProps(dispatch) {
   return {
-    saveItem: (attributes, navigation) => {
+    saveItem: (attributes) => (
       dispatch(createItem(attributes))
-        .then(() => {
-          navigation.goBack();
-        });
-    },
+    ),
     type: 'collection'
   };
 }

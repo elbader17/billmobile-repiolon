@@ -43,10 +43,10 @@ const styles = StyleSheet.create({
     elevation: 2.5,
   },
   containerItemsInvoice: {
-    maxHeight: hp('33%'),
+    maxHeight: hp('26%'),
     backgroundColor: COLORS.white,
     borderRadius: 9,
-    marginTop: 12,
+    marginTop: 6,
     elevation: 2.5
   },
   buttonEditSummary: {

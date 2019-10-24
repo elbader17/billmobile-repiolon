@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { Button } from "react-native-elements";
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -69,8 +69,7 @@ class NewItem extends React.Component {
           name,
           price,
           quantity
-        },
-        navigation, type
+        }
       )
       .then(() => {
         this.setLoading(false);
@@ -111,6 +110,7 @@ class NewItem extends React.Component {
         end={{x: 0, y: 0}}
       >
           <View style={style.containerBody}>
+            <ScrollView>
             <View style={[style.boxSelectButton, style.inLineSpaceAround]}>
               <TouchableOpacity onPress={() => this.setState({isProduct: true})} activeOpacity={0.8}>
                 <LinearGradient
@@ -142,6 +142,7 @@ class NewItem extends React.Component {
                 setErrorPrice={this.setErrorPrice}
               />
             </View>
+            </ScrollView>
           </View> 
 
           <View style={[style.containerFooter, {alignItems: 'center'}]}>

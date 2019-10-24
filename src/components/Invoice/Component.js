@@ -2,8 +2,7 @@ import React from 'react';
 import { View, Text, Modal, TouchableOpacity } from 'react-native';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import LinearGradient from 'react-native-linear-gradient';
-import Icon from 'react-native-vector-icons/AntDesign';
-import { Button } from "react-native-elements";
+import { Button, Icon } from "react-native-elements";
 import { showMessage } from "react-native-flash-message";
 import InvoiceItems from './InvoiceItems';
 import InvoiceCustomer from './InvoiceCustomer';
@@ -47,7 +46,7 @@ class Invoice extends React.Component {
       headerTitleStyle: style.headerText,
       headerTintColor: 'white',
       headerLeft: (
-        <Icon name="filetext1" size={20} color={COLORS.blueLight} style={{marginLeft:20}}/>
+        <Icon type='antdesign' name="filetext1" size={20} color={COLORS.blueLight} iconStyle={{marginLeft:20}}/>
       )
     }  
   };
@@ -132,6 +131,15 @@ class Invoice extends React.Component {
         />
       );
     }
+    else return (
+      <View style={style.containerItemsInvoice}>
+        <View style={{marginVertical: 15, alignItems:'center'}}>
+          <Text style={style.textRegular16BlueMedium}>
+            No se han añadido Productos/Servicios
+          </Text>
+        </View>
+      </View>
+    )
   }
 
   renderCustomer = () => {
@@ -151,7 +159,7 @@ class Invoice extends React.Component {
   render() {
     const { fiscalIdentity } = this.props;
     const typeCustomer = fiscalIdentity.name === 'fc' || this.state.showFinalConsumer ? 'Cosumidor Final' : 'Nombre Cliente';
-    const iconAddCustomer = <Icon name="adduser" size={17} color={COLORS.blueMedium} />
+    const iconAddCustomer = <Icon type='antdesign' name="adduser" size={17} color={COLORS.blueMedium} />
     var date = presentInvoiceDate(this.state.invoiceDate);
     return(  
       <LinearGradient colors={GRADIANTBLUE2} 
@@ -218,7 +226,7 @@ class Invoice extends React.Component {
               title=' Agregar Items'
               TouchableComponent={TouchableOpacity}
               onPress={ this.navigateAddItems }
-              icon={<Icon name="plus" size={15} color="white"/>}
+              icon={<Icon type='antdesign' name="plus" size={15} color="white"/>}
               buttonStyle={style.buttonAdd}  
               titleStyle={ style.textRegular16White }
               disabledStyle={style.buttonAddDisabled}
@@ -226,6 +234,10 @@ class Invoice extends React.Component {
               ViewComponent={LinearGradient}
               linearGradientProps={COLORGBL}
             />
+
+            <Text style={[style.textRegular12White, {paddingTop: 8}]}>
+              Detalle Producto/Servicio
+            </Text>
 
           { this.renderViewItemsAdd() }
           </View>

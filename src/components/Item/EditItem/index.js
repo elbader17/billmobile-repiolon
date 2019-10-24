@@ -10,7 +10,8 @@ function mapDispatchToProps(dispatch) {
   return {
     saveItem: (attributes) => (
       dispatch(updateItem(attributes))
-    )
+    ),
+    type: 'collection'
   };
 }
 

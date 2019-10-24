@@ -60,7 +60,9 @@ class ItemList extends React.Component {
     else this.props.navigation.navigate('Invoice');
   }
   navigateToEditItem = (item) => {
-    this.props.navigation.navigate('EditItem', { item });
+    if (this.props.type === 'collection')
+      this.props.navigation.navigate('EditItem', { item });
+    else this.props.navigation.navigate('EditInvoiceItem', { item });
   }
 
   actionItem = (item) => {

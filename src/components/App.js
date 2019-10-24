@@ -9,7 +9,7 @@ import FlashMessage from "react-native-flash-message";
 import { PersistGate } from 'redux-persist/integration/react';
 import aws_exports from '../constants/aws-exports';
 import AppNavigator from './Navigator/AppNavigator';
-import NavigationService from './NavigationService';
+import NavigationService from '../components/Navigator/NavigationService';
 
 Amplify.configure(aws_exports);
 
