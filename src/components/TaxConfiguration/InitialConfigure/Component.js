@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image} from 'react-native';
+import { View, Text, Image, TouchableOpacity} from 'react-native';
 import { Button } from "react-native-elements";
 import LinearGradient from 'react-native-linear-gradient';
 import { COLORGB2 } from '../../../constants/colors';
@@ -43,13 +43,13 @@ class InitialConfiguration extends React.Component{
             buttonStyle={ style.button }
             titleStyle={ style.textRegular14white }
             disabledTitleStyle={ style.textRegular14Gray }
-            
             ViewComponent={LinearGradient}
             linearGradientProps={COLORGB2}
           />
           <Button
             title="Probar Aplicación"
             buttonStyle={ style.button }
+            TouchableComponent={TouchableOpacity}
             titleStyle={ style.submitText }
             disabledTitleStyle={ style.textRegular14Gray }
             ViewComponent={LinearGradient}

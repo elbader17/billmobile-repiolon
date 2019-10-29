@@ -13,12 +13,9 @@ const mapStateToProps = state => ({
 
 function mapDispatchToProps(dispatch) {
   return {
-    confirmInvoice: (attributes, navigation) => {
-      dispatch(confirmInvoice(attributes))
-        .then(() => {
-          navigation.navigate('Opinion');
-        });
-    },
+    confirmInvoice: (attributes) => (
+      dispatch(confirmInvoice(attributes))   
+    ),
   };
 }
 

@@ -22,6 +22,10 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 20
   },
+  buttonDrawer: {
+    backgroundColor: 'transparent', 
+    justifyContent: 'flex-start'
+  },
   textRegular16White: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size16,

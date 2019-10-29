@@ -1,9 +1,11 @@
 import React from "react";
 import { connect } from 'react-redux';
-import { ScrollView, Text, View, Image, TouchableOpacity,Alert } from 'react-native';
+import { ScrollView, Text, View, Image, TouchableOpacity, Alert } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import { Button, Icon } from "react-native-elements";
-import { COLORS, GRADIANTBLUE2 } from "../../constants/colors";
+import { Button } from "react-native-elements";
+import { IconChat, IconConfig, IconClose, IconCloseDrawer } from "../../constants/icons";
+import {  GRADIANTBLUE2 } from "../../constants/colors";
+import { XY } from "../../constants/gradientCoord";
 import { signOut } from '../../app/authentication/actions';
 import style from './style';
 
@@ -20,15 +22,18 @@ const mapDispatchToProps = (dispatch) => {
       Alert.alert(
         title,'Se cerrará la sesión',
         [
-          {
+          { //Press Cancel
             text: 'Cancelar',
-            onPress: () => console.log('Cancel SignOut'),
             style: 'cancel',
+            onPress: () => console.log('Cancel SignOut'),
           },
-          {text: 'Salir', onPress: () => {
-            dispatch(signOut())
-              .then(navigation.navigate('Login'))
-          }},
+          { //Press Close
+            text: 'Salir', 
+            onPress: () => {
+              dispatch(signOut())
+                .then(navigation.navigate('Login'))
+            }
+          },
         ],
         {cancelable: false},
       );
@@ -40,7 +45,7 @@ const DrawerComponent = (props) => (
   <LinearGradient 
     colors={GRADIANTBLUE2} 
     style={style.containerDrawer} 
-    start={{x: 1, y: 1}} end={{x: 1, y: 0}}>
+    start={XY.startV} end={XY.endV}>
       
     <View style={style.headerContainerDrawer}>
       <Image source={require('../../images/logoBlue.png')} style={style.logoDrawer} />
@@ -51,32 +56,33 @@ const DrawerComponent = (props) => (
         {props.user.cuit}
       </Text>
     </View>
+
     <ScrollView>
       <Button 
         title="Chat"
-        icon ={<Icon name='message1' size={20} color={COLORS.blueLight} iconStyle={{marginRight:8}} type='antdesign' />}
+        icon ={IconChat}
         onPress={() => {}}
-        buttonStyle={{backgroundColor: 'transparent', justifyContent: 'flex-start'}}
+        buttonStyle={style.buttonDrawer}
         titleStyle={style.textRegular18White}
       />
       <Button 
         title="Configuración"
-        icon ={<Icon name='setting' size={20} color={COLORS.blueLight} iconStyle={{marginRight:8}} type='antdesign' />}
+        icon ={IconConfig}
         onPress={() => {}}
-        buttonStyle={{backgroundColor: 'transparent', justifyContent: 'flex-start'}}
+        buttonStyle={style.buttonDrawer}
         titleStyle={style.textRegular18White}
       />
       <Button 
         title="Cerrar Sesión"
-        icon ={<Icon name='logout' size={20} color={COLORS.blueLight} iconStyle={{marginRight:8}} type='antdesign' />}
+        icon ={IconClose}
         onPress={() => props.signOut(props.navigation)}
-        buttonStyle={{backgroundColor: 'transparent', justifyContent: 'flex-start'}}
+        buttonStyle={style.buttonDrawer}
         titleStyle={style.textRegular18White}
       />
     </ScrollView>
     
     <TouchableOpacity onPress={() => props.navigation.closeDrawer()} style={{marginBottom: 30}}>
-      <Icon name='closecircleo' size={40} color={COLORS.blueLight} type='antdesign' />
+      {IconCloseDrawer}
     </TouchableOpacity>
     
   </LinearGradient>

@@ -80,12 +80,22 @@ const styles = StyleSheet.create({
     height: hp('5%'),
     borderWidth: 1,
     borderColor: COLORS.blueLight,
-    borderRadius: 10
+    borderRadius: 10,
+    marginLeft: 3
+  },
+  buttonEditGray:{
+    backgroundColor: 'transparent',
+    width: wp('15%'),
+    height: hp('5%'),
+    borderWidth: 1,
+    borderColor: COLORS.gray,
+    borderRadius: 10,
+    marginLeft: 3
   },
   buttonDelete:{
     backgroundColor: 'transparent',
-    height: hp('5%'),
-    width: 40
+    width: wp('15%'),
+    height: hp('5%')
   },
   textButtonEdit: {
     fontFamily: FONTS.latoRegular,
@@ -143,6 +153,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: 'space-between',
     alignItems: 'center'
+  },
+  textRegular12Gray: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size12,
+    color: COLORS.gray
   },
   textRegular14White: {
     fontFamily: FONTS.latoRegular,

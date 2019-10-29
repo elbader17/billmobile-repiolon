@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, StyleSheet, Image } from 'react-native';
-import { COLORS } from '../../constants/colors';
-import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { Auth } from 'aws-amplify';
+import { View, StyleSheet, Image } from 'react-native';
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { COLORS } from '../../constants/colors';
 
 class Initializing extends React.Component {
 

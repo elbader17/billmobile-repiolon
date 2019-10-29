@@ -3,10 +3,11 @@ import { View, Text, Picker, ScrollView, TouchableOpacity } from 'react-native';
 import { TextField } from 'react-native-material-textfield';
 import { Button } from "react-native-elements";
 import LinearGradient from 'react-native-linear-gradient';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { COLORS, GRADIANTBLUE2, COLORGBL } from '../../../constants/colors';
 import { CONDITION_IVA } from '../../../constants/fiscal_identity';
+import  { iconMenuBack }  from '../../../constants/icons';
 import { validateCuit } from '../../../utils/identity';
+import { XY } from '../../../constants/gradientCoord';
 import style from '../style';
 
 class NewCustomer extends React.Component {
@@ -25,25 +26,6 @@ class NewCustomer extends React.Component {
     }
   }
 
-  static navigationOptions = ({navigation}) => {
-    return {
-      title: 'Nuevo Cliente',
-      headerTransparent: true,
-      headerStyle: { elevation: 0 },
-      headerTitleStyle: style.headerText,
-      headerTintColor: 'white',
-      headerLeft:( 
-        <TouchableOpacity onPress={()=> navigation.goBack()}>
-          <Icon name="menu-open" size={30} color={COLORS.blueLight} style={{marginLeft:10}}/>
-        </TouchableOpacity>
-      ) 
-    }  
-  }
-
-  componentWillMount() {
-    this.props.navigation.setParams({type: this.props.type}); //Use in Header Left Navigation
-  }
-
   defaultCustomer= () => {
     return {
       attributes: {
@@ -54,6 +36,21 @@ class NewCustomer extends React.Component {
     };
   }
 
+  static navigationOptions = ({navigation}) => {
+    return {
+      title: 'Nuevo Cliente',
+      headerTransparent: true,
+      headerStyle: { elevation: 0 },
+      headerTitleStyle: style.headerText,
+      headerTintColor: COLORS.white,
+      headerLeft:( 
+        <TouchableOpacity onPress={()=> navigation.goBack()}>
+          {iconMenuBack}
+        </TouchableOpacity>
+      ) 
+    }  
+  }
+
   saveCustomer = () => {
     const { name, category, identification, customerId } = this.state;
     if (validateCuit(identification)) {
@@ -61,14 +58,11 @@ class NewCustomer extends React.Component {
       const { saveFiscalIdentity, navigation, type } = this.props;
       saveFiscalIdentity(name, identification, category, customerId)
         .then(() => {
-          if (type === 'collection') navigation.navigate('CustomersList');
-          else navigation.navigate('ListInvoiceCustomer');
+          type === 'collection' ? navigation.navigate('CustomersList'): navigation.navigate('Invoice');
           this.setLoading(false);
         })
-    }
-    else {
-      this.setState({error: 'CUIT Inválido'})
-    }
+    } 
+    else this.setState({error: 'CUIT Inválido'})
   }
 
   setName = (value) => this.setState({ name: value})
@@ -78,25 +72,31 @@ class NewCustomer extends React.Component {
 
   render() {
     return(
-      <LinearGradient
-        colors={ GRADIANTBLUE2 }
-        style={style.container}
-        start={{x: 0, y: 1}}
-        end={{x: 0, y: 0}}
-      >
+      <LinearGradient 
+        colors={ GRADIANTBLUE2 } 
+        style={ style.container }
+        start={ XY.startV } 
+        end={ XY.endV }>
+
           <View style={style.containerBody}>
             <ScrollView>
               <View style={style.containerInputs}>
+                
                 <View style={style.inputPicker}>
                   <Picker
                     selectedValue={this.state.category}
                     style= {style.picker}
                     onValueChange={this.setCategory}>
-                      {CONDITION_IVA.map((i, index) => (
-                        <Picker.Item key={index} color='gray' label={i.label} value={i.value} />
+                      { CONDITION_IVA.map((i, index) => (
+                        <Picker.Item 
+                          key={index} 
+                          color='gray' 
+                          label={i.label} 
+                          value={i.value}/>
                        ))}
                   </Picker>
                 </View>
+
                 <Text style={[style.textRegular12White, {marginTop: 5}]}>
                   Condición frente al IVA
                 </Text>
@@ -137,7 +137,7 @@ class NewCustomer extends React.Component {
 
           <View style={[style.containerFooter, {alignItems: 'center'}]}>
             <Button
-              title='Guardar'
+              title={this.props.type==='invoice' ? 'Añadir al Comprobante' : 'Guardar'}
               TouchableComponent={TouchableOpacity}
               onPress={this.saveCustomer}
               buttonStyle={ style.buttonSave }

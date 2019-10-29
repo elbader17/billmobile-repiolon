@@ -8,12 +8,10 @@ import style from './style';
 import { COLORS } from '../../constants/colors';
 
 const InvoiceCustomer = props => {
-  const iconEnabled = <Icon name="right" size={18} color={COLORS.blueMedium}/>;
-  const iconDisabled = <Icon name="right" size={18} color={COLORS.gray}/>;
   const customer = props.fiscalIdentity;
   const identification = customer.name === 'fc' ? customer.identification : customer.name;
   const subIdentification = customer.name === 'fc' ? 'Número de Documento' : customer.identification;
-  if (!props.showFinalConsumer && props.fiscalIdentity.name != "") {
+  if (props.showCustomer) {
     return (
       <View style={style.listCustomer}>
         <View style={style.inLineSpaceBetween}>
@@ -21,14 +19,14 @@ const InvoiceCustomer = props => {
           <Text style={style.textLight16BlueMedium}>| {subIdentification} |</Text> 
           <Button
             icon={<Icon name="close" size={15} color={COLORS.blueMedium}/>}
-            onPress={ () => props.setShowFinalConsumer(true) }
+            onPress={ () => props.setShowCustomer(false) }
             buttonStyle={style.buttonDeleteCustomerInvoice}
             titleStyle={style.textRegular12Blue}
           />       
         </View>
       </View>
     );
-  }else {
+  } else {
     return (
       <View style={style.containerFinalConsumer}>
         <View style={style.inLineSpaceBetween}>
@@ -47,6 +45,7 @@ const InvoiceCustomer = props => {
             titleStyle={validateDni(props.identity) ? style.textRegular12Blue : style.textRegular12Gray}
             buttonStyle={ style.buttonCheck }
             disabledStyle= { style.buttonCheckDisabled }
+            disabledTitleStyle = {style.textRegular12White}
             loading = { props.loading }
             loadingStyle={{top: 1.5, backgroundColor: COLORS.gray, borderRadius: 20}}
             disabled = { props.loading || !validateDni(props.identity) }
@@ -60,7 +59,7 @@ const InvoiceCustomer = props => {
 InvoiceCustomer.propTypes = {
   finalConsumer: PropTypes.bool,
   setFinalConsumer: PropTypes.func,
-  setShowFinalConsumer: PropTypes.func,
+  setShowCustomer: PropTypes.func,
   addFinalConsumer: PropTypes.func,
   loading: PropTypes.bool,
   identity: PropTypes.string

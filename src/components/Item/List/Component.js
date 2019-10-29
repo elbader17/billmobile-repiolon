@@ -1,11 +1,13 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator, Alert} from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, Alert} from 'react-native';
 import SearchInput, { createFilter } from 'react-native-search-filter';
-import { Button, Icon } from "react-native-elements";
-import { withNavigation } from 'react-navigation';
+import { Button } from "react-native-elements";
 import LinearGradient from 'react-native-linear-gradient';
+import LoadingIndicator from '../../Loading';
 import ListItems from './ListItems';
-import { GRADIANTBLUE2, COLORS, COLORGB, COLORGB2, GRADIANTBLUE1, COLORGBL, GRADIANTBLUELIGHT } from '../../../constants/colors';
+import { GRADIANTBLUE2, COLORS, COLORGBL, GRADIANTBLUELIGHT } from '../../../constants/colors';
+import { IconBack, IconMore } from '../../../constants/icons';
+import { XY } from '../../../constants/gradientCoord';
 import { orderByName } from '../../../utils/functions';
 import style from '../style';
 
@@ -16,9 +18,10 @@ class ItemList extends React.Component {
     super(props);
     this.state = {
       isProduct: true,
-      loading: true, //loading items list
-      loadingDelete: false, //for button item delete
-      inputSearch: '' //Item search
+      loading: true, //Loading items list
+      loadingItem: false, //Adding or removing a item
+      itemActive: undefined,
+      itemInputSearch: ''
     };
   }
 
@@ -30,11 +33,12 @@ class ItemList extends React.Component {
       headerTitleStyle: style.headerText,
       headerTintColor: 'white',
       headerLeft: (
-        <TouchableOpacity onPress={()=> {
-          if (navigation.state.params.type === 'collection') navigation.navigate('Inicio');
+        <TouchableOpacity onPress={() => {
+          const type = navigation.state.params;
+          if (type === 'collection') navigation.navigate('Inicio');
           else navigation.navigate('Invoice');
         }}>
-          <Icon type='ionicon' name='ios-arrow-back' size={25} color={COLORS.blueLight} iconStyle={{marginLeft:20}}/>
+          {IconBack}
         </TouchableOpacity>
       )
     }  
@@ -46,7 +50,7 @@ class ItemList extends React.Component {
   
   componentDidMount() {
     this.props.getItemList()
-      .then(()=> {this.setState({loading: false})})
+      .then(() => { this.setState({loading: false}) })
   }
 
   navigateToNewItem = (isProduct) => {
@@ -71,48 +75,42 @@ class ItemList extends React.Component {
     Alert.alert(
       title + item.attributes.name,'¿Está Seguro?',
       [
-        {
-          text: 'Cancelar',
+        { //Press Cancel
           onPress: () => console.log('Cancel Delete Item'),
+          text: 'Cancelar',
           style: 'cancel',
         },
-        {text: title, onPress: () => {
-          this.setState({loadingDelete: true, itemDelete: item.id})
-          const { actionItem, navigation } = this.props;
-          actionItem(item, navigation)
-            .then(() => {
-              if(this.props.type === 'collection')
-                this.props.getItemList().then(()=> this.setState({loadingDelete: false}));
-              else navigation.navigate('Invoice');
-            })
-        }},
+        { //Press OK
+          text: title, onPress: () => {
+            this.setState({loadingItem: true, itemActive: item.id})
+            const { actionItem, navigation } = this.props;
+            actionItem(item, navigation)
+              .then(() => {
+                if(this.props.type === 'collection')
+                  this.props.getItemList().then(()=> this.setState({loadingItem: false}));
+                else navigation.navigate('Invoice');
+              })
+          }//End onPress
+        },
       ],
       {cancelable: false},
     );
-    
   }
 
-  renderLoading = () => {
-    return (
-      <View style={style.center}>
-        <ActivityIndicator size="large" color={COLORS.blueLight} style={{paddingBottom: 15}}/>
-        <Text style={style.textRegular16BlueLight} >Cargando</Text>
-      </View>
-    );
-  }
+  renderLoading = () => (<LoadingIndicator/>);
 
   renderItems = () => {
     const category = this.state.isProduct ? 'product' : 'service';
     const items = this.props.items.slice().sort(orderByName);
     const filteredItems = items.filter(
-      createFilter(this.state.inputSearch, KEYS_TO_FILTERS)
+      createFilter(this.state.itemInputSearch, KEYS_TO_FILTERS)
     );
     return (
       <ListItems
         type={this.props.type}
         items={filteredItems}
-        loadingDelete={this.state.loadingDelete}
-        itemDelete={this.state.itemDelete}
+        loadingItem={this.state.loadingItem}
+        itemActive={this.state.itemActive}
         category={category}
         navigateToEditItem={this.navigateToEditItem}
         actionItem={this.actionItem}
@@ -123,13 +121,13 @@ class ItemList extends React.Component {
   renderSwtichButtons() {
     return (
       <View style={[style.boxSelectButton, style.inLineSpaceAround]}>
-        
-        <TouchableOpacity onPress={() => this.setState({isProduct: true})} activeOpacity={0.8}>
+        <TouchableOpacity 
+          onPress={() => this.setState({isProduct: true})} 
+          activeOpacity={0.8}>
           <LinearGradient
             colors={ this.state.isProduct ? GRADIANTBLUELIGHT : GRADIANTBLUE2 }
             style={ style.buttonSelect }
-            start={{x: 0, y: 0}} end={{x: 1, y: 0}}
-          >
+            start={XY.startH} end={XY.endH}>
             <Text style={style.textRegular14White}>Productos</Text>
           </LinearGradient>
         </TouchableOpacity>
@@ -138,12 +136,10 @@ class ItemList extends React.Component {
           <LinearGradient
             colors={ this.state.isProduct ? GRADIANTBLUE2 : GRADIANTBLUELIGHT }
             style={ style.buttonSelect }
-            start={{x: 0, y: 0}} end={{x: 1, y: 0}}
-          >
+            start={XY.startH} end={XY.endH}>
             <Text style={style.textRegular14White}>Servicios</Text>
           </LinearGradient>
         </TouchableOpacity>
-      
       </View>
     );
   }
@@ -153,18 +149,19 @@ class ItemList extends React.Component {
       <LinearGradient
         colors={ GRADIANTBLUE2 }
         style={style.container}
-        start={{x: 0, y: 1}}
-        end={{x: 0, y: 0}}
-      >
+        start={XY.startV}
+        end={XY.endV}>
+
           <View style={style.containerBody}>
             <SearchInput 
-              onChangeText={(term) => { this.setState({inputSearch: term}) }} 
-              placeholder="Buscar Item"
+              onChangeText={(term) => { this.setState({itemInputSearch: term}) }} 
+              placeholder={this.state.isProduct ? 'Buscar producto/s' : 'Buscar servicio/s'}
               placeholderTextColor={COLORS.grayDark}
               style={ style.search }
-              clearIcon={true && <Icon type='antdesign' name="plus" size={18} color="red"/>}
             />
+
             {this.renderSwtichButtons()}
+            
             <View style={style.boxItems}>
               <ScrollView>
                 {this.state.loading ? this.renderLoading() : this.renderItems()}
@@ -178,7 +175,7 @@ class ItemList extends React.Component {
                 title=' Añadir Nuevo'
                 TouchableComponent={TouchableOpacity}
                 onPress={() => this.navigateToNewItem(this.state.isProduct) }
-                icon={<Icon type='antdesign' name="plus" size={18} color="white"/>}
+                icon={IconMore}
                 buttonStyle={ style.buttonNew }
                 titleStyle={ style.textRegular16White }
                 ViewComponent={LinearGradient}
@@ -192,4 +189,4 @@ class ItemList extends React.Component {
   }
 }
 
-export default withNavigation(ItemList);
+export default ItemList;

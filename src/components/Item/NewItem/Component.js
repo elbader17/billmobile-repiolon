@@ -2,9 +2,10 @@ import React from 'react';
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { Button } from "react-native-elements";
 import LinearGradient from 'react-native-linear-gradient';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { GRADIANTBLUE2, GRADIANTBLUELIGHT ,COLORS, COLORGBL } from '../../../constants/colors';
 import { validateAddItem, validateName, validatePrice } from '../../../utils/validations';
+import { GRADIANTBLUE2, GRADIANTBLUELIGHT, COLORGBL } from '../../../constants/colors';
+import { iconMenuBack } from '../../../constants/icons';
+import { XY } from '../../../constants/gradientCoord';
 import AddItem from './AddItem';
 import style from '../style';
 
@@ -12,8 +13,9 @@ class NewItem extends React.Component {
   constructor(props) {
     super(props);
     const item = this.props.navigation.getParam('item', this.defaultItem());
-    const productOrService = item.attributes.category==='product';
+    const productOrService = item.attributes.category === 'product';
     const isProducts = this.props.navigation.getParam('isProduct', productOrService );
+    
     this.state = {
       name: item.attributes.name,
       price: item.attributes.price,
@@ -34,15 +36,11 @@ class NewItem extends React.Component {
       headerTintColor: 'white',
       headerLeft:( 
         <TouchableOpacity onPress={()=> navigation.goBack()}>
-          <Icon name="menu-open" size={30} color={COLORS.blueLight} style={{marginLeft:10}}/>
+          {iconMenuBack}
         </TouchableOpacity>
       ) 
     }
   };
-1
-  componentWillMount() {
-    this.props.navigation.setParams({type: this.props.type}); //Use in Header Left Navigation
-  }
 
   defaultItem = () => {
     return {
@@ -62,19 +60,17 @@ class NewItem extends React.Component {
     if (validateAddItem(name, price)) {
       this.setState({ isEnableButton: false});
       this.setLoading(true);
-      saveItem(
-        {
-          id: itemId,
-          category,
-          name,
-          price,
-          quantity
-        }
-      )
+      saveItem({
+        id: itemId,
+        category,
+        name,
+        price,
+        quantity
+      })
       .then(() => {
         this.setLoading(false);
         if (type === 'collection') navigation.navigate('ItemsList');
-        else navigation.navigate('ListInvoiceItem');
+        else navigation.navigate('Invoice');
       })
     }
     else {
@@ -106,31 +102,35 @@ class NewItem extends React.Component {
       <LinearGradient
         colors={ GRADIANTBLUE2 }
         style={style.container}
-        start={{x: 0, y: 1}}
-        end={{x: 0, y: 0}}
-      >
+        start={XY.startV}
+        end={XY.endV}>
+
           <View style={style.containerBody}>
             <ScrollView>
             <View style={[style.boxSelectButton, style.inLineSpaceAround]}>
-              <TouchableOpacity onPress={() => this.setState({isProduct: true})} activeOpacity={0.8}>
+              
+              <TouchableOpacity 
+                onPress={() => this.setState({isProduct: true})} 
+                activeOpacity={0.8}>
                 <LinearGradient
                   colors={ this.state.isProduct ? GRADIANTBLUELIGHT : GRADIANTBLUE2 }
                   style={ style.buttonSelect }
-                  start={{x: 0, y: 0}} end={{x: 1, y: 0}}
-                >
+                  start={XY.startH} end={XY.endH}>
                   <Text style={style.textRegular14White}>Productos</Text>
                 </LinearGradient>
               </TouchableOpacity>
               
-              <TouchableOpacity onPress={() => this.setState({isProduct: false})} activeOpacity={0.8}>
+              <TouchableOpacity 
+                onPress={() => this.setState({isProduct: false})} 
+                activeOpacity={0.8}>
                 <LinearGradient
                   colors={ this.state.isProduct ? GRADIANTBLUE2 : GRADIANTBLUELIGHT }
                   style={ style.buttonSelect }
-                  start={{x: 0, y: 0}} end={{x: 1, y: 0}}
-                >
+                  start={XY.startH} end={XY.endH}>
                   <Text style={style.textRegular14White}>Servicios</Text>
                 </LinearGradient>
               </TouchableOpacity>
+            
             </View>
 
             <View style={style.boxInput}>
@@ -147,7 +147,7 @@ class NewItem extends React.Component {
 
           <View style={[style.containerFooter, {alignItems: 'center'}]}>
             <Button
-              title='Guardar'
+              title={this.props.type==='invoice' ? 'Añadir al Comprobante' : 'Guardar'}
               TouchableComponent={TouchableOpacity}
               onPress={ this.saveItem }
               buttonStyle={ style.buttonSave }

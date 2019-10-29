@@ -6,12 +6,9 @@ const mapStateToProps = state => ({});
 
 function mapDispatchToProps(dispatch) {
   return {
-    saveItem: (attributes, navigation) => {
+    saveItem: (attributes) => (
       dispatch(createInvoiceItem(attributes))
-        .then(() => {
-          navigation.navigate('Invoice');
-        });
-    },
+    ),
     type: 'invoice'
   };
 }

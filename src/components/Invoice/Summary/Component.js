@@ -1,10 +1,12 @@
 import React from 'react';
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import { Button, Icon } from "react-native-elements";
-import { GRADIANTBLUE2, COLORS, COLORGB2, COLORGB, COLORGY, COLORGBL } from '../../../constants/colors';
-import style from '../style';
+import { Button } from "react-native-elements";
 import { presentInvoiceDate } from '../../../utils/date';
+import { GRADIANTBLUE2, COLORGBL } from '../../../constants/colors';
+import { XY } from '../../../constants/gradientCoord';
+import { IconBack } from '../../../constants/icons';
+import style from '../style';
 
 class InvoiceSummary extends React.Component {
 
@@ -20,34 +22,27 @@ class InvoiceSummary extends React.Component {
     return {
       title: 'Documento Final',
       headerTransparent: true,
-      headerStyle: {
-        elevation: 0,
-        shadowOpacity: 0,
-        borderBottomWidth: 0,
-      },
+      headerStyle: style.headerStyle,
       headerTitleStyle: style.headerText,
       headerTintColor: 'white',
       headerLeft: (
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Icon type='ionicon' name="ios-arrow-back" size={25} color={COLORS.blueLight} iconStyle={{marginLeft:20}}/>
+          {IconBack}
         </TouchableOpacity>
       )
     }
   };
   
   confirmInvoice = () => {
-    const {
-      confirmInvoice,
-    } = this.props;
-    confirmInvoice(resource);
+    this.props.navigation.navigate('Opinion');
+    /*const { confirmInvoice, navigation } = this.props;
+    confirmInvoice(resource)
+      .then(() => { navigation.navigate('Opinion') });*/
   }
   
-  setTotal = () => {this.total = this.subTotal + this.impuesto;}
-  setImpuesto = (value) => this.setState({ impuesto: value})
-  validateData = () => {
-    return ((this.props.fiscalIdentity.name!="") && (this.props.items!=null));
-  }
-  navigateToInvoice = () => {this.props.navigation.navigate('Invoice')}
+  navigateToInvoice = () => { this.props.navigation.navigate('Invoice') }
+  setTotal = () => { this.total = this.subTotal + this.impuesto }
+  setImpuesto = (value) => this.setState({ impuesto: value })  
 
   showInfoCustomer = () => {
     if (this.props.fiscalIdentity.name==='fc') {
@@ -73,14 +68,49 @@ class InvoiceSummary extends React.Component {
     }
   }
 
+  showInfoItems = () => {
+    return(
+      <View style={style.boxListItemsSummary}>
+        <ScrollView>
+          {this.props.items.map((item, index) => (
+            <View key={index}>
+              <View style={[style.inLineSpaceBetween, style.lineBottom]}>
+                <View style={style.boxItems1}>
+                  <Text style={style.textRegular16GrayDark} numberOfLines={1}>
+                    {item.name}
+                  </Text>
+                </View>
+                <View style={[style.inLineSpaceBetween, style.boxItems2]}>
+                  <Text numberOfLines={1}>
+                    <Text style={style.textLight14BlueMedium}>
+                      {'1'}x{' '}
+                    </Text>
+                    <Text style={style.textLight14GrayDark}>
+                      ${item.price}
+                    </Text>
+                  </Text>
+                </View>
+                <View style={style.boxItems3}>
+                  <Text style={style.textLight16GrayDark}>
+                    ${item.price}
+                  </Text>
+                </View>
+              </View>
+            </View>
+          ))}
+        </ScrollView>
+      </View>
+    )
+  }
+
   render() {
     return(
       <LinearGradient
         colors={ GRADIANTBLUE2 }
         style={style.containerSummary}
-        start={{x: 0, y: 1}}
-        end={{x: 0, y: 0}}
-      >
+        start={XY.startV}
+        end={XY.endV}>
+
         <View style={style.containerBodySummary}>
           
           <View style={style.boxHeaderSummary}>
@@ -94,36 +124,7 @@ class InvoiceSummary extends React.Component {
             {this.showInfoCustomer()}
           </View>
 
-          <View style={style.boxListItemsSummary}>
-            <ScrollView>
-              {this.props.items.map((item, index) => (
-                <View key={index}>
-                  <View style={[style.inLineSpaceBetween, style.lineBottom]}>
-                    <View style={style.boxItems1}>
-                      <Text style={style.textRegular16GrayDark} numberOfLines={1}>
-                        {item.name}
-                      </Text>
-                    </View>
-                    <View style={[style.inLineSpaceBetween, style.boxItems2]}>
-                      <Text numberOfLines={1}>
-                        <Text style={style.textLight14BlueMedium}>
-                          {'1'}x{' '}
-                        </Text>
-                        <Text style={style.textLight14GrayDark}>
-                          ${item.price}
-                        </Text>
-                      </Text>
-                    </View>
-                    <View style={style.boxItems3}>
-                      <Text style={style.textLight16GrayDark}>
-                        ${item.price}
-                      </Text>
-                    </View>
-                  </View>
-                </View>
-              ))}
-            </ScrollView>
-          </View>
+          {this.showInfoItems()}
 
           <View style={style.boxTotalSummary}>
             <View style={style.inLineSpaceBetween}>
@@ -147,10 +148,9 @@ class InvoiceSummary extends React.Component {
             title='Confirmar Factura'
             testID='confirmInvoice'
             TouchableComponent={TouchableOpacity}
-            onPress={ () =>  this.confirmInvoice}
+            onPress={ this.confirmInvoice }
             buttonStyle={ style.buttonContinue }
             titleStyle={ style.textRegular16White }
-            disabled={ !this.validateData() }
             ViewComponent={LinearGradient}
             linearGradientProps={COLORGBL}
           />

@@ -1,24 +1,26 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator, Alert } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { View, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import SearchInput, { createFilter } from 'react-native-search-filter';
 import LinearGradient from 'react-native-linear-gradient';
-import { Button, Icon } from "react-native-elements";
-import { COLORS, COLORGB, GRADIANTBLUE1, GRADIANTBLUE2, COLORGBL } from '../../../constants/colors';
+import { Button } from "react-native-elements";
+import { COLORS, GRADIANTBLUE2, COLORGBL } from '../../../constants/colors';
+import { IconBack, IconMore } from '../../../constants/icons';
+import { XY } from '../../../constants/gradientCoord';
 import { orderByName } from '../../../utils/functions';
 import ListCustomers from './ListCustomers';
+import LoadingIndicator from '../../Loading';
 import style from '../style';
 
-const KEYS_TO_FILTERS = ['attributes.name', 'attributes.identification']; //For list customer
+const KEYS_TO_FILTERS = ['attributes.name', 'attributes.identification']; //For list customer render
 
 class CustomerList extends React.Component {
   constructor(props){
     super(props);
     this.state = {
       loading: true, //Load list customer
-      loadingDelete: false,
-      customerDelete: undefined,
-      inputSearch: ''
+      loadingItem: false, //Adding or removing a customer
+      customerActive: undefined, //Customer selected to be added or removed
+      customerInputSearch: ''
     };
   }
   
@@ -30,11 +32,12 @@ class CustomerList extends React.Component {
       headerTitleStyle: style.headerText,
       headerTintColor: 'white',
       headerLeft: (
-        <TouchableOpacity onPress={()=> {
-          if (navigation.state.params.type === 'collection') navigation.navigate('Inicio');
+        <TouchableOpacity onPress={() => {
+          const type = navigation.state.params.type;
+          if (type === 'collection') navigation.navigate('Inicio');
           else navigation.navigate('Invoice');
         }}>
-          <Icon type='ionicon' name='ios-arrow-back' size={25} color={COLORS.blueLight} iconStyle={{marginLeft:20}}/>
+          {IconBack}
         </TouchableOpacity>
       )
     }
@@ -46,7 +49,7 @@ class CustomerList extends React.Component {
 
   componentDidMount() {
     this.props.getCustomerList()
-     .then(()=> {this.setState({loading: false})})
+     .then(() => { this.setState({loading: false}) })
   }
 
   actionCustomer = (customer) => {
@@ -55,26 +58,31 @@ class CustomerList extends React.Component {
     Alert.alert(
       title + customer.attributes.name,'¿Está Seguro?',
       [
-        {
-          text: 'Cancelar',
+        { //Press Cancel
           onPress: () => console.log('Cancel Delete Customer'),
+          text: 'Cancelar',
           style: 'cancel',
         },
-        {text: title, onPress: () => {
-          this.setState({loadingDelete: true, customerDelete: customer.id})
-          const { actionCustomer, navigation } = this.props;
-          actionCustomer(customer, navigation)
-            .then(() => {
-              if (this.props.type === 'collection')
-                this.props.getCustomerList().then(()=> this.setState({loadingDelete: false}));
-              else navigation.navigate('Invoice');
-            })
-        }},
+        { //Press OK
+          text: title, 
+          onPress: () => {
+            this.setState({loadingItem: true, customerActive: customer.id})
+            const { actionCustomer, navigation } = this.props;
+            actionCustomer(customer, navigation)
+              .then(() => {
+                if (this.props.type === 'collection')
+                  this.props.getCustomerList() //Refresh List
+                    .then(() => this.setState({ loadingItem: false }));
+                else navigation.navigate('Invoice');
+              })
+          }//End onPress
+        },
       ],
       {cancelable: false},
     );
     
   }
+  
   navigateToNewCustomer = () => {
     if (this.props.type === 'collection')
       this.props.navigation.navigate('NewCustomer');
@@ -91,26 +99,19 @@ class CustomerList extends React.Component {
     else this.props.navigation.navigate('EditInvoiceCustomer', { customer });
   }
 
-  renderLoading = () => {
-    return (
-      <View style={style.center}>
-        <ActivityIndicator size="large" color={COLORS.blueLight} style={{paddingBottom: 15}}/>
-        <Text style={style.textRegular16BlueLight} >Cargando</Text>
-      </View>
-    );
-  }
+  renderLoading = () => (<LoadingIndicator/>);
 
   renderCustomers() {
     const customers = this.props.customers.slice().sort(orderByName);
     const filteredCustomer = customers.filter(
-      createFilter(this.state.inputSearch, KEYS_TO_FILTERS)
+      createFilter(this.state.customerInputSearch, KEYS_TO_FILTERS)
     );
     return (
       <ListCustomers 
         type={this.props.type}
         customers={filteredCustomer}
-        loadingDelete={this.state.loadingDelete}
-        customerDelete={this.state.customerDelete}
+        loadingItem={this.state.loadingItem}
+        customerActive={this.state.customerActive}
         navigateToEditCustomer={this.navigateToEditCustomer}
         actionCustomer={this.actionCustomer}
       />
@@ -122,12 +123,12 @@ class CustomerList extends React.Component {
       <LinearGradient
         colors={ GRADIANTBLUE2 }
         style={style.container}
-        start={{x: 0, y: 1}}
-        end={{x: 0, y: 0}}
+        start={XY.startV}
+        end={XY.endV}
       >
         <View style={style.containerBody}>
           <SearchInput 
-            onChangeText={(term) => { this.setState({inputSearch: term}) }} 
+            onChangeText={(term) => { this.setState({customerInputSearch: term}) }} 
             placeholder="Buscar Cliente"
             placeholderTextColor={COLORS.grayDark}
             style={ style.search }
@@ -145,7 +146,7 @@ class CustomerList extends React.Component {
               title=' Nuevo Cliente'
               TouchableComponent={TouchableOpacity}
               onPress={ this.navigateToNewCustomer }
-              icon={<Icon type='antdesign' name="plus" size={18} color="white"/>}
+              icon={IconMore}
               buttonStyle={ style.buttonNew }
               titleStyle={ style.textRegular16White }
               ViewComponent={LinearGradient}
@@ -154,8 +155,7 @@ class CustomerList extends React.Component {
           </View>
         </View>
       
-      </LinearGradient>
-      
+      </LinearGradient>  
     );
   }
 }

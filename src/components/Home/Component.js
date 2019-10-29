@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, Text, Dimensions, TouchableOpacity, ScrollView, Image, Alert } from 'react-native';
+import { View, Text, Dimensions, TouchableOpacity, ScrollView, Image } from 'react-native';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
+import LinearGradient from 'react-native-linear-gradient';
 import { Button } from "react-native-elements";
 import { LineChart } from 'react-native-chart-kit';
-import LinearGradient from 'react-native-linear-gradient';
 import { Icon } from 'react-native-elements';
 import { dataChart, dataConfig } from '../../constants/lineChart';
 import { GRADIANTBLUE2, COLORS } from '../../constants/colors';

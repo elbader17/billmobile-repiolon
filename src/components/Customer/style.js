@@ -73,11 +73,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center'
   },
-  center: {
-    marginTop: 40,
-    justifyContent: 'center', 
-    alignItems: 'center'
-  },
   textRegular16BlueLight: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size16,
@@ -93,47 +88,25 @@ const styles = StyleSheet.create({
     fontSize: FONTS.size14,
     color: COLORS.white,
   },
-  textLight18White: {
-    fontFamily: FONTS.latoSemiBold,
-    fontSize: FONTS.size16,
-    color: COLORS.white,
-  },
   textRegular12White: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size12,
     color: COLORS.white,
   },
-  textRegular14GrayDark: {
+  textRegular12Gray: {
     fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size14,
-    color: COLORS.grayDark,
-  },
-  textRegular16GrayDark: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size16,
-    color: COLORS.grayDark,
+    fontSize: FONTS.size12,
+    color: COLORS.gray,
   },
   textLight14BlueLight: {
     fontFamily: FONTS.latoLight,
     fontSize: FONTS.size14,
     color: COLORS.blueLight,
   },
-  button: {
-    elevation: 1,
-    borderRadius: 25,
-  },
   buttonNew: {
     width: wp('90%'),
     height: hp('7%'),
     backgroundColor: 'transparent',
-    borderRadius: 25,
-    elevation: 1.5,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  buttonReady: {
-    width: wp('14%'),
-    height: hp('8%'),
     borderRadius: 25,
     elevation: 1.5,
     justifyContent: 'center',
@@ -148,37 +121,33 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     elevation: 1.5,
   },
-  buttonSaveDisabled: {
-    width: wp('90%'),
-    height: hp('8%'),
-    backgroundColor: 'transparent',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 25,
-    opacity: 0.5
-  },
   buttonEditBlue:{
     backgroundColor: 'transparent',
     width: wp('15%'),
     height: hp('5%'),
     borderWidth: 1,
     borderColor: COLORS.blueLight,
-    borderRadius: 10
+    borderRadius: 10,
+    marginLeft: 3
+  },
+  buttonEditGray:{
+    backgroundColor: 'transparent',
+    width: wp('15%'),
+    height: hp('5%'),
+    borderWidth: 1,
+    borderColor: COLORS.gray,
+    borderRadius: 10,
+    marginLeft: 3
   },
   buttonDelete:{
     backgroundColor: 'transparent',
     height: hp('5%'),
-    width: 40
+    width: wp('15%'),
   },
   textButtonEdit: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size12,
     color: COLORS.blueLight,
-  },
-  textDelete: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size12,
-    color: COLORS.redLight,
   },
   headerText: {
     fontFamily: FONTS.latoRegular,

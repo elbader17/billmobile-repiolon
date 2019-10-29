@@ -1,19 +1,20 @@
 import React from 'react';
-import { View, Text, ImageBackground } from 'react-native';
+import { View, Text } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import {SLIDES_INTRO} from '../../constants/slides_intro';
-import style from './style';
-import LinearGradient from 'react-native-linear-gradient';
 import { GRADIANTBLUE2 } from '../../constants/colors';
+import { XY } from '../../constants/gradientCoord';
+import style from './style';
 
 class Intro extends React.Component {
   _renderItem = (item) => {
     return (
       <LinearGradient 
         colors={GRADIANTBLUE2}
-        style={{flex: 1}}  
-        start={{x: 1, y: 0}} 
-        end={{x: 0.9, y: 1}}>
+        style={style.container}  
+        start={XY.startV} 
+        end={XY.endV}>
         <View style={style.silde}>
           <View style={style.box1}>
             <Text style={style.number}>{item.title}</Text>

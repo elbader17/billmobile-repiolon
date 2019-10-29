@@ -4,7 +4,6 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createDrawerNavigator } from 'react-navigation-drawer';
 import { DrawerActions } from 'react-navigation-drawer';
-import { Icon } from 'react-native-elements';
 //All Screens and Components
 import Initializing from '../Initializing/Component';
 import Intro from '../Intro';
@@ -28,9 +27,9 @@ import NewItem from '../Item/NewItem';
 import ItemsList from '../Item/List';
 import EditItem from '../Item/EditItem';
 import Opinion from '../Opinion';
-import DrawerScreen from '../ScreenDrawer/DrawerScreen';
 import DrawerComponent from './Drawer';
 //Utils
+import { IconHome, IconInvoice, IconCustomer, IconItem } from '../../constants/icons';
 import { COLORS } from '../../constants/colors';
 import style from './style'; 
 
@@ -80,25 +79,25 @@ const MainAppNavigator = createBottomTabNavigator(
     Inicio: {
       screen: HomeStack,
       navigationOptions: () => ({
-        tabBarIcon: ({tintColor}) => <Icon name="md-home" type="ionicon" color={tintColor}/>,
+        tabBarIcon: ({tintColor}) => <IconHome color={tintColor}/>,
       }),
     },
     Facturar: {
       screen: InvoiceStack,
       navigationOptions: () => ({
-        tabBarIcon: ({tintColor}) => <Icon name="ios-document" type="ionicon" color={tintColor}/>,
+        tabBarIcon: ({tintColor}) => <IconInvoice color={tintColor}/>,
       }),
     },
     Clientes: {
       screen: CustomerStack,
       navigationOptions: () => ({
-        tabBarIcon: ({tintColor}) => <Icon name="md-person" type="ionicon" color={tintColor}/>,
+        tabBarIcon: ({tintColor}) => <IconCustomer color={tintColor}/>,
       }),
     },
     Items: {
       screen: ItemStack,
       navigationOptions: () => ({
-        tabBarIcon: ({tintColor}) => <Icon name="md-cart" type="ionicon" color={tintColor}/>,
+        tabBarIcon: ({tintColor}) => <IconItem color={tintColor}/>,
       }),
     },
   },
@@ -121,11 +120,7 @@ const Drawer = createDrawerNavigator(
   {
     Main: {
       screen: MainAppNavigator,
-    },
-    DrawerScreen: {
-      screen: DrawerScreen,
-      navigationOptions: { header: null },
-    },
+    }
   }, 
   { contentComponent: DrawerComponent }
 );
@@ -136,7 +131,6 @@ const DrawerNavigator = createDrawerNavigator(
     Drawer
   },
   {
-    contentComponent: DrawerScreen,
     getCustomActionCreators: (route, stateKey) => ({
       toggleFilterDrawer: () => DrawerActions.toggleDrawer({ key: stateKey }),
     }),
@@ -150,10 +144,11 @@ const AppSwitchNavigator = createSwitchNavigator(
     Initializing,
     Configure: TaxConfigurationStack,
     Login: LoginStack,
-    Home: DrawerNavigator
+    Home: DrawerNavigator,
+    Opinion
   },
   {
-    initialRouteName: 'Initializing',
+    initialRouteName: 'Home',
   }
 );
 

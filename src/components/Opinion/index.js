@@ -1,6 +1,10 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
 import { withNavigation } from 'react-navigation';
+import { View, Text, TouchableOpacity, StyleSheet, Image, Linking} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+import { GRADIANTBLUE2, COLORS } from '../../constants/colors';
+import { XY } from '../../constants/gradientCoord';
+import { FONTS } from '../../constants/fonts';
 
 class Opinion extends React.Component {
 
@@ -9,15 +13,35 @@ class Opinion extends React.Component {
   }
 
   render() {
-    const logo = require('../../images/iconInit.png')
+    const logo = require('../../images/Bill.png')
     return(
-      <View style={styles.container}>
-        <Image source={ logo } style={ styles.imageHeader } />
-        <Text style={styles.text}>Dejanos tu opinión...</Text>
-        <TouchableOpacity style = {styles.button}>
-            <Text style={styles.text}>https://www.link.com.ar</Text>
-        </TouchableOpacity>
-      </View>
+      <LinearGradient
+        colors={ GRADIANTBLUE2 }
+        style={styles.container}
+        start={XY.startV}
+        end={XY.endV}>
+          <View style={{alignItems: 'center'}}>
+            <Image source={ logo } style={ styles.imageHeader } />
+            <Text style={styles.textLight18Blue}>¡Gracias por utilizar Bill Mobile!</Text>
+            <Text style={styles.textMedium22Blue}>Dejanos tu opinión...</Text>
+            <TouchableOpacity style = {styles.button}>
+              <Text 
+                style={styles.textLightBlue} 
+                onPress={() => Linking.openURL('https://www.instagram.com/billmobileok/?hl=es-la')}
+              >
+                Click Aquí
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity 
+              style = {styles.button} 
+              onPress={() => this.props.navigation.navigate('Home')}>
+              <Text style={styles.textLightBlue}>
+                Volver a Inicio
+              </Text>
+            </TouchableOpacity>
+          </View>
+      </LinearGradient>
     )
   }
 }
@@ -25,25 +49,38 @@ class Opinion extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#3687d1',
-    alignItems: 'center',
     justifyContent: 'center'
   },
   imageHeader: {
     width: 136,
     height: 99
   },
-  text: {
-    color: 'white',
-    fontSize: 20,
-    margin: 10,
-    justifyContent: 'center'
+  textMedium22Blue: {
+    fontFamily: FONTS.latoMedium,
+    fontSize: FONTS.size22,
+    color: COLORS.blueLight,
+    alignItems: 'center',
+  },
+  textLightBlue: {
+    fontFamily: FONTS.latoLight,
+    fontSize: FONTS.size20,
+    color: COLORS.blueLight,
+    alignItems: 'center'
+  },
+  textLight18Blue: {
+    fontFamily: FONTS.latoLight,
+    fontSize: FONTS.size18,
+    color: COLORS.blueLight,
+    alignItems: 'center',
+    marginTop: 10
   },
   button: {
     borderWidth: 1,
     borderRadius: 5,
-    borderColor: 'white',
-    marginTop: 20
+    borderColor: COLORS.blueLight,
+    marginTop: 20,
+    paddingHorizontal: 20,
+    paddingVertical: 5
   }
 });
 

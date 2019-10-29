@@ -2,9 +2,7 @@ import { connect } from 'react-redux';
 import NewItem from '../NewItem/Component';
 import { updateItem } from '../../../app/items/actions';
 
-const mapStateToProps = state => ({
-  
-});
+const mapStateToProps = state => ({});
 
 function mapDispatchToProps(dispatch) {
   return {

@@ -2,10 +2,12 @@ import { StyleSheet } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { COLORS } from '../../constants/colors';
 import { FONTS } from '../../constants/fonts';
+import { METRICS } from '../../constants/metrics';
 
 const styles = StyleSheet.create({
   container: {
-    height: hp('100%')
+    flex: 1,
+    paddingTop: METRICS.heightHeader
   },
   containerBody: {
     flex: 0.50,
@@ -22,15 +24,16 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   image: {
-    width: 360,
+    width: wp('100%'),
     height: 225,
   },
   center: {
-    marginTop: 15,
-    alignItems: 'center'
+    marginTop: 25,
+    alignItems: 'center',
+    justifyContent: 'flex-end'
   },
   button: {
-    width: wp('65%'),
+    width: wp('85%'),
     height: hp('7%'),
     backgroundColor: 'transparent',
     borderRadius: 25,
