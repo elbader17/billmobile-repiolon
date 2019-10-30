@@ -45,14 +45,23 @@ export const IconAddCustomer = <Icon
   type='antdesign' 
   name="adduser" 
   size={17} 
-  color={COLORS.blueMedium} 
+  color={COLORS.white} 
 />
 
-export const IconX = <Icon 
-  type='feather'
-  name="x" 
-  size={13} 
-  color={COLORS.blueMedium} 
+export const IconX = props => (
+  <Icon 
+    type='feather'
+    name="x" 
+    color={COLORS.blueMedium} 
+    {...props} 
+  />
+);
+
+export const IconCheck = <Icon 
+  type='antdesign'
+  name="check" 
+  size={20} 
+  color={COLORS.white} 
 />
 
 //Icons Bottom Tab Navigator

@@ -7,7 +7,7 @@ import { showMessage } from "react-native-flash-message";
 import ModalVoucherTYpe from './ModalVoucherType';
 import InvoiceCustomer from './InvoiceCustomer';
 import InvoiceItems from './InvoiceItems';
-import { validateData } from '../../utils/validations';
+import { validateData, validateDni } from '../../utils/validations';
 import { presentInvoiceDate } from '../../utils/date';
 import { 
   messageItemsIncomplete, 
@@ -34,6 +34,7 @@ class Invoice extends React.Component {
       modalVisible: false, //Show Modal Voucher Type
       loading: false, //For buttons
       quantity: 1, //Cant items
+      validIdentity: true,
     }
   }
 
@@ -51,11 +52,14 @@ class Invoice extends React.Component {
   setModalVisible = visible => this.setState({modalVisible: visible});
   showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true });
   hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
-  setFcIdentification = value => this.setState({ fcIdentification: value });
+  setFcIdentification = value => this.setState({ fcIdentification: value, validIdentity: true });
   setShowCustomer = value => this.setState({ showCustomer: value });
   setLoading = (bool) => this.setState({ loading: bool });
   
-  navigateClient = () => this.props.navigation.navigate('ListInvoiceCustomer');
+  navigateClient = () => {
+    this.setShowCustomer(true);
+    this.props.navigation.navigate('ListInvoiceCustomer');
+  }
   navigateAddItems = () => this.props.navigation.navigate('ListInvoiceItem');
   navigateToSummaryInvoice = () => {
     const { showCustomer } = this.state;
@@ -114,13 +118,17 @@ class Invoice extends React.Component {
 
   addFinalConsumer = () => {
     const { fcIdentification } = this.state;
-    const { fiscalIdentity, addFiscalIdentityToInvoice } = this.props;
-    this.setLoading(true);
-    addFiscalIdentityToInvoice('fc', fcIdentification, fiscalIdentity.id)
-      .then(() => {
-        this.setLoading(false);
-        this.setShowCustomer(true)
-      })
+    if (validateDni(fcIdentification)){
+      const { fiscalIdentity, addFiscalIdentityToInvoice } = this.props;
+      this.setLoading(true);
+      addFiscalIdentityToInvoice('fc', fcIdentification, fiscalIdentity.id)
+        .then(() => {
+          this.setLoading(false);
+          this.setShowCustomer(true)
+        })
+    } else {
+      this.setState({validIdentity: false})
+    }
   }
 
   renderViewItemsAdd = () => {
@@ -153,8 +161,9 @@ class Invoice extends React.Component {
   render() {
     var date = presentInvoiceDate(this.state.invoiceDate);
     const { fiscalIdentity } = this.props;
-    const { showCustomer } = this.state;
-    const typeCustomer = fiscalIdentity.name === 'fc' || showCustomer ? 'Cosumidor Final' : 'Nombre Cliente';
+    const { showCustomer, validIdentity } = this.state;
+    const displayDni = validIdentity ? 'none' : 'flex';
+    const typeCustomer = fiscalIdentity.name === 'fc' || !showCustomer ? 'Cosumidor Final' : 'Nombre Cliente';
     return(  
       <LinearGradient 
         colors={GRADIANTBLUE2} 
@@ -212,10 +221,16 @@ class Invoice extends React.Component {
                     icon={IconAddCustomer}
                     onPress={ this.navigateClient }
                     buttonStyle={style.buttonAddCustomer}
-                    titleStyle={style.textRegular12Blue}
+                    titleStyle={style.textRegular12White}
                   />
                 </View>
-
+                
+                <View style={{height: 4, left: 2, display: displayDni }}>
+                  <Text style={style.textRegular12Red}>
+                    Documento Inválido
+                  </Text>
+                </View>
+                
                 { this.renderCustomer() }
               
               </View>

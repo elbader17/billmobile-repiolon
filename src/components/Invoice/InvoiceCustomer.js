@@ -3,9 +3,9 @@ import { View, TextInput, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { Button } from "react-native-elements";
 import PropTypes from 'prop-types';
-import { validateDni } from '../../utils/validations'
 import style from './style';
 import { COLORS } from '../../constants/colors';
+import { IconCheck, IconX } from '../../constants/icons';
 
 const InvoiceCustomer = props => {
   const customer = props.fiscalIdentity;
@@ -18,7 +18,7 @@ const InvoiceCustomer = props => {
           <Text style={style.textLight16GrayDark}>{identification}</Text>
           <Text style={style.textLight16BlueMedium}>| {subIdentification} |</Text> 
           <Button
-            icon={<Icon name="close" size={15} color={COLORS.blueMedium}/>}
+            icon={ <IconX size={18}/> }
             onPress={ () => props.setShowCustomer(false) }
             buttonStyle={style.buttonDeleteCustomerInvoice}
             titleStyle={style.textRegular12Blue}
@@ -38,17 +38,15 @@ const InvoiceCustomer = props => {
             keyboardType='numeric'
           />
           <Button
-            title= 'Añadir'
+            //title= 'Añadir'
+            icon={IconCheck}
             testID='addfc'
             TouchableComponent={TouchableOpacity}
             onPress={ props.addFinalConsumer }
-            titleStyle={validateDni(props.identity) ? style.textRegular12Blue : style.textRegular12Gray}
+            titleStyle={ style.textRegular12White }
             buttonStyle={ style.buttonCheck }
-            disabledStyle= { style.buttonCheckDisabled }
-            disabledTitleStyle = {style.textRegular12White}
             loading = { props.loading }
-            loadingStyle={{top: 1.5, backgroundColor: COLORS.gray, borderRadius: 20}}
-            disabled = { props.loading || !validateDni(props.identity) }
+            loadingStyle={{top: 1}}
           />
         </View>
       </View>

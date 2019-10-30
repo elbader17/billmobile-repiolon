@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent'
   },
   inputDNICustomer: {
-    width: wp('60%'),
+    width: wp('64%'),
     height: hp('6%'),
     borderWidth: 1,
     borderRadius: 7,
@@ -163,8 +163,8 @@ const styles = StyleSheet.create({
     marginVertical: 7
   },
   listCustomer:{
-    marginTop: 6,
-    marginBottom: 6
+    marginTop: 10,
+    marginBottom: 8
   },
   inLine: {
     flexDirection: "row",
@@ -243,26 +243,18 @@ const styles = StyleSheet.create({
     opacity: 0.9
   },
   buttonCheck: {
-    backgroundColor: 'transparent',
-    borderColor: COLORS.blueMedium,
-    borderRadius: 7,
-    borderWidth: 1,
-    width: wp('15%'),
+    backgroundColor: COLORS.blueMedium,
+    borderRadius: 5,
+    width: wp('13%'),
     height: hp('6%'),
-  },
-  buttonCheckDisabled: {
-    backgroundColor: '#d9d9d9',
-    borderColor: '#d9d9d9',
-    borderRadius: 7,
-    borderWidth: 1,
-    width: wp('15%'),
-    height: hp('6%')
+    elevation: 1
   },
   buttonCantProduct: {
-    backgroundColor: 'transparent',
+    backgroundColor: COLORS.white,
     height: hp('3.5%'),
-    borderRadius: 5,
+    borderRadius: 4,
     borderWidth: 1,
+    elevation: 1,
     borderColor: COLORS.blueMedium,
     paddingHorizontal: 5,
     justifyContent: 'center',
@@ -292,14 +284,13 @@ const styles = StyleSheet.create({
     elevation: 4,
   },
   buttonAddCustomer: {
-    backgroundColor: 'transparent',
-    borderRadius: 20,
-    borderWidth: 1,
-    borderColor: COLORS.blueMedium,
-    width: 110,
+    backgroundColor: COLORS.blueMedium,
+    borderRadius: 6,
+    width: 120,
     height: hp('5%'),
     alignItems: 'center',
     justifyContent: 'center',
+    elevation: 1,
   },
   textRegular16GrayLight: {
     fontFamily: FONTS.latoRegular,
@@ -336,15 +327,10 @@ const styles = StyleSheet.create({
     fontSize: FONTS.size12,
     color: COLORS.grayDark
   },
-  textRegular12GrayLight: {
+  textRegular12Red: {
     fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size12,
-    color: COLORS.grayLight
-  },
-  textLight11GrayDark: {
-    fontFamily: FONTS.latoLight,
     fontSize: FONTS.size11,
-    color: COLORS.grayDark
+    color: COLORS.red
   },
   textLight14GrayDark: {
     fontFamily: FONTS.latoLight,

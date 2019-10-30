@@ -1,6 +1,7 @@
 import React from 'react';
 import { Auth } from 'aws-amplify';
 import { View, StyleSheet, Image } from 'react-native';
+import { connect } from 'react-redux'
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { COLORS } from '../../constants/colors';
 
@@ -13,12 +14,12 @@ class Initializing extends React.Component {
   async componentDidMount() {
     try {
       const user = await Auth.currentAuthenticatedUser();  
-      console.log('user: ', user);
       if (user) this.props.navigation.navigate('Home');
       else this.props.navigation.navigate('Authentication');
     } catch (err) {
       console.log('error: ', err);
-      this.props.navigation.navigate('Authentication');
+      if (this.props.user.completed) this.props.navigation.navigate('Authentication');
+      else this.props.navigation.navigate('Intro');
     }
   }
 
@@ -50,4 +51,7 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Initializing;
+const mapStateToProps = state => ({ user: state.userservice,});
+const Component = connect( mapStateToProps, null) (Initializing);
+
+export default Component;

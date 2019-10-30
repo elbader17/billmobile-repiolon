@@ -24,10 +24,10 @@ const InvoiceItems = props => {
                     TouchableComponent={TouchableOpacity}
                     onPress={props.incrementQuantity}
                     buttonStyle={style.buttonCantProduct}
-                    titleStyle={style.textRegular12BlueMedium}
+                    titleStyle={style.textRegular12Blue}
                   />
                   <Button
-                    icon = {IconX}
+                    icon = {<IconX size={13}/>}
                     TouchableComponent={TouchableOpacity}
                     onPress={() => props.deleteItem(props.invoiceId)}
                     buttonStyle={[style.buttonCantProduct, {marginLeft: 5}]}
