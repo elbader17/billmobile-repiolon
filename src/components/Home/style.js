@@ -11,13 +11,11 @@ const styles = StyleSheet.create({
   },
   containerHeader: { 
     flex:0.42,
-    paddingTop: 10,
-    paddingHorizontal: 5,
   },
   containerStatictis: {
     flex:0.33,
     justifyContent: 'center',
-    paddingHorizontal: 12,
+    paddingHorizontal: 10,
   },
   containerListCustomer: {
     flex:0.25,
@@ -31,16 +29,18 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 0, 
   },
   scrollCustomers: {
-    marginTop: 2,
-    marginHorizontal: 18
+    flex: 1,
+    paddingTop: 7,
+    marginTop: 5,
+    paddingHorizontal: 15,
+    borderTopWidth: 2,
+    borderColor: COLORS.blueLight
   },
   styleChart: {
-    borderRadius: 15,
-    elevation: 3,
-    borderColor: COLORS.grayDark,
-    marginHorizontal: 5,
-    alignItems: 'center',
-    justifyContent: 'center'
+    borderRadius: 2,
+    borderTopWidth: 2,
+    borderBottomWidth: 2,
+    borderColor: COLORS.blueLight
   },
   circlePercentaje: {
     elevation: 5, 
@@ -73,8 +73,8 @@ const styles = StyleSheet.create({
   },
   textFacPeriodo: {
     alignItems: 'flex-end',
-    marginBottom: 3,
-    marginRight: 15
+    marginBottom: 5,
+    marginRight: 10
   },
   textRegular16Blue: {
     fontFamily: FONTS.latoRegular,
@@ -101,6 +101,21 @@ const styles = StyleSheet.create({
     fontSize: FONTS.size12,
     color: COLORS.white,
   },
+  textLight14White: {
+    fontFamily: FONTS.latoLight,
+    fontSize: FONTS.size14,
+    color: COLORS.white,
+  },
+  textLight16White: {
+    fontFamily: FONTS.latoLight,
+    fontSize: FONTS.size16,
+    color: COLORS.white,
+  },
+  textLight16BlueLight: {
+    fontFamily: FONTS.latoLight,
+    fontSize: FONTS.size16,
+    color: COLORS.blueLight,
+  },
   textRegular12BlueLight: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size12,
@@ -109,8 +124,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
+  textRegular16BlueLight: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size16,
+    color: COLORS.blueLight,
+    opacity: 0.7,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
   textRegular14White: {
-    fontFamily: FONTS.latoLight,
+    fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size14,
     color: COLORS.white,
   },

@@ -41,6 +41,14 @@ export const IconDocument = <Icon
   iconStyle={{marginLeft:20}}
 />
 
+export const IconRight = <Icon 
+  type='antdesign' 
+  name="right" 
+  size={12} 
+  color={COLORS.blueLight} 
+  iconStyle={{ marginLeft: 2, top: 2.5}}
+/>
+
 export const IconAddCustomer = <Icon 
   type='antdesign' 
   name="adduser" 

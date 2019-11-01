@@ -1,3 +1,5 @@
+import { COLORS } from "../constants/colors";
+
 export const messageConfirmAccount = {
     message: "¡Cuenta Verificada!",
     description: "Inicie Sesión",
@@ -24,6 +26,34 @@ export const messageItemsIncomplete = {
     icon: { icon: "auto", position: "left" },
     type: 'warning',
     duration: 2000
+};
+
+export const messageInfoChart = {
+    message: "Facturación por Mes",
+    description: `Período: 2019 \nLos montos se expresan en K ($1K = $1000)`,
+    floating: true,
+    icon: { icon: "auto", position: "left" },
+    type: 'info',
+    backgroundColor: COLORS.blue,
+    style: {
+      borderWidth: 1,
+      borderColor: COLORS.blueLight
+    },
+    duration: 4000
+};
+
+export const messageCobros = {
+    message: "Cobros Pendientes",
+    description: `Período: 2019 \nInformacion Referente a los cobros o alguna otra información`,
+    floating: true,
+    icon: { icon: "auto", position: "left" },
+    type: 'info',
+    backgroundColor: COLORS.blue,
+    style: {
+      borderWidth: 1,
+      borderColor: COLORS.blueLight
+    },
+    duration: 4000
 };
 
 export const messageCustomerIncomplete = {

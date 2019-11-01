@@ -3,8 +3,11 @@ import { View, Text, Dimensions, TouchableOpacity, ScrollView, Image } from 'rea
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import LinearGradient from 'react-native-linear-gradient';
 import { Button } from "react-native-elements";
+import { showMessage } from "react-native-flash-message";
 import { LineChart } from 'react-native-chart-kit';
 import { Icon } from 'react-native-elements';
+import { IconCustomer, IconRight } from '../../constants/icons';
+import { messageInfoChart } from '../../utils/messagesNotifications';
 import { dataChart, dataConfig } from '../../constants/lineChart';
 import { GRADIANTBLUE2, COLORS } from '../../constants/colors';
 import style from './style';
@@ -48,6 +51,8 @@ class Home extends React.Component {
   itemListNavigate = () => this.props.navigation.navigate('ItemList');
   newInvoiceNavigate = () => this.props.navigation.navigate('Invoice');
 
+  infoChart = () => showMessage(messageInfoChart);
+
   render() {
     const iconInvoice = <Icon type='antdesign' name="filetext1" size={12} style={{opacity: 0.7}} color={COLORS.blueLight}/>
     return(
@@ -61,22 +66,27 @@ class Home extends React.Component {
 
             <View style={style.textFacPeriodo}>
               <View style={style.inLine}>
-                <Icon type='entypo' name="area-graph" color={COLORS.blueLight} size={15} iconStyle={{marginRight: 3}}/>
-                <Text style={style.textLight12White}>
+                <Icon type='entypo' name="area-graph" color={COLORS.blueLight} size={15} iconStyle={{marginRight: 4}}/>
+                <Text style={style.textLight14White}>
                   Facturación del Período
                 </Text>
               </View>
             </View>
+            <TouchableOpacity onPress={this.infoChart} activeOpacity={0.7}>
+              <LineChart
+                height={190}
+                width={Dimensions.get('window').width}
+                style={style.styleChart}
+                data={dataChart}
+                chartConfig={dataConfig}
+                yAxisLabel={'K $'}
+                bezier
+              />
+            </TouchableOpacity>
 
-            <LineChart
-              height={190}
-              width={Dimensions.get('window').width-25}
-              style={style.styleChart}
-              data={dataChart}
-              chartConfig={dataConfig}
-            />  
           </View>
           
+            
           <View style={style.containerStatictis}>
             <View style={style.inLineSpaceAround}>
               <AnimatedCircularProgress
@@ -124,55 +134,59 @@ class Home extends React.Component {
           </View>
 
           <View style={style.containerListCustomer}>
-
-            <View style={style.inLine}>
-              <View style={style.lineWhiteLeft}></View>
-              <Text style={[style.textRegular16White,{marginHorizontal: 7}]}>
-                Clientes Recientes
-              </Text>  
-              <View style={style.lineWhiteRight}></View>
+            <View style={[style.inLine,{marginLeft: 10}]}>
+              <IconCustomer size={17} color={COLORS.blueLight} iconStyle={{marginRight: 4}}/>
+              <Text style={style.textRegular14White}>Clientes Recientes</Text>
             </View>
-            
-            <ScrollView style={style.scrollCustomers}>
+            <View style={style.scrollCustomers}>
               
-              <View style={[style.inLineSpaceBetween,{marginVertical: 3}]}>
-                <Text style={style.textRegular14White}>Fulano Automotores & Hnos</Text>
-                <Button
-                  icon={iconInvoice}
-                  title='Ver Factura '
-                  iconRight
-                  buttonStyle={style.buttonViewInvoice}
-                  titleStyle={style.textLight12BlueLight}
-                />
+              <View style={{borderBottomWidth: 1, borderColor: COLORS.blueMedium}}>
+                <View style={style.inLineSpaceBetween}>
+                  <Text style={style.textLight16White}> 
+                    Armando Construcciones 
+                  </Text>
+                  <Button
+                    title='Comprobante'
+                    icon={IconRight}
+                    iconRight={true}
+                    buttonStyle={style.buttonViewInvoice}
+                    titleStyle={style.textLight16BlueLight}
+                  />
+                </View>
               </View>
 
-              <View style={style.lineBlueLight}></View>
-                
-              <View style={[style.inLineSpaceBetween,{marginVertical: 3}]}>
-                <Text style={style.textRegular14White}>Estudio Jurídico Juniors</Text>
-                <Button
-                  icon={iconInvoice}
-                  title='Ver Factura '
-                  iconRight
-                  buttonStyle={style.buttonViewInvoice}
-                  titleStyle={style.textLight12BlueLight}
-                />
+              <View style={{borderBottomWidth: 1, borderColor: COLORS.blueMedium}}>
+                <View style={style.inLineSpaceBetween}>
+                  <Text style={style.textLight16White}> 
+                    Ferretería Monsegur SRL
+                  </Text>
+                  <Button
+                    title='Comprobante'
+                    icon={IconRight}
+                    iconRight={true}
+                    buttonStyle={style.buttonViewInvoice}
+                    titleStyle={style.textLight16BlueLight}
+                  />
+                </View>
               </View>
 
-              <View style={style.lineBlueLight}></View>
-
-              <View style={[style.inLineSpaceBetween,{marginVertical: 3}]}>
-                <Text style={style.textRegular14White}>Pedro Rodriguez</Text>
-                <Button
-                  icon={iconInvoice}
-                  title='Ver Factura '
-                  iconRight
-                  buttonStyle={style.buttonViewInvoice}
-                  titleStyle={style.textLight12BlueLight}
-                />
+              <View style={{borderBottomWidth: 1, borderColor: COLORS.blueMedium}}>
+                <View style={style.inLineSpaceBetween}>
+                  <Text style={style.textLight16White}> 
+                    Martin Daniotti 
+                  </Text>
+                  <Button
+                    title='Comprobante'
+                    icon={IconRight}
+                    iconRight={true}
+                    buttonStyle={style.buttonViewInvoice}
+                    titleStyle={style.textLight16BlueLight}
+                  />
+                </View>
               </View>
-              <View style={style.lineBlueLight}></View>
-            </ScrollView>
+
+
+            </View>
               
           </View>
       
