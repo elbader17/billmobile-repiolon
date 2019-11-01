@@ -30,7 +30,7 @@ class Intro extends React.Component {
     );
   }
   _onDone = () => {
-    this.props.navigation.navigate('Authentication')
+    this.props.navigation.navigate('Configure')
   }
   render() {
     return ( 

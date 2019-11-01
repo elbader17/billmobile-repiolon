@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { fetch_api } from '../../utils/fetchrefresh';
 import { createInvoice } from '../invoices/actions';
 import {
   ADD_FISCAL_IDENTITY_TO_INVOICE,
@@ -11,29 +11,20 @@ const addfiscalIdentityToInvoiceAction = fiscalIdentity => {
   };
 }
 
-const createFiscalIdentity = (resource, dispatch, getState) => {
-  const instance = axios.create({
-    headers: { 'JWT-TOKEN': getState().authentication.jwtToken },
-  });
-  return instance.post('/v1/invoices_fiscal_identities', { resource })
+const createFiscalIdentity = (resource, dispatch) => {
+  return fetch_api('/v1/invoices_fiscal_identities', 'POST', false, { resource })
     .then((response) => {
-      const { data } = response.data;
-      console.log(data);
-      dispatch(addfiscalIdentityToInvoiceAction(data));
+      dispatch(addfiscalIdentityToInvoiceAction(response.data));
     })
     .catch((error) => {
       console.log(error.response);
     });
 };
 
-const updateFiscalIdentity = (resource, dispatch, getState) => {
-  const instance = axios.create({
-    headers: { 'JWT-TOKEN': getState().authentication.jwtToken },
-  });
-  return instance.put(`/v1/invoices_fiscal_identities/${resource.id}`, { resource })
+const updateFiscalIdentity = (resource, dispatch) => {
+  return fetch_api(`/v1/invoices_fiscal_identities/${resource.id}`, 'POST', false, { resource })
     .then((response) => {
-      const { data } = response.data;
-      dispatch(addfiscalIdentityToInvoiceAction(data));
+      dispatch(addfiscalIdentityToInvoiceAction(response.data));
     })
     .catch((error) => {
       console.log(error.response);
@@ -44,9 +35,9 @@ const addFiscalIdentityToInvoice = (name, identity, category, id) => {
   return (dispatch, getState) => {
     const { id: invoiceId } = getState().invoices.currentInvoice;
     let promise;
-    if (invoiceId != null) {
+    if (invoiceId != null)
       promise = Promise.resolve();
-    } else {
+    else {
       const { invoiceDate, voucherType } = getState().invoices.currentInvoice;
       promise = dispatch(createInvoice(invoiceDate, voucherType));
     }
@@ -64,4 +55,4 @@ const addFiscalIdentityToInvoice = (name, identity, category, id) => {
   };
 };
 
-export { addFiscalIdentityToInvoice };
+export { addFiscalIdentityToInvoice, updateFiscalIdentity };

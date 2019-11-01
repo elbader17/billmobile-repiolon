@@ -66,56 +66,59 @@ class TaxConfiguration extends React.Component{
         start={XY.startV}
         end={XY.endV}>
 
-        <ScrollView style={style.containerInput}>
-          
-          <TextField
-            title='Nombre de Fantasía o tu Nombre y Apellido.'
-            label='Nombre de la empresa'
-            value={this.state.name}
-            onChangeText={this.setName}
-            onFocus={() => this.setState({errorName: undefined})}
-            tintColor={COLORS.blueLight}
-            textColor= {COLORS.gray}
-            baseColor={COLORS.white}
-            lineWidth={1}
-            labelFontSize={15}
-            labelPadding={6}
-            error={this.state.errorName}
-            errorColor={'#ff9999'}
-          />
-
-          <TextField
-            title='Para acceder a tu información y configurar tu cuenta.'
-            label='Ingresa tu CUIT'
-            value={this.state.cuit}
-            onChangeText={this.setCuit}
-            onFocus={() => this.setState({errorCuit: undefined})}
-            keyboardType='numeric'
-            tintColor={COLORS.blueLight}
-            textColor= {COLORS.gray}
-            baseColor={COLORS.white}
-            lineWidth={1}
-            labelFontSize={15}
-            labelPadding={6}
-            error={this.state.errorCuit}
-            errorColor={'#ff9999'}
-          />
-
-          <View style={style.center}>
-            <Button
-              title='Configurar'
-              testID='ready'
-              TouchableComponent={TouchableOpacity}
-              onPress={ this.handleConfigFiscal }
-              buttonStyle={ style.button }
-              titleStyle={ style.textRegular14white }
-              loading={this.state.loading}
-              ViewComponent={LinearGradient}
-              linearGradientProps={COLORGBL}
+        <View style={style.containerBody}>
+        <ScrollView>  
+          <View style={{justifyContent: "flex-start"}}>
+            <TextField
+              title='Nombre de Fantasía o tu Nombre y Apellido.'
+              label='Nombre de la empresa'
+              value={this.state.name}
+              onChangeText={this.setName}
+              onFocus={() => this.setState({errorName: undefined})}
+              tintColor={COLORS.blueLight}
+              textColor= {COLORS.gray}
+              baseColor={COLORS.white}
+              lineWidth={1}
+              labelFontSize={15}
+              labelPadding={6}
+              error={this.state.errorName}
+              errorColor={'#ff9999'}
             />
-          </View>
 
-        </ScrollView>
+            <TextField
+              title='Para acceder a tu información y configurar tu cuenta.'
+              label='Ingresa tu CUIT'
+              value={this.state.cuit}
+              onChangeText={this.setCuit}
+              onFocus={() => this.setState({errorCuit: undefined})}
+              keyboardType='numeric'
+              tintColor={COLORS.blueLight}
+              textColor= {COLORS.gray}
+              baseColor={COLORS.white}
+              lineWidth={1}
+              labelFontSize={15}
+              labelPadding={6}
+              error={this.state.errorCuit}
+              errorColor={'#ff9999'}
+            />        
+          </View>
+          </ScrollView>
+        </View>
+
+        <View style={style.containerFooter}>
+          <Button
+            title='Configurar CUIT'
+            testID='ready'
+            TouchableComponent={TouchableOpacity}
+            onPress={ this.handleConfigFiscal }
+            buttonStyle={ style.button }
+            titleStyle={ style.textRegular14white }
+            loading={this.state.loading}
+            ViewComponent={LinearGradient}
+            linearGradientProps={COLORGBL}
+          />
+        </View>
+
       </LinearGradient>
     )
   }

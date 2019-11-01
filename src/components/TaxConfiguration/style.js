@@ -10,50 +10,40 @@ const styles = StyleSheet.create({
     paddingTop: METRICS.heightHeader
   },
   containerBody: {
-    flex: 0.50,
+    flex: 0.85,
     marginHorizontal: 25,
-    alignItems: 'center',
-    justifyContent: 'center'
   }, 
   containerFooter: {
-    flex: 0.50,
+    flex: 0.15,
     alignItems: 'center',
-  },
-  containerInput: {
-    marginHorizontal: 25,
-    marginTop: 10,
   },
   image: {
-    width: wp('100%'),
-    height: 225,
-  },
-  center: {
-    marginTop: 25,
-    alignItems: 'center',
-    justifyContent: 'flex-end'
+    width: wp('60%'),
+    height: hp('20%'),
+    marginBottom: 20
   },
   button: {
-    width: wp('85%'),
-    height: hp('7%'),
+    width: wp('90%'),
+    height: hp('7.5%'),
     backgroundColor: 'transparent',
     borderRadius: 25,
-    elevation: 1,
+    elevation: 2,
     marginTop: 15,
     justifyContent: 'center',
     alignItems: 'center'
   },
-  textRegular18Blue: {
+  textRegular18White: {
     fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size18,
-    color: COLORS.blueMedium,
+    fontSize: FONTS.size24,
+    color: COLORS.white,
     textAlign: 'center'
   },
-  textRegular14GrayDark: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size14,
-    color: COLORS.grayDark,
+  textLight18Blue: {
+    fontFamily: FONTS.latoLight,
+    fontSize: FONTS.size18,
+    color: COLORS.blueLight,
     textAlign: 'center',
-    marginTop: 10
+    marginTop: 15
   },
   textRegular14Gray: {
     fontFamily: FONTS.latoRegular,

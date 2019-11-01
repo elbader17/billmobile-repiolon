@@ -148,7 +148,7 @@ const AppSwitchNavigator = createSwitchNavigator(
     Opinion
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'Initializing',
   }
 );
 

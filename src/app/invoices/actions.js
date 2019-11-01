@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { fetch_api } from '../../utils/fetchrefresh';
 import {
   CREATE_INVOICE,
   UPDATE_INVOICE,
@@ -46,71 +46,47 @@ const createInvoice = (invoiceDate, voucherType) => {
     invoice_date: invoiceDate,
     invoice_type: voucherType
   };
-  console.log(invoiceDate);  
-  return (dispatch, getState) => {
-    const instance = axios.create({
-      headers: { 'JWT-TOKEN': getState().authentication.jwtToken },
-    });
-    return instance.post('v1/invoices', { resource })
-      .then((response) => {
-        return dispatch(createInvoiceAction(response.data.data));
-      })
-      .catch((error) => {
-        console.log(error.response);
-      });
+  return (dispatch) => {
+    return fetch_api('/v1/invoices', 'POST', false, { resource })
+      .then((response) => dispatch(createInvoiceAction(response.data)))
+      .catch((error) => console.log(error.response));
   };
 };
 
 const updateInvoice = (values) => {
-  console.log(values);
   let resource = {};
-  if (values.invoiceDate != null) {
+  if (values.invoiceDate != null) 
     resource.invoice_date = values.invoiceDate;
-  }
-  if (values.voucherType != null) {
+  if (values.voucherType != null) 
     resource.invoice_type = values.voucherType;
-  }
 
   return (dispatch, getState) => {
-    const { jwtToken } = getState().authentication;
     const { id: invoiceId } = getState().invoices.currentInvoice;
-    const instance = axios.create({
-      headers: { 'JWT-TOKEN': jwtToken },
-    });
-
-    return instance.put(`v1/invoices/${invoiceId}`, { resource })
-      .then((response) => {
-        return dispatch(updateInvoiceAction(response.data.data));
-      })
-      .catch((error) => {
-        console.log(error.response);
-      });
+    return fetch_api(`/v1/invoices/${invoiceId}`,'PUT', false, { resource })
+      .then((response) => dispatch(updateInvoiceAction(response.data)))
+      .catch((error) => console.log(error));
   };
 };
 
 const listInvoice = () => {
-  return (dispatch, getState) => {
-    const instance = axios.create({
-      headers: { 'JWT-TOKEN': getState().authentication.jwtToken },
-    });
-    return instance.get('v1/invoices')
+  return (dispatch) => {
+    return fetch_api('/v1/invoices', 'GET', false)
       .then((response) => {
-        dispatch(listInvoiceAction(response.data.data));
+        console.log(response);
+        dispatch(listInvoiceAction(response.data));
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error)
       });
   };
 };
 
 const getInvoice = (id) => {
-  return (dispatch, getState) => {
-    const instance = axios.create({
-      headers: { 'JWT-TOKEN': getState().authentication.jwtToken },
-    });
-    return instance.get(`v1/invoices/${id}`)
+  return (dispatch) => {
+    return fetch_api(`/v1/invoices/${id}`, 'GET', false)
       .then((response) => {
-        dispatch(getInvoiceAction(response.data.data));
+        console.log(response)
+        dispatch(getInvoiceAction(response.data));
       })
       .catch((error) => {
         console.log(error);
@@ -126,14 +102,11 @@ const confirmInvoice = (attributes) => {
     total: "10",
     id: "1"
   }
-  return (dispatch, getState) => {
-    const instance = axios.create({
-      headers: { 'JWT-TOKEN': getState().authentication.jwtToken },
-    });
-    return instance.put(`v1/invoices/confirm`, { resource })
+  return (dispatch) => {
+    return fetch_api('/v1/invoices/confirm','PUT', false, { resource })
       .then((response) => {
-        dispatch(confirmInvoiceAction(response.data.data));
         console.log(response);
+        dispatch(confirmInvoiceAction(response.data));
       })
       .catch((error) => {
         console.log(error);

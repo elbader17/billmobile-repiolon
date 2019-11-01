@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   scrollCustomers: {
     flex: 1,
     paddingTop: 7,
-    marginTop: 5,
+    marginTop: 3,
     paddingHorizontal: 15,
     borderTopWidth: 2,
     borderColor: COLORS.blueLight
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
   },
   textFacPeriodo: {
     alignItems: 'flex-end',
-    marginBottom: 5,
+    marginBottom: 3,
     marginRight: 10
   },
   textRegular16Blue: {

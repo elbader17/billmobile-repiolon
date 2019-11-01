@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch) => {
   return {
     saveFiscalIdentity: (name, identification, category, id) => (
-      dispatch(createCustomer({ name, identification, category }))
+      dispatch(createCustomer({ id, name, identification, category }))
     ),
     type: 'collection'
   };

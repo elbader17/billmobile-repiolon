@@ -44,7 +44,21 @@ export const messageInfoChart = {
 
 export const messageCobros = {
     message: "Cobros Pendientes",
-    description: `Período: 2019 \nInformacion Referente a los cobros o alguna otra información`,
+    description: `Período: 2019 \nFacturas que no han sido cobradas\nHay 8 Cobros por efectuar\n¡Detalles de Cobros Pendientes!`,
+    floating: true,
+    icon: { icon: "auto", position: "left" },
+    type: 'info',
+    backgroundColor: COLORS.blue,
+    style: {
+      borderWidth: 1,
+      borderColor: COLORS.blueLight
+    },
+    duration: 4000
+};
+
+export const messageTotalPeriod = {
+    message: "Total facturado",
+    description: `Período: 2019 \n¡Información sobre lo que lleva facturado!`,
     floating: true,
     icon: { icon: "auto", position: "left" },
     type: 'info',

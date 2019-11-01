@@ -7,7 +7,7 @@ import { showMessage } from "react-native-flash-message";
 import { LineChart } from 'react-native-chart-kit';
 import { Icon } from 'react-native-elements';
 import { IconCustomer, IconRight } from '../../constants/icons';
-import { messageInfoChart } from '../../utils/messagesNotifications';
+import { messageInfoChart, messageCobros, messageTotalPeriod } from '../../utils/messagesNotifications';
 import { dataChart, dataConfig } from '../../constants/lineChart';
 import { GRADIANTBLUE2, COLORS } from '../../constants/colors';
 import style from './style';
@@ -52,9 +52,10 @@ class Home extends React.Component {
   newInvoiceNavigate = () => this.props.navigation.navigate('Invoice');
 
   infoChart = () => showMessage(messageInfoChart);
+  infoPendingCharges = () => showMessage(messageCobros);
+  infoTotalPeriod = () => showMessage(messageTotalPeriod);
 
   render() {
-    const iconInvoice = <Icon type='antdesign' name="filetext1" size={12} style={{opacity: 0.7}} color={COLORS.blueLight}/>
     return(
         <LinearGradient
           colors={ GRADIANTBLUE2 }
@@ -85,62 +86,65 @@ class Home extends React.Component {
             </TouchableOpacity>
 
           </View>
-          
-            
+                
           <View style={style.containerStatictis}>
             <View style={style.inLineSpaceAround}>
-              <AnimatedCircularProgress
-                size={145}
-                width={12}
-                fill={80}
-                rotation={0}
-                tintColor={COLORS.blueLight}
-                backgroundColor={COLORS.white}
-                lineCap={"round"}
-                style={style.circlePercentaje}>
-                {(fill) => (
-                  <View style={style.inColumn}>
-                    <Text style={style.textLight18White}>
-                      0{ fill/10 }/12 
-                    </Text>
-                    <Text style={style.textLight12BlueLight}>
-                      Cobros Pendientes
-                    </Text>
-                  </View>
-                )}
-              </AnimatedCircularProgress>
-
-              <AnimatedCircularProgress
-                size={145}
-                width={12}
-                fill={20}
-                rotation={0}
-                tintColor={COLORS.blueLight}
-                backgroundColor={COLORS.white}
-                lineCap={"round"}
-                style={style.circlePercentaje}>
-                {(fill) => (
-                  <View style={style.inColumn}>
-                    <Text style={style.textLight18White}>
-                      { fill }/250 Mil 
-                    </Text>
-                    <Text style={style.textLight12BlueLight}>
-                      Total del Período
-                    </Text>
-                  </View>
-                )}
-              </AnimatedCircularProgress>
+              <TouchableOpacity onPress={this.infoPendingCharges} activeOpacity={0.7}>
+                <AnimatedCircularProgress
+                  size={145}
+                  width={12}
+                  fill={80}
+                  rotation={0}
+                  tintColor={COLORS.blueLight}
+                  backgroundColor={COLORS.white}
+                  lineCap={"round"}
+                  style={style.circlePercentaje}>
+                  {(fill) => (
+                    <View style={style.inColumn}>
+                      <Text style={style.textLight18White}>
+                        0{ fill/10 }/12 
+                      </Text>
+                      <Text style={style.textLight12BlueLight}>
+                        Cobros Pendientes
+                      </Text>
+                    </View>
+                  )}
+                </AnimatedCircularProgress>
+              </TouchableOpacity>
+              
+              <TouchableOpacity onPress={this.infoTotalPeriod} activeOpacity={0.7}>
+                <AnimatedCircularProgress
+                  size={145}
+                  width={12}
+                  fill={20}
+                  rotation={0}
+                  tintColor={COLORS.blueLight}
+                  backgroundColor={COLORS.white}
+                  lineCap={"round"}
+                  style={style.circlePercentaje}>
+                  {(fill) => (
+                    <View style={style.inColumn}>
+                      <Text style={style.textLight18White}>
+                        { fill }/250 Mil 
+                      </Text>
+                      <Text style={style.textLight12BlueLight}>
+                        Total del Período
+                      </Text>
+                    </View>
+                  )}
+                </AnimatedCircularProgress>
+              </TouchableOpacity>
             </View>
           </View>
 
           <View style={style.containerListCustomer}>
             <View style={[style.inLine,{marginLeft: 10}]}>
               <IconCustomer size={17} color={COLORS.blueLight} iconStyle={{marginRight: 4}}/>
-              <Text style={style.textRegular14White}>Clientes Recientes</Text>
+              <Text style={style.textLight14White}>Clientes Recientes</Text>
             </View>
             <View style={style.scrollCustomers}>
               
-              <View style={{borderBottomWidth: 1, borderColor: COLORS.blueMedium}}>
+              <View>
                 <View style={style.inLineSpaceBetween}>
                   <Text style={style.textLight16White}> 
                     Armando Construcciones 
@@ -155,7 +159,7 @@ class Home extends React.Component {
                 </View>
               </View>
 
-              <View style={{borderBottomWidth: 1, borderColor: COLORS.blueMedium}}>
+              <View>
                 <View style={style.inLineSpaceBetween}>
                   <Text style={style.textLight16White}> 
                     Ferretería Monsegur SRL
@@ -170,7 +174,7 @@ class Home extends React.Component {
                 </View>
               </View>
 
-              <View style={{borderBottomWidth: 1, borderColor: COLORS.blueMedium}}>
+              <View>
                 <View style={style.inLineSpaceBetween}>
                   <Text style={style.textLight16White}> 
                     Martin Daniotti 
@@ -185,11 +189,9 @@ class Home extends React.Component {
                 </View>
               </View>
 
-
             </View>
               
           </View>
-      
         </LinearGradient>
     )
   }

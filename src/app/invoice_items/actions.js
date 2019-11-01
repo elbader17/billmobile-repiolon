@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { fetch_api } from '../../utils/fetchrefresh';
 import {
   CREATE_INVOICE_ITEM,
@@ -26,19 +25,16 @@ function updateInvoiceItemAction(invoiceItem) {
 const updateInvoiceItem = (id, values) => {
   return (dispatch, getState) => {
     const { id: invoiceId } = getState().invoices.currentInvoice;
-    const instance = axios.create({
-      headers: { 'JWT-TOKEN': getState().authentication.jwtToken },
-    });
-    return instance.put(
-      `v1/invoice_items/${id}`,
-      { resource: { ...values, invoice_id: invoiceId } },
-    ).then((response) => {
-      console.log(response);
-      dispatch(updateInvoiceItemAction(response.data));
-      return dispatch(getInvoice(invoiceId));
-    }).catch((error) => {
-      console.log(error)
-    });
+    return fetch_api(`/v1/invoice_items/${id}`, 'POST', false, 
+    { resource: { ...values, invoice_id: invoiceId } })
+        .then((response) => {
+           console.log(response);
+           dispatch(updateInvoiceItemAction(response.data));
+           return dispatch(getInvoice(invoiceId));
+        })
+        .catch((error) => {
+          console.log(error)
+        });
   };
 };
 
@@ -70,9 +66,6 @@ const createInvoiceItem = ({category, name, price, quantity}) => {
       promise = dispatch(createInvoice(invoiceDate, voucherType));
     }
     return promise.then(() => {
-      const instance = axios.create({
-        headers: { 'JWT-TOKEN': getState().authentication.jwtToken },
-      });
       const { id: updatedInvoiceId } = getState().invoices.currentInvoice;
       const resource = {
         category,
@@ -81,9 +74,9 @@ const createInvoiceItem = ({category, name, price, quantity}) => {
         invoice_id: updatedInvoiceId,
         quantity
       };
-      return instance.post('v1/invoice_items', { resource })
+      return fetch_api('/v1/invoice_items', 'POST', false, { resource })
         .then((response) => {
-          dispatch(createInvoiceItemAction(response.data.data));
+          dispatch(createInvoiceItemAction(response.data));
           return dispatch(getInvoice(updatedInvoiceId));
         })
         .catch((error) => {

@@ -7,6 +7,7 @@ import { COLORS } from '../../../constants/colors';
 import style from '../style';
 
 const ListCustomers = props => {
+    console.log(props.customers);
     return props.customers.map((customer) => {
       const isInvoice = props.type === 'invoice';
       const color = props.loadingItem ? COLORS.gray : COLORS.blueLight //Disabled and enabled Button

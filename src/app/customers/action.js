@@ -1,5 +1,4 @@
 import { fetch_api } from '../../utils/fetchrefresh';
-import axios from 'axios';
 import {
   CREATE_CUSTOMER,
   UPDATE_CUSTOMER,
@@ -34,32 +33,20 @@ const createCustomer = ({ name, identification, category }) => {
     name,
     identification,
   };
-  return (dispatch, getState) => {
-    const instance = axios.create({
-      headers: { 'JWT-TOKEN': getState().authentication.jwtToken },
-    });
-    return instance.post('v1/fiscal_identities', { resource })
-      .then((response) => {
-        return dispatch(createCustomerAction(response.data));
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  return (dispatch) => {
+    return fetch_api('/v1/fiscal_identities', 'POST', false, { resource })
+      .then((response) => dispatch(createCustomerAction(response)))
+      .catch((error) => console.log(error));
   };
 };
 
 const listCustomers = () => {
-  return (dispatch, getState) => {
-    const instance = axios.create({
-      headers: { 'JWT-TOKEN': getState().authentication.jwtToken },
-    });
-    return instance.get('v1/fiscal_identities')
+  return (dispatch) => {
+    return fetch_api('/v1/fiscal_identities', 'GET', false)
       .then((resources) => {
-        dispatch(customerListAction(resources.data));
+        dispatch(customerListAction(resources))
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => console.log(error));
   };
 };
 
@@ -69,21 +56,14 @@ const updateCustomer = ({ id, name, identification, category }) => {
     identification,
     category
   };
-
-  return (dispatch, getState) => {
-    const instance = axios.create({
-      headers: { 'JWT-TOKEN': getState().authentication.jwtToken },
-    });
-
-    return instance.put(`v1/fiscal_identities/${id}`, { resource })
+  return (dispatch) => {
+    return fetch_api(`/v1/fiscal_identities/${id}`,'PUT', false, { resource })
       .then((response) => {
-        const customer = response.data.data;
+        const customer = response.data;
         console.log(customer);
         dispatch(updateCustomerAction(customer.id, customer.attributes.name, customer.attributes.identification, customer.attributes.category));
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => console.log(error));
   };
 };
 
