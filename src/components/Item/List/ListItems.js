@@ -10,8 +10,9 @@ const ListItems = props => {
     return props.items
       .filter(item => item.attributes.category === props.category)
       .map((item) => {
+        console.log(item);
         const isInvoice = props.type === 'invoice';
-        const color = props.loadingItem ? COLORS.gray : COLORS.blueLight //Disabled an enabled Button
+        const color = props.loadingItem ? COLORS.grayDark : COLORS.blue //Disabled an enabled Button
         const icon = isInvoice ? undefined : <IconTrash color={color}/>;  
         const title = isInvoice ? 'Añadir' : undefined ; 
         const conditionLoading = props.loadingItem && item.id === props.itemActive;
@@ -19,10 +20,10 @@ const ListItems = props => {
           <View style={style.boxInfoItems} key={item.id}>
             <View style={style.inLineSpaceBetween} >
               <View>
-                <Text style={style.textRegular14White}>
+                <Text style={style.textRegular14GrayDark}>
                   {item.attributes.name}
                 </Text>
-                <Text style={style.textLight14BlueLight}>
+                <Text style={style.textLight14BlueMedium}>
                   $ {item.attributes.price}
                 </Text>
               </View>
@@ -30,9 +31,11 @@ const ListItems = props => {
                 <Button
                   title='Editar'
                   TouchableComponent={TouchableOpacity}
-                  onPress={() => props.navigateToEditItem(item) }
+                  onPress={() => props.navigateToEditItem(item.attributes) }
                   buttonStyle={ style.buttonEditBlue }
                   titleStyle={ style.textButtonEdit }
+                  disabled = {isInvoice}
+                  disabledStyle={{display: 'none', borderColor: 'transparent'}}
                 />
                 <Button
                   title={title}
@@ -41,7 +44,7 @@ const ListItems = props => {
                   onPress={() => props.actionItem(item) }
                   buttonStyle={isInvoice ? style.buttonEditBlue : style.buttonDelete}
                   titleStyle={style.textButtonEdit}
-                  disabledStyle={isInvoice ? style.buttonEditGray : style.buttonDelete}
+                  disabledStyle={isInvoice ? style.buttonEditGray : style.buttonDeleteDisabled}
                   disabledTitleStyle={style.textRegular12Gray}
                   disabled = {props.loadingItem}
                   loading={conditionLoading}

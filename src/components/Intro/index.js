@@ -10,11 +10,7 @@ import style from './style';
 class Intro extends React.Component {
   _renderItem = (item) => {
     return (
-      <LinearGradient 
-        colors={GRADIANTBLUE2}
-        style={style.container}  
-        start={XY.startV} 
-        end={XY.endV}>
+      <View style={style.container} >
         <View style={style.silde}>
           <View style={style.box1}>
             <Text style={style.number}>{item.title}</Text>
@@ -26,7 +22,7 @@ class Intro extends React.Component {
             <Text style={style.textDescription}>{item.description}</Text>
           </View>
         </View>
-      </LinearGradient>
+      </View>
     );
   }
   _onDone = () => {

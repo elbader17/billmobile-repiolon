@@ -21,20 +21,16 @@ class InitialConfiguration extends React.Component{
   }
     
   render() {
-    const logo = require('../../../images/logoBlue.png')
+    const logo = require('../../../images/logoBill1.png')
     return(
-      <LinearGradient
-        colors={ GRADIANTBLUE2 }
-        style={style.container}
-        start={XY.startV}
-        end={XY.endV}>
+      <View style={style.container}>
 
         <View style={style.containerBody}>
           <View style={{alignItems: 'center'}}>
             <Image source={ logo } style={style.image}/>
           </View>
-          <Text style={style.textRegular18White}> 
-            Tu celular será tu punto de venta
+          <Text style={style.textRegular18Blue}> 
+            Tu Celular será tu Punto de Venta
           </Text>
           <Text style={style.textLight18Blue}>
             Billmobil te permitirá emitir comprobantes electrónicos
@@ -52,22 +48,10 @@ class InitialConfiguration extends React.Component{
             buttonStyle={ style.button }
             titleStyle={ style.textRegular14white }
             disabledTitleStyle={ style.textRegular14Gray }
-            ViewComponent={LinearGradient}
-            linearGradientProps={COLORGBL}
           />
-          {/*<Button
-            title="Probar Aplicación"
-            buttonStyle={ style.button }
-            TouchableComponent={TouchableOpacity}
-            titleStyle={ style.submitText }
-            disabledTitleStyle={ style.textRegular14Gray }
-            ViewComponent={LinearGradient}
-            linearGradientProps={COLORGB2}
-            disabled
-          />*/}
 
         </View>
-      </LinearGradient>
+      </View>
     )
   }
 }

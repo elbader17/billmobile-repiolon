@@ -28,8 +28,7 @@ class ItemList extends React.Component {
   static navigationOptions = ({navigation}) => {
     return {
       title: 'Listado de Items',
-      headerTransparent: true,
-      headerStyle: { elevation: 0 },
+      headerStyle: { backgroundColor: COLORS.blue, elevation: 0 },
       headerTitleStyle: style.headerText,
       headerTintColor: 'white',
       headerLeft: (
@@ -84,7 +83,7 @@ class ItemList extends React.Component {
           text: title, onPress: () => {
             this.setState({loadingItem: true, itemActive: item.id})
             const { actionItem, navigation } = this.props;
-            actionItem(item, navigation)
+            actionItem(item)
               .then(() => {
                 if(this.props.type === 'collection')
                   this.props.getItemList().then(()=> this.setState({loadingItem: false}));
@@ -121,36 +120,27 @@ class ItemList extends React.Component {
   renderSwtichButtons() {
     return (
       <View style={[style.boxSelectButton, style.inLineSpaceAround]}>
-        <TouchableOpacity 
+        <Button
+          title='Productos'
+          TouchableComponent={TouchableOpacity}
           onPress={() => this.setState({isProduct: true})} 
-          activeOpacity={0.8}>
-          <LinearGradient
-            colors={ this.state.isProduct ? GRADIANTBLUELIGHT : GRADIANTBLUE2 }
-            style={ style.buttonSelect }
-            start={XY.startH} end={XY.endH}>
-            <Text style={style.textRegular14White}>Productos</Text>
-          </LinearGradient>
-        </TouchableOpacity>
-        
-        <TouchableOpacity onPress={() => this.setState({isProduct: false})} activeOpacity={0.8}>
-          <LinearGradient
-            colors={ this.state.isProduct ? GRADIANTBLUE2 : GRADIANTBLUELIGHT }
-            style={ style.buttonSelect }
-            start={XY.startH} end={XY.endH}>
-            <Text style={style.textRegular14White}>Servicios</Text>
-          </LinearGradient>
-        </TouchableOpacity>
+          buttonStyle={ this.state.isProduct ? style.buttonSelect : style.buttonSelectDisable }
+          titleStyle={ this.state.isProduct ? style.textRegular14White : style.textRegular14White }
+        />
+        <Button
+          title='Servicios'
+          TouchableComponent={TouchableOpacity}
+          onPress={() => this.setState({isProduct: false})}
+          buttonStyle={ this.state.isProduct ? style.buttonSelectDisable : style.buttonSelect }
+          titleStyle={ this.state.isProduct ? style.textRegular14White : style.textRegular14White }
+        />
       </View>
     );
   }
 
   render() {
     return(
-      <LinearGradient
-        colors={ GRADIANTBLUE2 }
-        style={style.container}
-        start={XY.startV}
-        end={XY.endV}>
+      <View style={style.container}>
 
           <View style={style.containerBody}>
             <SearchInput 
@@ -177,14 +167,12 @@ class ItemList extends React.Component {
                 onPress={() => this.navigateToNewItem(this.state.isProduct) }
                 icon={IconMore}
                 buttonStyle={ style.buttonNew }
-                titleStyle={ style.textRegular16White }
-                ViewComponent={LinearGradient}
-                linearGradientProps={COLORGBL}
+                titleStyle={ style.textBold18White }
               />
             </View>
           </View>
 
-      </LinearGradient>   
+      </View>   
     );
   }
 }

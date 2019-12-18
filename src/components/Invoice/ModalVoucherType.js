@@ -15,9 +15,9 @@ const ModalVoucherTYpe = props => {
           {VOUCHER_TYPES.map((voucherType, index) => (
             <View key={index}>
                 <TouchableOpacity
-                style={[style.borderVoucher,style.marginVertical8]}
-                onPress={() => props.selectionVoucher(voucherType)}>
-                  <Text style={style.textRegular16BlueMedium}>
+                  style={[style.borderVoucher,style.marginVertical8]}
+                  onPress={() => props.selectionVoucher(voucherType)}>
+                  <Text style={style.textRegular16Blue}>
                     {voucherType.label}
                   </Text>
                 </TouchableOpacity>

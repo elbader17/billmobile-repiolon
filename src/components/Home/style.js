@@ -7,18 +7,20 @@ import { METRICS } from '../../constants/metrics';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: METRICS.heightHeader
+    backgroundColor: COLORS.blue
   },
   containerHeader: { 
     flex:0.42,
   },
   containerStatictis: {
-    flex:0.33,
+    backgroundColor: COLORS.white,
+    flex:0.22,
     justifyContent: 'center',
-    paddingHorizontal: 10,
+    paddingHorizontal: 5,
   },
   containerListCustomer: {
-    flex:0.25,
+    backgroundColor: COLORS.white,
+    flex:0.36,
   },
   containerFooter: { 
     width: '100%',
@@ -28,19 +30,29 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 0, 
     borderTopRightRadius: 0, 
   },
+  boxData: {
+    backgroundColor: COLORS.whiteGray,
+    paddingHorizontal: 20,
+    paddingVertical: 20,
+    borderRadius: 7,
+    borderWidth: 0.5,
+    borderColor: COLORS.blue,
+  },
   scrollCustomers: {
     flex: 1,
-    paddingTop: 7,
+    backgroundColor: COLORS.whiteGray,
+    marginHorizontal: 10,
+    marginBottom: 10,
     marginTop: 3,
-    paddingHorizontal: 15,
-    borderTopWidth: 2,
-    borderColor: COLORS.blueLight
+    paddingVertical: 7,
+    paddingHorizontal: 10,
+    borderWidth: 0.5,
+    borderRadius: 7,
+    borderColor: COLORS.blue,
+    
   },
   styleChart: {
-    borderRadius: 2,
-    borderTopWidth: 2,
-    borderBottomWidth: 2,
-    borderColor: COLORS.blueLight
+    marginTop: 5
   },
   circlePercentaje: {
     elevation: 5, 
@@ -72,9 +84,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around'
   },
   textFacPeriodo: {
-    alignItems: 'flex-end',
-    marginBottom: 3,
-    marginRight: 10
+    alignItems: 'center',
+    marginLeft: 0
   },
   textRegular16Blue: {
     fontFamily: FONTS.latoRegular,
@@ -106,15 +117,27 @@ const styles = StyleSheet.create({
     fontSize: FONTS.size14,
     color: COLORS.white,
   },
+  textLight12White: {
+    fontFamily: FONTS.latoLight,
+    fontSize: FONTS.size12,
+    color: COLORS.white,
+  },
   textLight16White: {
     fontFamily: FONTS.latoLight,
     fontSize: FONTS.size16,
     color: COLORS.white,
   },
-  textLight16BlueLight: {
-    fontFamily: FONTS.latoLight,
-    fontSize: FONTS.size16,
-    color: COLORS.blueLight,
+  textLight14BlueMedium: {
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size14,
+    color: COLORS.grayDark,
+    top: 3
+  },
+  textRegular14Blue: {
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size14,
+    color: COLORS.blue,
+    top: 3
   },
   textRegular12BlueLight: {
     fontFamily: FONTS.latoRegular,
@@ -152,6 +175,29 @@ const styles = StyleSheet.create({
     fontSize: FONTS.size18,
     color: COLORS.white,
   },
+  textLight14Blue: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size14,
+    color: COLORS.blueMedium,
+  },
+  textRegular12Blue: {
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size12,
+    color: COLORS.blue,
+    top: 2
+  },
+  textBold14Blue: {
+    fontFamily: FONTS.pSemiBold,
+    fontSize: FONTS.size14,
+    color: COLORS.blue,
+    top: 3
+  },
+  textLight22Gray: {
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size22,
+    color: COLORS.grayDark,
+    marginVertical: -5
+  },
   lineWhiteLeft: {
     width:'10%',
     backgroundColor: COLORS.blueLight,
@@ -172,13 +218,19 @@ const styles = StyleSheet.create({
   buttonViewInvoice: {
     height: hp('4%'),
     backgroundColor: 'transparent',
-    borderColor: COLORS.blueLight,
+  },
+  buttonViewAll: {
+    height: hp('5%'),
+    backgroundColor: 'transparent',
+    borderTopWidth: 0.5,
+    borderColor: COLORS.blue,
   },
   headerText: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size18,
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size16,
     fontWeight: 'normal',
     color: COLORS.white,
+    top: 3
   }
 });
 

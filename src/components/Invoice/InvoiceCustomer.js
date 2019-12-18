@@ -15,10 +15,10 @@ const InvoiceCustomer = props => {
     return (
       <View style={style.listCustomer}>
         <View style={style.inLineSpaceBetween}>
-          <Text style={style.textLight16GrayDark}>{identification}</Text>
-          <Text style={style.textLight16BlueMedium}>| {subIdentification} |</Text> 
+          <Text style={style.textRegular14GrayDark}>{identification}</Text>
+          <Text style={style.textLight14BlueMedium}>| {subIdentification} |</Text> 
           <Button
-            icon={ <IconX size={18}/> }
+            icon={ <IconX size={18} color={COLORS.blueMedium}/> }
             onPress={ () => props.setShowCustomer(false) }
             buttonStyle={style.buttonDeleteCustomerInvoice}
             titleStyle={style.textRegular12Blue}
@@ -34,7 +34,7 @@ const InvoiceCustomer = props => {
             placeholder="Ingresar Documento"
             placeholderTextColor={COLORS.gray}
             onChangeText={props.setFinalConsumer}
-            style={[style.textRegular16GrayDark,style.inputDNICustomer]}
+            style={[style.textRegular12GrayDark,style.inputDNICustomer]}
             keyboardType='numeric'
           />
           <Button
@@ -45,8 +45,9 @@ const InvoiceCustomer = props => {
             onPress={ props.addFinalConsumer }
             titleStyle={ style.textRegular12White }
             buttonStyle={ style.buttonCheck }
+            disabled={props.loading}
+            disabledStyle={style.buttonCheckDisabled}
             loading = { props.loading }
-            loadingStyle={{top: 1}}
           />
         </View>
       </View>

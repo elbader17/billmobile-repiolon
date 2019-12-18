@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { Button } from "react-native-elements";
 import LinearGradient from 'react-native-linear-gradient';
 import { validateAddItem, validateName, validatePrice } from '../../../utils/validations';
-import { GRADIANTBLUE2, GRADIANTBLUELIGHT, COLORGBL } from '../../../constants/colors';
+import { GRADIANTBLUE2, GRADIANTBLUELIGHT, COLORGBL, COLORS } from '../../../constants/colors';
 import { iconMenuBack } from '../../../constants/icons';
 import { XY } from '../../../constants/gradientCoord';
 import AddItem from './AddItem';
@@ -13,12 +13,13 @@ class NewItem extends React.Component {
   constructor(props) {
     super(props);
     const item = this.props.navigation.getParam('item', this.defaultItem());
-    const productOrService = item.attributes.category === 'product';
+    console.log(item);
+    const productOrService = item.category === 'product';
     const isProducts = this.props.navigation.getParam('isProduct', productOrService );
     
     this.state = {
-      name: item.attributes.name,
-      price: item.attributes.price,
+      name: item.name,
+      price: item.price,
       isProduct: isProducts,
       itemId: item.id,
       loading: false,
@@ -30,8 +31,7 @@ class NewItem extends React.Component {
   static navigationOptions = ({navigation}) => {
     return {
       title: 'Cargar Items',
-      headerTransparent: true,
-      headerStyle: { elevation: 0 },
+      headerStyle: { backgroundColor: COLORS.blue, elevation: 0 },
       headerTitleStyle: style.headerText,
       headerTintColor: 'white',
       headerLeft:( 
@@ -43,12 +43,10 @@ class NewItem extends React.Component {
   };
 
   defaultItem = () => {
-    return {
-      attributes: {
-        name: '',
-        price: '',
-        category: 'product',
-      }
+    return {      
+      name: '',
+      price: '',
+      category: 'product',
     };
   }
 
@@ -99,38 +97,25 @@ class NewItem extends React.Component {
       errorPrice: this.state.errorPrice
     }
     return(
-      <LinearGradient
-        colors={ GRADIANTBLUE2 }
-        style={style.container}
-        start={XY.startV}
-        end={XY.endV}>
+      <View style={style.container}>
 
           <View style={style.containerBody}>
             <ScrollView>
             <View style={[style.boxSelectButton, style.inLineSpaceAround]}>
-              
-              <TouchableOpacity 
+              <Button
+                title='Productos'
+                TouchableComponent={TouchableOpacity}
                 onPress={() => this.setState({isProduct: true})} 
-                activeOpacity={0.8}>
-                <LinearGradient
-                  colors={ this.state.isProduct ? GRADIANTBLUELIGHT : GRADIANTBLUE2 }
-                  style={ style.buttonSelect }
-                  start={XY.startH} end={XY.endH}>
-                  <Text style={style.textRegular14White}>Productos</Text>
-                </LinearGradient>
-              </TouchableOpacity>
-              
-              <TouchableOpacity 
-                onPress={() => this.setState({isProduct: false})} 
-                activeOpacity={0.8}>
-                <LinearGradient
-                  colors={ this.state.isProduct ? GRADIANTBLUE2 : GRADIANTBLUELIGHT }
-                  style={ style.buttonSelect }
-                  start={XY.startH} end={XY.endH}>
-                  <Text style={style.textRegular14White}>Servicios</Text>
-                </LinearGradient>
-              </TouchableOpacity>
-            
+                buttonStyle={ this.state.isProduct ? style.buttonSelect : style.buttonSelectDisable }
+                titleStyle={ this.state.isProduct ? style.textRegular14White : style.textRegular14White }
+              />
+              <Button
+                title='Servicios'
+                TouchableComponent={TouchableOpacity}
+                onPress={() => this.setState({isProduct: false})}
+                buttonStyle={ this.state.isProduct ? style.buttonSelectDisable : style.buttonSelect }
+                titleStyle={ this.state.isProduct ? style.textRegular14White : style.textRegular14White }
+              />
             </View>
 
             <View style={style.boxInput}>
@@ -151,14 +136,12 @@ class NewItem extends React.Component {
               TouchableComponent={TouchableOpacity}
               onPress={ this.saveItem }
               buttonStyle={ style.buttonSave }
-              titleStyle={ style.textRegular16White }
+              titleStyle={ style.textBold18White }
               loading={this.state.loading}
-              ViewComponent={LinearGradient}
-              linearGradientProps={COLORGBL}
             /> 
           </View> 
 
-      </LinearGradient>
+      </View>
     );
   }
 }

@@ -72,7 +72,7 @@ const listInvoice = () => {
   return (dispatch) => {
     return fetch_api('/v1/invoices', 'GET', false)
       .then((response) => {
-        console.log(response);
+        //console.log(response);
         dispatch(listInvoiceAction(response.data));
       })
       .catch((error) => {
@@ -85,7 +85,6 @@ const getInvoice = (id) => {
   return (dispatch) => {
     return fetch_api(`/v1/invoices/${id}`, 'GET', false)
       .then((response) => {
-        console.log(response)
         dispatch(getInvoiceAction(response.data));
       })
       .catch((error) => {
@@ -95,15 +94,14 @@ const getInvoice = (id) => {
 };
 
 const confirmInvoice = (attributes) => {
-  const resource = {
-    state:"confirm",
-    invoice_id: 8,
-    user_id :1,
-    total: "10",
-    id: "1"
-  }
-  return (dispatch) => {
-    return fetch_api('/v1/invoices/confirm','PUT', false, { resource })
+  return (dispatch, getState) => {
+    const { id: invoiceId } = getState().invoices.currentInvoice;
+    const resource = {
+      invoice_id: invoiceId,
+      state: attributes.state,
+      total: attributes.total
+    }
+    return fetch_api(`/v1/invoices/${invoiceId}/confirm`,'PUT', false, { resource })
       .then((response) => {
         console.log(response);
         dispatch(confirmInvoiceAction(response.data));

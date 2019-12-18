@@ -42,10 +42,8 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 const DrawerComponent = (props) => (
-  <LinearGradient 
-    colors={GRADIANTBLUE2} 
-    style={style.containerDrawer} 
-    start={XY.startV} end={XY.endV}>
+
+  <View style={style.containerDrawer}>
       
     <View style={style.headerContainerDrawer}>
       <Image source={require('../../images/logoBlue.png')} style={style.logoDrawer} />
@@ -57,27 +55,27 @@ const DrawerComponent = (props) => (
       </Text>
     </View>
 
-    <ScrollView>
+    <ScrollView style={{margin: 5}}>
       <Button 
         title="Chat"
         icon ={IconChat}
         onPress={() => {}}
         buttonStyle={style.buttonDrawer}
-        titleStyle={style.textRegular18White}
+        titleStyle={style.textRegular18Blue}
       />
       <Button 
         title="Configuración"
         icon ={IconConfig}
         onPress={() => {}}
         buttonStyle={style.buttonDrawer}
-        titleStyle={style.textRegular18White}
+        titleStyle={style.textRegular18Blue}
       />
       <Button 
         title="Cerrar Sesión"
         icon ={IconClose}
         onPress={() => props.signOut(props.navigation)}
         buttonStyle={style.buttonDrawer}
-        titleStyle={style.textRegular18White}
+        titleStyle={style.textRegular18Blue}
       />
     </ScrollView>
     
@@ -85,7 +83,7 @@ const DrawerComponent = (props) => (
       {IconCloseDrawer}
     </TouchableOpacity>
     
-  </LinearGradient>
+  </View>
 );
 
 const component = connect(

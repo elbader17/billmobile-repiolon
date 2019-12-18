@@ -2,6 +2,7 @@ import { fetch_api } from '../../utils/fetchrefresh';
 import {
   CREATE_INVOICE_ITEM,
   UPDATE_INVOICE_ITEM,
+  LIST_INVOICE_ITEMS
 } from './constants';
 import {
   createInvoice,
@@ -22,15 +23,21 @@ function updateInvoiceItemAction(invoiceItem) {
   };
 }
 
+function setInvoiceItemsAction(invoiceItems) {
+  return {
+    type: LIST_INVOICE_ITEMS,
+    invoiceItems,
+  };
+}
+
 const updateInvoiceItem = (id, values) => {
   return (dispatch, getState) => {
     const { id: invoiceId } = getState().invoices.currentInvoice;
     return fetch_api(`/v1/invoice_items/${id}`, 'POST', false, 
     { resource: { ...values, invoice_id: invoiceId } })
         .then((response) => {
-           console.log(response);
-           dispatch(updateInvoiceItemAction(response.data));
-           return dispatch(getInvoice(invoiceId));
+           dispatch(updateInvoiceItemAction(response));
+           return dispatch(getInvoiceItems(invoiceId));
         })
         .catch((error) => {
           console.log(error)
@@ -38,24 +45,27 @@ const updateInvoiceItem = (id, values) => {
   };
 };
 
-const deleteInvoiceItem = (id) => {
+const deleteInvoiceItem = (id, invoiceId) => {
   return () => {
-    return fetch_api(`/v1/invoice_items/${id}`,'GET', false)
-      .then(() => console.log('OK'))
+    return fetch_api(`/v1/invoice_items/${id}`,'DELETE', false, {resource: {invoice_id: invoiceId}})
+      .then(() => console.log('Delete OK'))
       .catch((error) => console.log(error));
   };
 };
 
 const getInvoiceItems = () => {
-  return (getState) => {
+  return (dispatch, getState) => {
     const { id } = getState().invoices.currentInvoice;
     return fetch_api(`/v1/invoice_items/${id}`,'GET', false)
-      .then((response) => console.log(response))
-      .catch((error) => console.log(error));
+      .then(response => {
+        console.log('refres items');
+        dispatch(setInvoiceItemsAction(response.data))
+      })
+      .catch(error => console.log(error));
   };
 };
 
-const createInvoiceItem = ({category, name, price, quantity}) => {
+const createInvoiceItem = ({category, name, price, quantity, item_id}) => {
   return (dispatch, getState) => {
     const { id: invoiceId } = getState().invoices.currentInvoice;
     let promise;
@@ -72,6 +82,7 @@ const createInvoiceItem = ({category, name, price, quantity}) => {
         name,
         price: parseFloat(price, 10),
         invoice_id: updatedInvoiceId,
+        item_id,
         quantity
       };
       return fetch_api('/v1/invoice_items', 'POST', false, { resource })

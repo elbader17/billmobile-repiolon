@@ -15,6 +15,7 @@ function addItem({ draftState, item }) {
 }
 
 function setItems({ draftState, items }) {
+  //console.log(items.data);
   draftState.items = items.data;
   return draftState;
 }

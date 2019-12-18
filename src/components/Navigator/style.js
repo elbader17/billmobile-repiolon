@@ -6,15 +6,14 @@ import { FONTS } from '../../constants/fonts';
 const styles = StyleSheet.create({
   containerDrawer: {
     height: hp('100%'),
-    borderWidth: 0.5,
-    borderColor: COLORS.blueMedium
+    backgroundColor: COLORS.white,
   },
   headerContainerDrawer: {
+    backgroundColor: COLORS.blue,
     alignItems: 'center',
-    paddingVertical: 20,
-    marginHorizontal: 5,
+    paddingVertical: 25,
     borderBottomWidth: 0.5,
-    borderColor: COLORS.blueMedium
+    borderColor: COLORS.blueLight
   },
   logoDrawer: {
     width: 180,
@@ -27,32 +26,44 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start'
   },
   textRegular16White: {
-    fontFamily: FONTS.latoRegular,
+    fontFamily: FONTS.pRegular,
     fontSize: FONTS.size16,
-    color: COLORS.white
+    color: COLORS.white,
+    top: 3,
+    marginVertical: -3
   },
   textLight16Blue: {
-    fontFamily: FONTS.latoLight,
+    fontFamily: FONTS.pExtraLight,
     fontSize: FONTS.size16,
     color: COLORS.blueLight
   },
   textRegular11: {
-    fontFamily: FONTS.latoRegular,
+    fontFamily: FONTS.pRegular,
     fontSize: FONTS.size11,
   },
   textRegular14GrayDark: {
-    fontFamily: FONTS.latoRegular,
+    fontFamily: FONTS.pRegular,
     fontSize: FONTS.size14,
     color: COLORS.grayDark
   },
   textRegular18White: {
     fontWeight: 'normal',
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size18,
-    color: COLORS.white
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size16,
+    color: COLORS.white,
+    top: 2,
+    marginVertical: -3
+  },
+  textRegular18Blue: {
+    fontWeight: 'normal',
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size16,
+    color: COLORS.blue,
+    top: 2,
+    marginVertical: -3
   },
   headerText: {
-    fontFamily: FONTS.latoRegular,
+    fontFamily: FONTS.pRegular,
     fontSize: FONTS.size18,
     fontWeight: 'normal',
     color: COLORS.white,

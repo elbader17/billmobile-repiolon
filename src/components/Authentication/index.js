@@ -5,7 +5,7 @@ import { Button } from "react-native-elements";
 import Signup from './SignUp';
 import Signin from './SignIn';
 import style from './style';
-import { GRADIANTBLUE2, GRADIENTYELLOW, GRADIANTBLUELIGHT } from '../../constants/colors';
+import { GRADIANTBLUE2, GRADIENTYELLOW, GRADIANTBLUELIGHT, COLORS } from '../../constants/colors';
 
 class Authentication extends React.Component {
 
@@ -51,25 +51,20 @@ class Authentication extends React.Component {
               </View>
             
               <View style={style.inLineSpaceAround}>
-                <TouchableOpacity onPress={() => this.setState({selectedSignUp: true})} activeOpacity={0.8}>
-                  <LinearGradient
-                    colors={ this.state.selectedSignUp ? GRADIANTBLUELIGHT : GRADIANTBLUE2 }
-                    style={ style.buttonSign }
-                    start={{x: 0, y: 0}} end={{x: 1, y: 0}}
-                  >
-                    <Text style={style.textRegular14White}>Registrarse</Text>
-                  </LinearGradient>
-                </TouchableOpacity>
-
-                <TouchableOpacity onPress={() => this.setState({selectedSignUp: false})} activeOpacity={0.8}>
-                  <LinearGradient
-                    colors={ this.state.selectedSignUp ? GRADIANTBLUE2 : GRADIANTBLUELIGHT }
-                    style={ style.buttonSign }
-                    start={{x: 0, y: 0}} end={{x: 1, y: 0}}
-                  >
-                    <Text style={style.textRegular14White}>Iniciar Sesión</Text>
-                  </LinearGradient>
-                </TouchableOpacity>
+                <Button
+                  title='Registrarse'
+                  TouchableComponent={TouchableOpacity}
+                  onPress={() => this.setState({selectedSignUp: true})}
+                  buttonStyle={ this.state.selectedSignUp ? style.buttonSign : style.buttonSignDisable }
+                  titleStyle={ style.textRegular14White }
+                />
+                <Button
+                  title='Iniciar Sesión'
+                  TouchableComponent={TouchableOpacity}
+                  onPress={() => this.setState({selectedSignUp: false})}
+                  buttonStyle={ this.state.selectedSignUp ? style.buttonSignDisable : style.buttonSign }
+                  titleStyle={ style.textRegular14White }
+                />
               </View>
 
               <View style={style.containerInputs}>
@@ -78,19 +73,14 @@ class Authentication extends React.Component {
             </View>
             
             <View style={style.containerFooter}>
-              <LinearGradient
-                colors={ GRADIANTBLUELIGHT }
-                start={{x: 0.0, y: 1.0}} 
-                end={{x: 1.0, y: 1.0}}
-                style={style.gradientBottom}
-              >
+              <View style={style.gradientBottom}>
                <Text style={style.textRegular11White}>
                   Al registrarte estas aceptando nuestros
                 </Text>
                 <Text style={style.textRegular11WhiteBold}>
                   Términos, Condiciones y Políticas de Privacidad
                 </Text>
-              </LinearGradient> 
+              </View> 
                 
             </View>
           </View>

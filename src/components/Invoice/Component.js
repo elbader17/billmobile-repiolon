@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, Modal, TouchableOpacity, Alert } from 'react-native';
 import DateTimePicker from 'react-native-modal-datetime-picker';
-import LinearGradient from 'react-native-linear-gradient';
 import { Button } from "react-native-elements";
 import { showMessage } from "react-native-flash-message";
 import ModalVoucherTYpe from './ModalVoucherType';
@@ -14,9 +13,7 @@ import {
   messageCustomerIncomplete 
 } from '../../utils/messagesNotifications';
 import { IconDocument, IconAddCustomer, IconMore } from '../../constants/icons';
-import { GRADIANTBLUE2, COLORGBL } from '../../constants/colors';
 import { VOUCHER_TYPES } from '../../constants/invoice';
-import { XY } from '../../constants/gradientCoord';
 import style from './style';
 
 class Invoice extends React.Component {
@@ -41,10 +38,8 @@ class Invoice extends React.Component {
   static navigationOptions = () => {
     return {
       title: 'Generación de Comprobante',
-      headerTransparent: true,
       headerStyle: style.headerStyle,
       headerTitleStyle: style.headerText,
-      headerTintColor: 'white',
       headerLeft: IconDocument
     }  
   };
@@ -59,6 +54,9 @@ class Invoice extends React.Component {
   navigateClient = () => {
     this.setShowCustomer(true);
     this.props.navigation.navigate('ListInvoiceCustomer');
+  }
+  navigateToEditItem = (item) => {
+    this.props.navigation.navigate('EditInvoiceItem', { item });
   }
   navigateAddItems = () => this.props.navigation.navigate('ListInvoiceItem');
   navigateToSummaryInvoice = () => {
@@ -111,11 +109,6 @@ class Invoice extends React.Component {
     this.setState({voucherType: voucherType.value });
   }
 
-  incrementQuantity = () => { 
-    this.setState({ quantity: this.state.quantity + 1 });
-    this.updateInvoiceItemQuantity(this.props.invoiceId, this.state.quantity)
-  }
-
   addFinalConsumer = () => {
     const { fcIdentification } = this.state;
     if (validateDni(fcIdentification)){
@@ -137,9 +130,11 @@ class Invoice extends React.Component {
         items={this.props.items}
         total={this.props.invoiceTotal} 
         invoiceId ={this.props.invoiceId}
-        incrementQuantity={this.incrementQuantity}
+        updateInvoiceItemQuantity={this.props.updateInvoiceItemQuantity}
         quantity={this.state.quantity}
         deleteItem={this.props.deleteInvoiceItem}
+        getInvoiceItems = {this.props.getInvoiceItems}
+        navigateToEditItem = {this.navigateToEditItem}
       />
     ); 
   }
@@ -165,37 +160,34 @@ class Invoice extends React.Component {
     const displayDni = validIdentity ? 'none' : 'flex';
     const typeCustomer = fiscalIdentity.name === 'fc' || !showCustomer ? 'Cosumidor Final' : 'Nombre Cliente';
     return(  
-      <LinearGradient 
-        colors={GRADIANTBLUE2} 
-        style={style.container} 
-        start={XY.startV} 
-        end={XY.endV}>
-
-        <View style={style.container}>
+      <View style={style.container}>
+        
           <View style={style.containerBody}>
             
             <View style={style.containerReceptor}>
               <View style={style.inLineSpaceBetween}>
                 <View style={style.boxVoucher}>
-                  <Text style={[style.textRegular12White, {paddingBottom: 5}]}>
+                  <Text style={[style.textBold12Blue, {padding: 3}]}>
                     Tipo de Comprobante
                   </Text>
                   <Button
                     title={this.presentVoucherType()}
+                    TouchableComponent={TouchableOpacity}
                     onPress={() => {this.setModalVisible(true)}}
                     buttonStyle={style.buttonVoucher}
-                    titleStyle={style.textRegular16BlueCenter}
+                    titleStyle={style.textRegular16White}
                   />
                 </View>
                 <View style={style.boxDate}>
-                  <Text style={[style.textRegular12White, {paddingBottom: 5}]}>
+                  <Text style={[style.textBold12Blue, {padding: 3}]}>
                     Fecha de Emisión
                   </Text>
                   <Button
                     title={date}
+                    TouchableComponent={TouchableOpacity}
                     onPress={this.showDateTimePicker}
                     buttonStyle={style.buttonDate}
-                    titleStyle={style.textRegular16BlueCenter}
+                    titleStyle={style.textRegular16White}
                   />
                   <DateTimePicker
                     isVisible={this.state.isDateTimePickerVisible}
@@ -206,13 +198,13 @@ class Invoice extends React.Component {
                 </View>
               </View>
           
-              <Text style={[style.textRegular12White, {paddingVertical: 5}]}>
+              <Text style={[style.textBold12Blue, {padding: 3, marginTop: 8}]}>
                 Datos del Receptor
               </Text>
               <View style={[style.containerCustomers,style.inColumnSpaceBetween]}>
                 <View style={style.inLineSpaceBetween}>
                   <View style={style.textConsumerFinal}>
-                    <Text style={style.textRegular16BlueMedium}>{typeCustomer}</Text>
+                    <Text style={style.textLight14Blue}>{typeCustomer}</Text>
                   </View>
                   <Button
                     title='Otro Cliente'
@@ -225,7 +217,7 @@ class Invoice extends React.Component {
                   />
                 </View>
                 
-                <View style={{height: 4, left: 2, display: displayDni }}>
+                <View style={{height: 7, left: 5, display: displayDni }}>
                   <Text style={style.textRegular12Red}>
                     Documento Inválido
                   </Text>
@@ -234,6 +226,12 @@ class Invoice extends React.Component {
                 { this.renderCustomer() }
               
               </View>
+
+              <Text style={[style.textBold12Blue, {padding: 3, marginTop: 8}]}>
+                Detalle Producto/Servicio
+              </Text>
+
+              {this.renderViewItemsAdd()}
 
               <Button
                 title=' Agregar Producto/Servicio'
@@ -244,15 +242,7 @@ class Invoice extends React.Component {
                 titleStyle={ style.textRegular16White }
                 disabledStyle={style.buttonAddDisabled}
                 disabledTitleStyle = { style.textRegular16GrayLight }
-                ViewComponent={LinearGradient}
-                linearGradientProps={COLORGBL}
               />
-
-              <Text style={[style.textRegular12White, {paddingTop: 8}]}>
-                Detalle Producto/Servicio
-              </Text>
-
-              { this.renderViewItemsAdd() }
 
             </View>
           </View>
@@ -263,18 +253,15 @@ class Invoice extends React.Component {
               TouchableComponent={TouchableOpacity}
               onPress={ this.navigateToSummaryInvoice }
               buttonStyle={style.buttonContinue}  
-              titleStyle={ style.textRegular16White }
-              ViewComponent={LinearGradient}
-              linearGradientProps={COLORGBL}
+              titleStyle={ style.textBold16White }
             />
           </View>
 
-          <Modal visible={this.state.modalVisible} animationType="fade" transparent={true}>
+          <Modal visible={this.state.modalVisible} animationType='slide' transparent={true}>
             <ModalVoucherTYpe selectionVoucher={this.selectionVoucher}/>
           </Modal>
 
-        </View>
-      </LinearGradient>
+      </View>
     )
   }
 }

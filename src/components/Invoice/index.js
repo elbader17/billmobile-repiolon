@@ -10,10 +10,10 @@ const mapStateToProps = state => ({
   invoiceDate: state.invoices.currentInvoice.invoiceDate,
   voucherType: state.invoices.currentInvoice.voucherType,
   invoiceId: state.invoices.currentInvoice.id,
-  invoiceTotal: state.invoices.currentInvoice.total,
+  invoiceTotal: state.invoices.currentInvoice.total
 });
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     addFiscalIdentityToInvoice: (name, cuit, id) => (
       dispatch(addFiscalIdentityToInvoice(name, cuit, id))
@@ -27,8 +27,8 @@ const mapDispatchToProps = (dispatch) => {
     createInvoice: (invoiceDate, voucherType) => (
       dispatch(createInvoice(invoiceDate, voucherType))
     ),
-    deleteInvoiceItem: (id) => (
-      dispatch(deleteInvoiceItem(id))
+    deleteInvoiceItem: (id, invoiceId) => (
+      dispatch(deleteInvoiceItem(id, invoiceId))
     ),
     getInvoiceItems: () => (
       dispatch(getInvoiceItems())

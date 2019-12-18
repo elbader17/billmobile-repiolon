@@ -1,10 +1,7 @@
 import React from 'react';
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
 import { Button } from "react-native-elements";
 import { presentInvoiceDate } from '../../../utils/date';
-import { GRADIANTBLUE2, COLORGBL } from '../../../constants/colors';
-import { XY } from '../../../constants/gradientCoord';
 import { IconBack } from '../../../constants/icons';
 import style from '../style';
 
@@ -21,7 +18,6 @@ class InvoiceSummary extends React.Component {
   static navigationOptions = ({navigation}) => {
     return {
       title: 'Documento Final',
-      headerTransparent: true,
       headerStyle: style.headerStyle,
       headerTitleStyle: style.headerText,
       headerTintColor: 'white',
@@ -34,10 +30,14 @@ class InvoiceSummary extends React.Component {
   };
   
   confirmInvoice = () => {
-    this.props.navigation.navigate('Opinion');
-    /*const { confirmInvoice, navigation } = this.props;
-    confirmInvoice(resource)
-      .then(() => { navigation.navigate('Opinion') });*/
+    const { confirmInvoice, navigation } = this.props;
+    const attributes = {
+      invoice_id: this.props.invoiceId,
+      total: this.props.invoiceTotal,
+      state: 'confirm'
+    }
+    confirmInvoice(attributes)
+      .then(() => { navigation.navigate('Home') });
   }
   
   navigateToInvoice = () => { this.props.navigation.navigate('Invoice') }
@@ -58,7 +58,7 @@ class InvoiceSummary extends React.Component {
             <Text style={style.textRegular16GrayDark}>
               {this.props.fiscalIdentity.name}
             </Text>
-            <Text style={style.textLight14BlueMedium}>CUIT: {this.props.fiscalIdentity.identification}</Text>
+            <Text style={style.textLight14BlueMedium}>CUIT : {this.props.fiscalIdentity.identification}</Text>
             <Text style={style.textLight12GrayDark}>Localidad: {'Río Cuarto'}</Text>
             <Text style={style.textLight12GrayDark}>Provincia: {'Córdoba'}</Text>
             <Text style={style.textLight12GrayDark}>IVA: {'Responsable Inscripto'}</Text>
@@ -76,14 +76,14 @@ class InvoiceSummary extends React.Component {
             <View key={index}>
               <View style={[style.inLineSpaceBetween, style.lineBottom]}>
                 <View style={style.boxItems1}>
-                  <Text style={style.textRegular16GrayDark} numberOfLines={1}>
+                  <Text style={style.textRegular14GrayDark} numberOfLines={1}>
                     {item.name}
                   </Text>
                 </View>
                 <View style={[style.inLineSpaceBetween, style.boxItems2]}>
                   <Text numberOfLines={1}>
                     <Text style={style.textLight14BlueMedium}>
-                      {'1'}x{' '}
+                      {'1 '}x{' '}
                     </Text>
                     <Text style={style.textLight14GrayDark}>
                       ${item.price}
@@ -105,11 +105,7 @@ class InvoiceSummary extends React.Component {
 
   render() {
     return(
-      <LinearGradient
-        colors={ GRADIANTBLUE2 }
-        style={style.containerSummary}
-        start={XY.startV}
-        end={XY.endV}>
+      <View style={style.containerSummary}>
 
         <View style={style.containerBodySummary}>
           
@@ -136,7 +132,7 @@ class InvoiceSummary extends React.Component {
                 buttonStyle={ style.buttonEditSummary }
                 titleStyle={ style.textRegular14BlueMedium }
               />
-              <Text style={style.textLight18BlueMedium}>Total:</Text>
+              <Text style={style.textLight18BlueMedium}>Total :</Text>
               <Text style={style.textRegular18GrayDark}>$ {this.props.invoiceTotal}</Text>
             </View>
           </View>
@@ -150,12 +146,10 @@ class InvoiceSummary extends React.Component {
             TouchableComponent={TouchableOpacity}
             onPress={ this.confirmInvoice }
             buttonStyle={ style.buttonContinue }
-            titleStyle={ style.textRegular16White }
-            ViewComponent={LinearGradient}
-            linearGradientProps={COLORGBL}
+            titleStyle={ style.textBold16White }
           />
         </View>
-      </LinearGradient>
+      </View>
     )
   }
 }

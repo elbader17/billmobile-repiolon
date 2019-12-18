@@ -75,7 +75,7 @@ const updateItem = ({id, category, name, price}) => {
 const deleteItem = (id) => {
   return () => {
     return fetch_api(`/v1/items/${id}`,'DELETE', false)
-      .then(() => console.log('OK'))
+      .then(() => console.log('DELETE OK'))
       .catch((error) => console.log(error));
   };
 };

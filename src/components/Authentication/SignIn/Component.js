@@ -69,13 +69,15 @@ class SignIn extends React.Component {
     return(
       <View>
         <TextField
+          titleTextStyle={style.textRegular12GrayDark}
+          labelTextStyle={style.textRegular12GrayDark}
           label="Email"
           value={this.state.email}
           onChangeText={this.setEmail}
           onFocus={()=>{this.setState({error: undefined, confirm: false})}}
-          baseColor={COLORS.gray}
+          baseColor={COLORS.grayDark}
           textColor= {COLORS.grayDark}
-          tintColor={COLORS.blueMedium}
+          tintColor={COLORS.blue}
           lineWidth={1}
           labelFontSize={12}
           inputContainerPadding={6}
@@ -84,12 +86,14 @@ class SignIn extends React.Component {
         />
         <View>
           <PasswordInputText
+            titleTextStyle={style.textRegular12GrayDark}
+            labelTextStyle={style.textRegular12GrayDark}
             label='Contraseña'
             value={this.state.password}
             onChangeText={this.setPassword}
             onFocus={()=>{this.setState({error: undefined, confirm: false})}}
-            baseColor={COLORS.gray}
-            tintColor={COLORS.blueMedium}
+            baseColor={COLORS.grayDark}
+            tintColor={COLORS.blue}
             textColor= {COLORS.grayDark}
             labelFontSize={12}
             labelHeight={25}
@@ -111,8 +115,6 @@ class SignIn extends React.Component {
             buttonStyle={ style.buttonSignTwo }
             titleStyle={ style.textRegular16White }
             loading = {this.state.loading}
-            ViewComponent={LinearGradient}
-            linearGradientProps={COLORGBL}
           />
           <View style={this.state.confirm ? style.displayFlex : style.displayNone}>
             <Button

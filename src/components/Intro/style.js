@@ -5,7 +5,8 @@ import { FONTS } from '../../constants/fonts';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: COLORS.blue
   },
   silde: {
     flex: 1,
@@ -25,21 +26,21 @@ const styles = StyleSheet.create({
     paddingHorizontal: 50
   },
   number: {
-    fontFamily: FONTS.regular,
+    fontFamily: FONTS.pRegular,
     fontSize: FONTS.size78,
-    color: COLORS.white,
+    color: COLORS.blueLight,
   },
   textTittle: {
-    fontFamily: FONTS.latoSemiBold,
-    fontSize: FONTS.size18,
-    color: COLORS.white,
+    fontFamily: FONTS.pSemiBold,
+    fontSize: FONTS.size16,
+    color: COLORS.blueLight,
     textAlign: 'center',
     width: wp('80%'),
     lineHeight: 32,
   },
   textDescription: {
-    fontFamily: FONTS.latoLight,
-    fontSize: FONTS.size16,
+    fontFamily: FONTS.pExtraLight,
+    fontSize: FONTS.size14,
     color: COLORS.white,
     textAlign: 'center',
     width: wp('85%'),
@@ -57,14 +58,15 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: 'transparent',
-    borderColor: COLORS.white, 
+    borderColor: COLORS.blueLight, 
     borderRadius: 30, 
     borderWidth: 1,
   },
   buttonText: {
-    fontFamily: FONTS.latoRegular, 
-    fontSize: FONTS.size16, 
-    color: COLORS.white,
+    fontFamily: FONTS.pRegular, 
+    fontSize: FONTS.size14, 
+    color: COLORS.blueLight,
+    top: 2
   }
 });
 

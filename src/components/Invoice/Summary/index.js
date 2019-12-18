@@ -8,6 +8,7 @@ const mapStateToProps = state => ({
   items: state.invoices.currentInvoice.invoiceItems,
   invoiceDate: state.invoices.currentInvoice.invoiceDate,
   invoiceTotal: state.invoices.currentInvoice.total,
+  invoiceId: state.invoices.currentInvoice.id,
   voucherType: state.invoices.currentInvoice.voucherType,
 });
 

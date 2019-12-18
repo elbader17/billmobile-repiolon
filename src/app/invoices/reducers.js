@@ -8,6 +8,7 @@ import {
 import {
   CREATE_INVOICE_ITEM,
   UPDATE_INVOICE_ITEM,
+  LIST_INVOICE_ITEMS
 } from '../invoice_items/constants';
 import {
   ADD_FISCAL_IDENTITY_TO_INVOICE,
@@ -61,6 +62,19 @@ function addInvoiceItem({ draftState, invoiceItem }) {
   return draftState;
 }
 
+function setInvoiceItems({ draftState, invoice_items }) {
+  var items = []
+  var item = {}
+  var id;
+  for (x=0; x<invoice_items.length; x++){
+    id = parseInt(invoice_items[x].id);
+    item = {...invoice_items[x].attributes, id: id}
+    items.push(item)
+  }
+  draftState.currentInvoice.invoiceItems = items;
+  return draftState;
+}
+
 function addFiscalIdentity({ draftState, fiscalIdentity }) {
   draftState.currentInvoice.fiscalIdentity = fiscalIdentity.attributes;
   draftState.currentInvoice.fiscalIdentity.id = fiscalIdentity.id;
@@ -73,7 +87,7 @@ function updateInvoiceItem({ draftState, invoiceItem }) {
     name,
     price,
     quantity,
-  } = invoiceItem.data.attributes;
+  } = invoiceItem;
   const itemIndex = draftState.currentInvoice.invoiceItems.findIndex(
     item => item.id === invoiceItem.id,
   );
@@ -129,6 +143,11 @@ export default addInvoiceReducer = (state = initialState, action) => {
         return addFiscalIdentity({
           draftState,
           fiscalIdentity: action.fiscalIdentity,
+        });
+      case LIST_INVOICE_ITEMS:
+        return setInvoiceItems({
+          draftState,
+          invoice_items: action.invoiceItems,
         });
       default:
         return draftState;

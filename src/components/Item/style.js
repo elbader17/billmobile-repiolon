@@ -10,25 +10,29 @@ const styles = StyleSheet.create({
   },
   containerBody: {
     flex: 0.87,
-    marginTop: METRICS.heightHeader
+    paddingTop: 12
   }, 
   containerFooter: {
     flex: 0.13,
-    justifyContent: 'center'
+    justifyContent: 'flex-end'
   },
   boxItems: {
     flex: 1,
-    borderColor: COLORS.blueMedium,
+    backgroundColor: COLORS.white,
+    borderColor: COLORS.gray,
     borderBottomWidth: 0.5,
-    borderTopWidth: 0.3,
-    marginTop: 10,
-    marginHorizontal: 12
+    paddingTop: 10,
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    paddingHorizontal: 12
   },
   boxInfoItems: {
     paddingHorizontal: 10,
     paddingVertical: 10,
-    borderColor: COLORS.blueMedium,
-    borderBottomWidth: 0.4,
+    justifyContent: 'center',
+    marginBottom: 5,
+    borderColor: COLORS.gray,
+    borderBottomWidth: 0.5,
   },
   boxInput: {
     backgroundColor: 'transparent',
@@ -57,35 +61,31 @@ const styles = StyleSheet.create({
     borderRadius: 25,
   },
   buttonNew: {
-    width: wp('90%'),
+    width: wp('100%'),
     height: hp('7%'),
-    backgroundColor: 'transparent',
-    borderRadius: 25,
-    elevation: 1.5,
+    backgroundColor: COLORS.blueLight,
     justifyContent: 'center',
     alignItems: 'center'
   },
   buttonSave: {
-    width: wp('90%'),
+    width: wp('100%'),
     height: hp('7%'),
-    backgroundColor: 'transparent',
+    backgroundColor: COLORS.blueLight,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 25,
-    elevation: 1.5,
   },
   buttonEditBlue:{
     backgroundColor: 'transparent',
-    width: wp('15%'),
+    width: wp('16%'),
     height: hp('5%'),
     borderWidth: 1,
-    borderColor: COLORS.blueLight,
+    borderColor: COLORS.blue,
     borderRadius: 10,
     marginLeft: 3
   },
   buttonEditGray:{
-    backgroundColor: 'transparent',
-    width: wp('15%'),
+    backgroundColor: COLORS.grayMedium,
+    width: wp('16%'),
     height: hp('5%'),
     borderWidth: 1,
     borderColor: COLORS.gray,
@@ -94,13 +94,20 @@ const styles = StyleSheet.create({
   },
   buttonDelete:{
     backgroundColor: 'transparent',
-    width: wp('15%'),
-    height: hp('5%')
+    width: wp('10%'),
+    height: hp('5%'),
+    marginLeft: 3
+  },
+  buttonDeleteDisabled:{
+    backgroundColor: COLORS.grayMedium,
+    width: wp('10%'),
+    height: hp('5%'),
+    marginLeft: 3
   },
   textButtonEdit: {
-    fontFamily: FONTS.latoRegular,
+    fontFamily: FONTS.pRegular,
     fontSize: FONTS.size12,
-    color: COLORS.blueLight,
+    color: COLORS.blue,
   },
   textDelete: {
     fontFamily: FONTS.latoRegular,
@@ -111,13 +118,16 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     width: wp('90%'),
     height: hp('6%'),
-    paddingLeft: 20,
-    marginHorizontal: 15,
-    fontFamily: FONTS.latoRegular,
+    paddingLeft: 18,
+    alignSelf: 'center',
+    paddingVertical: 5,
+    fontFamily: FONTS.pExtraLight,
     fontSize: FONTS.size14,
+    paddingBottom: 3,
+    color: COLORS.blue,
+    borderWidth: 1,
     borderRadius: 25,
-    color: 'black',
-    elevation: 4
+    borderColor: COLORS.gray
   },
   searchInvoice: {
     backgroundColor: COLORS.white,
@@ -133,12 +143,21 @@ const styles = StyleSheet.create({
     elevation: 4
   },
   buttonSelect: {
+    backgroundColor: COLORS.blue,
     width: wp('40%'),
     height: hp('6%'),
     borderRadius: 25,
-    elevation: 1.5,
+    elevation: 2,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  buttonSelectDisable: {
+    backgroundColor: COLORS.gray,
+    width: wp('40%'),
+    height: hp('6%'),
+    borderRadius: 25,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   inLine:{
     flexDirection: "row",
@@ -155,14 +174,9 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   textRegular12Gray: {
-    fontFamily: FONTS.latoRegular,
+    fontFamily: FONTS.pRegular,
     fontSize: FONTS.size12,
     color: COLORS.gray
-  },
-  textRegular14White: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size14,
-    color: COLORS.white
   },
   textRegular16Gray: {
     fontFamily: FONTS.latoRegular,
@@ -170,30 +184,46 @@ const styles = StyleSheet.create({
     color: COLORS.gray
   },
   textRegular14GrayDark: {
-    fontFamily: FONTS.latoRegular,
+    fontFamily: FONTS.pRegular,
     fontSize: FONTS.size14,
-    color: COLORS.grayDark
+    color: COLORS.grayDark,
+    marginVertical: -3,
   },
-  textLight14BlueLight: {
-    fontFamily: FONTS.latoLight,
+  textLight14BlueMedium: {
+    fontFamily: FONTS.pExtraLight,
     fontSize: FONTS.size14,
-    color: COLORS.blueLight
+    color: COLORS.blueMedium,
+    marginVertical: -3,
   },
-  textRegular16White: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size16,
-    color: COLORS.white
+  textRegular14White: {
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size14,
+    color: COLORS.white,
+    marginVertical: -3,
+  },
+  textBold18White: {
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size18,
+    color: COLORS.white,
+    top: 2,
   },
   textRegular16BlueLight: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size16,
-    color: COLORS.blueLight
+    color: COLORS.blueLight,
+    marginVertical: -3,
+  },
+  textRegular12GrayDark: {
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size12,
+    color: COLORS.grayDark,
   },
   headerText: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size18,
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size16,
     fontWeight: 'normal',
     color: COLORS.white,
+    top: 3
   }
 });
 

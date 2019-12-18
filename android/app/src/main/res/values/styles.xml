@@ -5,9 +5,9 @@
         <item name="android:datePickerDialogTheme">@style/datePickerTheme</item>
     </style>
     <style name="datePickerTheme" parent="Theme.AppCompat.Light.Dialog">
-       <item name="colorAccent">#3687d1</item>
+       <item name="colorAccent">#003359</item>
        <item name="colorControlActivated">#3687d1</item>
-       <item name="colorControlHighlight">#3687d1</item>
+       <item name="colorControlHighlight">#003359</item>
     </style>
 
 </resources>

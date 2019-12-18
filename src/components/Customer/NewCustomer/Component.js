@@ -39,8 +39,7 @@ class NewCustomer extends React.Component {
   static navigationOptions = ({navigation}) => {
     return {
       title: 'Nuevo Cliente',
-      headerTransparent: true,
-      headerStyle: { elevation: 0 },
+      headerStyle: { backgroundColor: COLORS.blue, elevation: 0 },
       headerTitleStyle: style.headerText,
       headerTintColor: COLORS.white,
       headerLeft:( 
@@ -72,11 +71,7 @@ class NewCustomer extends React.Component {
 
   render() {
     return(
-      <LinearGradient 
-        colors={ GRADIANTBLUE2 } 
-        style={ style.container }
-        start={ XY.startV } 
-        end={ XY.endV }>
+      <View style={ style.container }>
 
           <View style={style.containerBody}>
             <ScrollView>
@@ -97,36 +92,40 @@ class NewCustomer extends React.Component {
                   </Picker>
                 </View>
 
-                <Text style={[style.textRegular12White, {marginTop: 5}]}>
+                <Text style={[style.textRegular12GrayDark, {marginTop: 5}]}>
                   Condición frente al IVA
                 </Text>
 
                 <TextField
                   title='Su información fiscal se cargará con su CUIT'
+                  titleTextStyle={style.textRegular12GrayDark}
                   label='Número de CUIT'
+                  labelTextStyle={style.textRegular12GrayDark}
                   value={this.state.identification}
                   onChangeText={this.setIdentification}
                   onFocus={()=>{this.setState({error: undefined})}}
                   keyboardType='numeric'
-                  tintColor={COLORS.blueLight}
-                  textColor= {COLORS.gray}
-                  baseColor={COLORS.white}
+                  tintColor={COLORS.blueMedium}
+                  textColor= {COLORS.blue}
+                  baseColor={COLORS.grayDark}
                   lineWidth={1}
                   labelFontSize={15}
                   labelPadding={6}
                   characterRestriction={11}
                   error={this.state.error}
-                  errorColor={'#ff9999'}
+                  errorColor={'red'}
                 />
                 
                 <TextField
                   title='Opcional'
+                  titleTextStyle={style.textRegular12GrayDark}
                   label='Nombre de Fantasía'
+                  labelTextStyle={style.textRegular12GrayDark}
                   value={this.state.name}
                   onChangeText={this.setName}
-                  textColor= {COLORS.gray}
-                  tintColor={COLORS.blueLight}
-                  baseColor={COLORS.white}
+                  textColor= {COLORS.blue}
+                  tintColor={COLORS.blueMedium}
+                  baseColor={COLORS.grayDark}
                   lineWidth={1}
                   labelFontSize={15}
                   labelPadding={6}
@@ -141,14 +140,12 @@ class NewCustomer extends React.Component {
               TouchableComponent={TouchableOpacity}
               onPress={this.saveCustomer}
               buttonStyle={ style.buttonSave }
-              titleStyle={ style.textRegular16White }
+              titleStyle={ style.textBold18White }
               loading={this.state.loading}
-              ViewComponent={LinearGradient}
-              linearGradientProps={COLORGBL}
             /> 
           </View>
 
-      </LinearGradient>
+      </View>
     )
   }
 }

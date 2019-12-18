@@ -10,11 +10,11 @@ const styles = StyleSheet.create({
   },
   containerBody: {
     flex: 0.87,
-    marginTop: METRICS.heightHeader,
+    paddingTop: 12
   }, 
   containerFooter: {
     flex: 0.13,
-    justifyContent: 'center'
+    justifyContent: 'flex-end'
   },
   containerInputs: {
     flex: 1,
@@ -23,41 +23,48 @@ const styles = StyleSheet.create({
   },
   boxCustomer: {
     flex: 1,
-    borderColor: COLORS.blueMedium,
+    backgroundColor: COLORS.white,
+    borderColor: COLORS.gray,
     borderBottomWidth: 0.5,
-    borderTopWidth: 0.3,
-    marginTop: 10,
-    marginHorizontal: 12
+    paddingTop: 10,
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    paddingHorizontal: 12
   },
   boxInfoCustomer: {
     paddingHorizontal: 10,
     paddingVertical: 10,
-    borderColor: COLORS.blueMedium,
-    borderBottomWidth: 0.4,
+    justifyContent: 'center',
+    marginBottom: 5,
+    borderColor: COLORS.gray,
+    borderBottomWidth: 0.5,
   },
   inputPicker: {
     height: 35,
     borderBottomWidth: 1,
-    borderBottomColor: COLORS.white
+    borderBottomColor: COLORS.grayDark,
   },
   picker: {
     flex: 1,
     justifyContent: 'center',
-    color: 'white',
+    color: COLORS.blue,
     marginVertical: 0,
-    marginLeft: -8
+    marginLeft: -8,
   },
   search: {
     backgroundColor: COLORS.white,
     width: wp('90%'),
     height: hp('6%'),
-    paddingLeft: 20,
-    marginHorizontal: 15,
-    fontFamily: FONTS.latoRegular,
+    paddingLeft: 18,
+    alignSelf: 'center',
+    paddingVertical: 5,
+    fontFamily: FONTS.pExtraLight,
     fontSize: FONTS.size14,
+    paddingBottom: 3,
+    color: COLORS.blue,
+    borderWidth: 1,
     borderRadius: 25,
-    color: 'black',
-    elevation: 4
+    borderColor: COLORS.gray
   },
   inLine:{
     flexDirection: "row",
@@ -88,13 +95,13 @@ const styles = StyleSheet.create({
     fontSize: FONTS.size14,
     color: COLORS.white,
   },
-  textRegular12White: {
-    fontFamily: FONTS.latoRegular,
+  textRegular12GrayDark: {
+    fontFamily: FONTS.pRegular,
     fontSize: FONTS.size12,
-    color: COLORS.white,
+    color: COLORS.grayDark,
   },
   textRegular12Gray: {
-    fontFamily: FONTS.latoRegular,
+    fontFamily: FONTS.pRegular,
     fontSize: FONTS.size12,
     color: COLORS.gray,
   },
@@ -103,36 +110,50 @@ const styles = StyleSheet.create({
     fontSize: FONTS.size14,
     color: COLORS.blueLight,
   },
+  textBold18White: {
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size18,
+    color: COLORS.white,
+    top: 2,
+  },
+  textRegular14GrayDark: {
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size14,
+    color: COLORS.grayDark,
+    marginVertical: -3,
+  },
+  textLight14BlueMedium: {
+    fontFamily: FONTS.pExtraLight,
+    fontSize: FONTS.size14,
+    color: COLORS.blueMedium,
+    marginVertical: -3,
+  },
   buttonNew: {
-    width: wp('90%'),
+    width: wp('100%'),
     height: hp('7%'),
-    backgroundColor: 'transparent',
-    borderRadius: 25,
-    elevation: 1.5,
+    backgroundColor: COLORS.blueLight,
     justifyContent: 'center',
     alignItems: 'center'
   },
   buttonSave: {
-    width: wp('90%'),
+    width: wp('100%'),
     height: hp('7%'),
-    backgroundColor: 'transparent',
+    backgroundColor: COLORS.blueLight,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 25,
-    elevation: 1.5,
   },
   buttonEditBlue:{
     backgroundColor: 'transparent',
-    width: wp('15%'),
+    width: wp('16%'),
     height: hp('5%'),
     borderWidth: 1,
-    borderColor: COLORS.blueLight,
+    borderColor: COLORS.blue,
     borderRadius: 10,
     marginLeft: 3
   },
   buttonEditGray:{
-    backgroundColor: 'transparent',
-    width: wp('15%'),
+    backgroundColor: COLORS.grayMedium,
+    width: wp('16%'),
     height: hp('5%'),
     borderWidth: 1,
     borderColor: COLORS.gray,
@@ -142,18 +163,26 @@ const styles = StyleSheet.create({
   buttonDelete:{
     backgroundColor: 'transparent',
     height: hp('5%'),
-    width: wp('15%'),
+    width: wp('10%'),
+    marginLeft: 3
+  },
+  buttonDeleteDisabled:{
+    backgroundColor: COLORS.grayMedium,
+    height: hp('5%'),
+    width: wp('10%'),
+    marginLeft: 3
   },
   textButtonEdit: {
-    fontFamily: FONTS.latoRegular,
+    fontFamily: FONTS.pRegular,
     fontSize: FONTS.size12,
-    color: COLORS.blueLight,
+    color: COLORS.blue,
   },
   headerText: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size18,
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size16,
     fontWeight: 'normal',
     color: COLORS.white,
+    top: 3
   }
 });
 

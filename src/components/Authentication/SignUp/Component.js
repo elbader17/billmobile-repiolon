@@ -72,26 +72,30 @@ class SignUp extends React.Component {
     return(
       <View>
         <TextField
+          titleTextStyle={style.textRegular12GrayDark}
+          labelTextStyle={style.textRegular12GrayDark}
           label='Nombre de usuario'
           value={ this.state.name }
           onChangeText={ this.setName }
           onFocus={()=>{this.setState({errorName: undefined})}}
-          baseColor={COLORS.gray}
-          tintColor={COLORS.blueMedium}
+          baseColor={COLORS.grayDark}
+          tintColor={COLORS.blue}
           textColor= {COLORS.grayDark}
           labelFontSize={12}
           lineWidth={1}
           inputContainerPadding={6}
           error={this.state.errorName}
-          errorColor={COLORS.redMedium}
+          errorColor={'red'}
         />
-        <TextField  
+        <TextField 
+          titleTextStyle={style.textRegular12GrayDark}
+          labelTextStyle={style.textRegular12GrayDark}
           label='Email'
           value={ this.state.email }    
           onChangeText={ this.setEmail }
           onFocus={()=>{this.setState({errorEmail: undefined})}}
-          baseColor={COLORS.gray}
-          tintColor={COLORS.blueMedium}
+          baseColor={COLORS.grayDark}
+          tintColor={COLORS.blue}
           textColor= {COLORS.grayDark}
           titleFontSize={10}
           labelFontSize={12}
@@ -99,17 +103,19 @@ class SignUp extends React.Component {
           lineWidth={1}
           inputContainerPadding={6}
           error={this.state.errorEmail}
-          errorColor={COLORS.redMedium}
+          errorColor={'red'}
         />
         <View>
           <PasswordInputText
-            title='Minimo 8 Caracteres, 1 Número, 1 Mayuscula y Minúscula, 1 Caracter Especial'
+            titleTextStyle={style.textRegular12GrayDark}
+            labelTextStyle={style.textRegular12GrayDark}
+            title='Minimo 8 Caracteres'
             label='Contraseña'
             value={ this.state.password }
             onChangeText={ this.setPassword }
             onFocus={()=>{this.setState({errorPass: undefined})}}
-            baseColor={COLORS.gray}
-            tintColor={COLORS.blueMedium}
+            baseColor={COLORS.grayDark}
+            tintColor={COLORS.blue}
             textColor= {COLORS.grayDark}
             titleFontSize={8.5}
             labelHeight={25}
@@ -119,19 +125,21 @@ class SignUp extends React.Component {
             iconColor= {COLORS.gray}
             iconSize={20}
             error={this.state.errorPass}
-            errorColor={COLORS.redMedium}
+            errorColor={'red'}
           />
         </View>
         <View>
           <PasswordInputText
+            titleTextStyle={style.textRegular12GrayDark}
+            labelTextStyle={style.textRegular12GrayDark}
             label='Confirmar Contraseña'
             value={ this.state.confirmPassword }
             onChangeText={ this.setConfirmPassword }
             onFocus={()=>{this.setState({errorConfirmPass: undefined})}}
-            baseColor={COLORS.gray}
+            baseColor={COLORS.grayDark}
             textColor= {COLORS.grayDark}
             titleFontSize={10}
-            tintColor={COLORS.blueMedium}
+            tintColor={COLORS.blue}
             iconColor= {COLORS.gray}
             iconSize={20}
             inputContainerPadding={7}
@@ -139,7 +147,7 @@ class SignUp extends React.Component {
             labelHeight={25}
             labelFontSize={12}
             error={this.state.errorConfirmPass}
-            errorColor={COLORS.redMedium}
+            errorColor={'red'}
           />
         </View>
 
@@ -152,8 +160,6 @@ class SignUp extends React.Component {
             buttonStyle={ style.buttonSignTwo }
             titleStyle={ style.textRegular16White }
             loading = {this.state.loading}
-            ViewComponent={LinearGradient}
-            linearGradientProps={COLORGBL}
           />
         </View>
       </View>

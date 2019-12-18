@@ -1,15 +1,14 @@
 import React from 'react';
 import { View, Text, Dimensions, TouchableOpacity, ScrollView, Image } from 'react-native';
-import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import LinearGradient from 'react-native-linear-gradient';
 import { Button } from "react-native-elements";
 import { showMessage } from "react-native-flash-message";
-import { LineChart } from 'react-native-chart-kit';
+import { BarChart } from 'react-native-chart-kit';
 import { Icon } from 'react-native-elements';
 import { IconCustomer, IconRight } from '../../constants/icons';
 import { messageInfoChart, messageCobros, messageTotalPeriod } from '../../utils/messagesNotifications';
 import { dataChart, dataConfig } from '../../constants/lineChart';
-import { GRADIANTBLUE2, COLORS } from '../../constants/colors';
+import { GRADIANTBLUE2, COLORS, GRADIANTBLUE3 } from '../../constants/colors';
 import style from './style';
 
 class Home extends React.Component {
@@ -24,17 +23,14 @@ class Home extends React.Component {
 
   static navigationOptions = ({ navigation }) => ({
     title: 'Bill Mobile',
-    headerTransparent: true,
-    headerStyle: { elevation: 0 },
+    headerStyle: { backgroundColor: COLORS.blue, elevation: 0 },
     headerTitleStyle: style.headerText,
     headerLeft: (
       <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
-        <Icon type='feather' name='menu' size={30} color={COLORS.blueLight} iconStyle={{marginLeft: 10}}/>
+        <Icon type='feather' name='menu' size={25} color={COLORS.blueLight} iconStyle={{marginLeft: 10}}/>
       </TouchableOpacity>
     ),
-    headerRight: (
-      <Image source={require('../../images/Bill.png')} style={{width: 45, height: 45}}/>
-    ),
+    
   });
 
   componentDidMount() {
@@ -57,30 +53,25 @@ class Home extends React.Component {
 
   render() {
     return(
-        <LinearGradient
-          colors={ GRADIANTBLUE2 }
-          start={{x: 1.0, y: 1.0}} 
-          end={{x: 1.0, y: 0.0}}
-          style={style.container}
-        >
-          <View style={style.containerHeader}>
+        <View style={style.container}>
 
-            <View style={style.textFacPeriodo}>
+        <View style={style.containerHeader}>
+          <View style={style.textFacPeriodo}>
               <View style={style.inLine}>
-                <Icon type='entypo' name="area-graph" color={COLORS.blueLight} size={15} iconStyle={{marginRight: 4}}/>
-                <Text style={style.textLight14White}>
+                <Icon type='feather' name="bar-chart" color={COLORS.blueLight} size={12} iconStyle={{marginRight: 2}}/>
+                <Text style={style.textLight12White}>
                   Facturación del Período
                 </Text>
               </View>
             </View>
             <TouchableOpacity onPress={this.infoChart} activeOpacity={0.7}>
-              <LineChart
+            <BarChart
                 height={190}
-                width={Dimensions.get('window').width}
+                width={Dimensions.get('window').width-10}
                 style={style.styleChart}
                 data={dataChart}
                 chartConfig={dataConfig}
-                yAxisLabel={'K $'}
+                yAxisLabel={'$ '}
                 bezier
               />
             </TouchableOpacity>
@@ -90,63 +81,43 @@ class Home extends React.Component {
           <View style={style.containerStatictis}>
             <View style={style.inLineSpaceAround}>
               <TouchableOpacity onPress={this.infoPendingCharges} activeOpacity={0.7}>
-                <AnimatedCircularProgress
-                  size={145}
-                  width={12}
-                  fill={80}
-                  rotation={0}
-                  tintColor={COLORS.blueLight}
-                  backgroundColor={COLORS.white}
-                  lineCap={"round"}
-                  style={style.circlePercentaje}>
-                  {(fill) => (
-                    <View style={style.inColumn}>
-                      <Text style={style.textLight18White}>
-                        0{ fill/10 }/12 
-                      </Text>
-                      <Text style={style.textLight12BlueLight}>
-                        Cobros Pendientes
-                      </Text>
-                    </View>
-                  )}
-                </AnimatedCircularProgress>
+                <View style={style.boxData}>
+                  <View style={style.inColumn}>
+                    <Text style={style.textLight22Gray}>
+                      08/12 
+                    </Text>
+                    <Text style={style.textRegular14Blue}>
+                      Cobros Pendientes
+                    </Text>
+                  </View>
+                </View>
               </TouchableOpacity>
               
               <TouchableOpacity onPress={this.infoTotalPeriod} activeOpacity={0.7}>
-                <AnimatedCircularProgress
-                  size={145}
-                  width={12}
-                  fill={20}
-                  rotation={0}
-                  tintColor={COLORS.blueLight}
-                  backgroundColor={COLORS.white}
-                  lineCap={"round"}
-                  style={style.circlePercentaje}>
-                  {(fill) => (
-                    <View style={style.inColumn}>
-                      <Text style={style.textLight18White}>
-                        { fill }/250 Mil 
-                      </Text>
-                      <Text style={style.textLight12BlueLight}>
-                        Total del Período
-                      </Text>
-                    </View>
-                  )}
-                </AnimatedCircularProgress>
+                <View style={style.boxData}>
+                  <View style={style.inColumn}>
+                    <Text style={style.textLight22Gray}>
+                      20/250 Mil
+                    </Text>
+                    <Text style={style.textRegular14Blue}>
+                      Total del Período
+                    </Text>
+                  </View>
+                </View>
               </TouchableOpacity>
             </View>
           </View>
 
           <View style={style.containerListCustomer}>
-            <View style={[style.inLine,{marginLeft: 10}]}>
-              <IconCustomer size={17} color={COLORS.blueLight} iconStyle={{marginRight: 4}}/>
-              <Text style={style.textLight14White}>Clientes Recientes</Text>
+            <View style={[style.inLine,{justifyContent: 'center'}]}>
+              <IconCustomer size={15} color={COLORS.blue} iconStyle={{marginRight: 4}}/>
+              <Text style={style.textRegular12Blue}>Clientes Recientes</Text>
             </View>
             <View style={style.scrollCustomers}>
               
               <View>
                 <View style={style.inLineSpaceBetween}>
-                  <Text style={style.textLight16White}> 
+                  <Text style={style.textLight14BlueMedium}> 
                     Armando Construcciones 
                   </Text>
                   <Button
@@ -154,14 +125,14 @@ class Home extends React.Component {
                     icon={IconRight}
                     iconRight={true}
                     buttonStyle={style.buttonViewInvoice}
-                    titleStyle={style.textLight16BlueLight}
+                    titleStyle={style.textRegular14Blue}
                   />
                 </View>
               </View>
 
               <View>
                 <View style={style.inLineSpaceBetween}>
-                  <Text style={style.textLight16White}> 
+                  <Text style={style.textLight14BlueMedium}> 
                     Ferretería Monsegur SRL
                   </Text>
                   <Button
@@ -169,14 +140,14 @@ class Home extends React.Component {
                     icon={IconRight}
                     iconRight={true}
                     buttonStyle={style.buttonViewInvoice}
-                    titleStyle={style.textLight16BlueLight}
+                    titleStyle={style.textRegular14Blue}
                   />
                 </View>
               </View>
 
               <View>
                 <View style={style.inLineSpaceBetween}>
-                  <Text style={style.textLight16White}> 
+                  <Text style={style.textLight14BlueMedium}> 
                     Martin Daniotti 
                   </Text>
                   <Button
@@ -184,15 +155,23 @@ class Home extends React.Component {
                     icon={IconRight}
                     iconRight={true}
                     buttonStyle={style.buttonViewInvoice}
-                    titleStyle={style.textLight16BlueLight}
+                    titleStyle={style.textRegular14Blue}
                   />
                 </View>
+              </View>
+
+              <View style={{flex: 1,justifyContent: "flex-end"}}>
+                <Button
+                  title='Ver Todos'
+                  buttonStyle={style.buttonViewAll}
+                  titleStyle={style.textBold14Blue}
+                />   
               </View>
 
             </View>
               
           </View>
-        </LinearGradient>
+        </View>
     )
   }
 }

@@ -58,7 +58,7 @@ export const messageCobros = {
 
 export const messageTotalPeriod = {
     message: "Total facturado",
-    description: `Período: 2019 \n¡Información sobre lo que lleva facturado!`,
+    description: `$20.569 de $200.000\n\nPeríodo: 2019 `,
     floating: true,
     icon: { icon: "auto", position: "left" },
     type: 'info',

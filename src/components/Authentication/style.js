@@ -48,37 +48,43 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   textRegular14White: {
-    fontFamily: FONTS.latoRegular,
+    fontFamily: FONTS.pRegular,
     fontSize: FONTS.size14,
     color: COLORS.white,
     lineHeight: 22,
     textAlign: 'center'
   },
   textRegular16White: {
-    fontFamily: FONTS.latoRegular,
+    fontFamily: FONTS.pRegular,
     fontSize: FONTS.size16,
     color: COLORS.white,
     textAlign: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    top: 1
   },
   imageHeader: {
     width: 219,
     height: 130
   },
   buttonSign: {
-    width: wp('42%'),
+    width: wp('40%'),
     height: hp('6%'),
-    backgroundColor: 'transparent',
+    backgroundColor: COLORS.blue,
     borderRadius: 25,
     justifyContent: 'center',
-    elevation: 2,
+  },
+  buttonSignDisable: {
+    width: wp('42%'),
+    height: hp('6%'),
+    backgroundColor: COLORS.gray,
+    borderRadius: 25,
+    justifyContent: 'center',
   },
   buttonSignTwo: {
     width: wp('86%'),
     height: hp('7%'),
-    backgroundColor: 'transparent',
-    borderRadius: 25,
-    elevation: 2
+    backgroundColor: COLORS.blue,
+    borderRadius: 25
   },
   buttonVerify: {
     width: wp('86%'),
@@ -97,20 +103,16 @@ const styles = StyleSheet.create({
     elevation: 1
   },
   gradientBottom: { 
-    height: hp('8%'),
+    backgroundColor: COLORS.blue,
+    height: hp('9%'),
     borderTopLeftRadius: 100, 
     borderTopRightRadius: 100, 
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   textMedium16Blue: {
-    fontFamily: FONTS.latoMedium,
-    fontSize: FONTS.size16,
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size14,
     color: COLORS.blue
-  },
-  textRegular12GrayDark: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size12,
-    color: COLORS.grayDark
   },
   textRegular18BlueMedium: {
     fontFamily: FONTS.latoRegular,
@@ -118,19 +120,23 @@ const styles = StyleSheet.create({
     color: COLORS.blueMedium
   },
   textRegular11White: {
-    fontFamily: FONTS.latoRegular,
+    fontFamily: FONTS.pRegular,
     fontSize: FONTS.size11,
     color: COLORS.white,
     textAlign: 'center',
-    opacity: 0.9
+    top: 2
   },
   textRegular11WhiteBold: {
-    fontFamily: FONTS.latoRegular,
+    fontFamily: FONTS.pSemiBold,
     fontSize: FONTS.size11,
-    color: COLORS.white,
-    fontWeight: 'bold',
+    color: COLORS.blueLight,
     textAlign: 'center',
-    opacity: 0.9
+  },
+  textRegular12GrayDark: {
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size11,
+    color: COLORS.grayDark,
+    textAlign: 'center'
   },
   inLineSpaceAround: {
     flexDirection: 'row',

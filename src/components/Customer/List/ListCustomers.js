@@ -10,7 +10,7 @@ const ListCustomers = props => {
     console.log(props.customers);
     return props.customers.map((customer) => {
       const isInvoice = props.type === 'invoice';
-      const color = props.loadingItem ? COLORS.gray : COLORS.blueLight //Disabled and enabled Button
+      const color = props.loadingItem ? COLORS.grayDark : COLORS.blue //Disabled and enabled Button
       const icon = isInvoice ? undefined : <IconTrash color={color} />
       const title = isInvoice ? 'Añadir' : undefined; 
       const conditionLoading= props.loadingItem && customer.id === props.customerActive; 
@@ -18,10 +18,10 @@ const ListCustomers = props => {
         <View style={style.boxInfoCustomer} key={customer.id}>
           <View style={style.inLineSpaceBetween}>
             <View>
-              <Text style={style.textRegular14White}>
+              <Text style={style.textRegular14GrayDark}>
                 {customer.attributes.name} 
               </Text>
-              <Text style={style.textLight14BlueLight}>
+              <Text style={style.textLight14BlueMedium}>
                 {customer.attributes.identification}
               </Text>
             </View>
@@ -32,6 +32,8 @@ const ListCustomers = props => {
                 onPress={() => props.navigateToEditCustomer(customer) }
                 buttonStyle={ style.buttonEditBlue }
                 titleStyle={ style.textButtonEdit }
+                disabled = {isInvoice}
+                disabledStyle={{display: 'none', borderColor: 'transparent'}}
               />
               <Button
                 title={title}
@@ -40,7 +42,7 @@ const ListCustomers = props => {
                 onPress={() => props.actionCustomer(customer) }
                 buttonStyle={isInvoice ? style.buttonEditBlue : style.buttonDelete}
                 titleStyle={style.textButtonEdit}
-                disabledStyle={isInvoice ? style.buttonEditGray : style.buttonDelete}
+                disabledStyle={isInvoice ? style.buttonEditGray : style.buttonDeleteDisabled}
                 disabledTitleStyle={style.textRegular12Gray}
                 disabled = {props.loadingItem}
                 loading={conditionLoading}

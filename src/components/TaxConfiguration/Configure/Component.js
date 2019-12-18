@@ -1,11 +1,9 @@
 import React from 'react';
 import { View, TouchableOpacity, ScrollView } from 'react-native';
 import { Button } from "react-native-elements";
-import LinearGradient from 'react-native-linear-gradient';
 import { TextField } from 'react-native-material-textfield';
-import { GRADIANTBLUE2, COLORS, COLORGBL } from '../../../constants/colors';
+import { COLORS } from '../../../constants/colors';
 import { IconBack } from '../../../constants/icons';
-import { XY } from '../../../constants/gradientCoord';
 import  { validateCuit } from '../../../utils/identity';
 import style from '../style';
 
@@ -25,8 +23,7 @@ class TaxConfiguration extends React.Component{
   static navigationOptions = ({navigation}) => {
     return {
       title: 'Configuración de CUIT',
-      headerTransparent: true,
-      headerStyle: { elevation: 0 },
+      headerStyle: { backgroundColor: COLORS.blue, elevation: 0 },
       headerTitleStyle: style.headerText,
       headerTintColor: 'white',
       headerLeft: (
@@ -53,6 +50,7 @@ class TaxConfiguration extends React.Component{
       else this.setState({errorName: 'Debe ingresar un nombre'})
     }
   } 
+  navigateLogin = () => this.props.navigation.navigate('Login');
   
   setName = (value) => this.setState({ name: value})
   setCuit = (value) => this.setState({ cuit: value })
@@ -60,49 +58,57 @@ class TaxConfiguration extends React.Component{
 
   render() {
     return(
-      <LinearGradient
-        colors={ GRADIANTBLUE2 }
-        style={style.container}
-        start={XY.startV}
-        end={XY.endV}>
+      <View style={style.container}>
 
         <View style={style.containerBody}>
         <ScrollView>  
           <View style={{justifyContent: "flex-start"}}>
             <TextField
+              titleTextStyle={style.textRegular12GrayDark}
+              labelTextStyle={style.textRegular12GrayDark}
               title='Nombre de Fantasía o tu Nombre y Apellido.'
               label='Nombre de la empresa'
               value={this.state.name}
               onChangeText={this.setName}
               onFocus={() => this.setState({errorName: undefined})}
-              tintColor={COLORS.blueLight}
-              textColor= {COLORS.gray}
-              baseColor={COLORS.white}
+              tintColor={COLORS.blue}
+              textColor= {COLORS.blue}
+              baseColor={COLORS.grayDark}
               lineWidth={1}
               labelFontSize={15}
               labelPadding={6}
               error={this.state.errorName}
-              errorColor={'#ff9999'}
+              errorColor={'red'}
             />
 
             <TextField
+              titleTextStyle={style.textRegular12GrayDark}
+              labelTextStyle={style.textRegular12GrayDark}
               title='Para acceder a tu información y configurar tu cuenta.'
               label='Ingresa tu CUIT'
               value={this.state.cuit}
               onChangeText={this.setCuit}
               onFocus={() => this.setState({errorCuit: undefined})}
               keyboardType='numeric'
-              tintColor={COLORS.blueLight}
-              textColor= {COLORS.gray}
-              baseColor={COLORS.white}
+              tintColor={COLORS.blue}
+              textColor= {COLORS.blue}
+              baseColor={COLORS.grayDark}
               lineWidth={1}
               labelFontSize={15}
               labelPadding={6}
               error={this.state.errorCuit}
-              errorColor={'#ff9999'}
+              errorColor={'red'}
             />        
           </View>
           </ScrollView>
+          <Button
+            title='Omitir'
+            TouchableComponent={TouchableOpacity}
+            onPress={ this.navigateLogin }
+            buttonStyle={ style.buttonOmitir }
+            titleStyle={ style.textRegular14white }
+            loading={this.state.loading}
+          />
         </View>
 
         <View style={style.containerFooter}>
@@ -114,12 +120,10 @@ class TaxConfiguration extends React.Component{
             buttonStyle={ style.button }
             titleStyle={ style.textRegular14white }
             loading={this.state.loading}
-            ViewComponent={LinearGradient}
-            linearGradientProps={COLORGBL}
           />
         </View>
 
-      </LinearGradient>
+      </View>
     )
   }
 }

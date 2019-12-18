@@ -7,7 +7,7 @@ import { METRICS } from '../../constants/metrics';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: METRICS.heightHeader
+    paddingTop: 5
   },
   containerBody: {
     flex: 0.85,
@@ -18,50 +18,79 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   image: {
-    width: wp('60%'),
-    height: hp('20%'),
-    marginBottom: 20
+    width: wp('55%'),
+    height: hp('18%'),
+    marginVertical: 50
   },
   button: {
     width: wp('90%'),
     height: hp('7.5%'),
-    backgroundColor: 'transparent',
+    backgroundColor: COLORS.blue,
     borderRadius: 25,
-    elevation: 2,
+    marginTop: 15,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  buttonOmitir: {
+    width: wp('85%'),
+    height: hp('5%'),
+    backgroundColor: COLORS.gray,
+    borderRadius: 25,
     marginTop: 15,
     justifyContent: 'center',
     alignItems: 'center'
   },
   textRegular18White: {
     fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size24,
+    fontSize: FONTS.size18,
     color: COLORS.white,
     textAlign: 'center'
   },
-  textLight18Blue: {
-    fontFamily: FONTS.latoLight,
+  textRegular18Blue: {
+    fontFamily: FONTS.pSemiBold,
     fontSize: FONTS.size18,
-    color: COLORS.blueLight,
+    color: COLORS.blue,
+    textAlign: 'center'
+  },
+  textLight18Blue: {
+    fontFamily: FONTS.pExtraLight,
+    fontSize: FONTS.size16,
+    color: COLORS.blue,
     textAlign: 'center',
     marginTop: 15
   },
   textRegular14Gray: {
-    fontFamily: FONTS.latoRegular,
+    fontFamily: FONTS.pRegular,
     fontSize: FONTS.size14,
     color: COLORS.gray,
     textAlign: 'center',
+    top: 1
   },
   textRegular14white: {
-    fontFamily: FONTS.latoRegular,
+    fontFamily: FONTS.pRegular,
     fontSize: FONTS.size14,
+    color: COLORS.white,
+    textAlign: 'center',
+    top: 1
+  },
+  textRegular16White: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size16,
     color: COLORS.white,
     textAlign: 'center'
   },
+  textRegular12GrayDark: {
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size11,
+    color: COLORS.grayDark,
+    textAlign: 'center'
+  },
   headerText: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size18,
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size16,
     fontWeight: 'normal',
     color: COLORS.white,
+    top: 2
   }
 });
 

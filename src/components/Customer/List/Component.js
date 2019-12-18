@@ -27,8 +27,7 @@ class CustomerList extends React.Component {
   static navigationOptions = ({navigation}) => {
     return {
       title: 'Listado de Clientes',
-      headerTransparent: true,
-      headerStyle: { elevation: 0 },
+      headerStyle: { backgroundColor: COLORS.blue, elevation: 0 },
       headerTitleStyle: style.headerText,
       headerTintColor: 'white',
       headerLeft: (
@@ -68,7 +67,7 @@ class CustomerList extends React.Component {
           onPress: () => {
             this.setState({loadingItem: true, customerActive: customer.id})
             const { actionCustomer, navigation } = this.props;
-            actionCustomer(customer, navigation)
+            actionCustomer(customer)
               .then(() => {
                 if (this.props.type === 'collection')
                   this.props.getCustomerList() //Refresh List
@@ -120,16 +119,11 @@ class CustomerList extends React.Component {
 
   render() {
     return(
-      <LinearGradient
-        colors={ GRADIANTBLUE2 }
-        style={style.container}
-        start={XY.startV}
-        end={XY.endV}
-      >
+      <View style={style.container}>
         <View style={style.containerBody}>
           <SearchInput 
             onChangeText={(term) => { this.setState({customerInputSearch: term}) }} 
-            placeholder="Buscar Cliente"
+            placeholder="Buscar cliente/s"
             placeholderTextColor={COLORS.grayDark}
             style={ style.search }
           />
@@ -148,14 +142,11 @@ class CustomerList extends React.Component {
               onPress={ this.navigateToNewCustomer }
               icon={IconMore}
               buttonStyle={ style.buttonNew }
-              titleStyle={ style.textRegular16White }
-              ViewComponent={LinearGradient}
-              linearGradientProps={COLORGBL}
+              titleStyle={ style.textBold18White }
             />
           </View>
         </View>
-      
-      </LinearGradient>  
+      </View>  
     );
   }
 }
