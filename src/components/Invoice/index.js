@@ -10,7 +10,8 @@ const mapStateToProps = state => ({
   invoiceDate: state.invoices.currentInvoice.invoiceDate,
   voucherType: state.invoices.currentInvoice.voucherType,
   invoiceId: state.invoices.currentInvoice.id,
-  invoiceTotal: state.invoices.currentInvoice.total
+  invoiceTotal: state.invoices.currentInvoice.total,
+  invoices: state.invoices.invoices
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => {

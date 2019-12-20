@@ -6,9 +6,10 @@ import { IconTrash } from '../../../constants/icons';
 import { COLORS } from '../../../constants/colors';
 import style from '../style';
 
-const ListCustomers = props => {
-    console.log(props.customers);
-    return props.customers.map((customer) => {
+const ListCustomers = props => {  
+  return props.customers
+    .filter(customer => customer.attributes.user_id != null)  
+    .map((customer) => {
       const isInvoice = props.type === 'invoice';
       const color = props.loadingItem ? COLORS.grayDark : COLORS.blue //Disabled and enabled Button
       const icon = isInvoice ? undefined : <IconTrash color={color} />

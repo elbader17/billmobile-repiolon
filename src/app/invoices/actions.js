@@ -72,7 +72,6 @@ const listInvoice = () => {
   return (dispatch) => {
     return fetch_api('/v1/invoices', 'GET', false)
       .then((response) => {
-        //console.log(response);
         dispatch(listInvoiceAction(response.data));
       })
       .catch((error) => {

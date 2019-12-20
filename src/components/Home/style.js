@@ -2,7 +2,6 @@ import { StyleSheet } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { COLORS } from '../../constants/colors';
 import { FONTS } from '../../constants/fonts';
-import { METRICS } from '../../constants/metrics';
 
 const styles = StyleSheet.create({
   container: {
@@ -14,13 +13,13 @@ const styles = StyleSheet.create({
   },
   containerStatictis: {
     backgroundColor: COLORS.white,
-    flex:0.22,
+    flex:0.20,
     justifyContent: 'center',
     paddingHorizontal: 5,
   },
   containerListCustomer: {
     backgroundColor: COLORS.white,
-    flex:0.36,
+    flex:0.38,
   },
   containerFooter: { 
     width: '100%',
@@ -31,10 +30,10 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 0, 
   },
   boxData: {
-    backgroundColor: COLORS.whiteGray,
+    backgroundColor: COLORS.blue,
     paddingHorizontal: 20,
-    paddingVertical: 20,
-    borderRadius: 7,
+    paddingVertical: 15,
+    borderRadius: 10,
     borderWidth: 0.5,
     borderColor: COLORS.blue,
   },
@@ -44,12 +43,21 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     marginBottom: 10,
     marginTop: 3,
-    paddingVertical: 7,
-    paddingHorizontal: 10,
+    paddingVertical: 5,
+    paddingHorizontal: 13,
     borderWidth: 0.5,
-    borderRadius: 7,
+    borderRadius: 10,
     borderColor: COLORS.blue,
-    
+    justifyContent: 'center',
+  },
+  listCustomers: {
+    borderBottomWidth: 0.5,
+    borderColor: COLORS.blue
+  },
+  lineBlue: {
+    flex: 1,
+    height: 1, 
+    backgroundColor: COLORS.blue
   },
   styleChart: {
     marginTop: 5
@@ -93,9 +101,10 @@ const styles = StyleSheet.create({
     color: COLORS.blue,
   },
   textRegular16GrayDark: {
-    fontFamily: FONTS.latoRegular,
+    fontFamily: FONTS.pExtraLight,
     fontSize: FONTS.size16,
     color: COLORS.grayDark,
+    top: 3
   },
   textRegular16Bluelight: {
     fontFamily: FONTS.latoRegular,
@@ -133,8 +142,20 @@ const styles = StyleSheet.create({
     color: COLORS.grayDark,
     top: 3
   },
-  textRegular14Blue: {
+  textLight14White: {
+    fontFamily: FONTS.pExtraLight,
+    fontSize: FONTS.size14,
+    color: COLORS.white,
+    top: 1
+  },
+  textRegular14White: {
     fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size14,
+    color: COLORS.white,
+    top: 1
+  },
+  textRegular14Blue: {
+    fontFamily: FONTS.pExtraLight,
     fontSize: FONTS.size14,
     color: COLORS.blue,
     top: 3
@@ -155,20 +176,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
-  textRegular14White: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size14,
-    color: COLORS.white,
-  },
   textRegular18GrayDark: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size18,
     color: COLORS.grayDark,
-  },
-  textRegular16White: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size16,
-    color: COLORS.white,
   },
   textLight18White: {
     fontFamily: FONTS.latoLight,
@@ -192,10 +203,10 @@ const styles = StyleSheet.create({
     color: COLORS.blue,
     top: 3
   },
-  textLight22Gray: {
-    fontFamily: FONTS.pRegular,
+  textLight22Blue: {
+    fontFamily: FONTS.pExtraLight,
     fontSize: FONTS.size22,
-    color: COLORS.grayDark,
+    color: COLORS.blueLight,
     marginVertical: -5
   },
   lineWhiteLeft: {
@@ -208,6 +219,14 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.blueLight,
     height: 1
   },
+  buttonAll: {
+    height: hp('6%'),
+    marginTop: 5,
+    backgroundColor: COLORS.blue,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
   buttonFooter: {
     height: hp('5%'),
     backgroundColor: 'transparent'
@@ -219,11 +238,9 @@ const styles = StyleSheet.create({
     height: hp('4%'),
     backgroundColor: 'transparent',
   },
-  buttonViewAll: {
-    height: hp('5%'),
+  buttonComprobante: {
+    height: hp('4%'),
     backgroundColor: 'transparent',
-    borderTopWidth: 0.5,
-    borderColor: COLORS.blue,
   },
   headerText: {
     fontFamily: FONTS.pRegular,
