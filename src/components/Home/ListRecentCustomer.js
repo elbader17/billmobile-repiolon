@@ -4,6 +4,7 @@ import { Button } from "react-native-elements";
 import PropTypes from 'prop-types';
 import {IconRight} from '../../constants/icons'
 import style from './style';
+import { COLORS } from '../../constants/colors';
 
 const ListRecentCustomer = props => {
     if (props.customers === null ) {
@@ -22,10 +23,10 @@ const ListRecentCustomer = props => {
           customer => customer.id === invoice.relationships.fiscal_identity.data.id
         );
         return (
-          <View key={invoice.id}>
+          <View key={invoice.id} style={{ paddingLeft: 7, marginVertical: 3, paddingVertical: 0, borderRadius: 7, borderBottomWidth: 0.5, borderColor: COLORS.grayLight}}>
             <View style={style.inLineSpaceBetween} >
               
-              <Text style={style.textRegular16GrayDark}>
+              <Text style={style.textRegular14GrayDark}>
                 {customer.attributes.name === 'fc' ? 'Consumidor Final': customer.attributes.name}
               </Text>
               

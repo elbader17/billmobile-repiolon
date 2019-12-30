@@ -13,6 +13,7 @@ import {
 } from '../../../utils/validations';
 import { COLORS, COLORGY, COLORGBL } from '../../../constants/colors';
 import style from '../style';
+import { ScrollView } from 'react-native-gesture-handler';
 
 class SignUp extends React.Component {
 
@@ -70,7 +71,7 @@ class SignUp extends React.Component {
   
   render() {
     return(
-      <View>
+      <ScrollView>
         <TextField
           titleTextStyle={style.textRegular12GrayDark}
           labelTextStyle={style.textRegular12GrayDark}
@@ -162,7 +163,7 @@ class SignUp extends React.Component {
             loading = {this.state.loading}
           />
         </View>
-      </View>
+      </ScrollView>
     )
   }
 }

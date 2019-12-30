@@ -201,6 +201,11 @@ const styles = StyleSheet.create({
     color: COLORS.white,
     marginVertical: -3,
   },
+  textRegular16GrayDark: {
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size16,
+    color: COLORS.grayDark,
+  },
   textBold18White: {
     fontFamily: FONTS.pRegular,
     fontSize: FONTS.size18,
@@ -217,6 +222,12 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.pRegular,
     fontSize: FONTS.size12,
     color: COLORS.grayDark,
+  },
+  textBold16White: {
+    fontFamily: FONTS.pSemiBold,
+    fontSize: FONTS.size16,
+    color: COLORS.blue,
+    top: 1
   },
   headerText: {
     fontFamily: FONTS.pRegular,

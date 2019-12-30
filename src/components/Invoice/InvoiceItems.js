@@ -1,9 +1,8 @@
 import React from 'react';
 import { View, Text, ScrollView, TouchableOpacity, Alert, Modal } from 'react-native';
 import { Button } from "react-native-elements";
-import { IconX, IconEdit, IconMore } from '../../constants/icons';
+import { IconX, IconEdit } from '../../constants/icons';
 import style from './style';
-
 import NumericInput from 'react-native-numeric-input';
 import { COLORS } from '../../constants/colors';
 
@@ -22,7 +21,6 @@ class InvoiceItems extends React.Component {
   }
 
   deleteItem = (id, props, name) => {
-    this.setState({loadingDelete: true, itemActive: id});
     Alert.alert(
       'Se eliminará "' + name +'" del Comprobante','¿Está Seguro?',
       [
@@ -33,6 +31,7 @@ class InvoiceItems extends React.Component {
         },
         { //Press OK
           text: 'Eliminar', onPress: () => {
+            this.setState({loadingDelete: true, itemActive: id});
             this.props.deleteItem(id, props.invoiceId)
               .then(() => {
                 this.props.getInvoiceItems()
@@ -110,7 +109,7 @@ class InvoiceItems extends React.Component {
                     </View>
                     <View style={style.boxItems3}>
                       <Text style={style.textRegular14GrayDark}>
-                        ${item.price}
+                        ${item.price * item.quantity}
                       </Text>
                     </View>
                   </View>

@@ -2,12 +2,10 @@ import React from 'react';
 import { View, Text, TouchableOpacity, ScrollView, Alert} from 'react-native';
 import SearchInput, { createFilter } from 'react-native-search-filter';
 import { Button } from "react-native-elements";
-import LinearGradient from 'react-native-linear-gradient';
 import LoadingIndicator from '../../Loading';
 import ListItems from './ListItems';
-import { GRADIANTBLUE2, COLORS, COLORGBL, GRADIANTBLUELIGHT } from '../../../constants/colors';
+import { COLORS } from '../../../constants/colors';
 import { IconBack, IconMore } from '../../../constants/icons';
-import { XY } from '../../../constants/gradientCoord';
 import { orderByName } from '../../../utils/functions';
 import style from '../style';
 
@@ -162,12 +160,11 @@ class ItemList extends React.Component {
           <View style={style.containerFooter}>
             <View style={style.inLineSpaceAround}>
               <Button
-                title=' Añadir Nuevo'
+                title='Añadir Nuevo'
                 TouchableComponent={TouchableOpacity}
                 onPress={() => this.navigateToNewItem(this.state.isProduct) }
-                icon={IconMore}
                 buttonStyle={ style.buttonNew }
-                titleStyle={ style.textBold18White }
+                titleStyle={ style.textBold16White }
               />
             </View>
           </View>

@@ -27,6 +27,11 @@ const styles = StyleSheet.create({
     alignItems: 'center', 
     marginTop: 18,
   },
+  containerButtons: {
+    flex: 1, 
+    justifyContent: 'center', 
+    alignItems: "center"
+  },
   gradientStyle: { 
     width: wp('50%'),
     height: hp('5%'),
@@ -35,9 +40,9 @@ const styles = StyleSheet.create({
   },
   textSubLogo: {
     flex:1,
-    marginTop: 5,
+    marginTop: 3,
     marginBottom: 5,
-    marginLeft: 35,
+    marginLeft: 50,
     justifyContent: 'center',
     alignItems: 'center'
   },
@@ -111,13 +116,13 @@ const styles = StyleSheet.create({
   },
   textMedium16Blue: {
     fontFamily: FONTS.pRegular,
-    fontSize: FONTS.size14,
+    fontSize: FONTS.size12,
     color: COLORS.blue
   },
-  textRegular18BlueMedium: {
-    fontFamily: FONTS.latoRegular,
+  textRegular18Blue: {
+    fontFamily: FONTS.pRegular,
     fontSize: FONTS.size18,
-    color: COLORS.blueMedium
+    color: COLORS.blue
   },
   textRegular11White: {
     fontFamily: FONTS.pRegular,

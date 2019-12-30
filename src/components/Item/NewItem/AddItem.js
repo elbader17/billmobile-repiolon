@@ -16,7 +16,7 @@ const AddItem = props => {
           value={props.data.name}
           onChangeText={props.setName}
           onFocus={props.setErrorName}
-          tintColor={COLORS.blueMedium}
+          tintColor={COLORS.blue}
           textColor= {COLORS.blue}
           baseColor={COLORS.grayDark}
           lineWidth={1}
@@ -34,7 +34,7 @@ const AddItem = props => {
           placeholderTextColor={ COLORS.gray }
           onChangeText={props.setPrice}
           onFocus={props.setErrorPrice}
-          tintColor={COLORS.blueMedium}
+          tintColor={COLORS.blue}
           textColor= {COLORS.blue}
           baseColor={COLORS.grayDark}
           lineWidth={1}

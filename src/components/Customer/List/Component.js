@@ -137,12 +137,11 @@ class CustomerList extends React.Component {
         <View style={style.containerFooter}>
           <View style={style.inLineSpaceAround}> 
             <Button
-              title=' Nuevo Cliente'
+              title='Nuevo Cliente'
               TouchableComponent={TouchableOpacity}
               onPress={ this.navigateToNewCustomer }
-              icon={IconMore}
               buttonStyle={ style.buttonNew }
-              titleStyle={ style.textBold18White }
+              titleStyle={ style.textBold16White }
             />
           </View>
         </View>

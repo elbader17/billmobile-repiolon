@@ -4,6 +4,7 @@ import {
   UPDATE_INVOICE,
   LIST_INVOICE,
   GET_INVOICE,
+  CONFIRM_INVOICE
 } from './constants';
 
 function createInvoiceAction(invoice) {
@@ -17,6 +18,14 @@ function updateInvoiceAction(invoice) {
   return {
     type: UPDATE_INVOICE,
     invoice,
+  };
+}
+
+function updateInvoiceTotalAction(invoice, add) {
+  return {
+    type: 'UPDATE_INVOICE_TOTAL',
+    invoice,
+    add
   };
 }
 
@@ -111,4 +120,4 @@ const confirmInvoice = (attributes) => {
   };
 };
 
-export { listInvoice, getInvoice, createInvoice, updateInvoice, confirmInvoice };
+export { listInvoice, getInvoice, createInvoice, updateInvoice, confirmInvoice, updateInvoiceTotalAction };

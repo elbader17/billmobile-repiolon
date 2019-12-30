@@ -105,7 +105,7 @@ class NewCustomer extends React.Component {
                   onChangeText={this.setIdentification}
                   onFocus={()=>{this.setState({error: undefined})}}
                   keyboardType='numeric'
-                  tintColor={COLORS.blueMedium}
+                  tintColor={COLORS.blue}
                   textColor= {COLORS.blue}
                   baseColor={COLORS.grayDark}
                   lineWidth={1}
@@ -124,7 +124,7 @@ class NewCustomer extends React.Component {
                   value={this.state.name}
                   onChangeText={this.setName}
                   textColor= {COLORS.blue}
-                  tintColor={COLORS.blueMedium}
+                  tintColor={COLORS.blue}
                   baseColor={COLORS.grayDark}
                   lineWidth={1}
                   labelFontSize={15}
@@ -140,7 +140,7 @@ class NewCustomer extends React.Component {
               TouchableComponent={TouchableOpacity}
               onPress={this.saveCustomer}
               buttonStyle={ style.buttonSave }
-              titleStyle={ style.textBold18White }
+              titleStyle={ style.textBold16White }
               loading={this.state.loading}
             /> 
           </View>

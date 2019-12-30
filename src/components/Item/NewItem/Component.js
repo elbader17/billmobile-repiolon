@@ -136,7 +136,7 @@ class NewItem extends React.Component {
               TouchableComponent={TouchableOpacity}
               onPress={ this.saveItem }
               buttonStyle={ style.buttonSave }
-              titleStyle={ style.textBold18White }
+              titleStyle={ style.textBold16White }
               loading={this.state.loading}
             /> 
           </View> 

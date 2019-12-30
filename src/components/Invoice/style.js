@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
     paddingHorizontal: 15,
     borderBottomWidth: 1,
-    borderBottomColor: COLORS.blueMedium
+    borderBottomColor: COLORS.blue
   },
   boxInfoCustomerSummary: {
     //backgroundColor: 'gray',
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
     paddingHorizontal: 5,
     borderTopWidth: 1,
-    borderTopColor: COLORS.blueMedium
+    borderTopColor: COLORS.blue
   },
   boxTotalSummary: {
     justifyContent: 'flex-end',
@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
     paddingHorizontal: 10,
     borderTopWidth: 1,
-    borderTopColor: COLORS.blueMedium
+    borderTopColor: COLORS.blue
   },
   borderVoucher: {
     borderWidth: 1,
@@ -205,10 +205,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 5
   },
   buttonEditSummary: {
-    backgroundColor: 'transparent',
+    backgroundColor: COLORS.blue,
     borderRadius: 20,
-    borderWidth: 1,
-    borderColor: COLORS.blueMedium,
     width: wp('25%'),
     height: hp('5%'),
     alignItems: 'center',
@@ -319,8 +317,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     backgroundColor: COLORS.blue,
     borderRadius: 25,
-    //borderWidth: 0.5,
-    //borderColor: COLORS.blue,
+    borderWidth: 0,
   },
   buttonAddCustomer: {
     backgroundColor: COLORS.blue,
@@ -334,7 +331,7 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.pRegular,
     fontSize: FONTS.size14,
     color: COLORS.white,
-    marginVertical: -5
+    top: 1
   },
   textRegular12BlueLight: {
     fontFamily: FONTS.pRegular,
@@ -385,8 +382,8 @@ const styles = StyleSheet.create({
   textBold16White: {
     fontFamily: FONTS.pSemiBold,
     fontSize: FONTS.size16,
-    color: COLORS.white,
-    marginBottom: -3
+    color: COLORS.blue,
+    top: 1
   },
   textBold14White: {
     fontFamily: FONTS.pSemiBold,
@@ -400,10 +397,10 @@ const styles = StyleSheet.create({
     color: COLORS.blueMedium,
     top: 2
   },
-  textLight18BlueMedium: {
+  textLight18Blue: {
     fontFamily: FONTS.pRegular,
     fontSize: FONTS.size18,
-    color: COLORS.blueMedium,
+    color: COLORS.blue,
     top: 2
   },
   textLight18GrayDark: {
@@ -430,7 +427,7 @@ const styles = StyleSheet.create({
   textLight14BlueMedium: {
     fontFamily: FONTS.pExtraLight,
     fontSize: FONTS.size14,
-    color: COLORS.blueMedium,
+    color: COLORS.blue,
     top: 2
   },
   textLight16GrayDark: {
@@ -447,6 +444,11 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.pRegular,
     fontSize: FONTS.size14,
     color: COLORS.blueMedium,
+  },
+  textRegular14Blue: {
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size14,
+    color: COLORS.blue,
   },
   textRegular14Gray: {
     fontFamily: FONTS.latoRegular,

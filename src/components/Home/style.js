@@ -42,16 +42,16 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.whiteGray,
     marginHorizontal: 10,
     marginBottom: 10,
-    marginTop: 3,
-    paddingVertical: 5,
-    paddingHorizontal: 13,
-    borderWidth: 0.5,
+    paddingHorizontal: 5,
+    
     borderRadius: 10,
     borderColor: COLORS.blue,
     justifyContent: 'center',
   },
   listCustomers: {
-    borderBottomWidth: 0.5,
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
+    borderRadius: 0,
     borderColor: COLORS.blue
   },
   lineBlue: {
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
   inLineCenter: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between'
+    justifyContent: 'center'
   },
   inLineSpaceAround: {
     flexDirection: 'row',
@@ -103,6 +103,12 @@ const styles = StyleSheet.create({
   textRegular16GrayDark: {
     fontFamily: FONTS.pExtraLight,
     fontSize: FONTS.size16,
+    color: COLORS.grayDark,
+    top: 3
+  },
+  textRegular14GrayDark: {
+    fontFamily: FONTS.pExtraLight,
+    fontSize: FONTS.size14,
     color: COLORS.grayDark,
     top: 3
   },

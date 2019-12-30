@@ -48,7 +48,7 @@ class Confirmation extends React.Component {
 
         <View style={style.containerBody}>
           <View style={style.containerHeader}>
-            <Text style={style.textRegular18BlueMedium}>
+            <Text style={style.textRegular18Blue}>
               Verificación de Cuenta
             </Text>
             <Text style={style.textRegular12GrayDark}>
@@ -57,12 +57,14 @@ class Confirmation extends React.Component {
           </View>
           <View style={style.containerInputs}>
             <TextField
+              titleTextStyle={style.textRegular12GrayDark}
+              labelTextStyle={style.textRegular12GrayDark}
               label="Email a Verificar"
               value= { this.state.confirmationEmail }
               onChangeText={ (value) => this.setState({ confirmationEmail: value }) }
-              baseColor={COLORS.gray}
-              tintColor={COLORS.blueMedium}
-              textColor= {COLORS.grayDark}
+              baseColor={COLORS.grayDark}
+              tintColor={COLORS.blue}
+              textColor= {COLORS.blue}
               labelFontSize={12}
               lineWidth={1}
               inputContainerPadding={6}
@@ -71,43 +73,42 @@ class Confirmation extends React.Component {
             />
               
             <TextField
+              titleTextStyle={style.textRegular12GrayDark}
+              labelTextStyle={style.textRegular12GrayDark}
               title = 'Número de 6 Dígitos'
               label="Código de Confirmación"
               onChangeText={ (value) => this.setState({ confirmationCode: value }) }
               keyboardType='numeric'
-              baseColor={COLORS.gray}
-              tintColor={COLORS.blueMedium}
-              textColor= {COLORS.grayDark}
+              baseColor={COLORS.grayDark}
+              tintColor={COLORS.blue}
+              textColor= {COLORS.blue}
               labelFontSize={12}
               lineWidth={1}
               inputContainerPadding={6}
               error={this.state.errorName}
               errorColor={COLORS.redMedium}
-            />
+              />
+            </View>
+            <View style={style.containerButtons}>
+              <Button
+                title='Verificar Cuenta'
+                testID={'submitConfirmation'}
+                onPress={ this.handleConfirmationCode }
+                buttonStyle={[style.buttonSignTwo,{marginBottom: 15}]}
+                titleStyle={ style.textRegular16White }
+                disabled={ !this.validateData() }
+                loading = {this.state.loading}
+              />
 
-            <Button
-              title='Verificar Cuenta'
-              testID={'submitConfirmation'}
-              onPress={ this.handleConfirmationCode }
-              buttonStyle={ style.buttonVerify }
-              titleStyle={ style.textRegular16White }
-              disabled={ !this.validateData() }
-              loading = {this.state.loading}
-              ViewComponent={LinearGradient}
-              linearGradientProps={COLORGB2}
-            />
+              <Button
+                title='Cancelar'
+                testID={'submitConfirmation'}
+                onPress={ this.navigateAuth }
+                buttonStyle={ style.buttonSignTwo }
+                titleStyle={ style.textRegular16White }
+              />
+            </View>
 
-            <Button
-              title='Cancelar'
-              testID={'submitConfirmation'}
-              onPress={ this.navigateAuth }
-              buttonStyle={ style.buttonVerify }
-              titleStyle={ style.textRegular16White }
-              ViewComponent={LinearGradient}
-              linearGradientProps={COLORGB2}
-            />
-
-          </View>
         </View>    
      
       </View>

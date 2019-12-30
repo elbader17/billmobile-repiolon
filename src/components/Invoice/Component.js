@@ -1,6 +1,6 @@
 import React from 'react';
+import DatePicker from 'react-native-datepicker';
 import { View, Text, Modal, TouchableOpacity, Alert } from 'react-native';
-import DateTimePicker from 'react-native-modal-datetime-picker';
 import { Button } from "react-native-elements";
 import { showMessage } from "react-native-flash-message";
 import ModalVoucherTYpe from './ModalVoucherType';
@@ -26,12 +26,10 @@ class Invoice extends React.Component {
       invoiceDate: new Date(this.props.invoiceDate),
       fcIdentification: undefined,
       showCustomer: fiscalIdentity.name != '',
-      isDateTimePickerVisible: false,
-      isDateTimeVisible:false,
       modalVisible: false, //Show Modal Voucher Type
       loading: false, //For buttons
       quantity: 1, //Cant items
-      validIdentity: true,
+      validIdentity: true
     }
   }
 
@@ -45,8 +43,6 @@ class Invoice extends React.Component {
   };
 
   setModalVisible = visible => this.setState({modalVisible: visible});
-  showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true });
-  hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
   setFcIdentification = value => this.setState({ fcIdentification: value, validIdentity: true });
   setShowCustomer = value => this.setState({ showCustomer: value });
   setLoading = (bool) => this.setState({ loading: bool });
@@ -88,7 +84,6 @@ class Invoice extends React.Component {
   
   handleDatePicked = (date) => {
     this.setState({ invoiceDate: date });
-    this.hideDateTimePicker();
     this.createOrUpdateInvoice({ invoiceDate: date });
   }
 
@@ -182,18 +177,20 @@ class Invoice extends React.Component {
                   <Text style={[style.textBold12Blue, {padding: 3}]}>
                     Fecha de Emisión
                   </Text>
-                  <Button
-                    title={date}
-                    TouchableComponent={TouchableOpacity}
-                    onPress={this.showDateTimePicker}
-                    buttonStyle={style.buttonDate}
-                    titleStyle={style.textRegular16White}
-                  />
-                  <DateTimePicker
-                    isVisible={this.state.isDateTimePickerVisible}
-                    onConfirm={this.handleDatePicked}
-                    onCancel={this.hideDateTimePicker}
+    
+                  <DatePicker
+                    style={{width: '100%'}}
                     date={this.state.invoiceDate}
+                    mode="date"
+                    format="DD-MM-YYYY"
+                    minDate="01-12-2019"
+                    //maxDate={this.state.invoiceDate}
+                    showIcon={false}
+                    customStyles={{
+                      dateText: style.textRegular12White,
+                      dateInput: style.buttonDate
+                    }}
+                    onDateChange={(date) => {this.handleDatePicked(date)}}
                   />
                 </View>
               </View>

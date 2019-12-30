@@ -54,6 +54,7 @@ const signUp = (password, email, attributes) => {
       validationData: [],
     })
       .then((data) => {
+        console.log(data)
         if (data.userConfirmed)
           return dispatch(userSignedUp(email, password));
         else {

@@ -4,6 +4,7 @@ import {
   LIST_INVOICE,
   GET_INVOICE,
   UPDATE_INVOICE,
+  CONFIRM_INVOICE
 } from './constants';
 import {
   CREATE_INVOICE_ITEM,
@@ -22,6 +23,7 @@ function defaultCurrentInvoice() {
     voucherType: 'fc',
     id: null,
     total: 0.0,
+    url: ''
   };
 }
 
@@ -31,11 +33,20 @@ const initialState = {
 };
 
 function setCurrentInvoice({ draftState, invoice }) {
-  const { invoice_date, invoice_type, total } = invoice.attributes;
+  const { invoice_date, invoice_type, total, url } = invoice.attributes;
   draftState.currentInvoice.id = invoice.id;
   draftState.currentInvoice.invoiceDate = new Date(invoice_date);
   draftState.currentInvoice.voucherType = invoice_type;
   draftState.currentInvoice.total = total;
+  draftState.currentInvoice.url = url;
+  return draftState;
+}
+
+function setCurrentInvoiceTotal({ draftState, invoice, add }) {
+  const { invoice_id, price } = invoice.attributes;
+  draftState.currentInvoice.id = invoice_id;
+  if (add) draftState.currentInvoice.total = parseInt(draftState.currentInvoice.total) + parseInt(price);
+  else draftState.currentInvoice.total -= price;
   return draftState;
 }
 
@@ -119,12 +130,23 @@ export default addInvoiceReducer = (state = initialState, action) => {
           draftState,
           invoice: action.invoice,
         });
+      case 'UPDATE_INVOICE_TOTAL':
+        return setCurrentInvoiceTotal({
+          draftState,
+          invoice: action.invoice,
+          add: action.add
+        });
       case LIST_INVOICE:
         return setInvoices({
           draftState,
           invoices: action.invoices,
         });
       case GET_INVOICE:
+        return setCurrentInvoice({
+          draftState,
+          invoice: action.invoice,
+        });
+      case CONFIRM_INVOICE:
         return setCurrentInvoice({
           draftState,
           invoice: action.invoice,

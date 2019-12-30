@@ -135,9 +135,9 @@ class Home extends React.Component {
             <View style={style.scrollCustomers}>              
               
               <View style={style.inLineCenter}>
-              <View style={style.lineBlue}></View>          
+              
                 <Text style={style.textRegular12Blue}>  Clientes Recientes  </Text>
-                <View style={style.lineBlue}></View>
+              
               </View>
               
               <ScrollView style={style.listCustomers}> 

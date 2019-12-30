@@ -7,6 +7,7 @@ import {
 import {
   createInvoice,
   getInvoice,
+  updateInvoiceTotalAction
 } from '../invoices/actions';
 
 function createInvoiceItemAction(invoiceItem) {
@@ -36,7 +37,9 @@ const updateInvoiceItem = (id, values) => {
     return fetch_api(`/v1/invoice_items/${id}`, 'POST', false, 
     { resource: { ...values, invoice_id: invoiceId } })
         .then((response) => {
+           const add = true;
            dispatch(updateInvoiceItemAction(response));
+           dispatch(updateInvoiceTotalAction(response.data, add));
            return dispatch(getInvoiceItems(invoiceId));
         })
         .catch((error) => {
@@ -46,9 +49,12 @@ const updateInvoiceItem = (id, values) => {
 };
 
 const deleteInvoiceItem = (id, invoiceId) => {
-  return () => {
+  return (dispatch) => {
     return fetch_api(`/v1/invoice_items/${id}`,'DELETE', false, {resource: {invoice_id: invoiceId}})
-      .then(() => console.log('Delete OK'))
+      .then((response) => { 
+        const add = false;
+        return dispatch(updateInvoiceTotalAction(response.data, add))
+      })
       .catch((error) => console.log(error));
   };
 };
@@ -58,7 +64,6 @@ const getInvoiceItems = () => {
     const { id } = getState().invoices.currentInvoice;
     return fetch_api(`/v1/invoice_items/${id}`,'GET', false)
       .then(response => {
-        console.log('refres items');
         dispatch(setInvoiceItemsAction(response.data))
       })
       .catch(error => console.log(error));
@@ -87,6 +92,7 @@ const createInvoiceItem = ({category, name, price, quantity, item_id}) => {
       };
       return fetch_api('/v1/invoice_items', 'POST', false, { resource })
         .then((response) => {
+          console.log('mamamamama')
           dispatch(createInvoiceItemAction(response.data));
           return dispatch(getInvoice(updatedInvoiceId));
         })

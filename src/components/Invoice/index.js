@@ -14,7 +14,7 @@ const mapStateToProps = state => ({
   invoices: state.invoices.invoices
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch) => {
   return {
     addFiscalIdentityToInvoice: (name, cuit, id) => (
       dispatch(addFiscalIdentityToInvoice(name, cuit, id))

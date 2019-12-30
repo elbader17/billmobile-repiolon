@@ -39,6 +39,7 @@ const getFiscalIdentity = function () {
     });
     return instance.get('/v1/my/fiscal_identity')
       .then((response) => {
+        console.log(response)
         const { name, identification } = response.data.data.attributes;
         dispatch(setMyFiscalIdentity(name, identification));
         return response.data;

@@ -11,7 +11,8 @@ class InvoiceSummary extends React.Component {
     super(props);
     this.state = {
       impuesto: '',
-      subTotal: ''
+      subTotal: '',
+      loading: false
     };
   }
 
@@ -30,6 +31,7 @@ class InvoiceSummary extends React.Component {
   };
   
   confirmInvoice = () => {
+    this.setState({loading: true})
     const { confirmInvoice, navigation } = this.props;
     const attributes = {
       invoice_id: this.props.invoiceId,
@@ -37,7 +39,10 @@ class InvoiceSummary extends React.Component {
       state: 'confirm'
     }
     confirmInvoice(attributes)
-      .then(() => { navigation.navigate('Home') });
+      .then(() => { 
+        this.setState({loading: false});
+        navigation.navigate('Opinion') 
+      });
   }
   
   navigateToInvoice = () => { this.props.navigation.navigate('Invoice') }
@@ -83,7 +88,7 @@ class InvoiceSummary extends React.Component {
                 <View style={[style.inLineSpaceBetween, style.boxItems2]}>
                   <Text numberOfLines={1}>
                     <Text style={style.textLight14BlueMedium}>
-                      {'1 '}x{' '}
+                      {item.quantity}x{' '}
                     </Text>
                     <Text style={style.textLight14GrayDark}>
                       ${item.price}
@@ -92,7 +97,7 @@ class InvoiceSummary extends React.Component {
                 </View>
                 <View style={style.boxItems3}>
                   <Text style={style.textLight16GrayDark}>
-                    ${item.price}
+                    ${item.price * item.quantity}
                   </Text>
                 </View>
               </View>
@@ -111,8 +116,8 @@ class InvoiceSummary extends React.Component {
           
           <View style={style.boxHeaderSummary}>
             <View style={style.inLineSpaceBetween}>
-              <Text style={style.textRegular16BlueMedium}>{"Factura-C"}</Text>
-              <Text style={style.textRegular16BlueMedium}>{presentInvoiceDate(this.props.invoiceDate)}</Text>
+              <Text style={style.textRegular16Blue}>{"Factura-C"}</Text>
+              <Text style={style.textRegular16Blue}>{presentInvoiceDate(this.props.invoiceDate)}</Text>
             </View>
           </View>
           
@@ -130,9 +135,9 @@ class InvoiceSummary extends React.Component {
                 TouchableComponent={TouchableOpacity}
                 onPress={ this.navigateToInvoice}
                 buttonStyle={ style.buttonEditSummary }
-                titleStyle={ style.textRegular14BlueMedium }
+                titleStyle={ style.textRegular12White }
               />
-              <Text style={style.textLight18BlueMedium}>Total :</Text>
+              <Text style={style.textLight18Blue}>Total :</Text>
               <Text style={style.textRegular18GrayDark}>$ {this.props.invoiceTotal}</Text>
             </View>
           </View>
@@ -141,12 +146,13 @@ class InvoiceSummary extends React.Component {
 
         <View style={style.containerFooter}>
           <Button
-            title='Confirmar Factura'
+            title='Confirmar'
             testID='confirmInvoice'
             TouchableComponent={TouchableOpacity}
             onPress={ this.confirmInvoice }
             buttonStyle={ style.buttonContinue }
             titleStyle={ style.textBold16White }
+            loading={this.state.loading}
           />
         </View>
       </View>

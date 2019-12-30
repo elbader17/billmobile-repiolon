@@ -44,7 +44,7 @@ class Authentication extends React.Component {
                 
                   <View style={style.textSubLogo}>
                     <Text style={style.textMedium16Blue}>
-                      "Tu contador online"
+                      "Tu asesor contable online!"
                     </Text>
                   </View>
                 
