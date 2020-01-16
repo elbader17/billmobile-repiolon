@@ -5,7 +5,7 @@ import { Button } from "react-native-elements";
 import PropTypes from 'prop-types';
 import style from './style';
 import { COLORS } from '../../constants/colors';
-import { IconCheck, IconX } from '../../constants/icons';
+import { IconCheck, IconX, IconCustomer2 } from '../../constants/icons';
 
 const InvoiceCustomer = props => {
   const customer = props.fiscalIdentity;
@@ -18,7 +18,7 @@ const InvoiceCustomer = props => {
           <Text style={style.textRegular14GrayDark}>{identification}</Text>
           <Text style={style.textLight14BlueMedium}>| {subIdentification} |</Text> 
           <Button
-            icon={ <IconX size={18} color={COLORS.blueMedium}/> }
+            icon={ <IconX size={18} color={COLORS.blue}/> }
             onPress={ () => props.setShowCustomer(false) }
             buttonStyle={style.buttonDeleteCustomerInvoice}
             titleStyle={style.textRegular12Blue}
@@ -28,15 +28,18 @@ const InvoiceCustomer = props => {
     );
   } else {
     return (
-      <View style={style.containerFinalConsumer}>
+      <View>
         <View style={style.inLineSpaceBetween}>
-          <TextInput
-            placeholder="Ingresar Documento"
-            placeholderTextColor={COLORS.gray}
-            onChangeText={props.setFinalConsumer}
-            style={[style.textRegular12GrayDark,style.inputDNICustomer]}
-            keyboardType='numeric'
-          />
+          <View style={style.containerInputWithIcon}>
+            <IconCustomer2 color={COLORS.gray} size={20} iconStyle={{left: 2}}/>
+            <TextInput
+              placeholder="Ingresar Documento"
+              placeholderTextColor={COLORS.gray}
+              onChangeText={props.setFinalConsumer}
+              keyboardType='numeric'
+              style={style.inputWithIconName}
+            />
+          </View>
           <Button
             //title= 'Añadir'
             icon={IconCheck}

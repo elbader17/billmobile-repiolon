@@ -9,8 +9,9 @@ import {
   TextInput, 
   Modal
 } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 import { Button, Icon } from "react-native-elements";
-import { COLORS } from '../../constants/colors';
+import { COLORS, GRADIANTBLUELIGHT } from '../../constants/colors';
 import { FONTS } from '../../constants/fonts';
 
 class Opinion extends React.Component {
@@ -39,41 +40,68 @@ class Opinion extends React.Component {
   }
 
   render() {
-    const logo = require('../../images/logoBlue.png')
+    const logo = require('../../images/logoBill.png')
+    const invoice = require('../../images/invoiceok.png')
     return(
       <View style={styles.container}>
         <View style={styles.boxLogo}>
           <Image source={ logo } style={ styles.imageHeader } />
+          <LinearGradient
+            colors={ GRADIANTBLUELIGHT }
+            start={{x: 0.0, y: 1.0}} 
+            end={{x: 1.0, y: 1.0}}
+            style={styles.textSubLogo}
+          >
+            <Text style={styles.textRegular14White}>
+              Tu asesor contable online!
+            </Text>
+          </LinearGradient>  
         </View>
         <View style={styles.boxInfo}>
-          <Text style={styles.textLight18White}>
+          <Image source={ invoice } style={ styles.imageInvoice } />
+          <Text style={styles.textLight18GrayDark}>
             Comprobante creado con ¡Éxito!
           </Text>
-          <Button
-            title='Ver y Descargar Comprobante'
-            TouchableComponent={TouchableOpacity}
-            onPress={() => this.opinion()}
-            buttonStyle={ styles.buttonComprobante }
-            titleStyle={ styles.textBold14Blue }
-          />
-          <Button
-            title='Volver a Inicio'
-            TouchableComponent={TouchableOpacity}
-            onPress={() => this.props.navigation.navigate('Home')}
-            buttonStyle={[
-              styles.buttonComprobante, 
-              this.state.toBegin ? { display: 'flex'} : { display: 'none'}
-            ]}
-            titleStyle={ styles.textBold14Blue }
-          />
+          <View style={{flexDirection: 'row'}}>
+            <Button
+              title='Descargar '
+              icon = {<Icon
+                name='download'
+                type='feather'
+                color='white'
+              />}
+              iconRight
+              TouchableComponent={TouchableOpacity}
+              onPress={() => this.opinion()}
+              buttonStyle={ styles.button }
+              titleStyle={ styles.textBold14Blue }
+            />
+            <Button
+              title='Ir a Inicio'
+              TouchableComponent={TouchableOpacity}
+              onPress={() => this.props.navigation.navigate('Home')}
+              buttonStyle={[
+                styles.button, 
+                this.state.toBegin ? { display: 'flex'} : { display: 'none'}
+              ]}
+              titleStyle={ styles.textBold14Blue }
+            />
+          </View>
           
         </View>
+
         <View style={styles.boxFooter}>
-          <Text style={styles.textLight18Blue}>
-            ¡Gracias por utilizar Bill Mobile!
-          </Text>
-          <Icon type='ionicon' name="md-happy" size={25} color={COLORS.blueLight} iconStyle={{marginLeft: 5}}/>
-        </View>
+          <LinearGradient
+            colors={ GRADIANTBLUELIGHT }
+            start={{x: 0.0, y: 1.0}} 
+            end={{x: 1.0, y: 1.0}}
+            style={{flex: 1,alignItems: 'center', borderTopLeftRadius: 100, borderTopRightRadius: 100, paddingVertical: 15}}
+          >
+            <Text style={styles.textBold14Blue}>
+              ¡Gracias por utilizar Bill Mobile!
+            </Text>
+          </LinearGradient>
+        </View>   
 
         <Modal
           animationType= 'slide'
@@ -88,7 +116,6 @@ class Opinion extends React.Component {
               <TextInput
                 multiline={true}
                 placeholder='Opinión...'
-                numberOfLines={4}
                 style={styles.textInput}
                 //onChangeText={text => onChangeText(text)}
                 //value={value}
@@ -97,7 +124,7 @@ class Opinion extends React.Component {
                 title = 'Enviar'
                 TouchableComponent={TouchableOpacity}
                 onPress={() => this.showPdf()}
-                buttonStyle={ styles.buttonComprobante }
+                buttonStyle={ styles.button }
                 titleStyle={ styles.textBold14Blue }
               />
 
@@ -114,27 +141,39 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: COLORS.blue
+    backgroundColor: COLORS.white
   },
   boxLogo: {
-    flex: 0.333,
+    flex: 0.35,
     alignItems: 'center',
     justifyContent: 'center'
   },
+  textSubLogo: {
+    paddingHorizontal: 15,
+    paddingVertical: 7,
+    borderRadius: 25,
+    marginTop: 15,
+    alignItems: 'center'
+  },
   boxInfo: {
-    flex: 0.333,
+    flex: 0.5,
     alignItems: 'center',
     justifyContent: 'center',
   },
   boxFooter: {
-    flex: 0.333,
-    alignItems: 'center',
-    justifyContent: 'center',
+    flex: 0.15,
+    alignItems: 'flex-end',
     flexDirection: 'row'
   },
   imageHeader: {
-    width: 160,
-    height: 99
+    width: 200,
+    height: 120
+  },
+  imageInvoice: {
+    width: 120,
+    height: 120,
+    opacity: 0.5,
+    marginBottom: 10
   },
   containerModal: {
     flex: 1, 
@@ -145,58 +184,58 @@ const styles = StyleSheet.create({
     width: '70%',
     height: 80,
     marginTop: 10, 
-    justifyContent: 'flex-start',
+    //justifyContent: 'flex-start',
     borderColor: COLORS.blueLight, 
-    borderWidth: 1,
+    borderWidth: 2,
     borderRadius: 7, 
     backgroundColor: 'white'
   },
   modal: {
     width: 400, 
     height: 250, 
-    backgroundColor: COLORS.blue, 
+    backgroundColor: COLORS.white, 
     justifyContent: 'center', 
     alignItems: 'center',
-    borderTopWidth: 1,
+    borderTopWidth: 2,
     borderColor: COLORS.blueLight
   },
   textBold14Blue: {
     fontFamily: FONTS.pSemiBold,
     fontSize: FONTS.size14,
-    color: COLORS.blue,
+    color: COLORS.white,
     alignItems: 'center',
     top: 1
   },
-  textLight18Blue: {
+  textRegular16Blue: {
     fontFamily: FONTS.pRegular,
-    fontSize: FONTS.size18,
-    color: COLORS.blueLight,
+    fontSize: FONTS.size16,
+    color: COLORS.blue,
     alignItems: 'center',
   },
-  textLight18White: {
+  textRegular14White: {
     fontFamily: FONTS.pRegular,
-    fontSize: FONTS.size18,
+    fontSize: FONTS.size14,
     color: COLORS.white,
     alignItems: 'center',
   },
-  buttonComprobante: {
-    backgroundColor: COLORS.blueLight,
-    borderWidth: 1,
-    borderRadius: 5,
-    borderColor: COLORS.blueLight,
-    marginTop: 20,
-    paddingHorizontal: 20,
-    paddingVertical: 5
+  textLight18GrayDark: {
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size18,
+    color: COLORS.grayDark,
+    alignItems: 'center',
   },
   button: {
-    marginTop: 10,
+    height: 45,
+    backgroundColor: COLORS.blueLight,
     borderWidth: 1,
-    borderColor: COLORS.blueLight,
-    backgroundColor: COLORS.blue,
-    justifyContent: 'center',
-    alignItems: 'center',
     borderRadius: 25,
-  },
+    borderColor: COLORS.blueLight,
+    marginTop: 25,
+    paddingHorizontal: 20,
+    paddingVertical: 5,
+    marginHorizontal: 10,
+    elevation: 1
+  }
 });
 
 export default Opinion;

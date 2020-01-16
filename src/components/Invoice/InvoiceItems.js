@@ -59,13 +59,14 @@ class InvoiceItems extends React.Component {
   }
 
   render() {
+    console.log(this.props.items);
     if (this.props.items.length != 0) {
       return (
         <View style={[style.containerItemsInvoice,style.inColumnSpaceBetween]}>
           <ScrollView style={style.styleScroll}>
             {this.props.items.map((item) => {
               const conditionLoading = this.state.loadingDelete && item.id === this.state.itemActive;
-              const textDelete =  this.state.loadingDelete ? COLORS.gray : COLORS.blueMedium;
+              const textDelete =  this.state.loadingDelete ? COLORS.gray : COLORS.blue;
               return (
                 <View key={item.id}>
                   <View style={[style.inLineSpaceBetween, style.line]}>
@@ -77,7 +78,7 @@ class InvoiceItems extends React.Component {
                     <View style={[style.inLine, style.boxItems2]}>
                       <Button
                         title={`${item.quantity}`}
-                        icon = {<IconX size={9} color={COLORS.blueMedium}/>}
+                        icon = {<IconX size={9} color={COLORS.blue}/>}
                         TouchableComponent={TouchableOpacity}
                         onPress={() => this.setState({
                           modalVisible: true, 
@@ -85,15 +86,15 @@ class InvoiceItems extends React.Component {
                           itemQuantityOld: item.quantity,
                           itemQuantityNew: item.quantity
                         })}
-                        buttonStyle={style.buttonCantProduct}
-                        titleStyle={style.textRegular12BlueMedium}
+                        buttonStyle={item.category === 'product' ? style.buttonCantProduct : {display: 'none'}}
+                        titleStyle={style.textRegular12Blue}
                       />
                       <Button
                         icon = {<IconX size={13} color={textDelete}/>}
                         TouchableComponent={TouchableOpacity}
                         onPress={() => this.deleteItem(item.id, this.props, item.name)}
                         buttonStyle={[style.buttonCantProduct, {marginLeft: 5}]}
-                        titleStyle={style.textRegular12BlueMedium}
+                        titleStyle={style.textRegular12Blue}
                         disabled={this.state.loadingDelete}
                         loading={conditionLoading}
                         disabledStyle={style.buttonCantProductDisabled}
@@ -104,7 +105,7 @@ class InvoiceItems extends React.Component {
                         TouchableComponent={TouchableOpacity}
                         onPress={() => this.props.navigateToEditItem(item)}
                         buttonStyle={[style.buttonCantProduct, {marginLeft: 5}]}
-                        titleStyle={style.textRegular12BlueMedium}
+                        titleStyle={style.textRegular12Blue}
                       />
                     </View>
                     <View style={style.boxItems3}>
@@ -120,8 +121,8 @@ class InvoiceItems extends React.Component {
     
           <View style={style.boxItemsInvoiceTotal}>
             <View style={style.inLineSpaceBetween}>
-              <Text style={style.textRegular16BlueMedium}>TOTAL</Text>
-              <Text style={style.textRegular16BlueMedium}>$ {this.props.total}</Text>
+              <Text style={style.textRegular16Blue}>TOTAL</Text>
+              <Text style={style.textRegular16Blue}>$ {this.props.total}</Text>
             </View>
           </View>
 
@@ -132,6 +133,9 @@ class InvoiceItems extends React.Component {
           >
             <View style={style.containerModalCant}>
               <View style={style.modalCant}>
+                <Text style={[style.textRegular12White, {marginBottom: 7}]}>
+                  Indique la cantidad del Producto
+                </Text>
                 <NumericInput 
                   initValue={this.state.itemQuantityOld}
                   onChange={value => this.setState({itemQuantityNew: value})}
@@ -148,7 +152,7 @@ class InvoiceItems extends React.Component {
                   TouchableComponent={TouchableOpacity}
                   onPress={this.updateQuantity}
                   buttonStyle={style.buttonOkModalCant}
-                  titleStyle={style.textRegular12BlueLight}
+                  titleStyle={style.textBold14White}
                   loading={this.state.loading}
                 />
               </View>
@@ -161,8 +165,8 @@ class InvoiceItems extends React.Component {
     else return (
       <View style={style.containerItemsInvoice}>
         <View style={{marginVertical: 15, alignItems:'center'}}>
-          <Text style={style.textRegular14BlueMedium}>
-            No se han añadido Productos/Servicios
+          <Text style={style.textLight14GrayDark}>
+            ¡No se han añadido Productos/Servicios!
           </Text>
         </View>
       </View>

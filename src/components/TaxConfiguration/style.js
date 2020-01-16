@@ -16,29 +16,96 @@ const styles = StyleSheet.create({
   containerFooter: {
     flex: 0.15,
     alignItems: 'center',
+    justifyContent: 'center'
+  },
+  containerButtonKey: {
+    marginTop: 20,
+    alignItems: 'center'
+  },
+  containerInputWithIcon: {
+    height: 45,
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderWidth: 1,
+    paddingHorizontal: 5,
+    borderColor: COLORS.gray,
+    borderRadius: 7,
+    marginTop: 10,
+    marginBottom: 3
+  },
+  inputWithIcon: {
+    flex: 1,
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size14,
+    paddingBottom: 7,
+    color: COLORS.grayDark,
+    paddingLeft: 7
   },
   image: {
     width: wp('55%'),
     height: hp('18%'),
-    marginVertical: 50
+    marginBottom: 60,
+    marginTop: 40
+  },
+  containerModal: {
+    flex: 1, 
+    justifyContent:'flex-end', 
+    alignItems: 'center'
+  },
+  modal: {
+    width: '100%', 
+    height: hp('85%'),
+    borderTopWidth: 1,
+    backgroundColor: COLORS.white, 
+    justifyContent: 'center', 
+    alignItems: 'center'
+  },
+  textareaContainer: {
+    width: '90%',
+    height: 120,
+    borderRadius: 7,
+    borderWidth: 0.5,
+    borderColor: COLORS.gray,
+    padding: 5,
+    marginBottom: 15,
+    backgroundColor: COLORS.grayLight,
+  },
+  textarea: {
+    textAlignVertical: 'top',  // hack android
+    height: 90,
+    fontFamily: FONTS.pExtraLight,
+    fontSize: FONTS.size14,
+    color: COLORS.grayDark,
   },
   button: {
     width: wp('90%'),
-    height: hp('7.5%'),
+    height: hp('7%'),
+    borderRadius: 25,
+    backgroundColor: COLORS.blueLight,
+    elevation: 1
+  },
+  buttonOkModal: {
+    width: wp('90%'),
+    height: hp('7%'),
+    borderRadius: 25,
+    marginVertical: 10,
+    backgroundColor: COLORS.blue,
+    elevation: 1
+  },
+  buttonCancelModal: {
+    width: 120,
+    height: hp('7%'),
+    marginTop: 10,
+    borderRadius: 25,
+    backgroundColor: COLORS.blueLight
+  },
+  buttonKeys: {
+    width: wp('85%'),
+    height: hp('7%'),
     backgroundColor: COLORS.blue,
     borderRadius: 25,
-    marginTop: 15,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  buttonOmitir: {
-    width: wp('85%'),
-    height: hp('5%'),
-    backgroundColor: COLORS.gray,
-    borderRadius: 25,
-    marginTop: 15,
-    justifyContent: 'center',
-    alignItems: 'center'
+    elevation: 1,
+    marginBottom: 5,
   },
   textRegular18White: {
     fontFamily: FONTS.latoRegular,
@@ -49,13 +116,13 @@ const styles = StyleSheet.create({
   textRegular18Blue: {
     fontFamily: FONTS.pSemiBold,
     fontSize: FONTS.size18,
-    color: COLORS.blue,
+    color: COLORS.blueMedium,
     textAlign: 'center'
   },
   textLight18Blue: {
-    fontFamily: FONTS.pExtraLight,
-    fontSize: FONTS.size16,
-    color: COLORS.blue,
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size14,
+    color: COLORS.grayDark,
     textAlign: 'center',
     marginTop: 15
   },
@@ -73,10 +140,23 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     top: 1
   },
+  textBold16White: {
+    fontFamily: FONTS.pSemiBold,
+    fontSize: FONTS.size16,
+    color: COLORS.white,
+    textAlign: 'center',
+    top: 2
+  },
   textRegular16White: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size16,
     color: COLORS.white,
+    textAlign: 'center'
+  },
+  textRegular16GrayDark: {
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size16,
+    color: COLORS.grayDark,
     textAlign: 'center'
   },
   textRegular12GrayDark: {
@@ -85,11 +165,29 @@ const styles = StyleSheet.create({
     color: COLORS.grayDark,
     textAlign: 'center'
   },
+  textRegular12Blue: {
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size12,
+    color: COLORS.blue,
+    textAlign: 'center'
+  },
+  textRegular12BlueMedium: {
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size12,
+    color: COLORS.blueMedium,
+    textAlign: 'center'
+  },
+  textRegular12Red: {
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size12,
+    color: 'red',
+    textAlign: 'center'
+  },
   headerText: {
     fontFamily: FONTS.pRegular,
     fontSize: FONTS.size16,
     fontWeight: 'normal',
-    color: COLORS.white,
+    color: COLORS.blue,
     top: 2
   }
 });

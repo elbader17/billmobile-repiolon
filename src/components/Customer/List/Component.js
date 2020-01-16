@@ -1,11 +1,9 @@
 import React from 'react';
 import { View, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import SearchInput, { createFilter } from 'react-native-search-filter';
-import LinearGradient from 'react-native-linear-gradient';
 import { Button } from "react-native-elements";
-import { COLORS, GRADIANTBLUE2, COLORGBL } from '../../../constants/colors';
-import { IconBack, IconMore } from '../../../constants/icons';
-import { XY } from '../../../constants/gradientCoord';
+import { COLORS } from '../../../constants/colors';
+import { IconBack, IconSearch } from '../../../constants/icons';
 import { orderByName } from '../../../utils/functions';
 import ListCustomers from './ListCustomers';
 import LoadingIndicator from '../../Loading';
@@ -27,7 +25,6 @@ class CustomerList extends React.Component {
   static navigationOptions = ({navigation}) => {
     return {
       title: 'Listado de Clientes',
-      headerStyle: { backgroundColor: COLORS.blue, elevation: 0 },
       headerTitleStyle: style.headerText,
       headerTintColor: 'white',
       headerLeft: (
@@ -45,7 +42,6 @@ class CustomerList extends React.Component {
   componentWillMount() {
     this.props.navigation.setParams({type: this.props.type}); //List for collection or invoice
   }
-
   componentDidMount() {
     this.props.getCustomerList()
      .then(() => { this.setState({loading: false}) })
@@ -78,8 +74,7 @@ class CustomerList extends React.Component {
         },
       ],
       {cancelable: false},
-    );
-    
+    ); 
   }
   
   navigateToNewCustomer = () => {
@@ -98,8 +93,6 @@ class CustomerList extends React.Component {
     else this.props.navigation.navigate('EditInvoiceCustomer', { customer });
   }
 
-  renderLoading = () => (<LoadingIndicator/>);
-
   renderCustomers() {
     const customers = this.props.customers.slice().sort(orderByName);
     const filteredCustomer = customers.filter(
@@ -116,17 +109,22 @@ class CustomerList extends React.Component {
       />
     );
   }
+  
+  renderLoading = () => (<LoadingIndicator/>);
 
   render() {
     return(
       <View style={style.container}>
         <View style={style.containerBody}>
-          <SearchInput 
-            onChangeText={(term) => { this.setState({customerInputSearch: term}) }} 
-            placeholder="Buscar cliente/s"
-            placeholderTextColor={COLORS.grayDark}
-            style={ style.search }
-          />
+          <View style={style.containerSearch}>
+            {IconSearch}
+            <SearchInput 
+              onChangeText={(term) => { this.setState({customerInputSearch: term}) }} 
+              placeholder="Buscar cliente/s"
+              placeholderTextColor={COLORS.grayDark}
+              style={ style.search }
+            />
+          </View>
           <View style={style.boxCustomer}>
             <ScrollView> 
               {this.state.loading ? this.renderLoading() : this.renderCustomers()}
@@ -140,7 +138,7 @@ class CustomerList extends React.Component {
               title='Nuevo Cliente'
               TouchableComponent={TouchableOpacity}
               onPress={ this.navigateToNewCustomer }
-              buttonStyle={ style.buttonNew }
+              buttonStyle={ style.buttonPrimary }
               titleStyle={ style.textBold16White }
             />
           </View>

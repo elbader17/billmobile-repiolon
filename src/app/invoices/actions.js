@@ -57,7 +57,10 @@ const createInvoice = (invoiceDate, voucherType) => {
   };
   return (dispatch) => {
     return fetch_api('/v1/invoices', 'POST', false, { resource })
-      .then((response) => dispatch(createInvoiceAction(response.data)))
+      .then((response) => {
+        console.log(response);
+        dispatch(createInvoiceAction(response.data))
+      })
       .catch((error) => console.log(error.response));
   };
 };
@@ -93,6 +96,7 @@ const getInvoice = (id) => {
   return (dispatch) => {
     return fetch_api(`/v1/invoices/${id}`, 'GET', false)
       .then((response) => {
+        console.log(response);
         dispatch(getInvoiceAction(response.data));
       })
       .catch((error) => {

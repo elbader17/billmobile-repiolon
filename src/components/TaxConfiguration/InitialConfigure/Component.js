@@ -1,9 +1,6 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity} from 'react-native';
 import { Button } from "react-native-elements";
-import LinearGradient from 'react-native-linear-gradient';
-import { GRADIANTBLUE2, COLORGBL } from '../../../constants/colors';
-import { XY } from '../../../constants/gradientCoord';
 import style from '../style';
 
 class InitialConfiguration extends React.Component{
@@ -21,7 +18,7 @@ class InitialConfiguration extends React.Component{
   }
     
   render() {
-    const logo = require('../../../images/logoBill1.png')
+    const logo = require('../../../images/logoBill.png')
     return(
       <View style={style.container}>
 
@@ -46,7 +43,7 @@ class InitialConfiguration extends React.Component{
             TouchableComponent={TouchableOpacity}
             onPress={ this.navigateTaxConfiguration }
             buttonStyle={ style.button }
-            titleStyle={ style.textRegular14white }
+            titleStyle={ style.textBold16White }
             disabledTitleStyle={ style.textRegular14Gray }
           />
 

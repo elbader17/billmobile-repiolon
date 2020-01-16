@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import SignIn from './Component';
 import { signIn } from '../../../app/authentication/actions';
-import { getFiscalIdentity } from '../../../app/user_service/actions';
 
 const mapStateToProps = (state) => {
   return {
@@ -13,8 +12,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    signIn: (email, password) => dispatch(signIn(email, password)),
-    getFiscalIdentity: () => dispatch(getFiscalIdentity()),
+    signIn: (email, password) => dispatch(signIn(email, password))
   };
 }
 

@@ -12,7 +12,7 @@ import {
   messageItemsIncomplete, 
   messageCustomerIncomplete 
 } from '../../utils/messagesNotifications';
-import { IconDocument, IconAddCustomer, IconMore } from '../../constants/icons';
+import { IconDocument, IconAddCustomer, IconMore, IconBottom } from '../../constants/icons';
 import { VOUCHER_TYPES } from '../../constants/invoice';
 import style from './style';
 
@@ -36,7 +36,6 @@ class Invoice extends React.Component {
   static navigationOptions = () => {
     return {
       title: 'Generación de Comprobante',
-      headerStyle: style.headerStyle,
       headerTitleStyle: style.headerText,
       headerLeft: IconDocument
     }  
@@ -158,23 +157,25 @@ class Invoice extends React.Component {
       <View style={style.container}>
         
           <View style={style.containerBody}>
-            
-            <View style={style.containerReceptor}>
-              <View style={style.inLineSpaceBetween}>
+            <View style={style.containerInvoiceHeader}>
+              
+              <View style={[style.inLineSpaceBetween,{margin: 7}]}>
                 <View style={style.boxVoucher}>
-                  <Text style={[style.textBold12Blue, {padding: 3}]}>
+                  <Text style={[style.textRegular12GrayDark,{marginLeft: 7}]}>
                     Tipo de Comprobante
                   </Text>
                   <Button
                     title={this.presentVoucherType()}
+                    icon={IconBottom}
+                    iconRight
                     TouchableComponent={TouchableOpacity}
                     onPress={() => {this.setModalVisible(true)}}
                     buttonStyle={style.buttonVoucher}
-                    titleStyle={style.textRegular16White}
+                    titleStyle={style.textRegular14White}
                   />
                 </View>
                 <View style={style.boxDate}>
-                  <Text style={[style.textBold12Blue, {padding: 3}]}>
+                  <Text style={[style.textRegular12GrayDark,{textAlign: 'center'}]}>
                     Fecha de Emisión
                   </Text>
     
@@ -187,48 +188,52 @@ class Invoice extends React.Component {
                     //maxDate={this.state.invoiceDate}
                     showIcon={false}
                     customStyles={{
-                      dateText: style.textRegular12White,
+                      dateText: style.textRegular14White,
                       dateInput: style.buttonDate
                     }}
                     onDateChange={(date) => {this.handleDatePicked(date)}}
                   />
                 </View>
               </View>
-          
-              <Text style={[style.textBold12Blue, {padding: 3, marginTop: 8}]}>
+
+            </View>
+            
+            <Text style={[style.textRegular12GrayDark, {textAlign:'center', marginTop: 5}]}>
                 Datos del Receptor
-              </Text>
-              <View style={[style.containerCustomers,style.inColumnSpaceBetween]}>
-                <View style={style.inLineSpaceBetween}>
-                  <View style={style.textConsumerFinal}>
-                    <Text style={style.textLight14Blue}>{typeCustomer}</Text>
-                  </View>
-                  <Button
-                    title='Otro Cliente'
-                    testID='addCustomer'
-                    TouchableComponent={TouchableOpacity}
-                    icon={IconAddCustomer}
-                    onPress={ this.navigateClient }
-                    buttonStyle={style.buttonAddCustomer}
-                    titleStyle={style.textRegular12White}
-                  />
-                </View>
-                
-                <View style={{height: 7, left: 5, display: displayDni }}>
-                  <Text style={style.textRegular12Red}>
-                    Documento Inválido
-                  </Text>
-                </View>
-                
-                { this.renderCustomer() }
-              
+            </Text>
+            <View style={style.containerInvoiceBody}>
+          
+              <Text style={style.textRegular14Blue}>
+                {typeCustomer}
+              </Text>    
+                       
+              <View style={{display: displayDni }}>
+                <Text style={style.textRegular12Red}>
+                  Documento Inválido
+                </Text>
               </View>
+                
+              { this.renderCustomer() }
+              
+              <Button
+                title=' Cambiar Cliente'
+                testID='addCustomer'
+                TouchableComponent={TouchableOpacity}
+                icon={IconAddCustomer}
+                onPress={ this.navigateClient }
+                buttonStyle={style.buttonAddCustomer}
+                titleStyle={style.textRegular14White}
+              />
+            </View>
 
-              <Text style={[style.textBold12Blue, {padding: 3, marginTop: 8}]}>
-                Detalle Producto/Servicio
-              </Text>
-
-              {this.renderViewItemsAdd()}
+            <Text style={[style.textRegular12GrayDark, {textAlign:'center', marginTop: 5}]}>
+                Detalle Producto / Servicio
+            </Text>
+            <View style={style.containerInvoiceFooter}>
+              
+              <View>
+                {this.renderViewItemsAdd()}
+              </View>
 
               <Button
                 title=' Agregar Producto/Servicio'
@@ -236,12 +241,13 @@ class Invoice extends React.Component {
                 onPress={ this.navigateAddItems }
                 icon={IconMore}
                 buttonStyle={style.buttonAdd}  
-                titleStyle={ style.textRegular16White }
+                titleStyle={ style.textRegular14White }
                 disabledStyle={style.buttonAddDisabled}
                 disabledTitleStyle = { style.textRegular16GrayLight }
               />
 
             </View>
+            
           </View>
 
           <View style={style.containerFooter}>

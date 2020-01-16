@@ -1,20 +1,20 @@
 import { StyleSheet } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import { METRICS } from '../../constants/metrics';
 import { COLORS } from '../../constants/colors';
 import { FONTS } from '../../constants/fonts';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: COLORS.grayLight
   },
   containerBody: {
     flex: 0.87,
-    paddingTop: 12
+    paddingTop: 8
   }, 
   containerFooter: {
     flex: 0.13,
-    justifyContent: 'flex-end'
+    justifyContent: 'center'
   },
   containerInputs: {
     flex: 1,
@@ -24,47 +24,43 @@ const styles = StyleSheet.create({
   boxCustomer: {
     flex: 1,
     backgroundColor: COLORS.white,
-    borderColor: COLORS.gray,
-    borderBottomWidth: 0.5,
-    paddingTop: 10,
-    borderTopLeftRadius: 30,
-    borderTopRightRadius: 30,
-    paddingHorizontal: 12
+    borderRadius: 7,
+    paddingTop: 5,
+    marginHorizontal: 10, 
+    elevation: 1
   },
   boxInfoCustomer: {
-    paddingHorizontal: 10,
+    paddingHorizontal: 12,
     paddingVertical: 10,
     justifyContent: 'center',
     marginBottom: 5,
-    borderColor: COLORS.gray,
+    borderColor: COLORS.grayLight,
     borderBottomWidth: 0.5,
   },
   inputPicker: {
-    height: 35,
-    borderBottomWidth: 1,
-    borderBottomColor: COLORS.grayDark,
+    height: 45,
+    borderWidth: 1,
+    borderRadius: 7,
+    borderColor: COLORS.gray
   },
   picker: {
     flex: 1,
-    justifyContent: 'center',
-    color: COLORS.blue,
-    marginVertical: 0,
-    marginLeft: -8,
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size14,
+    paddingBottom: 7,
+    color: COLORS.grayDark,
+    paddingLeft: 7
   },
   search: {
+    width: wp('80%'),
     backgroundColor: COLORS.white,
-    width: wp('90%'),
-    height: hp('6%'),
-    paddingLeft: 18,
-    alignSelf: 'center',
+    paddingLeft: 10,
+    alignItems: 'center',
     paddingVertical: 5,
     fontFamily: FONTS.pExtraLight,
     fontSize: FONTS.size14,
     paddingBottom: 3,
-    color: COLORS.blue,
-    borderWidth: 1,
-    borderRadius: 25,
-    borderColor: COLORS.gray
+    color: COLORS.grayDark
   },
   inLine:{
     flexDirection: "row",
@@ -80,21 +76,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center'
   },
-  textRegular16BlueLight: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size16,
-    color: COLORS.blueLight
-  },
-  textRegular16White: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size16,
-    color: COLORS.white,
-  },
-  textRegular14White: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size14,
-    color: COLORS.white,
-  },
   textRegular12GrayDark: {
     fontFamily: FONTS.pRegular,
     fontSize: FONTS.size12,
@@ -105,17 +86,6 @@ const styles = StyleSheet.create({
     fontSize: FONTS.size12,
     color: COLORS.gray,
   },
-  textLight14BlueLight: {
-    fontFamily: FONTS.latoLight,
-    fontSize: FONTS.size14,
-    color: COLORS.blueLight,
-  },
-  textBold18White: {
-    fontFamily: FONTS.pRegular,
-    fontSize: FONTS.size18,
-    color: COLORS.white,
-    top: 2,
-  },
   textRegular16GrayDark: {
     fontFamily: FONTS.pRegular,
     fontSize: FONTS.size16,
@@ -124,8 +94,13 @@ const styles = StyleSheet.create({
   textBold16White: {
     fontFamily: FONTS.pSemiBold,
     fontSize: FONTS.size16,
-    color: COLORS.blue,
+    color: COLORS.white,
     top: 1
+  },
+  textRegular12Red: {
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size12,
+    color: 'red'
   },
   textRegular14GrayDark: {
     fontFamily: FONTS.pRegular,
@@ -136,30 +111,65 @@ const styles = StyleSheet.create({
   textLight14BlueMedium: {
     fontFamily: FONTS.pExtraLight,
     fontSize: FONTS.size14,
-    color: COLORS.blueMedium,
+    color: COLORS.grayDark,
     marginVertical: -3,
   },
-  buttonNew: {
-    width: wp('100%'),
-    height: hp('7%'),
-    backgroundColor: COLORS.blueLight,
-    justifyContent: 'center',
-    alignItems: 'center'
+  containerSearch: {
+    height: 40,
+    backgroundColor: COLORS.white,
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderWidth: 1,
+    paddingHorizontal: 5,
+    borderColor: COLORS.gray,
+    borderRadius: 7,
+    marginTop: 5,
+    marginHorizontal: 10,
+    marginBottom: 10
   },
-  buttonSave: {
-    width: wp('100%'),
+  containerInputWithIcon: {
+    height: 45,
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderWidth: 1,
+    paddingHorizontal: 5,
+    backgroundColor: COLORS.white,
+    borderColor: COLORS.gray,
+    borderRadius: 7,
+    marginTop: 10,
+    marginBottom: 3
+  },
+  inputWithIconName: {
+    flex: 1,
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size14,
+    paddingBottom: 7,
+    color: COLORS.grayDark,
+    paddingLeft: 7
+  },
+  inputWithIconPrice: {
+    flex: 1,
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size16,
+    paddingBottom: 7,
+    color: COLORS.grayDark,
+  },
+  buttonPrimary: {
+    width: wp('95%'),
     height: hp('7%'),
     backgroundColor: COLORS.blueLight,
+    borderRadius: 25,
     justifyContent: 'center',
     alignItems: 'center',
+    elevation: 1
   },
   buttonEditBlue:{
     backgroundColor: 'transparent',
-    width: wp('16%'),
+    width: 70,
     height: hp('5%'),
     borderWidth: 1,
     borderColor: COLORS.blue,
-    borderRadius: 10,
+    borderRadius: 7,
     marginLeft: 3
   },
   buttonEditGray:{
@@ -168,20 +178,25 @@ const styles = StyleSheet.create({
     height: hp('5%'),
     borderWidth: 1,
     borderColor: COLORS.gray,
-    borderRadius: 10,
+    borderRadius: 7,
     marginLeft: 3
   },
   buttonDelete:{
     backgroundColor: 'transparent',
     height: hp('5%'),
     width: wp('10%'),
-    marginLeft: 3
+    marginLeft: 5,
+    borderWidth: 1,
+    borderColor: COLORS.blue,
+    borderRadius: 7
   },
   buttonDeleteDisabled:{
     backgroundColor: COLORS.grayMedium,
     height: hp('5%'),
     width: wp('10%'),
-    marginLeft: 3
+    marginLeft: 5,
+    borderRadius: 7,
+    borderColor: COLORS.grayMedium
   },
   textButtonEdit: {
     fontFamily: FONTS.pRegular,
@@ -192,7 +207,7 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.pRegular,
     fontSize: FONTS.size16,
     fontWeight: 'normal',
-    color: COLORS.white,
+    color: COLORS.blue,
     top: 3
   }
 });

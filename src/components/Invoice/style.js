@@ -6,26 +6,53 @@ import { METRICS } from '../../constants/metrics';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: COLORS.grayLight
   },
   containerSummary: {
     flex: 1,
+    backgroundColor: COLORS.grayLight
   },
   containerBody: {
-    flex: 0.87
+    flex: 0.87,
   }, 
   containerBodySummary: {
-    flex: 1,
+    flex: 0.87,
     backgroundColor: COLORS.white,
     marginTop: 15,
     marginHorizontal: 15,
     borderRadius: 7,
-    borderWidth: 0.5,
-    borderColor: COLORS.blue,
+    borderWidth: 0,
+    borderColor: COLORS.gray,
+    elevation: 2
   },
   containerFooter: {
     flex: 0.13,
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  containerInvoiceHeader: {
+    backgroundColor: COLORS.white,
+    marginHorizontal: 10,
+    marginTop: 10,
+    paddingBottom: 5,
+    borderRadius: 7,
+    elevation: 1
+  },
+  containerInvoiceBody: {
+    backgroundColor: COLORS.white,
+    marginHorizontal: 10,
+    padding: 10,
+    //marginTop: 0,
+    borderRadius: 7,
+    elevation: 1
+  },
+  containerInvoiceFooter: {
+    backgroundColor: COLORS.white,
+    marginHorizontal: 10,
+    //marginTop: 10,
+    borderRadius: 7,
+    elevation: 1,
     alignItems: 'center'
   },
   containerReceptor: {
@@ -42,16 +69,29 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
   },
   containerItemsInvoice: {
-    maxHeight: hp('26%'),
+    maxHeight: hp('22%'),
     backgroundColor: COLORS.white,
-    borderRadius: 7,
-    borderWidth: 0.5,
-    borderColor: COLORS.blue,
+    //borderBottomWidth: 0.5,
+    borderColor: COLORS.gray,
   },
-  containerFinalConsumer: {
-    height: hp('10%'),
-    justifyContent: 'center',
-    paddingTop: 0
+  containerInputWithIcon: {
+    height: 40,
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderWidth: 1,
+    paddingHorizontal: 5,
+    borderColor: COLORS.gray,
+    borderRadius: 7,
+    marginTop: 5,
+    marginBottom: 10
+  },
+  inputWithIconName: {
+    width: '75%',
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size14,
+    paddingBottom: 7,
+    color: COLORS.grayDark,
+    paddingLeft: 7,
   },
   boxVoucher: {
     width: '60%',
@@ -60,7 +100,7 @@ const styles = StyleSheet.create({
     width: '35%',
   },
   boxCustomer: {
-    marginVertical: 10,
+    marginBottom: 5,
     marginHorizontal: 15,
   },
   boxModal: {
@@ -76,12 +116,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   containerModalCant: {
-    flex: 1, 
-    justifyContent:'flex-end', 
-    alignItems: 'center'
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
   },
   modalCant: {
-    width: 400, 
+    width: wp('100%'),
+    height: hp('25%'),
+    borderTopWidth: 1,
+    borderColor: COLORS.white,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: COLORS.blue
+  },
+  modal: {
+    width: '100%', 
     height: 120, 
     backgroundColor: COLORS.blue, 
     justifyContent: 'center', 
@@ -92,7 +141,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.blue,
     borderTopWidth: 1,
     borderColor: COLORS.white,
-    paddingVertical: 15
+    paddingVertical: 10
   },
   boxVoucherType: {
     flex: 1,
@@ -104,13 +153,11 @@ const styles = StyleSheet.create({
     paddingTop: 4
   },
   boxItemsInvoiceTotal: {
-    height: hp('6%'),
+    height: hp('5.5%'),
     borderTopWidth: 0.5,
     borderColor: COLORS.grayLight,
     backgroundColor: 'transparent',
     marginHorizontal: 10,
-    paddingHorizontal: 5,
-    paddingBottom: 2,
     justifyContent:'center'
   },
   boxItems1: {
@@ -126,10 +173,10 @@ const styles = StyleSheet.create({
   boxHeaderSummary: {
     flex: 0.2,
     justifyContent: 'center',
-    marginHorizontal: 5,
-    paddingHorizontal: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: COLORS.blue
+    margin: 5,
+    padding: 10,
+    borderBottomWidth: 0.5,
+    borderBottomColor: COLORS.gray
   },
   boxInfoCustomerSummary: {
     //backgroundColor: 'gray',
@@ -139,26 +186,24 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     paddingVertical: 5,
-    marginHorizontal: 5,
+    marginHorizontal: 10,
     paddingHorizontal: 5,
-    borderTopWidth: 1,
-    borderTopColor: COLORS.blue
+    borderTopWidth: 0.5,
+    borderTopColor: COLORS.gray
   },
   boxTotalSummary: {
     justifyContent: 'flex-end',
     paddingVertical: 10,
     marginHorizontal: 5,
     paddingHorizontal: 10,
-    borderTopWidth: 1,
-    borderTopColor: COLORS.blue
+    borderTopWidth: 0.5,
+    borderTopColor: COLORS.gray
   },
   borderVoucher: {
-    borderWidth: 1,
-    borderColor: COLORS.blue,
-    borderRadius: 7,
-    paddingVertical: 2,
-    paddingHorizontal: 10,
-    backgroundColor: 'transparent'
+    backgroundColor: COLORS.blueLight,
+    borderRadius: 25,
+    paddingVertical: 5,
+    paddingHorizontal: 25
   },
   inputDNICustomer: {
     width: wp('64%'),
@@ -170,11 +215,12 @@ const styles = StyleSheet.create({
     alignContent: 'center'
   },
   styleScroll: {
-    marginHorizontal: 12,
-    marginVertical: 7
+    marginHorizontal: 5,
+    marginTop: 7
   },
   listCustomer:{
-    marginTop: 10,
+    marginTop: 5,
+    marginHorizontal: 2,
     marginBottom: 8
   },
   inLine: {
@@ -194,8 +240,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   line: {
-    paddingVertical: 3,
-    paddingHorizontal: 5
+    paddingHorizontal: 3,
+    paddingTop: 3,
+    paddingBottom: 5,
+    borderBottomWidth: 0.5,
+    borderColor: COLORS.grayLight
   },
   lineBottom: {
     borderBottomWidth: 0.5,
@@ -206,31 +255,30 @@ const styles = StyleSheet.create({
   },
   buttonEditSummary: {
     backgroundColor: COLORS.blue,
-    borderRadius: 20,
-    width: wp('25%'),
-    height: hp('5%'),
+    borderRadius: 25,
+    width: wp('27%'),
+    height: hp('5.5%'),
     alignItems: 'center',
     justifyContent: 'center',
   },
   buttonOkModalCant: {
     marginTop: 10,
     width: wp('65%'),
-    height: hp('5%'),
-    borderWidth: 1,
-    borderColor: COLORS.blueLight,
-    backgroundColor: COLORS.blue,
+    height: hp('6%'),
+    backgroundColor: COLORS.blueLight,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 25,
   },
   buttonAdd: {
-    //width: wp('90%'),
-    height: hp('7%'),
-    marginTop: 12,
+    width: wp('90%'),
+    height: hp('6%'),
+    marginBottom: 10,
     backgroundColor: COLORS.blue,
     borderRadius: 25,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    elevation: 1
   },
   buttonAddDisabled: {
     height: hp('8%'),
@@ -242,11 +290,13 @@ const styles = StyleSheet.create({
     opacity: 0.9
   },
   buttonContinue: {
-    width: wp('100%'),
+    width: wp('95%'),
     height: hp('7%'),
     backgroundColor: COLORS.blueLight,
+    borderRadius: 25,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    elevation: 1
   },
   buttonContinueDisabled: {
     width: wp('90%'),
@@ -259,20 +309,19 @@ const styles = StyleSheet.create({
     opacity: 0.9
   },
   buttonCheck: {
-    backgroundColor: COLORS.white,
-    borderWidth: 1,
-    borderColor: COLORS.blueMedium,
-    borderRadius: 7,
-    width: wp('13%'),
-    height: hp('6.5%'),
+    backgroundColor: COLORS.blueLight,
+    borderRadius: 25,
+    width: 40,
+    height: 40,
+    elevation: 1,
+    bottom: 4
   },
   buttonCheckDisabled: {
-    backgroundColor: COLORS.grayMedium,
-    borderWidth: 1,
-    borderColor: COLORS.gray,
-    borderRadius: 7,
-    width: wp('13%'),
-    height: hp('6.5%'),
+    backgroundColor: COLORS.gray,
+    borderRadius: 25,
+    width: 40,
+    height: 40,
+    elevation: 1
   },
   buttonCantProduct: {
     width: wp('7.5%'),
@@ -280,8 +329,7 @@ const styles = StyleSheet.create({
     height: hp('3.5%'),
     borderRadius: 4,
     borderWidth: 1,
-    
-    borderColor: COLORS.blueMedium,
+    borderColor: COLORS.blue,
     paddingHorizontal: 5,
     justifyContent: 'center',
   },
@@ -307,25 +355,29 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   buttonVoucher: {
+    height: hp('6%'),
     paddingVertical: 10,
     backgroundColor: COLORS.blue,
     borderRadius: 25,
-    //borderWidth: 0.5,
-    //borderColor: COLORS.blue,
+    marginTop: 3,
+    elevation: 1
   },
   buttonDate: {
+    height: hp('6%'),
     paddingVertical: 10,
     backgroundColor: COLORS.blue,
     borderRadius: 25,
+    elevation: 1,
+    marginTop: 3,
     borderWidth: 0,
   },
   buttonAddCustomer: {
     backgroundColor: COLORS.blue,
     borderRadius: 25,
-    width: 135,
-    height: hp('5%'),
+    height: hp('6%'),
     alignItems: 'center',
     justifyContent: 'center',
+    elevation: 1
   },
   textRegular12White: {
     fontFamily: FONTS.pRegular,
@@ -348,7 +400,6 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.pRegular,
     fontSize: FONTS.size16,
     color: COLORS.blue,
-    top: 2
   },
   textLight14Blue: {
     fontFamily: FONTS.pRegular,
@@ -359,8 +410,7 @@ const styles = StyleSheet.create({
   textRegular16GrayDark: {
     fontFamily: FONTS.pRegular,
     fontSize: FONTS.size16,
-    color: COLORS.grayDark,
-    marginVertical: -3,
+    color: COLORS.grayDark
   },
   textLight14BlueMedium: {
     fontFamily: FONTS.pRegular,
@@ -370,19 +420,13 @@ const styles = StyleSheet.create({
   },
   textRegular12GrayDark: {
     fontFamily: FONTS.pRegular,
-    fontSize: FONTS.size14,
-    color: COLORS.grayDark,
-    marginVertical: -10,
-  },
-  textRegular16White: {
-    fontFamily: FONTS.latoRegular,
-    fontSize: FONTS.size16,
-    color: COLORS.white
+    fontSize: FONTS.size12,
+    color: COLORS.grayDark
   },
   textBold16White: {
     fontFamily: FONTS.pSemiBold,
     fontSize: FONTS.size16,
-    color: COLORS.blue,
+    color: COLORS.white,
     top: 1
   },
   textBold14White: {
@@ -449,15 +493,12 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.pRegular,
     fontSize: FONTS.size14,
     color: COLORS.blue,
+    top: 1
   },
   textRegular14Gray: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size14,
     color: COLORS.gray,
-  },
-  textConsumerFinal: {
-    width: '45%',
-    justifyContent: 'center',
   },
   textRegular12Gray: {
     fontFamily: FONTS.pRegular,
@@ -474,10 +515,16 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.pRegular,
     fontSize: FONTS.size14,
     color: COLORS.grayDark,
-    top: 2
+    top: 1
   },
-  textBold12Blue: {
-    fontFamily: FONTS.pBold,
+  textRegular14White: {
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size14,
+    color: COLORS.white,
+    top: 1
+  },
+  textRegular12Blue: {
+    fontFamily: FONTS.pRegular,
     fontSize: FONTS.size12,
     color: COLORS.blue
   },
@@ -488,10 +535,10 @@ const styles = StyleSheet.create({
   },
   textRegular16White: {
     fontFamily: FONTS.pRegular,
-    fontSize: FONTS.size14,
+    fontSize: FONTS.size16,
     color: COLORS.white,
     textAlign: 'center',
-    marginVertical: -3
+    top: 1
   },
   marginVertical8: {
     marginVertical: 8
@@ -500,15 +547,9 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.pRegular,
     fontSize: FONTS.size16,
     fontWeight: 'normal',
-    color: COLORS.white,
+    color: COLORS.blue,
     top: 3
-  },
-  headerStyle: {
-    backgroundColor: COLORS.blue,
-    elevation: 0,
-    shadowOpacity: 0,
-    borderBottomWidth: 0,
-  },
+  }
 });
 
 export default styles;

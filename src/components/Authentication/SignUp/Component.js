@@ -1,7 +1,6 @@
 import React from 'react';
-import { View } from 'react-native';
-import PasswordInputText from 'react-native-hide-show-password-input';
-import { TextField } from 'react-native-material-textfield';
+import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { IconEye, IconEyeOff } from '../../../constants/icons';
 import LinearGradient from 'react-native-linear-gradient';
 import { Button } from "react-native-elements";
 import { 
@@ -11,9 +10,8 @@ import {
   validateEmail,
   validateDataSignUp
 } from '../../../utils/validations';
-import { COLORS, COLORGY, COLORGBL } from '../../../constants/colors';
+import { COLORGY, COLORS } from '../../../constants/colors';
 import style from '../style';
-import { ScrollView } from 'react-native-gesture-handler';
 
 class SignUp extends React.Component {
 
@@ -26,6 +24,9 @@ class SignUp extends React.Component {
       confirmPassword: '@Martin44',
       confirmAccount: false,
       loading: false,
+      iconPassShow: false,
+      iconConfirmPassShow: false,
+      passRequireShow: false,
       errorName: undefined,
       errorEmail: undefined,
       errorPass: undefined,
@@ -36,10 +37,10 @@ class SignUp extends React.Component {
   handleSignUp = () => {
     const { name, email, password, confirmPassword } = this.state;
     if(!validateDataSignUp(password, confirmPassword, email, name)) {
-      if(!validateName(name)) this.setState({errorName: 'Ingrese Nombre de Usuario'});
-      if(!validateEmail(email)) this.setState({errorEmail: 'Formato Inválido'});
-      if(!validatePass(password)) this.setState({errorPass: 'No Cumple Requisitos'});
-      if(!validateConfirmPass(password, confirmPassword)) this.setState({errorConfirmPass: 'Las Contraseñas No Coinciden'});
+      if(!validateName(name)) this.setState({errorName: '*Ingrese Nombre de Usuario'});
+      if(!validateEmail(email)) this.setState({errorEmail: '*Formato Inválido'});
+      if(!validatePass(password)) this.setState({errorPass: '*No Cumple Requisitos'});
+      if(!validateConfirmPass(password, confirmPassword)) this.setState({errorConfirmPass: '*Las Contraseñas No Coinciden'});
     } else {
       const attributes = {
         email:email,
@@ -48,18 +49,19 @@ class SignUp extends React.Component {
       this.setLoading(true);
       const { signUp } = this.props;
       signUp(password, email, attributes)
-      .then((data) => {
-        this.setLoading(false);
-        if(data === true)
-          this.props.navigation.navigate('Authentication');
-        else{
-          if (data === false){
-            this.props.navigation.navigate('ConfirmationCodeRegister', { email: this.state.email });
-          } else {
-              this.setState({errorEmail: 'Email ya existente'})
+        .then((data) => {
+          console.log(data)
+          this.setLoading(false);
+          if(data === true)
+            this.props.navigation.navigate('Authentication');
+          else{
+            if (data === false){
+              this.props.navigation.navigate('ConfirmationCodeRegister', { email: this.state.email });
+            } else {
+                this.setState({errorEmail: 'Email ya existente'})
+            }
           }
-        }
-      })
+        })
     }
   }
 
@@ -70,100 +72,103 @@ class SignUp extends React.Component {
   setLoading = (bool) => this.setState({ loading: bool })
   
   render() {
+    const requireShow = this.state.passRequireShow ? 'flex' : 'none';
+    const displayName = this.state.errorName === undefined ? 'none' : 'flex';
+    const displayEmail = this.state.errorEmail === undefined ? 'none' : 'flex'
+    const displayPass = this.state.errorPass === undefined ? 'none' : 'flex'
+    const displayConfirmPass = this.state.errorConfirmPass === undefined ? 'none' : 'flex'
     return(
-      <ScrollView>
-        <TextField
-          titleTextStyle={style.textRegular12GrayDark}
-          labelTextStyle={style.textRegular12GrayDark}
-          label='Nombre de usuario'
+      <View style={style.containerInputs}>   
+        <TextInput
+          placeholder='Nombre de usuario'
+          placeholderTextColor={COLORS.gray}
           value={ this.state.name }
           onChangeText={ this.setName }
           onFocus={()=>{this.setState({errorName: undefined})}}
-          baseColor={COLORS.grayDark}
-          tintColor={COLORS.blue}
-          textColor= {COLORS.grayDark}
-          labelFontSize={12}
-          lineWidth={1}
-          inputContainerPadding={6}
-          error={this.state.errorName}
-          errorColor={'red'}
+          style={style.input}
         />
-        <TextField 
-          titleTextStyle={style.textRegular12GrayDark}
-          labelTextStyle={style.textRegular12GrayDark}
-          label='Email'
+        <View style={{display: displayName, alignItems: 'center'}}>
+          <Text style={style.textRegular12Red}>
+            {this.state.errorName}
+          </Text>
+        </View>
+
+        <TextInput
+          placeholder='Email'
+          placeholderTextColor={COLORS.gray}
           value={ this.state.email }    
           onChangeText={ this.setEmail }
           onFocus={()=>{this.setState({errorEmail: undefined})}}
-          baseColor={COLORS.grayDark}
-          tintColor={COLORS.blue}
-          textColor= {COLORS.grayDark}
-          titleFontSize={10}
-          labelFontSize={12}
-          labelHeight={20}
-          lineWidth={1}
-          inputContainerPadding={6}
-          error={this.state.errorEmail}
-          errorColor={'red'}
+          style={style.input}
         />
-        <View>
-          <PasswordInputText
-            titleTextStyle={style.textRegular12GrayDark}
-            labelTextStyle={style.textRegular12GrayDark}
-            title='Minimo 8 Caracteres'
-            label='Contraseña'
+        <View style={{display: displayEmail, alignItems: 'center'}}>
+          <Text style={style.textRegular12Red}>
+            {this.state.errorEmail}
+          </Text>
+        </View>
+        <View style={{display: requireShow}}>
+          <Text style={style.textRegular11Blue}>
+            Debe contener al menos 8 Caracteres, Mayúsculas, Minúsculas, Número y Caracter especial.
+          </Text>
+        </View>
+
+        <View style={style.passwordContainer}>
+          <TextInput
+            secureTextEntry={!this.state.iconPassShow}
+            placeholder='Contraseña'
+            placeholderTextColor={COLORS.gray}
             value={ this.state.password }
             onChangeText={ this.setPassword }
-            onFocus={()=>{this.setState({errorPass: undefined})}}
-            baseColor={COLORS.grayDark}
-            tintColor={COLORS.blue}
-            textColor= {COLORS.grayDark}
-            titleFontSize={8.5}
-            labelHeight={25}
-            labelFontSize={12}
-            lineWidth={1}
-            inputContainerPadding={7}
-            iconColor= {COLORS.gray}
-            iconSize={20}
-            error={this.state.errorPass}
-            errorColor={'red'}
+            onFocus={()=>{this.setState({errorPass: undefined, passRequireShow: true})}}
+            onBlur={()=>{this.setState({passRequireShow: false})}}
+            style={style.inputPass}
           />
-        </View>
-        <View>
-          <PasswordInputText
-            titleTextStyle={style.textRegular12GrayDark}
-            labelTextStyle={style.textRegular12GrayDark}
-            label='Confirmar Contraseña'
+          <TouchableOpacity 
+            onPress={()=>this.setState({iconPassShow: !this.state.iconPassShow})}>
+            {this.state.iconPassShow ? IconEye : IconEyeOff} 
+          </TouchableOpacity>
+        </View>   
+        <View style={{display: displayPass, alignItems: 'center'}}>
+          <Text style={style.textRegular12Red}>
+            {this.state.errorPass}
+          </Text>
+        </View>     
+        
+        <View style={style.passwordContainer}>
+          <TextInput
+            secureTextEntry={!this.state.iconConfirmPassShow}
+            placeholder='Confirmar Contraseña'
+            placeholderTextColor={COLORS.gray}
             value={ this.state.confirmPassword }
             onChangeText={ this.setConfirmPassword }
             onFocus={()=>{this.setState({errorConfirmPass: undefined})}}
-            baseColor={COLORS.grayDark}
-            textColor= {COLORS.grayDark}
-            titleFontSize={10}
-            tintColor={COLORS.blue}
-            iconColor= {COLORS.gray}
-            iconSize={20}
-            inputContainerPadding={7}
-            lineWidth={1}
-            labelHeight={25}
-            labelFontSize={12}
-            error={this.state.errorConfirmPass}
-            errorColor={'red'}
+            style={style.inputPass}
           />
-        </View>
+          <TouchableOpacity 
+            onPress={()=>this.setState({iconConfirmPassShow: !this.state.iconConfirmPassShow})}>
+            {this.state.iconConfirmPassShow ? IconEye : IconEyeOff}
+          </TouchableOpacity>
+        </View>   
+        <View style={{display: displayConfirmPass, alignItems: 'center'}}>
+          <Text style={style.textRegular12Red}>
+            {this.state.errorConfirmPass}
+          </Text>
+        </View>  
 
         <View style={style.containerButtonSignTwo}>
           <Button
             title='Crear Cuenta'
+            TouchableComponent={TouchableOpacity}
             testID='submitSignUp'
             onPress={ this.handleSignUp }
             value={this.state.email}
             buttonStyle={ style.buttonSignTwo }
-            titleStyle={ style.textRegular16White }
+            titleStyle={ style.textBold14White }
             loading = {this.state.loading}
           />
         </View>
-      </ScrollView>
+        
+      </View>
     )
   }
 }

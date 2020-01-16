@@ -9,7 +9,7 @@ const ModalVoucherTYpe = props => {
     <View style={style.modalVoucher}>
       <View style={style.boxModal}>
         <View style={style.headerModal}>
-          <Text style={style.textRegular16White}>Tipo de Comprobante</Text>
+          <Text style={style.textRegular14White}>Tipo de Comprobante</Text>
         </View>
         <View style={style.boxVoucherType}>
           {VOUCHER_TYPES.map((voucherType, index) => (
@@ -17,7 +17,7 @@ const ModalVoucherTYpe = props => {
                 <TouchableOpacity
                   style={[style.borderVoucher,style.marginVertical8]}
                   onPress={() => props.selectionVoucher(voucherType)}>
-                  <Text style={style.textRegular16Blue}>
+                  <Text style={style.textRegular16White}>
                     {voucherType.label}
                   </Text>
                 </TouchableOpacity>

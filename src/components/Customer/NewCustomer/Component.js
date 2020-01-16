@@ -1,13 +1,11 @@
 import React from 'react';
-import { View, Text, Picker, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, Picker, ScrollView, TouchableOpacity, TextInput } from 'react-native';
 import { TextField } from 'react-native-material-textfield';
 import { Button } from "react-native-elements";
-import LinearGradient from 'react-native-linear-gradient';
-import { COLORS, GRADIANTBLUE2, COLORGBL } from '../../../constants/colors';
+import { COLORS } from '../../../constants/colors';
 import { CONDITION_IVA } from '../../../constants/fiscal_identity';
-import  { iconMenuBack }  from '../../../constants/icons';
+import  { iconMenuBack, IconSearch, IconCustomer, IconIdcard }  from '../../../constants/icons';
 import { validateCuit } from '../../../utils/identity';
-import { XY } from '../../../constants/gradientCoord';
 import style from '../style';
 
 class NewCustomer extends React.Component {
@@ -15,7 +13,6 @@ class NewCustomer extends React.Component {
   constructor(props) {
     super(props);
     const customer = this.props.navigation.getParam('customer', this.defaultCustomer());
-
     this.state = {
       name: customer.attributes.name,
       category: customer.attributes.category,
@@ -39,7 +36,6 @@ class NewCustomer extends React.Component {
   static navigationOptions = ({navigation}) => {
     return {
       title: 'Nuevo Cliente',
-      headerStyle: { backgroundColor: COLORS.blue, elevation: 0 },
       headerTitleStyle: style.headerText,
       headerTintColor: COLORS.white,
       headerLeft:( 
@@ -61,7 +57,7 @@ class NewCustomer extends React.Component {
           this.setLoading(false);
         })
     } 
-    else this.setState({error: 'CUIT Inválido'})
+    else this.setState({error: '*CUIT Inválido'})
   }
 
   setName = (value) => this.setState({ name: value})
@@ -70,80 +66,78 @@ class NewCustomer extends React.Component {
   setLoading = (bool) => this.setState({ loading: bool })
 
   render() {
+    const displayCuit = this.state.error === undefined ? 'none' : 'flex';
     return(
       <View style={ style.container }>
+        <View style={style.containerBody}>
+          <ScrollView>
+            <View style={style.containerInputs}>  
+              <View style={style.containerInputWithIcon}>
+                <IconCustomer color={COLORS.grayDark} size={20}/>
+                <Picker
+                  selectedValue={this.state.category}
+                  style= {style.picker}
+                  onValueChange={this.setCategory}>
+                    { CONDITION_IVA.map((i, index) => (
+                      <Picker.Item 
+                        key={index} 
+                        color='gray' 
+                        label={i.label} 
+                        value={i.value}/>
+                      ))}
+                </Picker>
+              </View>
+              <Text style={[style.textRegular12GrayDark, {marginLeft: 3}]}>
+                Condición frente al IVA
+              </Text>
 
-          <View style={style.containerBody}>
-            <ScrollView>
-              <View style={style.containerInputs}>
-                
-                <View style={style.inputPicker}>
-                  <Picker
-                    selectedValue={this.state.category}
-                    style= {style.picker}
-                    onValueChange={this.setCategory}>
-                      { CONDITION_IVA.map((i, index) => (
-                        <Picker.Item 
-                          key={index} 
-                          color='gray' 
-                          label={i.label} 
-                          value={i.value}/>
-                       ))}
-                  </Picker>
-                </View>
-
-                <Text style={[style.textRegular12GrayDark, {marginTop: 5}]}>
-                  Condición frente al IVA
-                </Text>
-
-                <TextField
-                  title='Su información fiscal se cargará con su CUIT'
-                  titleTextStyle={style.textRegular12GrayDark}
-                  label='Número de CUIT'
-                  labelTextStyle={style.textRegular12GrayDark}
+              <View style={style.containerInputWithIcon}>
+                {IconIdcard}
+                <TextInput
+                  keyboardType='numeric'
+                  placeholder='Número de CUIT'
                   value={this.state.identification}
                   onChangeText={this.setIdentification}
                   onFocus={()=>{this.setState({error: undefined})}}
-                  keyboardType='numeric'
-                  tintColor={COLORS.blue}
-                  textColor= {COLORS.blue}
-                  baseColor={COLORS.grayDark}
-                  lineWidth={1}
-                  labelFontSize={15}
-                  labelPadding={6}
-                  characterRestriction={11}
-                  error={this.state.error}
-                  errorColor={'red'}
-                />
-                
-                <TextField
-                  title='Opcional'
-                  titleTextStyle={style.textRegular12GrayDark}
-                  label='Nombre de Fantasía'
-                  labelTextStyle={style.textRegular12GrayDark}
+                  style={style.inputWithIconName}
+                />  
+              </View>
+              <View style={{display: displayCuit, alignItems: 'center'}}>
+                <Text style={style.textRegular12Red}>
+                  {this.state.error}
+                </Text>
+              </View> 
+              <Text style={[style.textRegular12GrayDark, {marginLeft: 3}]}>
+                Su información fiscal se cargará con su CUIT
+              </Text>
+
+              <View style={style.containerInputWithIcon}>
+                {IconIdcard}
+                <TextInput
+                  placeholder='Nombre de Fantasía'
                   value={this.state.name}
                   onChangeText={this.setName}
-                  textColor= {COLORS.blue}
-                  tintColor={COLORS.blue}
-                  baseColor={COLORS.grayDark}
-                  lineWidth={1}
-                  labelFontSize={15}
-                  labelPadding={6}
-                />
+                  style={style.inputWithIconName}
+                />  
               </View>
-            </ScrollView>
-          </View>
+              <Text style={[style.textRegular12GrayDark, {marginLeft: 3}]}>
+                *Opcional
+              </Text>
 
-          <View style={[style.containerFooter, {alignItems: 'center'}]}>
-            <Button
-              title={this.props.type==='invoice' ? 'Añadir al Comprobante' : 'Guardar'}
-              TouchableComponent={TouchableOpacity}
-              onPress={this.saveCustomer}
-              buttonStyle={ style.buttonSave }
-              titleStyle={ style.textBold16White }
-              loading={this.state.loading}
-            /> 
-          </View>
+            </View>
+          </ScrollView>
+        </View>
+
+        <View style={[style.containerFooter, {alignItems: 'center'}]}>
+          <Button
+            title={this.props.type==='invoice' ? 'Añadir al Comprobante' : 'Guardar'}
+            TouchableComponent={TouchableOpacity}
+            onPress={this.saveCustomer}
+            buttonStyle={ style.buttonPrimary }
+            titleStyle={ style.textBold16White }
+            loading={this.state.loading}
+          /> 
+        </View>
 
       </View>
     )

@@ -1,11 +1,8 @@
 import React from "react";
 import { connect } from 'react-redux';
 import { ScrollView, Text, View, Image, TouchableOpacity, Alert } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
 import { Button } from "react-native-elements";
 import { IconChat, IconConfig, IconClose, IconCloseDrawer } from "../../constants/icons";
-import {  GRADIANTBLUE2 } from "../../constants/colors";
-import { XY } from "../../constants/gradientCoord";
 import { signOut } from '../../app/authentication/actions';
 import style from './style';
 
@@ -46,8 +43,8 @@ const DrawerComponent = (props) => (
   <View style={style.containerDrawer}>
       
     <View style={style.headerContainerDrawer}>
-      <Image source={require('../../images/logoBlue.png')} style={style.logoDrawer} />
-      <Text style={style.textRegular18White}>
+      <Image source={require('../../images/logoBill.png')} style={style.logoDrawer} />
+      <Text style={style.textRegular18Blue}>
         {props.user.name}
       </Text>
       <Text style={style.textLight16Blue}>
@@ -58,24 +55,27 @@ const DrawerComponent = (props) => (
     <ScrollView style={{margin: 5}}>
       <Button 
         title="Chat"
+        TouchableComponent={TouchableOpacity}
         icon ={IconChat}
         onPress={() => {}}
         buttonStyle={style.buttonDrawer}
-        titleStyle={style.textRegular18Blue}
+        titleStyle={style.textRegular18White}
       />
       <Button 
         title="Configuración"
+        TouchableComponent={TouchableOpacity}
         icon ={IconConfig}
-        onPress={() => {}}
+        onPress={() => props.navigation.navigate('TaxConfiguration', {Home: true})}
         buttonStyle={style.buttonDrawer}
-        titleStyle={style.textRegular18Blue}
+        titleStyle={style.textRegular18White}
       />
       <Button 
         title="Cerrar Sesión"
+        TouchableComponent={TouchableOpacity}
         icon ={IconClose}
         onPress={() => props.signOut(props.navigation)}
         buttonStyle={style.buttonDrawer}
-        titleStyle={style.textRegular18Blue}
+        titleStyle={style.textRegular18White}
       />
     </ScrollView>
     

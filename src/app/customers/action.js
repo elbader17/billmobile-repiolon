@@ -35,7 +35,10 @@ const createCustomer = ({ name, identification, category }) => {
   };
   return (dispatch) => {
     return fetch_api('/v1/fiscal_identities', 'POST', false, { resource })
-      .then((response) => dispatch(createCustomerAction(response)))
+      .then((response) => {
+        console.log(response)
+        return dispatch(createCustomerAction(response))
+      })
       .catch((error) => console.log(error));
   };
 };
@@ -44,6 +47,7 @@ const listCustomers = () => {
   return (dispatch) => {
     return fetch_api('/v1/fiscal_identities', 'GET', false)
       .then((resources) => {
+        console.log(resources)
         dispatch(customerListAction(resources))
       })
       .catch((error) => console.log(error));
@@ -59,8 +63,7 @@ const updateCustomer = ({ id, name, identification, category }) => {
   return (dispatch) => {
     return fetch_api(`/v1/fiscal_identities/${id}`,'PUT', false, { resource })
       .then((response) => {
-        const customer = response.data;
-        console.log(customer);
+        console.log(response);
         dispatch(updateCustomerAction(customer.id, customer.attributes.name, customer.attributes.identification, customer.attributes.category));
       })
       .catch((error) => console.log(error));

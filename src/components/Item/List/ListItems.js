@@ -11,7 +11,7 @@ const ListItems = props => {
     return(
       <View style={{alignItems: 'center', marginTop: 25}}>
         <Text style={style.textRegular16GrayDark}>
-          No hay items cargados
+          ¡No hay items cargados!
         </Text>
       </View>
     )
@@ -20,9 +20,15 @@ const ListItems = props => {
     return props.items
         .filter(item => item.attributes.category === props.category)
         .map((item) => {
+          const resource = {
+            name: item.attributes.name,
+            price: item.attributes.price,
+            category: item.attributes.category,
+            id: item.id
+          }
           const isInvoice = props.type === 'invoice';
           const color = props.loadingItem ? COLORS.grayDark : COLORS.blue //Disabled an enabled Button
-          const icon = isInvoice ? undefined : <IconTrash color={color}/>;  
+          const icon = isInvoice ? undefined : <IconTrash color={color} />;  
           const title = isInvoice ? 'Añadir' : undefined ; 
           const conditionLoading = props.loadingItem && item.id === props.itemActive;
           return (
@@ -40,7 +46,7 @@ const ListItems = props => {
                   <Button
                     title='Editar'
                     TouchableComponent={TouchableOpacity}
-                    onPress={() => props.navigateToEditItem(item.attributes) }
+                    onPress={() => props.navigateToEditItem(resource) }
                     buttonStyle={ style.buttonEditBlue }
                     titleStyle={ style.textButtonEdit }
                     disabled = {isInvoice}

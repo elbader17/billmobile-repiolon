@@ -6,20 +6,26 @@ import { FONTS } from '../../constants/fonts';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.blue
   },
   containerHeader: { 
-    flex:0.42,
+    flex:0.55,
+    backgroundColor: COLORS.blue,
+    borderBottomLeftRadius: 7,
+    borderBottomRightRadius: 7,
+    elevation: 1
   },
-  containerStatictis: {
+  containerChart: {
     backgroundColor: COLORS.white,
-    flex:0.20,
-    justifyContent: 'center',
-    paddingHorizontal: 5,
+    marginTop: 15,
+    marginHorizontal: 10,
+    paddingBottom: 5, 
+    borderRadius: 7, 
+    elevation: 1
   },
   containerListCustomer: {
-    backgroundColor: COLORS.white,
-    flex:0.38,
+    backgroundColor: COLORS.grayLight,
+    flex:0.45,
+    justifyContent: 'flex-end',
   },
   containerFooter: { 
     width: '100%',
@@ -27,32 +33,32 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: 20,
     borderTopLeftRadius: 0, 
-    borderTopRightRadius: 0, 
+    borderTopRightRadius: 0
   },
   boxData: {
-    backgroundColor: COLORS.blue,
+    height: hp('13%'),
+    justifyContent: 'center',
+    backgroundColor: COLORS.white,
     paddingHorizontal: 20,
-    paddingVertical: 15,
-    borderRadius: 10,
-    borderWidth: 0.5,
-    borderColor: COLORS.blue,
+    borderRadius: 7,
+    elevation: 1.5
   },
   scrollCustomers: {
-    flex: 1,
-    backgroundColor: COLORS.whiteGray,
+    height: hp('28%'),
+    backgroundColor: COLORS.white,
     marginHorizontal: 10,
     marginBottom: 10,
-    paddingHorizontal: 5,
-    
-    borderRadius: 10,
+    paddingHorizontal: 7,
+    paddingVertical: 5,
+    elevation: 1.5,
+    borderRadius: 7,
     borderColor: COLORS.blue,
     justifyContent: 'center',
   },
   listCustomers: {
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
-    borderRadius: 0,
-    borderColor: COLORS.blue
+    borderBottomWidth: 0.5,
+    borderRadius: 5,
+    borderColor: COLORS.grayMedium
   },
   lineBlue: {
     flex: 1,
@@ -60,7 +66,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.blue
   },
   styleChart: {
-    marginTop: 5
+    borderRadius: 7
   },
   circlePercentaje: {
     elevation: 5, 
@@ -93,7 +99,7 @@ const styles = StyleSheet.create({
   },
   textFacPeriodo: {
     alignItems: 'center',
-    marginLeft: 0
+    marginTop: 5
   },
   textRegular16Blue: {
     fontFamily: FONTS.latoRegular,
@@ -122,15 +128,11 @@ const styles = StyleSheet.create({
     fontSize: FONTS.size12,
     color: COLORS.blueLight,
   },
-  textLight12White: {
-    fontFamily: FONTS.latoLight,
+  textLight12GrayDark: {
+    fontFamily: FONTS.pRegular,
     fontSize: FONTS.size12,
-    color: COLORS.white,
-  },
-  textLight14White: {
-    fontFamily: FONTS.latoLight,
-    fontSize: FONTS.size14,
-    color: COLORS.white,
+    color: COLORS.grayDark,
+    top: 2
   },
   textLight12White: {
     fontFamily: FONTS.latoLight,
@@ -151,7 +153,7 @@ const styles = StyleSheet.create({
   textLight14White: {
     fontFamily: FONTS.pExtraLight,
     fontSize: FONTS.size14,
-    color: COLORS.white,
+    color: COLORS.grayDark,
     top: 1
   },
   textRegular14White: {
@@ -203,17 +205,16 @@ const styles = StyleSheet.create({
     color: COLORS.blue,
     top: 2
   },
-  textBold14Blue: {
+  textBold14White: {
     fontFamily: FONTS.pSemiBold,
     fontSize: FONTS.size14,
-    color: COLORS.blue,
-    top: 3
+    color: COLORS.white,
+    top: 1
   },
-  textLight22Blue: {
+  textRegular22BlueMedium: {
     fontFamily: FONTS.pExtraLight,
     fontSize: FONTS.size22,
-    color: COLORS.blueLight,
-    marginVertical: -5
+    color: COLORS.blueMedium
   },
   lineWhiteLeft: {
     width:'10%',
@@ -226,10 +227,10 @@ const styles = StyleSheet.create({
     height: 1
   },
   buttonAll: {
-    height: hp('6%'),
+    height: hp('5%'),
     marginTop: 5,
-    backgroundColor: COLORS.blue,
-    borderRadius: 10,
+    backgroundColor: COLORS.blueLight,
+    borderRadius: 25,
     justifyContent: 'center',
     alignItems: 'center'
   },
@@ -252,7 +253,7 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.pRegular,
     fontSize: FONTS.size16,
     fontWeight: 'normal',
-    color: COLORS.white,
+    color: COLORS.blue,
     top: 3
   }
 });

@@ -7,31 +7,29 @@ import { METRICS } from '../../constants/metrics';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: COLORS.grayLight
   },
   containerBody: {
     flex: 0.87,
-    paddingTop: 12
   }, 
   containerFooter: {
     flex: 0.13,
-    justifyContent: 'flex-end'
+    justifyContent: 'center'
   },
   boxItems: {
     flex: 1,
     backgroundColor: COLORS.white,
-    borderColor: COLORS.gray,
-    borderBottomWidth: 0.5,
-    paddingTop: 10,
-    borderTopLeftRadius: 30,
-    borderTopRightRadius: 30,
-    paddingHorizontal: 12
+    borderRadius: 7,
+    paddingTop: 5,
+    marginHorizontal: 10,
+    elevation: 1
   },
   boxInfoItems: {
-    paddingHorizontal: 10,
-    paddingVertical: 10,
+    paddingHorizontal: 12,
+    paddingVertical: 5,
     justifyContent: 'center',
     marginBottom: 5,
-    borderColor: COLORS.gray,
+    borderColor: COLORS.grayLight,
     borderBottomWidth: 0.5,
   },
   boxInput: {
@@ -39,9 +37,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20
   },
   boxSelectButton: {
-    marginTop: 17,
-    marginBottom: 5,
-    marginHorizontal: 5
+    marginBottom: 10
   },
   center: {
     marginTop: 40,
@@ -60,27 +56,22 @@ const styles = StyleSheet.create({
     elevation: 1,
     borderRadius: 25,
   },
-  buttonNew: {
-    width: wp('100%'),
+  buttonPrimary: {
+    width: wp('95%'),
     height: hp('7%'),
     backgroundColor: COLORS.blueLight,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  buttonSave: {
-    width: wp('100%'),
-    height: hp('7%'),
-    backgroundColor: COLORS.blueLight,
+    borderRadius: 25,
     justifyContent: 'center',
     alignItems: 'center',
+    elevation: 1
   },
   buttonEditBlue:{
     backgroundColor: 'transparent',
-    width: wp('16%'),
+    width: 70,
     height: hp('5%'),
     borderWidth: 1,
     borderColor: COLORS.blue,
-    borderRadius: 10,
+    borderRadius: 7,
     marginLeft: 3
   },
   buttonEditGray:{
@@ -89,20 +80,25 @@ const styles = StyleSheet.create({
     height: hp('5%'),
     borderWidth: 1,
     borderColor: COLORS.gray,
-    borderRadius: 10,
+    borderRadius: 7,
     marginLeft: 3
   },
   buttonDelete:{
     backgroundColor: 'transparent',
-    width: wp('10%'),
     height: hp('5%'),
-    marginLeft: 3
+    width: wp('10%'),
+    marginLeft: 5,
+    borderWidth: 1,
+    borderColor: COLORS.blue,
+    borderRadius: 7
   },
   buttonDeleteDisabled:{
     backgroundColor: COLORS.grayMedium,
-    width: wp('10%'),
     height: hp('5%'),
-    marginLeft: 3
+    width: wp('10%'),
+    marginLeft: 5,
+    borderRadius: 7,
+    borderColor: COLORS.grayMedium
   },
   textButtonEdit: {
     fontFamily: FONTS.pRegular,
@@ -115,19 +111,15 @@ const styles = StyleSheet.create({
     color: COLORS.redLight,
   },
   search: {
+    width: wp('80%'),
     backgroundColor: COLORS.white,
-    width: wp('90%'),
-    height: hp('6%'),
-    paddingLeft: 18,
-    alignSelf: 'center',
+    paddingLeft: 10,
+    alignItems: 'center',
     paddingVertical: 5,
     fontFamily: FONTS.pExtraLight,
     fontSize: FONTS.size14,
     paddingBottom: 3,
-    color: COLORS.blue,
-    borderWidth: 1,
-    borderRadius: 25,
-    borderColor: COLORS.gray
+    color: COLORS.grayDark
   },
   searchInvoice: {
     backgroundColor: COLORS.white,
@@ -143,21 +135,22 @@ const styles = StyleSheet.create({
     elevation: 4
   },
   buttonSelect: {
-    backgroundColor: COLORS.blue,
-    width: wp('40%'),
-    height: hp('6%'),
-    borderRadius: 25,
-    elevation: 2,
-    justifyContent: 'center',
-    alignItems: 'center'
+    width: wp('50%'),
+    height: hp('8%'),
+    borderBottomWidth: 3,
+    borderColor: COLORS.blueLight,
+    borderRadius: 0,
+    backgroundColor: COLORS.white,
+    justifyContent: 'center'
   },
   buttonSelectDisable: {
-    backgroundColor: COLORS.gray,
-    width: wp('40%'),
-    height: hp('6%'),
-    borderRadius: 25,
-    justifyContent: 'center',
-    alignItems: 'center',
+    width: wp('50%'),
+    height: hp('8%'),
+    backgroundColor: COLORS.white,
+    borderBottomWidth: 3,
+    borderColor: COLORS.grayMedium,
+    borderRadius: 0,
+    justifyContent: 'center'
   },
   inLine:{
     flexDirection: "row",
@@ -187,18 +180,24 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.pRegular,
     fontSize: FONTS.size14,
     color: COLORS.grayDark,
-    marginVertical: -3,
+    top: 2
   },
   textLight14BlueMedium: {
     fontFamily: FONTS.pExtraLight,
     fontSize: FONTS.size14,
-    color: COLORS.blueMedium,
+    color: COLORS.grayDark,
     marginVertical: -3,
   },
   textRegular14White: {
     fontFamily: FONTS.pRegular,
     fontSize: FONTS.size14,
     color: COLORS.white,
+    marginVertical: -3,
+  },
+  textRegular14Blue: {
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size14,
+    color: COLORS.blue,
     marginVertical: -3,
   },
   textRegular16GrayDark: {
@@ -226,14 +225,71 @@ const styles = StyleSheet.create({
   textBold16White: {
     fontFamily: FONTS.pSemiBold,
     fontSize: FONTS.size16,
-    color: COLORS.blue,
+    color: COLORS.white,
     top: 1
+  },
+  textRegular12Red: {
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size12,
+    color: 'red'
+  },
+  containerSearch: {
+    height: 40,
+    backgroundColor: COLORS.white,
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderWidth: 1,
+    paddingHorizontal: 5,
+    borderColor: COLORS.gray,
+    borderRadius: 7,
+    marginTop: 5,
+    marginHorizontal: 10,
+    marginBottom: 10
+  },
+  containerInputWithIcon: {
+    height: 45,
+    backgroundColor: COLORS.white,
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderWidth: 1,
+    paddingHorizontal: 5,
+    borderColor: COLORS.gray,
+    borderRadius: 7,
+    marginTop: 10,
+    marginBottom: 3
+  },
+  inputWithIconName: {
+    flex: 1,
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size14,
+    paddingBottom: 7,
+    color: COLORS.grayDark,
+    paddingLeft: 7
+  },
+  inputWithIconPrice: {
+    flex: 1,
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size16,
+    paddingBottom: 7,
+    color: COLORS.grayDark,
+  },
+  input: {
+    height: 45, 
+    borderWidth: 1, 
+    borderRadius: 7, 
+    borderColor: COLORS.gray, 
+    paddingLeft: 10,
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size14,
+    color: COLORS.grayDark,
+    marginTop: 15,
+    marginBottom: 3
   },
   headerText: {
     fontFamily: FONTS.pRegular,
     fontSize: FONTS.size16,
     fontWeight: 'normal',
-    color: COLORS.white,
+    color: COLORS.blue,
     top: 3
   }
 });

@@ -41,10 +41,11 @@ export function fetch_api(url, method, retry, data) {
   return new Promise( function (resolve, reject) {
     fetch(API_HOST+url, config)
       .then(async (response) => {
-        if (response.status === 500 && !retry) {
+        console.log(response);
+        if (response.status === 502 && !retry) {
           await refreshToken();
           return fetch_api(url, method, true);
-        } else if(response.status === 500 && retry) {
+        } else if(response.status === 502 && retry) {
             unauthenticatedCallback();
             reject({error: 'Error to RefreshToken'});
           }

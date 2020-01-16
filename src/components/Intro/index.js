@@ -1,10 +1,7 @@
 import React from 'react';
-import { View, Text } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
+import { View, Text, Image } from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import {SLIDES_INTRO} from '../../constants/slides_intro';
-import { GRADIANTBLUE2 } from '../../constants/colors';
-import { XY } from '../../constants/gradientCoord';
 import style from './style';
 
 class Intro extends React.Component {
@@ -13,12 +10,10 @@ class Intro extends React.Component {
       <View style={style.container} >
         <View style={style.silde}>
           <View style={style.box1}>
-            <Text style={style.number}>{item.title}</Text>
+            <Image source={ item.image } style={ style.imageHeader } />  
           </View>
           <View style={style.box2}>
             <Text style={style.textTittle}>{item.text}</Text>
-          </View>
-          <View style={style.box3}>
             <Text style={style.textDescription}>{item.description}</Text>
           </View>
         </View>
@@ -26,7 +21,7 @@ class Intro extends React.Component {
     );
   }
   _onDone = () => {
-    this.props.navigation.navigate('Configure')
+    this.props.navigation.navigate('Login')
   }
   render() {
     return ( 

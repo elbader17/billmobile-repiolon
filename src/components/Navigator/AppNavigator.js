@@ -105,11 +105,10 @@ const MainAppNavigator = createBottomTabNavigator(
     tabBarOptions: {
       showLabel: false,
       labelStyle: style.textRegular11,
-      activeTintColor: COLORS.blueLight,
-      inactiveTintColor: COLORS.white,
+      activeTintColor: COLORS.blueMedium,
+      inactiveTintColor: COLORS.grayDark,
       style: {
-        backgroundColor: COLORS.blue,
-        borderTopWidth: 0
+        backgroundColor: COLORS.white
       }
     }
   },

@@ -12,45 +12,124 @@ const styles = StyleSheet.create({
   },
   containerFooter: {
     flex: 0.10,
-    justifyContent: 'flex-end'
+    borderTopWidth: 1.5,
+    borderColor: COLORS.white
   },
   containerHeader: {
     paddingVertical: 25,
     alignItems: 'center',
-    backgroundColor: COLORS.white,
+    backgroundColor: COLORS.white
+  },
+  containerSign: {
+    flex: 1,
   },
   containerInputs: {
-    flex: 1,
-    marginHorizontal: 28
+    marginHorizontal: 35,
+    marginVertical: 20,
   },
   containerButtonSignTwo: {
-    alignItems: 'center', 
-    marginTop: 18,
+    alignItems: 'center',
+    marginTop: 10,
   },
   containerButtons: {
     flex: 1, 
     justifyContent: 'center', 
     alignItems: "center"
   },
-  gradientStyle: { 
-    width: wp('50%'),
-    height: hp('5%'),
-    borderRadius: 20,
-    marginTop: 7,
-  },
   textSubLogo: {
-    flex:1,
-    marginTop: 3,
-    marginBottom: 5,
-    marginLeft: 50,
-    justifyContent: 'center',
+    paddingHorizontal: 15,
+    paddingVertical: 7,
+    borderRadius: 25,
+    marginBottom: 10,
     alignItems: 'center'
   },
-  textCenter: {
-    flex:1,
-    marginTop: 10,
-    justifyContent: 'center',
-    alignItems: 'center'
+  input: {
+    height: 45, 
+    borderWidth: 1, 
+    borderRadius: 7, 
+    borderColor: COLORS.gray, 
+    paddingLeft: 10,
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size14,
+    color: COLORS.grayDark,
+    marginBottom: 7
+  },
+  inputPass: {
+    flex: 1,
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size14,
+    color: COLORS.grayDark,
+    paddingLeft: 2
+  },
+  passwordContainer: {
+    height: 45,
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderWidth: 1,
+    paddingHorizontal: 7,
+    borderColor: COLORS.gray,
+    borderRadius: 7,
+    marginBottom: 7
+  },
+  imageHeader: {
+    width: 209,
+    height: 120,
+    marginBottom: 10
+  },
+  buttonSign: {
+    width: wp('50%'),
+    height: hp('6%'),
+    backgroundColor: 'transparent',
+    borderRadius: 0,
+    borderBottomWidth: 2,
+    borderColor: COLORS.blueMedium,
+    justifyContent: 'center'
+  },
+  buttonSignDisable: {
+    width: wp('50%'),
+    height: hp('6%'),
+    borderTopWidth: 2,
+    borderColor: COLORS.gray,
+    backgroundColor: 'transparent',
+    borderRadius: 0,
+    justifyContent: 'center'
+  },
+  buttonSignTwo: {
+    width: wp('83%'),
+    height: hp('7%'),
+    backgroundColor: COLORS.blueLight,
+    borderRadius: 25,
+    elevation: 1.5
+  },
+  buttonSignTwoDisabled: {
+    width: wp('83%'),
+    height: hp('7%'),
+    borderRadius: 25,
+    elevation: 0.5
+  },
+  buttonSignInUp: {
+    height: hp('7%'),
+    backgroundColor: COLORS.blueLight
+  },
+  buttonConfirm: {
+    width: 200,
+    height: hp('7%'),
+    backgroundColor: COLORS.blueMedium,
+    borderRadius: 25,
+    marginTop: 15,
+    elevation: 1
+  },
+  inputVerify: {
+    height: 45,
+    marginBottom: 10,
+    borderWidth: 1,
+    borderColor: COLORS.gray,
+    borderRadius: 7,
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size14,
+    paddingBottom: 7,
+    color: COLORS.grayDark,
+    paddingLeft: 10
   },
   textRegular14White: {
     fontFamily: FONTS.pRegular,
@@ -58,6 +137,32 @@ const styles = StyleSheet.create({
     color: COLORS.white,
     lineHeight: 22,
     textAlign: 'center'
+  },
+  textRegular14Blue: {
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size14,
+    color: COLORS.blueMedium,
+    lineHeight: 22,
+    textAlign: 'center'
+  },
+  textRegular14Gray: {
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size14,
+    color: COLORS.grayDark,
+    lineHeight: 22,
+    textAlign: 'center'
+  },
+  textRegular12Red: {
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size12,
+    color: 'red'
+  },
+  textRegular11Blue: {
+    fontFamily: FONTS.pExtraLight,
+    fontSize: FONTS.size11,
+    color: COLORS.blueMedium,
+    textAlign: 'center',
+    marginVertical: 2
   },
   textRegular16White: {
     fontFamily: FONTS.pRegular,
@@ -67,62 +172,46 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     top: 1
   },
-  imageHeader: {
-    width: 219,
-    height: 130
-  },
-  buttonSign: {
-    width: wp('40%'),
-    height: hp('6%'),
-    backgroundColor: COLORS.blue,
-    borderRadius: 25,
+  textRegular16Blue: {
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size16,
+    color: COLORS.blue,
+    textAlign: 'center',
     justifyContent: 'center',
+    top: 1
   },
-  buttonSignDisable: {
-    width: wp('42%'),
-    height: hp('6%'),
-    backgroundColor: COLORS.gray,
-    borderRadius: 25,
-    justifyContent: 'center',
-  },
-  buttonSignTwo: {
-    width: wp('86%'),
-    height: hp('7%'),
-    backgroundColor: COLORS.blue,
-    borderRadius: 25
-  },
-  buttonVerify: {
-    width: wp('86%'),
-    height: hp('7%'),
-    backgroundColor: 'transparent',
-    borderRadius: 25,
-    marginTop: 35,
-    elevation: 2
-  },
-  buttonConfirm: {
-    width: wp('50%'),
-    height: hp('6%'),
-    backgroundColor: 'transparent',
-    borderRadius: 25,
-    marginTop: 15,
-    elevation: 1
-  },
-  gradientBottom: { 
-    backgroundColor: COLORS.blue,
-    height: hp('9%'),
-    borderTopLeftRadius: 100, 
-    borderTopRightRadius: 100, 
-    justifyContent: 'center',
-  },
-  textMedium16Blue: {
+  textMedium16White: {
     fontFamily: FONTS.pRegular,
     fontSize: FONTS.size12,
-    color: COLORS.blue
+    color: COLORS.white
+  },
+  textBold16Blue: {
+    fontFamily: FONTS.pSemiBold,
+    fontSize: FONTS.size16,
+    color: COLORS.blue,
+    top: 1
+  },
+  textBold14Blue: {
+    fontFamily: FONTS.pSemiBold,
+    fontSize: FONTS.size14,
+    color: COLORS.blue,
+    top: 1
+  },
+  textBold14White: {
+    fontFamily: FONTS.pSemiBold,
+    fontSize: FONTS.size14,
+    color: COLORS.white,
+    top: 1
   },
   textRegular18Blue: {
     fontFamily: FONTS.pRegular,
     fontSize: FONTS.size18,
     color: COLORS.blue
+  },
+  textBold18BlueMedium: {
+    fontFamily: FONTS.pSemiBold,
+    fontSize: FONTS.size18,
+    color: COLORS.blueMedium
   },
   textRegular11White: {
     fontFamily: FONTS.pRegular,
@@ -134,12 +223,12 @@ const styles = StyleSheet.create({
   textRegular11WhiteBold: {
     fontFamily: FONTS.pSemiBold,
     fontSize: FONTS.size11,
-    color: COLORS.blueLight,
+    color: COLORS.white,
     textAlign: 'center',
   },
   textRegular12GrayDark: {
     fontFamily: FONTS.pRegular,
-    fontSize: FONTS.size11,
+    fontSize: FONTS.size12,
     color: COLORS.grayDark,
     textAlign: 'center'
   },
@@ -151,12 +240,6 @@ const styles = StyleSheet.create({
   inLine: {
     flexDirection: 'row',
     alignItems: 'center'
-  },
-  displayNone: {
-    display: 'none'
-  },
-  displayFlex: {
-    display: 'flex'
   }
 });
 

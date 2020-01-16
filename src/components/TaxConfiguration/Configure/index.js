@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import TaxConfiguration from './Component';
-import { updateFiscalIdentity } from '../../../app/user_service/actions';
+import { updateFiscalIdentity, getCertificate, uploadCertificate } from '../../../app/user_service/actions';
 
 const mapStateToProps = state => ({
   name: state.userservice.name,
@@ -10,6 +10,8 @@ const mapStateToProps = state => ({
 function mapDispatchToProps(dispatch) {
   return {
     updateFiscalIdentity: (name, cuit) => dispatch(updateFiscalIdentity(name, cuit)),
+    getCertificate: () => dispatch(getCertificate()),
+    updateCertificate: (pkey, cert) => dispatch(uploadCertificate(pkey, cert))
   };
 }
 

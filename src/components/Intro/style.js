@@ -1,12 +1,12 @@
 import { StyleSheet } from 'react-native';
-import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { COLORS } from '../../constants/colors';
 import { FONTS } from '../../constants/fonts';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.blue
+    backgroundColor: COLORS.white
   },
   silde: {
     flex: 1,
@@ -14,40 +14,41 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   box1: {
-    flex: 0.8,
-    justifyContent: 'center',
+    flex: 0.45,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   box2: {
-    flex: 0.2,
-    justifyContent: 'center',
+    flex: 0.55,
+    justifyContent: 'flex-start'
   },
-  box3: {
-    flex: 1,
-    paddingHorizontal: 50
+  imageHeader: {
+    width: 210,
+    height: 180
   },
   number: {
     fontFamily: FONTS.pRegular,
     fontSize: FONTS.size78,
-    color: COLORS.blueLight,
+    color: COLORS.blue,
   },
   textTittle: {
     fontFamily: FONTS.pSemiBold,
-    fontSize: FONTS.size16,
-    color: COLORS.blueLight,
+    fontSize: FONTS.size18,
+    color: COLORS.blueMedium,
     textAlign: 'center',
     width: wp('80%'),
     lineHeight: 32,
   },
   textDescription: {
-    fontFamily: FONTS.pExtraLight,
+    fontFamily: FONTS.pRegular,
     fontSize: FONTS.size14,
-    color: COLORS.white,
+    color: COLORS.grayDark,
     textAlign: 'center',
     width: wp('85%'),
     lineHeight: 21,
   },
   activeDotStyle: {
-    backgroundColor: COLORS.white,
+    backgroundColor: COLORS.blueLight,
     width: 9,
     height: 9
   },
@@ -57,15 +58,18 @@ const styles = StyleSheet.create({
     height: 9
   },
   button: {
-    backgroundColor: 'transparent',
+    height: hp('7%'),
+    backgroundColor: COLORS.blueLight,
     borderColor: COLORS.blueLight, 
     borderRadius: 30, 
     borderWidth: 1,
+    marginBottom: 10,
+    elevation: 1
   },
   buttonText: {
-    fontFamily: FONTS.pRegular, 
-    fontSize: FONTS.size14, 
-    color: COLORS.blueLight,
+    fontFamily: FONTS.pBold, 
+    fontSize: FONTS.size16, 
+    color: COLORS.white,
     top: 2
   }
 });

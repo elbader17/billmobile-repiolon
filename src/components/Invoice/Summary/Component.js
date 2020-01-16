@@ -53,8 +53,9 @@ class InvoiceSummary extends React.Component {
     if (this.props.fiscalIdentity.name==='fc') {
       return(
         <View style={style.boxCustomer}>
+          <Text style={style.textRegular12Blue}>Datos del Receptor</Text>
           <Text style={style.textRegular16GrayDark}>Consumidor Final</Text>
-          <Text style={style.textLight14BlueMedium}>Documento: {this.props.fiscalIdentity.identification}</Text>
+          <Text style={style.textRegular14GrayDark}>Documento: {this.props.fiscalIdentity.identification}</Text>
         </View>
       )
     } else {
@@ -76,6 +77,9 @@ class InvoiceSummary extends React.Component {
   showInfoItems = () => {
     return(
       <View style={style.boxListItemsSummary}>
+        <Text style={style.textRegular12Blue}>
+          Detalle Producto/Servicio
+        </Text>
         <ScrollView>
           {this.props.items.map((item, index) => (
             <View key={index}>
@@ -116,15 +120,23 @@ class InvoiceSummary extends React.Component {
           
           <View style={style.boxHeaderSummary}>
             <View style={style.inLineSpaceBetween}>
-              <Text style={style.textRegular16Blue}>{"Factura-C"}</Text>
-              <Text style={style.textRegular16Blue}>{presentInvoiceDate(this.props.invoiceDate)}</Text>
+              <Text style={style.textRegular12Blue}>Tipo de Comprobante</Text>
+              <Text style={style.textRegular12Blue}>Fecha de Emisión</Text>
+            </View>
+            <View style={style.inLineSpaceBetween}>
+              <Text style={[style.textRegular16GrayDark,{marginLeft: 15}]}>
+                {"Factura-C"}
+              </Text>
+              <Text style={[style.textRegular16GrayDark,{marginRight: 15}]}>
+                {presentInvoiceDate(this.props.invoiceDate)}
+              </Text>
             </View>
           </View>
           
           <View style={style.boxInfoCustomerSummary}>
             {this.showInfoCustomer()}
           </View>
-
+          
           {this.showInfoItems()}
 
           <View style={style.boxTotalSummary}>

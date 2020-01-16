@@ -5,7 +5,7 @@ import { Button } from "react-native-elements";
 import LoadingIndicator from '../../Loading';
 import ListItems from './ListItems';
 import { COLORS } from '../../../constants/colors';
-import { IconBack, IconMore } from '../../../constants/icons';
+import { IconBack, IconMore, IconSearch } from '../../../constants/icons';
 import { orderByName } from '../../../utils/functions';
 import style from '../style';
 
@@ -26,7 +26,6 @@ class ItemList extends React.Component {
   static navigationOptions = ({navigation}) => {
     return {
       title: 'Listado de Items',
-      headerStyle: { backgroundColor: COLORS.blue, elevation: 0 },
       headerTitleStyle: style.headerText,
       headerTintColor: 'white',
       headerLeft: (
@@ -61,6 +60,7 @@ class ItemList extends React.Component {
     else this.props.navigation.navigate('Invoice');
   }
   navigateToEditItem = (item) => {
+    console.log(item);
     if (this.props.type === 'collection')
       this.props.navigation.navigate('EditItem', { item });
     else this.props.navigation.navigate('EditInvoiceItem', { item });
@@ -123,14 +123,14 @@ class ItemList extends React.Component {
           TouchableComponent={TouchableOpacity}
           onPress={() => this.setState({isProduct: true})} 
           buttonStyle={ this.state.isProduct ? style.buttonSelect : style.buttonSelectDisable }
-          titleStyle={ this.state.isProduct ? style.textRegular14White : style.textRegular14White }
+          titleStyle={ style.textRegular14GrayDark }
         />
         <Button
           title='Servicios'
           TouchableComponent={TouchableOpacity}
           onPress={() => this.setState({isProduct: false})}
           buttonStyle={ this.state.isProduct ? style.buttonSelectDisable : style.buttonSelect }
-          titleStyle={ this.state.isProduct ? style.textRegular14White : style.textRegular14White }
+          titleStyle={ style.textRegular14GrayDark }
         />
       </View>
     );
@@ -141,15 +141,19 @@ class ItemList extends React.Component {
       <View style={style.container}>
 
           <View style={style.containerBody}>
-            <SearchInput 
-              onChangeText={(term) => { this.setState({itemInputSearch: term}) }} 
-              placeholder={this.state.isProduct ? 'Buscar producto/s' : 'Buscar servicio/s'}
-              placeholderTextColor={COLORS.grayDark}
-              style={ style.search }
-            />
-
+            
             {this.renderSwtichButtons()}
             
+            <View style={style.containerSearch}>
+              {IconSearch}
+              <SearchInput 
+                onChangeText={(term) => { this.setState({itemInputSearch: term}) }} 
+                placeholder={this.state.isProduct ? 'Buscar producto/s' : 'Buscar servicio/s'}
+                placeholderTextColor={COLORS.grayDark}
+                style={ style.search }
+              />
+            </View>
+
             <View style={style.boxItems}>
               <ScrollView>
                 {this.state.loading ? this.renderLoading() : this.renderItems()}
@@ -163,7 +167,7 @@ class ItemList extends React.Component {
                 title='Añadir Nuevo'
                 TouchableComponent={TouchableOpacity}
                 onPress={() => this.navigateToNewItem(this.state.isProduct) }
-                buttonStyle={ style.buttonNew }
+                buttonStyle={ style.buttonPrimary }
                 titleStyle={ style.textBold16White }
               />
             </View>

@@ -6,23 +6,38 @@ export const iconMenuBack = <Icon
   type='material-community' 
   name="menu-open" 
   size={30} 
-  color={COLORS.blueLight} 
+  color={COLORS.blue} 
   iconStyle={{marginLeft:10}}/>
 
 export const IconTrash = props => (
   <Icon 
     type='evilicon'
     name="trash" 
-    size={25} 
+    size={25}
+    iconStyle={{marginLeft: -3}}
     {...props} 
   />
 );
+
+export const IconEye = <Icon
+  name='eye'  
+  type='feather'
+  color={COLORS.grayDark}
+  size={18}
+/>
+
+export const IconEyeOff = <Icon
+  name='eye-off'  
+  type='feather'
+  color={COLORS.grayDark}
+  size={18}
+/>
 
 export const IconBack = <Icon 
   type='ionicon' 
   name='ios-arrow-back' 
   size={25} 
-  color={COLORS.blueLight} 
+  color={COLORS.blue} 
   iconStyle={{marginLeft: 15}}
 />
 
@@ -37,7 +52,7 @@ export const IconDocument = <Icon
   type='antdesign' 
   name="filetext1" 
   size={18} 
-  color={COLORS.blueLight} 
+  color={COLORS.blue} 
   iconStyle={{marginLeft: 15}}
 />
 
@@ -68,7 +83,7 @@ export const IconEdit = props => (
   <Icon 
     type='material'
     name="edit" 
-    color={COLORS.blueMedium} 
+    color={COLORS.blue} 
     {...props} 
   />
 );
@@ -77,7 +92,7 @@ export const IconCheck = <Icon
   type='antdesign'
   name="check" 
   size={20} 
-  color={COLORS.blueMedium} 
+  color={COLORS.white} 
 />
 
 //Icons Bottom Tab Navigator
@@ -108,6 +123,14 @@ export const IconCustomer = props => (
   />
 );
 
+export const IconCustomer2 = props => (
+  <Icon 
+    name="user"
+    type="feather"
+    {...props}
+  />
+);
+
 export const IconItem = props => (
   <Icon 
     name="shopping-cart"
@@ -122,7 +145,7 @@ export const IconChat = <Icon
   type='antdesign' 
   name='message1' 
   size={20} 
-  color={COLORS.blue} 
+  color={COLORS.blueLight} 
   iconStyle={{marginRight:8}}
 /> 
 
@@ -130,7 +153,7 @@ export const IconConfig = <Icon
   type='antdesign' 
   name='setting' 
   size={20} 
-  color={COLORS.blue} 
+  color={COLORS.blueLight} 
   iconStyle={{marginRight:8}} 
 />
 
@@ -138,13 +161,49 @@ export const IconClose = <Icon
   type='antdesign' 
   name='logout' 
   size={20} 
-  color={COLORS.blue} 
+  color={COLORS.blueLight} 
   iconStyle={{marginRight:8}} 
 />
 
 export const IconCloseDrawer = <Icon 
   type='antdesign' 
-  name='closecircle' 
+  name='close' 
   size={40} 
-  color={COLORS.blue} 
+  color={COLORS.blueLight} 
+/>
+
+export const IconMoney = <Icon 
+  type='materialicons' 
+  name='attach-money' 
+  size={30} 
+  color={COLORS.grayDark} 
+/>
+
+export const IconTag = <Icon 
+  type='antdesign' 
+  name='tago' 
+  size={25} 
+  color={COLORS.grayDark} 
+/>
+
+export const IconIdcard = <Icon 
+  type='antdesign' 
+  name='idcard' 
+  size={25} 
+  color={COLORS.grayDark} 
+/>
+
+export const IconSearch = <Icon 
+  type='feather' 
+  name='search' 
+  size={23} 
+  color={COLORS.grayDark} 
+/>
+
+export const IconBottom = <Icon 
+  type='feather' 
+  name='chevron-down' 
+  size={20} 
+  color={COLORS.white} 
+  iconStyle={{left: 10}}
 />

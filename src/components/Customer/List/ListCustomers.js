@@ -12,7 +12,7 @@ const ListCustomers = props => {
     return(
       <View style={{alignItems: 'center', marginTop: 25}}>
         <Text style={style.textRegular16GrayDark}>
-          No hay clientes cargados
+          ¡No hay clientes cargados!
         </Text>
       </View>
     )

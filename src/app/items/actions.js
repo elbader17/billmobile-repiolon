@@ -36,7 +36,10 @@ const createItem = ({ category, name, price }) => {
 
   return (dispatch) => {
     return fetch_api('/v1/items', 'POST', false, { resource })
-      .then((response) => dispatch(createItemAction(response.data)))
+      .then((response) => {
+        console.log(response)
+        return dispatch(createItemAction(response.data))
+      })
       .catch((error) => {
         console.log(error);
       });
@@ -47,6 +50,7 @@ const listItems = () => {
   return (dispatch) => {    
     return fetch_api('/v1/items', 'GET', false)
       .then(response => {
+        console.log(response)
         dispatch(itemListAction(response))
       })
       .catch(error => console.log(error))
@@ -63,6 +67,7 @@ const updateItem = ({id, category, name, price}) => {
   return (dispatch) => {
     return fetch_api(`/v1/items/${id}`,'PUT', false, { resource })
       .then((response) => {
+        console.log(response)
         const item = response.data;
         dispatch(updateItemAction(item.id, item.attributes.name, item.attributes.price));
       })

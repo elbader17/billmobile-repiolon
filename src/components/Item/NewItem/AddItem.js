@@ -1,49 +1,48 @@
 import React from 'react';
-import { View } from 'react-native';
-import { TextField } from 'react-native-material-textfield';
+import { View, TextInput, Text } from 'react-native';
 import PropTypes from 'prop-types';
-import { COLORS } from '../../../constants/colors';
 import style from '../style';
+import { IconMoney, IconTag } from '../../../constants/icons';
 
 const AddItem = props => {
   const placeholder = props.data.isProduct ? "Nombre del Producto" : "Concepto del Servicio";
-    return (
+  const displayName = props.data.errorName === undefined ? 'none' : 'flex';
+  const displayPrice = props.data.errorPrice === undefined ? 'none' : 'flex';
+  return (
       <View>
-        <TextField
-          titleTextStyle={style.textRegular12GrayDark}
-          label={placeholder}
-          labelTextStyle={style.textRegular12GrayDark}
-          value={props.data.name}
-          onChangeText={props.setName}
-          onFocus={props.setErrorName}
-          tintColor={COLORS.blue}
-          textColor= {COLORS.blue}
-          baseColor={COLORS.grayDark}
-          lineWidth={1}
-          labelFontSize={15}
-          labelPadding={6}
-          error={props.data.errorName}
-          errorColor={'red'}
-        />    
-        <TextField
-          title= {'$ ' + props.data.price }
-          titleTextStyle={style.textRegular12GrayDark}
-          label='Precio'
-          labelTextStyle={style.textRegular12GrayDark}
-          value={props.data.price}
-          placeholderTextColor={ COLORS.gray }
-          onChangeText={props.setPrice}
-          onFocus={props.setErrorPrice}
-          tintColor={COLORS.blue}
-          textColor= {COLORS.blue}
-          baseColor={COLORS.grayDark}
-          lineWidth={1}
-          labelFontSize={15}
-          labelPadding={6}
-          keyboardType='numeric'
-          error={props.data.errorPrice}
-          errorColor={'red'}
-        />        
+        <View style={style.containerInputWithIcon}>
+          {IconTag}
+          <TextInput
+            placeholder={placeholder} 
+            value={props.data.name}
+            onChangeText={props.setName}
+            onFocus={props.setErrorName}
+            style={style.inputWithIconName}
+          />  
+        </View>
+        <View style={{display: displayName, alignItems: 'center'}}>
+          <Text style={style.textRegular12Red}>
+            {props.data.errorName}
+          </Text>
+        </View>
+
+        <View style={style.containerInputWithIcon}>
+          {IconMoney}
+          <TextInput
+            keyboardType='numeric'
+            placeholder='0.00'
+            value={props.data.price}
+            onChangeText={props.setPrice}
+            onFocus={props.setErrorPrice}
+            style={style.inputWithIconPrice}
+          />  
+        </View>
+        
+        <View style={{display: displayPrice, alignItems: 'center'}}>
+          <Text style={style.textRegular12Red}>
+            {props.data.errorPrice}
+          </Text>
+        </View>    
       </View>
     );  
 }

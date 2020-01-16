@@ -1,13 +1,10 @@
 import React from 'react';
-import { Text, View } from 'react-native';
-import { TextField } from 'react-native-material-textfield';
+import { Text, View, TextInput, TouchableOpacity } from 'react-native';
 import { showMessage } from "react-native-flash-message";
-import LinearGradient from 'react-native-linear-gradient';
 import { Button } from "react-native-elements";
 import { withNavigation } from 'react-navigation';
 import { CODE_CONFIRM } from '../../../constants/regular_expressions'
 import { messageConfirmAccount } from '../../../utils/messagesNotifications';
-import { COLORS, COLORGB2 } from '../../../constants/colors';
 import style from '../style';
 
 class Confirmation extends React.Component {
@@ -45,72 +42,61 @@ class Confirmation extends React.Component {
   render() {
     return(
       <View style={ style.container }>
-
         <View style={style.containerBody}>
+          
           <View style={style.containerHeader}>
-            <Text style={style.textRegular18Blue}>
+            <Text style={style.textBold18BlueMedium}>
               Verificación de Cuenta
             </Text>
             <Text style={style.textRegular12GrayDark}>
               Se envió el Código de Confirmación a su email.
             </Text>
           </View>
+
           <View style={style.containerInputs}>
-            <TextField
-              titleTextStyle={style.textRegular12GrayDark}
-              labelTextStyle={style.textRegular12GrayDark}
-              label="Email a Verificar"
+            <Text style={[style.textRegular14Gray, {textAlign: 'left'}]}>
+              Email a Verificar
+            </Text>
+            <TextInput
+              placeholder={'Email'} 
               value= { this.state.confirmationEmail }
               onChangeText={ (value) => this.setState({ confirmationEmail: value }) }
-              baseColor={COLORS.grayDark}
-              tintColor={COLORS.blue}
-              textColor= {COLORS.blue}
-              labelFontSize={12}
-              lineWidth={1}
-              inputContainerPadding={6}
-              error={this.state.errorName}
-              errorColor={COLORS.redMedium}
+              style={style.inputVerify}
             />
-              
-            <TextField
-              titleTextStyle={style.textRegular12GrayDark}
-              labelTextStyle={style.textRegular12GrayDark}
-              title = 'Número de 6 Dígitos'
-              label="Código de Confirmación"
-              onChangeText={ (value) => this.setState({ confirmationCode: value }) }
+            <Text style={[style.textRegular14Gray, {textAlign: 'left'}]}>
+              Código de Verificación
+            </Text>
+            <TextInput
+              placeholder={'Número de 6 Dígitos'} 
               keyboardType='numeric'
-              baseColor={COLORS.grayDark}
-              tintColor={COLORS.blue}
-              textColor= {COLORS.blue}
-              labelFontSize={12}
-              lineWidth={1}
-              inputContainerPadding={6}
-              error={this.state.errorName}
-              errorColor={COLORS.redMedium}
-              />
-            </View>
-            <View style={style.containerButtons}>
-              <Button
+              onChangeText={ (value) => this.setState({ confirmationCode: value }) }
+              style={style.inputVerify}
+            />
+    
+            <Button
                 title='Verificar Cuenta'
+                TouchableComponent={TouchableOpacity}
                 testID={'submitConfirmation'}
                 onPress={ this.handleConfirmationCode }
-                buttonStyle={[style.buttonSignTwo,{marginBottom: 15}]}
-                titleStyle={ style.textRegular16White }
+                buttonStyle={[style.buttonSignTwo,{marginTop: 15}]}
+                titleStyle={ style.textBold14White }
                 disabled={ !this.validateData() }
                 loading = {this.state.loading}
-              />
-
+              /> 
+            
+            </View>
+          </View>    
+            <View style={[style.containerFooter,{alignItems: 'center'}]}>
               <Button
                 title='Cancelar'
+                TouchableComponent={TouchableOpacity}
                 testID={'submitConfirmation'}
                 onPress={ this.navigateAuth }
                 buttonStyle={ style.buttonSignTwo }
-                titleStyle={ style.textRegular16White }
+                titleStyle={ style.textBold14White }
               />
             </View>
 
-        </View>    
-     
       </View>
     )
   }

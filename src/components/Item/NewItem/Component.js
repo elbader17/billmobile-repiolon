@@ -1,11 +1,8 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
+import { View, TouchableOpacity, ScrollView } from 'react-native';
 import { Button } from "react-native-elements";
-import LinearGradient from 'react-native-linear-gradient';
 import { validateAddItem, validateName, validatePrice } from '../../../utils/validations';
-import { GRADIANTBLUE2, GRADIANTBLUELIGHT, COLORGBL, COLORS } from '../../../constants/colors';
 import { iconMenuBack } from '../../../constants/icons';
-import { XY } from '../../../constants/gradientCoord';
 import AddItem from './AddItem';
 import style from '../style';
 
@@ -13,7 +10,6 @@ class NewItem extends React.Component {
   constructor(props) {
     super(props);
     const item = this.props.navigation.getParam('item', this.defaultItem());
-    console.log(item);
     const productOrService = item.category === 'product';
     const isProducts = this.props.navigation.getParam('isProduct', productOrService );
     
@@ -31,7 +27,6 @@ class NewItem extends React.Component {
   static navigationOptions = ({navigation}) => {
     return {
       title: 'Cargar Items',
-      headerStyle: { backgroundColor: COLORS.blue, elevation: 0 },
       headerTitleStyle: style.headerText,
       headerTintColor: 'white',
       headerLeft:( 
@@ -74,11 +69,11 @@ class NewItem extends React.Component {
     else {
       if (!validateName(name) && !validatePrice(price)) 
         this.setState({
-          errorPrice: 'Valor incorrecto o vacío', 
-          errorName: 'Campo inválido'
+          errorPrice: '*Precio no válido o vacío', 
+          errorName: '*Campo vacío'
         })  
-      else if (!validatePrice(price)) this.setState({errorPrice: 'Valor incorrecto o vacío'})
-        else this.setState({errorName: 'Campo inválido'})
+      else if (!validatePrice(price)) this.setState({errorPrice: '*Precio no válido o vacío'})
+        else this.setState({errorName: 'Campo vacío'})
     }
   }
 
@@ -101,20 +96,20 @@ class NewItem extends React.Component {
 
           <View style={style.containerBody}>
             <ScrollView>
-            <View style={[style.boxSelectButton, style.inLineSpaceAround]}>
+            <View style={[style.boxSelectButton, style.inLine]}>
               <Button
                 title='Productos'
                 TouchableComponent={TouchableOpacity}
                 onPress={() => this.setState({isProduct: true})} 
                 buttonStyle={ this.state.isProduct ? style.buttonSelect : style.buttonSelectDisable }
-                titleStyle={ this.state.isProduct ? style.textRegular14White : style.textRegular14White }
+                titleStyle={ style.textRegular14GrayDark }
               />
               <Button
                 title='Servicios'
                 TouchableComponent={TouchableOpacity}
                 onPress={() => this.setState({isProduct: false})}
                 buttonStyle={ this.state.isProduct ? style.buttonSelectDisable : style.buttonSelect }
-                titleStyle={ this.state.isProduct ? style.textRegular14White : style.textRegular14White }
+                titleStyle={ style.textRegular14GrayDark }
               />
             </View>
 
@@ -135,7 +130,7 @@ class NewItem extends React.Component {
               title={this.props.type==='invoice' ? 'Añadir al Comprobante' : 'Guardar'}
               TouchableComponent={TouchableOpacity}
               onPress={ this.saveItem }
-              buttonStyle={ style.buttonSave }
+              buttonStyle={ style.buttonPrimary }
               titleStyle={ style.textBold16White }
               loading={this.state.loading}
             /> 

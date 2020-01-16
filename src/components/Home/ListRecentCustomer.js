@@ -7,11 +7,11 @@ import style from './style';
 import { COLORS } from '../../constants/colors';
 
 const ListRecentCustomer = props => {
-    if (props.customers === null ) {
+    if (props.invoices.length === 0 ) {
       return (
-        <View>
-          <Text>
-            No hay Clientes recientes
+        <View style={{ alignItems: 'center', marginTop: 30}}>
+          <Text style={style.textRegular16GrayDark}>
+            !No posee Clientes recientes!
           </Text>
         </View>
       )
