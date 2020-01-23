@@ -10,8 +10,8 @@ export const dataChart = {
 };
 
 export const dataConfig = {
-  backgroundGradientFrom: COLORS.white,
-  backgroundGradientTo: COLORS.white,
+  backgroundGradientFrom: COLORS.blueLight,
+  backgroundGradientTo: COLORS.blueLight,
   decimalPlaces: 1,
-  color: (opacity = 1) => `rgba(0, 40, 70, ${opacity})`,
+  color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
 };

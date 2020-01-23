@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import InvoiceSummary from './Component';
-import { confirmInvoice } from '../../../app/invoices/actions';
+import { confirmInvoice, resetCurrentInvoice, getInvoice } from '../../../app/invoices/actions';
+import { getCertificate } from '../../../app/user_service/actions';
 
 const mapStateToProps = state => ({
   jwtToken: state.authentication.jwtToken,
@@ -9,6 +10,7 @@ const mapStateToProps = state => ({
   invoiceDate: state.invoices.currentInvoice.invoiceDate,
   invoiceTotal: state.invoices.currentInvoice.total,
   invoiceId: state.invoices.currentInvoice.id,
+  invoiceUrl: state.invoices.currentInvoice.url,
   voucherType: state.invoices.currentInvoice.voucherType,
 });
 
@@ -17,6 +19,13 @@ function mapDispatchToProps(dispatch) {
     confirmInvoice: (attributes) => (
       dispatch(confirmInvoice(attributes))   
     ),
+    getInvoice: (id) => (
+      dispatch(getInvoice(id))   
+    ),
+    resetCurrentInvoice: () => (
+      dispatch(resetCurrentInvoice())
+    ),
+    getCertificate: () => dispatch(getCertificate()),
   };
 }
 

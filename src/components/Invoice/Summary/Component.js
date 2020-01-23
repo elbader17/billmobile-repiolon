@@ -12,7 +12,8 @@ class InvoiceSummary extends React.Component {
     this.state = {
       impuesto: '',
       subTotal: '',
-      loading: false
+      loading: false,
+      urlInvoiceProcessed: ''
     };
   }
 
@@ -32,17 +33,30 @@ class InvoiceSummary extends React.Component {
   
   confirmInvoice = () => {
     this.setState({loading: true})
-    const { confirmInvoice, navigation } = this.props;
+    const { confirmInvoice, navigation, getCertificate } = this.props;
     const attributes = {
       invoice_id: this.props.invoiceId,
       total: this.props.invoiceTotal,
-      state: 'confirm'
+      state: 'confirmed'
     }
     confirmInvoice(attributes)
-      .then(() => { 
-        this.setState({loading: false});
-        navigation.navigate('Opinion') 
-      });
+      .then((response) => {
+        console.log(response)
+        this.setState({loading: false, urlInvoiceProcessed: this.props.invoiceUrl});
+        if (response) {
+          this.props.resetCurrentInvoice();
+          navigation.navigate('Opinion', {ok: response, url: this.state.urlInvoiceProcessed}) 
+        }
+        else {
+          /*getCertificate()
+            .then(response => {
+              console.log('certificate', response);
+              if (response) navigation.navigate('Opinion', {ok: false, url: 'errorAfip'});
+              else navigation.navigate('Opinion', {ok: false, url: 'errorCert'});
+            })*/
+            navigation.navigate('Opinion', {ok: false, url: '*Verifique sus Certificados'})
+        }
+      })
   }
   
   navigateToInvoice = () => { this.props.navigation.navigate('Invoice') }
@@ -81,32 +95,34 @@ class InvoiceSummary extends React.Component {
           Detalle Producto/Servicio
         </Text>
         <ScrollView>
-          {this.props.items.map((item, index) => (
-            <View key={index}>
-              <View style={[style.inLineSpaceBetween, style.lineBottom]}>
-                <View style={style.boxItems1}>
-                  <Text style={style.textRegular14GrayDark} numberOfLines={1}>
-                    {item.name}
-                  </Text>
-                </View>
-                <View style={[style.inLineSpaceBetween, style.boxItems2]}>
-                  <Text numberOfLines={1}>
-                    <Text style={style.textLight14BlueMedium}>
-                      {item.quantity}x{' '}
+          {this.props.items.map((item, index) => {
+            return ( 
+              <View key={index}>
+                <View style={[style.inLineSpaceBetween, style.lineBottom]}>
+                  <View style={style.boxItems1}>
+                    <Text style={style.textRegular14GrayDark} numberOfLines={1}>
+                      {item.name}
                     </Text>
-                    <Text style={style.textLight14GrayDark}>
-                      ${item.price}
+                  </View>
+                  <View style={[style.inLineSpaceBetween, style.boxItems2]}>
+                    <Text numberOfLines={1}>
+                      <Text style={style.textLight14BlueMedium}>
+                        {item.quantity}x{' '}
+                      </Text>
+                      <Text style={style.textLight14GrayDark}>
+                        ${item.price}
+                      </Text>
                     </Text>
-                  </Text>
-                </View>
-                <View style={style.boxItems3}>
-                  <Text style={style.textLight16GrayDark}>
-                    ${item.price * item.quantity}
-                  </Text>
+                  </View>
+                  <View style={style.boxItems3}>
+                    <Text style={style.textLight16GrayDark}>
+                      ${item.price * item.quantity}
+                    </Text>
+                  </View>
                 </View>
               </View>
-            </View>
-          ))}
+            )
+          })}
         </ScrollView>
       </View>
     )

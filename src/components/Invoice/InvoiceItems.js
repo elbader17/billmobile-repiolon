@@ -16,7 +16,8 @@ class InvoiceItems extends React.Component {
       modalVisible: false,
       loading: false,
       loadingDelete: false,
-      itemActive: undefined
+      itemActive: undefined,
+      total: 0
     }
   }
 
@@ -59,12 +60,13 @@ class InvoiceItems extends React.Component {
   }
 
   render() {
-    console.log(this.props.items);
+    var count = 0;
     if (this.props.items.length != 0) {
       return (
         <View style={[style.containerItemsInvoice,style.inColumnSpaceBetween]}>
           <ScrollView style={style.styleScroll}>
             {this.props.items.map((item) => {
+              count = parseInt(count) + (parseInt(item.price)*item.quantity);
               const conditionLoading = this.state.loadingDelete && item.id === this.state.itemActive;
               const textDelete =  this.state.loadingDelete ? COLORS.gray : COLORS.blue;
               return (
@@ -122,7 +124,7 @@ class InvoiceItems extends React.Component {
           <View style={style.boxItemsInvoiceTotal}>
             <View style={style.inLineSpaceBetween}>
               <Text style={style.textRegular16Blue}>TOTAL</Text>
-              <Text style={style.textRegular16Blue}>$ {this.props.total}</Text>
+              <Text style={style.textRegular16Blue}>$ {count}</Text>
             </View>
           </View>
 

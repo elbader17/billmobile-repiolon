@@ -7,7 +7,6 @@ import ModalVoucherTYpe from './ModalVoucherType';
 import InvoiceCustomer from './InvoiceCustomer';
 import InvoiceItems from './InvoiceItems';
 import { validateData, validateDni } from '../../utils/validations';
-import { presentInvoiceDate } from '../../utils/date';
 import { 
   messageItemsIncomplete, 
   messageCustomerIncomplete 
@@ -23,11 +22,12 @@ class Invoice extends React.Component {
     const { voucherType, fiscalIdentity } = this.props;
     this.state = {
       voucherType,
-      invoiceDate: new Date(this.props.invoiceDate),
+      invoiceDate: new Date(),
       fcIdentification: undefined,
       showCustomer: fiscalIdentity.name != '',
       modalVisible: false, //Show Modal Voucher Type
       loading: false, //For buttons
+      loadingContinue: false,
       quantity: 1, //Cant items
       validIdentity: true
     }
@@ -69,7 +69,14 @@ class Invoice extends React.Component {
           ], {cancelable: false},
         );
       } 
-      else this.props.navigation.navigate('InvoiceSummary');
+      else {
+        this.setState({loadingContinue: true})
+        this.props.getInvoice(this.props.invoiceId)
+          .then(() => {
+            this.props.navigation.navigate('InvoiceSummary')
+            this.setState({loadingContinue: false})
+          })
+      }
     } else 
       if (fiscalIdentity.name != '') 
         showMessage(messageItemsIncomplete);
@@ -148,7 +155,6 @@ class Invoice extends React.Component {
   }
 
   render() {
-    var date = presentInvoiceDate(this.state.invoiceDate);
     const { fiscalIdentity } = this.props;
     const { showCustomer, validIdentity } = this.state;
     const displayDni = validIdentity ? 'none' : 'flex';
@@ -185,7 +191,6 @@ class Invoice extends React.Component {
                     mode="date"
                     format="DD-MM-YYYY"
                     minDate="01-12-2019"
-                    //maxDate={this.state.invoiceDate}
                     showIcon={false}
                     customStyles={{
                       dateText: style.textRegular14White,
@@ -216,7 +221,7 @@ class Invoice extends React.Component {
               { this.renderCustomer() }
               
               <Button
-                title=' Cambiar Cliente'
+                title=' Otro Cliente'
                 testID='addCustomer'
                 TouchableComponent={TouchableOpacity}
                 icon={IconAddCustomer}
@@ -257,6 +262,7 @@ class Invoice extends React.Component {
               onPress={ this.navigateToSummaryInvoice }
               buttonStyle={style.buttonContinue}  
               titleStyle={ style.textBold16White }
+              loading={this.state.loadingContinue}
             />
           </View>
 

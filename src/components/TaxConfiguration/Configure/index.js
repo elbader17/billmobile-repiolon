@@ -9,7 +9,7 @@ const mapStateToProps = state => ({
 
 function mapDispatchToProps(dispatch) {
   return {
-    updateFiscalIdentity: (name, cuit) => dispatch(updateFiscalIdentity(name, cuit)),
+    updateFiscalIdentity: (name, cuit, category) => dispatch(updateFiscalIdentity(name, cuit, category)),
     getCertificate: () => dispatch(getCertificate()),
     updateCertificate: (pkey, cert) => dispatch(uploadCertificate(pkey, cert))
   };

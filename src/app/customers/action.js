@@ -47,7 +47,6 @@ const listCustomers = () => {
   return (dispatch) => {
     return fetch_api('/v1/fiscal_identities', 'GET', false)
       .then((resources) => {
-        console.log(resources)
         dispatch(customerListAction(resources))
       })
       .catch((error) => console.log(error));

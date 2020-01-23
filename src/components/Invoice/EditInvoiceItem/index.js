@@ -7,8 +7,8 @@ const mapStateToProps = state => ({});
 function mapDispatchToProps(dispatch) {
   return {
     saveItem: (attributes) => {
-      const {id, category, name, price} = attributes;
-      return dispatch(updateInvoiceItem(id, {category, name, price}))
+      const {id, category, name, price, quantity} = attributes;
+      return dispatch(updateInvoiceItem(id, {category, name, price}, quantity))
     },
     type: 'invoice'
   };

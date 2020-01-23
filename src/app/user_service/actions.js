@@ -26,9 +26,9 @@ function getCertificateAction(values) {
   };
 }*/
 
-const updateFiscalIdentity = function (name, cuit) {
+const updateFiscalIdentity = function (name, cuit, category) {
   const resource = {
-    category: 'monotributo',
+    category: category,
     name,
     identification: cuit,
   };

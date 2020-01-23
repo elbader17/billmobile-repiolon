@@ -6,8 +6,10 @@ import {IconRight} from '../../constants/icons'
 import style from './style';
 import { COLORS } from '../../constants/colors';
 
+
 const ListRecentCustomer = props => {
-    if (props.invoices.length === 0 ) {
+    const listProcessed = props.invoices.filter(invoice => invoice.attributes.state === 'processed');
+    if (listProcessed.length === 0 || props.invoices.length === 0 ) {
       return (
         <View style={{ alignItems: 'center', marginTop: 30}}>
           <Text style={style.textRegular16GrayDark}>
@@ -17,17 +19,17 @@ const ListRecentCustomer = props => {
       )
     }
     return props.invoices
-      .filter(invoice => invoice.attributes.state === 'confirm')
+      .filter(invoice => invoice.attributes.state === 'processed')
       .map((invoice) => {
-        const customer = props.customers.find(
-          customer => customer.id === invoice.relationships.fiscal_identity.data.id
-        );
         return (
           <View key={invoice.id} style={{ paddingLeft: 7, marginVertical: 3, paddingVertical: 0, borderRadius: 7, borderBottomWidth: 0.5, borderColor: COLORS.grayLight}}>
             <View style={style.inLineSpaceBetween} >
               
               <Text style={style.textRegular14GrayDark}>
-                {customer.attributes.name === 'fc' ? 'Consumidor Final': customer.attributes.name}
+                <Text>
+                  {invoice.attributes.invoice_type === 'fc' ? 'Factura-C | ' : 'Comprobante | '}
+                </Text>
+                {invoice.attributes.invoice_date}
               </Text>
               
               <Button

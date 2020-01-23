@@ -4,7 +4,8 @@ import {
   LIST_INVOICE,
   GET_INVOICE,
   UPDATE_INVOICE,
-  CONFIRM_INVOICE
+  CONFIRM_INVOICE,
+  RESET_INVOICE
 } from './constants';
 import {
   CREATE_INVOICE_ITEM,
@@ -14,6 +15,7 @@ import {
 import {
   ADD_FISCAL_IDENTITY_TO_INVOICE,
 } from '../fiscal_identity/constants';
+
 
 function defaultCurrentInvoice() {
   return {
@@ -35,18 +37,13 @@ const initialState = {
 function setCurrentInvoice({ draftState, invoice }) {
   const { invoice_date, invoice_type, total, url } = invoice.attributes;
   draftState.currentInvoice.id = invoice.id;
-  draftState.currentInvoice.invoiceDate = new Date(invoice_date);
+  const day = invoice_date.slice(8,10);
+  const month = invoice_date.slice(5,7);
+  const year = invoice_date.slice(0,4);
+  draftState.currentInvoice.invoiceDate = new Date(year+","+month+","+day);
   draftState.currentInvoice.voucherType = invoice_type;
   draftState.currentInvoice.total = total;
   draftState.currentInvoice.url = url;
-  return draftState;
-}
-
-function setCurrentInvoiceTotal({ draftState, invoice, add }) {
-  const { invoice_id, price } = invoice.attributes;
-  draftState.currentInvoice.id = invoice_id;
-  if (add) draftState.currentInvoice.total = parseInt(draftState.currentInvoice.total) + parseInt(price);
-  else draftState.currentInvoice.total -= price;
   return draftState;
 }
 
@@ -113,6 +110,7 @@ function updateInvoiceItem({ draftState, invoiceItem }) {
 }
 
 function resetCurrentInvoice({ draftState }) {
+  console.log('Reset Invoice');
   draftState.currentInvoice = defaultCurrentInvoice();
   return draftState;
 }
@@ -130,11 +128,9 @@ export default addInvoiceReducer = (state = initialState, action) => {
           draftState,
           invoice: action.invoice,
         });
-      case 'UPDATE_INVOICE_TOTAL':
-        return setCurrentInvoiceTotal({
-          draftState,
-          invoice: action.invoice,
-          add: action.add
+      case RESET_INVOICE:
+        return resetCurrentInvoice({
+          draftState
         });
       case LIST_INVOICE:
         return setInvoices({
@@ -170,6 +166,10 @@ export default addInvoiceReducer = (state = initialState, action) => {
         return setInvoiceItems({
           draftState,
           invoice_items: action.invoiceItems,
+        });
+      case LIST_INVOICE_ITEMS:
+        return resetCurrentInvoice({
+          draftState
         });
       default:
         return draftState;

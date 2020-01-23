@@ -13,6 +13,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import { Button, Icon } from "react-native-elements";
 import { COLORS, GRADIANTBLUELIGHT } from '../../constants/colors';
 import { FONTS } from '../../constants/fonts';
+import { widthPercentageToDP } from 'react-native-responsive-screen';
 
 class Opinion extends React.Component {
 
@@ -20,49 +21,84 @@ class Opinion extends React.Component {
     super(props);
     this.state = {
       modalVisible: false,
-      toBegin: false
+      url: this.props.navigation.getParam('url', ''),
+      error: ''
     }
   }
 
   opinion = () => {
-    this.setState({modalVisible: true});
-  }
-
-  showPdf = () => {
-    this.setState({modalVisible: false, toBegin: true});
-    Linking.canOpenURL(this.props.invoiceUrlPdf).then(supported => {
+    //this.setState({modalVisible: true});
+    Linking.canOpenURL(this.state.url).then(supported => {
       if (supported) {
-        Linking.openURL(this.props.invoiceUrlPdf);
+        Linking.openURL(this.state.url);
       } else {
+        alert('Error al abrir archio' + this.props.url)
         console.log("Don't know how to open URI: " + this.props.url);
       }
     });
   }
 
-  render() {
-    const logo = require('../../images/logoBill.png')
+  showPdf = () => {
+    this.setState({modalVisible: false});
+    Linking.canOpenURL(this.state.url).then(supported => {
+      if (supported) {
+        Linking.openURL(this.state.url);
+      } else {
+        console.log("Don't know how to open URI: " + this.state.url);
+      }
+    });
+  }
+
+  vistWeb = () => {
+    Linking.canOpenURL('http://www.billmobile.tech').then(supported => {
+      if (supported) {
+        Linking.openURL('http://www.billmobile.tech');
+      } else {
+        console.log("Don't know how to open URI: www.billMobile.tech");
+      }
+    });
+  }
+
+  renderInvoiceState = () => {
     const invoice = require('../../images/invoiceok.png')
+    const invoiceError = require('../../images/invoicerror.png')
+    if (this.props.navigation.getParam('ok',false)) {
+      return(
+        <View style={{alignItems: 'center'}}>
+          <Image source={ invoice } style={ styles.imageInvoice } />
+          <Text style={styles.textLight18GrayDark}>
+            ¡Comprobante creado con Éxito!
+          </Text>
+        </View>
+      )
+    } else {
+      return (
+        <View style={{alignItems: 'center'}}>
+          <Image source={ invoiceError } style={ styles.imageInvoice } />
+          <Text style={styles.textLight18GrayDark}>
+            ¡Error al Generar el Comprobante!
+          </Text>
+          <Text style={styles.textRegular14Red}>
+            {this.state.url}
+          </Text>
+        </View>
+      )
+    }
+  }
+
+  render() {
+    console.log(this.state.url);
+    const logo = require('../../images/logoBill.png')
     return(
       <View style={styles.container}>
         <View style={styles.boxLogo}>
           <Image source={ logo } style={ styles.imageHeader } />
-          <LinearGradient
-            colors={ GRADIANTBLUELIGHT }
-            start={{x: 0.0, y: 1.0}} 
-            end={{x: 1.0, y: 1.0}}
-            style={styles.textSubLogo}
-          >
-            <Text style={styles.textRegular14White}>
-              Tu asesor contable online!
-            </Text>
-          </LinearGradient>  
         </View>
         <View style={styles.boxInfo}>
-          <Image source={ invoice } style={ styles.imageInvoice } />
-          <Text style={styles.textLight18GrayDark}>
-            Comprobante creado con ¡Éxito!
-          </Text>
-          <View style={{flexDirection: 'row'}}>
+
+          {this.renderInvoiceState()}
+          
+          <View style={{}}>
             <Button
               title='Descargar '
               icon = {<Icon
@@ -73,17 +109,17 @@ class Opinion extends React.Component {
               iconRight
               TouchableComponent={TouchableOpacity}
               onPress={() => this.opinion()}
-              buttonStyle={ styles.button }
+              buttonStyle={[
+                styles.button,
+                this.props.navigation.getParam('ok', false) ? {display: 'flex'} : {display: 'none'}
+              ]}
               titleStyle={ styles.textBold14Blue }
             />
             <Button
               title='Ir a Inicio'
               TouchableComponent={TouchableOpacity}
               onPress={() => this.props.navigation.navigate('Home')}
-              buttonStyle={[
-                styles.button, 
-                this.state.toBegin ? { display: 'flex'} : { display: 'none'}
-              ]}
+              buttonStyle={styles.button}
               titleStyle={ styles.textBold14Blue }
             />
           </View>
@@ -95,11 +131,19 @@ class Opinion extends React.Component {
             colors={ GRADIANTBLUELIGHT }
             start={{x: 0.0, y: 1.0}} 
             end={{x: 1.0, y: 1.0}}
-            style={{flex: 1,alignItems: 'center', borderTopLeftRadius: 100, borderTopRightRadius: 100, paddingVertical: 15}}
+            style={{flex: 1, paddingVertical: 10 ,alignItems: 'center', borderTopLeftRadius: 100, borderTopRightRadius: 100}}
           >
+          <TouchableOpacity onPress={this.vistWeb}>
             <Text style={styles.textBold14Blue}>
               ¡Gracias por utilizar Bill Mobile!
             </Text>
+            <Text style={styles.textLight12white}>
+              <Text>Visitá </Text>
+                <Text style={styles.textRegular12White}>
+                  www.billmobile.tech
+                </Text>
+            </Text>
+          </TouchableOpacity>
           </LinearGradient>
         </View>   
 
@@ -158,7 +202,7 @@ const styles = StyleSheet.create({
   boxInfo: {
     flex: 0.5,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
   },
   boxFooter: {
     flex: 0.15,
@@ -166,14 +210,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   imageHeader: {
-    width: 200,
-    height: 120
+    width: 230,
+    height: 130
   },
   imageInvoice: {
     width: 120,
     height: 120,
-    opacity: 0.5,
-    marginBottom: 10
+    opacity: 0.9,
+    marginBottom: 15
   },
   containerModal: {
     flex: 1, 
@@ -212,6 +256,18 @@ const styles = StyleSheet.create({
     color: COLORS.blue,
     alignItems: 'center',
   },
+  textRegular14Red: {
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size16,
+    color:'red',
+    alignItems: 'center',
+  },
+  textRegular12White: {
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size12,
+    color: COLORS.white,
+    alignItems: 'center',
+  },
   textRegular14White: {
     fontFamily: FONTS.pRegular,
     fontSize: FONTS.size14,
@@ -219,18 +275,26 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   textLight18GrayDark: {
-    fontFamily: FONTS.pRegular,
-    fontSize: FONTS.size18,
+    fontFamily: FONTS.pExtraLight,
+    fontSize: FONTS.size16,
     color: COLORS.grayDark,
+    alignItems: 'center',
+  },
+  textLight12white: {
+    fontFamily: FONTS.pExtraLight,
+    fontSize: FONTS.size12,
+    color: COLORS.white,
+    textAlign: 'center',
     alignItems: 'center',
   },
   button: {
     height: 45,
+    width: widthPercentageToDP('90%'),
     backgroundColor: COLORS.blueLight,
     borderWidth: 1,
     borderRadius: 25,
     borderColor: COLORS.blueLight,
-    marginTop: 25,
+    marginTop: 15,
     paddingHorizontal: 20,
     paddingVertical: 5,
     marginHorizontal: 10,

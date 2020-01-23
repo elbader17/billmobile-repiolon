@@ -8,23 +8,28 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   containerHeader: { 
-    flex:0.55,
+    flex:0.45,
+    justifyContent: 'center',
     backgroundColor: COLORS.blue,
-    borderBottomLeftRadius: 7,
-    borderBottomRightRadius: 7,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
     elevation: 1
   },
   containerChart: {
-    backgroundColor: COLORS.white,
-    marginTop: 15,
+    backgroundColor: COLORS.blueLight,
     marginHorizontal: 10,
     paddingBottom: 5, 
     borderRadius: 7, 
     elevation: 1
   },
+  containerStatics: {
+    backgroundColor: COLORS.grayLight,
+    justifyContent: 'center',
+    flex:0.20,
+  },
   containerListCustomer: {
     backgroundColor: COLORS.grayLight,
-    flex:0.45,
+    flex:0.35,
     justifyContent: 'flex-end',
   },
   containerFooter: { 
@@ -41,7 +46,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     paddingHorizontal: 20,
     borderRadius: 7,
-    elevation: 1.5
+    elevation: 2
   },
   scrollCustomers: {
     height: hp('28%'),
@@ -57,8 +62,9 @@ const styles = StyleSheet.create({
   },
   listCustomers: {
     borderBottomWidth: 0.5,
+    borderTopWidth: 0.5,
     borderRadius: 5,
-    borderColor: COLORS.grayMedium
+    borderColor: COLORS.grayLight
   },
   lineBlue: {
     flex: 1,
@@ -113,7 +119,7 @@ const styles = StyleSheet.create({
     top: 3
   },
   textRegular14GrayDark: {
-    fontFamily: FONTS.pExtraLight,
+    fontFamily: FONTS.pRegular,
     fontSize: FONTS.size14,
     color: COLORS.grayDark,
     top: 3
@@ -151,7 +157,7 @@ const styles = StyleSheet.create({
     top: 3
   },
   textLight14White: {
-    fontFamily: FONTS.pExtraLight,
+    fontFamily: FONTS.pRegular,
     fontSize: FONTS.size14,
     color: COLORS.grayDark,
     top: 1
@@ -163,7 +169,7 @@ const styles = StyleSheet.create({
     top: 1
   },
   textRegular14Blue: {
-    fontFamily: FONTS.pExtraLight,
+    fontFamily: FONTS.pRegular,
     fontSize: FONTS.size14,
     color: COLORS.blue,
     top: 3
@@ -212,7 +218,7 @@ const styles = StyleSheet.create({
     top: 1
   },
   textRegular22BlueMedium: {
-    fontFamily: FONTS.pExtraLight,
+    fontFamily: FONTS.pRegular,
     fontSize: FONTS.size22,
     color: COLORS.blueMedium
   },
@@ -227,7 +233,7 @@ const styles = StyleSheet.create({
     height: 1
   },
   buttonAll: {
-    height: hp('5%'),
+    height: hp('5.5%'),
     marginTop: 5,
     backgroundColor: COLORS.blueLight,
     borderRadius: 25,
@@ -253,7 +259,7 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.pRegular,
     fontSize: FONTS.size16,
     fontWeight: 'normal',
-    color: COLORS.blue,
+    color: COLORS.white,
     top: 3
   }
 });

@@ -4,7 +4,8 @@ import {
   UPDATE_INVOICE,
   LIST_INVOICE,
   GET_INVOICE,
-  CONFIRM_INVOICE
+  CONFIRM_INVOICE,
+  RESET_INVOICE
 } from './constants';
 
 function createInvoiceAction(invoice) {
@@ -18,14 +19,6 @@ function updateInvoiceAction(invoice) {
   return {
     type: UPDATE_INVOICE,
     invoice,
-  };
-}
-
-function updateInvoiceTotalAction(invoice, add) {
-  return {
-    type: 'UPDATE_INVOICE_TOTAL',
-    invoice,
-    add
   };
 }
 
@@ -48,6 +41,12 @@ function confirmInvoiceAction(invoice) {
     type: CONFIRM_INVOICE,
     invoice,
   };
+}
+
+function resetCurrentInvoiceAction() {
+  return {
+    type: RESET_INVOICE
+  }
 }
 
 const createInvoice = (invoiceDate, voucherType) => {
@@ -96,7 +95,7 @@ const getInvoice = (id) => {
   return (dispatch) => {
     return fetch_api(`/v1/invoices/${id}`, 'GET', false)
       .then((response) => {
-        console.log(response);
+        console.log(response.data)
         dispatch(getInvoiceAction(response.data));
       })
       .catch((error) => {
@@ -117,11 +116,26 @@ const confirmInvoice = (attributes) => {
       .then((response) => {
         console.log(response);
         dispatch(confirmInvoiceAction(response.data));
+        return true;
       })
       .catch((error) => {
         console.log(error);
+        return false;
       });
   };
 };
 
-export { listInvoice, getInvoice, createInvoice, updateInvoice, confirmInvoice, updateInvoiceTotalAction };
+const resetCurrentInvoice = () => {
+  return dispatch => {
+    return dispatch(resetCurrentInvoiceAction());
+  }
+}
+
+export { 
+  listInvoice, 
+  getInvoice, 
+  createInvoice, 
+  updateInvoice, 
+  confirmInvoice, 
+  resetCurrentInvoice
+};

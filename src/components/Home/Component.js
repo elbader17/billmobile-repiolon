@@ -25,21 +25,18 @@ class Home extends React.Component {
 
   static navigationOptions = ({ navigation }) => ({
     title: 'Bill Mobile',
+    headerStyle: {backgroundColor: COLORS.blue},
     headerTitleStyle: style.headerText,
     headerLeft: (
       <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
-        <Icon type='feather' name='menu' size={25} color={COLORS.blue} iconStyle={{marginLeft: 10}}/>
+        <Icon type='feather' name='menu' size={25} color={COLORS.blueLight} iconStyle={{marginLeft: 10}}/>
       </TouchableOpacity>
     ),
   });
 
   componentWillMount(){
     this.props.listInvoice()
-      .then(() => (
-        this.props.getCustomerList()
-          .then(() => this.setState({loading: false}))
-        )
-      )
+      .then(() => this.setState({loading: false}))
   }
 
   componentDidMount() {
@@ -80,10 +77,10 @@ class Home extends React.Component {
 
         <View style={style.containerHeader}>
           <View style={style.containerChart}>
-          <View style={style.textFacPeriodo}>
+            <View style={style.textFacPeriodo}>
               <View style={style.inLine}>
                 <Icon type='feather' name="bar-chart" color={COLORS.blueMedium} size={15} iconStyle={{marginRight: 2}}/>
-                <Text style={style.textLight12GrayDark}>
+                <Text style={style.textRegular12Blue}>
                   Facturación del Período
                 </Text>
               </View>
@@ -91,7 +88,7 @@ class Home extends React.Component {
             <TouchableOpacity onPress={this.infoChart} activeOpacity={0.7}>
             <View>
               <LineChart
-                height={hp('30%')}
+                height={hp('29%')}
                 width={Dimensions.get('window').width-20}
                 style={style.styleChart}
                 data={dataChart}
@@ -101,10 +98,13 @@ class Home extends React.Component {
               />
             </View>
             </TouchableOpacity>
-          </View>
+          </View> 
 
-          <View style={{marginTop: 15}}>
-          <View style={style.inLineSpaceAround}>
+        </View>
+
+          <View style={style.containerStatics}>
+            
+            <View style={style.inLineSpaceAround}>
               <TouchableOpacity onPress={this.infoPendingCharges} activeOpacity={0.7}>
                 <View style={style.boxData}>
                   <View style={style.inColumn}>
@@ -131,19 +131,15 @@ class Home extends React.Component {
                 </View>
               </TouchableOpacity>
             </View>
-            </View>
-          </View>
-
-          <View>
           </View>
 
           <View style={style.containerListCustomer}>
-          <View style={style.scrollCustomers}>              
+            <View style={style.scrollCustomers}>              
               
-              <View style={style.inLineCenter}>
-                <Icon type='feather' name="user" color={COLORS.blueMedium} size={13} iconStyle={{marginRight: 2}}/>
-                <Text style={style.textLight12GrayDark}>
-                  Clientes Recientes
+              <View style={[style.inLineCenter, {marginBottom: 5}]}>
+                <Icon type='feather' name="file-text" color={COLORS.blueMedium} size={13} iconStyle={{marginRight: 2}}/>
+                <Text style={style.textRegular12Blue}>
+                  Comprobantes Recientes
                 </Text>
               </View>
               
@@ -152,17 +148,16 @@ class Home extends React.Component {
               </ScrollView>
 
               <Button
-                title='Ver todos'
+                title='Generar Nuevo'
                 TouchableComponent={TouchableOpacity}
-                onPress={ null }
+                onPress={ () => this.props.navigation.navigate('Invoice') }
                 buttonStyle={style.buttonAll}
-                disabled={this.props.invoices.length === 0}  
+                //disabled={this.props.invoices.length === 0}  
                 titleStyle={ style.textBold14White }
-                disabledTitleStyle={ style.textBold14White }
+                //disabledTitleStyle={ style.textBold14White }
                 />
 
             </View>
-
           </View>
           
         </View>
