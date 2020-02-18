@@ -2,7 +2,9 @@ import React from 'react';
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { Button } from "react-native-elements";
 import { presentInvoiceDate } from '../../../utils/date';
+import { nameByCategory } from '../../../utils/identity';
 import { IconBack } from '../../../constants/icons';
+import { VOUCHER_TYPES } from '../../../constants/invoice';
 import style from '../style';
 
 class InvoiceSummary extends React.Component {
@@ -58,6 +60,11 @@ class InvoiceSummary extends React.Component {
         }
       })
   }
+
+  presentVoucherType = () => {
+    const { voucherType } = this.props;
+    return VOUCHER_TYPES.find((v) => v.value === voucherType).label;
+  }
   
   navigateToInvoice = () => { this.props.navigation.navigate('Invoice') }
   setTotal = () => { this.total = this.subTotal + this.impuesto }
@@ -78,11 +85,11 @@ class InvoiceSummary extends React.Component {
             <Text style={style.textRegular16GrayDark}>
               {this.props.fiscalIdentity.name}
             </Text>
-            <Text style={style.textLight14BlueMedium}>CUIT : {this.props.fiscalIdentity.identification}</Text>
-            <Text style={style.textLight12GrayDark}>Localidad: {'Río Cuarto'}</Text>
-            <Text style={style.textLight12GrayDark}>Provincia: {'Córdoba'}</Text>
-            <Text style={style.textLight12GrayDark}>IVA: {'Responsable Inscripto'}</Text>
-            <Text style={style.textLight12GrayDark}>Domicilio Fiscal: {'Dean Funes 645'}</Text>
+            <Text style={style.textLight14BlueMedium}>CUIT: {this.props.fiscalIdentity.identification}</Text>
+            <Text style={style.textLight12GrayDark}>Razón Social: {this.props.fiscalIdentity.business_name}</Text>
+            <Text style={style.textLight12GrayDark}>Localidad: {this.props.fiscalIdentity.city}</Text>
+            <Text style={style.textLight12GrayDark}>IVA: { nameByCategory(this.props.fiscalIdentity.category) }</Text>
+            <Text style={style.textLight12GrayDark}>Domicilio Fiscal: {this.props.fiscalIdentity.business_address}</Text>
           </View>
         )
     }
@@ -129,6 +136,7 @@ class InvoiceSummary extends React.Component {
   }
 
   render() {
+    console.log(this.props.invoiceDate, this.props.fiscalIdentity);
     return(
       <View style={style.containerSummary}>
 
@@ -140,10 +148,10 @@ class InvoiceSummary extends React.Component {
               <Text style={style.textRegular12Blue}>Fecha de Emisión</Text>
             </View>
             <View style={style.inLineSpaceBetween}>
-              <Text style={[style.textRegular16GrayDark,{marginLeft: 15}]}>
-                {"Factura-C"}
+              <Text style={style.textRegular16GrayDark}>
+                {this.presentVoucherType()}
               </Text>
-              <Text style={[style.textRegular16GrayDark,{marginRight: 15}]}>
+              <Text style={style.textRegular16GrayDark}>
                 {presentInvoiceDate(this.props.invoiceDate)}
               </Text>
             </View>

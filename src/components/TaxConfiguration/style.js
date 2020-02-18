@@ -92,6 +92,12 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.blue,
     elevation: 1
   },
+  buttonSaveKey: {
+    marginTop: 5,
+    height: hp('6%'),
+    borderRadius: 25,
+    backgroundColor: COLORS.blueLight
+  },
   buttonCancelModal: {
     width: 120,
     height: hp('7%'),

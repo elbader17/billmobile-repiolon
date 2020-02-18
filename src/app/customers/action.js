@@ -36,8 +36,9 @@ const createCustomer = ({ name, identification, category }) => {
   return (dispatch) => {
     return fetch_api('/v1/fiscal_identities', 'POST', false, { resource })
       .then((response) => {
-        console.log(response)
-        return dispatch(createCustomerAction(response))
+        console.log(response);
+        if (response.error) return response.error.identity[0];
+        else dispatch(createCustomerAction(response))
       })
       .catch((error) => console.log(error));
   };
@@ -63,6 +64,8 @@ const updateCustomer = ({ id, name, identification, category }) => {
     return fetch_api(`/v1/fiscal_identities/${id}`,'PUT', false, { resource })
       .then((response) => {
         console.log(response);
+        if (response.error) return response.error.identity[0];
+        const customer = response.data;
         dispatch(updateCustomerAction(customer.id, customer.attributes.name, customer.attributes.identification, customer.attributes.category));
       })
       .catch((error) => console.log(error));

@@ -60,7 +60,7 @@ const createInvoice = (invoiceDate, voucherType) => {
         console.log(response);
         dispatch(createInvoiceAction(response.data))
       })
-      .catch((error) => console.log(error.response));
+      .catch((error) => console.log(error));
   };
 };
 
@@ -126,6 +126,7 @@ const confirmInvoice = (attributes) => {
 };
 
 const resetCurrentInvoice = () => {
+  console.log('Reset Invoice');
   return dispatch => {
     return dispatch(resetCurrentInvoiceAction());
   }

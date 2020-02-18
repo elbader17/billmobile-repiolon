@@ -24,8 +24,15 @@ const styles = StyleSheet.create({
   buttonDrawer: {
     marginVertical: 5,
     backgroundColor: 'transparent',
-    borderBottomWidth: 0.5,
-    borderColor: COLORS.grayLight, 
+    borderBottomWidth: 0.4,
+    borderColor: COLORS.grayDark, 
+    justifyContent: 'flex-start'
+  },
+  buttonDrawerSocial: {
+    marginVertical: 5,
+    backgroundColor: 'transparent',
+    //borderBottomWidth: 0.5,
+    //borderColor: COLORS.grayLight, 
     justifyContent: 'flex-start'
   },
   textRegular16White: {
@@ -56,6 +63,13 @@ const styles = StyleSheet.create({
     color: COLORS.white,
     top: 1
   },
+  textRegular14Gray: {
+    fontWeight: 'normal',
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size14,
+    color: COLORS.gray,
+    top: 1
+  },
   textRegular18Blue: {
     fontWeight: 'normal',
     fontFamily: FONTS.pRegular,
@@ -79,6 +93,18 @@ const styles = StyleSheet.create({
   logoBill: {
     width: 45, 
     alignSelf:'center'
+  },
+  logoWS: {
+    height: 30,
+    width: 30,
+    marginLeft: 10,
+    marginRight: 5 
+  },
+  logoMes: {
+    height: 32,
+    width: 32,
+    marginLeft: 10,
+    marginRight: 5 
   },
   logoMenu: {
     paddingHorizontal: 10

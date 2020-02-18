@@ -1,16 +1,25 @@
 import { connect } from 'react-redux';
 import NewCustomer from '../../Customer/NewCustomer/Component';
-import { addFiscalIdentityToInvoice } from '../../../app/fiscal_identity/actions';
+import { updateFiscalIdentity } from '../../../app/fiscal_identity/actions';
 
 const mapStateToProps = state => ({
   fiscalIdentity: state.invoices.currentInvoice.fiscalIdentity,
+  invoiceId: state.invoices.currentInvoice.id,
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    saveFiscalIdentity: (name, identification, category, id) => (
-      dispatch(addFiscalIdentityToInvoice(name, identification, category, id))
-    ),
+    saveFiscalIdentity: (name, identification, category, id, address, city) => {
+      const resource = {
+        id,
+        name,
+        identification,
+        category, 
+        business_address: address, 
+        city
+      }
+      return dispatch(updateFiscalIdentity(resource))
+    },
     type: 'invoice'
   };
 }

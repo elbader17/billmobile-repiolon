@@ -34,7 +34,8 @@ const styles = StyleSheet.create({
   },
   boxInput: {
     backgroundColor: 'transparent',
-    marginHorizontal: 20
+    marginHorizontal: 20,
+    paddingBottom: 20,
   },
   boxSelectButton: {
     marginBottom: 10
@@ -55,6 +56,13 @@ const styles = StyleSheet.create({
   button: {
     elevation: 1,
     borderRadius: 25,
+  },
+  buttonDate: {
+    height: hp('6%'),
+    backgroundColor: COLORS.white,
+    borderRadius: 7,
+    marginTop: 15,
+    borderColor: COLORS.blueLight
   },
   buttonPrimary: {
     width: wp('95%'),
@@ -155,6 +163,12 @@ const styles = StyleSheet.create({
   inLine:{
     flexDirection: "row",
     alignItems:'center'
+  },
+  inLineRight:{
+    marginVertical: 2,
+    flexDirection: "row",
+    alignItems: 'center',
+    justifyContent:'flex-end'
   },
   inLineSpaceAround: {
     flexDirection: 'row',
@@ -284,6 +298,10 @@ const styles = StyleSheet.create({
     color: COLORS.grayDark,
     marginTop: 15,
     marginBottom: 3
+  },
+  lineBlue: {
+    height: 1, 
+    backgroundColor: COLORS.blueLight
   },
   headerText: {
     fontFamily: FONTS.pRegular,

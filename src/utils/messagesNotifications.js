@@ -76,27 +76,14 @@ export const messageCustomerIncomplete = {
     floating: true,
     icon: { icon: "auto", position: "left" },
     type: 'warning',
-    duration: 2000
+    duration: 3000
 };
 
-export const messageLogOut = {
-    message: "Cerrar Sesión",
-    description: "No Implementado",
+export const messageRequestData = {
+    message: "Completar Datos del Receptor",
+    description: `El total de la factura es mayor o igual\n a $10.000 por lo que deberá completar\n todos los datos del receptor para\n continuar.`,
     floating: true,
-    icon: { icon: "auto", position: "left" },
-    type: 'info',
-    duration: 2450,
-    position: {top: 50}
+    autoHide: false,
+    icon: { icon: "danger", position: "left" },
+    type: 'warning'
 };
-
-export const messageOptions = {
-    message: "Opciones",
-    description: "No Implementado",
-    floating: true,
-    icon: { icon: "auto", position: "left" },
-    type: 'info',
-    duration: 2450,
-    position: {top: 50}
-};
-
-

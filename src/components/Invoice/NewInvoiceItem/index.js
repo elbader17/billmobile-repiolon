@@ -2,7 +2,9 @@ import { connect } from 'react-redux';
 import NewItem from '../../Item/NewItem/Component';
 import { createInvoiceItem } from '../../../app/invoice_items/actions';
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  items: state.items,
+});
 
 function mapDispatchToProps(dispatch) {
   return {

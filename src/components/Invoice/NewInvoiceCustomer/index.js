@@ -8,8 +8,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    saveFiscalIdentity: (name, identification, category, id) => (
-      dispatch(addFiscalIdentityToInvoice(name, identification, category, id))
+    saveFiscalIdentity: (name, identification, category, id, address, city) => (
+      dispatch(addFiscalIdentityToInvoice(name, identification, category, id, address, city))
     ),
     type: 'invoice'
   };

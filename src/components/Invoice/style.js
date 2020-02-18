@@ -42,8 +42,9 @@ const styles = StyleSheet.create({
   containerInvoiceBody: {
     backgroundColor: COLORS.white,
     marginHorizontal: 10,
-    padding: 10,
-    //marginTop: 0,
+    paddingTop: 10,
+    paddingBottom: 5,
+    paddingHorizontal: 10,
     borderRadius: 7,
     elevation: 1
   },
@@ -261,6 +262,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  buttonDataReceiver: {
+    paddingHorizontal: 15,
+    height: hp('5.5%'),
+    backgroundColor: COLORS.blueLight,
+    borderRadius: 25,
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 1,
+    marginBottom: 7
+  },
   buttonOkModalCant: {
     marginTop: 10,
     width: wp('65%'),
@@ -372,9 +383,10 @@ const styles = StyleSheet.create({
     borderWidth: 0,
   },
   buttonAddCustomer: {
+    paddingHorizontal: 15,
     backgroundColor: COLORS.blue,
     borderRadius: 25,
-    height: hp('6%'),
+    height: hp('5.5%'),
     alignItems: 'center',
     justifyContent: 'center',
     elevation: 1

@@ -72,6 +72,7 @@ class Home extends React.Component {
   }
 
   render() {
+    console.log(this.props.invoices)
     return(
         <View style={style.container}>
 

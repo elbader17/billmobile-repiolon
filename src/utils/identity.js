@@ -12,3 +12,13 @@ export const validateCuit = cuit => {
   }
   return false
 };
+
+export const nameByCategory = category => {
+  switch (category) {
+    case "ri": return 'Responsable Inscripto';
+    case "monotributo": return 'Monotributista';
+    case "exento": return "IVA Exento";
+    case "fc": return "Consumidor Final";
+    default: return ""
+  }
+}

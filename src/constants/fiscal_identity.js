@@ -5,15 +5,15 @@ export const CONDITION_IVA = [
   },
   {
     label: 'IVA Exento',
-    value: 'ie',
+    value: 'exento',
   },
   {
     label: 'Monotributista',
-    value: 'm',
+    value: 'monotributo',
   },
   {
-    label: 'Responsable No Inscripto',
-    value: 'rni',
+    label: 'Consumidor Final',
+    value: 'fc',
   },
 ];
 

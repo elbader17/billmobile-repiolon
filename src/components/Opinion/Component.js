@@ -7,7 +7,8 @@ import {
   Image, 
   Linking, 
   TextInput, 
-  Modal
+  Modal,
+  BackHandler
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { Button, Icon } from "react-native-elements";
@@ -24,6 +25,19 @@ class Opinion extends React.Component {
       url: this.props.navigation.getParam('url', ''),
       error: ''
     }
+  }
+
+  componentDidMount() {
+    this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
+  }
+
+  componentWillUnmount() {
+    this.backHandler.remove()
+  }
+
+  handleBackPress = () => {
+    this.props.navigation.navigate('Home');
+    return true;
   }
 
   opinion = () => {

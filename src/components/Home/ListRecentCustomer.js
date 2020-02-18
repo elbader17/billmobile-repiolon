@@ -1,11 +1,21 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Linking } from 'react-native';
 import { Button } from "react-native-elements";
 import PropTypes from 'prop-types';
 import {IconRight} from '../../constants/icons'
 import style from './style';
 import { COLORS } from '../../constants/colors';
 
+const showpdf = url => {
+  Linking.canOpenURL(url).then(supported => {
+    if (supported) {
+      Linking.openURL(url);
+    } else {
+      alert('Error al abrir archio' + this.props.url)
+      console.log("Don't know how to open URI: " + this.props.url);
+    }
+  });
+}
 
 const ListRecentCustomer = props => {
     const listProcessed = props.invoices.filter(invoice => invoice.attributes.state === 'processed');
@@ -37,7 +47,7 @@ const ListRecentCustomer = props => {
                 icon= {IconRight}
                 iconRight
                 TouchableComponent={TouchableOpacity}
-                onPress={() => null }
+                onPress={ () => showpdf(invoice.attributes.url) }
                 buttonStyle={ style.buttonComprobante }
                 titleStyle={ style.textRegular14Blue }
               />

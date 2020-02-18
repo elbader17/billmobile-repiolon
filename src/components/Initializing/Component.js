@@ -4,6 +4,7 @@ import { View, StyleSheet, Image } from 'react-native';
 import { connect } from 'react-redux'
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { COLORS } from '../../constants/colors';
+import { getFiscalIdentity } from '../../app/user_service/actions';
 
 class Initializing extends React.Component {
 
@@ -13,7 +14,8 @@ class Initializing extends React.Component {
 
   async componentDidMount() {
     try {
-      const user = await Auth.currentAuthenticatedUser();  
+      const user = await Auth.currentAuthenticatedUser();
+      console.log(user)  
       if (user) this.props.navigation.navigate('Home');
       else this.props.navigation.navigate('Authentication');
     } catch (err) {

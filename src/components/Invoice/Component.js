@@ -6,14 +6,25 @@ import { showMessage } from "react-native-flash-message";
 import ModalVoucherTYpe from './ModalVoucherType';
 import InvoiceCustomer from './InvoiceCustomer';
 import InvoiceItems from './InvoiceItems';
-import { validateData, validateDni } from '../../utils/validations';
+import { validateData } from '../../utils/validations';
+import { rankMaxDateBill, rankMinDateBill } from '../../utils/date';
 import { 
   messageItemsIncomplete, 
-  messageCustomerIncomplete 
+  messageCustomerIncomplete,
+  messageRequestData 
 } from '../../utils/messagesNotifications';
 import { IconDocument, IconAddCustomer, IconMore, IconBottom } from '../../constants/icons';
 import { VOUCHER_TYPES } from '../../constants/invoice';
 import style from './style';
+import { COLORS } from '../../constants/colors';
+
+const defaultCustomer = {
+  attributes: {
+    name: '',
+    identification: '',
+    category: 'fc',
+  }
+}
 
 class Invoice extends React.Component {
 
@@ -22,14 +33,14 @@ class Invoice extends React.Component {
     const { voucherType, fiscalIdentity } = this.props;
     this.state = {
       voucherType,
-      invoiceDate: new Date(),
+      invoiceDate: this.props.invoiceDate,
       fcIdentification: undefined,
       showCustomer: fiscalIdentity.name != '',
       modalVisible: false, //Show Modal Voucher Type
-      loading: false, //For buttons
+      loadingFC: false, //For add final consumer
       loadingContinue: false,
       quantity: 1, //Cant items
-      validIdentity: true
+      validIdentity: true,
     }
   }
 
@@ -58,13 +69,13 @@ class Invoice extends React.Component {
     const { showCustomer } = this.state;
     const { fiscalIdentity, items } = this.props;
     if (validateData(fiscalIdentity.name, items.length)){
-      if (!showCustomer) {
+      if (!showCustomer && this.props.invoiceTotal > 10000 && fiscalIdentity.identification != 'fc') {
         const customer = fiscalIdentity.name === 'fc' ? fiscalIdentity.identification : fiscalIdentity.name;
         const title = fiscalIdentity.name === 'fc' ? 'Consumidor Final: ' : 'Cliente: ' ;
         Alert.alert(
           title + customer,'El comprobante se confeccionará con éste Cliente',
           [
-            { text: 'Cambiar', style: 'cancel' },
+            { text: 'No Continuar', style: 'cancel' },
             { text: 'Continuar', onPress: () => this.props.navigation.navigate('InvoiceSummary') },
           ], {cancelable: false},
         );
@@ -73,8 +84,25 @@ class Invoice extends React.Component {
         this.setState({loadingContinue: true})
         this.props.getInvoice(this.props.invoiceId)
           .then(() => {
-            this.props.navigation.navigate('InvoiceSummary')
-            this.setState({loadingContinue: false})
+            if (this.props.invoiceTotal > 10000 && this.props.fiscalIdentity.identification == 'fc') {
+              const customer = {
+                id: this.props.fiscalIdentity.id,
+                attributes: {
+                  name: '',
+                  identification: '',
+                  category: 'fc'
+                }
+              }
+              this.setState({loadingContinue: false});
+              showMessage(messageRequestData);
+              this.props.navigation.navigate(
+                'EditInvoiceCustomer',
+                {customer, dataReceiver: true}
+              );
+            } else {
+              this.props.navigation.navigate('InvoiceSummary')
+              this.setState({loadingContinue: false})
+            }
           })
       }
     } else 
@@ -108,21 +136,34 @@ class Invoice extends React.Component {
   selectionVoucher = (voucherType) => {
     this.setModalVisible(!this.state.modalVisible);
     this.setState({voucherType: voucherType.value });
+    this.createOrUpdateInvoice({ voucherType: voucherType.value });
   }
 
-  addFinalConsumer = () => {
-    const { fcIdentification } = this.state;
-    if (validateDni(fcIdentification)){
-      const { fiscalIdentity, addFiscalIdentityToInvoice } = this.props;
-      this.setLoading(true);
-      addFiscalIdentityToInvoice('fc', fcIdentification, fiscalIdentity.id)
-        .then(() => {
-          this.setLoading(false);
-          this.setShowCustomer(true)
-        })
-    } else {
-      this.setState({validIdentity: false})
-    }
+  addFinalConsumer = (customer) => {
+    Alert.alert(
+      '¿Desea Completar los Datos del Receptor?','Deberá ingresar el DNI, Nombre y Apellido, y Domicilio Comercial del Receptor',
+      [
+        { 
+          text: 'Completar', 
+          onPress: () => {
+            this.setShowCustomer(true);
+            this.props.navigation.navigate(
+              'NewInvoiceCustomer',
+              {customer, dataReceiver: true}
+            );
+          }
+        },
+        { 
+          text: 'No Completar', 
+          onPress: () => {
+            this.setState({loadingFC: true})
+            this.props.addFiscalIdentityToInvoice('fc', 'fc', 'fc')
+              .then(()=> this.setState({loadingFC: false, showCustomer: true}))
+          },
+          style: 'cancel',
+        },
+      ], {cancelable: false},
+    );
   }
 
   renderViewItemsAdd = () => {
@@ -147,7 +188,6 @@ class Invoice extends React.Component {
         setShowCustomer={this.setShowCustomer}
         setFinalConsumer={this.setFcIdentification}
         identity={this.state.fcIdentification} 
-        addFinalConsumer={this.addFinalConsumer}
         loading={this.state.loading}
         fiscalIdentity={this.props.fiscalIdentity}
       />
@@ -155,10 +195,9 @@ class Invoice extends React.Component {
   }
 
   render() {
-    const { fiscalIdentity } = this.props;
-    const { showCustomer, validIdentity } = this.state;
-    const displayDni = validIdentity ? 'none' : 'flex';
-    const typeCustomer = fiscalIdentity.name === 'fc' || !showCustomer ? 'Cosumidor Final' : 'Nombre Cliente';
+    const buttonAddCustomerDidabled = this.state.showCustomer || this.state.loadingFC;
+    const displayRenderCustomer = this.state.showCustomer ? 'flex' : 'none';
+    const colorIconAddCustomer = buttonAddCustomerDidabled ? COLORS.grayDark : COLORS.white;
     return(  
       <View style={style.container}>
         
@@ -189,8 +228,9 @@ class Invoice extends React.Component {
                     style={{width: '100%'}}
                     date={this.state.invoiceDate}
                     mode="date"
-                    format="DD-MM-YYYY"
-                    minDate="01-12-2019"
+                    format="YYYY-MM-DD"
+                    minDate= {rankMinDateBill(this.props.items)}
+                    maxDate= {rankMaxDateBill(this.props.items)}
                     showIcon={false}
                     customStyles={{
                       dateText: style.textRegular14White,
@@ -208,27 +248,35 @@ class Invoice extends React.Component {
             </Text>
             <View style={style.containerInvoiceBody}>
           
-              <Text style={style.textRegular14Blue}>
-                {typeCustomer}
-              </Text>    
-                       
-              <View style={{display: displayDni }}>
-                <Text style={style.textRegular12Red}>
-                  Documento Inválido
-                </Text>
+              <View style={{display: displayRenderCustomer}}>
+                { this.renderCustomer() }
               </View>
-                
-              { this.renderCustomer() }
               
-              <Button
-                title=' Otro Cliente'
-                testID='addCustomer'
-                TouchableComponent={TouchableOpacity}
-                icon={IconAddCustomer}
-                onPress={ this.navigateClient }
-                buttonStyle={style.buttonAddCustomer}
-                titleStyle={style.textRegular14White}
-              />
+              <View style={style.inLineSpaceAround}>
+                <Button
+                  title=' Consumidor Final'
+                  testID='addCustomer'
+                  TouchableComponent={TouchableOpacity}
+                  icon={<IconAddCustomer color={colorIconAddCustomer}/>}
+                  onPress={ () => this.addFinalConsumer(defaultCustomer) }
+                  buttonStyle={style.buttonDataReceiver}
+                  titleStyle={style.textRegular14White}
+                  disabled={buttonAddCustomerDidabled }
+                  loading={this.state.loadingFC}
+                />
+
+                <Button
+                  title=' Otro Cliente'
+                  testID='addCustomer'
+                  TouchableComponent={TouchableOpacity}
+                  icon={<IconAddCustomer color={colorIconAddCustomer}/>}
+                  onPress={ this.navigateClient }
+                  buttonStyle={style.buttonAddCustomer}
+                  disabled={buttonAddCustomerDidabled }
+                  titleStyle={style.textRegular14White}
+                /> 
+              </View>
+          
             </View>
 
             <Text style={[style.textRegular12GrayDark, {textAlign:'center', marginTop: 5}]}>
@@ -266,7 +314,12 @@ class Invoice extends React.Component {
             />
           </View>
 
-          <Modal visible={this.state.modalVisible} animationType='slide' transparent={true}>
+          <Modal 
+            visible={this.state.modalVisible} 
+            animationType='slide' 
+            transparent={true}
+            onRequestClose={() => this.setState({ modalVisible: false })}
+          >
             <ModalVoucherTYpe selectionVoucher={this.selectionVoucher}/>
           </Modal>
 

@@ -1,9 +1,8 @@
 import React from 'react';
-import { View, TouchableOpacity, ScrollView, Modal, Text, TextInput } from 'react-native';
+import { View, TouchableOpacity, ScrollView, Modal, Text, TextInput, BackHandler } from 'react-native';
 import { Button } from "react-native-elements";
-import Textarea from 'react-native-textarea';
 import { COLORS } from '../../../constants/colors';
-import { IconBack, IconX, IconCustomer, IconIdcard } from '../../../constants/icons';
+import { IconBack, IconEye, IconEyeOff, IconCustomer, IconIdcard, IconKey, IconCloseDrawer, IconUp } from '../../../constants/icons';
 import  { validateCuit } from '../../../utils/identity';
 import style from '../style';
 
@@ -17,12 +16,29 @@ class TaxConfiguration extends React.Component{
     this.state = {
       name: this.props.name,
       cuit: this.props.cuit,
+      fiscalKey: '',
       loading: false,
       loadingKey: false,
       errorName: undefined,
       errorCuit: undefined,
-      modalVisible: false
+      hidePassword: true,
+      showInputFiscalKey: false
     };
+  }
+
+  componentDidMount() {
+    const fromHome = this.props.navigation.getParam('Home', false );
+    if (fromHome)
+      this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
+  }
+
+  componentWillUnmount() {
+    this.backHandler.remove()
+  }
+
+  handleBackPress = () => {
+    this.props.navigation.navigate('Home'); 
+    return true;
   }
 
   static navigationOptions = ({navigation}) => {
@@ -59,12 +75,12 @@ class TaxConfiguration extends React.Component{
     }
   } 
   uploadKeys = () => {
-    const { getCertificate, updateCertificate } = this.props;
+    //const { getCertificate, updateCertificate } = this.props;
     this.setState({loadingKey: true});
     //getCertificate()
     updateCertificate(DEFAULT_CERTIFICATE_KEY, DEFAULT_CERTIFICATE)
       .then(response => {
-        this.setState({modalVisible: false, loadingKey: false});
+        this.setState({loadingKey: false});
         console.log(response)
       })
       .catch(error => console.log(error))
@@ -76,6 +92,7 @@ class TaxConfiguration extends React.Component{
   setLoading = (bool) => this.setState({ loading: bool })
 
   render() {
+    const displayInputFiscalKey = this.state.showInputFiscalKey ? 'flex' : 'none';
     const displayCuit = this.state.errorCuit === undefined ? 'none' : 'flex';
     const displayName = this.state.errorName === undefined ? 'none' : 'flex';
     return(
@@ -123,22 +140,56 @@ class TaxConfiguration extends React.Component{
             <Text style={style.textRegular12GrayDark}>
               Para acceder a tu información y configurar tu cuenta.
             </Text>
-        
-          </View>
-          <View style = {style.containerButtonKey}>
-            <Text style={[style.textRegular12Blue,{textAlign: 'center', marginBottom: 10}]}>
-              Para le "Generación de Comprobantes" necesitará Credenciales requeridas por AFIP
-              para obtener el Certificado X.509 que se utilizará en el proceso de autorización de comprobantes.
-            </Text>
-            <Button
-              title='Cargar Credenciales'
-              TouchableComponent={TouchableOpacity}
-              onPress={() => this.setState({modalVisible: true})}
-              buttonStyle={ style.buttonKeys }
-              titleStyle={ style.textRegular14white }
-              loading={this.state.loadingKey}
-            />
 
+            <View style={style.containerButtonKey}>
+              <Button
+                title='Ingresar Clave Fiscal'
+                testID='ready'
+                TouchableComponent={TouchableOpacity}
+                onPress={() => this.setState({showInputFiscalKey: !this.state.showInputFiscalKey})}
+                buttonStyle={ style.buttonKeys }
+                titleStyle={ style.textRegular14white }
+                loading={this.state.loading}
+              />
+            </View>
+            
+            <View style={[style.containerInputWithIcon,{display: displayInputFiscalKey}]}>
+              {IconKey}
+              <TextInput
+                secureTextEntry={!this.state.hidePassword}
+                keyboardType='numeric'
+                placeholder=' Clave Fiscal'
+                value={this.state.fiscalKey}
+                //onChangeText={null}
+                style={style.inputWithIcon}
+              />  
+              <TouchableOpacity 
+                onPress={()=>this.setState({hidePassword: !this.state.hidePassword})}>
+                {this.state.hidePassword ? IconEye : IconEyeOff}
+              </TouchableOpacity>
+              
+            </View>
+            <View style={{display: displayInputFiscalKey}}>
+              <Button
+                title='Guardar'
+                TouchableComponent={TouchableOpacity}
+                onPress={ this.handleConfigFiscal }
+                buttonStyle={ style.buttonSaveKey }
+                titleStyle={ style.textRegular14white }
+                loading={this.state.loading}
+              />
+              <TouchableOpacity 
+                onPress={()=>this.setState({showInputFiscalKey: false})}>
+                <IconUp color={COLORS.blue} size={20} iconStyle={{marginTop: 10}}/>
+              </TouchableOpacity>
+            </View>
+
+            <Text style={[style.textRegular12Blue,{textAlign: 'center', marginTop: 5}]}>
+              Para le "Generación de Comprobantes" necesitará Credenciales requeridas por AFIP
+              para obtener el Certificado X.509 que se utilizará en el proceso de autorización de comprobantes,
+              y para ello es necesario la Clave Fiscal.
+            </Text>
+        
           </View>
 
           </ScrollView>
@@ -155,61 +206,6 @@ class TaxConfiguration extends React.Component{
             loading={this.state.loading}
           />
         </View>
-
-        <Modal
-            animationType= 'slide'
-            transparent={true}
-            visible={this.state.modalVisible}
-          >
-            <View style={style.containerModal}>
-              <View style={style.modal}>
-                <Text style={style.textRegular12GrayDark}>
-                  Para mas información sobre su obtencón presionar 
-                  <Text style={style.textRegular12BlueMedium}> aquí</Text>
-                </Text>
-                <Text style={style.textRegular16GrayDark}>
-                  Certificado Digital (.crt)
-                </Text>
-                <Textarea
-                  containerStyle={style.textareaContainer}
-                  style={style.textarea}
-                  //onChangeText={this.onChange}
-                  //defaultValue={this.state.text}
-                  placeholder={'Pegar certificado aquí ...'}
-                  placeholderTextColor={COLORS.gray}
-                  underlineColorAndroid={'transparent'}
-                />
-                <Text style={style.textRegular16GrayDark}>
-                  Clave Privada (.key)
-                </Text>
-                <Textarea
-                  containerStyle={style.textareaContainer}
-                  style={style.textarea}
-                  //onChangeText={this.onChange}
-                  //defaultValue={this.state.text}
-                  placeholder={'Pegar clave aquí ...'}
-                  placeholderTextColor={COLORS.gray}
-                  underlineColorAndroid={'transparent'}
-                />
-                <Button
-                  title = 'Cargar'
-                  TouchableComponent={TouchableOpacity}
-                  onPress={this.uploadKeys}
-                  buttonStyle={style.buttonOkModal}
-                  titleStyle={style.textRegular14white}
-                  loading={this.state.loading}
-                />
-                <Button
-                  title = 'Cancelar'
-                  TouchableComponent={TouchableOpacity}
-                  onPress={()=> this.setState({modalVisible: false})}
-                  buttonStyle={style.button}
-                  titleStyle={style.textBold16White}
-                  loading={this.state.loading}
-                />
-              </View>
-            </View>
-          </Modal>
 
       </View>
     )

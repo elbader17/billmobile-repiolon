@@ -64,12 +64,14 @@ export const IconRight = <Icon
   iconStyle={{ marginLeft: 2, top: 2.5}}
 />
 
-export const IconAddCustomer = <Icon 
-  type='antdesign' 
-  name="adduser" 
-  size={15} 
-  color={COLORS.white} 
-/>
+export const IconAddCustomer = props => (
+  <Icon 
+    type='antdesign' 
+    name="adduser"
+    size={15}  
+    {...props} 
+  />
+);
 
 export const IconX = props => (
   <Icon 
@@ -88,11 +90,26 @@ export const IconEdit = props => (
   />
 );
 
+export const IconUp = props => (
+  <Icon 
+    type='entypo'
+    name="chevron-thin-up" 
+    {...props} 
+  />
+);
+
 export const IconCheck = <Icon 
   type='antdesign'
   name="check" 
   size={20} 
   color={COLORS.white} 
+/>
+
+export const IconKey = <Icon 
+  type='entypo'
+  name="key" 
+  size={20} 
+  color={COLORS.grayDark} 
 />
 
 //Icons Bottom Tab Navigator
@@ -175,6 +192,13 @@ export const IconCloseDrawer = <Icon
 export const IconMoney = <Icon 
   type='materialicons' 
   name='attach-money' 
+  size={30} 
+  color={COLORS.grayDark} 
+/>
+
+export const IconLocation = <Icon 
+  type='materialicons' 
+  name='location-on' 
   size={30} 
   color={COLORS.grayDark} 
 />

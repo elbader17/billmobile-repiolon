@@ -24,5 +24,5 @@ function goBack() {
 export default {
   navigate,
   setTopLevelNavigator,
-  goBack,
+  goBack
 };

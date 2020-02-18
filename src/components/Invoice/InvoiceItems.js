@@ -123,6 +123,13 @@ class InvoiceItems extends React.Component {
     
           <View style={style.boxItemsInvoiceTotal}>
             <View style={style.inLineSpaceBetween}>
+              <Button
+                icon = {<IconEdit size={13}/>}
+                        TouchableComponent={TouchableOpacity}
+                        onPress={() => this.props.navigateToEditItem(item)}
+                        buttonStyle={[style.buttonCantProduct, {marginLeft: 5}]}
+                        titleStyle={style.textRegular12Blue}
+              />
               <Text style={style.textRegular16Blue}>TOTAL</Text>
               <Text style={style.textRegular16Blue}>$ {count}</Text>
             </View>

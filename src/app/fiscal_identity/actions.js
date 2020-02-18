@@ -5,6 +5,7 @@ import {
 } from './constants';
 
 const addfiscalIdentityToInvoiceAction = fiscalIdentity => {
+  console.log('aca');
   return {
     type: ADD_FISCAL_IDENTITY_TO_INVOICE,
     fiscalIdentity,
@@ -14,24 +15,30 @@ const addfiscalIdentityToInvoiceAction = fiscalIdentity => {
 const createFiscalIdentity = (resource, dispatch) => {
   return fetch_api('/v1/invoices_fiscal_identities', 'POST', false, { resource })
     .then((response) => {
+      console.log(response);
       dispatch(addfiscalIdentityToInvoiceAction(response.data));
     })
     .catch((error) => {
-      console.log(error.response);
+      console.log(error);
     });
 };
 
-const updateFiscalIdentity = (resource, dispatch) => {
-  return fetch_api(`/v1/invoices_fiscal_identities/${resource.id}`, 'POST', false, { resource })
-    .then((response) => {
-      dispatch(addfiscalIdentityToInvoiceAction(response.data));
-    })
-    .catch((error) => {
-      console.log(error.response);
-    });
+const updateFiscalIdentity = (data) => {
+  return (dispatch, getState) => {
+    const { id: invoiceId } = getState().invoices.currentInvoice;
+    const resource = {...data, invoice_id: invoiceId }
+    return fetch_api(`/v1/invoices_fiscal_identities/${invoiceId}`, 'POST', false, {resource})
+      .then((response) => {
+        console.log(response);
+        dispatch(addfiscalIdentityToInvoiceAction(response.data));
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  }
 };
 
-const addFiscalIdentityToInvoice = (name, identity, category, id) => {
+const addFiscalIdentityToInvoice = (name, identity, category, id, address, city) => {
   return (dispatch, getState) => {
     const { id: invoiceId } = getState().invoices.currentInvoice;
     let promise;
@@ -44,11 +51,13 @@ const addFiscalIdentityToInvoice = (name, identity, category, id) => {
     return promise.then(() => {
       const updatedInvoiceId = getState().invoices.currentInvoice.id;
       const resource = {
-        category: 'monotributo', //Luego usar parametro
+        category: category,
         name,
         id,
         identification: identity,
         invoice_id: updatedInvoiceId,
+        business_address: address,
+        city: city
       };
       return createFiscalIdentity(resource, dispatch, getState);
     });

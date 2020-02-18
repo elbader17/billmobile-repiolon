@@ -19,7 +19,7 @@ import {
 
 function defaultCurrentInvoice() {
   return {
-    fiscalIdentity: { name: '', cuit: '' },
+    fiscalIdentity: { name: '', cuit: '', category: ''},
     invoiceItems: [],
     invoiceDate: new Date(),
     voucherType: 'fc',
@@ -40,6 +40,7 @@ function setCurrentInvoice({ draftState, invoice }) {
   const day = invoice_date.slice(8,10);
   const month = invoice_date.slice(5,7);
   const year = invoice_date.slice(0,4);
+  console.log(day, month, year);
   draftState.currentInvoice.invoiceDate = new Date(year+","+month+","+day);
   draftState.currentInvoice.voucherType = invoice_type;
   draftState.currentInvoice.total = total;
@@ -58,6 +59,9 @@ function addInvoiceItem({ draftState, invoiceItem }) {
     name,
     price,
     quantity,
+    date_from,
+    date_to,
+    payment_expiration
   } = invoiceItem.attributes;
 
   draftState.currentInvoice.invoiceItems.push({
@@ -66,6 +70,9 @@ function addInvoiceItem({ draftState, invoiceItem }) {
     price,
     quantity,
     id: invoiceItem.id,
+    date_from,
+    date_to,
+    payment_expiration
   });
   return draftState;
 }
@@ -84,6 +91,7 @@ function setInvoiceItems({ draftState, invoice_items }) {
 }
 
 function addFiscalIdentity({ draftState, fiscalIdentity }) {
+  console.log('Add Fiscal Identity to Invoice')
   draftState.currentInvoice.fiscalIdentity = fiscalIdentity.attributes;
   draftState.currentInvoice.fiscalIdentity.id = fiscalIdentity.id;
   return draftState;
@@ -95,6 +103,9 @@ function updateInvoiceItem({ draftState, invoiceItem }) {
     name,
     price,
     quantity,
+    date_from,
+    date_to,
+    payment_expiration
   } = invoiceItem;
   const itemIndex = draftState.currentInvoice.invoiceItems.findIndex(
     item => item.id === invoiceItem.id,
@@ -105,6 +116,9 @@ function updateInvoiceItem({ draftState, invoiceItem }) {
     price,
     quantity,
     id: invoiceItem.id,
+    date_from,
+    date_to,
+    payment_expiration
   };
   return draftState ;
 }
