@@ -4,15 +4,24 @@ import {
 } from './constants';
 
 const initialState = {
-  name: '',
-  cuit: '',
+  name: null,
+  cuit: null,
   completed: false,
+  business_address: '',
+  city: '',
+  sale_point: ''
 };
 
-function setMyFiscalIdentity({ draftState, name, cuit }) {
-  draftState.name = name;
-  draftState.cuit = cuit;
-  draftState.completed = name != null && cuit != null;
+function setMyFiscalIdentity({draftState, fiscalIdentity }) {
+  if (fiscalIdentity != null) {
+    const { name, identification, business_address, city, sale_point } = fiscalIdentity.attributes;
+    draftState.name = name;
+    draftState.cuit = identification;
+    draftState.completed = name != null && identification != null;
+    draftState.business_address = business_address;
+    draftState.city = city;
+    draftState.sale_point = sale_point;
+  }
   return draftState;
 }
 
@@ -22,8 +31,7 @@ export default userserviceReducer = (state = initialState, action) => {
       case SET_MY_FISCAL_IDENTITY:
         return setMyFiscalIdentity({
           draftState,
-          name: action.name,
-          cuit: action.cuit,
+          fiscalIdentity: action.fiscalIdentity
         });
       default:
         return draftState;

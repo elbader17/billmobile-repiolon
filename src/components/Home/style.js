@@ -16,16 +16,15 @@ const styles = StyleSheet.create({
     elevation: 1
   },
   containerChart: {
-    backgroundColor: COLORS.blueLight,
     marginHorizontal: 10,
-    paddingBottom: 5, 
-    borderRadius: 7, 
-    elevation: 1
+    borderRadius: 10,
+    paddingVertical: 3
   },
   containerStatics: {
     backgroundColor: COLORS.grayLight,
     justifyContent: 'center',
     flex:0.20,
+    paddingHorizontal: 10
   },
   containerListCustomer: {
     backgroundColor: COLORS.grayLight,
@@ -41,12 +40,12 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 0
   },
   boxData: {
-    height: hp('13%'),
+    height: hp('6.5%'),
     justifyContent: 'center',
     backgroundColor: COLORS.white,
     paddingHorizontal: 20,
     borderRadius: 7,
-    elevation: 2
+    elevation: 1.5
   },
   scrollCustomers: {
     height: hp('28%'),
@@ -72,7 +71,8 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.blue
   },
   styleChart: {
-    borderRadius: 7
+    borderRadius: 10,
+    elevation: 4
   },
   circlePercentaje: {
     elevation: 5, 
@@ -104,8 +104,23 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around'
   },
   textFacPeriodo: {
-    alignItems: 'center',
-    marginTop: 5
+    alignItems: 'center'
+  },
+  selectDMY: {
+    borderWidth: 0.5, 
+    borderRadius: 7,
+    marginBottom: 2, 
+    marginLeft: 5,
+    borderColor: COLORS.blueMedium, 
+    backgroundColor: COLORS.blueMedium
+  },
+  picker: {
+    height: 22,
+    width: 100,
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size12,
+    color: COLORS.blueLight,
+    paddingLeft: 5
   },
   textRegular16Blue: {
     fontFamily: FONTS.latoRegular,
@@ -195,6 +210,11 @@ const styles = StyleSheet.create({
     fontSize: FONTS.size18,
     color: COLORS.grayDark,
   },
+  textRegular18Blue: {
+    fontFamily: FONTS.latoRegular,
+    fontSize: FONTS.size18,
+    color: COLORS.blueLight,
+  },
   textLight18White: {
     fontFamily: FONTS.latoLight,
     fontSize: FONTS.size18,
@@ -211,6 +231,12 @@ const styles = StyleSheet.create({
     color: COLORS.blue,
     top: 2
   },
+  textRegular12White: {
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size12,
+    color: COLORS.white,
+    top: 1
+  },
   textBold14White: {
     fontFamily: FONTS.pSemiBold,
     fontSize: FONTS.size14,
@@ -219,8 +245,9 @@ const styles = StyleSheet.create({
   },
   textRegular22BlueMedium: {
     fontFamily: FONTS.pRegular,
-    fontSize: FONTS.size22,
-    color: COLORS.blueMedium
+    fontSize: FONTS.size18,
+    color: COLORS.blueMedium,
+    top: 2
   },
   lineWhiteLeft: {
     width:'10%',
@@ -236,6 +263,14 @@ const styles = StyleSheet.create({
     height: hp('5.5%'),
     marginTop: 5,
     backgroundColor: COLORS.blueLight,
+    borderRadius: 25,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  buttonFacturacion: {
+    height: hp('3%'),
+    marginTop: 5,
+    backgroundColor: COLORS.blueMedium,
     borderRadius: 25,
     justifyContent: 'center',
     alignItems: 'center'

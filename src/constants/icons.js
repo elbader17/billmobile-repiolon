@@ -19,6 +19,13 @@ export const IconTrash = props => (
   />
 );
 
+export const IconCaretRight = <Icon
+  name='caretright'  
+  type='antdesign'
+  color={COLORS.blueLight}
+  size={18}
+/>
+
 export const IconEye = <Icon
   name='eye'  
   type='feather'
@@ -45,7 +52,7 @@ export const IconMore = <Icon
   type='antdesign' 
   name="plus" 
   size={18} 
-  color="white"
+  color={COLORS.blueLight}
 />
 
 export const IconDocument = <Icon 
@@ -94,6 +101,14 @@ export const IconUp = props => (
   <Icon 
     type='entypo'
     name="chevron-thin-up" 
+    {...props} 
+  />
+);
+
+export const MoreInfo = props => (
+  <Icon 
+    type='foundation'
+    name="page-search" 
     {...props} 
   />
 );
@@ -228,6 +243,6 @@ export const IconBottom = <Icon
   type='feather' 
   name='chevron-down' 
   size={20} 
-  color={COLORS.white} 
+  color={COLORS.blueLight} 
   iconStyle={{left: 10}}
 />

@@ -20,7 +20,8 @@ class Initializing extends React.Component {
       else this.props.navigation.navigate('Authentication');
     } catch (err) {
       console.log('error: ', err);
-      if (this.props.user.completed) this.props.navigation.navigate('Authentication');
+      console.log(this.props.user);
+      if (this.props.user.business_address != '') this.props.navigation.navigate('Authentication');
       else this.props.navigation.navigate('Intro');
     }
   }

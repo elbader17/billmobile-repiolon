@@ -121,49 +121,45 @@ class InvoiceItems extends React.Component {
             })}
           </ScrollView>
     
-          <View style={style.boxItemsInvoiceTotal}>
+          <View style={style.boxItemsInvoiceTotal}> 
             <View style={style.inLineSpaceBetween}>
-              <Button
-                icon = {<IconEdit size={13}/>}
-                        TouchableComponent={TouchableOpacity}
-                        onPress={() => this.props.navigateToEditItem(item)}
-                        buttonStyle={[style.buttonCantProduct, {marginLeft: 5}]}
-                        titleStyle={style.textRegular12Blue}
-              />
               <Text style={style.textRegular16Blue}>TOTAL</Text>
               <Text style={style.textRegular16Blue}>$ {count}</Text>
-            </View>
+            </View> 
           </View>
 
           <Modal
             animationType= 'slide'
             transparent={true}
             visible={this.state.modalVisible}
+            onRequestClose={() => this.setState({ modalVisible: false })}
           >
-            <View style={style.containerModalCant}>
-              <View style={style.modalCant}>
-                <Text style={[style.textRegular12White, {marginBottom: 7}]}>
-                  Indique la cantidad del Producto
-                </Text>
-                <NumericInput 
-                  initValue={this.state.itemQuantityOld}
-                  onChange={value => this.setState({itemQuantityNew: value})}
-                  totalWidth={238} 
-                  totalHeight={45}  
-                  minValue={1}
-                  textColor={COLORS.white}
-                  rightButtonBackgroundColor={COLORS.blueLight}
-                  leftButtonBackgroundColor={COLORS.blueLight}
-                  borderColor={COLORS.blueLight}
-                />
-                <Button
-                  title = 'OK'
-                  TouchableComponent={TouchableOpacity}
-                  onPress={this.updateQuantity}
-                  buttonStyle={style.buttonOkModalCant}
-                  titleStyle={style.textBold14White}
-                  loading={this.state.loading}
-                />
+            <View style={style.modalVoucher}>
+              <View style={style.boxModal}>
+                <View style={style.headerModal}>
+                  <Text style={style.textBold14White}>Indique la Cantidad del Producto</Text>
+                </View>
+                <View style={style.boxVoucherType}>                
+                  <NumericInput 
+                    initValue={this.state.itemQuantityOld}
+                    onChange={value => this.setState({itemQuantityNew: value})}
+                    totalWidth={238} 
+                    totalHeight={60}  
+                    minValue={1}
+                    textColor={COLORS.blue}
+                    rightButtonBackgroundColor={COLORS.blueLight}
+                    leftButtonBackgroundColor={COLORS.blueLight}
+                    borderColor={COLORS.blueLight}
+                  />
+                  <Button
+                    title = 'OK'
+                    TouchableComponent={TouchableOpacity}
+                    onPress={this.updateQuantity}
+                    buttonStyle={style.buttonOkModalCant}
+                    titleStyle={style.textBold14White}
+                    loading={this.state.loading}
+                  />
+                </View>
               </View>
             </View>
           </Modal>

@@ -1,15 +1,16 @@
 import React from 'react';
 import ListRecentCustomer from './ListRecentCustomer';
-import { View, Text, Dimensions, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
+import { View, Text, Picker,Dimensions, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
 import { Button } from "react-native-elements";
 import { showMessage } from "react-native-flash-message";
 import { LineChart } from 'react-native-chart-kit';
 import { Icon } from 'react-native-elements';
 import { messageInfoChart, messageCobros, messageTotalPeriod } from '../../utils/messagesNotifications';
-import { dataChart, dataConfig } from '../../constants/lineChart';
+import { dataConfig, presentDataDay, presentDataMonth, presentDataYear, DMY } from '../../constants/lineChart';
 import { COLORS } from '../../constants/colors';
 import style from './style';
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { IconCaretRight, MoreInfo } from '../../constants/icons';
 
 class Home extends React.Component {
 
@@ -19,7 +20,8 @@ class Home extends React.Component {
     this.state = {
       name: user.name,
       itemInputSearch: '',
-      loading: true
+      loading: true,
+      chart: 'day'
     }
   }
 
@@ -71,32 +73,59 @@ class Home extends React.Component {
     );
   }
 
+  showDataChart = () => {
+    const invoicess = this.props.invoices;
+    if (this.state.chart == 'month'){
+      const data = presentDataMonth(new Date(), invoicess); 
+      return data;
+    } else if (this.state.chart == 'day') {
+      const dataM = presentDataDay(new Date(), invoicess);
+      return dataM
+    } else {
+      const dataY = presentDataYear(new Date(), invoicess);
+      return dataY
+    }
+  }
+
   render() {
-    console.log(this.props.invoices)
     return(
         <View style={style.container}>
 
         <View style={style.containerHeader}>
-          <View style={style.containerChart}>
-            <View style={style.textFacPeriodo}>
-              <View style={style.inLine}>
-                <Icon type='feather' name="bar-chart" color={COLORS.blueMedium} size={15} iconStyle={{marginRight: 2}}/>
-                <Text style={style.textRegular12Blue}>
-                  Facturación del Período
-                </Text>
-              </View>
+          <View style={style.textFacPeriodo}>
+            <View style={style.inLine}>
+              <Icon type='feather' name="bar-chart" color={COLORS.blueLight} size={18} iconStyle={{marginLeft: 15, marginRight: 5}}/>
+            <Text style={style.textRegular12White}>
+              Facturación del Período : 
+            </Text>
+            <View style={style.selectDMY}>
+              <Picker
+                selectedValue={this.state.chart}
+                style= {style.picker}
+                onValueChange={value => this.setState({chart: value}) }>
+                  { DMY.map((i, index) => (
+                     <Picker.Item 
+                      key={index}
+                      color='gray' 
+                      label={i.label} 
+                      value={i.value}/>                           
+                  ))}
+              </Picker>
             </View>
+            </View>
+          </View>
+          <View style={style.containerChart}>
             <TouchableOpacity onPress={this.infoChart} activeOpacity={0.7}>
             <View>
-              <LineChart
-                height={hp('29%')}
+              {/*<LineChart
+                height={hp('30%')}
                 width={Dimensions.get('window').width-20}
                 style={style.styleChart}
-                data={dataChart}
+                data={this.showDataChart()}
                 chartConfig={dataConfig}
-                yAxisLabel={'$ '}
+                yAxisLabel={'$'}
                 bezier
-              />
+              />*/}
             </View>
             </TouchableOpacity>
           </View> 
@@ -104,41 +133,41 @@ class Home extends React.Component {
         </View>
 
           <View style={style.containerStatics}>
-            
-            <View style={style.inLineSpaceAround}>
-              <TouchableOpacity onPress={this.infoPendingCharges} activeOpacity={0.7}>
-                <View style={style.boxData}>
-                  <View style={style.inColumn}>
-                    <Text style={style.textRegular22BlueMedium}>
-                      08/12 
-                    </Text>
-                    <Text style={style.textLight14White}>
-                      Cobros Pendientes
-                    </Text>
-                  </View>
+            <TouchableOpacity onPress={this.infoPendingCharges} activeOpacity={0.7}>
+              <View style={style.boxData}>
+                <View style={style.inLineSpaceAround}>
+                  <Text style={style.textRegular22BlueMedium}>
+                    20/250 Mil 
+                  </Text>
+                  {IconCaretRight}
+                  <Text style={style.textLight14White}>
+                    Total del Período
+                  </Text>
+                  {<MoreInfo color={COLORS.blue} size={25}/>}
                 </View>
-              </TouchableOpacity>
-              
-              <TouchableOpacity onPress={this.infoTotalPeriod} activeOpacity={0.7}>
-                <View style={style.boxData}>
-                  <View style={style.inColumn}>
-                    <Text style={style.textRegular22BlueMedium}>
-                      20/250 Mil
-                    </Text>
-                    <Text style={style.textLight14White}>
-                      Total del Período
-                    </Text>
-                  </View>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={this.infoTotalPeriod} activeOpacity={0.7}>
+              <View style={[style.boxData, {marginTop: 5}]}>
+                <View style={style.inLineSpaceAround}>
+                  <Text style={style.textRegular22BlueMedium}>
+                    08/12
+                  </Text>
+                  {IconCaretRight}
+                  <Text style={style.textLight14White}>
+                    Cobros Pendientes
+                  </Text>
+                  {<MoreInfo color={COLORS.blue} size={25}/>}
                 </View>
-              </TouchableOpacity>
-            </View>
+              </View>
+            </TouchableOpacity>
           </View>
 
           <View style={style.containerListCustomer}>
             <View style={style.scrollCustomers}>              
               
-              <View style={[style.inLineCenter, {marginBottom: 5}]}>
-                <Icon type='feather' name="file-text" color={COLORS.blueMedium} size={13} iconStyle={{marginRight: 2}}/>
+              <View style={[style.inLine, {marginBottom: 5}]}>
+                <Icon type='feather' name="file-text" color={COLORS.blueLight} size={13} iconStyle={{marginRight: 3}}/>
                 <Text style={style.textRegular12Blue}>
                   Comprobantes Recientes
                 </Text>
@@ -156,7 +185,7 @@ class Home extends React.Component {
                 //disabled={this.props.invoices.length === 0}  
                 titleStyle={ style.textBold14White }
                 //disabledTitleStyle={ style.textBold14White }
-                />
+              />
 
             </View>
           </View>

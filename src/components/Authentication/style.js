@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   containerInputs: {
-    marginHorizontal: 35,
+    marginHorizontal: 20,
     marginVertical: 20,
   },
   containerButtonSignTwo: {
@@ -40,16 +40,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 7,
     borderRadius: 25,
-    marginBottom: 10,
     alignItems: 'center'
   },
   input: {
-    height: 45, 
+    height: 40, 
     borderWidth: 1, 
     borderRadius: 7, 
     borderColor: COLORS.gray, 
     paddingLeft: 10,
     fontFamily: FONTS.pRegular,
+    paddingVertical: 0,
     fontSize: FONTS.size14,
     color: COLORS.grayDark,
     marginBottom: 7
@@ -59,10 +59,11 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.pRegular,
     fontSize: FONTS.size14,
     color: COLORS.grayDark,
-    paddingLeft: 2
+    paddingLeft: 2,
+    paddingVertical: 0
   },
   passwordContainer: {
-    height: 45,
+    height: 40,
     flexDirection: 'row',
     alignItems: 'center',
     borderWidth: 1,
@@ -72,12 +73,12 @@ const styles = StyleSheet.create({
     marginBottom: 7
   },
   imageHeader: {
-    width: 209,
-    height: 120,
-    marginBottom: 10
+    width: 179,
+    height: 90,
+    marginBottom: 15
   },
   buttonSign: {
-    width: wp('50%'),
+    width: wp('47%'),
     height: hp('6%'),
     backgroundColor: 'transparent',
     borderRadius: 0,
@@ -86,7 +87,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   buttonSignDisable: {
-    width: wp('50%'),
+    width: wp('47%'),
     height: hp('6%'),
     borderTopWidth: 2,
     borderColor: COLORS.gray,

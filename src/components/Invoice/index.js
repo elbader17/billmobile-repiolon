@@ -5,10 +5,12 @@ import { updateInvoice, createInvoice, getInvoice } from '../../app/invoices/act
 import { updateInvoiceItem, deleteInvoiceItem, getInvoiceItems } from '../../app/invoice_items/actions';
 
 const mapStateToProps = state => ({
+  user: state.userservice,
   fiscalIdentity: state.invoices.currentInvoice.fiscalIdentity,
   items: state.invoices.currentInvoice.invoiceItems,
   invoiceDate: state.invoices.currentInvoice.invoiceDate,
   voucherType: state.invoices.currentInvoice.voucherType,
+  conditionSale: state.invoices.currentInvoice.conditionSale,
   invoiceId: state.invoices.currentInvoice.id,
   invoiceTotal: state.invoices.currentInvoice.total,
   invoices: state.invoices.invoices
@@ -25,8 +27,8 @@ const mapDispatchToProps = (dispatch) => {
     updateInvoice: values => (
       dispatch(updateInvoice(values))
     ),
-    createInvoice: (invoiceDate, voucherType) => (
-      dispatch(createInvoice(invoiceDate, voucherType))
+    createInvoice: (invoiceDate, voucherType, conditionSale) => (
+      dispatch(createInvoice(invoiceDate, voucherType, conditionSale))
     ),
     getInvoice: (id) => (
       dispatch(getInvoice(id))

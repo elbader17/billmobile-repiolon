@@ -1,18 +1,64 @@
 export const VOUCHER_TYPES = [
   {
     label: 'Factura - C',
-    value: 'fc',
+    value: '11',
   },
   {
     label: 'Nota de Crédito - C',
-    value: 'ncc',
+    value: '13',
   },
   {
     label: 'Nota de Débito - C',
-    value: 'ndc',
+    value: '12',
   },
   {
     label: 'Recibo - C',
-    value: 'rc',
+    value: '15',
+  },
+];
+
+export const CONDITION_SALE = [
+  {
+    label: 'Contado',
+    value: 'cdo',
+  },
+  {
+    label: 'Tarjeta de Crédito',
+    value: 'tc',
+  },
+  {
+    label: 'Tarjeta de Débito',
+    value: 'td',
+  },
+  {
+    label: 'Cuenta Corriente',
+    value: 'cc',
+  },
+  {
+    label: 'Cheque',
+    value: 'ch',
+  },
+  {
+    label: 'Ticket',
+    value: 'tk',
+  },
+  {
+    label: 'Otra',
+    value: 'ot',
+  },
+];
+
+export const CONCEPT = [
+  {
+    label: 'Productos',
+    value: 'products',
+  },
+  {
+    label: 'Servicios',
+    value: 'services',
+  },
+  {
+    label: 'Productos y Servicios',
+    value: 'prodserv',
   },
 ];

@@ -32,9 +32,9 @@ class TaxConfiguration extends React.Component{
       this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
   }
 
-  componentWillUnmount() {
+  /*componentWillUnmount() {
     this.backHandler.remove()
-  }
+  }*/
 
   handleBackPress = () => {
     this.props.navigation.navigate('Home'); 
@@ -64,8 +64,10 @@ class TaxConfiguration extends React.Component{
       const { updateFiscalIdentity } = this.props;
       this.setLoading(true);
       updateFiscalIdentity(name, cuit, 'monotributo')
-       .then(() => {
-        this.props.navigation.navigate('Home');
+       .then((response) => {
+          console.log(response)
+          if (response != undefined) this.setState({errorCuit: response, loading: false});
+          else this.props.navigation.navigate('Home');
       })
     } else {
       if (!validateCuit(this.state.cuit) && this.state.name === '') 
@@ -92,6 +94,7 @@ class TaxConfiguration extends React.Component{
   setLoading = (bool) => this.setState({ loading: bool })
 
   render() {
+    console.log(this.props.name);
     const displayInputFiscalKey = this.state.showInputFiscalKey ? 'flex' : 'none';
     const displayCuit = this.state.errorCuit === undefined ? 'none' : 'flex';
     const displayName = this.state.errorName === undefined ? 'none' : 'flex';
@@ -149,7 +152,7 @@ class TaxConfiguration extends React.Component{
                 onPress={() => this.setState({showInputFiscalKey: !this.state.showInputFiscalKey})}
                 buttonStyle={ style.buttonKeys }
                 titleStyle={ style.textRegular14white }
-                loading={this.state.loading}
+                loading={this.state.loadingKey}
               />
             </View>
             

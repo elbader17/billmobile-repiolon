@@ -4,27 +4,25 @@ import {
   SET_MY_FISCAL_IDENTITY,
 } from './constants';
 
-function setMyFiscalIdentity(name, cuit) {
+function setMyFiscalIdentity(fiscalIdentity) {
   return {
     type: SET_MY_FISCAL_IDENTITY,
-    name,
-    cuit,
-  };
-}
-/*
-function getCertificateAction(value) {
-  return {
-    type: 'SET_USER_CERTIFICATE',
-    value
+    fiscalIdentity
   };
 }
 
-function getCertificateAction(values) {
-  return {
-    type: 'SET_CERTIFICATEs',
-    values
+const setFiscalIdentity = () => {
+  return (dispatch) => {
+    console.log('Set User to Empty');
+    const defaultFiscalIdentity = {
+      attributes: {
+        name: null,
+        identification: null
+      }
+    }
+    return dispatch(setMyFiscalIdentity(defaultFiscalIdentity));
   };
-}*/
+};
 
 const updateFiscalIdentity = function (name, cuit, category) {
   const resource = {
@@ -37,14 +35,14 @@ const updateFiscalIdentity = function (name, cuit, category) {
     const instance = axios.create({
       headers: { 'JWT-TOKEN': getState().authentication.jwtToken },
     });
-    console.log(resource, getState().authentication.jwtToken)
     return instance.put('/v1/my/fiscal_identity', { resource })
       .then((response) => {
         console.log(response)
-        dispatch(setMyFiscalIdentity(name, cuit));
+        dispatch(setMyFiscalIdentity(response.data.data));
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.response.data.error.identity[0]);
+        return error.response.data.error.identity[0]
       });
   };
 };
@@ -56,9 +54,8 @@ const getFiscalIdentity = function () {
     });
     return instance.get('/v1/my/fiscal_identity')
       .then((response) => {
-        console.log(response)
-        const { name, identification } = response.data.data.attributes;
-        dispatch(setMyFiscalIdentity(name, identification));
+        console.log(response.data.data)
+        dispatch(setMyFiscalIdentity(response.data.data));
         return response.data;
       })
       .catch((error) => {
@@ -95,4 +92,4 @@ const uploadCertificate = (pkey, cert) => {
   };
 }
 
-export { updateFiscalIdentity, getFiscalIdentity, getCertificate, uploadCertificate };
+export { updateFiscalIdentity, getFiscalIdentity, setFiscalIdentity };

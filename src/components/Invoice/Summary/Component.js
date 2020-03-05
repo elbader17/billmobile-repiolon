@@ -50,13 +50,7 @@ class InvoiceSummary extends React.Component {
           navigation.navigate('Opinion', {ok: response, url: this.state.urlInvoiceProcessed}) 
         }
         else {
-          /*getCertificate()
-            .then(response => {
-              console.log('certificate', response);
-              if (response) navigation.navigate('Opinion', {ok: false, url: 'errorAfip'});
-              else navigation.navigate('Opinion', {ok: false, url: 'errorCert'});
-            })*/
-            navigation.navigate('Opinion', {ok: false, url: '*Verifique sus Certificados'})
+          navigation.navigate('Opinion', {ok: false, url: '*Verifique sus Certificados'})
         }
       })
   }
@@ -71,12 +65,20 @@ class InvoiceSummary extends React.Component {
   setImpuesto = (value) => this.setState({ impuesto: value })  
 
   showInfoCustomer = () => {
-    if (this.props.fiscalIdentity.name==='fc') {
+    if (this.props.fiscalIdentity.category==='fc') {
+      const displayData = this.props.fiscalIdentity.identification != 'fc' ? 'flex' : 'none';
       return(
         <View style={style.boxCustomer}>
           <Text style={style.textRegular12Blue}>Datos del Receptor</Text>
           <Text style={style.textRegular16GrayDark}>Consumidor Final</Text>
-          <Text style={style.textRegular14GrayDark}>Documento: {this.props.fiscalIdentity.identification}</Text>
+          <View style={{display: displayData}}>
+            <Text style={style.textRegular14GrayDark}>
+              Nombre: {this.props.fiscalIdentity.name}
+            </Text>
+            <Text style={style.textRegular14GrayDark}>
+              Documento: {this.props.fiscalIdentity.identification}
+            </Text>
+          </View>
         </View>
       )
     } else {
@@ -136,7 +138,7 @@ class InvoiceSummary extends React.Component {
   }
 
   render() {
-    console.log(this.props.invoiceDate, this.props.fiscalIdentity);
+    console.log(this.props.invoiceDate);
     return(
       <View style={style.containerSummary}>
 
@@ -180,13 +182,13 @@ class InvoiceSummary extends React.Component {
     
         </View>
 
-        <View style={style.containerFooter}>
+        <View style={style.containerFooterSumary}>
           <Button
             title='Confirmar'
             testID='confirmInvoice'
             TouchableComponent={TouchableOpacity}
             onPress={ this.confirmInvoice }
-            buttonStyle={ style.buttonContinue }
+            buttonStyle={ style.buttonContinueSumary }
             titleStyle={ style.textBold16White }
             loading={this.state.loading}
           />

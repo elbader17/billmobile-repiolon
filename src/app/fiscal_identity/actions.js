@@ -5,7 +5,6 @@ import {
 } from './constants';
 
 const addfiscalIdentityToInvoiceAction = fiscalIdentity => {
-  console.log('aca');
   return {
     type: ADD_FISCAL_IDENTITY_TO_INVOICE,
     fiscalIdentity,
@@ -45,8 +44,8 @@ const addFiscalIdentityToInvoice = (name, identity, category, id, address, city)
     if (invoiceId != null)
       promise = Promise.resolve();
     else {
-      const { invoiceDate, voucherType } = getState().invoices.currentInvoice;
-      promise = dispatch(createInvoice(invoiceDate, voucherType));
+      const { invoiceDate, voucherType, conditionSale } = getState().invoices.currentInvoice;
+      promise = dispatch(createInvoice(invoiceDate, voucherType, conditionSale));
     }
     return promise.then(() => {
       const updatedInvoiceId = getState().invoices.currentInvoice.id;

@@ -4,7 +4,7 @@ import { signUp } from '../../../app/authentication/actions';
 
 const mapDispatchToProps = dispatch => {
   return {
-    signUp: (password, name,attributes) => dispatch(signUp(password, name, attributes)),
+    signUp: (password, email, attributes) => dispatch(signUp(password, email, attributes)),
   };
 }
 

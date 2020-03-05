@@ -18,11 +18,13 @@ import {
 
 
 function defaultCurrentInvoice() {
+  var date = new Date();
   return {
     fiscalIdentity: { name: '', cuit: '', category: ''},
     invoiceItems: [],
-    invoiceDate: new Date(),
-    voucherType: 'fc',
+    invoiceDate: date,
+    voucherType: '11',
+    conditionSale: 'cdo',
     id: null,
     total: 0.0,
     url: ''
@@ -35,7 +37,7 @@ const initialState = {
 };
 
 function setCurrentInvoice({ draftState, invoice }) {
-  const { invoice_date, invoice_type, total, url } = invoice.attributes;
+  const { invoice_date, invoice_type, total, url, condition_sale } = invoice.attributes;
   draftState.currentInvoice.id = invoice.id;
   const day = invoice_date.slice(8,10);
   const month = invoice_date.slice(5,7);
@@ -45,6 +47,7 @@ function setCurrentInvoice({ draftState, invoice }) {
   draftState.currentInvoice.voucherType = invoice_type;
   draftState.currentInvoice.total = total;
   draftState.currentInvoice.url = url;
+  draftState.currentInvoice.conditionSale = condition_sale;
   return draftState;
 }
 

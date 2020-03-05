@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { Button } from "react-native-elements";
 import PropTypes from 'prop-types';
 import { COLORS } from '../../constants/colors';
@@ -17,23 +17,24 @@ const InvoiceCustomer = props => {
       <View style={style.inLineSpaceBetween}>
         <View style={style.inColumnSpaceBetween}>
           <Text style={style.textLight12GrayDark}>
-            Condición IVA: <Text style={style.textRegular14GrayDark}>
-                            {iva}
-                           </Text> 
-          </Text>
-          <Text style={style.textLight12GrayDark}>
-            Nombre:  <Text style={style.textRegular14GrayDark}>
+            Nombre:  <Text style={style.textRegular14Blue}>
                       {name}
                      </Text> 
           </Text>
           <Text style={style.textLight12GrayDark}>
-            {titleIdentity}  <Text style={style.textRegular14GrayDark}>
+            {titleIdentity}  <Text style={style.textRegular14Blue}>
                               {identity}
                              </Text> 
           </Text>
+          <Text style={style.textLight12GrayDark}>
+            Condición IVA: <Text style={style.textRegular14Blue}>
+                            {iva}
+                           </Text> 
+          </Text>
         </View>
         <Button
-          icon={ <IconX size={18} color={COLORS.blue}/> }
+          icon={ <IconX size={25} color={COLORS.blue}/> }
+          TouchableComponent={TouchableOpacity}
           onPress={ () => props.setShowCustomer(false) }
           buttonStyle={style.buttonDeleteCustomerInvoice}
           titleStyle={style.textRegular12Blue}

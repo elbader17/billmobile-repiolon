@@ -60,7 +60,6 @@ class ItemList extends React.Component {
     else this.props.navigation.navigate('Invoice');
   }
   navigateToEditItem = (item) => {
-    console.log(item);
     if (this.props.type === 'collection')
       this.props.navigation.navigate('EditItem', { item });
     else this.props.navigation.navigate('EditInvoiceItem', { item });
@@ -69,29 +68,33 @@ class ItemList extends React.Component {
   actionItem = (item) => {
     const isInvoice = this.props.type === 'invoice'
     const title = isInvoice ? 'Añadir ' : 'Eliminar ';
-    Alert.alert(
-      title + item.attributes.name,'¿Está Seguro?',
-      [
-        { //Press Cancel
-          onPress: () => console.log('Cancel Delete Item'),
-          text: 'Cancelar',
-          style: 'cancel',
-        },
-        { //Press OK
-          text: title, onPress: () => {
-            this.setState({loadingItem: true, itemActive: item.id})
-            const { actionItem, navigation } = this.props;
-            actionItem(item)
-              .then(() => {
-                if(this.props.type === 'collection')
-                  this.props.getItemList().then(()=> this.setState({loadingItem: false}));
-                else navigation.navigate('Invoice');
-              })
-          }//End onPress
-        },
-      ],
-      {cancelable: false},
-    );
+    if (isInvoice && item.attributes.category == 'service') 
+      this.navigateToEditItem(item)
+    else {
+      Alert.alert(
+        title + item.attributes.name,'¿Está Seguro?',
+        [
+          { //Press Cancel
+            onPress: () => console.log('Cancel Delete Item'),
+            text: 'Cancelar',
+            style: 'cancel',
+          },
+          { //Press OK
+            text: title, onPress: () => {
+              this.setState({loadingItem: true, itemActive: item.id})
+              const { actionItem, navigation } = this.props;
+              actionItem(item)
+                .then(() => {
+                  if(this.props.type === 'collection')
+                    this.props.getItemList().then(()=> this.setState({loadingItem: false}));
+                  else navigation.navigate('Invoice');
+                })
+            }//End onPress
+          },
+        ],
+        {cancelable: false},
+      );
+    }
   }
 
   renderLoading = () => (<LoadingIndicator/>);

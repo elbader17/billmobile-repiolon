@@ -18,6 +18,7 @@ const showpdf = url => {
 }
 
 const ListRecentCustomer = props => {
+    console.log(props.invoices)
     const listProcessed = props.invoices.filter(invoice => invoice.attributes.state === 'processed');
     if (listProcessed.length === 0 || props.invoices.length === 0 ) {
       return (

@@ -49,11 +49,13 @@ function resetCurrentInvoiceAction() {
   }
 }
 
-const createInvoice = (invoiceDate, voucherType) => {
+const createInvoice = (invoiceDate, voucherType, conditionSale) => {
   const resource = {
     invoice_date: invoiceDate,
-    invoice_type: voucherType
+    invoice_type: voucherType,
+    condition_sale: conditionSale
   };
+  console.log(resource);
   return (dispatch) => {
     return fetch_api('/v1/invoices', 'POST', false, { resource })
       .then((response) => {
@@ -70,11 +72,16 @@ const updateInvoice = (values) => {
     resource.invoice_date = values.invoiceDate;
   if (values.voucherType != null) 
     resource.invoice_type = values.voucherType;
+  if (values.conditionSale != null) 
+    resource.condition_sale = values.conditionSale;
 
   return (dispatch, getState) => {
     const { id: invoiceId } = getState().invoices.currentInvoice;
     return fetch_api(`/v1/invoices/${invoiceId}`,'PUT', false, { resource })
-      .then((response) => dispatch(updateInvoiceAction(response.data)))
+      .then((response) => {
+        console.log(response);
+        dispatch(updateInvoiceAction(response.data))
+      })
       .catch((error) => console.log(error));
   };
 };
@@ -83,6 +90,7 @@ const listInvoice = () => {
   return (dispatch) => {
     return fetch_api('/v1/invoices', 'GET', false)
       .then((response) => {
+        console.log(response)
         dispatch(listInvoiceAction(response.data));
       })
       .catch((error) => {

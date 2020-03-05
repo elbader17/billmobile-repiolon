@@ -77,8 +77,8 @@ const createInvoiceItem = ({category, name, price, quantity, item_id, dateFrom, 
     if (invoiceId != null) {
       promise = Promise.resolve();
     } else {
-      const { invoiceDate, voucherType } = getState().invoices.currentInvoice;
-      promise = dispatch(createInvoice(invoiceDate, voucherType));
+      const { invoiceDate, voucherType, conditionSale } = getState().invoices.currentInvoice;
+      promise = dispatch(createInvoice(invoiceDate, voucherType, conditionSale));
     }
     return promise.then(() => {
       const { id: updatedInvoiceId } = getState().invoices.currentInvoice;

@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import { IconEye, IconEyeOff } from '../../../constants/icons';
-import LinearGradient from 'react-native-linear-gradient';
 import { Button } from "react-native-elements";
 import { 
   validateName,
@@ -10,7 +9,7 @@ import {
   validateEmail,
   validateDataSignUp
 } from '../../../utils/validations';
-import { COLORGY, COLORS } from '../../../constants/colors';
+import { COLORS } from '../../../constants/colors';
 import style from '../style';
 
 class SignUp extends React.Component {
@@ -21,6 +20,7 @@ class SignUp extends React.Component {
       email: '@mozej.com',
       password: '@Martin44',
       name:'martin',
+      phone: '3584859376',
       confirmPassword: '@Martin44',
       confirmAccount: false,
       loading: false,
@@ -29,22 +29,23 @@ class SignUp extends React.Component {
       passRequireShow: false,
       errorName: undefined,
       errorEmail: undefined,
+      errorPhone: undefined,
       errorPass: undefined,
       errorConfirmPass: undefined
     };
   }
 
   handleSignUp = () => {
-    const { name, email, password, confirmPassword } = this.state;
+    const { name, email, password, phone, confirmPassword } = this.state;
     if(!validateDataSignUp(password, confirmPassword, email, name)) {
       if(!validateName(name)) this.setState({errorName: '*Ingrese Nombre de Usuario'});
-      if(!validateEmail(email)) this.setState({errorEmail: '*Formato Inválido'});
+      if(!validateEmail(email)) this.setState({errorEmail: '*Formato Email Inválido'});
       if(!validatePass(password)) this.setState({errorPass: '*No Cumple Requisitos'});
       if(!validateConfirmPass(password, confirmPassword)) this.setState({errorConfirmPass: '*Las Contraseñas No Coinciden'});
     } else {
       const attributes = {
         email:email,
-        name:name,
+        name:name
       };
       this.setLoading(true);
       const { signUp } = this.props;
@@ -67,6 +68,7 @@ class SignUp extends React.Component {
 
   setName = (value) => this.setState({ name: value})
   setEmail = (value) => this.setState({ email: value })
+  setPhone = (value) => this.setState({ phone: value })
   setPassword = (value) => this.setState({ password: value })
   setConfirmPassword = (value) => this.setState({ confirmPassword: value })
   setLoading = (bool) => this.setState({ loading: bool })
@@ -106,6 +108,17 @@ class SignUp extends React.Component {
             {this.state.errorEmail}
           </Text>
         </View>
+
+        <TextInput
+          placeholder='Número de Celular'
+          keyboardType='numeric'
+          placeholderTextColor={COLORS.gray}
+          value={ this.state.phone }    
+          onChangeText={ this.setPhone }
+          onFocus={()=>{this.setState({errorPhone: undefined})}}
+          style={style.input}
+        />
+        
         <View style={{display: requireShow}}>
           <Text style={style.textRegular11Blue}>
             Debe contener al menos 8 Caracteres, Mayúsculas, Minúsculas, Número y Caracter especial.

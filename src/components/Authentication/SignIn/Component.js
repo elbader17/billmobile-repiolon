@@ -53,6 +53,7 @@ class SignIn extends React.Component {
   }
 
   navigateNext = () => {
+    console.log(this.props.fiscalIdentity);
     if (this.props.fiscalIdentityComplete) {
       this.props.navigation.navigate('Home');
     } else {

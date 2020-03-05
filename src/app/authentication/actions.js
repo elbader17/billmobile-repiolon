@@ -1,5 +1,5 @@
 import { Auth } from 'aws-amplify';
-import { getFiscalIdentity } from '../user_service/actions';
+import { getFiscalIdentity, setFiscalIdentity } from '../user_service/actions';
 import {
   SET_JWT_TOKEN,
   USER_SIGNED_UP,
@@ -10,7 +10,7 @@ const setJwtToken = jwtToken => {
   return { type: SET_JWT_TOKEN, jwtToken };
 }
 
-const userSignedUp = (email, password) => {
+const userSignedUp = (email, password, phone) => {
   return { type: USER_SIGNED_UP, registration: { email, password } };
 }
 
@@ -37,6 +37,7 @@ const signOut = () => {
   return (dispatch) => {
     return Auth.signOut()
       .then(() => {
+        dispatch(setFiscalIdentity())
         return dispatch(setJwtToken(''));
       })
       .catch((err) => {

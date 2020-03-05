@@ -98,7 +98,6 @@ class NewItem extends React.Component {
   setErrorPrice = () => this.setState({errorPrice: undefined})
 
   render() {
-    console.log(this.state.dateFrom, this.state.dateTo, this.state.paymentExpiration)
     const data = {
       isProduct: this.state.isProduct,
       name: this.state.name,
