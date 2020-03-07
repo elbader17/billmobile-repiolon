@@ -232,6 +232,13 @@ export const IconIdcard = <Icon
   color={COLORS.grayDark} 
 />
 
+export const IconTax = <Icon 
+  type='antdesign' 
+  name='exclefile1' 
+  size={25} 
+  color={COLORS.grayDark} 
+/>
+
 export const IconSearch = <Icon 
   type='feather' 
   name='search' 

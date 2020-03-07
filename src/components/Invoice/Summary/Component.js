@@ -188,7 +188,7 @@ class InvoiceSummary extends React.Component {
             testID='confirmInvoice'
             TouchableComponent={TouchableOpacity}
             onPress={ this.confirmInvoice }
-            buttonStyle={ style.buttonContinueSumary }
+            buttonStyle={ style.buttonContinue }
             titleStyle={ style.textBold16White }
             loading={this.state.loading}
           />

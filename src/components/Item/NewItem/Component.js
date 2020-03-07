@@ -20,10 +20,7 @@ class NewItem extends React.Component {
       itemId: item.id,
       loading: false,
       errorName: undefined, 
-      errorPrice: undefined,
-      dateFrom: item.date_from,
-      dateTo: item.date_to,
-      paymentExpiration: item.payment_expiration
+      errorPrice: undefined
     };
   }
 
@@ -45,19 +42,12 @@ class NewItem extends React.Component {
       name: '',
       price: '',
       category: 'product',
-      quantity: 1,
-      date_from: new Date(),
-      date_to: new Date(),
-      payment_expiration: new Date()
+      quantity: 1
     };
   }
 
-  handleDateFrom = (date) => this.setState({ dateFrom: date });
-  handleDateTo = (date) => this.setState({ dateTo: date });
-  handleDatePayment = (date) => this.setState({ paymentExpiration: date });
-
   saveItem = () => {
-    const { name, price, isProduct, itemId, dateFrom, dateTo, paymentExpiration } = this.state;
+    const { name, price, isProduct, itemId } = this.state;
     const { saveItem, type, navigation } = this.props;
     const category = isProduct ? 'product' : 'service';
     const quantity = 1;
@@ -69,10 +59,7 @@ class NewItem extends React.Component {
         category,
         name,
         price,
-        quantity,
-        dateFrom,
-        dateTo,
-        paymentExpiration
+        quantity
       })
       .then(() => {
         this.setLoading(false);
@@ -129,12 +116,6 @@ class NewItem extends React.Component {
 
             <View style={style.boxInput}>
               <AddItem
-                dateFrom={this.state.dateFrom}
-                dateTo={this.state.dateTo}
-                paymentExpiration={this.state.paymentExpiration}
-                handleDateFrom={this.handleDateFrom}
-                handleDateTo={this.handleDateTo}
-                handleDatePayment={this.handleDatePayment}
                 data={data}
                 type={this.props.type}
                 setName={this.setName}

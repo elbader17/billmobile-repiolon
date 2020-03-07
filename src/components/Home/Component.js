@@ -21,7 +21,8 @@ class Home extends React.Component {
       name: user.name,
       itemInputSearch: '',
       loading: true,
-      chart: 'day'
+      chart: 'day',
+      renderRecentInvoices: false
     }
   }
 
@@ -35,11 +36,6 @@ class Home extends React.Component {
       </TouchableOpacity>
     ),
   });
-
-  componentWillMount(){
-    this.props.listInvoice()
-      .then(() => this.setState({loading: false}))
-  }
 
   componentDidMount() {
     const { navigation } = this.props;
@@ -73,6 +69,12 @@ class Home extends React.Component {
     );
   }
 
+  loadInvoices = () => {
+    this.setState({renderRecentInvoices: true})
+    this.props.listInvoice()
+      .then(() => this.setState({loading: false}))
+  }
+
   showDataChart = () => {
     const invoicess = this.props.invoices;
     if (this.state.chart == 'month'){
@@ -88,6 +90,7 @@ class Home extends React.Component {
   }
 
   render() {
+    const displayButtonRecentInvoices = this.state.renderRecentInvoices ? 'none' : 'flex'
     return(
         <View style={style.container}>
 
@@ -117,7 +120,7 @@ class Home extends React.Component {
           <View style={style.containerChart}>
             <TouchableOpacity onPress={this.infoChart} activeOpacity={0.7}>
             <View>
-              {/*<LineChart
+              <LineChart
                 height={hp('30%')}
                 width={Dimensions.get('window').width-20}
                 style={style.styleChart}
@@ -125,7 +128,7 @@ class Home extends React.Component {
                 chartConfig={dataConfig}
                 yAxisLabel={'$'}
                 bezier
-              />*/}
+              />
             </View>
             </TouchableOpacity>
           </View> 
@@ -143,21 +146,6 @@ class Home extends React.Component {
                   <Text style={style.textLight14White}>
                     Total del Período
                   </Text>
-                  {<MoreInfo color={COLORS.blue} size={25}/>}
-                </View>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={this.infoTotalPeriod} activeOpacity={0.7}>
-              <View style={[style.boxData, {marginTop: 5}]}>
-                <View style={style.inLineSpaceAround}>
-                  <Text style={style.textRegular22BlueMedium}>
-                    08/12
-                  </Text>
-                  {IconCaretRight}
-                  <Text style={style.textLight14White}>
-                    Cobros Pendientes
-                  </Text>
-                  {<MoreInfo color={COLORS.blue} size={25}/>}
                 </View>
               </View>
             </TouchableOpacity>
@@ -173,12 +161,22 @@ class Home extends React.Component {
                 </Text>
               </View>
               
+
               <ScrollView style={style.listCustomers}> 
-                {this.state.loading ? this.renderLoading() : this.renderRecentCustomers()}
+                <Button
+                  title='Cargar Comprobantes'
+                  TouchableComponent={TouchableOpacity}
+                  onPress={ this.loadInvoices }
+                  buttonStyle={[style.buttonLoad,{display: displayButtonRecentInvoices}]}
+                  titleStyle={style.textRegular14White }
+                />
+                <View style={{display: this.state.renderRecentInvoices ? 'flex' :'none'}}>
+                  {this.state.loading ? this.renderLoading() : this.renderRecentCustomers()}
+                </View>
               </ScrollView>
 
               <Button
-                title='Generar Nuevo'
+                title='Nuevo Comprobante'
                 TouchableComponent={TouchableOpacity}
                 onPress={ () => this.props.navigation.navigate('Invoice') }
                 buttonStyle={style.buttonAll}

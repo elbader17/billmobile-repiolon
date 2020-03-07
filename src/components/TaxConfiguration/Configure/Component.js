@@ -2,12 +2,9 @@ import React from 'react';
 import { View, TouchableOpacity, ScrollView, Modal, Text, TextInput, BackHandler } from 'react-native';
 import { Button } from "react-native-elements";
 import { COLORS } from '../../../constants/colors';
-import { IconBack, IconEye, IconEyeOff, IconCustomer, IconIdcard, IconKey, IconCloseDrawer, IconUp } from '../../../constants/icons';
+import { IconBack, IconEye, IconEyeOff, IconCustomer, IconIdcard, IconKey, IconCloseDrawer, IconUp, IconTax } from '../../../constants/icons';
 import  { validateCuit } from '../../../utils/identity';
 import style from '../style';
-
-const DEFAULT_CERTIFICATE = '-----BEGIN CERTIFICATE-----MIIDQzCCAiugAwIBAgIIbLaTuF1CqWQwDQYJKoZIhvcNAQENBQAwMzEVMBMGA1UEAwwMQ29tcHV0YWRvcmVzMQ0wCwYDVQQKDARBRklQMQswCQYDVQQGEwJBUjAeFw0xOTEyMDkxOTQxNTZaFw0yMTEyMDgxOTQxNTZaMC4xETAPBgNVBAMMCGlGYWN0dXJhMRkwFwYDVQQFExBDVUlUIDIwMzYzMDk1NzIxMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA5RVYwJfHcTl+qPF3mJ0/JEbzTsAbCN4xHzfPg8iwEkbVPCykLMECYvNV9pgEf6p28qn+rC8zNEKHapp7xVELn79IeaBgN4aOZCeRKMwmsLBuUCGNvYDbHo7xv9sm69VlN2BHM1TS103OnnfeborfHyhCU9XtJLMVciIUPWdBxee7n91DuD7Pb8KrSpUFiwfffHl3Yxd0Qt+TxxHsorXVRCEMR5q10PxMIjO1gZuQmRXhLzqikIsIp7FY4RXEMPIbr8L79/Csk6bjBbAZohlxgYTy5dVuhQUMmripM0Qi1PHVgRvEirunN62cjCv8KMMlXv1FQkppblyxBEDwp6EQ4QIDAQABo2AwXjAMBgNVHRMBAf8EAjAAMB8GA1UdIwQYMBaAFFtAUTDnwyq2nFack4XjQoCwUOv2MB0GA1UdDgQWBBQPskItzm2jHpKM3XVQlnp9IvJeajAOBgNVHQ8BAf8EBAMCBeAwDQYJKoZIhvcNAQENBQADggEBAJ3IIPQ3YIPNKNo8qC/gX6JGQyTU4FKx1kUR6hIQ9OEt3lOdQZqLxJnqxCekfHSW3X4p5m6Ua9787/c4ZfQktKTTvuwWIzzoqYcglAJJGzVxbG8LOPJWpNpKeNPPQJ9S9A6R4mQM7bvRSaAl6GN5ro3Ar4DkbMyMXBM5dNCVu9+W+XMX8kVIR+OHiwHsHjtvCmOnoOjsjMJ4KXPQBe8YqzCMNBqQMP5pf3FGPLPexRJry0mTtuIpAmLPWhULw5wpT7guGNyZ1r0RB1vkH+HGYVpzzV8wdQZ+75DosjKG5nd2rwDJZCs0meBxIb8u3wxVk1WUyoG1lcHuYYfqbj9S/fw=-----END CERTIFICATE-----';
-const DEFAULT_CERTIFICATE_KEY = '-----BEGIN RSA PRIVATE KEY-----MIIEpAIBAAKCAQEA5RVYwJfHcTl+qPF3mJ0/JEbzTsAbCN4xHzfPg8iwEkbVPCykLMECYvNV9pgEf6p28qn+rC8zNEKHapp7xVELn79IeaBgN4aOZCeRKMwmsLBuUCGNvYDbHo7xv9sm69VlN2BHM1TS103OnnfeborfHyhCU9XtJLMVciIUPWdBxee7n91DuD7Pb8KrSpUFiwfffHl3Yxd0Qt+TxxHsorXVRCEMR5q10PxMIjO1gZuQmRXhLzqikIsIp7FY4RXEMPIbr8L79/Csk6bjBbAZohlxgYTy5dVuhQUMmripM0Qi1PHVgRvEirunN62cjCv8KMMlXv1FQkppblyxBEDwp6EQ4QIDAQABAoIBAQCsYTLGwa93OL9hm0nWUkUoJCeD07TEKIYoKpQBY2tyZVChlin370i/csH17BA+jOQy185mfKH4KjPB+Ps30DOCAqsjspWUUrElFkz5uR1ICYsIyybgOW0pAoFRUDRqc8pVMCKDsslw8ACRaDu9TMx2opG+ihSHcCasGo7GYcOxibEhWoVyH4ArGXr7hdkfWr3k5qvVlQA4s//d3oDSx/6zNcvIJiUZe81kZjk1rjvXJlmzeGmZuuj2ddFAj6IAXVdEVDN94+gomN1hjm0MvD1P3rIVUS4JKEL8Jc9ghrA9ec7s1ZnC5sT+12yFipRU6tHkYNoyLW80mTedYlc8/ieNAoGBAPkHbmVKFFPhr4eTH4CxJP+Wy7CiYM1Tvc73LmcVdWGCpcCLQjG5IQUUnvEW21cbjAoVTjm4sKhLiEMaT7+9aLvNLdcHDX+BT6XMYTMD2wWHbVL+ts//x+/RbCMxLOD6VagJUNiwVEDGPMRKWZhUKFgZjSQvGKAJY+Tbh2Rh2vPHAoGBAOt++5s3s3WLtZ2r64p2L7JY00ScMd/rJjBMz6QsNb7excSF4DCUlYUbTE0gJvboOFnQhpHffzTV81Ej3yJgzNMdMsIKD/BWj/UZ+cIXtEE2QIqP4v4BD5iSVMuei63+lZKKdl7WyG7ezhtDpgmnKoIw6eTvizZMeQhXfzudzYYXAoGAZwk4GBiqiHpckg/BfRHOaSIPbSoCO3JmmneTb3tlcc8Inb4AyWn7y4pYqQ/3+Pag3psqHp/YGAoIexsr2/2Wk/209b8pSpRKTCNgJCd4O7Vo+moBYdZG92cDAxyZoQxy3G/eT4nFkndzNRQ+NdS8TJdl2o7R9YVtG4fpYRNL8IkCgYEAidRPRGBMa26yhC6789UKQ3LTa+OTGUASoNBD8w1hA251B3lnZmeAP2Bjvvwjcf0mBgMSz8ukMvNJrmK1VPSczK7ZJ1ImU/8F0Gk8kYm4GTa8fZyLOSi7zQtQD8Ciddp8BkF92DITKzjCHpjwU9QAACTKsBA3RTdq2yQCtoy8Xk8CgYBA+8fBtf6/+RtP3QJ1C64DKS4bLJQd4BeMHB4MbrA/NWBu7Fq3ZRc9Imnv3JZ1prIjtCVoT/5dp66eEWK0q9+XR1Y5wpMJF7JkOuQNgqK+ZZsMWi9itNaARuGxlUSVDOkB3g8nSOGWAnjyhAPI61IUmIRpXum4Jeh4ijKkWa5g3w==-----END RSA PRIVATE KEY-----';
 
 class TaxConfiguration extends React.Component{
 
@@ -17,13 +14,23 @@ class TaxConfiguration extends React.Component{
       name: this.props.name,
       cuit: this.props.cuit,
       fiscalKey: '',
+      ib: this.props.ib,
       loading: false,
       loadingKey: false,
+      disabledCertificate: true,
       errorName: undefined,
       errorCuit: undefined,
       hidePassword: true,
       showInputFiscalKey: false
     };
+  }
+
+  componentWillMount() {
+    this.props.getCertificate()
+      .then(response => {
+        console.log(response);
+        this.setState({disabledCertificate: false})
+      })
   }
 
   componentDidMount() {
@@ -60,10 +67,10 @@ class TaxConfiguration extends React.Component{
 
   handleConfigFiscal = () => {
     if (validateCuit(this.state.cuit) && this.state.name != '') {
-      const { name, cuit } = this.state;
+      const { name, cuit, ib } = this.state;
       const { updateFiscalIdentity } = this.props;
       this.setLoading(true);
-      updateFiscalIdentity(name, cuit, 'monotributo')
+      updateFiscalIdentity(name, cuit, 'monotributo', ib)
        .then((response) => {
           console.log(response)
           if (response != undefined) this.setState({errorCuit: response, loading: false});
@@ -75,26 +82,31 @@ class TaxConfiguration extends React.Component{
       else if (!validateCuit(this.state.cuit)) this.setState({errorCuit: '*CUIT inválido'});
       else this.setState({errorName: '*Debe ingresar un nombre'})
     }
-  } 
-  uploadKeys = () => {
-    //const { getCertificate, updateCertificate } = this.props;
+  }
+  
+  saveKey = () => {
+    const { saveFiscalKey } = this.props;
     this.setState({loadingKey: true});
-    //getCertificate()
-    updateCertificate(DEFAULT_CERTIFICATE_KEY, DEFAULT_CERTIFICATE)
+    saveFiscalKey(this.state.fiscalKey)
       .then(response => {
-        this.setState({loadingKey: false});
+        this.setState({loadingKey: false, showInputFiscalKey: false});
         console.log(response)
       })
       .catch(error => console.log(error))
   }
+
   navigateLogin = () => this.props.navigation.navigate('Login');
   
   setName = (value) => this.setState({ name: value})
   setCuit = (value) => this.setState({ cuit: value })
+  setIb = (value) => this.setState({ ib: value })
+  setClave = (value) => this.setState({ fiscalKey: value })
   setLoading = (bool) => this.setState({ loading: bool })
 
   render() {
-    console.log(this.props.name);
+    console.log(this.props.user);
+    const titleKey = this.props.user.fiscal_key ? 'Modificar Clave Fiscal' : 'Ingresar Clave Fiscal'
+    const titleIb = this.state.ib === 'Excento' ? 'No Estoy Excento' : 'Estoy Excento';
     const displayInputFiscalKey = this.state.showInputFiscalKey ? 'flex' : 'none';
     const displayCuit = this.state.errorCuit === undefined ? 'none' : 'flex';
     const displayName = this.state.errorName === undefined ? 'none' : 'flex';
@@ -144,42 +156,65 @@ class TaxConfiguration extends React.Component{
               Para acceder a tu información y configurar tu cuenta.
             </Text>
 
+            <View style={style.containerInputWithIcon}>
+              {IconTax}
+              <TextInput
+                keyboardType='numeric'
+                placeholder='Número de Ingresos Brutos'
+                value={this.state.ib}
+                onChangeText={this.setIb}
+                style={style.inputWithIcon}
+                editable={this.state.ib != 'Excento'}
+              />  
+            </View>
+            <Text style={style.textRegular12GrayDark}>
+              Número de Ingresos Brutos
+            </Text>
+            
+            <Button
+              title={titleIb}
+              TouchableComponent={TouchableOpacity}
+              onPress={ () => this.setState({ib: this.state.ib === 'Excento' ? null : 'Excento'}) }
+              buttonStyle={ style.buttonIb }
+              titleStyle={ style.textRegular14white }
+            />
+            
             <View style={style.containerButtonKey}>
               <Button
-                title='Ingresar Clave Fiscal'
+                title={this.state.disabledCertificate ? 'Verificando Clave ... Un monento!': titleKey}
                 testID='ready'
                 TouchableComponent={TouchableOpacity}
-                onPress={() => this.setState({showInputFiscalKey: !this.state.showInputFiscalKey})}
+                onPress={ () => this.setState({showInputFiscalKey: !this.state.showInputFiscalKey}) }
                 buttonStyle={ style.buttonKeys }
                 titleStyle={ style.textRegular14white }
-                loading={this.state.loadingKey}
+                disabled = {this.state.disabledCertificate}
               />
             </View>
             
             <View style={[style.containerInputWithIcon,{display: displayInputFiscalKey}]}>
               {IconKey}
               <TextInput
-                secureTextEntry={!this.state.hidePassword}
+                secureTextEntry={this.state.hidePassword}
                 keyboardType='numeric'
                 placeholder=' Clave Fiscal'
                 value={this.state.fiscalKey}
-                //onChangeText={null}
+                onChangeText={this.setClave}
                 style={style.inputWithIcon}
               />  
               <TouchableOpacity 
                 onPress={()=>this.setState({hidePassword: !this.state.hidePassword})}>
-                {this.state.hidePassword ? IconEye : IconEyeOff}
+                {this.state.hidePassword ? IconEyeOff : IconEye}
               </TouchableOpacity>
               
             </View>
             <View style={{display: displayInputFiscalKey}}>
               <Button
-                title='Guardar'
+                title='Guardar Clave'
                 TouchableComponent={TouchableOpacity}
-                onPress={ this.handleConfigFiscal }
+                onPress={ this.saveKey }
                 buttonStyle={ style.buttonSaveKey }
-                titleStyle={ style.textRegular14white }
-                loading={this.state.loading}
+                titleStyle={ style.textBold16White }
+                loading={this.state.loadingKey}
               />
               <TouchableOpacity 
                 onPress={()=>this.setState({showInputFiscalKey: false})}>

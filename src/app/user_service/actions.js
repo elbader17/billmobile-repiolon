@@ -2,12 +2,20 @@ import axios from 'axios';
 import { fetch_api } from '../../utils/fetchrefresh';
 import {
   SET_MY_FISCAL_IDENTITY,
+  SET_CERTIFICATE_KEY
 } from './constants';
 
 function setMyFiscalIdentity(fiscalIdentity) {
   return {
     type: SET_MY_FISCAL_IDENTITY,
     fiscalIdentity
+  };
+}
+
+function setCertificateAndKeyPresent(data) {
+  return {
+    type: SET_CERTIFICATE_KEY,
+    data
   };
 }
 
@@ -24,11 +32,12 @@ const setFiscalIdentity = () => {
   };
 };
 
-const updateFiscalIdentity = function (name, cuit, category) {
+const updateFiscalIdentity = function (name, cuit, category, ib) {
   const resource = {
     category: category,
     name,
     identification: cuit,
+    ingresos_brutos: ib
   };
 
   return (dispatch, getState) => {
@@ -69,22 +78,21 @@ const getCertificate = () => {
     return fetch_api('/v1/my/certificate', 'GET', false)
       .then((resources) => {
         console.log(resources)
-        //dispatch(getCertificateAction(resources.data))
+        dispatch(setCertificateAndKeyPresent(resources.data))
       })
       .catch((error) => console.log(error));
   };
 }
 
-const uploadCertificate = (pkey, cert) => {
+const saveFiscalKey = (key) => {
   const resource = {
-    pkey,
-    cert
+    fiscal_key: key
   };
   return (dispatch) => {
     return fetch_api('/v1/my/certificate','PUT', false, { resource })
       .then((response) => {
         console.log(response)
-        //dispatch(uploadCertificateAction(resource.data));
+        dispatch(setCertificateAndKeyPresent(response.data));
       })
       .catch((error) => {
         console.log(error);
@@ -92,4 +100,4 @@ const uploadCertificate = (pkey, cert) => {
   };
 }
 
-export { updateFiscalIdentity, getFiscalIdentity, setFiscalIdentity };
+export { updateFiscalIdentity, getFiscalIdentity, setFiscalIdentity, saveFiscalKey, getCertificate };

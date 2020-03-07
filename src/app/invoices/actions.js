@@ -49,11 +49,14 @@ function resetCurrentInvoiceAction() {
   }
 }
 
-const createInvoice = (invoiceDate, voucherType, conditionSale) => {
+const createInvoice = (invoiceDate, voucherType, conditionSale, dateFrom, dateTo, paymentExpire) => {
   const resource = {
     invoice_date: invoiceDate,
     invoice_type: voucherType,
-    condition_sale: conditionSale
+    condition_sale: conditionSale,
+    date_from: dateFrom,
+    date_to: dateTo,
+    payment_expiration: paymentExpire
   };
   console.log(resource);
   return (dispatch) => {
@@ -74,6 +77,10 @@ const updateInvoice = (values) => {
     resource.invoice_type = values.voucherType;
   if (values.conditionSale != null) 
     resource.condition_sale = values.conditionSale;
+  
+  resource.date_from = values.dateFrom;
+  resource.date_to = values.dateTo
+  resource.payment_expiration = values.paymentExpire
 
   return (dispatch, getState) => {
     const { id: invoiceId } = getState().invoices.currentInvoice;
@@ -120,6 +127,7 @@ const confirmInvoice = (attributes) => {
       state: attributes.state,
       total: attributes.total
     }
+    console.log(resource)
     return fetch_api(`/v1/invoices/${invoiceId}/confirm`,'PUT', false, { resource })
       .then((response) => {
         console.log(response);

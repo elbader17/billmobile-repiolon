@@ -30,15 +30,12 @@ function setInvoiceItemsAction(invoiceItems) {
   };
 }
 
-const updateInvoiceItem = (id, values, quantity, date_from, date_to, payment_expiration) => {
+const updateInvoiceItem = (id, values, quantity) => {
   return (dispatch, getState) => {
     const { id: invoiceId } = getState().invoices.currentInvoice;
     const resource = {
       ...values, 
-      invoice_id: invoiceId, 
-      date_from, 
-      date_to, 
-      payment_expiration
+      invoice_id: invoiceId
     }
     return fetch_api(`/v1/invoice_items/${id}`, 'POST', false, { resource })
       .then((response) => {
@@ -70,7 +67,7 @@ const getInvoiceItems = () => {
   };
 };
 
-const createInvoiceItem = ({category, name, price, quantity, item_id, dateFrom, dateTo, paymentExpiration}) => {
+const createInvoiceItem = ({category, name, price, quantity, item_id}) => {
   return (dispatch, getState) => {
     const { id: invoiceId } = getState().invoices.currentInvoice;
     let promise;
@@ -88,10 +85,7 @@ const createInvoiceItem = ({category, name, price, quantity, item_id, dateFrom, 
         price: parseFloat(price, 10),
         invoice_id: updatedInvoiceId,
         item_id,
-        quantity,
-        date_from: dateFrom,
-        date_to: dateTo,
-        payment_expiration: paymentExpiration
+        quantity
       };
       return fetch_api('/v1/invoice_items', 'POST', false, { resource })
         .then((response) => {

@@ -96,7 +96,16 @@ const styles = StyleSheet.create({
     marginTop: 5,
     height: hp('6%'),
     borderRadius: 25,
-    backgroundColor: COLORS.blueLight
+    backgroundColor: COLORS.blueLight,
+    elevation: 1
+  },
+  buttonIb: {
+    width: '50%',
+    marginTop: 5,
+    height: hp('5%'),
+    borderRadius: 25,
+    backgroundColor: COLORS.blueMedium,
+    elevation: 1
   },
   buttonCancelModal: {
     width: 120,

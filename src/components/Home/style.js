@@ -21,9 +21,9 @@ const styles = StyleSheet.create({
     paddingVertical: 3
   },
   containerStatics: {
-    backgroundColor: COLORS.grayLight,
-    justifyContent: 'center',
     flex:0.20,
+    justifyContent: 'center',
+    backgroundColor: COLORS.grayLight,
     paddingHorizontal: 10
   },
   containerListCustomer: {
@@ -40,12 +40,10 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 0
   },
   boxData: {
-    height: hp('6.5%'),
-    justifyContent: 'center',
     backgroundColor: COLORS.white,
-    paddingHorizontal: 20,
+    elevation: 1.5,
     borderRadius: 7,
-    elevation: 1.5
+    paddingVertical: 25
   },
   scrollCustomers: {
     height: hp('28%'),
@@ -173,7 +171,7 @@ const styles = StyleSheet.create({
   },
   textLight14White: {
     fontFamily: FONTS.pRegular,
-    fontSize: FONTS.size14,
+    fontSize: FONTS.size16,
     color: COLORS.grayDark,
     top: 1
   },
@@ -245,7 +243,7 @@ const styles = StyleSheet.create({
   },
   textRegular22BlueMedium: {
     fontFamily: FONTS.pRegular,
-    fontSize: FONTS.size18,
+    fontSize: FONTS.size22,
     color: COLORS.blueMedium,
     top: 2
   },
@@ -265,7 +263,18 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.blueLight,
     borderRadius: 25,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    elevation: 1
+  },
+  buttonLoad: {
+    height: hp('5%'),
+    marginTop: 5,
+    backgroundColor: COLORS.blue,
+    borderRadius: 25,
+    marginBottom: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 1
   },
   buttonFacturacion: {
     height: hp('3%'),

@@ -5,9 +5,9 @@ export const presentInvoiceDate = (date) => {
   return `${dateF.getDate()}/${dateF.getMonth()+1}/${dateF.getFullYear()}`;
 }
 
-export const rankMaxDateBill = (items) => {
+export const rankMaxDateBill = (concept) => {
   const date = new Date();
-  if (items.length == 0 || items[0].category == 'service') {
+  if (concept == 'services' || concept == 'prodserv') {
     const days10 = (24*60*60*1000) * 10;
     date.setTime(date.getTime() + days10);
   }
@@ -18,9 +18,9 @@ export const rankMaxDateBill = (items) => {
   return `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`;
 }
 
-export const rankMinDateBill = (items) => {
+export const rankMinDateBill = (concept) => {
   const date = new Date();
-  if (items.length == 0 || items[0].category == 'service') {
+  if (concept == 'services' || concept == 'prodserv') {
     const days10 = (24*60*60*1000) * 10;
     date.setTime(date.getTime() - days10);
   }

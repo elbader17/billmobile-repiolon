@@ -1,32 +1,19 @@
 import React from 'react';
-import DatePicker from 'react-native-datepicker';
-import { View, Text, Picker, TouchableOpacity, Alert, ActivityIndicator } from 'react-native';
+import { View, TouchableOpacity, Alert } from 'react-native';
 import { Button } from "react-native-elements";
 import { showMessage } from "react-native-flash-message";
-import ModalVoucherTYpe from './ModalVoucherType';
 import InvoiceCustomer from './InvoiceCustomer';
 import InvoiceItems from './InvoiceItems';
 import { validateData } from '../../utils/validations';
-import { rankMaxDateBill, rankMinDateBill } from '../../utils/date';
 import { 
   messageItemsIncomplete, 
   messageCustomerIncomplete,
   messageRequestData 
 } from '../../utils/messagesNotifications';
-import { IconDocument, IconAddCustomer, IconMore, IconBottom, IconCustomer2, IconCloseDrawer, IconX } from '../../constants/icons';
-import { VOUCHER_TYPES, CONCEPT } from '../../constants/invoice';
-import { COLORS } from '../../constants/colors';
-import { CONDITION_SALE } from '../../constants/invoice'
-import ModalConditionSale from './ModalConditionSale';
+import { IconDocument, IconBottom, } from '../../constants/icons';
 import style from './style';
-
-const defaultCustomer = {
-  attributes: {
-    name: '',
-    identification: '',
-    category: 'fc',
-  }
-}
+import InitInvoice from './InitInvoice';
+import EndInvoice from './EndInvoice';
 
 class Invoice extends React.Component {
 
@@ -39,15 +26,19 @@ class Invoice extends React.Component {
       fcIdentification: undefined,
       showCustomer: fiscalIdentity.name != '',
       conditionSale: conditionSale,
-      modalVisible: false, //Show Modal Voucher Type
-      modalConditionSale: false,
       loadingFC: false, //For add final consumer
       loadingContinue: false,
       quantity: 1, //Cant items
       validIdentity: true,
       concept: 'products',
       dateDisabled: this.props.items.length === 0,
-      renderInitInvoice: false
+      renderInitInvoice: this.props.invoiceId != null,
+      renderEndInvoice: false,
+      renderButtonsNewDraft: this.props.invoiceId === null,
+      salePoint: 1,
+      dateFrom: this.props.dateFrom,
+      dateTo: this.props.dateTo,
+      paymentExpire: this.props.paymentExpire,
     }
   }
 
@@ -89,7 +80,7 @@ class Invoice extends React.Component {
   navigateToEditItem = (item) => {
     this.props.navigation.navigate('EditInvoiceItem', { item });
   }
-  navigateAddItems = () => this.props.navigation.navigate('ListInvoiceItem');
+  navigateAddItems = () => this.props.navigation.navigate('ListInvoiceItem', {concept: this.state.concept});
   navigateToSummaryInvoice = () => {
     const { showCustomer } = this.state;
     const { fiscalIdentity, items } = this.props;
@@ -141,52 +132,36 @@ class Invoice extends React.Component {
     updateInvoiceItemQuantity(invoiceItemId, quantity);
   }
   
-  handleDatePicked = (date) => {
-    this.setState({ invoiceDate: date });
-    this.createOrUpdateInvoice({ 
-      invoiceDate: date,
-      voucherType: this.state.voucherType,
-      conditionSale: this.state.conditionSale 
-    });
-  }
-
   createOrUpdateInvoice = (values) => {
     const { updateInvoice, createInvoice, invoiceId } = this.props;
-    if (invoiceId != null) updateInvoice(values);
-    else createInvoice(values.invoiceDate, values.voucherType, values.conditionSale);
+    if (invoiceId != null) {
+      updateInvoice(values)
+        .then(() => {
+          this.setState({
+            renderEndInvoice: true, 
+            renderInitInvoice: false,
+            loadingContinue: false
+          });
+        });
+    } 
+    else {
+      createInvoice(
+        values.invoiceDate, 
+        values.voucherType, 
+        values.conditionSale, 
+        values.dateFrom, 
+        values.dateTo, 
+        values.paymentExpire
+      )
+        .then(() => {
+          this.setState({
+            renderEndInvoice: true, 
+            renderInitInvoice: false,
+            loadingContinue: false
+          });
+        });
+    } 
   };
-
-  presentVoucherType = () => {
-    const { voucherType } = this.state;
-    return VOUCHER_TYPES.find((v) => v.value === voucherType).label;
-  }
-
-  selectionVoucher = (voucherType) => {
-    this.setModalVisible(!this.state.modalVisible);
-    this.setState({voucherType: voucherType.value });
-    this.createOrUpdateInvoice({ 
-      voucherType: voucherType.value,
-      invoiceDate: this.state.invoiceDate,
-      conditionSale: this.state.conditionSale
-    });
-  }
-
-  presentConditionSale = () => {
-    const { conditionSale } = this.state;
-    return CONDITION_SALE.find((v) => v.value === conditionSale).label;
-  }
-
-  selectionCondition = (conditionSale) => {
-    this.setState({
-      conditionSale: conditionSale.value, 
-      modalConditionSale: !this.state.modalConditionSale
-    });
-    this.createOrUpdateInvoice({
-      conditionSale: conditionSale.value,
-      voucherType: this.state.voucherType,
-      invoiceDate: this.state.invoiceDate,
-    })
-  }
 
   addFinalConsumer = (customer) => {
     Alert.alert(
@@ -243,129 +218,77 @@ class Invoice extends React.Component {
     );
   }
 
-  renderLoading = () => (
-    <View>
-      <ActivityIndicator size="large" color={COLORS.blue} style={{}}/>
-    </View>
-  );
+  createInvoice = () => {
+    const isProducts = this.state.concept === 'products';
+    this.setState({loadingContinue: true});
+    this.createOrUpdateInvoice({ 
+      invoiceDate: this.state.invoiceDate,
+      voucherType: this.state.voucherType,
+      conditionSale: this.state.conditionSale,
+      dateFrom: isProducts ? null : this.state.dateFrom,
+      dateTo: isProducts ? null : this.state.dateTo,
+      paymentExpire: isProducts ? null : this.state.paymentExpire 
+    })
+  };
   
-  renderNewInvoice = () => (
-    <View style={{flex: 1}}>
-      <View style={style.containerBody}>
-        <View style={style.containerBoxInvoice}>
-          <Text style={style.textRegular12GrayDark}>
-            Puntos de Ventas a utilizar
-          </Text>
-          <View style={style.picker}>
-            <Picker
-              selectedValue={this.state.concept}
-              style= {style.styleTextPicker}
-              onValueChange={value => this.setState({concept: value}) }>
-              { CONCEPT.map((i, index) => (
-                <Picker.Item 
-                  key={index}
-                  color='gray' 
-                  label={i.label} 
-                  value={i.value}/>                           
-              ))}
-            </Picker>
-          </View>
-        </View>
-        <View style={style.containerBoxInvoice}>
-          <Text style={style.textRegular12GrayDark}>
-            Tipo de Comprobante
-          </Text>
-          <View style={style.picker}>
-            <Picker
-              selectedValue={this.state.voucherType}
-              style= {{flex: 1, color: COLORS.blue}}
-              onValueChange={value => this.setState({voucherType: value}) }>
-              { VOUCHER_TYPES.map((i, index) => (
-                <Picker.Item 
-                key={index}
-                color='gray' 
-                label={i.label} 
-                value={i.value}/>                           
-                ))}
-            </Picker>
-          </View>
-        </View>
-        <View style={style.containerBoxInvoice}>
-          <Text style={style.textRegular12GrayDark}>
-            Concepto a Incluir
-          </Text>
-          <View style={style.picker}>
-            <Picker
-              selectedValue={this.state.concept}
-              style= {style.styleTextPicker}
-              onValueChange={value => this.setState({concept: value}) }>
-              { CONCEPT.map((i, index) => (
-                <Picker.Item 
-                  key={index}
-                  color='gray' 
-                  label={i.label} 
-                  value={i.value}/>                           
-              ))}
-            </Picker>
-          </View>
-        </View>
-        <View style={style.containerBoxInvoice}>
-          <Text style={style.textRegular12GrayDark}>
-            Fecha del Comprbante
-          </Text>
-          <DatePicker
-            style={{width: '100%'}}
-            date={this.state.invoiceDate}
-            mode="date"
-            format="YYYY-MM-DD"
-            minDate= {rankMinDateBill(this.props.items)}
-            maxDate= {rankMaxDateBill(this.props.items)}
-            showIcon={false}
-            customStyles={{
-              dateText: this.state.dateDisabled ? style.textRegular14GrayDark : style.textRegular14Blue,
-              dateInput: style.buttonDate
-            }}
-            disabled = {this.state.dateDisabled}
-            onDateChange={(date) => {this.handleDatePicked(date)}}
-          />
-        </View>
-        <View style={{alignItems: 'center'}}>
-          <Button
-            title=' Cancelar Comprobante '
-            TouchableComponent={TouchableOpacity}
-            onPress={() => {this.setState({renderInitInvoice: false})}}
-            buttonStyle={style.buttonCancelInvoice}
-            titleStyle={style.textRegular14White}
-          />
-        </View>
-      </View>
-
-      <View style={style.containerFooter}>
-        <Button
-          title='Continuar'
-          TouchableComponent={TouchableOpacity}
-          //onPress={() => {this.setState({renderInitInvoice: false})}}
-          buttonStyle={style.buttonContinue}
-          titleStyle={style.textBold16White}
-        />
-      </View>
-    </View>
+  setSalePoint = value => {this.setState({salePoint: value})}
+  setConditionSale = value => {this.setState({conditionSale: value})}
+  setInvoiceDate = value => {this.setState({invoiceDate: value})}
+  setVoucherType = value => {this.setState({voucherType: value})}
+  setConcept = value => {this.setState({concept: value})}
+  setRenderInitInvoice = value => {this.setState({renderInitInvoice: value })}
+  setRenderButtonsNewDraft = value => {this.setState({renderButtonsNewDraft: value })}
+  setDate = (from, to, expire) => {this.setState({dateFrom: from, dateTo: to, paymentExpire: expire})}
+  
+  renderNewInvoiceInit = () => (
+    <InitInvoice
+      user={this.props.user}
+      concept={this.state.concept}
+      setConcept={this.setConcept}
+      salePoint={this.state.salePoint}
+      setSalePoint={this.setSalePoint}
+      voucherType={this.state.voucherType}
+      setVoucherType={this.setVoucherType}
+      conditionSale={this.state.conditionSale}
+      setConditionSale={this.setConditionSale}
+      invoiceDate={this.state.invoiceDate}
+      setInvoiceDate={this.setInvoiceDate}
+      invoiceId={this.props.invoiceId}
+      setRenderInitInvoice={this.setRenderInitInvoice}
+      setRenderEndInvoice={this.setRenderEndInvoice}
+      setRenderButtonsNewDraft={this.setRenderButtonsNewDraft}
+      createInvoice={this.createInvoice}
+      loadingContinue={this.state.loadingContinue}
+      dateFrom={this.state.dateFrom}
+      dateTo={this.state.dateTo}
+      paymentExpire={this.state.paymentExpire}
+      setDate={this.setDate}
+    />
   )
 
-  renderDraftInvoice = () => {
-    <View>
-      <Text>
-        Implementar Borrador
-      </Text>
-    </View>
-  }
-
+  setRenderEndInvoice = value => {this.setState({renderEndInvoice: value })}
+  
+  renderNewInvoiceEnd = () => (
+    <EndInvoice
+      showCustomer={this.state.showCustomer}
+      loadingFC={this.state.loadingFC}
+      addFinalConsumer={this.addFinalConsumer}
+      navigateClient={this.navigateClient}
+      renderViewItemsAdd={this.renderViewItemsAdd}
+      renderCustomer={this.renderCustomer}
+      navigateAddItems={this.navigateAddItems}
+      setRenderEndInvoice={this.setRenderEndInvoice}
+      setRenderInitInvoice={this.setRenderInitInvoice}
+      setRenderButtonsNewDraft={this.setRenderButtonsNewDraft}
+      navigateToSummaryInvoice={this.navigateToSummaryInvoice}
+      loadingContinue={this.state.loadingContinue}
+    />
+  )
+  
   render() {
     //console.log(this.state.invoiceDate, this.props.invoiceDate)
-    console.log(this.props.user);
-    const displayButtonAddCustomer = (this.state.showCustomer || this.state.loadingFC) ? 'none': 'flex';
-    const displayRenderCustomer = this.state.showCustomer ? 'flex' : 'none';
-    const displayButtonsInit = this.state.renderInitInvoice ? 'none' : 'flex';
+    console.log(this.state.dateFrom, this.state.dateTo, this.state.paymentExpire, this.state.invoiceId);
+    const displayButtonsInit = this.state.renderButtonsNewDraft ? 'flex' : 'none';
     return(
       <View style={style.container}>
         <Button
@@ -373,209 +296,12 @@ class Invoice extends React.Component {
           icon={IconBottom}
           iconRight
           TouchableComponent={TouchableOpacity}
-          onPress={() => {this.setState({renderInitInvoice: true})}}
+          onPress={() => {this.setState({renderInitInvoice: true, renderButtonsNewDraft: false})}}
           buttonStyle={[style.buttonVoucher,{display: displayButtonsInit}]}
           titleStyle={style.textRegular14White}
         />
-        <Button
-          title='Cargar Borrador'
-          icon={IconBottom}
-          iconRight
-          TouchableComponent={TouchableOpacity}
-          onPress={() => {this.setModalVisible(true)}}
-          buttonStyle={[style.buttonVoucher,{display: displayButtonsInit}]}
-          titleStyle={style.textRegular14White}
-        />
-
-        {this.state.renderInitInvoice ? this.renderNewInvoice() : null }
-
-      {/*  
-        <View style={style.containerBody}>
-
-          <View style={style.containerBoxInvoice}>
-            <View style={style.inLineSpaceBetween}>
-              <View style={style.boxVoucher}>
-                <Text style={[style.textRegular12GrayDark,{marginLeft: 7}]}>
-                  Tipo de Comprobante
-                </Text>
-                <Button
-                  title={this.presentVoucherType()}
-                  icon={IconBottom}
-                  iconRight
-                  TouchableComponent={TouchableOpacity}
-                  onPress={() => {this.setModalVisible(true)}}
-                  buttonStyle={style.buttonVoucher}
-                  titleStyle={style.textRegular14White}
-                />
-              </View>
-              <View style={style.boxDate}>
-                <Text style={[style.textRegular12GrayDark,{textAlign: 'center', top: 3}]}>
-                  Fecha de Emisión
-                </Text>                
-                <DatePicker
-                  style={{width: '100%'}}
-                  date={this.state.invoiceDate}
-                  mode="date"
-                  format="YYYY-MM-DD"
-                  minDate= {rankMinDateBill(this.props.items)}
-                  maxDate= {rankMaxDateBill(this.props.items)}
-                  showIcon={false}
-                  customStyles={{
-                    dateText: this.state.dateDisabled ? style.textRegular14GrayDark : style.textRegular14White,
-                    dateInput: style.buttonDate
-                  }}
-                  disabled = {this.state.dateDisabled}
-                  onDateChange={(date) => {this.handleDatePicked(date)}}
-                />
-              </View>
-            </View>
-          </View>
-
-          <Text style={[style.textRegular12GrayDark, {textAlign:'center'}]}>
-            Datos del Receptor
-          </Text>
-          <View style={style.containerBoxInvoice}>
-            <View style={{display: displayRenderCustomer}}>
-              {this.state.loadingFC ? this.renderLoading() : this.renderCustomer() }
-            </View>
-            <View style={{display: displayButtonAddCustomer}}>
-              <View style={style.inLineSpaceAround}>
-                <Button
-                  title=' Consumidor Final'
-                  testID='addCustomer'
-                  TouchableComponent={TouchableOpacity}
-                  icon={<IconCustomer2 size={15} color={COLORS.blueLight}/>}
-                  onPress={ () => this.addFinalConsumer(defaultCustomer) }
-                  buttonStyle={style.buttonAddFinalConsumer}
-                  titleStyle={style.textRegular14White}
-                />
-                <Button
-                  title=' Otro Cliente'
-                  testID='addCustomer'
-                  TouchableComponent={TouchableOpacity}
-                  icon={<IconAddCustomer color={COLORS.blueLight}/>}
-                  onPress={ this.navigateClient }
-                  buttonStyle={style.buttonAddCustomer}
-                  titleStyle={style.textRegular14White}
-                /> 
-              </View>
-            </View>
-          </View>
-
-          <Text style={[style.textRegular12GrayDark, {textAlign:'center'}]}>
-            Detalle Producto / Servicio
-          </Text>
-          <View style={style.containerBoxInvoice}>
-            <View>
-              {this.renderViewItemsAdd()}
-            </View>    
-            <Button
-              title=' Agregar Producto/Servicio'
-              TouchableComponent={TouchableOpacity}
-              onPress={ this.navigateAddItems }
-              icon={IconMore}
-              buttonStyle={style.buttonAdd}  
-              titleStyle={ style.textRegular14White }
-              disabledStyle={style.buttonAddDisabled}
-              disabledTitleStyle = { style.textRegular16GrayLight }
-            />
-          </View>
-
-          <Text style={[style.textRegular12GrayDark, {textAlign:'center'}]}>
-            Período de Facturación
-          </Text>
-          <View style={style.containerBoxInvoice}>
-            <View style={style.inLineSpaceAround}>
-              <Text style={style.textRegular12GrayDark}> Desde: </Text>
-              <Text style={style.textRegular12GrayDark}> Hasta: </Text>
-              <Text style={style.textRegular12GrayDark}> Vto. Pago:</Text>
-            </View>
-            <View style={style.inLineSpaceAround}>
-              <DatePicker
-                style={{width: '32%'}}
-                date={this.state.invoiceDate}
-                mode="date"
-                format="YYYY-MM-DD"
-                showIcon={false}
-                customStyles={{
-                  dateText: style.textRegular14Blue,
-                  dateInput: style.buttonDateService
-                }}
-                onDateChange={(date) => {this.handleDatePicked(date)}}
-              />
-              <DatePicker
-                style={{width: '32%'}}
-                date={this.state.invoiceDate}
-                mode="date"
-                format="YYYY-MM-DD"
-                showIcon={false}
-                customStyles={{
-                  dateText: style.textRegular14Blue,
-                  dateInput: style.buttonDateService
-                }}
-                onDateChange={(date) => {this.handleDatePicked(date)}}
-              />
-              <DatePicker
-                style={{width: '32%'}}
-                date={this.state.invoiceDate}
-                mode="date"
-                format="YYYY-MM-DD"
-                showIcon={false}
-                customStyles={{
-                  dateText: style.textRegular14Blue,
-                  dateInput: style.buttonDateService
-                }}
-                onDateChange={(date) => {this.handleDatePicked(date)}}
-              />
-            </View>
-          </View>
-
-          <View style={{alignItems: 'center'}}>
-          <Text style={style.textRegular12GrayDark}>
-            Condición de Venta
-          </Text>
-            <Button
-              title = {this.presentConditionSale()}
-              icon={IconBottom}
-              iconRight
-              TouchableComponent={TouchableOpacity}
-              onPress={() => this.setState({modalConditionSale: true})}
-              buttonStyle={style.buttonSaleCondition}
-              titleStyle={style.textRegular11White}
-            />
-          </View>
-        </View>
-
-        <View style={style.containerFooter}>
-          <Button
-            title='Continuar'
-            TouchableComponent={TouchableOpacity}
-            onPress={ this.navigateToSummaryInvoice }
-            buttonStyle={style.buttonContinue}  
-            titleStyle={ style.textBold16White }
-            loading={this.state.loadingContinue}
-          />
-        </View>
-
-          <Modal 
-            visible={this.state.modalVisible} 
-            animationType='slide' 
-            transparent={true}
-            onRequestClose={() => this.setState({ modalVisible: false })}
-          >
-            <ModalVoucherTYpe selectionVoucher={this.selectionVoucher}/>
-          </Modal>
-
-          <Modal 
-            visible={this.state.modalConditionSale} 
-            animationType='slide' 
-            transparent={true}
-            onRequestClose={() => this.setState({ modalConditionSale: false })}
-          >
-            <ModalConditionSale selectionConditionSale={this.selectionCondition}/>
-          </Modal>
-
-        */}
+        {this.state.renderInitInvoice ? this.renderNewInvoiceInit() : null }
+        {this.state.renderEndInvoice ? this.renderNewInvoiceEnd() : null }
       </View>
     )
   }

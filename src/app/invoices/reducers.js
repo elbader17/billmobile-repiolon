@@ -27,7 +27,10 @@ function defaultCurrentInvoice() {
     conditionSale: 'cdo',
     id: null,
     total: 0.0,
-    url: ''
+    url: '',
+    dateFrom: date,
+    dateTo: date,
+    paymentExpire: date
   };
 }
 
@@ -61,10 +64,7 @@ function addInvoiceItem({ draftState, invoiceItem }) {
     category,
     name,
     price,
-    quantity,
-    date_from,
-    date_to,
-    payment_expiration
+    quantity
   } = invoiceItem.attributes;
 
   draftState.currentInvoice.invoiceItems.push({
@@ -72,10 +72,7 @@ function addInvoiceItem({ draftState, invoiceItem }) {
     name,
     price,
     quantity,
-    id: invoiceItem.id,
-    date_from,
-    date_to,
-    payment_expiration
+    id: invoiceItem.id
   });
   return draftState;
 }
@@ -105,10 +102,7 @@ function updateInvoiceItem({ draftState, invoiceItem }) {
     category,
     name,
     price,
-    quantity,
-    date_from,
-    date_to,
-    payment_expiration
+    quantity
   } = invoiceItem;
   const itemIndex = draftState.currentInvoice.invoiceItems.findIndex(
     item => item.id === invoiceItem.id,
@@ -118,10 +112,7 @@ function updateInvoiceItem({ draftState, invoiceItem }) {
     name,
     price,
     quantity,
-    id: invoiceItem.id,
-    date_from,
-    date_to,
-    payment_expiration
+    id: invoiceItem.id
   };
   return draftState ;
 }

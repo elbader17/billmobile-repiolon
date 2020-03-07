@@ -13,6 +13,11 @@ const styles = StyleSheet.create({
   containerBody: {
     flex: 0.9
   },
+  containerInitInvoice: {
+    flex: 1,
+    marginHorizontal: 15,
+    paddingTop: 5
+  },
   containerSummary: {
     flex: 1,
     backgroundColor: COLORS.grayLight
@@ -25,13 +30,20 @@ const styles = StyleSheet.create({
     elevation: 1,
     padding: 10
   },
+  containerBoxDateServices: {
+    backgroundColor: COLORS.white,
+    marginBottom: 5,
+    borderRadius: 5,
+    elevation: 1,
+    padding: 5
+  },
   containerItemsInvoice: {
     maxHeight: hp('16%')
   },
   containerBodySummary: {
     flex: 0.90,
     backgroundColor: COLORS.white,
-    marginTop: 15,
+    marginTop: 10,
     marginHorizontal: 15,
     borderRadius: 7,
     borderWidth: 0,
@@ -90,17 +102,18 @@ const styles = StyleSheet.create({
   },
   picker: {
     width: '100%',
-    height: hp('6%'),
-    borderWidth: 0.5,
+    backgroundColor: COLORS.white,
+    height: hp('5%'),
+    marginBottom: 7,
+    borderWidth: 1,
     borderRadius: 7,
-    borderColor: COLORS.blue,
-    elevation: 1
+    borderColor: COLORS.gray
   },
   styleTextPicker: {
     flex: 1,
     fontFamily: FONTS.pRegular,
     fontSize: FONTS.size14,
-    color: COLORS.blue
+    color: COLORS.grayDark
   },
   containerCustomers: {
     backgroundColor: COLORS.white,
@@ -434,25 +447,36 @@ const styles = StyleSheet.create({
   },
   buttonCancelInvoice: {
     height: hp('6%'),
+    width: '100%',
+    paddingVertical: 10,
+    backgroundColor: COLORS.blue,
+    borderRadius: 25,
+    marginTop: 5,
+    marginBottom: 2,
+    elevation: 1
+  },
+  buttonBackInvoice: {
+    height: hp('6%'),
+    width: '100%',
     paddingVertical: 10,
     backgroundColor: COLORS.blueMedium,
     borderRadius: 25,
-    marginTop: 3,
+    marginTop: 10,
+    marginBottom: 2,
     elevation: 1
   },
   buttonDate: {
-    height: hp('6%'),
-    backgroundColor: 'transparent',
-    borderRadius: 7,
-    borderWidth: 0.5,
-    borderColor: COLORS.blue,
-    elevation: 1
-  },
-  buttonDateService: {
     height: hp('5.5%'),
     backgroundColor: COLORS.white,
+    borderRadius: 7,
+    borderWidth: 1,
+    borderColor: COLORS.gray
+  },
+  buttonDateService: {
+    height: hp('5%'),
+    backgroundColor: COLORS.white,
     borderWidth: 0.3,
-    borderColor: COLORS.blue,
+    borderColor: COLORS.grayDark,
     borderRadius: 7,
     elevation: 1
   },
@@ -502,7 +526,8 @@ const styles = StyleSheet.create({
   textRegular16GrayDark: {
     fontFamily: FONTS.pRegular,
     fontSize: FONTS.size16,
-    color: COLORS.grayDark
+    color: COLORS.grayDark,
+    top: 2
   },
   textLight14BlueMedium: {
     fontFamily: FONTS.pRegular,
@@ -514,6 +539,11 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.pRegular,
     fontSize: FONTS.size12,
     color: COLORS.grayDark
+  },
+  textRegular11GrayDark: {
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size11,
+    color: COLORS.blue
   },
   textBold16White: {
     fontFamily: FONTS.pSemiBold,
