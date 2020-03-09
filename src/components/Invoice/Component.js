@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity, Alert } from 'react-native';
+import { View, TouchableOpacity, Alert, Text } from 'react-native';
 import { Button } from "react-native-elements";
 import { showMessage } from "react-native-flash-message";
 import InvoiceCustomer from './InvoiceCustomer';
@@ -10,10 +10,11 @@ import {
   messageCustomerIncomplete,
   messageRequestData 
 } from '../../utils/messagesNotifications';
-import { IconDocument, IconBottom, } from '../../constants/icons';
+import { IconDocument, IconBottom, IconNewInvoice, } from '../../constants/icons';
 import style from './style';
 import InitInvoice from './InitInvoice';
 import EndInvoice from './EndInvoice';
+import { COLORS } from '../../constants/colors';
 
 class Invoice extends React.Component {
 
@@ -30,10 +31,10 @@ class Invoice extends React.Component {
       loadingContinue: false,
       quantity: 1, //Cant items
       validIdentity: true,
-      concept: 'products',
+      concept: this.props.concept,
       dateDisabled: this.props.items.length === 0,
-      renderInitInvoice: this.props.invoiceId != null,
-      renderEndInvoice: false,
+      renderInitInvoice: false,
+      renderEndInvoice: this.props.invoiceId != null,
       renderButtonsNewDraft: this.props.invoiceId === null,
       salePoint: 1,
       dateFrom: this.props.dateFrom,
@@ -151,7 +152,8 @@ class Invoice extends React.Component {
         values.conditionSale, 
         values.dateFrom, 
         values.dateTo, 
-        values.paymentExpire
+        values.paymentExpire,
+        values.concept
       )
         .then(() => {
           this.setState({
@@ -227,7 +229,8 @@ class Invoice extends React.Component {
       conditionSale: this.state.conditionSale,
       dateFrom: isProducts ? null : this.state.dateFrom,
       dateTo: isProducts ? null : this.state.dateTo,
-      paymentExpire: isProducts ? null : this.state.paymentExpire 
+      paymentExpire: isProducts ? null : this.state.paymentExpire,
+      concept: this.state.concept
     })
   };
   
@@ -263,6 +266,7 @@ class Invoice extends React.Component {
       dateTo={this.state.dateTo}
       paymentExpire={this.state.paymentExpire}
       setDate={this.setDate}
+      resetCurrentInvoice={this.props.resetCurrentInvoice}
     />
   )
 
@@ -282,24 +286,40 @@ class Invoice extends React.Component {
       setRenderButtonsNewDraft={this.setRenderButtonsNewDraft}
       navigateToSummaryInvoice={this.navigateToSummaryInvoice}
       loadingContinue={this.state.loadingContinue}
+      resetCurrentInvoice={this.props.resetCurrentInvoice}
     />
   )
   
   render() {
-    //console.log(this.state.invoiceDate, this.props.invoiceDate)
-    console.log(this.state.dateFrom, this.state.dateTo, this.state.paymentExpire, this.state.invoiceId);
+    console.log(this.state.invoiceDate, this.props.invoiceDate)
+    console.log(this.props.invoiceId);
+    const canCreateInvoice = this.props.user.fiscal_key;
     const displayButtonsInit = this.state.renderButtonsNewDraft ? 'flex' : 'none';
     return(
       <View style={style.container}>
-        <Button
-          title='Nuevo Comprobante'
-          icon={IconBottom}
-          iconRight
-          TouchableComponent={TouchableOpacity}
-          onPress={() => {this.setState({renderInitInvoice: true, renderButtonsNewDraft: false})}}
-          buttonStyle={[style.buttonVoucher,{display: displayButtonsInit}]}
-          titleStyle={style.textRegular14White}
-        />
+        <View style={{alignItems: 'center'}}>  
+          <TouchableOpacity 
+            onPress={() => {this.setState({renderInitInvoice: true, renderButtonsNewDraft: false})}}
+            style={[style.buttonNewInvoice,{display: displayButtonsInit, justifyContent: 'center'}]}
+            disabled={!canCreateInvoice}
+          >
+            <View style={style.inColumn}>
+              {<IconNewInvoice 
+                size={100} 
+                color={canCreateInvoice ?  COLORS.blueLight : COLORS.gray} 
+                iconStyle={{marginBottom: 15}} 
+              />}
+              <Text style={canCreateInvoice ? style.textRegular20Blue : style.textRegular20GrayDark}>
+                Nuevo Comprobante
+              </Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+        <View style={{display: canCreateInvoice ? 'none':'flex'}}>
+          <Text style={[style.textRegular14GrayDark, {textAlign: 'center', paddingHorizontal: 15, marginTop: 10}]}>
+            ¡Para poder facturar debe cargar su Clave Fiscal y esperar a ser autorizado!
+          </Text>
+        </View>
         {this.state.renderInitInvoice ? this.renderNewInvoiceInit() : null }
         {this.state.renderEndInvoice ? this.renderNewInvoiceEnd() : null }
       </View>

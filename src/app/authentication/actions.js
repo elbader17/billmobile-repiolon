@@ -1,5 +1,5 @@
 import { Auth } from 'aws-amplify';
-import { getFiscalIdentity, setFiscalIdentity } from '../user_service/actions';
+import { getFiscalIdentity, setFiscalIdentity, getCertificate } from '../user_service/actions';
 import {
   SET_JWT_TOKEN,
   USER_SIGNED_UP,
@@ -24,6 +24,7 @@ const signIn = (email, password) => {
         } else {
           const { jwtToken } = data.signInUserSession.idToken;
           dispatch(setJwtToken(jwtToken));
+          dispatch(getCertificate())
           return dispatch(getFiscalIdentity());
         }
       })

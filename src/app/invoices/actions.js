@@ -8,17 +8,19 @@ import {
   RESET_INVOICE
 } from './constants';
 
-function createInvoiceAction(invoice) {
+function createInvoiceAction(invoice, concept) {
   return {
     type: CREATE_INVOICE,
     invoice,
+    concept
   };
 }
 
-function updateInvoiceAction(invoice) {
+function updateInvoiceAction(invoice, concept) {
   return {
     type: UPDATE_INVOICE,
     invoice,
+    concept
   };
 }
 
@@ -49,7 +51,7 @@ function resetCurrentInvoiceAction() {
   }
 }
 
-const createInvoice = (invoiceDate, voucherType, conditionSale, dateFrom, dateTo, paymentExpire) => {
+const createInvoice = (invoiceDate, voucherType, conditionSale, dateFrom, dateTo, paymentExpire, concept) => {
   const resource = {
     invoice_date: invoiceDate,
     invoice_type: voucherType,
@@ -63,7 +65,7 @@ const createInvoice = (invoiceDate, voucherType, conditionSale, dateFrom, dateTo
     return fetch_api('/v1/invoices', 'POST', false, { resource })
       .then((response) => {
         console.log(response);
-        dispatch(createInvoiceAction(response.data))
+        dispatch(createInvoiceAction(response.data, concept))
       })
       .catch((error) => console.log(error));
   };
@@ -87,7 +89,7 @@ const updateInvoice = (values) => {
     return fetch_api(`/v1/invoices/${invoiceId}`,'PUT', false, { resource })
       .then((response) => {
         console.log(response);
-        dispatch(updateInvoiceAction(response.data))
+        dispatch(updateInvoiceAction(response.data, values.concept))
       })
       .catch((error) => console.log(error));
   };

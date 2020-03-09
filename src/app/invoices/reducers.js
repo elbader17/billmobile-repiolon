@@ -25,6 +25,7 @@ function defaultCurrentInvoice() {
     invoiceDate: date,
     voucherType: '11',
     conditionSale: 'cdo',
+    concept: 'products',
     id: null,
     total: 0.0,
     url: '',
@@ -39,7 +40,7 @@ const initialState = {
   currentInvoice: defaultCurrentInvoice(),
 };
 
-function setCurrentInvoice({ draftState, invoice }) {
+function setCurrentInvoice({ draftState, invoice, concept }) {
   const { invoice_date, invoice_type, total, url, condition_sale } = invoice.attributes;
   draftState.currentInvoice.id = invoice.id;
   const day = invoice_date.slice(8,10);
@@ -51,6 +52,7 @@ function setCurrentInvoice({ draftState, invoice }) {
   draftState.currentInvoice.total = total;
   draftState.currentInvoice.url = url;
   draftState.currentInvoice.conditionSale = condition_sale;
+  draftState.currentInvoice.concept = concept;
   return draftState;
 }
 
@@ -130,11 +132,13 @@ export default addInvoiceReducer = (state = initialState, action) => {
         return setCurrentInvoice({
           draftState,
           invoice: action.invoice,
+          concept: action.concept
         });
       case UPDATE_INVOICE:
         return setCurrentInvoice({
           draftState,
           invoice: action.invoice,
+          concept: action.concept
         });
       case RESET_INVOICE:
         return resetCurrentInvoice({

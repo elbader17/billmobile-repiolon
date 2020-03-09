@@ -50,7 +50,7 @@ class InvoiceSummary extends React.Component {
           navigation.navigate('Opinion', {ok: response, url: this.state.urlInvoiceProcessed}) 
         }
         else {
-          navigation.navigate('Opinion', {ok: false, url: '*Verifique sus Certificados'})
+          navigation.navigate('Opinion', {ok: false, url: '¡Error! Intente Nuevamente'})
         }
       })
   }

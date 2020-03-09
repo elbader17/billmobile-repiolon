@@ -246,6 +246,15 @@ export const IconSearch = <Icon
   color={COLORS.grayDark} 
 />
 
+export const IconNewInvoice = props => (
+  <Icon 
+    type='antdesign' 
+    name='addfile' 
+    {...props}
+  />
+);
+
+
 export const IconBottom = <Icon 
   type='feather' 
   name='chevron-down' 

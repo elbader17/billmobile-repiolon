@@ -180,6 +180,7 @@ class InitInvoice extends React.Component {
                 onPress={() => {
                     this.props.setRenderInitInvoice(false);
                     this.props.setRenderButtonsNewDraft(true);
+                    this.props.resetCurrentInvoice()
                 }}
                 buttonStyle={style.buttonCancelInvoice}
                 titleStyle={style.textRegular14White}

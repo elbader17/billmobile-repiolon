@@ -87,7 +87,8 @@ class EndInvoice extends React.Component {
                   TouchableComponent={TouchableOpacity}
                   onPress={() => {
                     this.props.setRenderEndInvoice(false);
-                    this.props.setRenderButtonsNewDraft(true)
+                    this.props.setRenderButtonsNewDraft(true);
+                    this.props.resetCurrentInvoice()
                   }}
                   buttonStyle={style.buttonCancelInvoice}
                   titleStyle={style.textRegular14White}

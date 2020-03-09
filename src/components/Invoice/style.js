@@ -100,6 +100,14 @@ const styles = StyleSheet.create({
   buttonCloseInvoice: {
     backgroundColor: 'transparent'
   },
+  buttonNewInvoice: {
+    width: '90%',
+    marginTop: 5,
+    height: hp('40%'),
+    borderRadius: 10,
+    backgroundColor: COLORS.white,
+    elevation: 2,
+  },
   picker: {
     width: '100%',
     backgroundColor: COLORS.white,
@@ -449,9 +457,9 @@ const styles = StyleSheet.create({
     height: hp('6%'),
     width: '100%',
     paddingVertical: 10,
-    backgroundColor: COLORS.blue,
+    backgroundColor: COLORS.blueMedium,
     borderRadius: 25,
-    marginTop: 5,
+    marginTop: 7,
     marginBottom: 2,
     elevation: 1
   },
@@ -459,9 +467,9 @@ const styles = StyleSheet.create({
     height: hp('6%'),
     width: '100%',
     paddingVertical: 10,
-    backgroundColor: COLORS.blueMedium,
+    backgroundColor: COLORS.blue,
     borderRadius: 25,
-    marginTop: 10,
+    marginTop: 5,
     marginBottom: 2,
     elevation: 1
   },
@@ -511,6 +519,18 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size16,
     color: COLORS.grayLight
+  },
+  textRegular20Blue: {
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size20,
+    color: COLORS.blueMedium,
+    top: 2
+  },
+  textRegular20GrayDark: {
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size20,
+    color: COLORS.gray,
+    top: 2
   },
   textRegular16Blue: {
     fontFamily: FONTS.pRegular,

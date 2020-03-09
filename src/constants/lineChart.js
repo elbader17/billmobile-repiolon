@@ -22,7 +22,7 @@ export const presentDataDay = (date, invoices) => {
         count = count + invoice.attributes.total 
       });
       return ({
-        labels: ['','1/3', day.toString() +'/'+ month.toString(), '3/3', ''],
+        labels: ['','<', day.toString() +'/'+ month.toString(), '>', ''],
           datasets: [{
             data: [0, 0, count, 0, 0],
             strokeWidth: 2,

@@ -70,9 +70,6 @@ class ItemList extends React.Component {
   actionItem = (item) => {
     const isInvoice = this.props.type === 'invoice'
     const title = isInvoice ? 'Añadir ' : 'Eliminar ';
-    if (isInvoice && item.attributes.category == 'service') 
-      this.navigateToEditItem(item)
-    else {
       Alert.alert(
         title + item.attributes.name,'¿Está Seguro?',
         [
@@ -96,7 +93,6 @@ class ItemList extends React.Component {
         ],
         {cancelable: false},
       );
-    }
   }
 
   renderLoading = () => (<LoadingIndicator/>);

@@ -10,7 +10,7 @@ import { dataConfig, presentDataDay, presentDataMonth, presentDataYear, DMY } fr
 import { COLORS } from '../../constants/colors';
 import style from './style';
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import { IconCaretRight, MoreInfo } from '../../constants/icons';
+import { IconCaretRight, MoreInfo, IconInvoice } from '../../constants/icons';
 
 class Home extends React.Component {
 
@@ -118,7 +118,7 @@ class Home extends React.Component {
             </View>
           </View>
           <View style={style.containerChart}>
-            <TouchableOpacity onPress={this.infoChart} activeOpacity={0.7}>
+            <TouchableOpacity activeOpacity={0.7}>
             <View>
               <LineChart
                 height={hp('30%')}
@@ -136,7 +136,7 @@ class Home extends React.Component {
         </View>
 
           <View style={style.containerStatics}>
-            <TouchableOpacity onPress={this.infoPendingCharges} activeOpacity={0.7}>
+            <TouchableOpacity activeOpacity={0.7}>
               <View style={style.boxData}>
                 <View style={style.inLineSpaceAround}>
                   <Text style={style.textRegular22BlueMedium}>
@@ -156,7 +156,7 @@ class Home extends React.Component {
               
               <View style={[style.inLine, {marginBottom: 5}]}>
                 <Icon type='feather' name="file-text" color={COLORS.blueLight} size={13} iconStyle={{marginRight: 3}}/>
-                <Text style={style.textRegular12Blue}>
+                <Text style={style.textRegular12GrayDark}>
                   Comprobantes Recientes
                 </Text>
               </View>
@@ -164,11 +164,13 @@ class Home extends React.Component {
 
               <ScrollView style={style.listCustomers}> 
                 <Button
-                  title='Cargar Comprobantes'
+                  title='Cargar Comprobantes '
+                  icon={<IconInvoice color={COLORS.blueLight}/>}
+                  iconRight
                   TouchableComponent={TouchableOpacity}
                   onPress={ this.loadInvoices }
                   buttonStyle={[style.buttonLoad,{display: displayButtonRecentInvoices}]}
-                  titleStyle={style.textRegular14White }
+                  titleStyle={style.textRegular14Blue }
                 />
                 <View style={{display: this.state.renderRecentInvoices ? 'flex' :'none'}}>
                   {this.state.loading ? this.renderLoading() : this.renderRecentCustomers()}

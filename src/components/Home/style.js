@@ -105,12 +105,9 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   selectDMY: {
-    borderWidth: 0.5, 
-    borderRadius: 7,
     marginBottom: 2, 
     marginLeft: 5,
-    borderColor: COLORS.blueMedium, 
-    backgroundColor: COLORS.blueMedium
+    backgroundColor: COLORS.blue,
   },
   picker: {
     height: 22,
@@ -185,7 +182,7 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.pRegular,
     fontSize: FONTS.size14,
     color: COLORS.blue,
-    top: 3
+    top: 2
   },
   textRegular12BlueLight: {
     fontFamily: FONTS.latoRegular,
@@ -194,6 +191,12 @@ const styles = StyleSheet.create({
     opacity: 0.7,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  textRegular12GrayDark: {
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size12,
+    color: COLORS.grayDark,
+    top: 2
   },
   textRegular16BlueLight: {
     fontFamily: FONTS.latoRegular,
@@ -260,21 +263,23 @@ const styles = StyleSheet.create({
   buttonAll: {
     height: hp('5.5%'),
     marginTop: 5,
-    backgroundColor: COLORS.blueLight,
+    marginBottom: 3,
+    backgroundColor: COLORS.blueMedium,
     borderRadius: 25,
     justifyContent: 'center',
     alignItems: 'center',
     elevation: 1
   },
   buttonLoad: {
-    height: hp('5%'),
+    height: hp('14%'),
     marginTop: 5,
-    backgroundColor: COLORS.blue,
-    borderRadius: 25,
-    marginBottom: 2,
+    backgroundColor: COLORS.grayLight,
+    borderRadius: 7,
+    marginBottom: 3,
+    marginHorizontal: 5,
     justifyContent: 'center',
     alignItems: 'center',
-    elevation: 1
+    elevation: 2
   },
   buttonFacturacion: {
     height: hp('3%'),
