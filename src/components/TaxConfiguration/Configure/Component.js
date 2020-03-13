@@ -106,7 +106,7 @@ class TaxConfiguration extends React.Component{
   render() {
     console.log(this.props.user);
     const titleKey = this.props.user.fiscal_key ? 'Modificar Clave Fiscal' : 'Ingresar Clave Fiscal'
-    const titleIb = this.state.ib === 'Excento' ? 'No Estoy Excento' : 'Estoy Excento';
+    const titleIb = this.state.ib === 'Exento' ? 'No Estoy Exento' : 'Estoy Exento';
     const displayInputFiscalKey = this.state.showInputFiscalKey ? 'flex' : 'none';
     const displayCuit = this.state.errorCuit === undefined ? 'none' : 'flex';
     const displayName = this.state.errorName === undefined ? 'none' : 'flex';
@@ -164,7 +164,7 @@ class TaxConfiguration extends React.Component{
                 value={this.state.ib}
                 onChangeText={this.setIb}
                 style={style.inputWithIcon}
-                editable={this.state.ib != 'Excento'}
+                editable={this.state.ib != 'Exento'}
               />  
             </View>
             <Text style={style.textRegular12GrayDark}>
@@ -174,7 +174,7 @@ class TaxConfiguration extends React.Component{
             <Button
               title={titleIb}
               TouchableComponent={TouchableOpacity}
-              onPress={ () => this.setState({ib: this.state.ib === 'Excento' ? null : 'Excento'}) }
+              onPress={ () => this.setState({ib: this.state.ib === 'Exento' ? null : 'Exento'}) }
               buttonStyle={ style.buttonIb }
               titleStyle={ style.textRegular14white }
             />
