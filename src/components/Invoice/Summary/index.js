@@ -11,7 +11,12 @@ const mapStateToProps = state => ({
   invoiceTotal: state.invoices.currentInvoice.total,
   invoiceId: state.invoices.currentInvoice.id,
   invoiceUrl: state.invoices.currentInvoice.url,
+  concept: state.invoices.currentInvoice.concept,
   voucherType: state.invoices.currentInvoice.voucherType,
+  conditionSale: state.invoices.currentInvoice.conditionSale,
+  dateFrom: state.invoices.currentInvoice.dateFrom,
+  dateTo: state.invoices.currentInvoice.dateTo,
+  paymentExpire: state.invoices.currentInvoice.paymentExpire
 });
 
 function mapDispatchToProps(dispatch) {

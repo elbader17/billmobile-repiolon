@@ -132,7 +132,13 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.pRegular,
     fontSize: FONTS.size14,
     color: COLORS.grayDark,
-    top: 3
+    top: 2
+  },
+  textRegular14BlueMedium: {
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size14,
+    color: COLORS.blueMedium,
+    top: 2
   },
   textRegular16Bluelight: {
     fontFamily: FONTS.latoRegular,
@@ -264,7 +270,7 @@ const styles = StyleSheet.create({
     height: hp('5.5%'),
     marginTop: 5,
     marginBottom: 3,
-    backgroundColor: COLORS.blueMedium,
+    backgroundColor: COLORS.blue,
     borderRadius: 25,
     justifyContent: 'center',
     alignItems: 'center',

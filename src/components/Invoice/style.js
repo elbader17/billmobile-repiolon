@@ -455,19 +455,17 @@ const styles = StyleSheet.create({
   },
   buttonCancelInvoice: {
     height: hp('6%'),
-    width: '100%',
     paddingVertical: 10,
-    backgroundColor: COLORS.blueMedium,
+    backgroundColor: COLORS.blue,
     borderRadius: 25,
     marginTop: 7,
     marginBottom: 2,
     elevation: 1
   },
   buttonBackInvoice: {
-    height: hp('6%'),
-    width: '100%',
+    height: hp('6%'), 
     paddingVertical: 10,
-    backgroundColor: COLORS.blue,
+    backgroundColor: COLORS.blueLight,
     borderRadius: 25,
     marginTop: 5,
     marginBottom: 2,

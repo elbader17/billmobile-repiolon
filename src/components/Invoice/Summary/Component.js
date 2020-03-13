@@ -4,7 +4,7 @@ import { Button } from "react-native-elements";
 import { presentInvoiceDate } from '../../../utils/date';
 import { nameByCategory } from '../../../utils/identity';
 import { IconBack } from '../../../constants/icons';
-import { VOUCHER_TYPES } from '../../../constants/invoice';
+import { VOUCHER_TYPES, CONDITION_SALE } from '../../../constants/invoice';
 import style from '../style';
 
 class InvoiceSummary extends React.Component {
@@ -50,7 +50,7 @@ class InvoiceSummary extends React.Component {
           navigation.navigate('Opinion', {ok: response, url: this.state.urlInvoiceProcessed}) 
         }
         else {
-          navigation.navigate('Opinion', {ok: false, url: '¡Error! Intente Nuevamente'})
+          navigation.navigate('Opinion', {ok: false, url: '¡Error! Intente Nuevamente Mas Tarde'})
         }
       })
   }
@@ -98,10 +98,11 @@ class InvoiceSummary extends React.Component {
   }
 
   showInfoItems = () => {
+    const detalle = this.props.concept === 'products' ? 'Producto/s' : 'Servicio/s'
     return(
       <View style={style.boxListItemsSummary}>
         <Text style={style.textRegular12Blue}>
-          Detalle Producto/Servicio
+          Detalle {detalle}
         </Text>
         <ScrollView>
           {this.props.items.map((item, index) => {
@@ -137,8 +138,7 @@ class InvoiceSummary extends React.Component {
     )
   }
 
-  render() {
-    console.log(this.props.invoiceDate);
+  render() {    
     return(
       <View style={style.containerSummary}>
 
@@ -147,14 +147,14 @@ class InvoiceSummary extends React.Component {
           <View style={style.boxHeaderSummary}>
             <View style={style.inLineSpaceBetween}>
               <Text style={style.textRegular12Blue}>Tipo de Comprobante</Text>
-              <Text style={style.textRegular12Blue}>Fecha de Emisión</Text>
+              {/*<Text style={style.textRegular12Blue}>Fecha de Emisión</Text>*/}
             </View>
             <View style={style.inLineSpaceBetween}>
               <Text style={style.textRegular16GrayDark}>
                 {this.presentVoucherType()}
               </Text>
               <Text style={style.textRegular16GrayDark}>
-                {presentInvoiceDate(this.props.invoiceDate)}
+                {/*'' + day+'/'+month+'/'+year*/}
               </Text>
             </View>
           </View>
@@ -162,8 +162,17 @@ class InvoiceSummary extends React.Component {
           <View style={style.boxInfoCustomerSummary}>
             {this.showInfoCustomer()}
           </View>
-          
+
           {this.showInfoItems()}
+          
+          <View style={[{paddingHorizontal: 10}, style.inLine]}>
+            <Text style={style.textRegular12Blue}>
+              Condicion de Venta :
+            </Text>
+            <Text style={style.textRegular12GrayDark}>
+              {'  '+CONDITION_SALE.filter(x => x.value == this.props.conditionSale)[0].label}
+            </Text>
+          </View>
 
           <View style={style.boxTotalSummary}>
             <View style={style.inLineSpaceBetween}>

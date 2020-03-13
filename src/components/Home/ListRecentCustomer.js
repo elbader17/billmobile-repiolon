@@ -17,6 +17,21 @@ const showpdf = url => {
   });
 }
 
+presentInvoiceType = (type) => {
+  switch(type) {
+    case '11':
+      return 'Factura C';
+    case '12':
+      return 'Nota de Débito C';
+    case '13':
+      return 'Nota de Crédito C';
+    case '15':
+      return 'Recibo C';
+    default:
+      return 'Comprobante C';
+  }
+}
+
 const ListRecentCustomer = props => {
     console.log(props.invoices)
     const listProcessed = props.invoices.filter(invoice => invoice.attributes.state === 'processed');
@@ -37,20 +52,20 @@ const ListRecentCustomer = props => {
             <View style={style.inLineSpaceBetween} >
               
               <Text style={style.textRegular14GrayDark}>
-                <Text>
-                  {invoice.attributes.invoice_type === 'fc' ? 'Factura-C | ' : 'Comprobante | '}
+                <Text style={style.textRegular14Blue}>
+                  {this.presentInvoiceType(invoice.attributes.invoice_type)}
                 </Text>
-                {invoice.attributes.invoice_date}
+                  {' ('+invoice.attributes.invoice_date.substr(8,2)+'/'+invoice.attributes.invoice_date.substr(5,2)+'/'+invoice.attributes.invoice_date.substr(2,2)+')'}
               </Text>
               
               <Button
-                title='Comporobante'
+                title='Ver Cbte'
                 icon= {IconRight}
                 iconRight
                 TouchableComponent={TouchableOpacity}
                 onPress={ () => showpdf(invoice.attributes.url) }
                 buttonStyle={ style.buttonComprobante }
-                titleStyle={ style.textRegular14Blue }
+                titleStyle={ style.textRegular14BlueMedium }
               />
               
             </View>

@@ -22,7 +22,8 @@ class Home extends React.Component {
       itemInputSearch: '',
       loading: true,
       chart: 'day',
-      renderRecentInvoices: false
+      renderRecentInvoices: false,
+      invoices: this.props.invoices
     }
   }
 
@@ -36,6 +37,11 @@ class Home extends React.Component {
       </TouchableOpacity>
     ),
   });
+
+  componentWillMount(){
+    this.props.listInvoice()
+      .then(() => this.setState({loading: false}))
+  }
 
   componentDidMount() {
     const { navigation } = this.props;
@@ -69,28 +75,21 @@ class Home extends React.Component {
     );
   }
 
-  loadInvoices = () => {
-    this.setState({renderRecentInvoices: true})
-    this.props.listInvoice()
-      .then(() => this.setState({loading: false}))
-  }
-
   showDataChart = () => {
-    const invoicess = this.props.invoices;
+    console.log(this.props.invoices)
     if (this.state.chart == 'month'){
-      const data = presentDataMonth(new Date(), invoicess); 
+      const data = presentDataMonth(new Date(), this.props.invoices); 
       return data;
     } else if (this.state.chart == 'day') {
-      const dataM = presentDataDay(new Date(), invoicess);
+      const dataM = presentDataDay(new Date(), this.props.invoices);
       return dataM
     } else {
-      const dataY = presentDataYear(new Date(), invoicess);
+      const dataY = presentDataYear(new Date(), this.props.invoices);
       return dataY
     }
   }
 
   render() {
-    const displayButtonRecentInvoices = this.state.renderRecentInvoices ? 'none' : 'flex'
     return(
         <View style={style.container}>
 
@@ -163,18 +162,7 @@ class Home extends React.Component {
               
 
               <ScrollView style={style.listCustomers}> 
-                <Button
-                  title='Cargar Comprobantes '
-                  icon={<IconInvoice color={COLORS.blueLight}/>}
-                  iconRight
-                  TouchableComponent={TouchableOpacity}
-                  onPress={ this.loadInvoices }
-                  buttonStyle={[style.buttonLoad,{display: displayButtonRecentInvoices}]}
-                  titleStyle={style.textRegular14Blue }
-                />
-                <View style={{display: this.state.renderRecentInvoices ? 'flex' :'none'}}>
-                  {this.state.loading ? this.renderLoading() : this.renderRecentCustomers()}
-                </View>
+                {this.state.loading ? this.renderLoading() : this.renderRecentCustomers()}
               </ScrollView>
 
               <Button
@@ -183,7 +171,7 @@ class Home extends React.Component {
                 onPress={ () => this.props.navigation.navigate('Invoice') }
                 buttonStyle={style.buttonAll}
                 //disabled={this.props.invoices.length === 0}  
-                titleStyle={ style.textBold14White }
+                titleStyle={ style.textRegular14White }
                 //disabledTitleStyle={ style.textBold14White }
               />
 

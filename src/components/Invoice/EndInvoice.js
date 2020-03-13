@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { View, Text, TouchableOpacity, ActivityIndicator, Alert } from 'react-native';
 import { Button } from "react-native-elements";
 import { IconAddCustomer, IconMore, IconCustomer2 } from '../../constants/icons';
 import { COLORS } from '../../constants/colors';
@@ -18,6 +18,27 @@ class EndInvoice extends React.Component {
     constructor(props) {
       super(props);
     }
+
+    cancelCbte = () => {
+        Alert.alert(
+          'Se Eliminará el Comprobante Actual','¿Está Seguro?',
+          [
+            { //Press Cancel
+              onPress: () => console.log('Cancel Cbte'),
+              text: 'Cancelar',
+              style: 'cancel',
+            },
+            { //Press OK
+              text: 'Eliminar', onPress: () => {
+                this.props.setRenderEndInvoice(false);
+                this.props.setRenderButtonsNewDraft(true);
+                this.props.resetCurrentInvoice()
+              }//End onPress
+            },
+          ],
+          {cancelable: false},
+        );
+    }  
 
     renderLoading = () => (
       <View>
@@ -81,26 +102,22 @@ class EndInvoice extends React.Component {
                   disabledTitleStyle = { style.textRegular16GrayLight }
                 />
               </View>
-              <View style={{alignItems: 'center'}}>
+              <View style={[{alignItems: 'center'}, style.inLineSpaceAround]}>
                 <Button
-                  title=' Cancelar Comprobante '
-                  TouchableComponent={TouchableOpacity}
-                  onPress={() => {
-                    this.props.setRenderEndInvoice(false);
-                    this.props.setRenderButtonsNewDraft(true);
-                    this.props.resetCurrentInvoice()
-                  }}
-                  buttonStyle={style.buttonCancelInvoice}
-                  titleStyle={style.textRegular14White}
-                />
-                <Button
-                  title='Modificar Datos Anteriores'
+                  title='  Volver Atrás  '
                   TouchableComponent={TouchableOpacity}
                   onPress={() => {
                     this.props.setRenderEndInvoice(false);
                     this.props.setRenderInitInvoice(true)
                   }}
                   buttonStyle={style.buttonBackInvoice}
+                  titleStyle={style.textBold14White}
+                />
+                <Button
+                  title='  Cancelar Comprobante  '
+                  TouchableComponent={TouchableOpacity}
+                  onPress={this.cancelCbte}
+                  buttonStyle={style.buttonCancelInvoice}
                   titleStyle={style.textRegular14White}
                 />
               </View>

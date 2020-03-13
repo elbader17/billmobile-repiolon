@@ -56,9 +56,5 @@ export const CONCEPT = [
   {
     label: 'Servicios',
     value: 'services',
-  },
-  {
-    label: 'Productos y Servicios',
-    value: 'prodserv',
-  },
+  }
 ];

@@ -17,11 +17,11 @@ class SignUp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '@mozej.com',
-      password: '@Martin44',
-      name:'martin',
-      phone: '3584859376',
-      confirmPassword: '@Martin44',
+      email: '',
+      password: '',
+      name:'',
+      phone: '',
+      confirmPassword: '',
       confirmAccount: false,
       loading: false,
       iconPassShow: false,
@@ -109,7 +109,7 @@ class SignUp extends React.Component {
           </Text>
         </View>
 
-        <TextInput
+        {/*<TextInput
           placeholder='Número de Celular'
           keyboardType='numeric'
           placeholderTextColor={COLORS.gray}
@@ -117,7 +117,7 @@ class SignUp extends React.Component {
           onChangeText={ this.setPhone }
           onFocus={()=>{this.setState({errorPhone: undefined})}}
           style={style.input}
-        />
+        />*/}
         
         <View style={{display: requireShow}}>
           <Text style={style.textRegular11Blue}>

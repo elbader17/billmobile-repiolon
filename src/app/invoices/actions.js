@@ -16,11 +16,10 @@ function createInvoiceAction(invoice, concept) {
   };
 }
 
-function updateInvoiceAction(invoice, concept) {
+function updateInvoiceAction(invoice) {
   return {
     type: UPDATE_INVOICE,
-    invoice,
-    concept
+    invoice
   };
 }
 
@@ -58,14 +57,15 @@ const createInvoice = (invoiceDate, voucherType, conditionSale, dateFrom, dateTo
     condition_sale: conditionSale,
     date_from: dateFrom,
     date_to: dateTo,
-    payment_expiration: paymentExpire
+    payment_expiration: paymentExpire,
+    concept: concept
   };
   console.log(resource);
   return (dispatch) => {
     return fetch_api('/v1/invoices', 'POST', false, { resource })
       .then((response) => {
         console.log(response);
-        dispatch(createInvoiceAction(response.data, concept))
+        dispatch(createInvoiceAction(response.data))
       })
       .catch((error) => console.log(error));
   };
@@ -83,13 +83,14 @@ const updateInvoice = (values) => {
   resource.date_from = values.dateFrom;
   resource.date_to = values.dateTo
   resource.payment_expiration = values.paymentExpire
+  resource.concept = values.concept
 
   return (dispatch, getState) => {
     const { id: invoiceId } = getState().invoices.currentInvoice;
     return fetch_api(`/v1/invoices/${invoiceId}`,'PUT', false, { resource })
       .then((response) => {
         console.log(response);
-        dispatch(updateInvoiceAction(response.data, values.concept))
+        dispatch(updateInvoiceAction(response.data))
       })
       .catch((error) => console.log(error));
   };

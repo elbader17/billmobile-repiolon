@@ -43,7 +43,7 @@ class Invoice extends React.Component {
     }
   }
 
-  componentDidUpdate(prev_props) {
+  /*componentDidUpdate(prev_props) {
     if(this.props.invoiceId != null){
       var afterProp = this.props.items.length;
       var beforeProp = prev_props.items.length;
@@ -59,7 +59,7 @@ class Invoice extends React.Component {
         })
       }
     }
-  }
+  }*/
 
   static navigationOptions = () => {
     return {
@@ -221,7 +221,9 @@ class Invoice extends React.Component {
   }
 
   createInvoice = () => {
+    const dateOk = (new Date(this.state.invoiceDate)).getTime() > (new Date(this.state.paymentExpire)).getTime() ? this.state.invoiceDate : this.state.paymentExpire;
     const isProducts = this.state.concept === 'products';
+    console.log(dateOk);
     this.setState({loadingContinue: true});
     this.createOrUpdateInvoice({ 
       invoiceDate: this.state.invoiceDate,
@@ -229,7 +231,7 @@ class Invoice extends React.Component {
       conditionSale: this.state.conditionSale,
       dateFrom: isProducts ? null : this.state.dateFrom,
       dateTo: isProducts ? null : this.state.dateTo,
-      paymentExpire: isProducts ? null : this.state.paymentExpire,
+      paymentExpire: isProducts ? null : dateOk,
       concept: this.state.concept
     })
   };
@@ -292,8 +294,8 @@ class Invoice extends React.Component {
   
   render() {
     console.log(this.state.invoiceDate, this.props.invoiceDate)
-    console.log(this.props.invoiceId);
-    const canCreateInvoice = this.props.user.fiscal_key;
+    console.log(this.props.user);
+    const canCreateInvoice = this.props.user.cert;
     const displayButtonsInit = this.state.renderButtonsNewDraft ? 'flex' : 'none';
     return(
       <View style={style.container}>

@@ -67,8 +67,8 @@ export const IconRight = <Icon
   type='antdesign' 
   name="right" 
   size={12} 
-  color={COLORS.blue} 
-  iconStyle={{ marginLeft: 2, top: 2.5}}
+  color={COLORS.blueMedium} 
+  iconStyle={{ marginLeft: 2, top: 2}}
 />
 
 export const IconAddCustomer = props => (

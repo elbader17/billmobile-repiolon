@@ -1,9 +1,7 @@
 import React from 'react';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import { IconEye, IconEyeOff } from '../../../constants/icons';
-import LinearGradient from 'react-native-linear-gradient';
 import { Button } from "react-native-elements";
-import { COLORS, COLORGY } from '../../../constants/colors';
 import style from '../style';
 
 class SignIn extends React.Component {
@@ -11,8 +9,8 @@ class SignIn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '@mozej.com',
-      password: '@Martin44',
+      email: '',
+      password: '',
       hidePassword: false,
       loading: false,
       confirm: false,

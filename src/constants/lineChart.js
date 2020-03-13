@@ -1,5 +1,6 @@
 import { COLORS } from "./colors";
 
+
 export const presentDataDay = (date, invoices) => {
   const day = date.getDate();
   const month = date.getMonth() +1;
@@ -7,24 +8,21 @@ export const presentDataDay = (date, invoices) => {
   const listProcessed = invoices.filter(invoice => invoice.attributes.state === 'processed' && parseInt(invoice.attributes.invoice_date.slice(0,4)) == parseInt(year) && parseInt(invoice.attributes.invoice_date.slice(5,7)) == parseInt(month) && parseInt(invoice.attributes.invoice_date.slice(8,10)) == parseInt(day));
     if (listProcessed.length === 0 || invoices.length === 0 ) {
       return ({
-        labels: ['','1/3', day.toString() +'/'+ month.toString(), '3/3', ''],
+        labels: ['','<', day.toString() +'/'+ month.toString(), '>', ''],
           datasets: [{
-            data: [0, 0, 0, 0],
+            data: [0, 0, 0, 0, 0],
             strokeWidth: 2,
           }
         ],
       })
     }
     else {
-      var count = 0;
-      listProcessed.map(invoice => {
-        console.log(invoice.attributes.total);
-        count = count + invoice.attributes.total 
-      });
+      let total = 0;
+      for(let i of listProcessed) total+= parseInt(i.attributes.total);
       return ({
         labels: ['','<', day.toString() +'/'+ month.toString(), '>', ''],
           datasets: [{
-            data: [0, 0, count, 0, 0],
+            data: [0, 0, total , 0, 0],
             strokeWidth: 2,
           }
         ],
@@ -91,7 +89,6 @@ export const presentDataMonth = (date, invoices) => {
           else if (d>14 && d<=21) data[2] = data[2] + total;
             else data[3] = data[3] + total;
       });
-      console.log(data)
       return ({
         labels: labelss,
           datasets: [{
