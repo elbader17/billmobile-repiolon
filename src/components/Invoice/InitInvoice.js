@@ -7,7 +7,7 @@ import { VOUCHER_TYPES, CONCEPT } from '../../constants/invoice';
 import { CONDITION_SALE } from '../../constants/invoice'
 import style from './style';
 import { COLORS } from '../../constants/colors';
-import { IconRight } from '../../constants/icons';
+import {IconX} from '../../constants/icons'
 
 class InitInvoice extends React.Component {
 
@@ -25,10 +25,11 @@ class InitInvoice extends React.Component {
           style: 'cancel',
         },
         { //Press OK
-          text: 'Eliminar', onPress: () => {
+          text: 'Borrar', onPress: () => {
             this.props.setRenderInitInvoice(false);
             this.props.setRenderButtonsNewDraft(true);
-            this.props.resetCurrentInvoice()
+            this.props.resetCurrentInvoice(),
+            this.props.setStateCurrentInvoice()
           }//End onPress
         },
       ],
@@ -37,10 +38,10 @@ class InitInvoice extends React.Component {
 }  
 
     render() {
-      const displayDateServices = this.props.concept === 'services' || this.props.concept == 'prodserv' ? 'flex' : 'none';
+      const displayDateServices = this.props.concept === 'Servicios' || this.props.concept === 'Productos y Servicios' ? 'flex' : 'none';
       const { dateFrom, dateTo, paymentExpire } = this.props;
       return(
-        <View style={style.containerInitInvoice}>
+        <View style={style.containerInitEndInvoice}>
           <View style={style.containerBody}>
             <ScrollView style={{borderBottomWidth: 0.3, borderBottomColor: COLORS.gray}}>
             <View>
@@ -120,7 +121,7 @@ class InitInvoice extends React.Component {
                   style={{width: '32%'}}
                   date={dateFrom}
                   mode="date"
-                  format="YYYY/MM/DD"
+                  format="DD/MM/YYYY"
                   showIcon={false}
                   customStyles={{
                     dateText: style.textRegular14GrayDark,
@@ -132,7 +133,7 @@ class InitInvoice extends React.Component {
                   style={{width: '32%'}}
                   date={dateTo}
                   mode="date"
-                  format="YYYY/MM/DD"
+                  format="DD/MM/YYYY"
                   showIcon={false}
                   customStyles={{
                     dateText: style.textRegular14GrayDark,
@@ -144,7 +145,7 @@ class InitInvoice extends React.Component {
                   style={{width: '32%'}}
                   date={paymentExpire}
                   mode="date"
-                  format="YYYY/MM/DD"
+                  format="DD/MM/YYYY"
                   showIcon={false}
                   customStyles={{
                     dateText: style.textRegular14GrayDark,
@@ -163,7 +164,7 @@ class InitInvoice extends React.Component {
                 style={{width: '100%', marginBottom: 7}}
                 date={this.props.invoiceDate}
                 mode="date"
-                format="YYYY/MM/DD"
+                format="DD/MM/YYYY"
                 minDate= {rankMinDateBill(this.props.concept)}
                 maxDate= {rankMaxDateBill(this.props.concept)}
                 showIcon = {false}
@@ -195,13 +196,14 @@ class InitInvoice extends React.Component {
               </View>
             </View>
                 
-            <View style={[{alignItems: 'center'}, style.inLineSpaceBetween]}>
+            <View>
               <Button
                 title=' Cancelar Comprobante '
+                icon={<IconX color={'red'} size={21} />}
                 TouchableComponent={TouchableOpacity}
                 onPress={this.cancelCbte}
                 buttonStyle={style.buttonCancelInvoice}
-                titleStyle={style.textRegular14White}
+                titleStyle={style.textRegular14Red}
               />
               <View style={{display: this.props.invoiceId != null ? 'flex': 'none'}}>
                 <Button
@@ -212,7 +214,7 @@ class InitInvoice extends React.Component {
                     this.props.setRenderInitInvoice(false)
                   }}
                   buttonStyle={style.buttonBackInvoice}
-                  titleStyle={style.textBold14White}
+                  titleStyle={style.textRegular14White}
                 />
               </View>
             </View>

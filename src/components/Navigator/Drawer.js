@@ -51,6 +51,8 @@ class DrawerComponent extends React.Component {
 
   render() {
     const displayButtonSocial = this.state.showIconSocial ? 'flex' : 'none';
+    const category = this.props.user.clase.slice(0,1);
+    const description = this.props.user.clase.slice(1);
     return (
       <View style={style.containerDrawer}>
       
@@ -61,6 +63,12 @@ class DrawerComponent extends React.Component {
           </Text>
           <Text style={style.textLight16Blue}>
             {this.props.user.cuit}
+          </Text>
+          <Text style={style.textRegular14GrayDark}>
+            Categoría {category}
+          </Text>
+          <Text style={style.textRegular14Gray}>
+            {description}
           </Text>
         </View>
 

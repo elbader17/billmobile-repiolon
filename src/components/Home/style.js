@@ -21,15 +21,32 @@ const styles = StyleSheet.create({
     paddingVertical: 3
   },
   containerStatics: {
-    flex:0.20,
+    flex:0.10,
     justifyContent: 'center',
     backgroundColor: COLORS.grayLight,
     paddingHorizontal: 10
   },
-  containerListCustomer: {
+  containerButtonNewCbte: {
     backgroundColor: COLORS.grayLight,
-    flex:0.35,
-    justifyContent: 'flex-end',
+    flex: 0.10,
+    paddingTop: 5,
+    paddingHorizontal: 10
+  },
+  containerProgressBar: {
+    backgroundColor: COLORS.grayLight,
+    flex: 0.35,
+    justifyContent: 'center',
+    paddingHorizontal: 10
+  },
+  boxProgress: {
+    flex: 1,
+    marginTop: 10,
+    marginBottom: 5,
+    borderRadius: 7,
+    elevation: 2,
+    backgroundColor: COLORS.white,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   containerFooter: { 
     width: '100%',
@@ -39,11 +56,31 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 0, 
     borderTopRightRadius: 0
   },
-  boxData: {
-    backgroundColor: COLORS.white,
-    elevation: 1.5,
-    borderRadius: 7,
-    paddingVertical: 25
+  containerModalBilling: {
+    flex: 1, 
+    marginVertical: 20,
+    marginHorizontal: 10, 
+    padding: 15, 
+    backgroundColor: COLORS.grayLight, 
+    borderRadius: 7, 
+    elevation: 5
+  },
+  listBilling: {
+    flex: 1, 
+    backgroundColor: COLORS.white, 
+    borderRadius: 7, 
+    padding: 5, 
+    marginVertical: 10, 
+    elevation: 1
+  },
+  buttonPeriod: {
+    height: hp('6%'),
+    backgroundColor: COLORS.blue,
+    elevation: 1,
+    borderRadius: 25,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: 5
   },
   scrollCustomers: {
     height: hp('28%'),
@@ -123,10 +160,10 @@ const styles = StyleSheet.create({
     color: COLORS.blue,
   },
   textRegular16GrayDark: {
-    fontFamily: FONTS.pExtraLight,
+    fontFamily: FONTS.pRegular,
     fontSize: FONTS.size16,
-    color: COLORS.grayDark,
-    top: 3
+    color: COLORS.blue,
+    top: 0
   },
   textRegular14GrayDark: {
     fontFamily: FONTS.pRegular,
@@ -213,14 +250,14 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   textRegular18GrayDark: {
-    fontFamily: FONTS.latoRegular,
+    fontFamily: FONTS.pRegular,
     fontSize: FONTS.size18,
     color: COLORS.grayDark,
   },
   textRegular18Blue: {
     fontFamily: FONTS.latoRegular,
     fontSize: FONTS.size18,
-    color: COLORS.blueLight,
+    color: COLORS.blue,
   },
   textLight18White: {
     fontFamily: FONTS.latoLight,
@@ -250,11 +287,11 @@ const styles = StyleSheet.create({
     color: COLORS.white,
     top: 1
   },
-  textRegular22BlueMedium: {
+  textRegular20Blue: {
     fontFamily: FONTS.pRegular,
     fontSize: FONTS.size22,
     color: COLORS.blueMedium,
-    top: 2
+    top: 3
   },
   lineWhiteLeft: {
     width:'10%',
@@ -267,6 +304,14 @@ const styles = StyleSheet.create({
     height: 1
   },
   buttonAll: {
+    height: hp('6.5%'),
+    backgroundColor: COLORS.blueLight,
+    borderRadius: 25,
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 1
+  },
+  buttonCloseModal: {
     height: hp('5.5%'),
     marginTop: 5,
     marginBottom: 3,
@@ -298,6 +343,13 @@ const styles = StyleSheet.create({
   buttonFooter: {
     height: hp('5%'),
     backgroundColor: 'transparent'
+  },
+  buttonMonth: {
+    height: hp('6%'),
+    marginBottom: 7,
+    borderRadius: 7,
+    backgroundColor: COLORS.blueLight,
+    elevation: 1
   },
   buttonHeader: {
     backgroundColor: 'transparent'

@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { Button } from "react-native-elements";
-import { presentInvoiceDate } from '../../../utils/date';
 import { nameByCategory } from '../../../utils/identity';
 import { IconBack } from '../../../constants/icons';
 import { VOUCHER_TYPES, CONDITION_SALE } from '../../../constants/invoice';
@@ -34,25 +33,28 @@ class InvoiceSummary extends React.Component {
   };
   
   confirmInvoice = () => {
-    this.setState({loading: true})
-    const { confirmInvoice, navigation, getCertificate } = this.props;
-    const attributes = {
-      invoice_id: this.props.invoiceId,
-      total: this.props.invoiceTotal,
-      state: 'confirmed'
+    if (this.props.user.cert) {
+      this.setState({loading: true})
+      const { confirmInvoice, navigation } = this.props;
+      const attributes = {
+        invoice_id: this.props.invoiceId,
+        total: this.props.invoiceTotal,
+        state: 'confirmed'
+      }
+      confirmInvoice(attributes)
+        .then((response) => {
+          console.log(response)
+          this.setState({loading: false, urlInvoiceProcessed: this.props.invoiceUrl});
+          if (response) {
+            this.props.resetCurrentInvoice();
+            navigation.navigate('Opinion', {ok: response, url: this.state.urlInvoiceProcessed}) 
+          }
+          else {
+            navigation.navigate('Opinion', {ok: false, url: '¡Error! Intente Nuevamente Mas Tarde'})
+          }
+        })
     }
-    confirmInvoice(attributes)
-      .then((response) => {
-        console.log(response)
-        this.setState({loading: false, urlInvoiceProcessed: this.props.invoiceUrl});
-        if (response) {
-          this.props.resetCurrentInvoice();
-          navigation.navigate('Opinion', {ok: response, url: this.state.urlInvoiceProcessed}) 
-        }
-        else {
-          navigation.navigate('Opinion', {ok: false, url: '¡Error! Intente Nuevamente Mas Tarde'})
-        }
-      })
+    else alert('NO PUEDE EFECTUAR COMPORBANTES, ingrese su Clave Fiscal o si ya lo hizo debe esperar a ser habilitado!')
   }
 
   presentVoucherType = () => {
@@ -99,8 +101,24 @@ class InvoiceSummary extends React.Component {
 
   showInfoItems = () => {
     const detalle = this.props.concept === 'products' ? 'Producto/s' : 'Servicio/s'
+    const from = (this.props.dateFrom).slice(0,5);
+    const to = (this.props.dateTo).slice(0,5);
+    const expire = (this.props.paymentExpire).slice(0,5);
+    const displayPeriod = this.props.concept != 'Productos' ? 'flex' : 'none';
     return(
       <View style={style.boxListItemsSummary}>
+        
+        <View style={[style.inLineSpaceBetween, {display: displayPeriod}]}>
+          <Text style={style.textRegular12Blue}>Desde: 
+            <Text style={style.textRegular12GrayDark}> {from}</Text>
+          </Text>
+          <Text style={style.textRegular12Blue}>Hasta: 
+            <Text style={style.textRegular12GrayDark}> {to}</Text>
+          </Text>
+          <Text style={style.textRegular12Blue}>Vto Pago: 
+            <Text style={style.textRegular12GrayDark}> {expire}</Text>
+          </Text>
+        </View>
         <Text style={style.textRegular12Blue}>
           Detalle {detalle}
         </Text>
@@ -147,14 +165,14 @@ class InvoiceSummary extends React.Component {
           <View style={style.boxHeaderSummary}>
             <View style={style.inLineSpaceBetween}>
               <Text style={style.textRegular12Blue}>Tipo de Comprobante</Text>
-              {/*<Text style={style.textRegular12Blue}>Fecha de Emisión</Text>*/}
+              <Text style={style.textRegular12Blue}>Fecha de Emisión</Text>
             </View>
             <View style={style.inLineSpaceBetween}>
               <Text style={style.textRegular16GrayDark}>
                 {this.presentVoucherType()}
               </Text>
               <Text style={style.textRegular16GrayDark}>
-                {/*'' + day+'/'+month+'/'+year*/}
+                {this.props.invoiceDate}
               </Text>
             </View>
           </View>

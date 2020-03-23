@@ -1,6 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity, Alert, Text } from 'react-native';
-import { Button } from "react-native-elements";
+import { View, TouchableOpacity, Alert, Text, Modal } from 'react-native';
 import { showMessage } from "react-native-flash-message";
 import InvoiceCustomer from './InvoiceCustomer';
 import InvoiceItems from './InvoiceItems';
@@ -10,10 +9,13 @@ import {
   messageCustomerIncomplete,
   messageRequestData 
 } from '../../utils/messagesNotifications';
-import { IconDocument, IconBottom, IconNewInvoice, } from '../../constants/icons';
+import { invoiceDateString } from '../../utils/date';
+import ModalInvoicesExisting from './ModalInvoicesExisting';
+import { IconDocument, IconNewInvoice, IconExistente, } from '../../constants/icons';
 import style from './style';
 import InitInvoice from './InitInvoice';
 import EndInvoice from './EndInvoice';
+import { presentInvoiceDate } from '../../utils/date'
 import { COLORS } from '../../constants/colors';
 
 class Invoice extends React.Component {
@@ -23,12 +25,15 @@ class Invoice extends React.Component {
     const { voucherType, fiscalIdentity, conditionSale, invoiceDate } = this.props;
     this.state = {
       voucherType: voucherType,
+      fiscalIdentity: fiscalIdentity,
+      showCustomer: fiscalIdentity != null ? true : false,
+      invoiceId: this.props.invoiceId,
       invoiceDate: invoiceDate,
       fcIdentification: undefined,
-      showCustomer: fiscalIdentity.name != '',
       conditionSale: conditionSale,
       loadingFC: false, //For add final consumer
       loadingContinue: false,
+      loadingInvoices: false,
       quantity: 1, //Cant items
       validIdentity: true,
       concept: this.props.concept,
@@ -36,30 +41,14 @@ class Invoice extends React.Component {
       renderInitInvoice: false,
       renderEndInvoice: this.props.invoiceId != null,
       renderButtonsNewDraft: this.props.invoiceId === null,
+      renderItems: false,
       salePoint: 1,
       dateFrom: this.props.dateFrom,
       dateTo: this.props.dateTo,
       paymentExpire: this.props.paymentExpire,
+      modalVisible: false
     }
   }
-
-  /*componentDidUpdate(prev_props) {
-    if(this.props.invoiceId != null){
-      var afterProp = this.props.items.length;
-      var beforeProp = prev_props.items.length;
-      if ((beforeProp == 0 && afterProp != 0)||(beforeProp != 0 && afterProp == 0)){
-        this.setState({
-          dateDisabled: !this.state.dateDisabled,
-          invoiceDate: new Date()
-        })
-        this.props.updateInvoice({
-          invoiceDate: new Date(),
-          voucherType: this.state.voucherType,
-          conditionSale: this.state.conditionSale
-        })
-      }
-    }
-  }*/
 
   static navigationOptions = () => {
     return {
@@ -68,6 +57,19 @@ class Invoice extends React.Component {
       headerLeft: IconDocument
     }  
   };
+
+  setStateCurrentInvoice = () => {
+    this.setState({
+      invoiceDate: invoiceDateString(),
+      dateFrom: invoiceDateString(),
+      dateTo: invoiceDateString(),
+      paymentExpire: invoiceDateString(),
+      voucherType: '11',
+      conditionSale: 'cdo',
+      concept: 'Productos',
+      showCustomer: false
+    })
+  }
 
   setModalVisible = visible => this.setState({modalVisible: visible});
   setFcIdentification = value => this.setState({ fcIdentification: value, validIdentity: true });
@@ -99,7 +101,7 @@ class Invoice extends React.Component {
       } 
       else {
         this.setState({loadingContinue: true})
-        this.props.getInvoice(this.props.invoiceId)
+        this.props.getInvoice(this.state.invoiceId)
           .then(() => {
             if (this.props.invoiceTotal > 10000 && this.props.fiscalIdentity.identification == 'fc') {
               const customer = {
@@ -134,7 +136,8 @@ class Invoice extends React.Component {
   }
   
   createOrUpdateInvoice = (values) => {
-    const { updateInvoice, createInvoice, invoiceId } = this.props;
+    const { updateInvoice, createInvoice} = this.props;
+    const { invoiceId } = this.state;
     if (invoiceId != null) {
       updateInvoice(values)
         .then(() => {
@@ -165,24 +168,24 @@ class Invoice extends React.Component {
     } 
   };
 
-  addFinalConsumer = (customer) => {
+  addFinalConsumer = () => {
     Alert.alert(
       '¿Desea Completar los Datos del Receptor?','Deberá ingresar el DNI, Nombre y Apellido, y Domicilio Comercial del Receptor',
       [
         { 
           text: 'Completar', 
           onPress: () => {
-            this.setShowCustomer(true);
+            this.setState({showCustomer: true})
             this.props.navigation.navigate(
               'NewInvoiceCustomer',
-              {customer, dataReceiver: true}
+              {dataReceiver: true}
             );
           }
         },
         { 
           text: 'No Completar', 
           onPress: () => {
-            this.setState({loadingFC: true, showCustomer: true})
+            this.setState({loadingFC: true,  showCustomer: true})
             this.props.addFiscalIdentityToInvoice('fc', 'fc', 'fc')
               .then(()=> this.setState({loadingFC: false}))
           },
@@ -196,8 +199,8 @@ class Invoice extends React.Component {
     return (
       <InvoiceItems
         items={this.props.items}
-        total={this.props.invoiceTotal} 
-        invoiceId ={this.props.invoiceId}
+        total={this.props.invoiceTotal}
+        invoiceId ={this.state.invoiceId}
         updateInvoiceItemQuantity={this.props.updateInvoiceItemQuantity}
         quantity={this.state.quantity}
         deleteItem={this.props.deleteInvoiceItem}
@@ -210,9 +213,9 @@ class Invoice extends React.Component {
   renderCustomer = () => {
     return(
       <InvoiceCustomer 
-        showCustomer={this.state.showCustomer}
-        setShowCustomer={this.setShowCustomer}
+        setCurrentInvoiceId={this.props.setCurrentInvoiceId}
         setFinalConsumer={this.setFcIdentification}
+        setShowCustomer={this.setShowCustomer}
         identity={this.state.fcIdentification} 
         loading={this.state.loading}
         fiscalIdentity={this.props.fiscalIdentity}
@@ -223,7 +226,6 @@ class Invoice extends React.Component {
   createInvoice = () => {
     const dateOk = (new Date(this.state.invoiceDate)).getTime() > (new Date(this.state.paymentExpire)).getTime() ? this.state.invoiceDate : this.state.paymentExpire;
     const isProducts = this.state.concept === 'products';
-    console.log(dateOk);
     this.setState({loadingContinue: true});
     this.createOrUpdateInvoice({ 
       invoiceDate: this.state.invoiceDate,
@@ -245,6 +247,23 @@ class Invoice extends React.Component {
   setRenderButtonsNewDraft = value => {this.setState({renderButtonsNewDraft: value })}
   setDate = (from, to, expire) => {this.setState({dateFrom: from, dateTo: to, paymentExpire: expire})}
   
+  setInvoice = () => {
+    this.setState({
+      invoiceItems: [],
+      invoiceDate: invoiceDateString(),
+      voucherType: '11',
+      conditionSale: 'cdo',
+      concept: 'Productos',
+      id: null,
+      total: 0.0,
+      url: '',
+      dateFrom: invoiceDateString(),
+      dateTo: invoiceDateString(),
+      paymentExpire: invoiceDateString()
+    })
+    this.props.resetCurrentInvoice()
+  }
+
   renderNewInvoiceInit = () => (
     <InitInvoice
       user={this.props.user}
@@ -268,62 +287,127 @@ class Invoice extends React.Component {
       dateTo={this.state.dateTo}
       paymentExpire={this.state.paymentExpire}
       setDate={this.setDate}
-      resetCurrentInvoice={this.props.resetCurrentInvoice}
+      resetCurrentInvoice={this.setInvoice}
+      setStateCurrentInvoice={this.setStateCurrentInvoice}
     />
   )
 
   setRenderEndInvoice = value => {this.setState({renderEndInvoice: value })}
   
-  renderNewInvoiceEnd = () => (
-    <EndInvoice
-      showCustomer={this.state.showCustomer}
-      loadingFC={this.state.loadingFC}
-      addFinalConsumer={this.addFinalConsumer}
-      navigateClient={this.navigateClient}
-      renderViewItemsAdd={this.renderViewItemsAdd}
-      renderCustomer={this.renderCustomer}
-      navigateAddItems={this.navigateAddItems}
-      setRenderEndInvoice={this.setRenderEndInvoice}
-      setRenderInitInvoice={this.setRenderInitInvoice}
-      setRenderButtonsNewDraft={this.setRenderButtonsNewDraft}
-      navigateToSummaryInvoice={this.navigateToSummaryInvoice}
-      loadingContinue={this.state.loadingContinue}
-      resetCurrentInvoice={this.props.resetCurrentInvoice}
-    />
-  )
+  renderNewInvoiceEnd = () => {
+    return (
+      <EndInvoice
+        fiscalIdentity={this.props.fiscalIdentity}
+        showCustomer={this.state.showCustomer}
+        renderItems={this.renderItems}
+        loadingFC={this.state.loadingFC}
+        addFinalConsumer={this.addFinalConsumer}
+        navigateClient={this.navigateClient}
+        renderViewItemsAdd={this.renderViewItemsAdd}
+        renderCustomer={this.renderCustomer}
+        navigateAddItems={this.navigateAddItems}
+        setRenderEndInvoice={this.setRenderEndInvoice}
+        setRenderInitInvoice={this.setRenderInitInvoice}
+        setRenderButtonsNewDraft={this.setRenderButtonsNewDraft}
+        navigateToSummaryInvoice={this.navigateToSummaryInvoice}
+        loadingContinue={this.state.loadingContinue}
+        resetCurrentInvoice={this.setInvoice}
+        setStateCurrentInvoice={this.setStateCurrentInvoice}
+        getInvoiceItems={this.props.getInvoiceItems}
+      />
+    );
+  }
+
+  getFiscalInvoices = () => {
+    this.setModalVisible(true);
+    this.setState({loadingInvoices: true})
+    this.props.listInvoice()
+      .then(() => 
+        this.props.getFiscalIdentitiesInvoices()
+         .then(() => this.setState({loadingInvoices: false}))
+      )
+  }
+
+  loadInvoice = (invoice, fiscalIdentity) => {
+    const { concept, condition_sale, state, date_from, date_to, payment_expiration, invoice_date, invoice_type, total } = invoice.attributes;
+    const id = state != 'processed' ? invoice.id : null;
+    this.setState({
+      renderInitInvoice: true, 
+      renderButtonsNewDraft: false,
+      dateFrom: presentInvoiceDate(date_from),
+      dateTo: presentInvoiceDate(date_to),
+      paymentExpire: presentInvoiceDate(payment_expiration),
+      invoiceDate: presentInvoiceDate(invoice_date),
+      voucherType: invoice_type,
+      invoiceTotal: total,
+      concept: concept,
+      conditionSale: condition_sale,
+      fiscalIdentity: fiscalIdentity,
+      invoiceId: id,
+      showCustomer: true
+    });
+  }
+
+  setModalVisible = value => {this.setState({modalVisible: value})} 
   
   render() {
-    console.log(this.state.invoiceDate, this.props.invoiceDate)
-    console.log(this.props.user);
-    const canCreateInvoice = this.props.user.cert;
+    console.log(this.props.fiscalIdentity);
     const displayButtonsInit = this.state.renderButtonsNewDraft ? 'flex' : 'none';
     return(
       <View style={style.container}>
-        <View style={{alignItems: 'center'}}>  
+        <View style={{alignItems: 'center', justifyContent: 'center', flex: 1, display: displayButtonsInit}}>  
           <TouchableOpacity 
             onPress={() => {this.setState({renderInitInvoice: true, renderButtonsNewDraft: false})}}
-            style={[style.buttonNewInvoice,{display: displayButtonsInit, justifyContent: 'center'}]}
-            disabled={!canCreateInvoice}
+            style={style.buttonNewInvoice}
           >
             <View style={style.inColumn}>
               {<IconNewInvoice 
                 size={100} 
-                color={canCreateInvoice ?  COLORS.blueLight : COLORS.gray} 
+                color={COLORS.blueLight} 
                 iconStyle={{marginBottom: 15}} 
               />}
-              <Text style={canCreateInvoice ? style.textRegular20Blue : style.textRegular20GrayDark}>
+              <Text style={style.textRegular20Blue}>
                 Nuevo Comprobante
               </Text>
             </View>
           </TouchableOpacity>
         </View>
-        <View style={{display: canCreateInvoice ? 'none':'flex'}}>
-          <Text style={[style.textRegular14GrayDark, {textAlign: 'center', paddingHorizontal: 15, marginTop: 10}]}>
-            ¡Para poder facturar debe cargar su Clave Fiscal y esperar a ser autorizado!
-          </Text>
+        <View style={{alignItems: 'center', justifyContent: 'flex-start', flex: 1, display: displayButtonsInit}}>
+          <TouchableOpacity 
+            onPress={() => this.getFiscalInvoices()}
+            style={style.buttonNewInvoice}
+            >
+            <View style={style.inColumn}>
+              {<IconExistente
+                size={100} 
+                color={COLORS.blueLight} 
+                iconStyle={{marginBottom: 15}} 
+                />}
+              <Text style={style.textRegular20Blue}>
+                Cargar Existente
+              </Text>
+            </View>
+          </TouchableOpacity>
         </View>
         {this.state.renderInitInvoice ? this.renderNewInvoiceInit() : null }
         {this.state.renderEndInvoice ? this.renderNewInvoiceEnd() : null }
+        
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={this.state.modalVisible}
+        >
+          <ModalInvoicesExisting 
+            setModalVisible={this.setModalVisible}
+            invoices={this.props.invoices}
+            customers={this.props.invoicesFI}
+            loading={this.state.loadingInvoices}
+            loadInvoice={this.loadInvoice}
+            setCurrentInvoiceId={this.props.setCurrentInvoiceId}
+            deleteInvoice={this.props.deleteInvoice}
+          />
+        </Modal>
+
       </View>
     )
   }

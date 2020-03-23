@@ -5,13 +5,16 @@ import PropTypes from 'prop-types';
 import { COLORS } from '../../constants/colors';
 import { IconX } from '../../constants/icons';
 import style from './style';
-import {nameByCategory} from '../../utils/identity'
+import {nameByCategory} from '../../utils/identity';
+
 const InvoiceCustomer = props => {
+  console.log(props.fiscalIdentity)
   const customer = props.fiscalIdentity;
-  const identity = customer.identification == '' || customer.identification == 'fc' ? 'No Completa' : customer.identification
-  const name = customer.name == 'fc' ? 'No Completa' : customer.name
-  const iva = nameByCategory(customer.category)
-  const titleIdentity = customer.category == 'fc' ? 'Número de Documento:' : 'CUIT:'
+  const identity = customer == null ? 'No Completa' : (customer.identification == 'fc' ? 'No Completa' : customer.identification);
+  const name = customer == null ? 'No Completa' : (customer.name === 'fc' ? 'No Completa' : customer.name)
+  const category = customer == null ? 'fc' : customer.category;
+  const iva = nameByCategory(category)
+  const titleIdentity = category == 'fc' ? 'Número de Documento:' : 'CUIT:'
   return (
     <View style={style.listCustomer}>
       <View style={style.inLineSpaceBetween}>

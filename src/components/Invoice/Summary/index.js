@@ -16,7 +16,8 @@ const mapStateToProps = state => ({
   conditionSale: state.invoices.currentInvoice.conditionSale,
   dateFrom: state.invoices.currentInvoice.dateFrom,
   dateTo: state.invoices.currentInvoice.dateTo,
-  paymentExpire: state.invoices.currentInvoice.paymentExpire
+  paymentExpire: state.invoices.currentInvoice.paymentExpire,
+  user: state.userservice
 });
 
 function mapDispatchToProps(dispatch) {

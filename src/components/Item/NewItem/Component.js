@@ -12,12 +12,14 @@ class NewItem extends React.Component {
     const item = this.props.navigation.getParam('item', this.defaultItem());
     const productOrService = item.category === 'product';
     const isProducts = this.props.navigation.getParam('isProduct', productOrService );
+    const concept = this.props.navigation.getParam('concept', 'Productos' );
     
     this.state = {
       name: item.name,
       price: item.price,
       isProduct: isProducts,
       itemId: item.id,
+      concept: concept,
       loading: false,
       errorName: undefined, 
       errorPrice: undefined
@@ -104,6 +106,7 @@ class NewItem extends React.Component {
                 onPress={() => this.setState({isProduct: true})} 
                 buttonStyle={ this.state.isProduct ? style.buttonSelect : style.buttonSelectDisable }
                 titleStyle={ style.textRegular14GrayDark }
+                disabled = {this.props.type === 'invoice' && this.state.concept === 'Servicios'}
               />
               <Button
                 title='Servicios'
@@ -111,6 +114,7 @@ class NewItem extends React.Component {
                 onPress={() => this.setState({isProduct: false})}
                 buttonStyle={ this.state.isProduct ? style.buttonSelectDisable : style.buttonSelect }
                 titleStyle={ style.textRegular14GrayDark }
+                disabled = {this.props.type === 'invoice' && this.state.concept === 'Productos'}
               />
             </View>
 

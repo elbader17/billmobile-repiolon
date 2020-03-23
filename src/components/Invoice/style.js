@@ -7,13 +7,13 @@ import { METRICS } from '../../constants/metrics';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 10,
+    paddingTop: 5,
     backgroundColor: COLORS.grayLight
   },
   containerBody: {
     flex: 0.9
   },
-  containerInitInvoice: {
+  containerInitEndInvoice: {
     flex: 1,
     marginHorizontal: 15,
     paddingTop: 5
@@ -24,11 +24,10 @@ const styles = StyleSheet.create({
   },
   containerBoxInvoice: {
     backgroundColor: COLORS.white,
-    marginHorizontal: 10,
     marginBottom: 10,
     borderRadius: 7,
     elevation: 1,
-    padding: 10
+    paddingVertical: 10,
   },
   containerBoxDateServices: {
     backgroundColor: COLORS.white,
@@ -97,13 +96,62 @@ const styles = StyleSheet.create({
     marginTop: 12,
     marginHorizontal: 20
   },
+  containerInvoicesExisting: {
+    flex: 1, 
+    marginVertical: 20,
+    marginHorizontal: 7, 
+    padding: 10, 
+    backgroundColor: COLORS.grayLight, 
+    borderRadius: 7, 
+    borderWidth: 1,
+    borderColor: COLORS.blue,
+    elevation: 5
+  },
+  listInvoices: {
+    flex: 1, 
+    backgroundColor: COLORS.white, 
+    borderRadius: 7, 
+    paddingVertical: 5, 
+    marginVertical: 10, 
+    elevation: 1
+  },
+  buttonBorrador: {
+    height: hp('4.5%'),
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: COLORS.blue,
+    borderRadius: 5,
+    elevation: 1,
+    marginLeft: 1,
+    marginHorizontal: 3
+  },
+  buttonLoad: {
+    height: hp('4.5%'),
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: COLORS.blueLight,
+    borderRadius: 5,
+    elevation: 1,
+    marginHorizontal: 3
+  },
+  buttonCloseModal: {
+    height: hp('5.5%'),
+    marginTop: 5,
+    marginBottom: 3,
+    backgroundColor: COLORS.blue,
+    borderRadius: 25,
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 1
+  },
   buttonCloseInvoice: {
     backgroundColor: 'transparent'
   },
   buttonNewInvoice: {
     width: '90%',
     marginTop: 5,
-    height: hp('40%'),
+    height: hp('35%'),
+    justifyContent: 'center',
     borderRadius: 10,
     backgroundColor: COLORS.white,
     elevation: 2,
@@ -292,7 +340,7 @@ const styles = StyleSheet.create({
   },
   listCustomer:{
     marginTop: 5,
-    marginHorizontal: 2,
+    marginHorizontal: 7,
     marginBottom: 8
   },
   inLine: {
@@ -362,7 +410,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
   },
   buttonAdd: {
-    width: wp('90%'),
+    width: '100%',
     height: hp('5.5%'),
     marginBottom: 0,
     backgroundColor: COLORS.blue,
@@ -456,19 +504,21 @@ const styles = StyleSheet.create({
   buttonCancelInvoice: {
     height: hp('6%'),
     paddingVertical: 10,
-    backgroundColor: COLORS.blue,
+    borderColor: 'red',
+    borderWidth: 1,
+    backgroundColor: COLORS.white,
     borderRadius: 25,
     marginTop: 7,
-    marginBottom: 2,
+    marginBottom: 5,
     elevation: 1
   },
   buttonBackInvoice: {
     height: hp('6%'), 
     paddingVertical: 10,
-    backgroundColor: COLORS.blueLight,
+    backgroundColor: COLORS.blue,
     borderRadius: 25,
     marginTop: 5,
-    marginBottom: 2,
+    marginBottom: 5,
     elevation: 1
   },
   buttonDate: {
@@ -497,8 +547,20 @@ const styles = StyleSheet.create({
   },
   textRegular12White: {
     fontFamily: FONTS.pRegular,
-    fontSize: FONTS.size14,
+    fontSize: FONTS.size12,
     color: COLORS.white,
+    top: 1
+  },
+  textRegular12Red: {
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size12,
+    color: 'red',
+    top: 1
+  },
+  textRegular12Green: {
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size12,
+    color: 'green',
     top: 1
   },
   textRegular11White: {
@@ -506,12 +568,6 @@ const styles = StyleSheet.create({
     fontSize: FONTS.size12,
     color: COLORS.white,
     top: 1
-  },
-  textRegular12BlueLight: {
-    fontFamily: FONTS.pRegular,
-    fontSize: FONTS.size14,
-    color: COLORS.blueLight,
-    marginVertical: -3
   },
   textRegular16GrayLight: {
     fontFamily: FONTS.latoRegular,
@@ -561,7 +617,8 @@ const styles = StyleSheet.create({
   textRegular11GrayDark: {
     fontFamily: FONTS.pRegular,
     fontSize: FONTS.size11,
-    color: COLORS.blue
+    color: COLORS.grayDark,
+    top: 3
   },
   textBold16White: {
     fontFamily: FONTS.pSemiBold,
@@ -629,6 +686,12 @@ const styles = StyleSheet.create({
     fontSize: FONTS.size14,
     color: COLORS.blueMedium,
   },
+  textRegular12BlueLight: {
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size12,
+    color: COLORS.blueLight,
+    top: 1
+  },
   textRegular14Blue: {
     fontFamily: FONTS.pRegular,
     fontSize: FONTS.size14,
@@ -644,6 +707,7 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.pRegular,
     fontSize: FONTS.size12,
     color: COLORS.gray,
+    top: 1
   },
   textRegular18GrayDark: {
     fontFamily: FONTS.pRegular,
@@ -661,6 +725,12 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.pRegular,
     fontSize: FONTS.size14,
     color: COLORS.white,
+    top: 1
+  },
+  textRegular14Red: {
+    fontFamily: FONTS.pRegular,
+    fontSize: FONTS.size14,
+    color: 'red',
     top: 1
   },
   textRegular12Blue: {

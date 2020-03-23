@@ -15,39 +15,41 @@ import {
 import {
   ADD_FISCAL_IDENTITY_TO_INVOICE,
 } from '../fiscal_identity/constants';
-
+import { invoiceDateString } from '../../utils/date';
 
 function defaultCurrentInvoice() {
-  var date = new Date();
   return {
-    fiscalIdentity: { name: '', cuit: '', category: ''},
+    fiscalIdentity: null,
     invoiceItems: [],
-    invoiceDate: date,
+    invoiceDate: invoiceDateString(),
     voucherType: '11',
     conditionSale: 'cdo',
-    concept: 'products',
+    concept: 'Productos',
     id: null,
     total: 0.0,
     url: '',
-    dateFrom: date,
-    dateTo: date,
-    paymentExpire: date
+    dateFrom: invoiceDateString(),
+    dateTo: invoiceDateString(),
+    paymentExpire: invoiceDateString()
   };
 }
 
 const initialState = {
   invoices: [],
+  invoiceFiscalIdentities: [],
   currentInvoice: defaultCurrentInvoice(),
 };
 
 function setCurrentInvoice({ draftState, invoice }) {
-  const { invoice_date, invoice_type, total, url, condition_sale, concept } = invoice.attributes;
-  draftState.currentInvoice.id = invoice.id;
+  const { invoice_date, invoice_type, total, url, condition_sale, concept, date_from, date_to, payment_expiration } = invoice.attributes;
   const day = invoice_date.slice(8,10);
   const month = invoice_date.slice(5,7);
   const year = invoice_date.slice(0,4);
-  console.log(day, month, year);
-  draftState.currentInvoice.invoiceDate = new Date(year+","+month+","+day);
+  draftState.currentInvoice.id = invoice.id;
+  draftState.currentInvoice.invoiceDate = (day+"/"+month+"/"+year);
+  draftState.currentInvoice.dateFrom = (date_from.slice(8,10)+"/"+date_from.slice(5,7)+"/"+date_from.slice(0,4));
+  draftState.currentInvoice.dateTo = (date_to.slice(8,10)+"/"+date_to.slice(5,7)+"/"+date_to.slice(0,4));
+  draftState.currentInvoice.paymentExpire = (payment_expiration.slice(8,10)+"/"+payment_expiration.slice(5,7)+"/"+payment_expiration.slice(0,4));
   draftState.currentInvoice.voucherType = invoice_type;
   draftState.currentInvoice.total = total;
   draftState.currentInvoice.url = url;
@@ -56,7 +58,32 @@ function setCurrentInvoice({ draftState, invoice }) {
   return draftState;
 }
 
+function setInvoiceId({ draftState, id, fiscalIdentity }) {
+  console.log('Set Invoice Id and Fiscal Identity', id, fiscalIdentity)
+  draftState.currentInvoice.id = id;
+  draftState.currentInvoice.fiscalIdentity = fiscalIdentity.attributes;
+  return draftState;
+}
+
+function setInvoiceFiscalIdentities({ draftState, fiscal_identities }) {
+  draftState.invoiceFiscalIdentities = fiscal_identities;
+  return draftState;
+}
+
 function setInvoices({ draftState, invoices }) {
+  draftState.invoices = invoices;
+  return draftState;
+}
+
+function deleteInvoice({ draftState, invoices, id }) {
+  console.log('Delete Invoice', id);
+  const invoicesNew = []
+  for (x=0; x<invoices.length; x++){
+    if (invoices[x].id != id) {
+      invoicesNew.push(invoices[x])
+    }
+    console.log(invoices[x].id, id)
+  }
   draftState.invoices = invoices;
   return draftState;
 }
@@ -137,6 +164,23 @@ export default addInvoiceReducer = (state = initialState, action) => {
         return setCurrentInvoice({
           draftState,
           invoice: action.invoice
+        });
+      case 'FISCAL_INVOICES':
+        return setInvoiceFiscalIdentities({
+          draftState,
+          fiscal_identities: action.fiscalIdentities
+        });
+      case 'RESET_INVOICE_ID':
+        return setInvoiceId({
+          draftState,
+          id: action.id,
+          fiscalIdentity: action.fiscalIdentity
+        });
+      case 'DELETE_INVOICE':
+        return deleteInvoice({
+          draftState,
+          invoices: action.invoices,
+          id: action.id
         });
       case RESET_INVOICE:
         return resetCurrentInvoice({

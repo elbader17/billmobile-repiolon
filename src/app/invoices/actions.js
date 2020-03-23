@@ -44,10 +44,34 @@ function confirmInvoiceAction(invoice) {
   };
 }
 
+function fiscalInvoicesAction(fiscalIdentities) {
+  return {
+    type: 'FISCAL_INVOICES',
+    fiscalIdentities,
+  };
+}
+
 function resetCurrentInvoiceAction() {
   return {
     type: RESET_INVOICE
   }
+}
+
+function deleteInvoiceAction(id, invoices) {
+  return {
+    type: 'DELETE_INVOICE',
+    invoices: invoices,
+    id: id
+  }
+}
+
+function resetCurrentInvoiceIdAction(id, fiscalIdentity) {
+  return {
+    type: 'RESET_INVOICE_ID',
+    id: id,
+    fiscalIdentity: fiscalIdentity
+  }
+
 }
 
 const createInvoice = (invoiceDate, voucherType, conditionSale, dateFrom, dateTo, paymentExpire, concept) => {
@@ -109,6 +133,19 @@ const listInvoice = () => {
   };
 };
 
+const deleteInvoice = (id, invoices) => {
+  return (dispatch) => {
+    return fetch_api(`/v1/invoices/${id}`, 'DELETE', false)
+      .then((response) => {
+        console.log(response)
+        dispatch(deleteInvoiceAction(id, invoices));
+      })
+      .catch((error) => {
+        console.log(error)
+      });
+  };
+};
+
 const getInvoice = (id) => {
   return (dispatch) => {
     return fetch_api(`/v1/invoices/${id}`, 'GET', false)
@@ -144,6 +181,19 @@ const confirmInvoice = (attributes) => {
   };
 };
 
+const getFiscalIdentitiesInvoices = () => {
+  return (dispatch) => {
+    return fetch_api('/v1/invoices_fiscal_identities','GET', false)
+      .then((response) => {
+        console.log(response);
+        dispatch(fiscalInvoicesAction(response.data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+}
+
 const resetCurrentInvoice = () => {
   console.log('Reset Invoice');
   return dispatch => {
@@ -151,11 +201,20 @@ const resetCurrentInvoice = () => {
   }
 }
 
+const setCurrentInvoiceId = (id, fiscalIdentity) => {
+  return dispatch => {
+    return dispatch(resetCurrentInvoiceIdAction(id, fiscalIdentity));
+  }
+}
+
 export { 
   listInvoice, 
   getInvoice, 
-  createInvoice, 
+  createInvoice,
+  deleteInvoice, 
   updateInvoice, 
   confirmInvoice, 
-  resetCurrentInvoice
+  resetCurrentInvoice,
+  getFiscalIdentitiesInvoices,
+  setCurrentInvoiceId
 };

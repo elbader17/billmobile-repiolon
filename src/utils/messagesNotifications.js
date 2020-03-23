@@ -9,6 +9,15 @@ export const messageConfirmAccount = {
     duration: 3000
 };
 
+export const messageInvoiceDelete = {
+    message: "Comprobante Eliminado",
+    description: "Con Éxito.",
+    floating: true,
+    icon: { icon: "auto", position: "left" },
+    type: 'success',
+    duration: 3000
+};
+
 export const messageAddItemInvoice = {
     message: "Producto/Servicio Temporal",
     description: "Se creará solo para esta Factura",

@@ -51,10 +51,14 @@ export const CONDITION_SALE = [
 export const CONCEPT = [
   {
     label: 'Productos',
-    value: 'products',
+    value: 'Productos',
   },
   {
     label: 'Servicios',
-    value: 'services',
+    value: 'Servicios',
+  },
+  {
+    label: 'Productos y Servicios',
+    value: 'Productos y Servicios',
   }
 ];

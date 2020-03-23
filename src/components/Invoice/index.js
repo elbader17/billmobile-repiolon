@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import Invoice from './Component';
 import { addFiscalIdentityToInvoice } from '../../app/fiscal_identity/actions';
-import { updateInvoice, createInvoice, getInvoice, resetCurrentInvoice } from '../../app/invoices/actions';
+import { updateInvoice, createInvoice, getInvoice, deleteInvoice, listInvoice , resetCurrentInvoice, getFiscalIdentitiesInvoices, setCurrentInvoiceId } from '../../app/invoices/actions';
 import { updateInvoiceItem, deleteInvoiceItem, getInvoiceItems } from '../../app/invoice_items/actions';
 
 const mapStateToProps = state => ({
@@ -17,7 +17,9 @@ const mapStateToProps = state => ({
   invoiceId: state.invoices.currentInvoice.id,
   invoiceTotal: state.invoices.currentInvoice.total,
   concept: state.invoices.currentInvoice.concept,
-  invoices: state.invoices.invoices
+  invoices: state.invoices.invoices,
+  invoicesFI: state.invoices.invoiceFiscalIdentities,
+  customers: state.customers.customers
 });
 
 const mapDispatchToProps = (dispatch) => {
@@ -25,11 +27,23 @@ const mapDispatchToProps = (dispatch) => {
     addFiscalIdentityToInvoice: (name, cuit, id) => (
       dispatch(addFiscalIdentityToInvoice(name, cuit, id))
     ),
+    getFiscalIdentitiesInvoices: () => (
+      dispatch(getFiscalIdentitiesInvoices())
+    ),
+    setCurrentInvoiceId: (id, fiscalIdentity) => (
+      dispatch(setCurrentInvoiceId(id, fiscalIdentity))
+    ),
     updateInvoiceItemQuantity: (id, quantity) => (
       dispatch(updateInvoiceItem(id, { quantity }))
     ),
     updateInvoice: values => (
       dispatch(updateInvoice(values))
+    ),
+    listInvoice: () => (
+      dispatch(listInvoice())
+    ),
+    deleteInvoice: (id, invoices) => (
+      dispatch(deleteInvoice(id, invoices))
     ),
     createInvoice: (invoiceDate, voucherType, conditionSale, dateFrom, dateTo, paymentExpire, concept) => (
       dispatch(createInvoice(invoiceDate, voucherType, conditionSale, dateFrom, dateTo, paymentExpire, concept))

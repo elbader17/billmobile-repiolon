@@ -1,27 +1,27 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, ActivityIndicator, Alert } from 'react-native';
 import { Button } from "react-native-elements";
-import { IconAddCustomer, IconMore, IconCustomer2 } from '../../constants/icons';
+import { IconAddCustomer, IconMore, IconCustomer2, IconX } from '../../constants/icons';
 import { COLORS } from '../../constants/colors';
 import style from './style';
-
-const defaultCustomer = {
-  attributes: {
-    name: '',
-    identification: '',
-    category: 'fc',
-  }
-}
 
 class EndInvoice extends React.Component {
 
     constructor(props) {
       super(props);
+      this.state = {
+        loadingItems: false
+      }
+    }
+
+    componentWillMount() {
+      this.props.getInvoiceItems()
+        .then(() => this.setState({loadingItems: true}))
     }
 
     cancelCbte = () => {
         Alert.alert(
-          'Se Eliminará el Comprobante Actual','¿Está Seguro?',
+          'Se Cancelará el Comprobante Actual','¿Está Seguro?',
           [
             { //Press Cancel
               onPress: () => console.log('Cancel Cbte'),
@@ -29,10 +29,11 @@ class EndInvoice extends React.Component {
               style: 'cancel',
             },
             { //Press OK
-              text: 'Eliminar', onPress: () => {
+              text: 'Borrar', onPress: () => {
                 this.props.setRenderEndInvoice(false);
                 this.props.setRenderButtonsNewDraft(true);
-                this.props.resetCurrentInvoice()
+                this.props.resetCurrentInvoice(),
+                this.props.setStateCurrentInvoice()
               }//End onPress
             },
           ],
@@ -41,7 +42,7 @@ class EndInvoice extends React.Component {
     }  
 
     renderLoading = () => (
-      <View>
+      <View style={{marginBottom: 7}}>
         <ActivityIndicator size="large" color={COLORS.blue}/>
       </View>
     );
@@ -50,10 +51,10 @@ class EndInvoice extends React.Component {
       const displayRenderCustomer = this.props.showCustomer ? 'flex' : 'none';
       const displayButtonAddCustomer = (this.props.showCustomer || this.props.loadingFC) ? 'none': 'flex';
         return (
-          <View style={{flex: 1}}>
+          <View style={style.containerInitEndInvoice}>
             <View style={style.containerBody}>
           
-              <Text style={[style.textRegular12GrayDark, {textAlign:'center'}]}>
+              <Text style={style.textRegular12GrayDark}>
                 Datos del Receptor
               </Text>
               <View style={style.containerBoxInvoice}>
@@ -67,7 +68,7 @@ class EndInvoice extends React.Component {
                       testID='addCustomer'
                       TouchableComponent={TouchableOpacity}
                       icon={<IconCustomer2 size={15} color={COLORS.blueLight}/>}
-                      onPress={ () => this.props.addFinalConsumer(defaultCustomer) }
+                      onPress={ () => this.props.addFinalConsumer() }
                       buttonStyle={style.buttonAddFinalConsumer}
                       titleStyle={style.textRegular14White}
                     />
@@ -84,25 +85,35 @@ class EndInvoice extends React.Component {
                 </View>
               </View>
     
-              <Text style={[style.textRegular12GrayDark, {textAlign:'center'}]}>
+              <Text style={style.textRegular12GrayDark}>
                 Detalle Producto / Servicio
               </Text>
               <View style={style.containerBoxInvoice}>
                 <View>
-                  {this.props.renderViewItemsAdd()}
-                </View>    
-                <Button
-                  title=' Agregar Producto/Servicio'
-                  TouchableComponent={TouchableOpacity}
-                  onPress={ this.props.navigateAddItems }
-                  icon={IconMore}
-                  buttonStyle={style.buttonAdd}  
-                  titleStyle={ style.textRegular14White }
-                  disabledStyle={style.buttonAddDisabled}
-                  disabledTitleStyle = { style.textRegular16GrayLight }
-                />
+                  {this.state.loadingItems ? this.props.renderViewItemsAdd() : this.renderLoading()}
+                </View> 
+                <View style={{alignItems: 'center'}}>
+                  <Button
+                    title=' Agregar Producto/Servicio'
+                    TouchableComponent={TouchableOpacity}
+                    onPress={ this.props.navigateAddItems }
+                    icon={IconMore}
+                    buttonStyle={style.buttonAdd}  
+                    titleStyle={ style.textRegular14White }
+                    disabledStyle={style.buttonAddDisabled}
+                    disabledTitleStyle = { style.textRegular16GrayLight }
+                  />
+                </View>   
               </View>
-              <View style={[{alignItems: 'center'}, style.inLineSpaceAround]}>
+              <View>
+                <Button
+                  title='  Cancelar Comprobante  '
+                  icon={<IconX color={'red'} size={21} />}
+                  TouchableComponent={TouchableOpacity}
+                  onPress={this.cancelCbte}
+                  buttonStyle={style.buttonCancelInvoice}
+                  titleStyle={style.textRegular14Red}
+                />
                 <Button
                   title='  Volver Atrás  '
                   TouchableComponent={TouchableOpacity}
@@ -111,13 +122,6 @@ class EndInvoice extends React.Component {
                     this.props.setRenderInitInvoice(true)
                   }}
                   buttonStyle={style.buttonBackInvoice}
-                  titleStyle={style.textBold14White}
-                />
-                <Button
-                  title='  Cancelar Comprobante  '
-                  TouchableComponent={TouchableOpacity}
-                  onPress={this.cancelCbte}
-                  buttonStyle={style.buttonCancelInvoice}
                   titleStyle={style.textRegular14White}
                 />
               </View>

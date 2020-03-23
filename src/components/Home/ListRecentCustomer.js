@@ -2,9 +2,10 @@ import React from 'react';
 import { View, Text, TouchableOpacity, Linking } from 'react-native';
 import { Button } from "react-native-elements";
 import PropTypes from 'prop-types';
-import {IconRight} from '../../constants/icons'
-import style from './style';
+import {IconRight} from '../../constants/icons';
+import { presentInvoiceType } from '../../utils/invoice';
 import { COLORS } from '../../constants/colors';
+import style from './style';
 
 const showpdf = url => {
   Linking.canOpenURL(url).then(supported => {
@@ -15,21 +16,6 @@ const showpdf = url => {
       console.log("Don't know how to open URI: " + this.props.url);
     }
   });
-}
-
-presentInvoiceType = (type) => {
-  switch(type) {
-    case '11':
-      return 'Factura C';
-    case '12':
-      return 'Nota de Débito C';
-    case '13':
-      return 'Nota de Crédito C';
-    case '15':
-      return 'Recibo C';
-    default:
-      return 'Comprobante C';
-  }
 }
 
 const ListRecentCustomer = props => {
@@ -53,13 +39,13 @@ const ListRecentCustomer = props => {
               
               <Text style={style.textRegular14GrayDark}>
                 <Text style={style.textRegular14Blue}>
-                  {this.presentInvoiceType(invoice.attributes.invoice_type)}
+                  {presentInvoiceType(invoice.attributes.invoice_type)}
                 </Text>
                   {' ('+invoice.attributes.invoice_date.substr(8,2)+'/'+invoice.attributes.invoice_date.substr(5,2)+'/'+invoice.attributes.invoice_date.substr(2,2)+')'}
               </Text>
               
               <Button
-                title='Ver Cbte'
+                title='Ver'
                 icon= {IconRight}
                 iconRight
                 TouchableComponent={TouchableOpacity}
@@ -75,8 +61,7 @@ const ListRecentCustomer = props => {
 }
 
 ListRecentCustomer.propTypes = {
-  invoices: PropTypes.array,
-  customers: PropTypes.array
+  invoices: PropTypes.array
 };
 
 export default ListRecentCustomer;

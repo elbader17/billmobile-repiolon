@@ -4,6 +4,7 @@ import { listCustomers, deleteCustomer } from '../../../app/customers/action';
 
 const mapStateToProps = state => ({
   customers: state.customers.customers,
+  user: state.userservice,
 });
 
 const mapDispatchToProps = (dispatch) => {

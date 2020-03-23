@@ -13,12 +13,13 @@ const initialState = {
   completed: false,
   business_address: '',
   city: '',
-  sale_point: ''
+  sale_point: '',
+  clase: null
 };
 
 function setMyFiscalIdentity({draftState, fiscalIdentity }) {
   if (fiscalIdentity != null) {
-    const { name, identification, business_address, city, sale_point, ingresos_brutos } = fiscalIdentity.attributes;
+    const { name, identification, business_address, city, sale_point, ingresos_brutos, clase } = fiscalIdentity.attributes;
     draftState.name = name;
     draftState.cuit = identification;
     draftState.completed = name != null && identification != null;
@@ -26,6 +27,7 @@ function setMyFiscalIdentity({draftState, fiscalIdentity }) {
     draftState.city = city;
     draftState.sale_point = sale_point;
     draftState.ib = ingresos_brutos;
+    draftState.clase = clase;
   }
   return draftState;
 }

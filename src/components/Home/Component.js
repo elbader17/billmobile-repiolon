@@ -1,16 +1,19 @@
 import React from 'react';
 import ListRecentCustomer from './ListRecentCustomer';
-import { View, Text, Picker,Dimensions, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
+import { View, Modal, Text, Picker,Dimensions, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
 import { Button } from "react-native-elements";
 import { showMessage } from "react-native-flash-message";
 import { LineChart } from 'react-native-chart-kit';
 import { Icon } from 'react-native-elements';
+import * as Progress from 'react-native-progress';
 import { messageInfoChart, messageCobros, messageTotalPeriod } from '../../utils/messagesNotifications';
 import { dataConfig, presentDataDay, presentDataMonth, presentDataYear, DMY } from '../../constants/lineChart';
 import { COLORS } from '../../constants/colors';
+import { limitBilling } from '../../utils/invoice'
 import style from './style';
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import { IconCaretRight, MoreInfo, IconInvoice } from '../../constants/icons';
+import { IconCaretRight, IconInvoice } from '../../constants/icons';
+import ModalBilling from './ModalBilling';
 
 class Home extends React.Component {
 
@@ -22,6 +25,7 @@ class Home extends React.Component {
       itemInputSearch: '',
       loading: true,
       chart: 'day',
+      modalVisible: false,
       renderRecentInvoices: false,
       invoices: this.props.invoices
     }
@@ -37,6 +41,13 @@ class Home extends React.Component {
       </TouchableOpacity>
     ),
   });
+
+  calculateTotalInvoice = () => {
+    const filterInvoices = this.props.invoices.filter(invoice => invoice.attributes.state === 'processed');
+    let total = 0;
+    for(let i of filterInvoices) total+= parseInt(i.attributes.total);
+    return total;
+  }
 
   componentWillMount(){
     this.props.listInvoice()
@@ -66,17 +77,15 @@ class Home extends React.Component {
   );
 
   renderRecentCustomers = () => {
-    const customersInvoices = this.props.invoices;
+    const {invoices} = this.props;
     return (
       <ListRecentCustomer
-        invoices={customersInvoices}
-        customers={this.props.customers}
+        invoices={invoices}
       />
     );
   }
 
   showDataChart = () => {
-    console.log(this.props.invoices)
     if (this.state.chart == 'month'){
       const data = presentDataMonth(new Date(), this.props.invoices); 
       return data;
@@ -89,7 +98,12 @@ class Home extends React.Component {
     }
   }
 
+  setModalVisible = value => {this.setState({modalVisible: value})} 
+
   render() {
+    const total = this.calculateTotalInvoice();
+    const category = this.props.user.clase.slice(0,1)
+    const limit = limitBilling(category);
     return(
         <View style={style.container}>
 
@@ -133,50 +147,68 @@ class Home extends React.Component {
           </View> 
 
         </View>
-
-          <View style={style.containerStatics}>
-            <TouchableOpacity activeOpacity={0.7}>
-              <View style={style.boxData}>
-                <View style={style.inLineSpaceAround}>
-                  <Text style={style.textRegular22BlueMedium}>
-                    20/250 Mil 
-                  </Text>
-                  {IconCaretRight}
-                  <Text style={style.textLight14White}>
-                    Total del Período
-                  </Text>
-                </View>
-              </View>
-            </TouchableOpacity>
-          </View>
-
-          <View style={style.containerListCustomer}>
-            <View style={style.scrollCustomers}>              
-              
-              <View style={[style.inLine, {marginBottom: 5}]}>
-                <Icon type='feather' name="file-text" color={COLORS.blueLight} size={13} iconStyle={{marginRight: 3}}/>
-                <Text style={style.textRegular12GrayDark}>
-                  Comprobantes Recientes
-                </Text>
-              </View>
-              
-
-              <ScrollView style={style.listCustomers}> 
-                {this.state.loading ? this.renderLoading() : this.renderRecentCustomers()}
-              </ScrollView>
-
-              <Button
-                title='Nuevo Comprobante'
-                TouchableComponent={TouchableOpacity}
-                onPress={ () => this.props.navigation.navigate('Invoice') }
-                buttonStyle={style.buttonAll}
-                //disabled={this.props.invoices.length === 0}  
-                titleStyle={ style.textRegular14White }
-                //disabledTitleStyle={ style.textBold14White }
-              />
-
+        
+        <View style={style.containerProgressBar}>
+          <View style={style.boxProgress}>
+            <Text style={style.textRegular16GrayDark}>
+              Total Facturado del Período
+            </Text>
+            <Progress.Bar 
+              progress={total/limit} 
+              width={300} 
+              height={35}
+              unfilledColor={COLORS.grayLight}
+              color={COLORS.blueLight}
+              borderWidth={1} 
+              borderColor={COLORS.blue} 
+              borderRadius={7}
+              style={{marginVertical: 5}}
+            />
+            <View style={style.inLineSpaceAround}>
+              <Text style={style.textRegular20Blue}>
+                ${total} / ${limit} 
+              </Text>
+            </View>
+            <View style={style.inLineSpaceAround}>
+              <Text style={style.textRegular12GrayDark}>
+                Total Facturado / Ingresos Brutos (Categ. {this.props.user.clase.slice(0,1)})
+              </Text>
             </View>
           </View>
+          
+        </View>
+          
+          <View style={style.containerStatics}>
+            <Button
+              title=' Ver Detalles de Facturación'
+              icon={<IconInvoice size={20} color={COLORS.blueLight}/>}
+              TouchableComponent={TouchableOpacity}
+              onPress={() => this.setModalVisible(true)}
+              buttonStyle={style.buttonPeriod}
+              titleStyle={ style.textRegular14White }
+            />
+          </View>
+
+          <View style={style.containerButtonNewCbte}>
+            <Button
+              title='Nuevo Comprobante'
+              TouchableComponent={TouchableOpacity}
+              onPress={ () => this.props.navigation.navigate('Invoice') }
+              buttonStyle={style.buttonAll}
+              titleStyle={ style.textBold14White }
+            />
+          </View>
+
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={this.state.modalVisible}
+          >
+            <ModalBilling 
+              setModalVisible={this.setModalVisible}
+              invoices={this.props.invoices}
+            />
+          </Modal>
           
         </View>
     )

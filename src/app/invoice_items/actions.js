@@ -59,8 +59,10 @@ const deleteInvoiceItem = (id, invoiceId) => {
 const getInvoiceItems = () => {
   return (dispatch, getState) => {
     const { id } = getState().invoices.currentInvoice;
+    console.log(id);
     return fetch_api(`/v1/invoice_items/${id}`,'GET', false)
       .then(response => {
+        console.log(response);
         dispatch(setInvoiceItemsAction(response.data))
       })
       .catch(error => console.log(error));

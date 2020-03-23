@@ -14,9 +14,9 @@ const KEYS_TO_FILTERS = ['attributes.name', 'attributes.price']; //Attributes sh
 class ItemList extends React.Component {
   constructor(props){
     super(props);
-    const concept = this.props.navigation.getParam('concept', 'products');
+    const concept = this.props.navigation.getParam('concept', 'Productos');
     this.state = {
-      isProduct: concept === 'products',
+      isProduct: concept === 'Productos',
       concept: concept,
       loading: true, //Loading items list
       loadingItem: false, //Adding or removing a item
@@ -54,7 +54,7 @@ class ItemList extends React.Component {
   navigateToNewItem = (isProduct) => {
     if (this.props.type === 'collection')
       this.props.navigation.navigate('NewItem', { isProduct });
-    else this.props.navigation.navigate('NewInvoiceItem', { isProduct });
+    else this.props.navigation.navigate('NewInvoiceItem', { isProduct, concept: this.state.concept });
   }
   navigateToHome = () => {
     if (this.props.type === 'collection')
@@ -125,7 +125,7 @@ class ItemList extends React.Component {
           onPress={() => this.setState({isProduct: true})} 
           buttonStyle={ this.state.isProduct ? style.buttonSelect : style.buttonSelectDisable }
           titleStyle={ style.textRegular14GrayDark }
-          disabled = {this.props.type === 'invoice' && !(this.state.concept === 'products')}
+          disabled = {this.props.type === 'invoice' && this.state.concept === 'Servicios'}
         />
         <Button
           title='Servicios'
@@ -133,7 +133,7 @@ class ItemList extends React.Component {
           onPress={() => this.setState({isProduct: false})}
           buttonStyle={ this.state.isProduct ? style.buttonSelectDisable : style.buttonSelect }
           titleStyle={ style.textRegular14GrayDark }
-          disabled = {this.props.type === 'invoice' && this.state.concept === 'products' }
+          disabled = {this.props.type === 'invoice' && this.state.concept === 'Productos'}
         />
       </View>
     );

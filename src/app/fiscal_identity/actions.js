@@ -38,6 +38,7 @@ const updateFiscalIdentity = (data) => {
 };
 
 const addFiscalIdentityToInvoice = (name, identity, category, id, address, city) => {
+  console.log(name);
   return (dispatch, getState) => {
     const { id: invoiceId } = getState().invoices.currentInvoice;
     let promise;

@@ -19,6 +19,15 @@ export const IconTrash = props => (
   />
 );
 
+export const IconLoad = props => (
+  <Icon 
+    type='antdesign'
+    name="upload" 
+    //iconStyle={{marginLeft: -3}}
+    {...props} 
+  />
+);
+
 export const IconCaretRight = <Icon
   name='caretright'  
   type='antdesign'
@@ -113,12 +122,14 @@ export const MoreInfo = props => (
   />
 );
 
-export const IconCheck = <Icon 
-  type='antdesign'
-  name="check" 
-  size={20} 
-  color={COLORS.white} 
-/>
+export const IconCheck = props => (
+  <Icon 
+    type='antdesign'
+    name="check" 
+    {...props} 
+  />
+);
+
 
 export const IconKey = <Icon 
   type='entypo'
@@ -250,6 +261,14 @@ export const IconNewInvoice = props => (
   <Icon 
     type='antdesign' 
     name='addfile' 
+    {...props}
+  />
+);
+
+export const IconExistente = props => (
+  <Icon 
+    type='antdesign' 
+    name='filetext1' 
     {...props}
   />
 );
