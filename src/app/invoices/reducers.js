@@ -61,7 +61,7 @@ function setCurrentInvoice({ draftState, invoice }) {
 function setInvoiceId({ draftState, id, fiscalIdentity }) {
   console.log('Set Invoice Id and Fiscal Identity', id, fiscalIdentity)
   draftState.currentInvoice.id = id;
-  draftState.currentInvoice.fiscalIdentity = fiscalIdentity.attributes;
+  draftState.currentInvoice.fiscalIdentity = fiscalIdentity != null ? fiscalIdentity.attributes : null;
   return draftState;
 }
 

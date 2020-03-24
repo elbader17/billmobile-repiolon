@@ -92,9 +92,15 @@ class ModalInvoicesExisting extends React.Component {
         })
         .map((invoice) => {
           const date = invoice.attributes.invoice_date;
+          let name; let fiscalIdentity;
           if (invoice.relationships.fiscal_identity.data != null) {
-          const fiscalIdentity = (this.props.customers).find(customer => customer.id === invoice.relationships.fiscal_identity.data.id)
-          const name = fiscalIdentity.attributes.name;
+            fiscalIdentity = (this.props.customers).find(customer => customer.id === invoice.relationships.fiscal_identity.data.id)
+            name = fiscalIdentity.attributes.name;
+          }
+          else {
+            fiscalIdentity = null;
+            name = 'Incompleto'
+          }
           return (
             <View key={invoice.id} style={{ marginVertical: 2, marginLeft: 5, borderRadius: 7, borderBottomWidth: 0.5, borderColor: COLORS.grayLight}}>
                 <View style={style.inLineSpaceBetween} >
@@ -138,7 +144,6 @@ class ModalInvoicesExisting extends React.Component {
                 </View>
             </View>
           );
-        }
       }); 
     }
   }

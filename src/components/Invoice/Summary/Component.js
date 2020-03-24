@@ -46,8 +46,8 @@ class InvoiceSummary extends React.Component {
           console.log(response)
           this.setState({loading: false, urlInvoiceProcessed: this.props.invoiceUrl});
           if (response) {
-            this.props.resetCurrentInvoice();
             navigation.navigate('Opinion', {ok: response, url: this.state.urlInvoiceProcessed}) 
+            this.props.resetCurrentInvoice();
           }
           else {
             navigation.navigate('Opinion', {ok: false, url: '¡Error! Intente Nuevamente Mas Tarde'})
@@ -67,7 +67,7 @@ class InvoiceSummary extends React.Component {
   setImpuesto = (value) => this.setState({ impuesto: value })  
 
   showInfoCustomer = () => {
-    if (this.props.fiscalIdentity.category==='fc') {
+    if (this.props.fiscalIdentity!= null && this.props.fiscalIdentity.category==='fc') {
       const displayData = this.props.fiscalIdentity.identification != 'fc' ? 'flex' : 'none';
       return(
         <View style={style.boxCustomer}>
@@ -83,7 +83,7 @@ class InvoiceSummary extends React.Component {
           </View>
         </View>
       )
-    } else {
+    } else if (this.props.fiscalIdentity!= null){
         return(
           <View style={style.boxCustomer}>
             <Text style={style.textRegular16GrayDark}>

@@ -344,7 +344,7 @@ class Invoice extends React.Component {
       conditionSale: condition_sale,
       fiscalIdentity: fiscalIdentity,
       invoiceId: id,
-      showCustomer: true
+      showCustomer: fiscalIdentity != null ? true : false
     });
   }
 
