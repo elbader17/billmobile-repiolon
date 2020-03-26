@@ -178,7 +178,7 @@ class Invoice extends React.Component {
             this.setState({showCustomer: true})
             this.props.navigation.navigate(
               'NewInvoiceCustomer',
-              {dataReceiver: true}
+              {dataReceiver: true, customer: { attributes: {name:'', category: 'fc', identification: ''}}}
             );
           }
         },

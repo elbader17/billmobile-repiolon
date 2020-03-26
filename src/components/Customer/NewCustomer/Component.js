@@ -32,7 +32,7 @@ class NewCustomer extends React.Component {
       attributes: {
         name: '',
         identification: '',
-        category: 'fc',
+        category: '',
       },
     };
   }
