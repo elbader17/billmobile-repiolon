@@ -14,10 +14,12 @@ const initialState = {
   business_address: '',
   city: '',
   sale_point: '',
-  clase: null
+  clase: null,
+  token_device: null
 };
 
 function setMyFiscalIdentity({draftState, fiscalIdentity }) {
+  console.log(fiscalIdentity);
   if (fiscalIdentity != null) {
     const { name, identification, business_address, city, sale_point, ingresos_brutos, clase } = fiscalIdentity.attributes;
     draftState.name = name;
@@ -42,6 +44,12 @@ function setCertificateKey({draftState, data }) {
   return draftState;
 }
 
+function setTokenDevice({draftState, token }) {
+  draftState.token_device = token;
+  return draftState;
+}
+
+
 export default userserviceReducer = (state = initialState, action) => {
   return producer(state, (draftState) => {
     switch (action.type) {
@@ -54,6 +62,11 @@ export default userserviceReducer = (state = initialState, action) => {
         return setCertificateKey({
           draftState,
           data: action.data
+        });
+      case 'SET_TOKEN_DEVICE':
+        return setTokenDevice({
+          draftState,
+          token: action.token
         });
       default:
         return draftState;

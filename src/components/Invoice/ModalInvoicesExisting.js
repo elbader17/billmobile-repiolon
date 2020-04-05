@@ -14,7 +14,9 @@ class ModalInvoicesExisting extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loadingDelete: false
+      loadingDelete: false,
+      invoices: props.invoices,
+      customers: props.customers
     }
   }
 
@@ -61,8 +63,9 @@ class ModalInvoicesExisting extends React.Component {
   }
 
   renderListInvoices = () => {
-     if (this.props.invoices.length === 0) {
-       return (
+    console.log(this.state.invoices)
+    if (this.state.invoices.length === 0) { 
+        return (
          <View style= {{alignItems: 'center', marginBottom: 25}}>
            <Text style={style.textRegular12GrayDark}>
              ¡No existen Comprobantes!
@@ -70,31 +73,11 @@ class ModalInvoicesExisting extends React.Component {
          </View>
        )
      } else {
-        return this.props.invoices.sort(function(a,b) {
-          //Ordenamos por mes
-          if (a.attributes.invoice_date.slice(5,7) > b.attributes.invoice_date.slice(5,7)) {
-            return 1;
-          }
-          if (a.attributes.invoice_date.slice(5,7) < b.attributes.invoice_date.slice(5,7)) {
-            return -1;
-          }
-          return 0;
-        })
-        .sort(function(a,b) {
-          //Ordenamos por dia
-          if (a.attributes.invoice_date.slice(8,10) > b.attributes.invoice_date.slice(8,10)) {
-            return 1;
-          }
-          if (a.attributes.invoice_date.slice(8,10) < b.attributes.invoice_date.slice(8,10)) {
-            return -1;
-          }
-          return 0;
-        })
-        .map((invoice) => {
+        return this.state.invoices.map((invoice) => {
           const date = invoice.attributes.invoice_date;
           let name; let fiscalIdentity;
           if (invoice.relationships.fiscal_identity.data != null) {
-            fiscalIdentity = (this.props.customers).find(customer => customer.id === invoice.relationships.fiscal_identity.data.id)
+            fiscalIdentity = (this.state.customers).find(customer => customer.id === invoice.relationships.fiscal_identity.data.id)
             name = fiscalIdentity.attributes.name;
           }
           else {

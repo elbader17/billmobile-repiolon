@@ -14,7 +14,7 @@ class Initializing extends React.Component {
 
   async componentDidMount() {
     try {
-      const user = await Auth.currentAuthenticatedUser();
+      const user = await Auth.currentSession();
       console.log(user)  
       if (user) this.props.navigation.navigate('Home');
       else this.props.navigation.navigate('Authentication');

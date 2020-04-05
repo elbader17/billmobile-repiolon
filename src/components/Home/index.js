@@ -4,6 +4,7 @@ import { listItems } from '../../app/items/actions';
 import { listCustomers } from '../../app/customers/action';
 import { listInvoice } from '../../app/invoices/actions';
 import { signOut } from '../../app/authentication/actions'
+import { setTokenDevice } from '../../app/user_service/actions';
 
 const mapStateToProps = state => ({
   user: state.userservice,
@@ -20,6 +21,7 @@ const mapDispatchToProps = (dispatch) => {
     listInvoice: () => (
       dispatch(listInvoice())
     ),
+    setTokenDevice: token => dispatch(setTokenDevice(token))
   };
 };
 

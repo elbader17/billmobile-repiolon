@@ -45,6 +45,7 @@ function setCurrentInvoice({ draftState, invoice }) {
   const day = invoice_date.slice(8,10);
   const month = invoice_date.slice(5,7);
   const year = invoice_date.slice(0,4);
+  console.log('setCurrentId', invoice.id);
   draftState.currentInvoice.id = invoice.id;
   draftState.currentInvoice.invoiceDate = (day+"/"+month+"/"+year);
   draftState.currentInvoice.dateFrom = (date_from.slice(8,10)+"/"+date_from.slice(5,7)+"/"+date_from.slice(0,4));

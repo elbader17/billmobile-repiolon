@@ -67,7 +67,8 @@ class Invoice extends React.Component {
       voucherType: '11',
       conditionSale: 'cdo',
       concept: 'Productos',
-      showCustomer: false
+      showCustomer: false,
+      invoiceId: null
     })
   }
 
@@ -83,10 +84,14 @@ class Invoice extends React.Component {
   navigateToEditItem = (item) => {
     this.props.navigation.navigate('EditInvoiceItem', { item });
   }
-  navigateAddItems = () => this.props.navigation.navigate('ListInvoiceItem', {concept: this.state.concept});
+  navigateAddItems = () => this.props.navigation.navigate('ListInvoiceItem', {concept: this.state.concept, invoiceId: this.state.ivoiceId});
   navigateToSummaryInvoice = () => {
     const { showCustomer } = this.state;
     const { fiscalIdentity, items } = this.props;
+    if (fiscalIdentity === null) {
+      showMessage(messageCustomerIncomplete)
+    } else {
+
     if (validateData(fiscalIdentity.name, items.length)){
       if (!showCustomer && this.props.invoiceTotal > 10000 && fiscalIdentity.identification != 'fc') {
         const customer = fiscalIdentity.name === 'fc' ? fiscalIdentity.identification : fiscalIdentity.name;
@@ -128,6 +133,7 @@ class Invoice extends React.Component {
       if (fiscalIdentity.name != '') 
         showMessage(messageItemsIncomplete);
       else showMessage(messageCustomerIncomplete)
+    }
   }
 
   updateInvoiceItemQuantity = (invoiceItemId, quantity) => {
@@ -138,6 +144,7 @@ class Invoice extends React.Component {
   createOrUpdateInvoice = (values) => {
     const { updateInvoice, createInvoice} = this.props;
     const { invoiceId } = this.state;
+    console.log(invoiceId);
     if (invoiceId != null) {
       updateInvoice(values)
         .then(() => {
@@ -165,7 +172,7 @@ class Invoice extends React.Component {
             loadingContinue: false
           });
         });
-    } 
+    }
   };
 
   addFinalConsumer = () => {
@@ -196,6 +203,7 @@ class Invoice extends React.Component {
   }
 
   renderViewItemsAdd = () => {
+    console.log(this.state.invoiceId, this.props.invoiceId)
     return (
       <InvoiceItems
         items={this.props.items}
@@ -351,7 +359,7 @@ class Invoice extends React.Component {
   setModalVisible = value => {this.setState({modalVisible: value})} 
   
   render() {
-    console.log(this.props.fiscalIdentity);
+    console.log(this.props.invoicesFI);
     const displayButtonsInit = this.state.renderButtonsNewDraft ? 'flex' : 'none';
     return(
       <View style={style.container}>

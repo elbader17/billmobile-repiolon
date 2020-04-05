@@ -12,8 +12,9 @@ import { COLORS } from '../../constants/colors';
 import { limitBilling } from '../../utils/invoice'
 import style from './style';
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import { IconCaretRight, IconInvoice } from '../../constants/icons';
+import { IconInvoice } from '../../constants/icons';
 import ModalBilling from './ModalBilling';
+import NotifService from '../../notifications/NotifService';
 
 class Home extends React.Component {
 
@@ -27,8 +28,15 @@ class Home extends React.Component {
       chart: 'day',
       modalVisible: false,
       renderRecentInvoices: false,
-      invoices: this.props.invoices
+      invoices: this.props.invoices,
+      registerToken: null
     }
+    this.notif = new NotifService(this.onRegister.bind(this));
+  }
+
+  onRegister(token) {
+    console.log('Token Device:',token);
+    this.setState({ registerToken: token.token});
   }
 
   static navigationOptions = ({ navigation }) => ({
@@ -55,9 +63,18 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
+    console.log(this.props.user);
     const { navigation } = this.props;
     navigation.setParams({ toggleDrawer: this.toggleDrawer });
   }
+
+  /*componentDidUpdate() {
+    //Si no existe el Token Device, guardarlo.
+    if (this.state.registerToken != null && this.props.user.token_device === null) {
+      //this.notif.localNotif('Bienvenida')
+      this.props.setTokenDevice(this.state.registerToken); 
+    }
+  }*/
 
   toggleDrawer = () => {
     const { navigation } = this.props;
@@ -111,6 +128,7 @@ class Home extends React.Component {
           <View style={style.textFacPeriodo}>
             <View style={style.inLine}>
               <Icon type='feather' name="bar-chart" color={COLORS.blueLight} size={18} iconStyle={{marginLeft: 15, marginRight: 5}}/>
+            
             <Text style={style.textRegular12White}>
               Facturación del Período : 
             </Text>
@@ -171,7 +189,7 @@ class Home extends React.Component {
             </View>
             <View style={style.inLineSpaceAround}>
               <Text style={style.textRegular12GrayDark}>
-                Total Facturado / Ingresos Brutos (Categ. {this.props.user.clase.slice(0,1)})
+                Total Facturado / Límite de Facturación
               </Text>
             </View>
           </View>

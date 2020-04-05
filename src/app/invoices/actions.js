@@ -84,7 +84,7 @@ const createInvoice = (invoiceDate, voucherType, conditionSale, dateFrom, dateTo
     payment_expiration: paymentExpire,
     concept: concept
   };
-  console.log(resource);
+  console.log('create invoice');
   return (dispatch) => {
     return fetch_api('/v1/invoices', 'POST', false, { resource })
       .then((response) => {
@@ -96,6 +96,7 @@ const createInvoice = (invoiceDate, voucherType, conditionSale, dateFrom, dateTo
 };
 
 const updateInvoice = (values) => {
+  console.log('update invoice');
   let resource = {};
   if (values.invoiceDate != null) 
     resource.invoice_date = values.invoiceDate;

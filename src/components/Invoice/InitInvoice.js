@@ -207,7 +207,7 @@ class InitInvoice extends React.Component {
               />
               <View style={{display: this.props.invoiceId != null ? 'flex': 'none'}}>
                 <Button
-                  title='  No Modificar  '
+                  title='  Siguiente  '
                   TouchableComponent={TouchableOpacity}
                   onPress={() => {
                     this.props.setRenderEndInvoice(true);

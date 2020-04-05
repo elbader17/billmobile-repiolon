@@ -18,7 +18,7 @@ const signIn = (email, password) => {
   return (dispatch) => {
     return Auth.signIn(email, password)
       .then((data) => {
-        console.log(data);
+        console.log('Sign In', data);
         if (data.message === USER_NOT_CONFIRMED_MESSAGE) {
           dispatch(userSignedUp(email, password));
         } else {

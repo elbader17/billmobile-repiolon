@@ -104,7 +104,6 @@ class TaxConfiguration extends React.Component{
   setLoading = (bool) => this.setState({ loading: bool })
 
   render() {
-    console.log(this.props.user);
     const titleKey = this.props.user.fiscal_key ? 'Modificar Clave Fiscal' : 'Ingresar Clave Fiscal'
     const titleIb = this.state.ib === 'Exento' ? 'No Estoy Exento' : 'Estoy Exento';
     const displayInputFiscalKey = this.state.showInputFiscalKey ? 'flex' : 'none';

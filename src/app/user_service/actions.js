@@ -19,6 +19,13 @@ function setCertificateAndKeyPresent(data) {
   };
 }
 
+function setTokenDeviceAction(token) {
+  return {
+    type: 'SET_TOKEN_DEVICE',
+    token
+  };
+}
+
 const setFiscalIdentity = () => {
   return (dispatch) => {
     console.log('Set User to Empty');
@@ -39,15 +46,12 @@ const updateFiscalIdentity = function (name, cuit, category, ib) {
     identification: cuit,
     ingresos_brutos: ib
   };
-
-  return (dispatch, getState) => {
-    const instance = axios.create({
-      headers: { 'JWT-TOKEN': getState().authentication.jwtToken },
-    });
-    return instance.put('/v1/my/fiscal_identity', { resource })
+  console.log('upadte', resource)
+  return (dispatch) => {
+    return fetch_api('/v1/my/fiscal_identity','PUT', false, { resource })
       .then((response) => {
         console.log(response)
-        dispatch(setMyFiscalIdentity(response.data.data));
+        dispatch(setMyFiscalIdentity(response.data));
       })
       .catch((error) => {
         console.log(error.response.data.error.identity[0]);
@@ -100,4 +104,25 @@ const saveFiscalKey = (key) => {
   };
 }
 
-export { updateFiscalIdentity, getFiscalIdentity, setFiscalIdentity, saveFiscalKey, getCertificate };
+const setTokenDevice = token => {
+  const resource = {
+    key: token,
+    device: 'android'
+  }
+  console.log('set token')
+  return (dispatch, getState) => {
+    const instance = axios.create({
+      headers: { 'JWT-TOKEN': getState().authentication.jwtToken },
+    });
+    return instance.put('/v1/my/notification_setting', { resource })
+      .then((response) => {
+        console.log(response);
+        dispatch(setTokenDeviceAction(token));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+}
+
+export { updateFiscalIdentity, getFiscalIdentity, setFiscalIdentity, saveFiscalKey, getCertificate, setTokenDevice };

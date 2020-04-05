@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StatusBar} from 'react-native';
+import { StatusBar, View} from 'react-native';
 import { Provider } from 'react-redux';
 import { store, persistor } from '../store/index';
 import Amplify from 'aws-amplify';
