@@ -3,6 +3,9 @@ package com.billmobilefrontend;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.RNFetchBlob.RNFetchBlobPackage;
+import org.wonday.pdf.RCTPdfView;
+import com.reactcommunity.rndatetimepicker.RNDateTimePickerPackage;
 import com.rnfs.RNFSPackage;
 import com.reactnativecommunity.webview.RNCWebViewPackage;
 import com.swmansion.rnscreens.RNScreensPackage;
@@ -21,6 +24,7 @@ import com.facebook.soloader.SoLoader;
 
 import java.util.Arrays;
 import java.util.List;
+import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -34,6 +38,10 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+          new ReactNativePushNotificationPackage(),
+            new RNFetchBlobPackage(),
+            new RCTPdfView(),
+            new RNDateTimePickerPackage(),
             new RNFSPackage(),
             new RNCWebViewPackage(),
             new RNScreensPackage(),
