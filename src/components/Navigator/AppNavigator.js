@@ -28,6 +28,7 @@ import ItemsList from '../Item/List';
 import EditItem from '../Item/EditItem';
 import Opinion from '../Opinion';
 import DrawerComponent from './Drawer';
+import TermsAndConditions from '../TermsAndConditions'
 //Utils
 import { IconHome, IconInvoice, IconCustomer, IconItem } from '../../constants/icons';
 import { COLORS } from '../../constants/colors';
@@ -140,6 +141,7 @@ const DrawerNavigator = createDrawerNavigator(
 const AppSwitchNavigator = createSwitchNavigator(
   {
     Intro,
+    TermsAndConditions,
     Initializing,
     Configure: TaxConfigurationStack,
     Login: LoginStack,

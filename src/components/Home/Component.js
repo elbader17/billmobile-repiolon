@@ -68,13 +68,13 @@ class Home extends React.Component {
     navigation.setParams({ toggleDrawer: this.toggleDrawer });
   }
 
-  /*componentDidUpdate() {
+  componentDidUpdate() {
     //Si no existe el Token Device, guardarlo.
     if (this.state.registerToken != null && this.props.user.token_device === null) {
       //this.notif.localNotif('Bienvenida')
       this.props.setTokenDevice(this.state.registerToken); 
     }
-  }*/
+  }
 
   toggleDrawer = () => {
     const { navigation } = this.props;

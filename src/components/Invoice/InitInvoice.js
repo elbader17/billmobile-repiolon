@@ -111,7 +111,7 @@ class InitInvoice extends React.Component {
               <Text style={style.textRegular12GrayDark}> 
                 Período de Facturación
               </Text>
-              <View style={[style.inLineSpaceAround,{height: 5, marginTop: 5}]}>
+              <View style={style.inLineSpaceAround}>
                 <Text style={style.textRegular11GrayDark}> Desde </Text>
                 <Text style={style.textRegular11GrayDark}> Hasta </Text>
                 <Text style={style.textRegular11GrayDark}> Vto. Pago</Text>

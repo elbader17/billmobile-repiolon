@@ -106,7 +106,9 @@ class Invoice extends React.Component {
       } 
       else {
         this.setState({loadingContinue: true})
-        this.props.getInvoice(this.state.invoiceId)
+        const id = this.state.invoiceId != null ? this.state.invoiceId : this.props.invoiceId;
+        console.log('id get invoices', id)
+        this.props.getInvoice(parseInt(id))
           .then(() => {
             if (this.props.invoiceTotal > 10000 && this.props.fiscalIdentity.identification == 'fc') {
               const customer = {
@@ -359,7 +361,7 @@ class Invoice extends React.Component {
   setModalVisible = value => {this.setState({modalVisible: value})} 
   
   render() {
-    console.log(this.props.invoicesFI);
+    console.log('id',this.props.invoiceId);
     const displayButtonsInit = this.state.renderButtonsNewDraft ? 'flex' : 'none';
     return(
       <View style={style.container}>

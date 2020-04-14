@@ -1,7 +1,9 @@
 import { API_HOST } from 'react-native-dotenv';
 import { Auth } from 'aws-amplify';
+import { showMessage } from "react-native-flash-message";
 import NavigationService from '../components/Navigator/NavigationService';
 import { store } from '../store/index';
+import { messageError } from './messagesNotifications';
 
 function saveNewToken(newToken) {
   const jwtToken = newToken;
@@ -9,7 +11,8 @@ function saveNewToken(newToken) {
 }
 
 function unauthenticatedCallback() {
-  NavigationService.navigate('Login');
+  //NavigationService.navigate('Login');
+  showMessage(messageError);
 }
 
 export const refreshToken = async () => {
@@ -41,7 +44,7 @@ export function fetch_api(url, method, retry, data) {
   return new Promise( function (resolve, reject) {
     fetch(API_HOST+url, config)
       .then(async (response) => {
-        console.log(response);
+        console.log(url,response);
         if (response.status === 502 && !retry) {
           await refreshToken();
           return fetch_api(url, method, true);

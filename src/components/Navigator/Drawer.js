@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from 'react-redux';
-import { ScrollView, Text, View, Image, TouchableOpacity, Alert } from 'react-native';
+import { ScrollView, Text, View, Image, TouchableOpacity, Alert, Linking } from 'react-native';
 import { Button } from "react-native-elements";
 import { IconChat, IconConfig, IconClose, IconCloseDrawer } from "../../constants/icons";
 import { signOut } from '../../app/authentication/actions';
@@ -40,6 +40,9 @@ const mapDispatchToProps = (dispatch) => {
     }
   };
 };
+
+const urlWS = 'https://api.whatsapp.com/send?phone=+5493515115025';
+const msjMessenger = 'https://m.me/billmobileok'
 
 class DrawerComponent extends React.Component {
   constructor(props){
@@ -84,8 +87,13 @@ class DrawerComponent extends React.Component {
           <View style={{display: displayButtonSocial}}>
             <TouchableOpacity 
               onPress={() => {
-                this.setState({showIconSocial: false})
-                //Linking whatsaap
+                Linking.openURL(urlWS).then(() => {
+                  console.log('WhatsApp Opened');
+                  this.setState({showIconSocial: false})
+                }).catch(() => {
+                  alert('¡Asegurese de tener WhatsApp intslado en su Dispositivo!');
+                  this.setState({showIconSocial: false})
+                });
               }} 
               style={style.buttonDrawerSocial} 
             >
@@ -102,8 +110,13 @@ class DrawerComponent extends React.Component {
             
             <TouchableOpacity 
               onPress={() => {
-                this.setState({showIconSocial: false});
-                //Linking Messenger
+                Linking.openURL(msjMessenger).then(() => {
+                  console.log('Messenger Opened');
+                  this.setState({showIconSocial: false})
+                }).catch(() => {
+                  alert('¡Asegurese de tener Messenger intslado en su Dispositivo!');
+                  this.setState({showIconSocial: false})
+                });
               }} 
               style={style.buttonDrawerSocial}
             >

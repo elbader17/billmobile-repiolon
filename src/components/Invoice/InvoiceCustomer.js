@@ -8,7 +8,6 @@ import style from './style';
 import {nameByCategory} from '../../utils/identity';
 
 const InvoiceCustomer = props => {
-  console.log(props.fiscalIdentity)
   const customer = props.fiscalIdentity;
   const identity = customer == null ? 'No Completa' : (customer.identification == 'fc' ? 'No Completa' : customer.identification);
   const name = customer == null ? 'No Completa' : (customer.name === 'fc' ? 'No Completa' : customer.name)

@@ -72,10 +72,10 @@ class TaxConfiguration extends React.Component{
       this.setLoading(true);
       updateFiscalIdentity(name, cuit, 'monotributo', ib)
        .then((response) => {
-          console.log(response)
-          if (response != undefined) this.setState({errorCuit: response, loading: false});
+          this.setLoading(false);
+          if (response != undefined) this.setState({errorCuit: response});
           else this.props.navigation.navigate('Home');
-      })
+      }).catch(()=> this.setLoading(false))
     } else {
       if (!validateCuit(this.state.cuit) && this.state.name === '') 
         this.setState({errorCuit: '*CUIT inválido', errorName: '*Debe ingresar un nombre'});

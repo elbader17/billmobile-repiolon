@@ -51,18 +51,15 @@ export const messageInfoChart = {
     duration: 4000
 };
 
-export const messageCobros = {
-    message: "Cobros Pendientes",
-    description: `Período: 2019 \nFacturas que no han sido cobradas\nHay 8 Cobros por efectuar\n¡Detalles de Cobros Pendientes!`,
+export const messageError = {
+    message: "¡Se ha producido un error!",
+    description: 'Verifique su conexión o intente nuevamente.',
     floating: true,
     icon: { icon: "auto", position: "left" },
-    type: 'info',
-    backgroundColor: COLORS.blue,
-    style: {
-      borderWidth: 1,
-      borderColor: COLORS.blueLight
-    },
-    duration: 4000
+    type: 'warning',
+    backgroundColor: 'red',
+    color: 'white',
+    duration: 3000
 };
 
 export const messageTotalPeriod = {

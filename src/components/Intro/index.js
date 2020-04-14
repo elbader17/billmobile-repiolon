@@ -21,7 +21,7 @@ class Intro extends React.Component {
     );
   }
   _onDone = () => {
-    this.props.navigation.navigate('Login')
+    this.props.navigation.navigate('TermsAndConditions')
   }
   render() {
     return ( 
