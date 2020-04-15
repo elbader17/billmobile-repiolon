@@ -1,34 +1,19 @@
 export const CONDITION_IVA = [
   {
-    label: 'Responsable Inscripto',
-    value: 'ri',
+    label: "Responsable Inscripto",
+    value: "ri",
   },
   {
-    label: 'IVA Exento',
-    value: 'exento',
+    label: "IVA Exento",
+    value: "exento",
   },
   {
-    label: 'Monotributista',
-    value: 'monotributo',
+    label: "Monotributista",
+    value: "monotributo",
   },
   {
-    label: 'Consumidor Final',
-    value: 'fc',
-  },
-];
-
-export const CONDITION_SALE = [
-  {
-    label: 'CONTADO',
-    value: 'contado',
-  },
-  {
-    label: 'DÉBITO',
-    value: 'debito',
-  },
-  {
-    label: 'CRÉDITO',
-    value: 'credito',
+    label: "Consumidor Final",
+    value: "fc",
   },
 ];
 

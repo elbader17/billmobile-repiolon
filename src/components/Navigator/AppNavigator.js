@@ -1,43 +1,48 @@
-import React from 'react';
-import { createAppContainer, createSwitchNavigator } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
-import { createBottomTabNavigator } from 'react-navigation-tabs';
-import { createDrawerNavigator } from 'react-navigation-drawer';
-import { DrawerActions } from 'react-navigation-drawer';
+import React from "react";
+import { createAppContainer, createSwitchNavigator } from "react-navigation";
+import { createStackNavigator } from "react-navigation-stack";
+import { createBottomTabNavigator } from "react-navigation-tabs";
+import { createDrawerNavigator } from "react-navigation-drawer";
+import { DrawerActions } from "react-navigation-drawer";
 //All Screens and Components
-import Initializing from '../Initializing/Component';
-import Intro from '../Intro';
-import Authentication from '../Authentication';
-import ConfirmationCodeRegister from '../Authentication/Confirmation';
-import InitialCofiguration from '../TaxConfiguration/InitialConfigure/Component';
-import TaxConfiguration from '../TaxConfiguration/Configure';
+import Initializing from "../Initializing/Component";
+import Intro from "../Intro";
+import Authentication from "../Authentication";
+import ConfirmationCodeRegister from "../Authentication/Confirmation";
+import InitialCofiguration from "../TaxConfiguration/InitialConfigure/Component";
+import TaxConfiguration from "../TaxConfiguration/Configure";
 import HomeScreen from "../Home";
-import Invoice from '../Invoice';
-import InvoiceSummary from '../Invoice/Summary';
-import ListInvoiceItem from '../Invoice/ListInvoiceItem';
-import ListInvoiceCustomer from '../Invoice/ListInvoiceCustomer';
-import NewInvoiceItem from '../Invoice/NewInvoiceItem';
-import EditInvoiceItem from '../Invoice/EditInvoiceItem';
-import NewInvoiceCustomer from '../Invoice/NewInvoiceCustomer';
-import EditInvoiceCustomer from '../Invoice/EditInvoiceCustomer';
-import NewCustomer from '../Customer/NewCustomer';
-import CustomersList from '../Customer/List';
-import EditCustomer from '../Customer/EditCustomer';
-import NewItem from '../Item/NewItem';
-import ItemsList from '../Item/List';
-import EditItem from '../Item/EditItem';
-import Opinion from '../Opinion';
-import DrawerComponent from './Drawer';
-import TermsAndConditions from '../TermsAndConditions'
+import Invoice from "../Invoice";
+import InvoiceSummary from "../Invoice/Summary";
+import ListInvoiceItem from "../Invoice/ListInvoiceItem";
+import ListInvoiceCustomer from "../Invoice/ListInvoiceCustomer";
+import NewInvoiceItem from "../Invoice/NewInvoiceItem";
+import EditInvoiceItem from "../Invoice/EditInvoiceItem";
+import NewInvoiceCustomer from "../Invoice/NewInvoiceCustomer";
+import EditInvoiceCustomer from "../Invoice/EditInvoiceCustomer";
+import NewCustomer from "../Customer/NewCustomer";
+import CustomersList from "../Customer/List";
+import EditCustomer from "../Customer/EditCustomer";
+import NewItem from "../Item/NewItem";
+import ItemsList from "../Item/List";
+import EditItem from "../Item/EditItem";
+import Opinion from "../Opinion";
+import DrawerComponent from "./Drawer";
+import TermsAndConditions from "../TermsAndConditions";
 //Utils
-import { IconHome, IconInvoice, IconCustomer, IconItem } from '../../constants/icons';
-import { COLORS } from '../../constants/colors';
-import style from './style'; 
+import {
+  IconHome,
+  IconInvoice,
+  IconCustomer,
+  IconItem,
+} from "../../constants/icons";
+import { COLORS } from "../../constants/colors";
+import style from "./style";
 
 //Stacks
 const TaxConfigurationStack = createStackNavigator({
   InitialCofiguration,
-  TaxConfiguration
+  TaxConfiguration,
 });
 
 const HomeStack = createStackNavigator({
@@ -52,26 +57,27 @@ const InvoiceStack = createStackNavigator({
   EditInvoiceCustomer,
   NewInvoiceCustomer,
   NewInvoiceItem,
-  InvoiceSummary
+  InvoiceSummary,
 });
 
 const CustomerStack = createStackNavigator({
   CustomersList,
   EditCustomer,
-  NewCustomer
+  NewCustomer,
 });
 
 const ItemStack = createStackNavigator({
   ItemsList,
   EditItem,
-  NewItem
+  NewItem,
 });
 
-const LoginStack = createStackNavigator({
+const LoginStack = createStackNavigator(
+  {
     Authentication,
     ConfirmationCodeRegister,
   },
-  { headerMode: 'none'}
+  { headerMode: "none" }
 );
 
 //Bottom Tab Navigator
@@ -80,25 +86,25 @@ const MainAppNavigator = createBottomTabNavigator(
     Inicio: {
       screen: HomeStack,
       navigationOptions: () => ({
-        tabBarIcon: ({tintColor}) => <IconHome color={tintColor}/>,
+        tabBarIcon: ({ tintColor }) => <IconHome color={tintColor} />,
       }),
     },
     Facturar: {
       screen: InvoiceStack,
       navigationOptions: () => ({
-        tabBarIcon: ({tintColor}) => <IconInvoice color={tintColor}/>,
+        tabBarIcon: ({ tintColor }) => <IconInvoice color={tintColor} />,
       }),
     },
     Clientes: {
       screen: CustomerStack,
       navigationOptions: () => ({
-        tabBarIcon: ({tintColor}) => <IconCustomer color={tintColor}/>,
+        tabBarIcon: ({ tintColor }) => <IconCustomer color={tintColor} />,
       }),
     },
     Items: {
       screen: ItemStack,
       navigationOptions: () => ({
-        tabBarIcon: ({tintColor}) => <IconItem color={tintColor}/>,
+        tabBarIcon: ({ tintColor }) => <IconItem color={tintColor} />,
       }),
     },
   },
@@ -109,10 +115,10 @@ const MainAppNavigator = createBottomTabNavigator(
       activeTintColor: COLORS.blueMedium,
       inactiveTintColor: COLORS.grayDark,
       style: {
-        backgroundColor: COLORS.white
-      }
-    }
-  },
+        backgroundColor: COLORS.white,
+      },
+    },
+  }
 );
 
 //Drawer
@@ -120,21 +126,21 @@ const Drawer = createDrawerNavigator(
   {
     Main: {
       screen: MainAppNavigator,
-    }
-  }, 
+    },
+  },
   { contentComponent: DrawerComponent }
 );
 
 //Drawer Navigator
 const DrawerNavigator = createDrawerNavigator(
   {
-    Drawer
+    Drawer,
   },
   {
     getCustomActionCreators: (route, stateKey) => ({
       toggleFilterDrawer: () => DrawerActions.toggleDrawer({ key: stateKey }),
     }),
-  },
+  }
 );
 
 //Switch Navigator
@@ -146,13 +152,13 @@ const AppSwitchNavigator = createSwitchNavigator(
     Configure: TaxConfigurationStack,
     Login: LoginStack,
     Home: DrawerNavigator,
-    Opinion
+    Opinion,
   },
   {
-    initialRouteName: 'Initializing',
+    initialRouteName: "Initializing",
   }
 );
 
 const AppNavigator = createAppContainer(AppSwitchNavigator);
 
-export default AppNavigator; 
+export default AppNavigator;

@@ -1,168 +1,206 @@
-import React from 'react';
-import { 
-  View, 
-  Text, 
-  TouchableOpacity, 
-  StyleSheet, 
-  Image, 
-  Linking, 
-  TextInput, 
+import React from "react";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Image,
+  Linking,
+  TextInput,
   Modal,
-  BackHandler
-} from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
+  BackHandler,
+} from "react-native";
+import LinearGradient from "react-native-linear-gradient";
 import { Button, Icon } from "react-native-elements";
-import { COLORS, GRADIANTBLUELIGHT } from '../../constants/colors';
-import { FONTS } from '../../constants/fonts';
-import { widthPercentageToDP } from 'react-native-responsive-screen';
+import { COLORS, GRADIANTBLUELIGHT } from "../../constants/colors";
+import { FONTS } from "../../constants/fonts";
+import { widthPercentageToDP } from "react-native-responsive-screen";
+import { IconMail } from "../../constants/icons";
 
 class Opinion extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
       modalVisible: false,
-      url: this.props.navigation.getParam('url', ''),
-      error: ''
-    }
+      url: this.props.navigation.getParam("url", " "),
+      error: "",
+    };
   }
 
   componentDidMount() {
-    this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
+    this.backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      this.handleBackPress
+    );
   }
 
   componentWillUnmount() {
-    this.backHandler.remove()
+    this.backHandler.remove();
   }
 
   handleBackPress = () => {
-    this.props.navigation.navigate('Home');
+    this.props.navigation.navigate("Home");
     return true;
-  }
+  };
 
   opinion = () => {
-    //this.setState({modalVisible: true});
-    Linking.canOpenURL(this.state.url).then(supported => {
-      if (supported) {
-        Linking.openURL(this.state.url);
-      } else {
-        alert('Error al abrir archio' + this.props.url)
-        console.log("Don't know how to open URI: " + this.props.url);
-      }
-    });
-  }
+    Linking.canOpenURL(this.state.url)
+      .then((supported) => {
+        if (supported) {
+          Linking.openURL(this.state.url);
+        } else {
+          alert("Error al abrir archivo o No Existe");
+          console.log("Don't know how to open URI");
+        }
+      })
+      .catch(() => {
+        alert("Error al abrir archivo o No Existe");
+      });
+  };
 
   showPdf = () => {
-    this.setState({modalVisible: false});
-    Linking.canOpenURL(this.state.url).then(supported => {
-      if (supported) {
-        Linking.openURL(this.state.url);
-      } else {
-        console.log("Don't know how to open URI: " + this.state.url);
-      }
-    });
-  }
+    this.setState({ modalVisible: false });
+    Linking.canOpenURL(this.state.url)
+      .then((supported) => {
+        if (supported) {
+          Linking.openURL(this.state.url);
+        } else {
+          alert("Error al abrir archivo o No Existe");
+          console.log("Don't know how to open URI");
+        }
+      })
+      .catch(() => {
+        alert("Error al abrir archivo o No Existe");
+      });
+  };
 
   vistWeb = () => {
-    Linking.canOpenURL('http://www.billmobile.tech').then(supported => {
+    Linking.canOpenURL("http://www.billmobile.tech").then((supported) => {
       if (supported) {
-        Linking.openURL('http://www.billmobile.tech');
+        Linking.openURL("http://www.billmobile.tech");
       } else {
         console.log("Don't know how to open URI: www.billMobile.tech");
       }
     });
-  }
+  };
 
   renderInvoiceState = () => {
-    const invoice = require('../../images/invoiceok.png')
-    const invoiceError = require('../../images/invoicerror.png')
-    if (this.props.navigation.getParam('ok',false)) {
-      return(
-        <View style={{alignItems: 'center'}}>
-          <Image source={ invoice } style={ styles.imageInvoice } />
+    const invoice = require("../../images/invoiceok.png");
+    const invoiceError = require("../../images/invoicerror.png");
+    if (this.props.navigation.getParam("ok", false)) {
+      return (
+        <View style={{ alignItems: "center" }}>
+          <Image source={invoice} style={styles.imageInvoice} />
           <Text style={styles.textLight18GrayDark}>
             ¡Comprobante creado con Éxito!
           </Text>
         </View>
-      )
+      );
     } else {
       return (
-        <View style={{alignItems: 'center'}}>
-          <Image source={ invoiceError } style={ styles.imageInvoice } />
+        <View style={{ alignItems: "center" }}>
+          <Image source={invoiceError} style={styles.imageInvoice} />
           <Text style={styles.textLight18GrayDark}>
             ¡Error al Generar el Comprobante!
           </Text>
-          <Text style={styles.textRegular14Red}>
-            {this.state.url}
-          </Text>
+          <Text style={styles.textRegular14Red}>{this.state.url}</Text>
         </View>
-      )
+      );
     }
-  }
+  };
+
+  enviar = (url) => {
+    return Linking.openURL(url)
+      .then(() => {
+        console.log("Email Opened");
+      })
+      .catch(() => {
+        alert("¡Error al cargar email!");
+      });
+  };
 
   render() {
-    console.log(this.state.url);
-    const logo = require('../../images/logoBill.png')
-    return(
+    const urlMail = `mailto:?subject=Comprobante&body=Link de Descarga: ${this.state.url} - [BillMobile - Tu Contador Online!]`;
+    const logo = require("../../images/logoBill.png");
+    return (
       <View style={styles.container}>
         <View style={styles.boxLogo}>
-          <Image source={ logo } style={ styles.imageHeader } />
+          <Image source={logo} style={styles.imageHeader} />
         </View>
         <View style={styles.boxInfo}>
-
           {this.renderInvoiceState()}
-          
+
           <View style={{}}>
+            <View
+              style={{ flexDirection: "row", justifyContent: "space-around" }}
+            >
+              <Button
+                title="Descargar "
+                icon={<Icon name="download" type="feather" color="white" />}
+                iconRight
+                TouchableComponent={TouchableOpacity}
+                onPress={() => this.opinion()}
+                buttonStyle={[
+                  styles.button,
+                  this.props.navigation.getParam("ok", false)
+                    ? { display: "flex" }
+                    : { display: "none" },
+                ]}
+                titleStyle={styles.textBold14Blue}
+              />
+              <Button
+                title="Enviar"
+                icon={IconMail}
+                TouchableComponent={TouchableOpacity}
+                onPress={() => this.enviar(urlMail)}
+                buttonStyle={[
+                  styles.buttonMail,
+                  this.props.navigation.getParam("ok", false)
+                    ? { display: "flex" }
+                    : { display: "none" },
+                ]}
+                titleStyle={styles.textBold14Blue}
+              />
+            </View>
             <Button
-              title='Descargar '
-              icon = {<Icon
-                name='download'
-                type='feather'
-                color='white'
-              />}
-              iconRight
+              title="Ir a Inicio"
               TouchableComponent={TouchableOpacity}
-              onPress={() => this.opinion()}
-              buttonStyle={[
-                styles.button,
-                this.props.navigation.getParam('ok', false) ? {display: 'flex'} : {display: 'none'}
-              ]}
-              titleStyle={ styles.textBold14Blue }
-            />
-            <Button
-              title='Ir a Inicio'
-              TouchableComponent={TouchableOpacity}
-              onPress={() => this.props.navigation.navigate('Home')}
-              buttonStyle={styles.button}
-              titleStyle={ styles.textBold14Blue }
+              onPress={() => this.props.navigation.navigate("Home")}
+              buttonStyle={styles.buttonBegin}
+              titleStyle={styles.textBold14Blue}
             />
           </View>
-          
         </View>
 
         <View style={styles.boxFooter}>
           <LinearGradient
-            colors={ GRADIANTBLUELIGHT }
-            start={{x: 0.0, y: 1.0}} 
-            end={{x: 1.0, y: 1.0}}
-            style={{flex: 1, paddingVertical: 10 ,alignItems: 'center', borderTopLeftRadius: 100, borderTopRightRadius: 100}}
+            colors={GRADIANTBLUELIGHT}
+            start={{ x: 0.0, y: 1.0 }}
+            end={{ x: 1.0, y: 1.0 }}
+            style={{
+              flex: 1,
+              paddingVertical: 10,
+              alignItems: "center",
+              borderTopLeftRadius: 100,
+              borderTopRightRadius: 100,
+            }}
           >
-          <TouchableOpacity onPress={this.vistWeb}>
-            <Text style={styles.textBold14Blue}>
-              ¡Gracias por utilizar Bill Mobile!
-            </Text>
-            <Text style={styles.textLight12white}>
-              <Text>Visitá </Text>
+            <TouchableOpacity onPress={this.vistWeb}>
+              <Text style={styles.textBold14Blue}>
+                ¡Gracias por utilizar Bill Mobile!
+              </Text>
+              <Text style={styles.textLight12white}>
+                <Text>Visitá </Text>
                 <Text style={styles.textRegular12White}>
                   www.billmobile.tech
                 </Text>
-            </Text>
-          </TouchableOpacity>
+              </Text>
+            </TouchableOpacity>
           </LinearGradient>
-        </View>   
+        </View>
 
         <Modal
-          animationType= 'slide'
+          animationType="slide"
           transparent={true}
           visible={this.state.modalVisible}
         >
@@ -173,147 +211,163 @@ class Opinion extends React.Component {
               </Text>
               <TextInput
                 multiline={true}
-                placeholder='Opinión...'
+                placeholder="Opinión..."
                 style={styles.textInput}
                 //onChangeText={text => onChangeText(text)}
                 //value={value}
-              />     
+              />
               <Button
-                title = 'Enviar'
+                title="Enviar"
                 TouchableComponent={TouchableOpacity}
                 onPress={() => this.showPdf()}
-                buttonStyle={ styles.button }
-                titleStyle={ styles.textBold14Blue }
+                buttonStyle={styles.button}
+                titleStyle={styles.textBold14Blue}
               />
-
             </View>
           </View>
         </Modal>
-
       </View>
-    )
+    );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    backgroundColor: COLORS.white
+    justifyContent: "center",
+    backgroundColor: COLORS.white,
   },
   boxLogo: {
     flex: 0.35,
-    alignItems: 'center',
-    justifyContent: 'center'
+    alignItems: "center",
+    justifyContent: "center",
   },
   textSubLogo: {
     paddingHorizontal: 15,
     paddingVertical: 7,
     borderRadius: 25,
     marginTop: 15,
-    alignItems: 'center'
+    alignItems: "center",
   },
   boxInfo: {
     flex: 0.5,
-    alignItems: 'center',
-    justifyContent: 'flex-start',
+    alignItems: "center",
+    justifyContent: "flex-start",
   },
   boxFooter: {
     flex: 0.15,
-    alignItems: 'flex-end',
-    flexDirection: 'row'
+    alignItems: "flex-end",
+    flexDirection: "row",
   },
   imageHeader: {
     width: 230,
-    height: 130
+    height: 130,
   },
   imageInvoice: {
-    width: 120,
-    height: 120,
+    width: 100,
+    height: 100,
     opacity: 0.9,
-    marginBottom: 15
+    marginBottom: 10,
   },
   containerModal: {
-    flex: 1, 
-    justifyContent:'flex-end', 
-    alignItems: 'center'
+    flex: 1,
+    justifyContent: "flex-end",
+    alignItems: "center",
   },
-  textInput: { 
-    width: '70%',
+  textInput: {
+    width: "70%",
     height: 80,
-    marginTop: 10, 
+    marginTop: 10,
     //justifyContent: 'flex-start',
-    borderColor: COLORS.blueLight, 
+    borderColor: COLORS.blueLight,
     borderWidth: 2,
-    borderRadius: 7, 
-    backgroundColor: 'white'
+    borderRadius: 7,
+    backgroundColor: "white",
   },
   modal: {
-    width: 400, 
-    height: 250, 
-    backgroundColor: COLORS.white, 
-    justifyContent: 'center', 
-    alignItems: 'center',
+    width: 400,
+    height: 250,
+    backgroundColor: COLORS.white,
+    justifyContent: "center",
+    alignItems: "center",
     borderTopWidth: 2,
-    borderColor: COLORS.blueLight
+    borderColor: COLORS.blueLight,
   },
   textBold14Blue: {
     fontFamily: FONTS.pSemiBold,
     fontSize: FONTS.size14,
     color: COLORS.white,
-    alignItems: 'center',
-    top: 1
+    alignItems: "center",
+    top: 1,
   },
   textRegular16Blue: {
     fontFamily: FONTS.pRegular,
     fontSize: FONTS.size16,
     color: COLORS.blue,
-    alignItems: 'center',
+    alignItems: "center",
   },
   textRegular14Red: {
     fontFamily: FONTS.pRegular,
     fontSize: FONTS.size16,
-    color:'red',
-    alignItems: 'center',
+    color: "red",
+    alignItems: "center",
   },
   textRegular12White: {
     fontFamily: FONTS.pRegular,
     fontSize: FONTS.size12,
     color: COLORS.white,
-    alignItems: 'center',
+    alignItems: "center",
   },
   textRegular14White: {
     fontFamily: FONTS.pRegular,
     fontSize: FONTS.size14,
     color: COLORS.white,
-    alignItems: 'center',
+    alignItems: "center",
   },
   textLight18GrayDark: {
     fontFamily: FONTS.pExtraLight,
     fontSize: FONTS.size16,
     color: COLORS.grayDark,
-    alignItems: 'center',
+    alignItems: "center",
   },
   textLight12white: {
     fontFamily: FONTS.pExtraLight,
     fontSize: FONTS.size12,
     color: COLORS.white,
-    textAlign: 'center',
-    alignItems: 'center',
+    textAlign: "center",
+    alignItems: "center",
   },
   button: {
-    height: 45,
-    width: widthPercentageToDP('90%'),
-    backgroundColor: COLORS.blueLight,
-    borderWidth: 1,
+    height: 40,
+    width: widthPercentageToDP("43%"),
+    backgroundColor: COLORS.blueMedium,
     borderRadius: 25,
-    borderColor: COLORS.blueLight,
-    marginTop: 15,
+    marginTop: 10,
+    paddingHorizontal: 15,
+    paddingVertical: 5,
+    elevation: 1,
+  },
+  buttonMail: {
+    height: 40,
+    width: widthPercentageToDP("43%"),
+    backgroundColor: "red",
+    borderRadius: 25,
+    marginTop: 10,
     paddingHorizontal: 20,
     paddingVertical: 5,
-    marginHorizontal: 10,
-    elevation: 1
-  }
+    elevation: 1,
+  },
+  buttonBegin: {
+    height: 45,
+    width: widthPercentageToDP("90%"),
+    backgroundColor: COLORS.blueLight,
+    borderRadius: 25,
+    marginTop: 10,
+    paddingHorizontal: 20,
+    paddingVertical: 5,
+    marginHorizontal: 5,
+    elevation: 1,
+  },
 });
 
 export default Opinion;
