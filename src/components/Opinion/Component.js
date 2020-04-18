@@ -15,7 +15,6 @@ import { Button, Icon } from "react-native-elements";
 import { COLORS, GRADIANTBLUELIGHT } from "../../constants/colors";
 import { FONTS } from "../../constants/fonts";
 import { widthPercentageToDP } from "react-native-responsive-screen";
-import { IconMail } from "../../constants/icons";
 
 class Opinion extends React.Component {
   constructor(props) {
@@ -109,18 +108,7 @@ class Opinion extends React.Component {
     }
   };
 
-  enviar = (url) => {
-    return Linking.openURL(url)
-      .then(() => {
-        console.log("Email Opened");
-      })
-      .catch(() => {
-        alert("¡Error al cargar email!");
-      });
-  };
-
   render() {
-    const urlMail = `mailto:?subject=Comprobante&body=Link de Descarga: ${this.state.url} - [BillMobile - Tu Contador Online!]`;
     const logo = require("../../images/logoBill.png");
     return (
       <View style={styles.container}>
@@ -131,44 +119,30 @@ class Opinion extends React.Component {
           {this.renderInvoiceState()}
 
           <View style={{}}>
-            <View
-              style={{ flexDirection: "row", justifyContent: "space-around" }}
-            >
+
+            <View style={{ alignItems: 'center', marginHorizontal: 10, display: this.props.navigation.getParam("ok", false) ? "flex" : "none" }}>
               <Button
                 title="Descargar "
                 icon={<Icon name="download" type="feather" color="white" />}
                 iconRight
                 TouchableComponent={TouchableOpacity}
                 onPress={() => this.opinion()}
-                buttonStyle={[
-                  styles.button,
-                  this.props.navigation.getParam("ok", false)
-                    ? { display: "flex" }
-                    : { display: "none" },
-                ]}
+                buttonStyle={styles.button}
                 titleStyle={styles.textBold14Blue}
               />
+              <Text style={styles.textLight12Gray}>
+                También puede enviarla a su cliente desde el link que se abrirá
+            </Text>
+            </View>
+            <View style={{ alignItems: 'center' }}>
               <Button
-                title="Enviar"
-                icon={IconMail}
+                title="Ir a Inicio"
                 TouchableComponent={TouchableOpacity}
-                onPress={() => this.enviar(urlMail)}
-                buttonStyle={[
-                  styles.buttonMail,
-                  this.props.navigation.getParam("ok", false)
-                    ? { display: "flex" }
-                    : { display: "none" },
-                ]}
+                onPress={() => this.props.navigation.navigate("Home")}
+                buttonStyle={styles.buttonBegin}
                 titleStyle={styles.textBold14Blue}
               />
             </View>
-            <Button
-              title="Ir a Inicio"
-              TouchableComponent={TouchableOpacity}
-              onPress={() => this.props.navigation.navigate("Home")}
-              buttonStyle={styles.buttonBegin}
-              titleStyle={styles.textBold14Blue}
-            />
           </View>
         </View>
 
@@ -213,8 +187,8 @@ class Opinion extends React.Component {
                 multiline={true}
                 placeholder="Opinión..."
                 style={styles.textInput}
-                //onChangeText={text => onChangeText(text)}
-                //value={value}
+              //onChangeText={text => onChangeText(text)}
+              //value={value}
               />
               <Button
                 title="Enviar"
@@ -335,25 +309,23 @@ const styles = StyleSheet.create({
     fontSize: FONTS.size12,
     color: COLORS.white,
     textAlign: "center",
+    alignItems: "center"
+  },
+  textLight12Gray: {
+    fontFamily: FONTS.pExtraLight,
+    fontSize: FONTS.size11,
+    color: COLORS.blueMedium,
+    textAlign: "center",
     alignItems: "center",
+    top: 3
   },
   button: {
-    height: 40,
-    width: widthPercentageToDP("43%"),
+    height: 45,
+    width: widthPercentageToDP("90%"),
     backgroundColor: COLORS.blueMedium,
     borderRadius: 25,
     marginTop: 10,
     paddingHorizontal: 15,
-    paddingVertical: 5,
-    elevation: 1,
-  },
-  buttonMail: {
-    height: 40,
-    width: widthPercentageToDP("43%"),
-    backgroundColor: "red",
-    borderRadius: 25,
-    marginTop: 10,
-    paddingHorizontal: 20,
     paddingVertical: 5,
     elevation: 1,
   },

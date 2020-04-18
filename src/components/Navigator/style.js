@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     backgroundColor: 'transparent',
     borderBottomWidth: 0.4,
-    borderColor: COLORS.grayDark, 
+    borderColor: COLORS.grayDark,
     justifyContent: 'flex-start'
   },
   buttonDrawerSocial: {
@@ -70,6 +70,15 @@ const styles = StyleSheet.create({
     color: COLORS.gray,
     top: 1
   },
+  textRegular12BlueLight: {
+    fontWeight: 'normal',
+    fontFamily: FONTS.pExtraLight,
+    fontSize: FONTS.size12,
+    color: COLORS.blueLight,
+    top: 2,
+    left: 2,
+    textDecorationLine: 'underline'
+  },
   textRegular18Blue: {
     fontWeight: 'normal',
     fontFamily: FONTS.pRegular,
@@ -91,20 +100,20 @@ const styles = StyleSheet.create({
     color: COLORS.white,
   },
   logoBill: {
-    width: 45, 
-    alignSelf:'center'
+    width: 45,
+    alignSelf: 'center'
   },
   logoWS: {
     height: 30,
     width: 30,
     marginLeft: 10,
-    marginRight: 5 
+    marginRight: 5
   },
   logoMes: {
     height: 32,
     width: 32,
     marginLeft: 10,
-    marginRight: 5 
+    marginRight: 5
   },
   logoMenu: {
     paddingHorizontal: 10

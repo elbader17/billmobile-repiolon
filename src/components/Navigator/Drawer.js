@@ -19,7 +19,7 @@ const mapDispatchToProps = (dispatch) => {
     signOut: (navigation) => {
       const title = '¿Salir de Bill Mobile?'
       Alert.alert(
-        title,'Se cerrará la sesión',
+        title, 'Se cerrará la sesión',
         [
           { //Press Cancel
             text: 'Cancelar',
@@ -27,7 +27,7 @@ const mapDispatchToProps = (dispatch) => {
             onPress: () => console.log('Cancel SignOut'),
           },
           { //Press Close
-            text: 'Salir', 
+            text: 'Salir',
             onPress: () => {
               dispatch(resetCurrentInvoice()); //Borrar el invoice que quedo a medias!
               dispatch(signOut())
@@ -35,7 +35,7 @@ const mapDispatchToProps = (dispatch) => {
             }
           },
         ],
-        {cancelable: false},
+        { cancelable: false },
       );
     }
   };
@@ -45,7 +45,7 @@ const urlWS = 'https://api.whatsapp.com/send?phone=+5493515115025';
 const msjMessenger = 'https://m.me/billmobileok'
 
 class DrawerComponent extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       showIconSocial: false,
@@ -54,11 +54,11 @@ class DrawerComponent extends React.Component {
 
   render() {
     const displayButtonSocial = this.state.showIconSocial ? 'flex' : 'none';
-    const category = this.props.user.clase.slice(0,1);
+    const category = this.props.user.clase.slice(0, 1);
     const description = this.props.user.clase.slice(1);
     return (
       <View style={style.containerDrawer}>
-      
+
         <View style={style.headerContainerDrawer}>
           <Image source={require('../../images/logoBill.png')} style={style.logoDrawer} />
           <Text style={style.textRegular18Blue}>
@@ -75,55 +75,55 @@ class DrawerComponent extends React.Component {
           </Text>
         </View>
 
-        <ScrollView style={{margin: 5}}>
-          <Button 
+        <ScrollView style={{ margin: 5 }}>
+          <Button
             title="Chat"
             TouchableComponent={TouchableOpacity}
-            icon ={IconChat}
-            onPress={() => this.setState({showIconSocial: !this.state.showIconSocial})}
+            icon={IconChat}
+            onPress={() => this.setState({ showIconSocial: !this.state.showIconSocial })}
             buttonStyle={style.buttonDrawer}
             titleStyle={style.textRegular18White}
           />
-          <View style={{display: displayButtonSocial}}>
-            <TouchableOpacity 
+          <View style={{ display: displayButtonSocial }}>
+            <TouchableOpacity
               onPress={() => {
                 Linking.openURL(urlWS).then(() => {
                   console.log('WhatsApp Opened');
-                  this.setState({showIconSocial: false})
+                  this.setState({ showIconSocial: false })
                 }).catch(() => {
                   alert('¡Asegurese de tener WhatsApp intslado en su Dispositivo!');
-                  this.setState({showIconSocial: false})
+                  this.setState({ showIconSocial: false })
                 });
-              }} 
-              style={style.buttonDrawerSocial} 
+              }}
+              style={style.buttonDrawerSocial}
             >
-              <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <Image 
-                  source={require('../../images/whatsapp.png')} 
-                  style={style.logoWS} 
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Image
+                  source={require('../../images/whatsapp.png')}
+                  style={style.logoWS}
                 />
                 <Text style={style.textRegular14Gray}>
                   Whatsapp
                 </Text>
               </View>
             </TouchableOpacity>
-            
-            <TouchableOpacity 
+
+            <TouchableOpacity
               onPress={() => {
                 Linking.openURL(msjMessenger).then(() => {
                   console.log('Messenger Opened');
-                  this.setState({showIconSocial: false})
+                  this.setState({ showIconSocial: false })
                 }).catch(() => {
                   alert('¡Asegurese de tener Messenger intslado en su Dispositivo!');
-                  this.setState({showIconSocial: false})
+                  this.setState({ showIconSocial: false })
                 });
-              }} 
+              }}
               style={style.buttonDrawerSocial}
             >
-              <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <Image 
-                  source={require('../../images/messenger.png')} 
-                  style={style.logoMes} 
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Image
+                  source={require('../../images/messenger.png')}
+                  style={style.logoMes}
                 />
                 <Text style={style.textRegular14Gray}>
                   Messenger
@@ -132,28 +132,31 @@ class DrawerComponent extends React.Component {
             </TouchableOpacity>
           </View>
 
-          <Button 
+          <Button
             title="Configuración"
             TouchableComponent={TouchableOpacity}
-            icon ={IconConfig}
-            onPress={() => this.props.navigation.navigate('TaxConfiguration', {Home: true})}
+            icon={IconConfig}
+            onPress={() => this.props.navigation.navigate('TaxConfiguration', { Home: true })}
             buttonStyle={style.buttonDrawer}
             titleStyle={style.textRegular18White}
           />
-          <Button 
+          <Button
             title="Salir"
             TouchableComponent={TouchableOpacity}
-            icon ={IconClose}
+            icon={IconClose}
             onPress={() => this.props.signOut(this.props.navigation)}
             buttonStyle={style.buttonDrawer}
             titleStyle={style.textRegular18White}
           />
+          <Text style={style.textRegular12BlueLight} onPress={() => this.props.navigation.navigate('TermsAndConditions', { fromDrawer: true })}>
+            Terminos y condiciones de uso
+          </Text>
         </ScrollView>
-        
-        <TouchableOpacity onPress={() => this.props.navigation.closeDrawer()} style={{marginBottom: 30}}>
+
+        <TouchableOpacity onPress={() => this.props.navigation.closeDrawer()} style={{ marginBottom: 30 }}>
           {IconCloseDrawer}
         </TouchableOpacity>
-        
+
       </View>
     );
   }

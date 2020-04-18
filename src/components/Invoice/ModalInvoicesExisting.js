@@ -95,7 +95,7 @@ class ModalInvoicesExisting extends React.Component {
               (customer) =>
                 customer.id === invoice.relationships.fiscal_identity.data.id
             );
-            name = fiscalIdentity.attributes.name;
+            name = (!!fiscalIdentity && fiscalIdentity.attributes.name) || 'Cliente'
           } else {
             name = "Cliente";
           }

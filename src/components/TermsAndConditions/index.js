@@ -10,8 +10,13 @@ import { FONTS } from "../../constants/fonts";
 import { ScrollView } from "react-native-gesture-handler";
 
 class TermsAndConditions extends React.Component {
+  constructor(props) {
+    super(props);
+    const navigateHome = this.props.navigation.getParam('fromDrawer', false);
+    this.state = { navigateHome: navigateHome }
+  }
   navigate = () => {
-    this.props.navigation.navigate("Login");
+    this.state.navigateHome ? this.props.navigation.navigate('Home') : this.props.navigation.navigate("Login");
   };
 
   render() {
