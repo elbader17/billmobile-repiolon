@@ -16,6 +16,8 @@ import { COLORS, GRADIANTBLUELIGHT } from "../../constants/colors";
 import { FONTS } from "../../constants/fonts";
 import { widthPercentageToDP } from "react-native-responsive-screen";
 
+var SendIntentAndroid = require("react-native-send-intent");
+
 class Opinion extends React.Component {
   constructor(props) {
     super(props);
@@ -119,22 +121,52 @@ class Opinion extends React.Component {
           {this.renderInvoiceState()}
 
           <View style={{}}>
-
-            <View style={{ alignItems: 'center', marginHorizontal: 10, display: this.props.navigation.getParam("ok", false) ? "flex" : "none" }}>
+            <View
+              style={{
+                alignItems: "center",
+                flexDirection: "row",
+                justifyContent: "space-around",
+                marginHorizontal: 10,
+                display: this.props.navigation.getParam("ok", false)
+                  ? "flex"
+                  : "none",
+              }}
+            >
               <Button
-                title="Descargar "
-                icon={<Icon name="download" type="feather" color="white" />}
-                iconRight
+                title=" Descargar "
+                icon={
+                  <Icon
+                    name="download"
+                    type="feather"
+                    color="white"
+                    size={20}
+                  />
+                }
                 TouchableComponent={TouchableOpacity}
                 onPress={() => this.opinion()}
-                buttonStyle={styles.button}
+                buttonStyle={styles.buttonAux}
                 titleStyle={styles.textBold14Blue}
               />
-              <Text style={styles.textLight12Gray}>
-                También puede enviarla a su cliente desde el link que se abrirá
-            </Text>
+              <Button
+                title=" Enviar "
+                icon={
+                  <Icon name="mail" type="feather" color="white" size={18} />
+                }
+                TouchableComponent={TouchableOpacity}
+                onPress={() =>
+                  SendIntentAndroid.openChooserWithOptions(
+                    {
+                      subject: "Comprobante BillMobile",
+                      text: this.state.url,
+                    },
+                    "Share Story"
+                  )
+                }
+                buttonStyle={styles.buttonAux}
+                titleStyle={styles.textBold14Blue}
+              />
             </View>
-            <View style={{ alignItems: 'center' }}>
+            <View style={{ alignItems: "center" }}>
               <Button
                 title="Ir a Inicio"
                 TouchableComponent={TouchableOpacity}
@@ -187,8 +219,8 @@ class Opinion extends React.Component {
                 multiline={true}
                 placeholder="Opinión..."
                 style={styles.textInput}
-              //onChangeText={text => onChangeText(text)}
-              //value={value}
+                //onChangeText={text => onChangeText(text)}
+                //value={value}
               />
               <Button
                 title="Enviar"
@@ -309,7 +341,7 @@ const styles = StyleSheet.create({
     fontSize: FONTS.size12,
     color: COLORS.white,
     textAlign: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   textLight12Gray: {
     fontFamily: FONTS.pExtraLight,
@@ -317,11 +349,21 @@ const styles = StyleSheet.create({
     color: COLORS.blueMedium,
     textAlign: "center",
     alignItems: "center",
-    top: 3
+    top: 3,
   },
   button: {
     height: 45,
     width: widthPercentageToDP("90%"),
+    backgroundColor: COLORS.blueMedium,
+    borderRadius: 25,
+    marginTop: 10,
+    paddingHorizontal: 15,
+    paddingVertical: 5,
+    elevation: 1,
+  },
+  buttonAux: {
+    height: 45,
+    width: widthPercentageToDP("42%"),
     backgroundColor: COLORS.blueMedium,
     borderRadius: 25,
     marginTop: 10,

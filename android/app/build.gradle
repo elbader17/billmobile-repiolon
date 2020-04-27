@@ -156,6 +156,7 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-send-intent')
     implementation project(':react-native-push-notification')
     implementation project(':rn-fetch-blob')
     implementation project(':react-native-pdf')

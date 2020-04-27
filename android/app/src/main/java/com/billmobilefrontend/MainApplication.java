@@ -3,6 +3,7 @@ package com.billmobilefrontend;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.burnweb.rnsendintent.RNSendIntentPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import org.wonday.pdf.RCTPdfView;
 import com.reactcommunity.rndatetimepicker.RNDateTimePickerPackage;
@@ -38,6 +39,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNSendIntentPackage(),
           new ReactNativePushNotificationPackage(),
             new RNFetchBlobPackage(),
             new RCTPdfView(),
