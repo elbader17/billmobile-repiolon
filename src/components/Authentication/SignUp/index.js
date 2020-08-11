@@ -1,22 +1,16 @@
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import SignUp from './Component';
 import { signUp } from '../../../app/authentication/actions';
-import { confirmCode } from '../../../app/authentication/actions';
 
-const mapStateToProps = (state) => ({
-  showConfirmationModal: state.authentication.showConfirmationModal,
-}) ;
-
-function mapDispatchToProps(dispatch) {
-    return {
-        signUp: (password, name,attributes) => dispatch(signUp(password, name,attributes)),
-        confirmCode: (email, confirmationCode) => dispatch(confirmCode(email,confirmationCode)),
-    };
+const mapDispatchToProps = dispatch => {
+  return {
+    signUp: (password, email, attributes) => dispatch(signUp(password, email, attributes)),
+  };
 }
 
-const component = connect( 
-    mapStateToProps,
-    mapDispatchToProps,
+const component = connect(
+  null,
+  mapDispatchToProps,
 )(SignUp);
 
 export default component;

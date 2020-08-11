@@ -1,18 +1,22 @@
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import SignIn from './Component';
 import { signIn } from '../../../app/authentication/actions';
 
-const mapStateToProps = (state) => ({
-  jwtToken: state.authentication.jwtToken,
-});
-
-function mapDispatchToProps(dispatch) {
+const mapStateToProps = (state) => {
   return {
-    signIn: (email, password) => dispatch(signIn(email, password)),
+    jwtToken: state.authentication.jwtToken,
+    fiscalIdentityComplete: state.userservice.completed,
+    fiscalIdentity: state.userservice
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    signIn: (email, password) => dispatch(signIn(email, password))
   };
 }
-  
-const component = connect( 
+
+const component = connect(
   mapStateToProps,
   mapDispatchToProps,
 )(SignIn);

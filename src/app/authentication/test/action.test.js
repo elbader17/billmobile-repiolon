@@ -2,7 +2,7 @@ import { Auth } from 'aws-amplify';
 import * as actions from '../actions';
 import {
   SET_JWT_TOKEN,
-  SHOW_CONFIRMATION_MODAL,
+  USER_SIGNED_UP,
 } from '../constants';
 
 describe('Actions', () => {
@@ -19,7 +19,7 @@ describe('Actions', () => {
     };
     let store;
 
-    beforeEach(async () =>{
+    beforeEach(async () => {
       const mockFn = jest.fn();
       store = mockStore();
       mockFn.mockReturnValue(Promise.resolve(data));
@@ -48,13 +48,9 @@ describe('Actions', () => {
     const attributes = {
        attr: 'attr',
     };
-    const jwtToken = 'jwtToken';
     const data = {
-      signInUserSession: {
-        idToken: {
-          jwtToken,
-        },
-      },
+      signInUserSession: {},
+      userConfirmed: true,
     };
     let store;
 
@@ -75,9 +71,9 @@ describe('Actions', () => {
       });
     });
 
-    it('the action.type should be SHOW_CONFIRMATION_MODAL', () => {
+    it('the action.type should be USER_SIGNED_UP', () => {
       const actions = store.getActions();
-      expect(actions[0].type).toEqual(SHOW_CONFIRMATION_MODAL);
+      expect(actions[0].type).toEqual(USER_SIGNED_UP);
     });
   });
 });

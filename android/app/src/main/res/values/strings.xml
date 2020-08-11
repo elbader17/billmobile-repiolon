@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">billmobilefrontend</string>
+    <string name="app_name">Bill Mobile</string>
+    <string name="facebook_app_id">000000000000</string>
 </resources>

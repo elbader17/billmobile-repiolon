@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render correctly functional component Invoice 1`] = `
+<ScrollViewMock>
+  <View
+    style={
+      Object {
+        "marginHorizontal": 8,
+        "marginVertical": 5,
+      }
+    }
+  >
+    <InvoiceListCustomer />
+  </View>
+</ScrollViewMock>
+`;

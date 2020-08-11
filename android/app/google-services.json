@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "737755359918",
+    "firebase_url": "https://bill-mobile.firebaseio.com",
+    "project_id": "bill-mobile",
+    "storage_bucket": "bill-mobile.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:737755359918:android:b296d91b5ae1c5efb51b3f",
+        "android_client_info": {
+          "package_name": "com.billmobilefrontend"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "737755359918-d2catd6ebo3e13qiqcmqlipt67plqtqc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRBUQy0qod0Az63cU3-IZOPXcU3mfq72w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "737755359918-d2catd6ebo3e13qiqcmqlipt67plqtqc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:737755359918:android:0ee73e52b9c6b4d9b51b3f",
+        "android_client_info": {
+          "package_name": "com.nuxtulabs.bill"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "737755359918-d2catd6ebo3e13qiqcmqlipt67plqtqc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRBUQy0qod0Az63cU3-IZOPXcU3mfq72w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "737755359918-d2catd6ebo3e13qiqcmqlipt67plqtqc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

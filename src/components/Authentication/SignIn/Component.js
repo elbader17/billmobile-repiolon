@@ -1,10 +1,8 @@
 import React from 'react';
-import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { IconEye, IconEyeOff } from '../../../constants/icons';
 import { Button } from "react-native-elements";
-import style from './style';
-
-const EMAIL_REGEXP = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
-const PASSWORD_REGEXP = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})"); 
+import style from '../style';
 
 class SignIn extends React.Component {
 
@@ -13,89 +11,112 @@ class SignIn extends React.Component {
     this.state = {
       email: '',
       password: '',
-      name:'',
-      hidePassword: true
+      hidePassword: false,
+      loading: false,
+      confirm: false,
+      error: undefined
     };
-  }
-
-  managePasswordVisibility = () => {
-    this.setState({ hidePassword: !this.state.hidePassword });
   }
 
   handleSignIn = () => {
     const { email, password } = this.state;
     const { signIn } = this.props;
-    signIn(email, password);    
+    this.setLoading(true);
+    signIn(email, password)
+      .then( (_data) => {
+        if(this.props.jwtToken !== ''){
+          this.navigateNext();
+        } else {
+          if ( _data.message === 'User does not exist.'){
+            this.setState({error: 'Email no registrado'})
+            this.props.navigation.navigate('Authentication');
+          } else if ( _data.message === 'User is not confirmed.'){
+            this.setState({confirm: true, error: 'Cuenta no verificada'});
+          } else {
+            this.setState({error: 'Email o Password incorrectos'})
+            this.props.navigation.navigate('Authentication');
+          }
+        }
+        this.setLoading(false);
+      })
+      .catch(err => {
+        this.setState({error: 'ERROR al ingresar, intente nuevamente!'});
+        console.log(err);
+      });
   }
 
-  validateData = () => {
-    const isValidPassword = PASSWORD_REGEXP.test(this.state.password);
-    const isValidEmail = EMAIL_REGEXP.test(String(this.state.email).toLowerCase());
-    return (isValidPassword && isValidEmail);
+  handleConfirm = () => {
+    this.props.navigation.navigate('ConfirmationCodeRegister', { email: this.state.email });
+    this.setState({confirm: false, error: undefined})
+  }
+
+  navigateNext = () => {
+    console.log(this.props.fiscalIdentity);
+    if (this.props.fiscalIdentityComplete) {
+      this.props.navigation.navigate('Home');
+    } else {
+      this.props.navigation.navigate('Configure');
+    }
   }
 
   setEmail = (value) => this.setState({ email: value })
   setPassword = (value) => this.setState({ password: value })
+  setLoading = (bool) => this.setState({ loading: bool })
 
   render() {
-    const hide = require('../../../images/hide.png')
-    const show = require('../../../images/show.png')
+    const displayError = this.state.error === undefined ? 'none' : 'flex';
     return(
-      <View style={ style.container }>
-        <View style={ style.container2 }>
-          <View style={ style.textBoxBtnHolder }>
-            <TextInput
-              label="Email"
-              onChangeText={this.setEmail}
-              value={this.state.email}
-              placeholder="Tu email"
-              style={ style.textBox }
-            />
-          </View>
-          <View style={ style.textBoxBtnHolder }>
-            <TextInput
-              label="Password" 
-              onChangeText={this.setPassword}
-              value={this.state.password}
-              placeholder="Contraseña"
-              style={ style.textBox }
-              secureTextEntry={ this.state.hidePassword } 
-            />        
-            <TouchableOpacity 
-              activeOpacity={ 0.8 } 
-              style={ style.visibilityBtn } 
-              onPress={ this.managePasswordVisibility }
-            >
-              <Image 
-                source={( this.state.hidePassword ) ? hide : show } 
-                style={ style.btnImage } 
-              />
-            </TouchableOpacity>
-          </View>
-
-          <Text style={ style.textRegister }>
-            ¿No tienes una cuenta? 
-            <Text style={ style.red }> Registrate</Text>
+      <View style={style.containerInputs}>
+          
+        <TextInput
+          placeholder="Email"
+          value={this.state.email}
+          onChangeText={this.setEmail}
+          onFocus={()=>{this.setState({error: undefined, confirm: false})}}
+          style={style.input}
+        />
+        <View style={style.passwordContainer}>
+          <TextInput
+            secureTextEntry={!this.state.hidePassword}
+            placeholder='Contraseña'
+            value={this.state.password}
+            onChangeText={this.setPassword}
+            onFocus={()=>{this.setState({error: undefined, confirm: false})}}
+            style={style.inputPass}
+          />
+          <TouchableOpacity 
+            onPress={()=>this.setState({hidePassword: !this.state.hidePassword})}>
+            {this.state.hidePassword ? IconEye : IconEyeOff}
+          </TouchableOpacity>
+        </View>
+        <View style={{display: displayError, alignItems: 'center'}}>
+          <Text style={style.textRegular12Red}>
+            {this.state.error}
           </Text>
+        </View>
 
+        <View style={style.containerButtonSignTwo}>
           <Button
-            title='ENTRAR'
+            title='Ingresar'
+            TouchableComponent={TouchableOpacity}
             testID={'submitSignIn'}
             onPress={ this.handleSignIn }
-            buttonStyle={ style.submit }
-            titleStyle={ style.submitText }
-            disabled={ !this.validateData() }
-            disabledTitleStyle={ style.submitText }
-            disabledStyle={ style.submitDisabled }
+            buttonStyle={ style.buttonSignTwo }
+            disabled={this.state.confirm}
+            disabledStyle={ style.buttonSignTwoDisabled}
+            titleStyle={ style.textBold14White }
+            loading = {this.state.loading}
           />
-
-          <Text style={style.textFooterA}>
-            Al registrarte estas aceptando nuestros
-          </Text>
-          <Text style={style.textFooterB}>
-            Términos y Condiciones y Políticas de Privacidad
-          </Text>
-          
+          <View style={this.state.confirm ? {display: 'flex'} : {display: 'none'}}>
+            <Button
+              title='Confirmar Cuenta'
+              TouchableComponent={TouchableOpacity}
+              testID={'submitSignIn'}
+              onPress={ this.handleConfirm }
+              buttonStyle={ style.buttonConfirm }
+              titleStyle={ style.textBold14White }
+            />
+          </View>
         </View>
       </View>
     )

@@ -1,0 +1,538 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render correctly component Intro 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <RCTScrollView
+    bottomButton={true}
+    bounces={false}
+    data={
+      Array [
+        Object {
+          "backgroundColor": "#59b2ab",
+          "description": "Como cuando lo era cuando lo hacias en papel, ágil para vos y para tus clientes.",
+          "text": "Facturar sin demoras",
+          "title": "1",
+        },
+        Object {
+          "backgroundColor": "#febe29",
+          "description": "No tendrás que cargar la misma información dos veces. Nuestro sistema guarda y ayuda a hacer más ágil tu facturación.",
+          "text": "Hacemos práctica la facturación",
+          "title": "2",
+        },
+        Object {
+          "backgroundColor": "#22bcb5",
+          "description": "Nuestra política de privacidad es simple: No compartimos ninguna información personal o impositiva tuya.",
+          "text": "Informacón segura",
+          "title": "3",
+        },
+      ]
+    }
+    disableVirtualization={false}
+    extraData={750}
+    getItem={[Function]}
+    getItemCount={[Function]}
+    horizontal={true}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onContentSizeChange={[Function]}
+    onDone={[Function]}
+    onEndReachedThreshold={2}
+    onLayout={[Function]}
+    onMomentumScrollEnd={[Function]}
+    onScroll={[Function]}
+    onScrollBeginDrag={[Function]}
+    onScrollEndDrag={[Function]}
+    paginationStyle={null}
+    pagingEnabled={true}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    showDoneButton={true}
+    showNextButton={true}
+    showsHorizontalScrollIndicator={false}
+    slides={
+      Array [
+        Object {
+          "backgroundColor": "#59b2ab",
+          "description": "Como cuando lo era cuando lo hacias en papel, ágil para vos y para tus clientes.",
+          "text": "Facturar sin demoras",
+          "title": "1",
+        },
+        Object {
+          "backgroundColor": "#febe29",
+          "description": "No tendrás que cargar la misma información dos veces. Nuestro sistema guarda y ayuda a hacer más ágil tu facturación.",
+          "text": "Hacemos práctica la facturación",
+          "title": "2",
+        },
+        Object {
+          "backgroundColor": "#22bcb5",
+          "description": "Nuestra política de privacidad es simple: No compartimos ninguna información personal o impositiva tuya.",
+          "text": "Informacón segura",
+          "title": "3",
+        },
+      ]
+    }
+    stickyHeaderIndices={Array []}
+    style={
+      Object {
+        "flex": 1,
+        "flexDirection": "row",
+      }
+    }
+    updateCellsBatchingPeriod={50}
+    viewabilityConfigCallbackPairs={Array []}
+    windowSize={21}
+  >
+    <View>
+      <View
+        onLayout={[Function]}
+        style={
+          Array [
+            Object {
+              "flexDirection": "row",
+            },
+            null,
+          ]
+        }
+      >
+        <View
+          style={
+            Object {
+              "height": 1334,
+              "width": 750,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "#3687d1",
+                "flex": 1,
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "flex": 0.8,
+                  "justifyContent": "center",
+                }
+              }
+            >
+              <Text
+                style={
+                  Object {
+                    "color": "#fff",
+                    "fontFamily": undefined,
+                    "fontSize": 78,
+                  }
+                }
+              >
+                1
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "flex": 0.2,
+                  "justifyContent": "center",
+                }
+              }
+            >
+              <Text
+                style={
+                  Object {
+                    "color": "#fff",
+                    "fontFamily": "Lato-Regular",
+                    "fontSize": 18,
+                    "fontWeight": "bold",
+                    "lineHeight": 32,
+                    "textAlign": "center",
+                    "width": 600,
+                  }
+                }
+              >
+                Facturar sin demoras
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "flex": 1,
+                  "paddingHorizontal": 50,
+                }
+              }
+            >
+              <Text
+                style={
+                  Object {
+                    "color": "#fff",
+                    "fontFamily": "Lato-Regular",
+                    "fontSize": 14,
+                    "lineHeight": 21,
+                    "textAlign": "center",
+                    "width": 600,
+                  }
+                }
+              >
+                Como cuando lo era cuando lo hacias en papel, ágil para vos y para tus clientes.
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={
+          Array [
+            Object {
+              "flexDirection": "row",
+            },
+            null,
+          ]
+        }
+      >
+        <View
+          style={
+            Object {
+              "height": 1334,
+              "width": 750,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "#3687d1",
+                "flex": 1,
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "flex": 0.8,
+                  "justifyContent": "center",
+                }
+              }
+            >
+              <Text
+                style={
+                  Object {
+                    "color": "#fff",
+                    "fontFamily": undefined,
+                    "fontSize": 78,
+                  }
+                }
+              >
+                2
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "flex": 0.2,
+                  "justifyContent": "center",
+                }
+              }
+            >
+              <Text
+                style={
+                  Object {
+                    "color": "#fff",
+                    "fontFamily": "Lato-Regular",
+                    "fontSize": 18,
+                    "fontWeight": "bold",
+                    "lineHeight": 32,
+                    "textAlign": "center",
+                    "width": 600,
+                  }
+                }
+              >
+                Hacemos práctica la facturación
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "flex": 1,
+                  "paddingHorizontal": 50,
+                }
+              }
+            >
+              <Text
+                style={
+                  Object {
+                    "color": "#fff",
+                    "fontFamily": "Lato-Regular",
+                    "fontSize": 14,
+                    "lineHeight": 21,
+                    "textAlign": "center",
+                    "width": 600,
+                  }
+                }
+              >
+                No tendrás que cargar la misma información dos veces. Nuestro sistema guarda y ayuda a hacer más ágil tu facturación.
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={
+          Array [
+            Object {
+              "flexDirection": "row",
+            },
+            null,
+          ]
+        }
+      >
+        <View
+          style={
+            Object {
+              "height": 1334,
+              "width": 750,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "#3687d1",
+                "flex": 1,
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "flex": 0.8,
+                  "justifyContent": "center",
+                }
+              }
+            >
+              <Text
+                style={
+                  Object {
+                    "color": "#fff",
+                    "fontFamily": undefined,
+                    "fontSize": 78,
+                  }
+                }
+              >
+                3
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "flex": 0.2,
+                  "justifyContent": "center",
+                }
+              }
+            >
+              <Text
+                style={
+                  Object {
+                    "color": "#fff",
+                    "fontFamily": "Lato-Regular",
+                    "fontSize": 18,
+                    "fontWeight": "bold",
+                    "lineHeight": 32,
+                    "textAlign": "center",
+                    "width": 600,
+                  }
+                }
+              >
+                Informacón segura
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "flex": 1,
+                  "paddingHorizontal": 50,
+                }
+              }
+            >
+              <Text
+                style={
+                  Object {
+                    "color": "#fff",
+                    "fontFamily": "Lato-Regular",
+                    "fontSize": 14,
+                    "lineHeight": 21,
+                    "textAlign": "center",
+                    "width": 600,
+                  }
+                }
+              >
+                Nuestra política de privacidad es simple: No compartimos ninguna información personal o impositiva tuya.
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </RCTScrollView>
+  <View
+    style={
+      Array [
+        Object {
+          "bottom": 16,
+          "left": 16,
+          "position": "absolute",
+          "right": 16,
+        },
+        null,
+      ]
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "height": 16,
+          "justifyContent": "center",
+          "margin": 16,
+        }
+      }
+    >
+      <View
+        accessible={true}
+        isTVSelectable={true}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "backgroundColor": "#fff",
+            "borderRadius": 5,
+            "height": 9,
+            "marginHorizontal": 4,
+            "opacity": 1,
+            "width": 9,
+          }
+        }
+      />
+      <View
+        accessible={true}
+        isTVSelectable={true}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "backgroundColor": "#C4C4C4",
+            "borderRadius": 5,
+            "height": 9,
+            "marginHorizontal": 4,
+            "opacity": 1,
+            "width": 9,
+          }
+        }
+      />
+      <View
+        accessible={true}
+        isTVSelectable={true}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "backgroundColor": "#C4C4C4",
+            "borderRadius": 5,
+            "height": 9,
+            "marginHorizontal": 4,
+            "opacity": 1,
+            "width": 9,
+          }
+        }
+      />
+    </View>
+    <View
+      style={false}
+    >
+      <View
+        accessible={true}
+        isTVSelectable={true}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "flex": 1,
+            "opacity": 1,
+          }
+        }
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "rgba(0, 0, 0, .3)",
+                "flex": 1,
+                "justifyContent": "center",
+              },
+              false,
+              Object {
+                "backgroundColor": "transparent",
+                "borderColor": "#fff",
+                "borderRadius": 2,
+                "borderWidth": 1,
+              },
+            ]
+          }
+        >
+          <Text
+            style={
+              Array [
+                Object {
+                  "backgroundColor": "transparent",
+                  "color": "white",
+                  "fontSize": 18,
+                  "padding": 12,
+                },
+                Object {
+                  "color": "#fff",
+                  "fontFamily": "Lato-Semibold",
+                  "fontSize": 15,
+                },
+              ]
+            }
+          >
+            Siguiente
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;

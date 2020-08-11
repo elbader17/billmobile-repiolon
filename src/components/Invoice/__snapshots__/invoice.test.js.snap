@@ -1,0 +1,485 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render correctly component Invoice 1`] = `
+<ImageBackground
+  source={
+    Object {
+      "testUri": "../../../src/images/gradiant.png",
+    }
+  }
+  style={
+    Object {
+      "height": "100%",
+      "width": "100%",
+    }
+  }
+>
+  <ScrollViewMock>
+    <View
+      style={
+        Object {
+          "height": NaN,
+          "paddingHorizontal": 18,
+          "paddingVertical": 7,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "width": "60%",
+            }
+          }
+        >
+          <TouchableOpacity
+            activeOpacity={0.2}
+            onPress={[Function]}
+            style={
+              Object {
+                "borderBottomColor": "#fff",
+                "borderBottomWidth": 1,
+                "borderRadius": 1,
+                "paddingVertical": 10,
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "color": "#fff",
+                  "fontFamily": "Lato-Regular",
+                  "fontSize": 15,
+                  "textAlign": "center",
+                }
+              }
+            />
+          </TouchableOpacity>
+        </View>
+        <View
+          style={
+            Object {
+              "width": "35%",
+            }
+          }
+        >
+          <TouchableOpacity
+            activeOpacity={0.2}
+            onPress={[Function]}
+            style={
+              Object {
+                "borderBottomColor": "#fff",
+                "borderBottomWidth": 1,
+                "borderRadius": 1,
+                "paddingVertical": 10,
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "color": "#fff",
+                  "fontFamily": "Lato-Regular",
+                  "fontSize": 15,
+                  "textAlign": "center",
+                }
+              }
+            />
+          </TouchableOpacity>
+          <CustomDatePickerIOS
+            cancelTextIOS="Cancel"
+            confirmTextIOS="Confirm"
+            hideTitleContainerIOS={false}
+            isVisible={false}
+            mode="date"
+            neverDisableConfirmIOS={false}
+            onCancel={[Function]}
+            onConfirm={[Function]}
+            onDateChange={[MockFunction]}
+            onHideAfterConfirm={[MockFunction]}
+            reactNativeModalPropsIOS={Object {}}
+            titleIOS="Pick a date"
+          />
+        </View>
+      </View>
+      <View
+        style={
+          Array [
+            Object {
+              "backgroundColor": "#fff",
+              "borderRadius": 5,
+              "elevation": 3,
+              "marginVertical": 15,
+              "maxHeight": 333.5,
+            },
+            Object {
+              "flexDirection": "column",
+              "justifyContent": "space-between",
+            },
+          ]
+        }
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "flexDirection": "row",
+                "justifyContent": "space-between",
+              },
+              Object {
+                "margin": 7,
+              },
+            ]
+          }
+        >
+          <ForwardRef(Themed.Button)
+            buttonStyle={
+              Object {
+                "backgroundColor": "transparent",
+                "borderColor": "#C4C4C4",
+                "borderWidth": 1,
+                "height": 66.5,
+                "width": 300,
+              }
+            }
+            onPress={[Function]}
+            testID="cf"
+            title="CONSUMIDOR FINAL"
+            titleStyle={
+              Object {
+                "color": "#858585",
+                "fontFamily": "Lato-Regular",
+                "fontSize": 11,
+              }
+            }
+          />
+          <ForwardRef(Themed.Button)
+            TouchableComponent={[Function]}
+            buttonStyle={
+              Object {
+                "backgroundColor": "transparent",
+                "borderColor": "#C4C4C4",
+                "borderWidth": 1,
+                "height": 66.5,
+                "width": 135,
+              }
+            }
+            disabled={true}
+            disabledStyle={
+              Object {
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
+              }
+            }
+            disabledTitleStyle={
+              Object {
+                "color": "transparent",
+              }
+            }
+            onPress={[Function]}
+            testID="cancel"
+            title="Cancelar"
+            titleStyle={
+              Object {
+                "color": "#C4C4C4",
+                "fontFamily": "Lato-Regular",
+                "fontSize": 12,
+              }
+            }
+          />
+          <ForwardRef(Themed.Button)
+            buttonStyle={
+              Object {
+                "backgroundColor": "transparent",
+                "borderColor": "#EE6123",
+                "borderRadius": 3,
+                "borderWidth": 1,
+                "height": 66.5,
+                "width": 105,
+              }
+            }
+            icon={
+              <Icon
+                allowFontScaling={false}
+                color="#EE6123"
+                name="md-person-add"
+                size={20}
+              />
+            }
+            onPress={[Function]}
+            testID="addCustomer"
+          />
+        </View>
+        <View
+          style={
+            Array [
+              Object {
+                "backgroundColor": "#C4C4C4",
+                "height": 1,
+              },
+              Object {
+                "marginHorizontal": 5,
+              },
+            ]
+          }
+        />
+        <InvoiceCustomer
+          addFinalConsumer={[Function]}
+          finalConsumer={false}
+          fiscalIdentity={
+            Object {
+              "category": "",
+              "identification": "",
+              "name": "",
+            }
+          }
+          loading={false}
+          setFinalConsumer={[Function]}
+        />
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "backgroundColor": "#C4C4C4",
+                  "height": 1,
+                },
+                Object {
+                  "marginHorizontal": 5,
+                },
+              ]
+            }
+          />
+          <ForwardRef(Themed.Button)
+            buttonStyle={
+              Object {
+                "backgroundColor": "transparent",
+                "opacity": 0.8,
+              }
+            }
+            title="VER TODOS"
+            titleStyle={
+              Object {
+                "color": "#EE6123",
+                "fontFamily": "Lato-Regular",
+                "fontSize": 12,
+              }
+            }
+          />
+        </View>
+      </View>
+      <ForwardRef(Themed.Button)
+        buttonStyle={
+          Object {
+            "backgroundColor": "#fff",
+            "borderRadius": 5,
+            "elevation": 3,
+            "height": 93.5,
+          }
+        }
+        icon={
+          <View
+            style={
+              Object {
+                "position": "absolute",
+                "right": 15,
+              }
+            }
+          >
+            <Icon
+              allowFontScaling={false}
+              color="#EE6123"
+              name="md-add"
+              size={30}
+            />
+          </View>
+        }
+        iconRight={true}
+        onPress={[Function]}
+        testID="addItems"
+        title={
+          <Text>
+            <Text
+              style={
+                Object {
+                  "color": "#858585",
+                  "fontFamily": "Lato-Regular",
+                  "fontSize": 14,
+                }
+              }
+            >
+              AGREGAR 
+            </Text>
+            <Text
+              style={
+                Object {
+                  "color": "#858585",
+                  "fontFamily": "Lato-Semibold",
+                  "fontSize": 14,
+                }
+              }
+            >
+              ITEMS
+            </Text>
+          </Text>
+        }
+        titleStyle={
+          Object {
+            "color": "#858585",
+            "fontFamily": "Lato-Regular",
+            "fontSize": 14,
+          }
+        }
+      />
+      <View
+        style={
+          Object {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+          }
+        }
+      >
+        <ForwardRef(Themed.Button)
+          buttonStyle={
+            Object {
+              "backgroundColor": "#EE6123",
+              "borderRadius": 0,
+              "height": 106.5,
+            }
+          }
+          disabled={true}
+          disabledStyle={
+            Object {
+              "backgroundColor": "#C4C4C4",
+              "borderRadius": 0,
+              "height": 106.5,
+            }
+          }
+          disabledTitleStyle={
+            Object {
+              "color": "#fff",
+              "fontFamily": "Lato-Semibold",
+              "fontSize": 14,
+            }
+          }
+          onPress={[Function]}
+          testID="continue"
+          title="CONTINUAR"
+          titleStyle={
+            Object {
+              "color": "#fff",
+              "fontFamily": "Lato-Semibold",
+              "fontSize": 14,
+            }
+          }
+        />
+      </View>
+      <Component
+        animationType="fade"
+        hardwareAccelerated={false}
+        transparent={true}
+        visible={false}
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "rgba(0,0,0,0.6)",
+              "flex": 1,
+              "justifyContent": "center",
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "backgroundColor": "#fff",
+                "borderRadius": 3,
+                "elevation": 20,
+                "height": 533.5,
+                "width": 525,
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "backgroundColor": "#3687d1",
+                  "borderTopLeftRadius": 3,
+                  "borderTopRightRadius": 3,
+                  "paddingVertical": 15,
+                }
+              }
+            >
+              <Text
+                style={
+                  Object {
+                    "color": "#fff",
+                    "fontFamily": "Lato-Regular",
+                    "fontSize": 15,
+                    "textAlign": "center",
+                  }
+                }
+              >
+                Tipo de Comprobante
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 1,
+                  "justifyContent": "center",
+                }
+              }
+            >
+              <View
+                key="0"
+              >
+                <TouchableOpacity
+                  activeOpacity={0.2}
+                  onPress={[Function]}
+                  style={
+                    Array [
+                      Object {
+                        "backgroundColor": "transparent",
+                        "borderColor": "#3687d1",
+                        "borderRadius": 3,
+                        "borderWidth": 1,
+                        "paddingHorizontal": 10,
+                        "paddingVertical": 3,
+                      },
+                      Object {
+                        "marginVertical": 8,
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    style={
+                      Object {
+                        "color": "#3687d1",
+                        "fontFamily": "Lato-Regular",
+                        "fontSize": 15,
+                      }
+                    }
+                  />
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        </View>
+      </Component>
+    </View>
+  </ScrollViewMock>
+</ImageBackground>
+`;
