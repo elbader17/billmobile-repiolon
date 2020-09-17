@@ -1,0 +1,318 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render correctly component SignUp 1`] = `
+<View
+  style={
+    Object {
+      "paddingHorizontal": 30,
+      "paddingVertical": 20,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignSelf": "stretch",
+          "justifyContent": "center",
+          "marginTop": 5,
+          "position": "relative",
+        }
+      }
+    >
+      <TextInput
+        allowFontScaling={true}
+        label="Nombre"
+        onChangeText={[Function]}
+        placeholder="Tu nombre"
+        placeholderTextColor="#C4C4C4"
+        rejectResponderTermination={true}
+        style={
+          Object {
+            "alignSelf": "stretch",
+            "borderColor": "#C4C4C4",
+            "borderRadius": 2,
+            "borderWidth": 1,
+            "color": "#858585",
+            "fontFamily": "Lato-Regular",
+            "fontSize": 18,
+            "height": 45,
+            "paddingLeft": 8,
+            "paddingRight": 45,
+            "paddingVertical": 0,
+          }
+        }
+        underlineColorAndroid="transparent"
+        value="martin"
+      />
+    </View>
+    <View
+      style={
+        Object {
+          "alignSelf": "stretch",
+          "justifyContent": "center",
+          "marginTop": 5,
+          "position": "relative",
+        }
+      }
+    >
+      <TextInput
+        allowFontScaling={true}
+        editable={true}
+        keyboardType="email-address"
+        label="Email"
+        onChangeText={[Function]}
+        onEndEditing={[Function]}
+        onFocus={[Function]}
+        onRef={[Function]}
+        placeholder="Tu email"
+        placeholderTextColor="#C4C4C4"
+        rejectResponderTermination={true}
+        returnKeyType="next"
+        style={
+          Object {
+            "alignSelf": "stretch",
+            "borderColor": "#C4C4C4",
+            "borderRadius": 2,
+            "borderWidth": 1,
+            "color": "#858585",
+            "fontFamily": "Lato-Regular",
+            "fontSize": 18,
+            "height": 45,
+            "paddingLeft": 8,
+            "paddingRight": 45,
+            "paddingVertical": 0,
+          }
+        }
+        underlineColorAndroid="transparent"
+        value="@mozej.com"
+      />
+    </View>
+    <View
+      style={
+        Object {
+          "alignSelf": "stretch",
+          "justifyContent": "center",
+          "marginTop": 5,
+          "position": "relative",
+        }
+      }
+    >
+      <View>
+        <View
+          style={
+            Object {
+              "borderColor": "#C4C4C4",
+              "borderRadius": 2,
+              "borderWidth": 1,
+              "flexDirection": "row",
+            }
+          }
+        >
+          <TextInput
+            allowFontScaling={true}
+            label="Password"
+            onChangeText={[Function]}
+            onEndEditing={[Function]}
+            onFocus={[Function]}
+            placeholder="Contraseña"
+            placeholderTextColor="#C4C4C4"
+            rejectResponderTermination={true}
+            secureTextEntry={true}
+            style={
+              Object {
+                "alignSelf": "stretch",
+                "color": "#858585",
+                "fontFamily": "Lato-Regular",
+                "fontSize": 18,
+                "height": 43,
+                "paddingLeft": 8,
+                "paddingRight": 45,
+              }
+            }
+            underlineColorAndroid="transparent"
+            value="@Martin44"
+          />
+          <TouchableOpacity
+            activeOpacity={0.8}
+            onPress={[Function]}
+            style={
+              Object {
+                "height": 40,
+                "marginTop": 2,
+                "padding": 6,
+                "position": "absolute",
+                "right": 3,
+                "width": 35,
+              }
+            }
+          >
+            <Image
+              source={
+                Object {
+                  "testUri": "../../../src/images/hide.png",
+                }
+              }
+              style={
+                Object {
+                  "height": "100%",
+                  "opacity": 0.4,
+                  "resizeMode": "contain",
+                  "width": "100%",
+                }
+              }
+            />
+          </TouchableOpacity>
+        </View>
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "alignSelf": "stretch",
+          "justifyContent": "center",
+          "marginTop": 5,
+          "position": "relative",
+        }
+      }
+    >
+      <View>
+        <View
+          style={
+            Object {
+              "borderColor": "#C4C4C4",
+              "borderRadius": 2,
+              "borderWidth": 1,
+              "flexDirection": "row",
+            }
+          }
+        >
+          <TextInput
+            allowFontScaling={true}
+            label="ConfirmPassword"
+            onChangeText={[Function]}
+            onEndEditing={[Function]}
+            onFocus={[Function]}
+            placeholder="Confirmar Contraseña"
+            placeholderTextColor="#C4C4C4"
+            rejectResponderTermination={true}
+            secureTextEntry={true}
+            style={
+              Object {
+                "alignSelf": "stretch",
+                "color": "#858585",
+                "fontFamily": "Lato-Regular",
+                "fontSize": 18,
+                "height": 43,
+                "paddingLeft": 8,
+                "paddingRight": 45,
+              }
+            }
+            underlineColorAndroid="transparent"
+            value="@Martin44"
+          />
+          <TouchableOpacity
+            activeOpacity={0.8}
+            onPress={[Function]}
+            style={
+              Object {
+                "height": 40,
+                "marginTop": 2,
+                "padding": 6,
+                "position": "absolute",
+                "right": 3,
+                "width": 35,
+              }
+            }
+          >
+            <Image
+              source={
+                Object {
+                  "testUri": "../../../src/images/hide.png",
+                }
+              }
+              style={
+                Object {
+                  "height": "100%",
+                  "opacity": 0.4,
+                  "resizeMode": "contain",
+                  "width": "100%",
+                }
+              }
+            />
+          </TouchableOpacity>
+        </View>
+      </View>
+    </View>
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#858585",
+            "fontFamily": "Lato-Regular",
+            "fontSize": 11,
+          },
+          Object {
+            "paddingVertical": 15,
+          },
+        ]
+      }
+    >
+      ¿Ya tienes una cuenta?
+      <Text
+        style={
+          Object {
+            "color": "#EE6123",
+          }
+        }
+      >
+         Iniciar Sesión
+      </Text>
+    </Text>
+    <ForwardRef(Themed.Button)
+      buttonStyle={
+        Object {
+          "backgroundColor": "#EE6123",
+          "borderRadius": 2,
+          "height": 93.5,
+          "width": 600,
+        }
+      }
+      disabled={true}
+      disabledStyle={
+        Object {
+          "backgroundColor": "#C4C4C4",
+          "borderRadius": 2,
+          "height": 93.5,
+          "width": 600,
+        }
+      }
+      disabledTitleStyle={
+        Object {
+          "color": "#fff",
+          "fontFamily": "Lato-Semibold",
+          "fontSize": 14,
+        }
+      }
+      loading={false}
+      onPress={[Function]}
+      testID="submitSignUp"
+      title="CREAR CUENTA"
+      titleStyle={
+        Object {
+          "color": "#fff",
+          "fontFamily": "Lato-Semibold",
+          "fontSize": 14,
+        }
+      }
+      value="@mozej.com"
+    />
+  </View>
+</View>
+`;

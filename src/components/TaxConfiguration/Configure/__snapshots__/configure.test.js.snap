@@ -1,0 +1,183 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render correctly component TaxConfiguration 1`] = `
+<KeyboardAvoidingView
+  behavior="padding"
+  enabled={true}
+  keyboardVerticalOffset={Object {}}
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <ScrollViewMock>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "height": NaN,
+          "paddingHorizontal": 18,
+          "paddingVertical": 15,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "alignSelf": "stretch",
+            "justifyContent": "center",
+            "marginTop": 5,
+            "position": "relative",
+          }
+        }
+      >
+        <View
+          style={Object {}}
+        >
+          <Text
+            style={
+              Array [
+                Object {
+                  "color": "#858585",
+                  "fontFamily": "Lato-Regular",
+                  "fontSize": 15,
+                  "textAlign": "center",
+                },
+                Object {
+                  "paddingVertical": 5,
+                },
+              ]
+            }
+          >
+            NOMBRE DE LA EMPRESA
+          </Text>
+          <TextInput
+            allowFontScaling={true}
+            onChangeText={[Function]}
+            onEndEditing={[Function]}
+            onFocus={[Function]}
+            rejectResponderTermination={true}
+            style={
+              Object {
+                "borderColor": "#C4C4C4",
+                "borderRadius": 2,
+                "borderWidth": 1,
+                "color": "#858585",
+                "fontFamily": "Lato-Regular",
+                "fontSize": 18,
+                "height": 45,
+                "paddingLeft": 8,
+                "paddingRight": 45,
+                "paddingVertical": 0,
+                "textAlign": "center",
+              }
+            }
+            underlineColorAndroid="transparent"
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "backgroundColor": "#EEEEEE",
+              "height": 1,
+              "marginBottom": 10,
+              "marginTop": 10,
+            }
+          }
+        />
+        <View
+          style={Object {}}
+        >
+          <Text
+            style={
+              Array [
+                Object {
+                  "color": "#858585",
+                  "fontFamily": "Lato-Regular",
+                  "fontSize": 15,
+                  "textAlign": "center",
+                },
+                Object {
+                  "paddingVertical": 5,
+                },
+              ]
+            }
+          >
+            INGRESA TU CUIT
+          </Text>
+          <TextInput
+            allowFontScaling={true}
+            keyboardType="numeric"
+            onChangeText={[Function]}
+            onEndEditing={[Function]}
+            onFocus={[Function]}
+            rejectResponderTermination={true}
+            style={
+              Object {
+                "borderColor": "#C4C4C4",
+                "borderRadius": 2,
+                "borderWidth": 1,
+                "color": "#858585",
+                "fontFamily": "Lato-Regular",
+                "fontSize": 18,
+                "height": 45,
+                "paddingLeft": 8,
+                "paddingRight": 45,
+                "paddingVertical": 0,
+                "textAlign": "center",
+              }
+            }
+            underlineColorAndroid="transparent"
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "backgroundColor": "#EEEEEE",
+              "height": 1,
+              "marginBottom": 10,
+              "marginTop": 10,
+            }
+          }
+        />
+      </View>
+    </View>
+  </ScrollViewMock>
+  <ForwardRef(Themed.Button)
+    buttonStyle={
+      Object {
+        "backgroundColor": "#EE6123",
+        "borderRadius": 0,
+        "height": 106.5,
+      }
+    }
+    disabled={true}
+    disabledStyle={
+      Object {
+        "backgroundColor": "#C4C4C4",
+        "borderRadius": 0,
+        "height": 106.5,
+      }
+    }
+    disabledTitleStyle={
+      Object {
+        "color": "#fff",
+        "fontFamily": "Lato-Semibold",
+        "fontSize": 14,
+      }
+    }
+    loading={false}
+    onPress={[Function]}
+    testID="ready"
+    title="LISTO"
+    titleStyle={
+      Object {
+        "color": "#fff",
+        "fontFamily": "Lato-Semibold",
+        "fontSize": 14,
+      }
+    }
+  />
+</KeyboardAvoidingView>
+`;

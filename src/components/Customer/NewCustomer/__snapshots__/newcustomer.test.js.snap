@@ -1,0 +1,239 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render correctly component NewCustomer 1`] = `
+<KeyboardAvoidingView
+  behavior="padding"
+  enabled={true}
+  keyboardVerticalOffset={Object {}}
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <ScrollViewMock>
+    <View
+      style={
+        Object {
+          "backgroundColor": "#3687d1",
+          "height": NaN,
+          "padding": 18,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "marginHorizontal": 2,
+            "marginVertical": 5,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "#fff",
+              "fontFamily": "Lato-Regular",
+              "fontSize": 14,
+            }
+          }
+        >
+          CONDICIÓN FRENTE AL IVA
+        </Text>
+        <View
+          style={
+            Object {
+              "backgroundColor": "#fff",
+              "borderRadius": 4,
+              "height": 93.5,
+              "marginVertical": 8,
+            }
+          }
+        >
+          <Picker
+            mode="dialog"
+            onValueChange={[Function]}
+            selectedValue=""
+            style={
+              Object {
+                "color": "#858585",
+                "flex": 1,
+                "justifyContent": "center",
+              }
+            }
+          >
+            <PickerItem
+              color="gray"
+              key="0"
+              label="RESPONSABLE INSCRIPTO"
+              value="ri"
+            />
+            <PickerItem
+              color="gray"
+              key="1"
+              label="IVA EXENTO"
+              value="ie"
+            />
+            <PickerItem
+              color="gray"
+              key="2"
+              label="MONOTRIBUTISTA"
+              value="m"
+            />
+            <PickerItem
+              color="gray"
+              key="3"
+              label="RESPONSABLE NO INSCRIPTO"
+              value="rni"
+            />
+          </Picker>
+        </View>
+        <Text
+          style={
+            Object {
+              "color": "#fff",
+              "fontFamily": "Lato-Regular",
+              "fontSize": 14,
+            }
+          }
+        >
+          NÚMERO DE CUIT
+        </Text>
+        <View
+          style={
+            Object {
+              "backgroundColor": "#fff",
+              "borderRadius": 4,
+              "height": 93.5,
+              "marginVertical": 8,
+            }
+          }
+        >
+          <TextInput
+            allowFontScaling={true}
+            keyboardType="numeric"
+            onChangeText={[Function]}
+            placeholder="00-00000000-0"
+            placeholderTextColor="#EEEEEE"
+            rejectResponderTermination={true}
+            style={
+              Array [
+                Object {
+                  "color": "#858585",
+                  "fontFamily": "Lato-Regular",
+                  "fontSize": 15,
+                },
+                Object {
+                  "marginLeft": 5,
+                },
+              ]
+            }
+            underlineColorAndroid="transparent"
+            value=""
+          />
+        </View>
+        <Text
+          style={
+            Object {
+              "color": "#fff",
+              "fontFamily": "Lato-Regular",
+              "fontSize": 12,
+            }
+          }
+        >
+          La información fiscal de los clientes se cargan automaticamente poniendo su N° de CUIT
+        </Text>
+        <View
+          style={
+            Object {
+              "backgroundColor": "#fff",
+              "height": 1,
+              "marginBottom": 10,
+              "marginTop": 10,
+              "width": "100%",
+            }
+          }
+        />
+        <Text
+          style={
+            Object {
+              "color": "#fff",
+              "fontFamily": "Lato-Regular",
+              "fontSize": 14,
+            }
+          }
+        >
+          NOMBRE DE FANTASÍA (OPCIONAL)
+        </Text>
+        <View
+          style={
+            Object {
+              "backgroundColor": "#fff",
+              "borderRadius": 4,
+              "height": 93.5,
+              "marginVertical": 8,
+            }
+          }
+        >
+          <TextInput
+            allowFontScaling={true}
+            onChangeText={[Function]}
+            placeholder="Inserta el Nombre"
+            placeholderTextColor="#EEEEEE"
+            rejectResponderTermination={true}
+            style={
+              Array [
+                Object {
+                  "color": "#858585",
+                  "fontFamily": "Lato-Regular",
+                  "fontSize": 15,
+                },
+                Object {
+                  "marginLeft": 5,
+                },
+              ]
+            }
+            underlineColorAndroid="transparent"
+            value=""
+          />
+        </View>
+      </View>
+    </View>
+  </ScrollViewMock>
+  <ForwardRef(Themed.Button)
+    buttonStyle={
+      Object {
+        "backgroundColor": "#EE6123",
+        "borderRadius": 0,
+        "height": 106.5,
+      }
+    }
+    disabled={true}
+    disabledStyle={
+      Object {
+        "backgroundColor": "#C4C4C4",
+        "borderRadius": 0,
+        "height": 106.5,
+      }
+    }
+    disabledTitleStyle={
+      Object {
+        "color": "#fff",
+        "fontFamily": "Lato-Semibold",
+        "fontSize": 14,
+      }
+    }
+    loading={false}
+    onPress={[Function]}
+    testID="buttonNewCustomer"
+    title="GUARDAR"
+    titleStyle={
+      Object {
+        "color": "#fff",
+        "fontFamily": "Lato-Semibold",
+        "fontSize": 14,
+      }
+    }
+  />
+</KeyboardAvoidingView>
+`;

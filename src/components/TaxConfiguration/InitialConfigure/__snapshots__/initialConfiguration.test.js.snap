@@ -1,0 +1,145 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render correctly component InitialConfiguration 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "height": 1334,
+      "paddingHorizontal": 18,
+      "paddingVertical": 15,
+    }
+  }
+>
+  <Image
+    source={
+      Object {
+        "testUri": "../../../src/images/configure.png",
+      }
+    }
+    style={
+      Object {
+        "height": 225,
+        "width": 360,
+      }
+    }
+  />
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "paddingVertical": 10,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#858585",
+          "fontFamily": "Lato-Regular",
+          "fontSize": 18,
+          "paddingHorizontal": 40,
+          "textAlign": "center",
+        }
+      }
+    >
+      TU CELULAR SERÁ TU PUNTO DE VENTA
+    </Text>
+    <Text
+      style={
+        Object {
+          "color": "#858585",
+          "fontFamily": "Lato-Regular",
+          "fontSize": 14,
+          "lineHeight": 20,
+          "paddingVertical": 15,
+        }
+      }
+    >
+      Billmobil te permitirá emitir comprobantes electrónicos válidos, homologados por AFIP desde tu celular.
+      
+
+      
+
+      Es necesario que nos proveas información, nosotros haremos de tu celular el punto de venta habilitado para facturar.
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "marginBottom": 15,
+      }
+    }
+  >
+    <ForwardRef(Themed.Button)
+      buttonStyle={
+        Object {
+          "backgroundColor": "#EE6123",
+          "borderRadius": 2,
+          "height": 93.5,
+          "marginTop": 10,
+          "width": 450,
+        }
+      }
+      disabledStyle={
+        Object {
+          "backgroundColor": "#C4C4C4",
+          "borderRadius": 2,
+          "height": 93.5,
+        }
+      }
+      disabledTitleStyle={
+        Object {
+          "color": "#fff",
+          "fontFamily": "Lato-Semibold",
+          "fontSize": 14,
+        }
+      }
+      onPress={[Function]}
+      testID="buttonConfigure"
+      title="CONFIGURAR MI CUIT"
+      titleStyle={
+        Object {
+          "color": "#fff",
+          "fontFamily": "Lato-Semibold",
+          "fontSize": 14,
+        }
+      }
+    />
+    <ForwardRef(Themed.Button)
+      buttonStyle={
+        Object {
+          "backgroundColor": "#EE6123",
+          "borderRadius": 2,
+          "height": 93.5,
+          "marginTop": 10,
+          "width": 450,
+        }
+      }
+      disabled={true}
+      disabledStyle={
+        Object {
+          "backgroundColor": "#C4C4C4",
+          "borderRadius": 2,
+          "height": 93.5,
+        }
+      }
+      disabledTitleStyle={
+        Object {
+          "color": "#fff",
+          "fontFamily": "Lato-Semibold",
+          "fontSize": 14,
+        }
+      }
+      title="PROBAR APLICACIÓN"
+      titleStyle={
+        Object {
+          "color": "#fff",
+          "fontFamily": "Lato-Semibold",
+          "fontSize": 14,
+        }
+      }
+    />
+  </View>
+</View>
+`;
